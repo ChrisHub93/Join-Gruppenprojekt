@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+ --bg-color : #f6f7f8;
+ --snd-color : #dbdbdb;
+}
+
+header, main{
+    background-color: var(--bg-color);
+}
+
+body{
+    min-height: 100vh;
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+}
+
+.seperator{
+    width: 1px;
+    height: 200px;
+    background-color: var(--snd-color);
+}
+
+.typeOfTask, .priority{
+    display: flex;
+    flex-direction: column;
+}
+
+.typeOfTask, .priority{
+    padding: 24px;
+}
+
