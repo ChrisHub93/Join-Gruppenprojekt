@@ -5,24 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Task</title>
     <link rel="stylesheet" href="/styles/add_task.css" />
+    <link rel="stylesheet" href="/styles/fonts.css">
+    <link rel="icon" type="image/x-icon" href="/assets/img/Capa 1 white.png">
   </head>
   <body>
     <main>
 
-        
-
+      
       <form class="form">
-
+        
         <div class="typeOfTask">
-            <h1>Add Task</h1>
-          <label for="title">Title<mark>*</mark></label>
+            <h1><b>Add Task</b></h1>
+          <div class="column">
+          <span>Title<mark>*</mark></span>
           <input type="text" name="title" id="title" placeholder="Enter a title" required/>
-
-          <label for="description">Description</label>
+          </div>
+          
+          <div class="column">
+          <span>Description</span>
           <textarea name="description" id="description" placeholder="Enter a Description"></textarea>
+          </div>
 
-          <label for="date">Due date<mark>*</mark></label>
+          <div class="column">
+          <span>Due Date<mark>*</mark></span>
           <input type="date" name="date" id="date" min="2025-01-01" max="2025-12-31" placeholder="dd/mm/yyyy" required/>
+          </div>
 
           <span><mark>*</mark>This field is required</span>
         </div>
@@ -30,12 +37,25 @@
         <div class="seperator"></div>
 
         <div class="priority">
+          
           <span>Priority</span>
           <div class="choose">
-            <span class="urgent">Urgent</span>
-            <span class="medium">Medium</span>
-            <span class="low">Low</span>
+            <div class="priorityBtn">
+            <span >Urgent</span>
+            <img src="/assets/icons/Prio alta.png" alt="">
+            </div>
+
+            <div class="priorityBtn mgRL">
+            <span >Medium</span>
+            <img src="/assets/icons/Prio media.png" alt="">
+            </div>
+
+            <div class="priorityBtn">
+            <span >Low</span>
+            <img src="/assets/icons/Prio baja.png" alt="">
+            </div>
           </div>
+          
 
           <label for="assign">Assigned to</label>
           <select name="assign" id="assign">
@@ -43,6 +63,7 @@
             <option value="contact">contact</option>
             <option value="contact2">contact2</option>
           </select>
+          
 
           <label for="category">Category<mark>*</mark></label>
           <select name="category" id="category">
@@ -65,7 +86,7 @@
             <button>Create Task</button>
           </div>
         </div>
-
+    
       </form>
     </main>
   </body>
