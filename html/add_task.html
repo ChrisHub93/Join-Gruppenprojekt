@@ -8,83 +8,88 @@
     <link rel="stylesheet" href="/styles/fonts.css">
     <link rel="icon" type="image/x-icon" href="/assets/img/Capa 1 white.png">
   </head>
+
   <body>
     <main>
 
-      
+      <div>
+      <h1><b>Add Task</b></h1>
+
       <form class="form">
         
         <div class="typeOfTask">
-            <h1><b>Add Task</b></h1>
           <div class="column">
-          <span>Title<mark>*</mark></span>
+          <span class="mgBottom">Title<mark>*</mark></span>
           <input type="text" name="title" id="title" placeholder="Enter a title" required/>
           </div>
           
           <div class="column">
-          <span>Description</span>
+          <span class="mgBottom">Description</span>
           <textarea name="description" id="description" placeholder="Enter a Description"></textarea>
           </div>
 
           <div class="column">
-          <span>Due Date<mark>*</mark></span>
+          <span class="mgBottom">Due Date<mark>*</mark></span>
           <input type="date" name="date" id="date" min="2025-01-01" max="2025-12-31" placeholder="dd/mm/yyyy" required/>
           </div>
-
           <span><mark>*</mark>This field is required</span>
         </div>
 
         <div class="seperator"></div>
 
         <div class="priority">
-          
-          <span>Priority</span>
-          <div class="choose">
-            <div class="priorityBtn">
-            <span >Urgent</span>
-            <img src="/assets/icons/Prio alta.png" alt="">
-            </div>
+          <div class="column">
+            <span class="mgBottom">Priority</span>
+            <div class="choose">
+              <div class="priorityBtn">
+                <span >Urgent</span>
+                <img src="/assets/icons/Prio alta.png" alt="">
+              </div>
 
-            <div class="priorityBtn mgRL">
-            <span >Medium</span>
-            <img src="/assets/icons/Prio media.png" alt="">
-            </div>
+              <div class="priorityBtn mgRL">
+                <span >Medium</span>
+                <img src="/assets/icons/Prio media.png" alt="">
+              </div>
 
-            <div class="priorityBtn">
-            <span >Low</span>
-            <img src="/assets/icons/Prio baja.png" alt="">
+              <div class="priorityBtn">
+                <span >Low</span>
+                <img src="/assets/icons/Prio baja.png" alt="">
+              </div>
             </div>
           </div>
           
-
-          <label for="assign">Assigned to</label>
+          <div class="column">
+          <span class="mgBottom">Assigned to</span>
           <select name="assign" id="assign">
             <option value="">Select contacts to assign</option>
             <option value="contact">contact</option>
             <option value="contact2">contact2</option>
           </select>
+          </div>
           
 
-          <label for="category">Category<mark>*</mark></label>
+
+          <div class="column">
+          <span class="mgBottom">Category<mark>*</mark></span>
           <select name="category" id="category">
             <option value="">Select task category</option>
             <option value="option">Technical Task</option>
             <option value="option2">User Story</option>
           </select>
+          </div>
 
-          <label for="subtasks">Subtasks</label>
-          <input
-            type="text"
-            name="subtasks"
-            id="subtasks"
-            placeholder="Add new subtask"
-          />
-          <div id="addedSubTask"></div>
+
+          <div class="column">
+          <span class="mgBottom">Subtasks</span>
+          <input type="text" name="subtasks" id="subtasks" placeholder="Add new subtask"/>
+          </div>
 
           <div class="buttons">
-            <button>Clear</button>
-            <button>Create Task</button>
+            <button class="clear">Clear</button>
+            <button class="createTask">Create Task</button>
           </div>
+        </div>
+
         </div>
     
       </form>
