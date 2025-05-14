@@ -73,13 +73,15 @@
 }
 
 .icon-mail {
-  padding-right: 10px;
-  background: url("../assets/icons/mail.svg") no-repeat right;
+  background: url("../assets/icons/mail.svg");
+  background-repeat: no-repeat;
+  background-position: 95%;
 }
 
 .icon-lock {
-    padding-right: 10px;
   background: url("../assets/icons/lock.svg") no-repeat right;
+  background-repeat: no-repeat;
+  background-position: 95%;
 }
 
 .log-in__buttons {
