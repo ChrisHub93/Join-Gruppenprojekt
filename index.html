@@ -9,36 +9,40 @@
     <script src="./scripts/templates.js"></script>
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/fonts.css" />
+    <link rel="stylesheet" href="./styles/index.css">
 
-    <title>Join Log in</title>
+    <title>Join Login</title>
 </head>
-<body>
+<body class="body-login">
 
-    <header>
-        <img src="" alt="Join Logo">
+    <header class="header-login">
+        <img class="header-login__logo" src="./assets/img/Capa 1.png" alt="Join Logo">
         <div class="header__sign-up">
-            <p>Not a join user?</p>
-            <button class="btn-sign-up">Sign up</button>
+            <p class="header__sign-up__text">Not a join user?</p>
+            <button class="header-login__sign-up__btn">Sign up</button>
         </div>
     </header>
 
-    <main>
+    <main class="main-login">
+
         <div class="log-in">
-            <h1>Log in</h1>
-            <div>
-                <input type="text">
-                <input type="text">
+            <p class="log-in__headline">Log in</p>
+            <div class="log-in__line"></div>
+            <div class="log-in__inputs">
+                <input class="log-in__inputs__inputfield icon-mail" type="email" placeholder="Email">
+                <input class="log-in__inputs__inputfield icon-lock" type="password" placeholder="Password">
             </div>
             <div class="log-in__buttons">
-                <button>Log In</button>
-                <button>Guest Log in</button>
+                <button class="log-in__buttons__btn log-in__buttons__btn--dark">Log In</button>
+                <button class="log-in__buttons__btn log-in__buttons__btn--bright">Guest Log in</button>
             </div>
         </div>
+
     </main>
 
-    <footer>
-        <a href="">Privacy Policy</a>
-        <a href="">Legal notice</a>
+    <footer class="footer-login">
+        <a class="footer-login__link" href="">Privacy Policy</a>
+        <a class="footer-login__link" href="">Legal notice</a>
     </footer>
 
 </body>
