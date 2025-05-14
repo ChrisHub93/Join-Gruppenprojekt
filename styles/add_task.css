@@ -6,9 +6,10 @@
 :root{
  --bg-color : #f6f7f8;
  --snd-color : #dbdbdb;
+ --focus-color : #5ec0e9;
 }
 
-header, main{
+main{
     background-color: var(--bg-color);
 }
 
@@ -19,6 +20,7 @@ body{
 .form{
     display: flex;
     justify-content: center;
+    height: 100vh;
 }
 
 .seperator{
@@ -36,3 +38,28 @@ body{
     padding: 24px;
 }
 
+.typeOfTask, .priority, .seperator{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+mark{
+    background-color: var(--bg-color);
+    color: red;
+}
+
+input, textarea{
+    border: 1px solid var(--snd-color);
+    border-radius: 5px;
+}
+
+input:focus, textarea:focus{
+    border-color: var(--focus-color);
+    outline: none;
+}

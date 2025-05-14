@@ -1,60 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Task</title>
-    <link rel="stylesheet" href="/styles/add_task.css">
-</head>
-<body>
-    <header>
-        <h1>Add Task</h1>
-    </header>
-
+    <link rel="stylesheet" href="/styles/add_task.css" />
+  </head>
+  <body>
     <main>
-        <section>
-            <form class="form">
-                <div class="typeOfTask">     
-                    <label for="title">Title</label>
-                    <input type="text" name="title" id="title" placeholder="Enter a title" required>
 
-                    <label for="description">Description</label>
-                    <input type="text" name="description" id="description" placeholder="Enter a Description">
+        
 
-                    <label for="date">Due date</label>
-                    <input type="date" name="date" id="date"  min="2025-01-01" max="2025-12-31" placeholder="dd/mm/yyyy" required>
-                </div>
+      <form class="form">
 
-                <div class="seperator"></div>
+        <div class="typeOfTask">
+            <h1>Add Task</h1>
+          <label for="title">Title<mark>*</mark></label>
+          <input type="text" name="title" id="title" placeholder="Enter a title" required/>
 
-                <div class="priority">
-                    <span>Priority</span>
-                    <div class="choose">
-                        <span class="urgent">Urgent</span>
-                        <span class="medium">Medium</span>
-                        <span class="low">Low</span>
-                    </div>
+          <label for="description">Description</label>
+          <textarea name="description" id="description" placeholder="Enter a Description"></textarea>
 
-                    <label for="assign">Assigned to</label>
-                    <select name="assign" id="assign">
-                        <option value="">Select contacts to assign</option>
-                        <option value="contact">contact</option>
-                        <option value="contact2">contact2</option>
-                    </select>
+          <label for="date">Due date<mark>*</mark></label>
+          <input type="date" name="date" id="date" min="2025-01-01" max="2025-12-31" placeholder="dd/mm/yyyy" required/>
 
-                    <label for="category">Category</label>
-                    <select name="category" id="category">
-                        <option value="">Select task category</option>
-                        <option value="option">Technical Task</option>
-                        <option value="option2">User Story</option>
-                    </select>
+          <span><mark>*</mark>This field is required</span>
+        </div>
 
-                    <label for="subtasks">Subtasks</label>
-                    <input type="text" name="subtasks" id="subtasks" placeholder="Add new subtask">
-                    <div id="addedSubTask"></div>
-                </div>
-            </form>
-        </section>
+        <div class="seperator"></div>
+
+        <div class="priority">
+          <span>Priority</span>
+          <div class="choose">
+            <span class="urgent">Urgent</span>
+            <span class="medium">Medium</span>
+            <span class="low">Low</span>
+          </div>
+
+          <label for="assign">Assigned to</label>
+          <select name="assign" id="assign">
+            <option value="">Select contacts to assign</option>
+            <option value="contact">contact</option>
+            <option value="contact2">contact2</option>
+          </select>
+
+          <label for="category">Category<mark>*</mark></label>
+          <select name="category" id="category">
+            <option value="">Select task category</option>
+            <option value="option">Technical Task</option>
+            <option value="option2">User Story</option>
+          </select>
+
+          <label for="subtasks">Subtasks</label>
+          <input
+            type="text"
+            name="subtasks"
+            id="subtasks"
+            placeholder="Add new subtask"
+          />
+          <div id="addedSubTask"></div>
+
+          <div class="buttons">
+            <button>Clear</button>
+            <button>Create Task</button>
+          </div>
+        </div>
+
+      </form>
     </main>
-</body>
+  </body>
 </html>
