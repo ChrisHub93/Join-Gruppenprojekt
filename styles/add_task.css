@@ -267,3 +267,16 @@ select:focus {
 .rotate {
   transform: rotate(180deg);
 }
+
+.inputSelectContact {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.inputStyleArrow {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}

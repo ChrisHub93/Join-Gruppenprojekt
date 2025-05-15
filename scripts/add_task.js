@@ -33,7 +33,7 @@ function closeAssignedTo() {
 function getContact(id) {
   let selectMemberRef = document.getElementById("selectMember");
   let membersRef = document.getElementById(id);
-  selectMemberRef.innerHTML = membersRef.innerText;
+  selectMemberRef.value = membersRef.innerText;
   closeAssignedTo();
 }
 
