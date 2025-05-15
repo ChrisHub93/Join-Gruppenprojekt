@@ -6,7 +6,7 @@
     <title>Add Task</title>
     <link rel="stylesheet" href="/styles/add_task.css" />
     <link rel="stylesheet" href="/styles/fonts.css" />
-    <link rel="icon" type="image/x-icon" href="/assets/img/Capa 1 white.png" />
+    <link rel="icon" type="image/x-icon" href="/assets/img/Capa 1.png" />
   </head>
 
   <body>
@@ -73,25 +73,86 @@
             </div>
           </div>
 
-          <div class="column">
+          <div class="container gapBetweenNextElement">
             <span class="mgBottom">Assigned to</span>
-            <select name="assign" id="assign">
-              <option value="">Select contacts to assign</option>
-              <option value="contact">contact</option>
-              <option value="contact2">contact2</option>
-            </select>
+
+            <div class="category">
+              <div class="select inputFlex" id="assignedContainer" onclick="openAssignedTo()">
+                <span id="selectMember">Select contacts to assign</span>
+                <img
+                  id="arrow"
+                  class="arrow"
+                  src="/assets/icons/arrow_drop_down.png"
+                  alt=""
+                />
+              </div>
+              <ul id="allMembers" class="options">
+                <li
+                  onclick="getContact(`contact1`)"
+                  id="contact1"
+                  class="optionsCategory"
+                >
+                  Contact 1
+                </li>
+                <li
+                  onclick="getContact(`contact2`)"
+                  id="contact2"
+                  class="optionsCategory"
+                >
+                  Contact 2
+                </li>
+                <li
+                  onclick="getContact(`contact3`)"
+                  id="contact3"
+                  class="optionsCategory"
+                >
+                  Contact 3
+                </li>
+                <li
+                  onclick="getContact(`contact4`)"
+                  id="contact4"
+                  class="optionsCategory"
+                >
+                  Contact 4
+                </li>
+                <li
+                  onclick="getContact(`contact5`)"
+                  id="contact5"
+                  class="optionsCategory"
+                >
+                  Contact 5
+                </li>
+              </ul>
+            </div>
           </div>
 
           <div class="container gapBetweenNextElement">
             <span class="mgBottom">Category<mark>*</mark></span>
-
             <div class="category">
-              <div class="select" id="select" onclick="openTaskCategory()">
-                Select task category
+              <div class="select inputFlex" id="" onclick="openTaskCategory()">
+                <span id="select">Select task category</span>
+                <img
+                  id="arrowCategory"
+                  class="arrow"
+                  src="/assets/icons/arrow_drop_down.png"
+                  alt=""
+                />
               </div>
               <ul id="allOptions" class="options">
-                <li onclick="getCategory(`index1`)" id="index1" class="optionsCategory">Technical Task</li>
-                <li onclick="getCategory(`index2`)" id="index2" class="optionsCategory">User Story</li>
+                <li
+                  onclick="getCategory(`index1`)"
+                  id="index1"
+                  class="optionsCategory"
+                >
+                  Technical Task
+                </li>
+                <li
+                  onclick="getCategory(`index2`)"
+                  id="index2"
+                  class="optionsCategory"
+                >
+                  User Story
+                </li>
               </ul>
             </div>
           </div>
@@ -112,8 +173,8 @@
           </div>
 
           <div class="buttons">
-            <button class="clear">Clear</button>
-            <button class="createTask">Create Task</button>
+            <button class="clear">Clear <img src="/assets/icons/iconoir_cancel.png" alt=""></button>
+            <button class="createTask">Create Task <img src="/assets/icons/check.png" alt=""></button>
           </div>
         </div>
       </form>

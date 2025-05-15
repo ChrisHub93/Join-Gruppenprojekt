@@ -1,19 +1,58 @@
-function openTaskCategory(){
-    let allOptionsRef = document.getElementById("allOptions");
-    allOptionsRef.classList.toggle("show");
-    let selectRef = document.getElementById("select");
-    selectRef.innerText = `Select task category`;
+function toggleVisibility(id) {
+  let ref = document.getElementById(id);
+  if (!ref) return;
+  ref.classList.toggle("show");
 }
 
-function closeTaskCategory(){
-    let allOptionsRef = document.getElementById("allOptions");
-    allOptionsRef.classList.toggle("show");
+function toggleArrow(id) {
+  let ref = document.getElementById(id);
+  if (!ref) return;
+  ref.classList.toggle("rotate");
 }
 
-function getCategory(id){
-    let selectRef = document.getElementById("select");
-    let optionsRef = document.getElementById(id);
-    selectRef.innerHTML ='';
-    selectRef.innerHTML = optionsRef.innerText ;
-    closeTaskCategory();
+function toggleBorderColor(id) {
+  let ref = document.getElementById(id);
+  if (!ref) return;
+  ref.classList.toggle("border-color");
+}
+
+function openAssignedTo() {
+  toggleVisibility("allMembers");
+  let selectMemberRef = document.getElementById("selectMember");
+  selectMemberRef.innerText = "";
+  toggleBorderColor("assignedContainer");
+  toggleArrow("arrow");
+}
+
+function closeAssignedTo() {
+  toggleVisibility("allMembers");
+  toggleBorderColor("assignedContainer");
+  toggleArrow("arrow");
+}
+
+function getContact(id) {
+  let selectMemberRef = document.getElementById("selectMember");
+  let membersRef = document.getElementById(id);
+  selectMemberRef.innerHTML = membersRef.innerText;
+  closeAssignedTo();
+}
+
+function openTaskCategory() {
+  toggleVisibility("allOptions");
+  let selectRef = document.getElementById("select");
+  selectRef.innerText = `Select task category`;
+  toggleArrow("arrowCategory");
+}
+
+function closeTaskCategory() {
+  toggleVisibility("allOptions");
+  toggleArrow("arrowCategory");
+}
+
+function getCategory(id) {
+  let selectRef = document.getElementById("select");
+  let optionsRef = document.getElementById(id);
+  selectRef.innerHTML = "";
+  selectRef.innerHTML = optionsRef.innerText;
+  closeTaskCategory();
 }
