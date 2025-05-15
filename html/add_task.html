@@ -5,32 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Task</title>
     <link rel="stylesheet" href="/styles/add_task.css" />
-    <link rel="stylesheet" href="/styles/fonts.css">
-    <link rel="icon" type="image/x-icon" href="/assets/img/Capa 1 white.png">
+    <link rel="stylesheet" href="/styles/fonts.css" />
+    <link rel="icon" type="image/x-icon" href="/assets/img/Capa 1 white.png" />
   </head>
 
   <body>
     <main>
-
-      <div>
       <h1><b>Add Task</b></h1>
 
       <form class="form">
-        
         <div class="typeOfTask">
           <div class="column">
-          <span class="mgBottom">Title<mark>*</mark></span>
-          <input type="text" name="title" id="title" placeholder="Enter a title" required/>
-          </div>
-          
-          <div class="column">
-          <span class="mgBottom">Description</span>
-          <textarea name="description" id="description" placeholder="Enter a Description"></textarea>
+            <span class="mgBottom">Title<mark>*</mark></span>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Enter a title"
+              required
+            />
           </div>
 
           <div class="column">
-          <span class="mgBottom">Due Date<mark>*</mark></span>
-          <input type="date" name="date" id="date" min="2025-01-01" max="2025-12-31" placeholder="dd/mm/yyyy" required/>
+            <span class="mgBottom">Description</span>
+            <textarea
+              name="description"
+              id="description"
+              placeholder="Enter a Description"
+            ></textarea>
+          </div>
+
+          <div class="column">
+            <span class="mgBottom">Due Date<mark>*</mark></span>
+            <input
+              type="date"
+              name="date"
+              id="date"
+              min="2025-01-01"
+              max="2025-12-31"
+              placeholder="dd/mm/yyyy"
+              required
+            />
           </div>
           <span><mark>*</mark>This field is required</span>
         </div>
@@ -42,46 +57,58 @@
             <span class="mgBottom">Priority</span>
             <div class="choose">
               <div class="priorityBtn">
-                <span >Urgent</span>
-                <img src="/assets/icons/Prio alta.png" alt="">
+                <span>Urgent</span>
+                <img src="/assets/icons/Prio alta.png" alt="" />
               </div>
 
               <div class="priorityBtn mgRL">
-                <span >Medium</span>
-                <img src="/assets/icons/Prio media.png" alt="">
+                <span>Medium</span>
+                <img src="/assets/icons/Prio media.png" alt="" />
               </div>
 
               <div class="priorityBtn">
-                <span >Low</span>
-                <img src="/assets/icons/Prio baja.png" alt="">
+                <span>Low</span>
+                <img src="/assets/icons/Prio baja.png" alt="" />
               </div>
             </div>
           </div>
-          
-          <div class="column">
-          <span class="mgBottom">Assigned to</span>
-          <select name="assign" id="assign">
-            <option value="">Select contacts to assign</option>
-            <option value="contact">contact</option>
-            <option value="contact2">contact2</option>
-          </select>
-          </div>
-          
-
 
           <div class="column">
-          <span class="mgBottom">Category<mark>*</mark></span>
-          <select name="category" id="category">
-            <option value="">Select task category</option>
-            <option value="option">Technical Task</option>
-            <option value="option2">User Story</option>
-          </select>
+            <span class="mgBottom">Assigned to</span>
+            <select name="assign" id="assign">
+              <option value="">Select contacts to assign</option>
+              <option value="contact">contact</option>
+              <option value="contact2">contact2</option>
+            </select>
           </div>
 
+          <div class="container gapBetweenNextElement">
+            <span class="mgBottom">Category<mark>*</mark></span>
+
+            <div class="category">
+              <div class="select" id="select" onclick="openTaskCategory()">
+                Select task category
+              </div>
+              <ul id="allOptions" class="options">
+                <li onclick="getCategory(`index1`)" id="index1" class="optionsCategory">Technical Task</li>
+                <li onclick="getCategory(`index2`)" id="index2" class="optionsCategory">User Story</li>
+              </ul>
+            </div>
+          </div>
 
           <div class="column">
-          <span class="mgBottom">Subtasks</span>
-          <input type="text" name="subtasks" id="subtasks" placeholder="Add new subtask"/>
+            <span class="mgBottom">Subtasks</span>
+            <input
+              type="text"
+              name="subtasks"
+              id="subtasks"
+              placeholder="Add new subtask"
+            />
+            <img
+              class="plusIcon"
+              src="/assets/icons/Subtasks-plus.png"
+              alt=""
+            />
           </div>
 
           <div class="buttons">
@@ -89,10 +116,8 @@
             <button class="createTask">Create Task</button>
           </div>
         </div>
-
-        </div>
-    
       </form>
     </main>
+    <script src="/scripts/add_task.js"></script>
   </body>
 </html>
