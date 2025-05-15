@@ -34,6 +34,12 @@
   background-color: #2b3647;
 }
 
+.header-login__sign-up__btn:hover {
+    background-color: #2AAAE2;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2)
+}
+
 .main-login {
   display: flex;
   flex: 1;
@@ -101,10 +107,23 @@
   background-color: #2a3647;
 }
 
+.log-in__buttons__btn--dark:hover {
+    background-color: #2AAAE2;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
 .log-in__buttons__btn--bright {
   background-color: #ffffff;
   border-width: 1px;
   border-color: #2a3647;
+}
+
+.log-in__buttons__btn--bright:hover {
+    color: #2AAAE2;
+    cursor: pointer;
+    border-color: #2AAAE2;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2)
 }
 
 .footer-login {
