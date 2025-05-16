@@ -8,6 +8,9 @@
   --snd-color: #dbdbdb;
   --focus-color: #5ec0e9;
   --createBtn-color: #2a3647;
+  --priority-urgent-bg: #ff3d00;
+  --priority-medium-bg: #ffa800;
+  --priority-low-bg: #7ae229;
 }
 
 .d-none {
@@ -166,15 +169,15 @@ h1 {
   align-items: center;
 }
 
-.clear .hoverIcon{
+.clear .hoverIcon {
   display: none;
 }
 
-.clear:hover .defaultIcon{
+.clear:hover .defaultIcon {
   display: none;
 }
 
-.clear:hover .hoverIcon{
+.clear:hover .hoverIcon {
   display: block;
 }
 
@@ -295,4 +298,22 @@ select:focus {
   height: 24px;
   width: 24px;
   object-fit: cover;
+}
+
+.priorityUrgentBg {
+  background-color: var(--priority-urgent-bg);
+  color: white;
+  font-weight: bold;
+}
+
+.priorityMediumBg {
+  background-color: var(--priority-medium-bg);
+  color: white;
+  font-weight: bold;
+}
+
+.priorityLowBg {
+  background-color: var(--priority-low-bg);
+  color: white;
+  font-weight: bold;
 }
