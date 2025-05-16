@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Task</title>
+    <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="/styles/add_task.css" />
     <link rel="stylesheet" href="/styles/fonts.css" />
     <link rel="icon" type="image/x-icon" href="/assets/img/Capa 1.png" />
@@ -47,7 +48,7 @@
               required
             />
           </div>
-          <span><mark>*</mark>This field is required</span>
+          
         </div>
 
         <div class="seperator"></div>
@@ -186,7 +187,15 @@
             />
           </div>
 
-          <div class="buttons">
+        </div>
+      </form>
+
+    <footer>
+        <div class="markedFields">
+          <span><mark class="marked">*</mark>This field is required</span>
+        </div>
+
+        <div class="buttons">
             <button class="clear">
               Clear
               <img
@@ -206,8 +215,8 @@
               <img src="/assets/icons/check.png" alt="" />
             </button>
           </div>
-        </div>
-      </form>
+      </footer>
+
     </main>
     <script src="/scripts/add_task.js"></script>
   </body>

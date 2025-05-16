@@ -20,21 +20,25 @@
 main {
   background-color: var(--bg-color);
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 body {
   min-height: 100vh;
-  font-family: "Inter";
 }
 
 .form {
   display: flex;
   justify-content: center;
+  max-width: 800px;
 }
 
 .seperator {
   width: 1px;
-  height: 200px;
+  /* height: 320px; */
   background-color: var(--snd-color);
   margin-left: 32px;
   margin-right: 32px;
@@ -57,7 +61,7 @@ body {
 .typeOfTask,
 .priority,
 .seperator {
-  min-height: 400px;
+  max-height: 320px;
 }
 
 mark {
@@ -70,7 +74,6 @@ textarea {
   border: 1px solid var(--snd-color);
   border-radius: 5px;
   width: 100%;
-  font-family: "Inter";
   padding-block: 8px;
   padding-inline: 16px;
   font-size: 16px;
@@ -101,6 +104,8 @@ textarea {
 
 h1 {
   font-size: 48px;
+  min-width: 800px;
+  margin-bottom: 40px;
 }
 
 .choose {
@@ -149,6 +154,7 @@ h1 {
 }
 
 .buttons {
+  right: 0;
   display: flex;
   justify-content: flex-end;
   gap: 12px;
@@ -316,4 +322,21 @@ select:focus {
   background-color: var(--priority-low-bg);
   color: white;
   font-weight: bold;
+}
+
+footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  min-width: 800px;
+  margin-top: 100px;
+  z-index: 1;
+}
+
+.marked{
+  display: flex;
+}
+
+.markedFields span{
+  display: flex;
 }
