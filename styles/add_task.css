@@ -264,9 +264,9 @@ select:focus {
   transition: all 0.2s ease;
 }
 
-.rotate {
+/* .rotate {
   transform: rotate(180deg);
-}
+} */
 
 .inputSelectContact {
   position: relative;
@@ -275,8 +275,12 @@ select:focus {
 }
 
 .inputStyleArrow {
+  cursor: pointer;
   position: absolute;
   right: 8px;
   top: 50%;
   transform: translateY(-50%);
+  height: 24px;
+  width: 24px;
+  object-fit: cover;
 }

@@ -7,7 +7,13 @@ function toggleVisibility(id) {
 function toggleArrow(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
-  ref.classList.toggle("rotate");
+
+  let currentSrc = ref.getAttribute("src");
+  if (currentSrc.includes("arrow_drop_down.png")) {
+    ref.src = "/assets/icons/arrow_drop_down2.png";
+  } else {
+    ref.src = "/assets/icons/arrow_drop_down.png";
+  }
 }
 
 function toggleBorderColor(id) {
