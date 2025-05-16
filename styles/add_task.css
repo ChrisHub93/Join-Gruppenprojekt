@@ -37,6 +37,14 @@ body {
   margin-right: 32px;
 }
 
+.typeOfTask {
+  width: 400px;
+}
+
+.priority {
+  width: 400px;
+}
+
 .typeOfTask,
 .priority {
   display: flex;
@@ -47,12 +55,6 @@ body {
 .priority,
 .seperator {
   min-height: 400px;
-}
-
-.buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
 }
 
 mark {
@@ -100,8 +102,9 @@ h1 {
 
 .choose {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 .priorityBtn {
@@ -133,11 +136,6 @@ h1 {
   margin-bottom: 24px;
 }
 
-.mgRL {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
 .mgBottom {
   display: inline-block;
   margin-bottom: 8px;
@@ -145,6 +143,12 @@ h1 {
 
 .gapBetweenNextElement {
   margin-bottom: 24px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
 }
 
 .buttons button {
@@ -160,6 +164,18 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.clear .hoverIcon{
+  display: none;
+}
+
+.clear:hover .defaultIcon{
+  display: none;
+}
+
+.clear:hover .hoverIcon{
+  display: block;
 }
 
 .clear:hover {
@@ -263,10 +279,6 @@ select:focus {
 .arrow {
   transition: all 0.2s ease;
 }
-
-/* .rotate {
-  transform: rotate(180deg);
-} */
 
 .inputSelectContact {
   position: relative;

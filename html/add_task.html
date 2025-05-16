@@ -61,7 +61,7 @@
                 <img src="/assets/icons/Prio alta.png" alt="" />
               </div>
 
-              <div class="priorityBtn mgRL">
+              <div class="priorityBtn">
                 <span>Medium</span>
                 <img src="/assets/icons/Prio media.png" alt="" />
               </div>
@@ -77,10 +77,24 @@
             <span class="mgBottom">Assigned to</span>
 
             <div class="category">
-              <div id="assignedContainer" class="inputSelectContact" onclick="openAssignedTo()">
-                <input class="select inputFlex" type="text" id="selectMember" placeholder="Select contacts to assign" >
-                <img id="arrow" class="arrow inputStyleArrow" src="/assets/icons/arrow_drop_down.png" alt=""/>
-               </div>
+              <div
+                id="assignedContainer"
+                class="inputSelectContact"
+                onclick="openAssignedTo()"
+              >
+                <input
+                  class="select inputFlex"
+                  type="text"
+                  id="selectMember"
+                  placeholder="Select contacts to assign"
+                />
+                <img
+                  id="arrow"
+                  class="arrow inputStyleArrow"
+                  src="/assets/icons/arrow_drop_down.png"
+                  alt=""
+                />
+              </div>
               <ul id="allMembers" class="options">
                 <li
                   onclick="getContact(`contact1`)"
@@ -167,10 +181,29 @@
             />
           </div>
 
-          <div class="buttons">
-            <button class="clear">Clear <img src="/assets/icons/iconoir_cancel.png" alt=""></button>
-            <button class="createTask">Create Task <img src="/assets/icons/check.png" alt=""></button>
+          <!-- <div class="buttons">
+            <button class="clear">
+              Clear <img src="/assets/icons/iconoir_cancel.png" alt="" />
+            </button>
+            <button class="createTask">
+              Create Task <img src="/assets/icons/check.png" alt="" />
+            </button>
+          </div> -->
+
+
+           <div class="buttons">
+            <button class="clear">
+              Clear
+              <img class="defaultIcon" src="/assets/icons/iconoir_cancel.png" alt="">
+              <img class="hoverIcon" src="/assets/icons/iconoir_cancel_hover.png" alt="">
+            </button>
+
+            <button class="createTask">
+              Create Task
+              <img src="/assets/icons/check.png" alt="" />
+            </button>
           </div>
+
         </div>
       </form>
     </main>
