@@ -154,3 +154,8 @@
   color: #a8a8a8;
   font-size: 16px;
 }
+
+.footer-login__link:hover{
+    color: #2aaae2;
+    font-weight: bold;
+}
