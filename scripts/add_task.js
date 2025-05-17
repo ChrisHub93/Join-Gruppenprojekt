@@ -35,6 +35,23 @@ function openAssignedTo() {
 function getContact(id) {
   let membersRef = document.getElementById(id);
   membersRef.classList.toggle("assignedBg");
+  inputRef = membersRef.querySelector('input');
+  if(!inputRef.checked){
+    inputRef.checked =  true;
+  } else {
+    inputRef.checked = false;
+  }
+}
+
+function setCheckBox(id, event){
+  let membersRef = document.getElementById(id);
+  inputRef = membersRef.querySelector('input');
+  if(inputRef.checked != true){
+    inputRef.checked = false;
+  } else {
+    inputRef.checked = true;
+  }
+  event.stopPropagation(event);
 }
 
 function openTaskCategory() {
