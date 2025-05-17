@@ -12,6 +12,7 @@
   --priority-medium-bg: #ffa800;
   --priority-low-bg: #7ae229;
   --error-color: #ffa0ac;
+  --selected-hover-bg: #091931;
 }
 
 .d-none {
@@ -230,7 +231,7 @@ h1 {
 
 .category li {
   list-style: none;
-  background-color: white;
+  /* background-color: white; */
   cursor: pointer;
 }
 
@@ -292,7 +293,6 @@ select:focus {
 
 .inputSelectContact {
   position: relative;
-  display: inline-block;
   width: 100%;
 }
 
@@ -358,4 +358,21 @@ footer{
 
 .mb12{
   margin-bottom: 12px !important;
+}
+
+.checkBox{
+  width: 13px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.assignedBg{
+  background-color: var(--createBtn-color) !important;
+  border: 1px solid white;
+  color: white;
+}
+
+.assignedBg:hover{
+  background-color: var(--selected-hover-bg) !important;
 }

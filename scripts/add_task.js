@@ -28,23 +28,13 @@ function toggleBorderColor(id) {
 
 function openAssignedTo() {
   toggleVisibility("allMembers");
-  let selectMemberRef = document.getElementById("selectMember");
-  selectMemberRef.innerText = "";
-  toggleBorderColor("assignedContainer");
-  toggleArrow("arrow");
-}
-
-function closeAssignedTo() {
-  toggleVisibility("allMembers");
-  toggleBorderColor("assignedContainer");
+  toggleBorderColor("selectMember");
   toggleArrow("arrow");
 }
 
 function getContact(id) {
-  let selectMemberRef = document.getElementById("selectMember");
   let membersRef = document.getElementById(id);
-  selectMemberRef.value = membersRef.innerText;
-  closeAssignedTo();
+  membersRef.classList.toggle("assignedBg");
 }
 
 function openTaskCategory() {
