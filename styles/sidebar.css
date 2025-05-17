@@ -1,11 +1,15 @@
 *{
     margin: 0;
     scroll-behavior: smooth;
+    font-family: 'Inter';
+}
+
+.page-box{
+    padding-left: calc((100% - 1960px) / 2);
+    padding-right: calc((100% - 1960px) / 2);
 }
 
 header{
-    padding-left: calc((100% - 1960px) / 2);
-    padding-right: calc((100% - 1960px) / 2);
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-end;
@@ -13,7 +17,6 @@ header{
 
 .header-name{
     font-size: 20px;
-    font-family: Inter;
     font-weight: 400;
 }
 
@@ -24,7 +27,7 @@ header{
     display: flex;
     justify-content: space-between;
     border-bottom: solid 4px #0000001A;
-    padding-left: 116px;
+    padding-left: 348px;
     padding-right: 40px;
 }
 
@@ -38,7 +41,22 @@ header{
     width: 20px;
 }
 
+.personal-icon{
+    font-size: 20px;
+    display: flex;
+    height: 51.2px;
+    width: 51.2px;
+    justify-content: center;
+    align-items: center;
+    color: #29ABE2;
+    font-weight: bolder;
+    border-radius: 50%;
+    border: 3px solid #2A3647;
+}
+
 .sidebar{
+    position: absolute;
+    top: 0;
     background-color: #2A3647;
     display: flex;
     align-items: center;
