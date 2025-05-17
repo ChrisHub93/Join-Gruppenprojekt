@@ -11,6 +11,7 @@
   --priority-urgent-bg: #ff3d00;
   --priority-medium-bg: #ffa800;
   --priority-low-bg: #7ae229;
+  --error-color: #ffa0ac;
 }
 
 .d-none {
@@ -339,4 +340,22 @@ footer{
 
 .markedFields span{
   display: flex;
+}
+
+.inputError{
+  border: 1px solid var(--error-color);
+}
+
+#errorTitle, #errorDate{
+  font-size: 10px;
+  color: var(--error-color);
+  margin-top: 4px;
+}
+
+.opacity{
+  opacity: 0;
+}
+
+.mb12{
+  margin-bottom: 12px !important;
 }

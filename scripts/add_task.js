@@ -135,3 +135,32 @@ function addDisplayNone(id) {
   if (!ref) return;
   ref.classList.add("d-none");
 }
+
+function createTask(){
+  checkEmptyTitle();
+  checkEmptyDate();
+}
+
+function checkEmptyTitle(){
+  let titleRef = document.getElementById("title");
+  let errorTitleRef = document.getElementById("errorTitle");
+  if(!titleRef.value){
+    titleRef.classList.add("inputError");
+    errorTitleRef.classList.remove("opacity");
+  } else {
+    titleRef.classList.remove("inputError");
+    errorTitleRef.classList.add("opacity"); 
+  }
+}
+
+function checkEmptyDate(){
+  let dateRef = document.getElementById("date");
+  let errorDateRef = document.getElementById("errorDate");
+   if(!dateRef.value){
+    dateRef.classList.add("inputError");
+    errorDateRef.classList.remove("opacity");
+  } else {
+    dateRef.classList.remove("inputError");
+    errorDateRef.classList.add("opacity"); 
+  }
+}

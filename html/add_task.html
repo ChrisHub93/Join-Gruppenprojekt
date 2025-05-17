@@ -16,15 +16,16 @@
 
       <form class="form">
         <div class="typeOfTask">
-          <div class="column">
+          <div class="column mb12">
             <span class="mgBottom">Title<mark>*</mark></span>
-            <input
+            <input onfocusout="checkEmptyTitle()"
               type="text"
               name="title"
               id="title"
               placeholder="Enter a title"
               required
             />
+            <span id="errorTitle" class="opacity">This field is required</span>
           </div>
 
           <div class="column">
@@ -38,15 +39,15 @@
 
           <div class="column">
             <span class="mgBottom">Due Date<mark>*</mark></span>
-            <input
+            <input onfocusout="checkEmptyDate()"
               type="date"
               name="date"
               id="date"
               min="2025-01-01"
               max="2025-12-31"
-              placeholder="dd/mm/yyyy"
               required
             />
+            <span id="errorDate" class="opacity">This field is required</span>
           </div>
           
         </div>
@@ -210,7 +211,7 @@
               />
             </button>
 
-            <button class="createTask">
+            <button class="createTask" onclick="createTask()">
               Create Task
               <img src="/assets/icons/check.png" alt="" />
             </button>
