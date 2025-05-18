@@ -39,6 +39,12 @@ header{
 
 .help-icon{
     width: 20px;
+    height: 20px;
+}
+
+.help-icon:hover{
+    cursor: pointer;
+    transform: scale(1.4);
 }
 
 .personal-icon{
@@ -52,6 +58,11 @@ header{
     font-weight: bolder;
     border-radius: 50%;
     border: 3px solid #2A3647;
+    cursor: pointer;
+}
+
+.personal-icon:hover{
+    background-color: #0C2E621F;
 }
 
 .sidebar{
@@ -63,21 +74,14 @@ header{
     flex-direction: column;
     width: 232px;
     height: 1024px;
+    padding-top: 64px;
+    padding-bottom: 64px;
+    justify-content: space-between;
 }
 
 .sidebar-icon{
     width: 100.03px;
     height: 121.97px;
-    padding-top: 64px;
-    padding-bottom: 64px;
-}
-
-.sidebar-box{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    flex: 1;
-    width: 232px;
 }
 
 .menu-box{
@@ -86,6 +90,7 @@ header{
     flex-direction: column;
     height: 229px;
     justify-content: center;
+    width: 232px;
 }
 
 .icon-sidebar {
@@ -111,15 +116,18 @@ header{
     background-color: #091931;
 }
 
-.text-sidebar{
+.sidebar-text{
     color: #CDCDCD;
     font-size: 16px;
     font-family: Inter;
+    text-decoration: none;
+    gap: 8px;
+    align-items: center;
+    display: flex;
 }
 
 .sidebar-policy{
     height: 317px;
-    padding-left: 52px;
     gap: 8px;
     display: flex;
     flex-direction: column;

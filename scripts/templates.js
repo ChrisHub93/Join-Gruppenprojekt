@@ -1,0 +1,27 @@
+function getHeader() {
+    return `
+        <div class="header-top">
+            <p class="header-name">Kanban Project Management Tool</p>
+            <div class="header-top-profile">
+                <img class="help-icon" src="/Join-Gruppenprojekt/assets/icons/help.png" alt="">
+                <p class="personal-icon">G</p>
+            </div>
+        </div>
+    `
+}
+
+function getSidebar() {
+    return `
+            <img class="sidebar-icon" src="/Join-Gruppenprojekt/assets/img/Capa 1 white.png" alt="">
+                <div class="menu-box">
+                    <div class="sidebar-menu"><a class="sidebar-text" href="/Join-Gruppenprojekt/html/summary.html"><img src="/Join-Gruppenprojekt/assets/icons/Summary.png" class="icon-sidebar" alt="">Summary</a></div>
+                    <div class="sidebar-menu"><a class="sidebar-text" href="/Join-Gruppenprojekt/html/add_task.html"><img src="/Join-Gruppenprojekt/assets/icons/Add task.png" class="icon-sidebar" alt="">Add Task</a></div>
+                    <div class="sidebar-menu"><a class="sidebar-text" href="/Join-Gruppenprojekt/html/board.html"><img src="/Join-Gruppenprojekt/assets/icons/Board.png" class="icon-sidebar" alt="">Board</a></div>
+                    <div class="sidebar-menu"><a class="sidebar-text" href="/Join-Gruppenprojekt/html/contacts.html"><img src="/Join-Gruppenprojekt/assets/icons/Contacts.png" class="icon-sidebar" alt="">Contacts</a></div>
+                </div>
+                <div class="sidebar-policy">
+                    <a class="sidebar-text policy-color pt-policy" href="/Join-Gruppenprojekt/html/privacy_policy.html">Privacy Policy</a>
+                    <a class="sidebar-text policy-color" href="/Join-Gruppenprojekt/html/legal_notice.html">Legal Notice</a>
+                </div>
+    `
+}
