@@ -84,6 +84,10 @@
   border: 1px solid #d1d1d1;
 }
 
+.log-in__inputs__inputfield:hover{
+    cursor: pointer;
+}
+
 .icon-mail {
   background: url("../assets/icons/mail.svg");
   background-repeat: no-repeat;
@@ -133,7 +137,7 @@
 .log-in__buttons__btn--bright:hover {
   color: #2aaae2;
   cursor: pointer;
-  border-color: #2aaae2;
+  border: 1px solid #2aaae2;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 

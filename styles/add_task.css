@@ -11,6 +11,8 @@
   --priority-urgent-bg: #ff3d00;
   --priority-medium-bg: #ffa800;
   --priority-low-bg: #7ae229;
+  --error-color: #ffa0ac;
+  --selected-hover-bg: #091931;
 }
 
 .d-none {
@@ -72,7 +74,7 @@ mark {
 input,
 textarea {
   border: 1px solid var(--snd-color);
-  border-radius: 5px;
+  border-radius: 8px;
   width: 100%;
   padding-block: 8px;
   padding-inline: 16px;
@@ -119,7 +121,7 @@ h1 {
   width: 120px;
   height: 40px;
   background-color: white;
-  border-radius: 5px;
+  border-radius: 8px;
   box-shadow: 0px 0px 4px var(--snd-color);
   cursor: pointer;
   display: flex;
@@ -162,7 +164,7 @@ h1 {
 
 .buttons button {
   padding: 12px 10px;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 16px;
 }
 
@@ -219,6 +221,7 @@ h1 {
 
 .category {
   background-color: white;
+  border-radius: 8px;
 }
 
 .container ul {
@@ -228,14 +231,13 @@ h1 {
 }
 
 .category li {
-  list-style: none;
-  background-color: white;
   cursor: pointer;
+  border: 1px solid white;
 }
 
 .select {
   border: 1px solid var(--snd-color);
-  border-radius: 5px;
+  border-radius: 8px;
   width: 100%;
   padding-block: 8px;
   padding-inline-start: 16px;
@@ -256,7 +258,7 @@ select:focus {
 
 .optionsCategory {
   background-color: white;
-  border-radius: 5px;
+  border-radius: 8px;
   width: 100%;
   padding-block: 8px;
   padding-inline: 16px;
@@ -291,7 +293,6 @@ select:focus {
 
 .inputSelectContact {
   position: relative;
-  display: inline-block;
   width: 100%;
 }
 
@@ -339,4 +340,38 @@ footer{
 
 .markedFields span{
   display: flex;
+}
+
+.inputError{
+  border: 1px solid var(--error-color);
+}
+
+#errorTitle, #errorDate{
+  font-size: 10px;
+  color: var(--error-color);
+  margin-top: 4px;
+}
+
+.opacity{
+  opacity: 0;
+}
+
+.mb12{
+  margin-bottom: 12px !important;
+}
+
+.checkBox{
+  width: 13px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.assignedBg{
+  background-color: var(--createBtn-color) !important;
+  color: white;
+}
+
+.assignedBg:hover{
+  background: var(--selected-hover-bg) !important;
 }

@@ -28,23 +28,30 @@ function toggleBorderColor(id) {
 
 function openAssignedTo() {
   toggleVisibility("allMembers");
-  let selectMemberRef = document.getElementById("selectMember");
-  selectMemberRef.innerText = "";
-  toggleBorderColor("assignedContainer");
-  toggleArrow("arrow");
-}
-
-function closeAssignedTo() {
-  toggleVisibility("allMembers");
-  toggleBorderColor("assignedContainer");
+  toggleBorderColor("selectMember");
   toggleArrow("arrow");
 }
 
 function getContact(id) {
-  let selectMemberRef = document.getElementById("selectMember");
   let membersRef = document.getElementById(id);
-  selectMemberRef.value = membersRef.innerText;
-  closeAssignedTo();
+  membersRef.classList.toggle("assignedBg");
+  inputRef = membersRef.querySelector('input');
+  if(!inputRef.checked){
+    inputRef.checked =  true;
+  } else {
+    inputRef.checked = false;
+  }
+}
+
+function setCheckBox(id, event){
+  let membersRef = document.getElementById(id);
+  inputRef = membersRef.querySelector('input');
+  if(inputRef.checked != true){
+    inputRef.checked = false;
+  } else {
+    inputRef.checked = true;
+  }
+  event.stopPropagation(event);
 }
 
 function openTaskCategory() {
@@ -134,4 +141,33 @@ function addDisplayNone(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
   ref.classList.add("d-none");
+}
+
+function createTask(){
+  checkEmptyTitle();
+  checkEmptyDate();
+}
+
+function checkEmptyTitle(){
+  let titleRef = document.getElementById("title");
+  let errorTitleRef = document.getElementById("errorTitle");
+  if(!titleRef.value){
+    titleRef.classList.add("inputError");
+    errorTitleRef.classList.remove("opacity");
+  } else {
+    titleRef.classList.remove("inputError");
+    errorTitleRef.classList.add("opacity"); 
+  }
+}
+
+function checkEmptyDate(){
+  let dateRef = document.getElementById("date");
+  let errorDateRef = document.getElementById("errorDate");
+   if(!dateRef.value){
+    dateRef.classList.add("inputError");
+    errorDateRef.classList.remove("opacity");
+  } else {
+    dateRef.classList.remove("inputError");
+    errorDateRef.classList.add("opacity"); 
+  }
 }
