@@ -1,0 +1,26 @@
+.summary-headline{
+    position: absolute;
+    top: 206px;
+    left: 328px;
+    height: 73px;
+    width: 625px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.text-360{
+    font-weight: 700;
+    font-size: 61px;
+}
+
+.text-headline{
+    font-size: 27px;
+    font-weight: 400;
+}
+
+.seperator{
+    height: 59px;
+    width: 3px;
+    background-color: #29ABE2;
+}
