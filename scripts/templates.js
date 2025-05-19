@@ -3,7 +3,7 @@ function getHeader() {
         <div class="header-top">
             <p class="header-name">Kanban Project Management Tool</p>
             <div class="header-top-profile">
-                <a href="/Join-Gruppenprojekt/html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
+                <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
                 <p class="personal-icon">G</p>
             </div>
         </div>
@@ -12,12 +12,12 @@ function getHeader() {
 
 function getSidebar() {
     return `
-            <img class="sidebar-logo" src="/Join-Gruppenprojekt/assets/img/Capa 1 white.png" alt="">
+            <img class="sidebar-logo" src="../assets/img/Capa 1 white.png" alt="">
                 <div class="menu-box">
-                    <div class="sidebar-menu sidebar-menu-active"><a class="sidebar-text a-active" href="../html/summary.html"><img src="/Join-Gruppenprojekt/assets/icons/Summary.png" class="sidebar-icon" alt="">Summary</a></div>
-                    <div class="sidebar-menu"><a class="sidebar-text" href="../html/add_task.html"><img src="/Join-Gruppenprojekt/assets/icons/Add task.png" class="sidebar-icon" alt="">Add Task</a></div>
-                    <div class="sidebar-menu"><a class="sidebar-text" href="../html/board.html"><img src="/Join-Gruppenprojekt/assets/icons/Board.png" class="sidebar-icon" alt="">Board</a></div>
-                    <div class="sidebar-menu"><a class="sidebar-text" href="../html/contacts.html"><img src="/Join-Gruppenprojekt/assets/icons/Contacts.png" class="sidebar-icon" alt="">Contacts</a></div>
+                    <div class="sidebar-menu sidebar-menu-active"><a class="sidebar-text a-active" href="../html/summary.html"><img src="../assets/icons/Summary.png" class="sidebar-icon" alt="">Summary</a></div>
+                    <div class="sidebar-menu"><a class="sidebar-text" href="../html/add_task.html"><img src="../assets/icons/Add task.png" class="sidebar-icon" alt="">Add Task</a></div>
+                    <div class="sidebar-menu"><a class="sidebar-text" href="../html/board.html"><img src="../assets/icons/Board.png" class="sidebar-icon" alt="">Board</a></div>
+                    <div class="sidebar-menu"><a class="sidebar-text" href="../html/contacts.html"><img src="../assets/icons/Contacts.png" class="sidebar-icon" alt="">Contacts</a></div>
                 </div>
                 <div class="sidebar-policy">
                     <a class="sidebar-text policy-color pt-policy" href="../html/privacy_policy.html">Privacy Policy</a>
