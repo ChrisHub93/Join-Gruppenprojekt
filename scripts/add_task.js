@@ -32,24 +32,36 @@ function openAssignedTo() {
   toggleArrow("arrow");
 }
 
+
+lastClickedFromCheckBox = false;
+
 function getContact(id) {
   let membersRef = document.getElementById(id);
-  membersRef.classList.toggle("assignedBg");
   inputRef = membersRef.querySelector('input');
   if(!inputRef.checked){
     inputRef.checked =  true;
-  } else {
+    checkBoxImg.src = "/assets/icons/Check button true.png";
+    membersRef.classList.add("assignedBg");
+    checkBoxImg.classList.add("filterChecked");
+  } else if (inputRef.checked) {
     inputRef.checked = false;
+    checkBoxImg.src = "/assets/icons/Check button.png";
+    membersRef.classList.remove("assignedBg");
+    checkBoxImg.classList.remove("filterChecked");
   }
 }
 
 function setCheckBox(id, event){
   let membersRef = document.getElementById(id);
   inputRef = membersRef.querySelector('input');
-  if(inputRef.checked != true){
-    inputRef.checked = false;
-  } else {
+  if(!inputRef.checked){
     inputRef.checked = true;
+    checkBoxImg.src = "/assets/icons/Check button true.png";
+    checkBoxImg.classList.add("filterChecked");
+  } else {
+    inputRef.checked = false;
+    checkBoxImg.src = "/assets/icons/Check button.png";
+    checkBoxImg.classList.remove("filterChecked");
   }
   event.stopPropagation(event);
 }

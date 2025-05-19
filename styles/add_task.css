@@ -1,20 +1,3 @@
-* {
-  margin: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --bg-color: #f6f7f8;
-  --snd-color: #dbdbdb;
-  --focus-color: #5ec0e9;
-  --createBtn-color: #2a3647;
-  --priority-urgent-bg: #ff3d00;
-  --priority-medium-bg: #ffa800;
-  --priority-low-bg: #7ae229;
-  --error-color: #ffa0ac;
-  --selected-hover-bg: #091931;
-}
-
 .d-none {
   display: none;
 }
@@ -40,7 +23,6 @@ body {
 
 .seperator {
   width: 1px;
-  /* height: 320px; */
   background-color: var(--snd-color);
   margin-left: 32px;
   margin-right: 32px;
@@ -196,7 +178,7 @@ h1 {
 }
 
 .createTask {
-  background-color: var(--createBtn-color);
+  background-color: var(--darkBtn-color);
   color: white;
   border: none;
   cursor: pointer;
@@ -365,10 +347,39 @@ footer{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  display: none;
+}
+
+.checkBoxImg{
+  height: 18px;
+  object-fit: cover;
+  height: 18px;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.checkBoxImg:hover{
+  background-color: white;
+  height: 18px;
+  border-radius: 50%;
+}
+
+.filterChecked{
+  filter: brightness(0) invert(1);
+  height: 18px;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.filterChecked:hover{
+  background-color: white;
+  height: 18px;
+  border-radius: 50%;
+  transition: all 200ms ease-in;
 }
 
 .assignedBg{
-  background-color: var(--createBtn-color) !important;
+  background-color: var(--darkBtn-color) !important;
   color: white;
 }
 

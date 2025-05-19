@@ -128,13 +128,9 @@
                 <img id="arrow" class="arrow inputStyleArrow" src="/assets/icons/arrow_drop_down.png" alt=""/>
               </div>
               <ul id="allMembers" class="options">
-                <li
-                  onclick="getContact(`contact1`)"
-                  id="contact1"
-                  class="optionsCategory inputFlex"
-                >
-                  Contact 1
-                  <input onclick="setCheckBox(`contact1`, event)" type="checkbox" class="checkBox" />
+                <li onclick="getContact(`contact1`)" id="contact1" class="optionsCategory inputFlex"> Contact 1
+                    <input type="checkbox" class="checkBox" />
+                    <img onclick="setCheckBox(`contact1`, event)" id="checkBoxImg" class="checkBoxImg" src="/assets/icons/Check button.png" alt="">
                 </li>
                 <li
                   onclick="getContact(`contact2`)"
