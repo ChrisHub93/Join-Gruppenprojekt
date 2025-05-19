@@ -33,6 +33,7 @@ function openAssignedTo() {
 }
 
 
+//do not behave like mockup
 lastClickedFromCheckBox = false;
 
 function getContact(id) {
@@ -43,27 +44,38 @@ function getContact(id) {
     checkBoxImg.src = "/assets/icons/Check button true.png";
     membersRef.classList.add("assignedBg");
     checkBoxImg.classList.add("filterChecked");
-  } else if (inputRef.checked) {
+  } else if (inputRef.checked || lastClickedFromCheckBox == true) {
+    lastClickedFromCheckBox = false;
     inputRef.checked = false;
     checkBoxImg.src = "/assets/icons/Check button.png";
     membersRef.classList.remove("assignedBg");
     checkBoxImg.classList.remove("filterChecked");
   }
+  console.log("inputRef.checked =",inputRef.checked);
+  console.log("lastClickedFromCheckBox =",lastClickedFromCheckBox);
+ 
 }
 
 function setCheckBox(id, event){
+  if(lastClickedFromCheckBox){
+    lastClickedFromCheckBox = false;
+  } 
+
   let membersRef = document.getElementById(id);
   inputRef = membersRef.querySelector('input');
-  if(!inputRef.checked){
-    inputRef.checked = true;
-    checkBoxImg.src = "/assets/icons/Check button true.png";
-    checkBoxImg.classList.add("filterChecked");
-  } else {
+  if(!inputRef.checked && lastClickedFromCheckBox == false){
+    // lastClickedFromCheckBox = true;
     inputRef.checked = false;
+    checkBoxImg.src = "/assets/icons/Check button true.png";
+    // checkBoxImg.classList.add("filterChecked");
+  } else {
+    // inputRef.checked = false;
     checkBoxImg.src = "/assets/icons/Check button.png";
     checkBoxImg.classList.remove("filterChecked");
   }
   event.stopPropagation(event);
+  console.log("inputRef.checked =",inputRef.checked);
+  console.log("lastClickedFromCheckBox =",lastClickedFromCheckBox);
 }
 
 function openTaskCategory() {
