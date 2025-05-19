@@ -80,6 +80,7 @@ header{
 }
 
 .sidebar-logo{
+    padding-top: 64px;
     width: 100.03px;
     height: 121.97px;
 }
@@ -140,6 +141,7 @@ header{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    padding-bottom: 64px;
 }
 
 .policy-color{
