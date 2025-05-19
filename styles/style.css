@@ -7,6 +7,7 @@
 
   :root {
     --bg-color: #f6f7f8;
+    --sng-bg-color: #FFFFFF;
     --snd-color: #dbdbdb;
     --focus-color: #5ec0e9;
     --createBtn-color: #2a3647;
@@ -15,4 +16,5 @@
     --priority-low-bg: #7ae229;
     --error-color: #ffa0ac;
     --selected-hover-bg: #091931;
+    --darkBtn-color: #2b3647;
   }
