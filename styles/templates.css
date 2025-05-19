@@ -74,8 +74,6 @@ header{
     flex-direction: column;
     width: 232px;
     height: 1024px;
-    padding-top: 64px;
-    padding-bottom: 64px;
     justify-content: space-between;
 }
 
