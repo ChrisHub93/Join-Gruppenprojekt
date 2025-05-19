@@ -4,3 +4,15 @@
     scroll-behavior: smooth;
     font-family: 'Inter';
   }
+
+  :root {
+    --bg-color: #f6f7f8;
+    --snd-color: #dbdbdb;
+    --focus-color: #5ec0e9;
+    --createBtn-color: #2a3647;
+    --priority-urgent-bg: #ff3d00;
+    --priority-medium-bg: #ffa800;
+    --priority-low-bg: #7ae229;
+    --error-color: #ffa0ac;
+    --selected-hover-bg: #091931;
+  }
