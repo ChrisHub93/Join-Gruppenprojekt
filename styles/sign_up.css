@@ -28,7 +28,7 @@
   .sign_up {
     display: flex;
     flex-direction: column;
-    padding: 48px 88px;
+    padding: 42px 88px;
     align-items: center;
     border-radius: 30px;
     background-color: var(--sng-bg-color);
@@ -152,10 +152,10 @@
   .footer-sign_up {
     display: flex;
     justify-content: center;
-    align-content: center;
     gap: 16px;
     height: 35px;
     max-width: 1920px;
+    margin-top: 19px;
   }
   
   .footer-sign_up__link {

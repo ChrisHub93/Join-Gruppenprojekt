@@ -15,7 +15,7 @@
 .header-login__logo {
   height: 122px;
   width: 100px;
-} 
+}
 
 .header__sign-up {
   display: flex;
@@ -44,6 +44,7 @@
   justify-content: center;
   align-items: center;
   max-width: 1920px;
+  flex-direction: column;
 }
 
 .log-in {
@@ -61,12 +62,12 @@
   margin-bottom: 16px;
 }
 
-.log-in__line{
-    height: 3px;
-    width: 40%;
-    background-color: #2aaae2;
-    margin-bottom: 24px;
-    border-radius: 10px;
+.log-in__line {
+  height: 3px;
+  width: 40%;
+  background-color: #2aaae2;
+  margin-bottom: 24px;
+  border-radius: 10px;
 }
 
 .log-in__inputs {
@@ -84,8 +85,8 @@
   border: 1px solid #d1d1d1;
 }
 
-.log-in__inputs__inputfield:hover{
-    cursor: pointer;
+.log-in__inputs__inputfield:hover {
+  cursor: pointer;
 }
 
 .icon-mail {
@@ -141,6 +142,28 @@
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
+.mobile-sign-up {
+  display: none;
+  text-align: center;
+  align-items: baseline;
+  gap: 35px;
+  margin-top: 64px;
+}
+
+.mobile-sign-up__btn {
+  border: none;
+  border-radius: 8px;
+  padding: 15px 16px;
+  color: white;
+  background-color: var(--darkBtn-color);
+}
+
+.mobile-sign-up__btn:hover {
+  background-color: #2aaae2;
+  cursor: pointer;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
 .footer-login {
   display: flex;
   justify-content: center;
@@ -156,7 +179,57 @@
   font-size: 16px;
 }
 
-.footer-login__link:hover{
-    color: #2aaae2;
-    font-weight: bold;
+.footer-login__link:hover {
+  color: #2aaae2;
+  font-weight: bold;
+}
+
+@media (max-width: 420px) {
+  .body-login {
+    padding: 16px 0px;
+  }
+
+  .header-login__logo {
+    width: 64px;
+    height: 78px;
+    margin-left: 32px;
+  }
+
+  .header__sign-up {
+    display: none;
+  }
+
+  .log-in {
+    width: 95%;
+    padding: 32px 32px;
+  }
+
+  .log-in__headline {
+    font-size: 47px;
+  }
+
+  .log-in__line {
+    width: 58%;
+  }
+
+  .log-in__inputs {
+    width: 110%;
+    margin-bottom: 32px;
+  }
+
+  .log-in__buttons {
+    flex-direction: column;
+    gap: 21px;
+  }
+
+  .log-in__buttons__btn {
+    font-size: 16px;
+    width: 180px;
+    height: 51px;
+    padding: 4px 4px;
+  }
+
+  .mobile-sign-up {
+    display: flex;
+  }
 }

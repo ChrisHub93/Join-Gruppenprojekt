@@ -17,3 +17,7 @@
     --selected-hover-bg: #091931;
     --darkBtn-color: #2b3647;
   }
+
+  .d-none{
+    display: none;
+  }
