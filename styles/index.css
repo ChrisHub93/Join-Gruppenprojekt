@@ -205,9 +205,6 @@
   .header__sign-up {
     margin-right: 32px;
   }
-}
-
-@media (max-width: 650px) {
   .log-in {
     width: 95%;
     padding: 48px 32px;
