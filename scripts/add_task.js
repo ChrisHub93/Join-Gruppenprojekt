@@ -32,50 +32,62 @@ function openAssignedTo() {
   toggleArrow("arrow");
 }
 
-
-//do not behave like mockup
-lastClickedFromCheckBox = false;
-
 function getContact(id) {
   let membersRef = document.getElementById(id);
-  inputRef = membersRef.querySelector('input');
-  if(!inputRef.checked){
-    inputRef.checked =  true;
-    checkBoxImg.src = "/assets/icons/Check button true.png";
-    membersRef.classList.add("assignedBg");
-    checkBoxImg.classList.add("filterChecked");
-  } else if (inputRef.checked || lastClickedFromCheckBox == true) {
-    lastClickedFromCheckBox = false;
-    inputRef.checked = false;
-    checkBoxImg.src = "/assets/icons/Check button.png";
-    membersRef.classList.remove("assignedBg");
-    checkBoxImg.classList.remove("filterChecked");
+  inputRef = membersRef.querySelector("input");
+  checkBoxImg = membersRef.querySelector("img");
+  if (!inputRef.checked && membersRef.classList.contains("assignedBg")) {
+    getInputCheckedFalse(membersRef, inputRef);
+  } else if (!inputRef.checked) {
+    getInputCheckedTrue(membersRef, inputRef);
+  } else if (inputRef.checked && membersRef.classList.contains("assignedBg")) {
+    getInputCheckedFalse(membersRef, inputRef);
+  } else if (inputRef.checked) {
+    membersRef.classList.toggle("assignedBg");
+    checkBoxImg.classList.toggle("filterChecked");
   }
-  console.log("inputRef.checked =",inputRef.checked);
-  console.log("lastClickedFromCheckBox =",lastClickedFromCheckBox);
- 
 }
 
-function setCheckBox(id, event){
-  if(lastClickedFromCheckBox){
-    lastClickedFromCheckBox = false;
-  } 
-
-  let membersRef = document.getElementById(id);
-  inputRef = membersRef.querySelector('input');
-  if(!inputRef.checked && lastClickedFromCheckBox == false){
-    // lastClickedFromCheckBox = true;
-    inputRef.checked = false;
-    checkBoxImg.src = "/assets/icons/Check button true.png";
-    // checkBoxImg.classList.add("filterChecked");
-  } else {
-    // inputRef.checked = false;
-    checkBoxImg.src = "/assets/icons/Check button.png";
-    checkBoxImg.classList.remove("filterChecked");
-  }
+function setCheckBox(id, event) {
   event.stopPropagation(event);
-  console.log("inputRef.checked =",inputRef.checked);
-  console.log("lastClickedFromCheckBox =",lastClickedFromCheckBox);
+  let membersRef = document.getElementById(id);
+  inputRef = membersRef.querySelector("input");
+  checkBoxImg = membersRef.querySelector("img");
+  if (inputRef.checked) {
+    getCheckBoxFalse(id);
+  } else if (!inputRef.checked && !membersRef.classList.contains("assignedBg")) {
+    inputRef.checked = true;
+    checkBoxImg.src = "/assets/icons/Check button true.png";
+  } else if (!inputRef.checked) {
+    inputRef.checked = true;
+    checkBoxImg.src = "/assets/icons/Check button true.png";
+    checkBoxImg.classList.add("filterChecked");
+  }
+}
+
+function getInputCheckedFalse(membersRef, inputRef) {
+  checkBoxImg = membersRef.querySelector("img");
+  inputRef.checked = false;
+  checkBoxImg.src = "/assets/icons/Check button.png";
+  membersRef.classList.remove("assignedBg");
+  checkBoxImg.classList.remove("filterChecked");
+}
+
+function getInputCheckedTrue(membersRef, inputRef) {
+  checkBoxImg = membersRef.querySelector("img");
+  inputRef.checked = true;
+  checkBoxImg.src = "/assets/icons/Check button true.png";
+  membersRef.classList.add("assignedBg");
+  checkBoxImg.classList.add("filterChecked");
+}
+
+function getCheckBoxFalse(id) {
+  let membersRef = document.getElementById(id);
+  inputRef = membersRef.querySelector("input");
+  imgRef = membersRef.querySelector("img");
+  inputRef.checked = false;
+  imgRef.src = "/assets/icons/Check button.png";
+  imgRef.classList.remove("filterChecked");
 }
 
 function openTaskCategory() {
@@ -167,31 +179,37 @@ function addDisplayNone(id) {
   ref.classList.add("d-none");
 }
 
-function createTask(){
+function createTask() {
   checkEmptyTitle();
   checkEmptyDate();
 }
 
-function checkEmptyTitle(){
+function checkEmptyTitle() {
   let titleRef = document.getElementById("title");
   let errorTitleRef = document.getElementById("errorTitle");
-  if(!titleRef.value){
+  if (!titleRef.value) {
     titleRef.classList.add("inputError");
     errorTitleRef.classList.remove("opacity");
   } else {
     titleRef.classList.remove("inputError");
-    errorTitleRef.classList.add("opacity"); 
+    errorTitleRef.classList.add("opacity");
   }
 }
 
-function checkEmptyDate(){
+function checkEmptyDate() {
   let dateRef = document.getElementById("date");
   let errorDateRef = document.getElementById("errorDate");
-   if(!dateRef.value){
+  if (!dateRef.value) {
     dateRef.classList.add("inputError");
     errorDateRef.classList.remove("opacity");
   } else {
     dateRef.classList.remove("inputError");
-    errorDateRef.classList.add("opacity"); 
+    errorDateRef.classList.add("opacity");
   }
+}
+
+function chooseSubTask(){
+  let inputRef = document.getElementById("subTaskInput");
+  inputRef.value = 'Contact Form';
+  inputRef.innerHTML = inputRef.value;
 }
