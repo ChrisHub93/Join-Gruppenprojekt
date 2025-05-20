@@ -130,51 +130,32 @@
               <ul id="allMembers" class="options">
 
                 
-                <li onclick="getContact(`contact1`)" id="contact1" class="optionsCategory inputFlex"> Contact 1
-
-                    <input type="checkbox" class="checkBox" />
-
-                    <img onclick="setCheckBox(`contact1`, event)" id="checkBoxImg1" class="checkBoxImg" src="/assets/icons/Check button.png" alt="">
+                <li onclick="getContact(`contact1`)" id="contact1" class="optionsCategory inputFlex">Contact 1 
+                  <input type="checkbox" class="checkBox" /> 
+                  <img onclick="setCheckBox(`contact1`, event)" id="checkBoxImg1" class="checkBoxImg" src="/assets/icons/Check button.png" alt="">
                 </li>
 
 
-                <li
-                  onclick="getContact(`contact2`)"
-                  id="contact2"
-                  class="optionsCategory inputFlex"
-                >
-                  Contact 2
+                <li onclick="getContact(`contact2`)" id="contact2" class="optionsCategory inputFlex">Contact 2
                   <input type="checkbox" class="checkBox" />
                   <img onclick="setCheckBox(`contact2`, event)" id="checkBoxImg2" class="checkBoxImg" src="/assets/icons/Check button.png" alt="">
                 </li>
-                <li
-                  onclick="getContact(`contact3`)"
-                  id="contact3"
-                  class="optionsCategory inputFlex"
-                >
-                  Contact 3
+
+                <li onclick="getContact(`contact3`)" id="contact3" class="optionsCategory inputFlex">Contact 3
                   <input type="checkbox" class="checkBox" />
                   <img onclick="setCheckBox(`contact3`, event)" id="checkBoxImg3" class="checkBoxImg" src="/assets/icons/Check button.png" alt="">
-
                 </li>
-                <li
-                  onclick="getContact(`contact4`)"
-                  id="contact4"
-                  class="optionsCategory inputFlex"
-                >
-                  Contact 4
+
+                <li onclick="getContact(`contact4`)" id="contact4" class="optionsCategory inputFlex">Contact 4
                   <input type="checkbox" class="checkBox" />
                   <img onclick="setCheckBox(`contact4`, event)" id="checkBoxImg4" class="checkBoxImg" src="/assets/icons/Check button.png" alt="">
                 </li>
-                <li
-                  onclick="getContact(`contact5`)"
-                  id="contact5"
-                  class="optionsCategory inputFlex"
-                >
-                  Contact 5
+
+                <li onclick="getContact(`contact5`)" id="contact5" class="optionsCategory inputFlex">Contact 5
                   <input type="checkbox" class="checkBox" />
                   <img onclick="setCheckBox(`contact5`, event)" id="checkBoxImg5" class="checkBoxImg" src="/assets/icons/Check button.png" alt="">
                 </li>
+
               </ul>
             </div>
             <div id="assignedMembers"></div>
@@ -193,19 +174,9 @@
                 />
               </div>
               <ul id="allOptions" class="options">
-                <li
-                  onclick="getCategory(`index1`)"
-                  id="index1"
-                  class="optionsCategory"
-                >
-                  Technical Task
+                <li onclick="getCategory(`index1`)" id="index1" class="optionsCategory">Technical Task
                 </li>
-                <li
-                  onclick="getCategory(`index2`)"
-                  id="index2"
-                  class="optionsCategory"
-                >
-                  User Story
+                <li onclick="getCategory(`index2`)" id="index2" class="optionsCategory">User Story
                 </li>
               </ul>
             </div>
@@ -213,17 +184,9 @@
 
           <div class="column">
             <span class="mgBottom">Subtasks</span>
-            <input
-              type="text"
-              name="subtasks"
-              id="subtasks"
-              placeholder="Add new subtask"
-            />
-            <img
-              class="plusIcon"
-              src="/assets/icons/Subtasks-plus.png"
-              alt=""
-            />
+            <input type="text" name="subtasks" id="subTaskInput" placeholder="Add new subtask"/>
+            <img onclick="chooseSubTask()" class="plusIcon" src="/assets/icons/Subtasks-plus.png" alt=""/>
+            <div id="subTasks"></div>
           </div>
         </div>
       </form>

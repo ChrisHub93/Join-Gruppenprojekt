@@ -386,3 +386,7 @@ footer{
 .assignedBg:hover{
   background: var(--selected-hover-bg) !important;
 }
+
+#subTasks li{
+  padding-right: 1px !important;
+}

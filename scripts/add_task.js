@@ -207,3 +207,9 @@ function checkEmptyDate() {
     errorDateRef.classList.add("opacity");
   }
 }
+
+function chooseSubTask(){
+  let inputRef = document.getElementById("subTaskInput");
+  inputRef.value = 'Contact Form';
+  inputRef.innerHTML = inputRef.value;
+}
