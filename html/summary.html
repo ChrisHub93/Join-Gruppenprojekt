@@ -12,17 +12,21 @@
 
     <script src="../scripts/script.js"></script>
     <script src="../scripts/templates.js"></script>
+    <script src="../scripts/summary.js"></script>
 </head>
-<body onload="init()">
+<body onload="init(); showGreeting();">
     <header id="header" class="page-box">
     </header>
     <main class="page-box">
         <div id="sidebar" class="sidebar">
         </div>
         <div class="page-box summary-headline">
-            <p class="text-360">JOIN 360</p>
+            <p class="text-360">Join 360</p>
             <div class="seperator"></div>
             <p class="text-headline">Key Metrics at a Glance</p>
+        </div>
+        <div class="greeting-box">
+            <p id="greeting" class="greeting"></p>
         </div>
     </main>
 </body>

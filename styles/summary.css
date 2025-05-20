@@ -24,3 +24,11 @@
     width: 3px;
     background-color: #29ABE2;
 }
+
+.greeting-box{
+    position: fixed;
+    top: 587.5px;
+    left: 968px;
+    width: 338px;
+    height: 56px;
+}
