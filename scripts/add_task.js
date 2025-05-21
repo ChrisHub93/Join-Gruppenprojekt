@@ -212,4 +212,10 @@ function chooseSubTask(){
   let inputRef = document.getElementById("subTaskInput");
   inputRef.value = 'Contact Form';
   inputRef.innerHTML = inputRef.value;
+
+  let plusIconRef = document.getElementById("plusIcon");
+  plusIconRef.classList.add("d-none");
+
+  let cancelOrCheckRef = document.getElementById("cancelOrCheck");
+  cancelOrCheckRef.classList.toggle("d-none");
 }

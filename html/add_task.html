@@ -185,7 +185,14 @@
           <div class="column">
             <span class="mgBottom">Subtasks</span>
             <input type="text" name="subtasks" id="subTaskInput" placeholder="Add new subtask"/>
-            <img onclick="chooseSubTask()" class="plusIcon" src="/assets/icons/Subtasks-plus.png" alt=""/>
+            <img onclick="chooseSubTask()" id="plusIcon" class="plusIcon" src="/assets/icons/Subtasks-plus.png" alt=""/>
+
+            <div id="cancelOrCheck" class="cancelOrCheck d-none">
+              <img src="/assets/icons/iconoir_cancel.png" alt="">
+              <div class="subTasksSeperator"></div>
+              <img src="/assets/icons/Property 1=check.png" alt="">
+            </div>
+
             <div id="subTasks"></div>
           </div>
         </div>
