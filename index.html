@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/fonts.css" />
     <link rel="stylesheet" href="./styles/index.css">
+    <script src="./scripts/index.js"></script>
 
     <title>Join Login</title>
 </head>
@@ -29,11 +30,11 @@
             <p class="log-in__headline">Log in</p>
             <div class="log-in__line"></div>
             <div class="log-in__inputs">
-                <input class="log-in__inputs__inputfield icon-mail" type="email" placeholder="Email">
-                <input class="log-in__inputs__inputfield icon-lock" type="password" placeholder="Password">
+                <input class="log-in__inputs__inputfield icon-mail" type="email" placeholder="Email" id="inputEmail">
+                <input class="log-in__inputs__inputfield icon-lock" type="password" placeholder="Password" id="inputPassword">
             </div>
             <div class="log-in__buttons">
-                <button class="log-in__buttons__btn log-in__buttons__btn--dark">Log In</button>
+                <button class="log-in__buttons__btn log-in__buttons__btn--dark" onclick="logIn()">Log In</button>
                 <button onclick="location.href='./html/summary.html'" class="log-in__buttons__btn log-in__buttons__btn--bright">Guest Log in</button>
             </div>
         </div>
