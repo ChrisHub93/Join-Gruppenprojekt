@@ -199,6 +199,7 @@ h1 {
   top: 53%;
   margin-right: 8px;
   cursor: pointer;
+  display: none;
 }
 
 .category {
@@ -385,4 +386,18 @@ footer{
 
 .assignedBg:hover{
   background: var(--selected-hover-bg) !important;
+}
+
+.cancelOrCheck{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subTasksSeperator{
+  width: 1px;
+  background-color: var(--snd-color);
+  margin-left: 0px;
+  margin-right: 0px;
+  height: 20px;
 }
