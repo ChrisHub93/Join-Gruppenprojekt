@@ -4,9 +4,12 @@
     left: 328px;
     height: 73px;
     width: 625px;
+}
+
+.center-between{
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
 }
 
 .text-360{
@@ -25,10 +28,39 @@
     background-color: #29ABE2;
 }
 
+.checkbox{
+    position: absolute;
+    height: 560px;
+    width: 562px;
+    top: 335px;
+    left: 328px;
+}
+
+.checkboxtodo{
+    width: 560px;
+    height: 168px;
+}
+
+.checkboxurgent{
+    width: 560px;
+    height: 168px;
+}
+
+.checkboxoverall{
+    width: 560px;
+    height: 160px;
+}
+
 .greeting-box{
-    position: fixed;
+    position: absolute;
     top: 587.5px;
     left: 968px;
     width: 338px;
     height: 56px;
+}
+
+.greeting{
+    font-size: 47px;
+    font-weight: 500;
+    color: #2A3647;
 }
