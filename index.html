@@ -1,55 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="icon" type="image/xcon" href="./assets/img/Capa 1.png">
+    <script src="./scripts/script.js"></script>
+    <script src="./scripts/templates.js"></script>
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/fonts.css" />
+    <link rel="stylesheet" href="./styles/index.css">
+    <script src="./scripts/index.js"></script>
 
-    <link rel="icon" type="image/xcon" href="../assets/img/Capa 1.png">
-    <script src="../scripts/script.js"></script>
-    <script src="../scripts/templates.js"></script>
-    <link rel="stylesheet" href="../styles/style.css" />
-    <link rel="stylesheet" href="../styles/fonts.css" />
-    <link rel="stylesheet" href="../styles/sign_up.css">
-
-    <title>Sign up</title>
+    <title>Join Login</title>
 </head>
-<body class="body-sign_up">
+<body class="body-login">
 
-    <header class="header-sign_up">
-        <img class="header-sign_up__logo" src="../assets/img/Capa 1.png" alt="Join Logo">
+    <header class="header-login">
+        <img class="header-login__logo" src="./assets/img/Capa 1.png" alt="Join Logo">
+        <div class="header__sign-up">
+            <p class="header__sign-up__text">Not a join user?</p>
+            <button onclick="location.href='./html/sign_up.html'" class="header-login__sign-up__btn">Sign up</button>
+        </div>
     </header>
 
-    <main class="main-sign_up">
+    <main class="main-login">
 
-        <div class="sign_up">
-            <div class="headline">
-                <button onclick="location.href='../index.html'" class="back-btn">
-                    <img src="../assets/icons/arrow-left-line.svg" alt="Arrow back">
-                </button>
-                <p class="sign_up__headline">Sign up</p>
+        <div class="log-in">
+            <p class="log-in__headline">Log in</p>
+            <div class="log-in__line"></div>
+            <div class="log-in__inputs">
+                <input class="log-in__inputs__inputfield icon-mail" type="email" placeholder="Email" id="inputEmail">
+                <input class="log-in__inputs__inputfield icon-lock" type="password" placeholder="Password" id="inputPassword">
             </div>
-            <div class="sign_up__line"></div>
-            <div class="sign_up__inputs">
-                <input class="sign_up__inputs__inputfield icon-user" type="text" placeholder="Name">
-                <input class="sign_up__inputs__inputfield icon-mail" type="email" placeholder="Email">
-                <input class="sign_up__inputs__inputfield icon-lock" type="password" placeholder="Password">
-                <input class="sign_up__inputs__inputfield icon-lock" type="password" placeholder="Confirm Password">
-            </div>
-            <form class="form-check">
-                <input type="checkbox" id="check-privacy" name="check-privacy" value="true">
-                <label for="check-privacy">I accept the <a class="sign_up__link" href="./html/privacy_policy.html">Privacy Policy</a></label>
-            </form >
-            <div class="sign_up__buttons">
-                <button class="sign_up__buttons__btn sign_up__buttons__btn--dark">Sign up</button>
+            <div class="log-in__buttons">
+                <button class="log-in__buttons__btn log-in__buttons__btn--dark" onclick="logIn()">Log In</button>
+                <button onclick="location.href='./html/summary.html'" class="log-in__buttons__btn log-in__buttons__btn--bright">Guest Log in</button>
             </div>
         </div>
-        
+
+        <div class="mobile-sign-up">
+            <p class="mobile-sign-up__text">Not a join user?</p>
+            <button onclick="location.href='./html/sign_up.html'" class="mobile-sign-up__btn">Sign up</button>
+        </div>
+
     </main>
 
-    <footer class="footer-sign_up">
-        <a class="footer-sign_up__link" href="./html/privacy_policy.html">Privacy Policy</a>
-        <a class="footer-sign_up__link" href="./html/legal_notice.html">Legal notice</a>
+    <footer class="footer-login">
+        <a class="footer-login__link" href="./html/privacy_policy.html">Privacy Policy</a>
+        <a class="footer-login__link" href="./html/legal_notice.html">Legal notice</a>
     </footer>
-    
+
 </body>
 </html>
