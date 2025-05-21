@@ -1,12 +1,10 @@
 function getHeader() {
     return `
-        <div class="header-top">
             <p class="header-name">Kanban Project Management Tool</p>
             <div class="header-top-profile">
                 <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
                 <p class="personal-icon">G</p>
             </div>
-        </div>
     `
 }
 

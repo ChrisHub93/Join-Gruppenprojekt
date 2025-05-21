@@ -9,32 +9,26 @@
     padding-right: calc((100% - 1960px) / 2);
 }
 
-header{
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-}
-
 .header-name{
+    padding-left: 348px;
     font-size: 20px;
     font-weight: 400;
 }
 
-.header-top{
-    flex: 1;
+header{
     height: 96px;
     align-items: center;
     display: flex;
     justify-content: space-between;
     border-bottom: solid 4px #0000001A;
-    padding-left: 348px;
-    padding-right: 40px;
+    background-color: white;
 }
 
 .header-top-profile{
     display: flex;
-    gap: 8px;
+    gap: 16px;
     align-items: center;
+    padding-right: 40px;
 }
 
 .help-icon{
