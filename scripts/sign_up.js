@@ -5,12 +5,12 @@ let passwordConfirm = "";
 
 function initSignUp() {}
 
-function submit() {
+async function submit() {
   name = document.getElementById("inputName").value;
   email = document.getElementById("inputEmail").value;
   password = document.getElementById("inputPassword").value;
   passwordConfirm = document.getElementById("inputePasswordConfirm").value;
-  postData("/users/", {email: email, password : password});
+  await postData("/users/", {email: email, password : password});
   window.location.href = '../index.html'
 }
 
