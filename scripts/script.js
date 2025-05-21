@@ -15,3 +15,7 @@ function renderSidebar() {
     let contentSidebar = document.getElementById('sidebar');
     contentSidebar.innerHTML = getSidebar();
 }
+
+function test(params) {
+    
+}
