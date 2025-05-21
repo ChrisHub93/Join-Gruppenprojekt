@@ -188,13 +188,14 @@
             <img onclick="chooseSubTask()" id="plusIcon" class="plusIcon" src="/assets/icons/Subtasks-plus.png" alt=""/>
 
             <div id="cancelOrCheck" class="cancelOrCheck d-none">
-              <img src="/assets/icons/iconoir_cancel.png" alt="">
+              <img onclick="deleteTask()" src="/assets/icons/iconoir_cancel.png" alt="">
               <div class="subTasksSeperator"></div>
-              <img src="/assets/icons/Property 1=check.png" alt="">
+              <img onclick="addTask()" src="/assets/icons/Property 1=check.png" alt="">
             </div>
-
-            <div id="subTasks"></div>
           </div>
+
+          <div id="subTasks"></div>
+
         </div>
       </form>
 
@@ -206,16 +207,8 @@
         <div class="buttons">
           <button class="clear">
             Clear
-            <img
-              class="defaultIcon"
-              src="/assets/icons/iconoir_cancel.png"
-              alt=""
-            />
-            <img
-              class="hoverIcon"
-              src="/assets/icons/iconoir_cancel_hover.png"
-              alt=""
-            />
+            <img class="defaultIcon" src="/assets/icons/iconoir_cancel.png" alt=""/>
+            <img class="hoverIcon" src="/assets/icons/iconoir_cancel_hover.png" alt=""/>
           </button>
 
           <button class="createTask" onclick="createTask()">

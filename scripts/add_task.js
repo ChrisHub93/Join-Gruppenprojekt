@@ -210,12 +210,64 @@ function checkEmptyDate() {
 
 function chooseSubTask(){
   let inputRef = document.getElementById("subTaskInput");
-  inputRef.value = 'Contact Form';
-  inputRef.innerHTML = inputRef.value;
+  let addedTaskRef = document.getElementById("subTasks");
 
-  let plusIconRef = document.getElementById("plusIcon");
-  plusIconRef.classList.add("d-none");
+  if (addedTaskRef.innerHTML == ''){
+    inputRef.value = 'Contact Form';
+    inputRef.innerHTML = inputRef.value;
+    addPlusIcon("plusIcon");
+    toggleCancelOrCheck("cancelOrCheck");
+  }else if(addedTaskRef.innerHTML == '<li>Contact Form</li><li>Write Legal Imprint</li>'){
+    inputRef.value = 'Contact Form';
+    inputRef.innerHTML = inputRef.value;
+    addedTaskRef.innerHTML = '';
+    addPlusIcon("plusIcon");
+    toggleCancelOrCheck("cancelOrCheck");
+  }else if(addedTaskRef.innerHTML != ''){
+    inputRef.value = 'Write Legal Imprint';
+    inputRef.innerHTML = inputRef.value;
+    addPlusIcon("plusIcon");
+    toggleCancelOrCheck("cancelOrCheck");
+  }
+}
 
-  let cancelOrCheckRef = document.getElementById("cancelOrCheck");
-  cancelOrCheckRef.classList.toggle("d-none");
+function deleteTask(){
+  let inputRef = document.getElementById("subTaskInput");
+  inputRef.value = '';
+
+  togglePlusIcon("plusIcon");
+  toggleCancelOrCheck("cancelOrCheck");
+}
+
+function addTask(){
+  let inputRef = document.getElementById("subTaskInput");
+  let addedTaskRef = document.getElementById("subTasks");
+  addedTaskRef.innerHTML += `<li>${inputRef.value}</li>`;
+
+  togglePlusIcon("plusIcon");
+  toggleCancelOrCheck("cancelOrCheck");
+
+  inputRef.value = '';
+}
+
+function addPlusIcon(id){
+
+  let ref = document.getElementById(id);
+  if (!ref) return;
+  ref.classList.add("d-none");
+
+}
+
+function togglePlusIcon(id){
+
+    let ref = document.getElementById(id);
+    if (!ref) return;
+    ref.classList.remove("d-none");
+  
+}
+
+function toggleCancelOrCheck(id) {
+  let ref = document.getElementById(id);
+  if (!ref) return;
+  ref.classList.toggle("d-none");
 }

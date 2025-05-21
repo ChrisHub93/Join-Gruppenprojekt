@@ -409,3 +409,8 @@ footer{
   margin-right: 2px;
   height: 20px;
 }
+
+#subTasks{
+  display: flex;
+  flex-direction: column;
+}
