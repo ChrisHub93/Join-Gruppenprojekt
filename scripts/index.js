@@ -20,19 +20,6 @@ function search(dataValues) {
     let mails = listOfUser.email;
     let passwords = listOfUser.password;
 
-<<<<<<< HEAD
-        if (mails == email && passwords == password) {
-            console.log("stimmt");
-            window.location.href = '../html/summary.html'
-            return
-        } else {
-            console.log("keine Übereinstimmung");
-        }
-
-      }
-
-}
-=======
     if (mails == email && passwords == password) {
       console.log("stimmt");
       window.location.href = "../html/summary.html";
@@ -42,4 +29,3 @@ function search(dataValues) {
     }
   }
 }
->>>>>>> 99938033599f1c5637a0bc466bad842e42327e79
