@@ -29,7 +29,7 @@ function search(dataValues) {
         } else {
             console.log("keine Übereinstimmung");
         }
-        
+
       }
 
 }
