@@ -391,7 +391,7 @@ footer{
   align-items: center;
   justify-content: center;
   position: absolute;
-  right: 8px;
+  right: 12px;
   top: 56%;
   cursor: pointer;
 }
@@ -413,4 +413,34 @@ footer{
 #subTasks{
   display: flex;
   flex-direction: column;
+}
+
+#subTasks input{
+  border: none;
+  font-size: 14px;
+  background-color: var(--bg-color);
+}
+
+#subTasks input:hover{
+  background-color: var(--snd-color);
+}
+
+.relative{
+  position: relative;
+}
+
+.editOrTrash{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 12px;
+  top: 20%;
+  cursor: pointer;
+}
+
+.editOrTrash img{
+  height: 20px;
+  width: 20px;
+  object-fit: contain;
 }

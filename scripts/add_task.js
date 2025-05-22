@@ -234,7 +234,6 @@ function chooseSubTask(){
 function deleteTask(){
   let inputRef = document.getElementById("subTaskInput");
   inputRef.value = '';
-
   togglePlusIcon("plusIcon");
   toggleCancelOrCheck("cancelOrCheck");
 }
@@ -242,28 +241,34 @@ function deleteTask(){
 function addTask(){
   let inputRef = document.getElementById("subTaskInput");
   let addedTaskRef = document.getElementById("subTasks");
-  addedTaskRef.innerHTML += `<li>${inputRef.value}</li>`;
+  addedTaskRef.innerHTML += `<div class="relative">
+                                <input type ="text" value="${inputRef.value}"/>
+                                  <div id="cancelOrCheck" class="editOrTrash">
+                                    <img onclick="deleteTask()" src="/assets/icons/Property 1=edit.png" alt="">
+                                    <div class="subTasksSeperator"></div>
+                                    <img onclick="addTask()" src="/assets/icons/Property 1=delete.png" alt="">
+                                  </div>
+            
+                            </div`;
+
+
+
 
   togglePlusIcon("plusIcon");
   toggleCancelOrCheck("cancelOrCheck");
-
   inputRef.value = '';
 }
 
 function addPlusIcon(id){
-
   let ref = document.getElementById(id);
   if (!ref) return;
   ref.classList.add("d-none");
-
 }
 
 function togglePlusIcon(id){
-
     let ref = document.getElementById(id);
     if (!ref) return;
     ref.classList.remove("d-none");
-  
 }
 
 function toggleCancelOrCheck(id) {
