@@ -23,16 +23,20 @@ function search(dataValues) {
     let passwords = listOfUser.password;
 
     if (mails == email && passwords == password) {
-      console.log("stimmt");
       pwAndUserFound = true;
       window.location.href = "../html/summary.html";
       return;
     }
   }
   if (!pwAndUserFound) {
+    clearInput()
     showAlertText();
-    console.log("keine Übereinstimmung");
   }
+}
+
+function clearInput() {
+  pwRef = document.getElementById('inputPassword');
+  pwRef.value = "";
 }
 
 function showAlertText() {
