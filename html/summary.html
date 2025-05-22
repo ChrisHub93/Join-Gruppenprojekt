@@ -17,21 +17,30 @@
 <body onload="init(); showGreeting();">
     <header id="header"  class="page-box">
     </header>
-    <main class="page-box">
-        <div id="sidebar" class="sidebar">
-        </div>
+    <main class="page-box flex-column30">
+        <!-- <div id="sidebar" class="sidebar">
+        </div> -->
             <div class="summary-headline center-between page-box">
                 <p class="text-360">Join 360</p>
                 <div class="seperator"></div>
                 <p class="text-headline">Key Metrics at a Glance</p>
             </div>
+        <div class="center-gp80">
             <div class="checkbox page-box">
                 <div class="checkboxtodo center-between">
-                    <div class="todone">
-                        To Do
+                    <div class="summary-box">
+                        <img class="todone-icon" src="../assets/icons/todo.png" alt="">
+                        <div>
+                            <p class="summary-number">4</p>
+                            <p class="summary-text">To-do</p>
+                        </div>
                     </div>
-                    <div class="todone">
-                        Done
+                    <div class="summary-box">
+                        <img class="todone-icon" src="../assets/icons/done.png" alt="">
+                        <div>
+                            <p class="summary-number">1</p>
+                            <p class="summary-text">Done</p>
+                        </div>
                     </div>
                 </div>
                 <div class="checkboxurgent center-between page-box">
@@ -41,9 +50,12 @@
                 </div>
                 <div class="checkboxoverall center-between page-box"></div>
             </div>
-        <div class="greeting-box page-box">
-            <p id="greeting" class="greeting"></p>
+            <div class="greeting-box page-box">
+                <p id="greeting" class="greeting"></p>
+            </div>
         </div>
     </main>
+
+<footer id="sidebar" class="sidebar"></footer>
 </body>
 </html>

@@ -2,10 +2,21 @@ body{
     background-color: #F6F7F8;
 }
 
+.flex-column30{
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 328px;
+    padding-top: 110px;
+}
+
+.center-gp80{
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
 .summary-headline{
-    position: absolute;
-    top: 206px;
-    left: 328px;
     height: 73px;
     width: 625px;
 }
@@ -33,11 +44,8 @@ body{
 }
 
 .checkbox{
-    position: absolute;
     height: 560px;
     width: 562px;
-    top: 335px;
-    left: 328px;
 }
 
 .checkboxtodo{
@@ -55,15 +63,24 @@ body{
     height: 160px;
 }
 
-.todone{
+.summary-box{
     width: 264px;
     height: 168px;
+    gap: 18px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 30px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.summary-box:hover{
+    background-color: #2A3647;
+    color: white;
 }
 
 .greeting-box{
-    position: absolute;
-    top: 547.5px;
-    left: 968px;
     width: 338px;
     height: 56px;
 }
@@ -72,4 +89,21 @@ body{
     font-size: 47px;
     font-weight: 500;
     color: #2A3647;
+}
+
+.todone-icon{
+    height: 69px;
+    width: 69px;
+}
+
+.summary-number{
+    text-align: center;
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.summary-text{
+    font-size: 20px;
+    color: #2A3647;
+    font-weight: 400;
 }
