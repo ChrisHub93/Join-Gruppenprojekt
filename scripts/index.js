@@ -29,17 +29,22 @@ function search(dataValues) {
     }
   }
   if (!pwAndUserFound) {
-    clearInput()
-    showAlertText();
+    clearPasswordInput()
+    showAlert();
   }
 }
 
-function clearInput() {
+function clearPasswordInput() {
   pwRef = document.getElementById('inputPassword');
   pwRef.value = "";
 }
 
-function showAlertText() {
-  alertRef = document.getElementById("logInAlert");
-  alertRef.classList.remove('d-none');
+function showAlert() {
+  textRef = document.getElementById("logInAlert");
+  textRef.classList.remove('d-none');
+
+  const collection = document.getElementsByClassName("log-in__inputs__inputfield");
+  for (let i = 0; i < collection.length; i++) {
+    collection[i].style.border = "1px solid var(--error-color)";
+  }
 }

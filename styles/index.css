@@ -90,6 +90,11 @@
   height: 48px;
   border-radius: 10px;
   border: 1px solid #d1d1d1;
+  outline: none;
+}
+
+.log-in__inputs__inputfield:focus {
+  border: 1px solid var(--focus-color);
 }
 
 .log-in__inputs__inputfield:hover {
