@@ -55,7 +55,10 @@ function setCheckBox(id, event) {
   checkBoxImg = membersRef.querySelector("img");
   if (inputRef.checked) {
     getCheckBoxFalse(id);
-  } else if (!inputRef.checked && !membersRef.classList.contains("assignedBg")) {
+  } else if (
+    !inputRef.checked &&
+    !membersRef.classList.contains("assignedBg")
+  ) {
     inputRef.checked = true;
     checkBoxImg.src = "/assets/icons/Check button true.png";
   } else if (!inputRef.checked) {
@@ -208,95 +211,77 @@ function checkEmptyDate() {
   }
 }
 
-function chooseSubTask(){
+function chooseSubTask() {
   let inputRef = document.getElementById("subTaskInput");
   let addedTaskRef = document.getElementById("subTasks");
 
-  if (addedTaskRef.innerHTML == ''){
-    inputRef.value = 'Contact Form';
+  if (addedTaskRef.innerHTML == "") {
+    inputRef.value = "Contact Form";
     inputRef.innerHTML = inputRef.value;
-    addPlusIcon("plusIcon");
-    toggleCancelOrCheck("cancelOrCheck");
-  }else if(addedTaskRef.innerHTML == '<li>Contact Form</li><li>Write Legal Imprint</li>'){
-    inputRef.value = 'Contact Form';
+    addDisplayNone("plusIcon");
+    toggleDisplayNone("cancelOrCheck");
+  }  else if (addedTaskRef.innerHTML != "") {
+    inputRef.value = "Write Legal Imprint";
     inputRef.innerHTML = inputRef.value;
-    addedTaskRef.innerHTML = '';
-    addPlusIcon("plusIcon");
-    toggleCancelOrCheck("cancelOrCheck");
-  }else if(addedTaskRef.innerHTML != ''){
-    inputRef.value = 'Write Legal Imprint';
-    inputRef.innerHTML = inputRef.value;
-    addPlusIcon("plusIcon");
-    toggleCancelOrCheck("cancelOrCheck");
+    addDisplayNone("plusIcon");
+    toggleDisplayNone("cancelOrCheck");
   }
 }
 
-function deleteTask(){
+function deleteTask() {
   let inputRef = document.getElementById("subTaskInput");
-  inputRef.value = '';
-  togglePlusIcon("plusIcon");
-  toggleCancelOrCheck("cancelOrCheck");
+  inputRef.value = "";
+  removeDisplayNone("plusIcon");
+  toggleDisplayNone("cancelOrCheck");
 }
 
-function addTask(){
+function addTask() {
   let inputRef = document.getElementById("subTaskInput");
   let addedTaskRef = document.getElementById("subTasks");
   addedTaskRef.innerHTML += getSubTasksTemplate(inputRef);
-  togglePlusIcon("plusIcon");
-  toggleCancelOrCheck("cancelOrCheck");
-  inputRef.value = '';
+  removeDisplayNone("plusIcon");
+  toggleDisplayNone("cancelOrCheck");
+  inputRef.value = "";
 }
 
-function editTask(id){
-  let editOrTrashRef = document.getElementById("editOrTrash");
-  editOrTrashRef.classList.add("d-none");
-  let trashOrCheckRef = document.getElementById("trashOrCheck");
-  trashOrCheckRef.classList.toggle("d-none");
-
+function editTask(id) {
+  addDisplayNone("editOrTrash");
+  toggleDisplayNone("trashOrCheck");
   let inputRef = document.getElementById(id);
-  inputField = inputRef.querySelector('input');
+  inputField = inputRef.querySelector("input");
   inputField.focus();
-
   inputField.classList.add("activeInput");
-
   let length = inputField.value.length;
-  inputField.setSelectionRange(length,length);
+  inputField.setSelectionRange(length, length);
 }
 
-function acceptTask(id){
-  let editOrTrashRef = document.getElementById("editOrTrash");
-  editOrTrashRef.classList.toggle("d-none");
-  let trashOrCheckRef = document.getElementById("trashOrCheck");
-  trashOrCheckRef.classList.toggle("d-none");
-
+function acceptTask(id) {
+  toggleDisplayNone("editOrTrash");
+  toggleDisplayNone("trashOrCheck");
   let inputRef = document.getElementById(id);
-  inputField = inputRef.querySelector('input');
+  inputField = inputRef.querySelector("input");
   inputField.blur();
-
   inputField.classList.toggle("activeInput");
-
 }
 
-
-
-function completeDeleteTask(id){
+function completeDeleteTask(id) {
   let inputRef = document.getElementById(id);
   inputRef.remove();
 }
 
-function addPlusIcon(id){
+function addDisplayNone(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
   ref.classList.add("d-none");
 }
 
-function togglePlusIcon(id){
-    let ref = document.getElementById(id);
-    if (!ref) return;
-    ref.classList.remove("d-none");
+function removeDisplayNone(id) {
+  let ref = document.getElementById(id);
+  if (!ref) return;
+  ref.classList.remove("d-none");
 }
 
-function toggleCancelOrCheck(id) {
+function toggleDisplayNone(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
   ref.classList.toggle("d-none");

@@ -26,7 +26,7 @@ function getSidebar() {
 
 function getSubTasksTemplate(inputRef){
     return `<div id="${inputRef.value}" class="relative">
-                                <input onfocus="" onfocusout=""  type ="text" value="${inputRef.value}"/>
+                                <input onfocusout="acceptTask('${inputRef.value}')"  type ="text" value="${inputRef.value}"/>
 
                                   <div id="editOrTrash" class="editOrTrash">
                                     <img onclick="editTask('${inputRef.value}')" src="/assets/icons/Property 1=edit.png" alt="">
