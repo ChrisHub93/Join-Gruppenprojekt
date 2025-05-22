@@ -444,3 +444,11 @@ footer{
   width: 20px;
   object-fit: contain;
 }
+
+.subTasksSeperatorSecond{
+  width: 1px;
+  background-color: var(--seperator-snd-color);
+  margin-left: 2px;
+  margin-right: 2px;
+  height: 20px;
+}

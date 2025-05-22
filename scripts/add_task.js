@@ -243,10 +243,16 @@ function addTask(){
   let addedTaskRef = document.getElementById("subTasks");
   addedTaskRef.innerHTML += `<div class="relative">
                                 <input type ="text" value="${inputRef.value}"/>
-                                  <div id="cancelOrCheck" class="editOrTrash">
+                                  <div id="cancelOrCheck" class="editOrTrash d-none">
                                     <img onclick="deleteTask()" src="/assets/icons/Property 1=edit.png" alt="">
-                                    <div class="subTasksSeperator"></div>
+                                    <div class="subTasksSeperatorSecond"></div>
                                     <img onclick="addTask()" src="/assets/icons/Property 1=delete.png" alt="">
+                                  </div>
+
+                                  <div id="trashOrCheck" class="editOrTrash">
+                                    <img onclick="deleteTask()" src="/assets/icons/Property 1=delete.png" alt="">
+                                    <div class="subTasksSeperatorSecond"></div>
+                                    <img onclick="addTask()" src="/assets/icons/Property 1=check.png" alt="">
                                   </div>
             
                             </div`;
