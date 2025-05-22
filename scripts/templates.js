@@ -25,20 +25,31 @@ function getSidebar() {
 }
 
 function getSubTasksTemplate(inputRef){
-    return `<div id="${inputRef.value}" class="relative">
-                                <input onfocusout="acceptTask('${inputRef.value}')"  type ="text" value="${inputRef.value}"/>
+    return `
+            <div class"bullet"></div>
 
-                                  <div id="editOrTrash" class="editOrTrash">
-                                    <img onclick="editTask('${inputRef.value}')" src="/assets/icons/Property 1=edit.png" alt="">
-                                    <div class="subTasksSeperatorSecond"></div>
-                                    <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
-                                  </div>
+            <div id="${inputRef.value}" class="relative">
 
-                                  <div id="trashOrCheck" class="editOrTrash d-none">
-                                    <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
-                                    <div class="subTasksSeperatorSecond"></div>
-                                    <img onclick="acceptTask('${inputRef.value}')" src="/assets/icons/Property 1=check.png" alt="">
-                                  </div>
-            
-                            </div`
+                <input onclick="editTask('${inputRef.value}')" type ="text" value="${inputRef.value}"/>
+
+                <div id="editOrTrash" class="editOrTrash">
+
+                    <img onclick="editTask('${inputRef.value}')" src="/assets/icons/Property 1=edit.png" alt="">
+
+                        <div class="subTasksSeperatorSecond"></div>
+                            <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
+                        </div>
+
+                        <div id="trashOrCheck" class="editOrTrash d-none">
+
+                            <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
+
+                            <div class="subTasksSeperatorSecond"></div>
+
+                                <img onclick="acceptTask('${inputRef.value}')" src="/assets/icons/Property 1=check.png" alt="">
+
+                        </div>
+                </div>
+                
+            </div`
 }
