@@ -251,6 +251,8 @@ function editTask(id) {
   inputField = inputRef.querySelector("input");
   inputField.focus();
   inputField.classList.add("activeInput");
+  let bulletRef = `bullet${id}`;
+  toggleDisplayNone(bulletRef);
   let length = inputField.value.length;
   inputField.setSelectionRange(length, length);
 }
@@ -262,6 +264,8 @@ function acceptTask(id) {
   inputField = inputRef.querySelector("input");
   inputField.blur();
   inputField.classList.toggle("activeInput");
+  let bulletRef = `bullet${id}`;
+  toggleDisplayNone(bulletRef);
 }
 
 function completeDeleteTask(id) {

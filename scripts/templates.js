@@ -1,15 +1,15 @@
 function getHeader() {
-    return `
+  return `
             <p class="header-name">Kanban Project Management Tool</p>
             <div class="header-top-profile">
                 <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
                 <p class="personal-icon">G</p>
             </div>
-    `
+    `;
 }
 
 function getSidebar() {
-    return `
+  return `
             <img class="sidebar-logo" src="../assets/img/Capa 1 white.png" alt="">
                 <div class="menu-box">
                     <div class="sidebar-menu sidebar-menu-active"><a class="sidebar-text a-active" href="../html/summary.html"><img src="../assets/icons/Summary.png" class="sidebar-icon" alt="">Summary</a></div>
@@ -21,35 +21,36 @@ function getSidebar() {
                     <a class="sidebar-text policy-color pt-policy" href="../html/privacy_policy.html">Privacy Policy</a>
                     <a class="sidebar-text policy-color" href="../html/legal_notice.html">Legal Notice</a>
                 </div>
-    `
+    `;
 }
 
-function getSubTasksTemplate(inputRef){
-    return `
-            <div class"bullet"></div>
+function getSubTasksTemplate(inputRef) {
+  return `
+            
 
             <div id="${inputRef.value}" class="relative">
+            <div id="bullet${inputRef.value}" class="bullet"></div>
 
-                <input onclick="editTask('${inputRef.value}')" type ="text" value="${inputRef.value}"/>
+  <input onclick="editTask('${inputRef.value}')" type ="text" value="${inputRef.value}"/>
 
-                <div id="editOrTrash" class="editOrTrash">
+    <div id="editOrTrash" class="editOrTrash">
 
-                    <img onclick="editTask('${inputRef.value}')" src="/assets/icons/Property 1=edit.png" alt="">
+      <img onclick="editTask('${inputRef.value}')" src="/assets/icons/Property 1=edit.png" alt="">
 
-                        <div class="subTasksSeperatorSecond"></div>
-                            <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
-                        </div>
+      <div class="subTasksSeperatorSecond"></div>
+        <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
+    </div>
 
-                        <div id="trashOrCheck" class="editOrTrash d-none">
+    <div id="trashOrCheck" class="editOrTrash d-none">
 
-                            <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
+      <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
 
-                            <div class="subTasksSeperatorSecond"></div>
+      <div class="subTasksSeperatorSecond"></div>
 
-                                <img onclick="acceptTask('${inputRef.value}')" src="/assets/icons/Property 1=check.png" alt="">
+      <img onclick="acceptTask('${inputRef.value}')" src="/assets/icons/Property 1=check.png" alt="">
 
-                        </div>
-                </div>
+    </div>
+              
                 
-            </div`
+  </div>`;
 }

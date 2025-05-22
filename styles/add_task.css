@@ -194,7 +194,7 @@ h1 {
   height: 20px;
   width: 20px;
   object-fit: contain;
-  right: 8px;
+  right: 12px;
   top: 55%;
   cursor: pointer;
 }
@@ -418,17 +418,15 @@ footer {
 #subTasks input {
   border: none;
   font-size: 14px;
-  background-color: var(--bg-color);
+  /* background-color: var(--bg-color); */
+  background-color: transparent;
   padding-block: 4px;
+  padding-inline: 8px;
 }
 
-#subTasks input:hover {
+/* #subTasks input:hover {
   background-color: var(--snd-color);
-}
-
-.relative {
-  position: relative;
-}
+} */
 
 .editOrTrash {
   display: flex;
@@ -458,13 +456,29 @@ footer {
   background-color: white !important;
   border-radius: 0;
   border-bottom: 1px solid var(--focus-color) !important;
-  padding-block: 4px !important;
+  padding-inline: 16px !important;
 }
 
-.bullet {
+.relative {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.relative:hover {
+  background-color: var(--snd-color);
+}
+
+.relative input,
+.relative img {
+  background-color: transparent;
+}
+
+div[id^="bullet"] {
   height: 5px;
   width: 5px;
   border-radius: 50%;
   background-color: black;
-  z-index: 1;
+  margin-left: 16px;
 }
