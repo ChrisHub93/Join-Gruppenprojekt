@@ -241,28 +241,47 @@ function deleteTask(){
 function addTask(){
   let inputRef = document.getElementById("subTaskInput");
   let addedTaskRef = document.getElementById("subTasks");
-  addedTaskRef.innerHTML += `<div class="relative">
-                                <input type ="text" value="${inputRef.value}"/>
-                                  <div id="cancelOrCheck" class="editOrTrash d-none">
-                                    <img onclick="deleteTask()" src="/assets/icons/Property 1=edit.png" alt="">
-                                    <div class="subTasksSeperatorSecond"></div>
-                                    <img onclick="addTask()" src="/assets/icons/Property 1=delete.png" alt="">
-                                  </div>
-
-                                  <div id="trashOrCheck" class="editOrTrash">
-                                    <img onclick="deleteTask()" src="/assets/icons/Property 1=delete.png" alt="">
-                                    <div class="subTasksSeperatorSecond"></div>
-                                    <img onclick="addTask()" src="/assets/icons/Property 1=check.png" alt="">
-                                  </div>
-            
-                            </div`;
-
-
-
-
+  addedTaskRef.innerHTML += getSubTasksTemplate(inputRef);
   togglePlusIcon("plusIcon");
   toggleCancelOrCheck("cancelOrCheck");
   inputRef.value = '';
+}
+
+function editTask(id){
+  let editOrTrashRef = document.getElementById("editOrTrash");
+  editOrTrashRef.classList.add("d-none");
+  let trashOrCheckRef = document.getElementById("trashOrCheck");
+  trashOrCheckRef.classList.toggle("d-none");
+
+  let inputRef = document.getElementById(id);
+  inputField = inputRef.querySelector('input');
+  inputField.focus();
+
+  inputField.classList.add("activeInput");
+
+  let length = inputField.value.length;
+  inputField.setSelectionRange(length,length);
+}
+
+function acceptTask(id){
+  let editOrTrashRef = document.getElementById("editOrTrash");
+  editOrTrashRef.classList.toggle("d-none");
+  let trashOrCheckRef = document.getElementById("trashOrCheck");
+  trashOrCheckRef.classList.toggle("d-none");
+
+  let inputRef = document.getElementById(id);
+  inputField = inputRef.querySelector('input');
+  inputField.blur();
+
+  inputField.classList.toggle("activeInput");
+
+}
+
+
+
+function completeDeleteTask(id){
+  let inputRef = document.getElementById(id);
+  inputRef.remove();
 }
 
 function addPlusIcon(id){

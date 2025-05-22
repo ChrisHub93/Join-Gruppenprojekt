@@ -419,6 +419,7 @@ footer{
   border: none;
   font-size: 14px;
   background-color: var(--bg-color);
+  padding-block: 4px;
 }
 
 #subTasks input:hover{
@@ -435,7 +436,7 @@ footer{
   justify-content: center;
   position: absolute;
   right: 12px;
-  top: 20%;
+  top: 10%;
   cursor: pointer;
 }
 
@@ -451,4 +452,11 @@ footer{
   margin-left: 2px;
   margin-right: 2px;
   height: 20px;
+}
+
+.activeInput{
+  background-color: white !important;
+  border-radius: 0;
+  border-bottom: 1px solid var(--focus-color) !important;
+  padding-block: 4px !important;
 }
