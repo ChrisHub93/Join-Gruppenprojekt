@@ -1,7 +1,9 @@
+let pwAndUserFound = false;
+
 async function logIn() {
   let data = await loadData("/users");
   let dataValues = Object.values(data);
-  
+
   search(dataValues);
 }
 
@@ -22,10 +24,18 @@ function search(dataValues) {
 
     if (mails == email && passwords == password) {
       console.log("stimmt");
+      pwAndUserFound = true;
       window.location.href = "../html/summary.html";
       return;
-    } else {
-      console.log("keine Übereinstimmung");
     }
   }
+  if (!pwAndUserFound) {
+    showAlertText();
+    console.log("keine Übereinstimmung");
+  }
+}
+
+function showAlertText() {
+  alertRef = document.getElementById("logInAlert");
+  alertRef.classList.remove('d-none');
 }

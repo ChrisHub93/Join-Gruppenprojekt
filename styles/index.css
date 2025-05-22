@@ -108,9 +108,16 @@
   background-position: 95%;
 }
 
+.log-in__inpts__alert-text{
+  font-size: 12px;
+  color: var(--error-color);
+}
+
 .log-in__buttons {
   display: flex;
   gap: 35px;
+  justify-content: center;
+  align-items: center;
 }
 
 .log-in__buttons__btn {
