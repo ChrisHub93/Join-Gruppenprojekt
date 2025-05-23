@@ -73,11 +73,14 @@ body{
     border-radius: 30px;
     background-color: white;
     cursor: pointer;
+    color: #2A3647;
 }
 
 .summary-box:hover{
     background-color: #2A3647;
     color: white;
+    transform: scale(1.1);
+    transition: transform 0.5s ease;
 }
 
 .greeting-box{
@@ -97,6 +100,7 @@ body{
 }
 
 .summary-number{
+    color: black;
     text-align: center;
     font-size: 64px;
     font-weight: 600;
@@ -106,4 +110,12 @@ body{
     font-size: 20px;
     color: #2A3647;
     font-weight: 400;
+}
+
+.summary-box:hover .summary-text{
+    color: white;
+}
+
+.summary-box:hover .summary-number{
+    color: white;
 }

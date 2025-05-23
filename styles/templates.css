@@ -1,9 +1,3 @@
-/* *{
-    margin: 0;
-    scroll-behavior: smooth;
-    font-family: 'Inter';
-} */
-
 .page-box{
     padding-left: calc((100% - 1960px) / 2);
     padding-right: calc((100% - 1960px) / 2);
@@ -60,6 +54,8 @@ header{
 }
 
 .sidebar{
+    padding-bottom: 64px;
+    padding-top: 64px;
     position: absolute;
     top: 0;
     background-color: #2A3647;
@@ -72,9 +68,7 @@ header{
 }
 
 .sidebar-logo{
-    padding-top: 64px;
-    /* width: 100.03px;
-    height: 121.97px; */
+    width: 100.03px;
 }
 
 .menu-box{
@@ -128,12 +122,11 @@ header{
 }
 
 .sidebar-policy{
-    height: 317px;
+    padding-top: 243px;
     gap: 8px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding-bottom: 64px;
 }
 
 .policy-color{
