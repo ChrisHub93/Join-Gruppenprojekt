@@ -11,7 +11,7 @@
     <link rel="icon" type="image/x-icon" href="/assets/img/Capa 1.png" />
   </head>
 
-  <body onload="init()">
+  <body onload="init(); setPriorityMedium(`medium`)" >
 
     <header id="header"  class="page-box">
     </header>
@@ -190,7 +190,7 @@
             </div>
           </div>
 
-          <div class="column">
+          <div class="columnSubTask">
             <span class="mgBottom">Subtasks</span>
             <input type="text" name="subtasks" id="subTaskInput" placeholder="Add new subtask"/>
             <img onclick="chooseSubTask()" id="plusIcon" class="plusIcon" src="/assets/icons/Subtasks-plus.png" alt=""/>
