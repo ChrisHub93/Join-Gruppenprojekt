@@ -1,6 +1,7 @@
 function getHeader() {
   return `
             <p class="header-name">Kanban Project Management Tool</p>
+            <img class="headerLogo d-none" src="/assets/img/Capa 1.png" alt="">
             <div class="header-top-profile">
                 <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
                 <p class="personal-icon">G</p>

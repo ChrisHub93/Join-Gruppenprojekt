@@ -13,9 +13,11 @@
 
   <body onload="init(); setPriorityMedium(`medium`)" >
 
-    <header id="header"  class="page-box">
+    <header id="header" class="page-box">
+      
     </header>
-    <div id="sidebar" class="sidebar"></div>
+    <div id="sidebar" class="sidebar">
+    </div>
   
     <main>
       <h1>Add Task</h1>
@@ -199,6 +201,10 @@
           </div>
 
           <div id="subTasks"></div>
+
+          <div class="markedFieldsResponsive d-none">
+            <span><mark class="marked">*</mark>This field is required</span>
+          </div>
 
         </div>
       </form>
