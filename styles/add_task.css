@@ -45,10 +45,12 @@ body {
   flex-direction: column;
 }
 
-.typeOfTask,
-.priority,
-.seperator {
+.typeOfTask, .priority, .seperator {
   height: 320px;
+}
+
+.priority{
+  min-height: 320px;
 }
 
 mark {
@@ -92,7 +94,8 @@ textarea {
 h1 {
   font-size: 48px;
   min-width: 800px;
-  margin-bottom: 40px;
+  padding-top: 40px;
+  padding-bottom: 8px;
 }
 
 .choose {
@@ -510,12 +513,10 @@ div[id^="bullet"] {
     font-size: 40px;
     min-width: 400px;
     background-color: var(--bg-color);
-    /* margin-top: 120px; */
+    position: sticky;
+    top: 0;
+    z-index: 1;
   }
-
-  /* main{
-    height: 100%;
-  } */
 
   footer{
     min-width: 400px;
@@ -529,12 +530,25 @@ div[id^="bullet"] {
     font-size: 14px;
   }
 
-  /* .sidebar {
-    width: 160px;
-  } */
-
   .select{
     font-size: 14px;
+  }
+
+  .typeOfTask, .priority,
+  .seperator{
+    padding-top: 80px;
+  }
+
+  main{
+    overflow-y: scroll;
+  }
+
+  footer{
+    position: fixed;
+    bottom: 0;
+    background-color: var(--bg-color);
+    padding-top: 8px;
+    padding-bottom: 16px;
   }
 
 }
