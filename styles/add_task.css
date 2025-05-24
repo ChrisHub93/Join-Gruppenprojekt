@@ -502,6 +502,38 @@ div[id^="bullet"] {
   margin-left: 16px;
 }
 
+.flexButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.navigation {
+  display: none;
+}
+
+.navigation img {
+  filter: brightness(0) invert(1);
+  height: 24px;
+  object-fit: contain;
+}
+
+.navigation a {
+  text-decoration: none;
+  color: white;
+}
+
+.navigationColumn {
+  display: flex;
+  flex-direction: column-reverse;
+  cursor: pointer;
+}
+
+.navigationColumn a {
+  font-size: 14px;
+}
+
 @media (max-width: 1090px) {
   .seperator,
   .markedFields {
@@ -542,7 +574,7 @@ div[id^="bullet"] {
 
   footer {
     position: fixed;
-    bottom: 0;
+    bottom: 0px;
     background-color: var(--bg-color);
     padding-top: 8px;
     padding-bottom: 16px;
@@ -637,6 +669,24 @@ div[id^="bullet"] {
   h1,
   footer {
     min-width: 400px;
+  }
+
+  /* for navigation */
+  footer {
+    display: flex;
+    flex-direction: column;
+    bottom: 80px;
+  }
+
+  .navigation {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--darkBtn-color);
+    position: fixed;
+    bottom: 0;
   }
 
   header {

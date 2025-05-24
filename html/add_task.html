@@ -7,18 +7,14 @@
     <link rel="stylesheet" href="/styles/style.css" />
     <link rel="stylesheet" href="/styles/add_task.css" />
     <link rel="stylesheet" href="/styles/fonts.css" />
-    <link rel="stylesheet" href="/styles/templates.css">
+    <link rel="stylesheet" href="/styles/templates.css" />
     <link rel="icon" type="image/x-icon" href="/assets/img/Capa 1.png" />
   </head>
 
-  <body onload="init(); setPriorityMedium(`medium`)" >
+  <body onload="init(); setPriorityMedium(`medium`)">
+    <header id="header" class="page-box"></header>
+    <div id="sidebar" class="sidebar"></div>
 
-    <header id="header" class="page-box">
-      
-    </header>
-    <div id="sidebar" class="sidebar">
-    </div>
-  
     <main>
       <h1>Add Task</h1>
 
@@ -127,41 +123,101 @@
             <span class="mgBottom">Assigned to</span>
 
             <div class="category">
-              <div id="assignedContainer" class="inputSelectContact" onclick="openAssignedTo()">
+              <div
+                id="assignedContainer"
+                class="inputSelectContact"
+                onclick="openAssignedTo()"
+              >
                 <span id="selectMember" class="select inputFlex">
                   Select Contacts to Assign
                 </span>
-                <img id="arrow" class="arrow inputStyleArrow" src="/assets/icons/arrow_drop_down.png" alt=""/>
+                <img
+                  id="arrow"
+                  class="arrow inputStyleArrow"
+                  src="/assets/icons/arrow_drop_down.png"
+                  alt=""
+                />
               </div>
               <ul id="allMembers" class="options">
-
-                
-                <li onclick="getContact(`contact1`)" id="contact1" class="optionsCategory inputFlex">Contact 1 
-                  <input type="checkbox" class="checkBox" /> 
-                  <img onclick="setCheckBox(`contact1`, event)" id="checkBoxImg1" class="checkBoxImg" src="/assets/icons/Check button.png" alt="">
-                </li>
-
-
-                <li onclick="getContact(`contact2`)" id="contact2" class="optionsCategory inputFlex">Contact 2
+                <li
+                  onclick="getContact(`contact1`)"
+                  id="contact1"
+                  class="optionsCategory inputFlex"
+                >
+                  Contact 1
                   <input type="checkbox" class="checkBox" />
-                  <img onclick="setCheckBox(`contact2`, event)" id="checkBoxImg2" class="checkBoxImg" src="/assets/icons/Check button.png" alt="">
+                  <img
+                    onclick="setCheckBox(`contact1`, event)"
+                    id="checkBoxImg1"
+                    class="checkBoxImg"
+                    src="/assets/icons/Check button.png"
+                    alt=""
+                  />
                 </li>
 
-                <li onclick="getContact(`contact3`)" id="contact3" class="optionsCategory inputFlex">Contact 3
+                <li
+                  onclick="getContact(`contact2`)"
+                  id="contact2"
+                  class="optionsCategory inputFlex"
+                >
+                  Contact 2
                   <input type="checkbox" class="checkBox" />
-                  <img onclick="setCheckBox(`contact3`, event)" id="checkBoxImg3" class="checkBoxImg" src="/assets/icons/Check button.png" alt="">
+                  <img
+                    onclick="setCheckBox(`contact2`, event)"
+                    id="checkBoxImg2"
+                    class="checkBoxImg"
+                    src="/assets/icons/Check button.png"
+                    alt=""
+                  />
                 </li>
 
-                <li onclick="getContact(`contact4`)" id="contact4" class="optionsCategory inputFlex">Contact 4
+                <li
+                  onclick="getContact(`contact3`)"
+                  id="contact3"
+                  class="optionsCategory inputFlex"
+                >
+                  Contact 3
                   <input type="checkbox" class="checkBox" />
-                  <img onclick="setCheckBox(`contact4`, event)" id="checkBoxImg4" class="checkBoxImg" src="/assets/icons/Check button.png" alt="">
+                  <img
+                    onclick="setCheckBox(`contact3`, event)"
+                    id="checkBoxImg3"
+                    class="checkBoxImg"
+                    src="/assets/icons/Check button.png"
+                    alt=""
+                  />
                 </li>
 
-                <li onclick="getContact(`contact5`)" id="contact5" class="optionsCategory inputFlex">Contact 5
+                <li
+                  onclick="getContact(`contact4`)"
+                  id="contact4"
+                  class="optionsCategory inputFlex"
+                >
+                  Contact 4
                   <input type="checkbox" class="checkBox" />
-                  <img onclick="setCheckBox(`contact5`, event)" id="checkBoxImg5" class="checkBoxImg" src="/assets/icons/Check button.png" alt="">
+                  <img
+                    onclick="setCheckBox(`contact4`, event)"
+                    id="checkBoxImg4"
+                    class="checkBoxImg"
+                    src="/assets/icons/Check button.png"
+                    alt=""
+                  />
                 </li>
 
+                <li
+                  onclick="getContact(`contact5`)"
+                  id="contact5"
+                  class="optionsCategory inputFlex"
+                >
+                  Contact 5
+                  <input type="checkbox" class="checkBox" />
+                  <img
+                    onclick="setCheckBox(`contact5`, event)"
+                    id="checkBoxImg5"
+                    class="checkBoxImg"
+                    src="/assets/icons/Check button.png"
+                    alt=""
+                  />
+                </li>
               </ul>
             </div>
             <div id="assignedMembers"></div>
@@ -180,9 +236,19 @@
                 />
               </div>
               <ul id="allOptions" class="options">
-                <li onclick="getCategory(`index1`)" id="index1" class="optionsCategory">Technical Task
+                <li
+                  onclick="getCategory(`index1`)"
+                  id="index1"
+                  class="optionsCategory"
+                >
+                  Technical Task
                 </li>
-                <li onclick="getCategory(`index2`)" id="index2" class="optionsCategory">User Story
+                <li
+                  onclick="getCategory(`index2`)"
+                  id="index2"
+                  class="optionsCategory"
+                >
+                  User Story
                 </li>
               </ul>
             </div>
@@ -190,13 +256,32 @@
 
           <div class="columnSubTask">
             <span class="mgBottom">Subtasks</span>
-            <input type="text" name="subtasks" id="subTaskInput" placeholder="Add new subtask"/>
-            <img onclick="chooseSubTask()" id="plusIcon" class="plusIcon" src="/assets/icons/Subtasks-plus.png" alt=""/>
+            <input
+              type="text"
+              name="subtasks"
+              id="subTaskInput"
+              placeholder="Add new subtask"
+            />
+            <img
+              onclick="chooseSubTask()"
+              id="plusIcon"
+              class="plusIcon"
+              src="/assets/icons/Subtasks-plus.png"
+              alt=""
+            />
 
             <div id="cancelOrCheck" class="cancelOrCheck d-none">
-              <img onclick="deleteTask()" src="/assets/icons/iconoir_cancel.png" alt="">
+              <img
+                onclick="deleteTask()"
+                src="/assets/icons/iconoir_cancel.png"
+                alt=""
+              />
               <div class="subTasksSeperator"></div>
-              <img onclick="addTask()" src="/assets/icons/Property 1=check.png" alt="">
+              <img
+                onclick="addTask()"
+                src="/assets/icons/Property 1=check.png"
+                alt=""
+              />
             </div>
           </div>
 
@@ -205,7 +290,6 @@
           <div class="markedFieldsResponsive d-none">
             <span><mark class="marked">*</mark>This field is required</span>
           </div>
-
         </div>
       </form>
 
@@ -215,21 +299,53 @@
         </div>
 
         <div class="buttons">
-          <button class="clear">
-            Clear
-            <img class="defaultIcon" src="/assets/icons/iconoir_cancel.png" alt=""/>
-            <img class="hoverIcon" src="/assets/icons/iconoir_cancel_hover.png" alt=""/>
-          </button>
+          <div class="flexButtons">
+            <button class="clear">
+              Clear
+              <img
+                class="defaultIcon"
+                src="/assets/icons/iconoir_cancel.png"
+                alt=""
+              />
+              <img
+                class="hoverIcon"
+                src="/assets/icons/iconoir_cancel_hover.png"
+                alt=""
+              />
+            </button>
 
-          <button class="createTask" onclick="createTask()">
-            Create Task
-            <img src="/assets/icons/check.png" alt="" />
-          </button>
+            <button class="createTask" onclick="createTask()">
+              Create Task
+              <img src="/assets/icons/check.png" alt="" />
+            </button>
+          </div>
         </div>
       </footer>
+
+      <div class="navigation">
+        <a class="navigationColumn" href="../html/summary.html">
+          <span>Summary</span>
+          <img src="../assets/icons/Summary.png" alt="" />
+        </a>
+
+        <a class="navigationColumn" href="../html/board.html">
+          <span>Board</span>
+          <img src="../assets/icons/Add task.png" alt="" />
+        </a>
+
+        <a class="navigationColumn" href="../html/add_task.html">
+          <span>Add Tasks</span>
+          <img src="../assets/icons/Board.png" alt="" />
+        </a>
+
+        <a class="navigationColumn" href="../html/contacts.html">
+          <span>Contacts</span>
+          <img src="../assets/icons/Contacts.png" alt="" />
+        </a>
+      </div>
     </main>
     <script src="/scripts/add_task.js"></script>
     <script src="/scripts/templates.js"></script>
     <script src="/scripts/script.js"></script>
   </body>
-</html>     
+</html>
