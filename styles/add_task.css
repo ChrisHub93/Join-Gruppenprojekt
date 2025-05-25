@@ -17,7 +17,7 @@ body {
 .form {
   display: flex;
   justify-content: center;
-  max-width: 800px;
+  width: 800px;
   margin-bottom: 170px;
   margin-left: 32px;
   margin-right: 32px;
@@ -91,7 +91,7 @@ textarea {
 
 h1 {
   font-size: 48px;
-  min-width: 800px;
+  width: 800px;
   padding-top: 40px;
   padding-bottom: 8px;
 }
@@ -326,7 +326,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: end;
-  min-width: 800px;
+  width: 800px;
   z-index: 1;
   position: absolute;
   bottom: 72px;
@@ -517,6 +517,7 @@ div[id^="bullet"] {
   filter: brightness(0) invert(1);
   height: 24px;
   object-fit: contain;
+  margin-bottom: 4px;
 }
 
 .navigation a {
@@ -528,205 +529,136 @@ div[id^="bullet"] {
   display: flex;
   flex-direction: column-reverse;
   cursor: pointer;
+  background-color: var(--selected-hover-bg);
+  height: 60px;
+  width: 60px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-.navigationColumn a {
-  font-size: 14px;
+.navigationColumn span {
+  font-size: 10px;
 }
 
-@media (max-width: 1090px) {
-  .seperator,
-  .markedFields {
+@media (max-width: 375px) {
+  header {
+    height: 80px !important;
+  }
+
+  .header-name {
+    padding-left: 0px !important;
     display: none;
   }
 
-  .form {
-    flex-wrap: wrap;
-    max-width: 400px;
-    margin-top: 140px;
-  }
-
-  h1 {
-    font-size: 40px;
-    min-width: 400px;
-    background-color: var(--bg-color);
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    padding-bottom: 4px;
-  }
-
-  footer {
-    min-width: 400px;
-    justify-content: end;
-  }
-
-  input,
-  textarea,
-  .select,
-  .mgBottom {
-    font-size: 14px;
-  }
-
-  main {
-    overflow-y: scroll;
-  }
-
-  footer {
-    position: fixed;
-    bottom: 0px;
-    background-color: var(--bg-color);
-    padding-top: 8px;
-    padding-bottom: 16px;
-  }
-
-  .markedFieldsResponsive {
-    display: block !important;
-  }
-}
-
-@media (max-width: 850px) {
-  .sidebar {
-    padding-bottom: 64px;
-    padding-top: 64px;
-    position: absolute;
-    top: 0;
-    background-color: #2a3647;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 180px !important;
-    height: 100%;
-    justify-content: space-between;
-  }
-
-  .sidebar-menu {
-    padding-left: 26px !important;
-    padding-right: 26px !important;
-  }
-
-  .menu-box {
-    width: 180px !important;
-  }
-
-  .sidebar-logo {
-    width: 80.03px !important;
-  }
-
-  main {
-    width: calc(100% - 180px);
-  }
-
-  .header-name {
-    padding-left: 250px !important;
-  }
-}
-
-@media (max-width: 725px) {
-  .header-name {
-    padding-left: 200px !important;
+  .help-icon {
+    display: none;
   }
 
   .header-top-profile {
-    padding-right: 16px !important;
-    gap: 8px !important;
+    padding-right: 8px !important;
   }
-}
 
-@media (max-width: 660px) {
   .headerLogo {
     display: block !important;
     height: 40px;
     object-fit: contain;
-    margin-left: 16px;
-  }
-
-  .personal-icon {
-    height: 40px !important;
-    width: 40px !important;
-    object-fit: contain !important;
+    padding-left: 8px;
   }
 
   .sidebar {
     display: none !important;
   }
 
-  main {
-    width: 100%;
+  h1 {
+    width: auto;
+    margin-left: 8px;
+    font-size: 40px;
   }
 
-  form {
-    max-width: 400px !important;
-    margin-left: 8px !important;
-    margin-right: 8px !important;
+  .typeOfTask {
+    width: auto;
+    margin-right: 12px;
+    margin-left: 12px;
   }
 
-  .typeOfTask,
+  .seperator {
+    display: none;
+  }
+
   .priority {
-    width: 400px;
+    width: auto;
+    margin-right: 12px;
+    margin-left: 12px;
   }
 
-  h1,
-  footer {
-    min-width: 400px;
+  .priorityBtn {
+    width: 96px;
+    height: 32px;
   }
 
-  /* for navigation */
-  footer {
-    display: flex;
+  .priority span {
+    font-size: 14px;
+  }
+
+  .priority img[id^="standard"] {
+    height: 14px;
+    width: 14px;
+    object-fit: contain;
+  }
+
+  .priority img[id^="active"] {
+    height: 14px;
+    width: 14px;
+    object-fit: contain;
+  }
+
+  .form {
     flex-direction: column;
-    bottom: 80px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+    width: 100%;
   }
 
   .navigation {
     width: 100%;
     height: 80px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     background-color: var(--darkBtn-color);
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  main {
+    width: 100%;
+    align-items: start;
+  }
+
+  .markedFields {
+    display: none;
+  }
+
+  .markedFieldsResponsive {
+    display: block;
+  }
+
+  footer {
+    width: 100%;
+    flex-direction: column;
     position: fixed;
     bottom: 0;
   }
 
-  header {
-    height: 80px !important;
-  }
-
-  header p,
-  .header-top-profile a {
-    display: none;
-  }
-}
-
-@media (max-width: 460px) {
-  .typeOfTask,
-  .priority {
-    width: 320px;
-  }
-
-  h1,
-  footer {
-    min-width: 320px;
-  }
-}
-
-@media (max-width: 375px) {
-  main {
+  .buttons {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 8px;
+    background-color: var(--bg-color);
     width: 100%;
-  }
-
-  form {
-    max-width: 290px !important;
-  }
-
-  .typeOfTask,
-  .priority {
-    width: 290px;
-  }
-
-  h1,
-  footer {
-    min-width: 290px;
   }
 }
