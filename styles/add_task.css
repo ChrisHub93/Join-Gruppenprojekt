@@ -8,6 +8,7 @@ main {
   align-items: center;
   position: absolute;
   right: 0;
+  overflow-y: auto;
 }
 
 .form {
