@@ -542,7 +542,18 @@ div[id^="bullet"] {
   font-size: 10px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
+
+  .header-name{
+    padding-left: calc(348px - 150px + 8px) !important;
+    font-size: 18px !important;
+  }
+
+  .header-top-profile{
+    padding-right: 8px !important;
+    gap: 8px !important;
+  }
+
   .sidebar {
     width: 200px !important;
   }
@@ -551,19 +562,22 @@ div[id^="bullet"] {
     width: calc(100% - 200px);
     align-items: start;
     padding-top: 40px;
+    max-height: 100vh;
+    /* overflow: scroll;
+    overflow-x: hidden; */
   }
 
   h1 {
     width: auto;
-    margin-left: 8px;
+    margin-left: 32px;
     margin-right: auto;
     padding-top: 0px;
   }
 
   .typeOfTask {
     width: auto;
-    margin-right: 12px;
-    margin-left: 12px;
+    margin-right: 32px;
+    margin-left: 32px;
   }
 
   .seperator {
@@ -572,8 +586,8 @@ div[id^="bullet"] {
 
   .priority {
     width: auto;
-    margin-right: 12px;
-    margin-left: 12px;
+    margin-right: 32px;
+    margin-left: 32px;
   }
 
   .form {
@@ -598,10 +612,13 @@ div[id^="bullet"] {
     align-items: end;
     padding-right: 8px;
     bottom: 8px;
+    position: fixed;
+    right: 0;
+    width: 100%;
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 620px) {
   header {
     height: 80px !important;
   }
@@ -713,6 +730,7 @@ div[id^="bullet"] {
     flex-direction: column;
     position: fixed;
     bottom: 0;
+    padding-right: 0px;
   }
 
   .buttons {
