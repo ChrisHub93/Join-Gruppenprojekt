@@ -4,9 +4,19 @@ function getHeader() {
             <img class="headerLogo d-none" src="/assets/img/Capa 1.png" alt="">
             <div class="header-top-profile">
                 <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
-                <p class="personal-icon">G</p>
+                <p onclick="togglenavbar()" class="personal-icon">G</p>
+            </div>
+            <div id="navbar" class="navbar d-none">
+                    <a class="navbarlink" href="../html/privacy_policy.html">Privacy Policy</a>
+                    <a class="navbarlink" href="../html/legal_notice.html">Legal Notice</a>
+                    <a class="navbarlink" href="../index.html">Log Out</a>
             </div>
     `;
+}
+
+function togglenavbar() {
+    let navbar = document.getElementById('navbar');
+    navbar.classList.toggle('d-none');
 }
 
 function getSidebar() {

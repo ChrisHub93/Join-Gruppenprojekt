@@ -53,6 +53,35 @@ header{
     background-color: #0C2E621F;
 }
 
+.navbar{
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding: 10px;
+    right: 20px;
+    top: 92px;
+    position: fixed;
+    background-color: #2A3647;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbarlink{
+    text-decoration: none;
+    color: #CDCDCD;
+    font-size: 16px;
+    font-weight: 400;
+    height: 46px;
+    align-items: center;
+    display: flex;
+    padding-right: 16px;
+    padding-left: 16px;
+}
+
+.navbarlink:hover{
+    background-color: #2A3D59;
+}
+
 .sidebar{
     padding-bottom: 64px;
     padding-top: 64px;

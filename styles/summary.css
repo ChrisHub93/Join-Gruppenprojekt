@@ -65,8 +65,6 @@ body{
 }
 
 .checkboxurgent{
-    padding-right: 48px;
-    padding-left: 48px;
     width: 560px;
     height: 168px;
 }
@@ -114,10 +112,25 @@ body{
     align-items: center;
 }
 
-.greeting-box{
+.deadline{
+    gap: 13px;
+    display: flex;
+    flex-direction: column;
+}
+
+.deadline-date{
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.deadline-text{
+    font-size: 16px;
+    font-weight: 400;
+}
+/* .greeting-box{
     width: 338px;
     height: 56px;
-}
+} */
 
 .greeting{
     font-size: 47px;
