@@ -10,10 +10,6 @@ main {
   right: 0;
 }
 
-body {
-  min-height: 100vh;
-}
-
 .form {
   display: flex;
   justify-content: center;
@@ -48,7 +44,7 @@ body {
 .typeOfTask,
 .priority,
 .seperator {
-  min-height: 320px;
+  height: 320px;
 }
 
 mark {
@@ -267,7 +263,7 @@ select:focus {
 }
 
 .options {
-  max-height: 0;
+  max-height: 0px;
   overflow: hidden;
   transition: all 0.2s ease;
   padding: 0;
@@ -529,7 +525,6 @@ div[id^="bullet"] {
   display: flex;
   flex-direction: column-reverse;
   cursor: pointer;
-  background-color: var(--selected-hover-bg);
   height: 60px;
   width: 60px;
   border-radius: 16px;
@@ -539,8 +534,71 @@ div[id^="bullet"] {
   text-align: center;
 }
 
+.activeLink {
+  background-color: var(--selected-hover-bg);
+}
+
 .navigationColumn span {
   font-size: 10px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px !important;
+  }
+
+  main {
+    width: calc(100% - 200px);
+    align-items: start;
+    padding-top: 40px;
+  }
+
+  h1 {
+    width: auto;
+    margin-left: 8px;
+    margin-right: auto;
+    padding-top: 0px;
+  }
+
+  .typeOfTask {
+    width: auto;
+    margin-right: 12px;
+    margin-left: 12px;
+  }
+
+  .seperator {
+    display: none;
+  }
+
+  .priority {
+    width: auto;
+    margin-right: 12px;
+    margin-left: 12px;
+  }
+
+  .form {
+    flex-direction: column;
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-bottom: auto;
+    width: 100%;
+  }
+
+  .markedFields{
+    display: none;
+  }
+
+  .markedFieldsResponsive{
+    display: block !important;
+  }
+
+  footer{
+    display: block;
+    width: 100%;
+    align-items: end;
+    padding-right: 8px;
+    bottom: 8px;
+  }
 }
 
 @media (max-width: 375px) {
@@ -576,6 +634,7 @@ div[id^="bullet"] {
     width: auto;
     margin-left: 8px;
     font-size: 40px;
+    padding-top: 0px;
   }
 
   .typeOfTask {
@@ -617,7 +676,7 @@ div[id^="bullet"] {
 
   .form {
     flex-direction: column;
-    margin-bottom: 0px;
+    margin-bottom: auto;
     margin-right: 0px;
     margin-left: 0px;
     width: 100%;
@@ -625,7 +684,7 @@ div[id^="bullet"] {
 
   .navigation {
     width: 100%;
-    height: 80px;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -637,6 +696,8 @@ div[id^="bullet"] {
   main {
     width: 100%;
     align-items: start;
+    height: 100vh;
+    padding-top: 40px;
   }
 
   .markedFields {
@@ -644,7 +705,7 @@ div[id^="bullet"] {
   }
 
   .markedFieldsResponsive {
-    display: block;
+    display: block !important;
   }
 
   footer {
