@@ -31,7 +31,8 @@
             <div class="log-in__line"></div>
             <form onsubmit="logIn(); return false;" class="form-input">
             <div class="log-in__inputs">
-                <input class="log-in__inputs__inputfield icon-mail" type="email" placeholder="Email" id="inputEmail" required>
+                <input class="log-in__inputs__inputfield icon-mail" type="email" placeholder="Email" id="inputEmail" oninput="validateEmailInput()">
+                <span id="emailFeedback" style="color: red;"></span>
                 <input class="log-in__inputs__inputfield icon-lock" type="password" placeholder="Password" id="inputPassword" required>
                 <p id="logInAlert" class="log-in__inpts__alert-text d-none">Check your email and password. Please try again.</p>            
             <div>

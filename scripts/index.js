@@ -48,3 +48,18 @@ function showAlert() {
     collection[i].style.border = "1px solid var(--error-color)";
   }
 }
+
+
+function validateEmailInput() {
+  const emailInput = document.getElementById('inputEmail');
+  const feedbackElement = document.getElementById('emailFeedback');
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (emailRegex.test(emailInput.value)) {
+    feedbackElement.textContent = ""; // Email is valid
+    emailInput.style.border = "1px solid var(--focus-color)";
+  } else {
+    emailInput.style.border = "1px solid var(--error-color)";
+    feedbackElement.textContent = "Please enter a valid email address.";
+  }
+}
