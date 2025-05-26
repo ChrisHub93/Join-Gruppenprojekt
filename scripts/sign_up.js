@@ -1,27 +1,25 @@
-let name = "";
-let email = "";
-let password = "";
-let passwordConfirm = "";
-
 function initSignUp() {}
 
 async function submit() {
-  name = document.getElementById("inputName").value;
-  email = document.getElementById("inputEmail").value;
-  password = document.getElementById("inputPassword").value;
-  passwordConfirm = document.getElementById("inputePasswordConfirm").value;
-  await postData("/users/", {email: email, password : password});
-  window.location.href = '../index.html'
+  await getInpuValueAndPost();
+  window.location.href = "../index.html";
 }
 
-async function postData(path, data={}) {
-    let response = await fetch(BASE_URL + path + ".json",{
-        method : "POST",
-        headers : {
-            "Content-Type" : "application/json"
-        },
-        body : JSON.stringify(data)
+async function getInpuValueAndPost() {
+  let name = document.getElementById("inputName").value;
+  let email = document.getElementById("inputEmail").value;
+  let password = document.getElementById("inputPassword").value;
+  let passwordConfirm = document.getElementById("inputePasswordConfirm").value;
+  await postData("/users/", { email: email, password: password });
+}
+
+async function postData(path, data = {}) {
+    let response = await fetch(BASE_URL + path + ".json", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
-    return responseToJson = await response.json();
-}
-
+    return (responseToJson = await response.json());
+  }
