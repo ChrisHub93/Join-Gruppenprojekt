@@ -23,3 +23,17 @@ async function postData(path, data = {}) {
     });
     return (responseToJson = await response.json());
   }
+
+  function validateEmailInput() {
+    const emailInputRef = document.getElementById("inputEmail");
+    const feedbackElementRef = document.getElementById("emailFeedback");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+    if (emailRegex.test(emailInputRef.value)) {
+      feedbackElementRef.textContent = "";
+      emailInputRef.style.border = "1px solid var(--input-border)";
+    } else {
+      emailInputRef.style.border = "1px solid var(--error-color)";
+      feedbackElementRef.textContent = "Please enter a valid email address.";
+    }
+  }

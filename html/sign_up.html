@@ -30,19 +30,22 @@
                 <p class="sign_up__headline">Sign up</p>
             </div>
             <div class="sign_up__line"></div>
-            <div class="sign_up__inputs">
-                <input class="sign_up__inputs__inputfield icon-user" type="text" placeholder="Name" id="inputName">
-                <input class="sign_up__inputs__inputfield icon-mail" type="email" placeholder="Email" id="inputEmail">
-                <input class="sign_up__inputs__inputfield icon-lock" type="password" placeholder="Password" id="inputPassword">
-                <input class="sign_up__inputs__inputfield icon-lock" type="password" placeholder="Confirm Password" id="inputePasswordConfirm">
-            </div>
-            <form class="form-check">
-                <input type="checkbox" id="check-privacy" name="check-privacy" value="true">
-                <label for="check-privacy">I accept the <a class="sign_up__link" href="./html/privacy_policy.html">Privacy Policy</a></label>
-            </form >
-            <div class="sign_up__buttons">
-                <button onclick="submit()" class="sign_up__buttons__btn sign_up__buttons__btn--dark">Sign up</button>
-            </div>
+            <form onsubmit="submit()" class="form-input">
+                <div class="sign_up__inputs">
+                    <input onfocusout="" class="sign_up__inputs__inputfield icon-user" type="text" placeholder="Name" id="inputName">
+                    <input onfocusout="validateEmailInput()" class="sign_up__inputs__inputfield icon-mail" type="email" placeholder="Email" id="inputEmail">
+                    <span id="emailFeedback" class="sign-up__inpts__alert-text"></span>
+                    <input onfocusout="" class="sign_up__inputs__inputfield icon-lock" type="password" placeholder="Password" id="inputPassword">
+                    <input onfocusout="" class="sign_up__inputs__inputfield icon-lock" type="password" placeholder="Confirm Password" id="inputePasswordConfirm">
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" id="check-privacy" name="check-privacy" value="true">
+                    <label for="check-privacy">I accept the <a class="sign_up__link" href="./html/privacy_policy.html">Privacy Policy</a></label>
+                </div >
+                <div class="sign_up__buttons">
+                    <button class="sign_up__buttons__btn sign_up__buttons__btn--dark">Sign up</button>
+                </div>
+            </form>
         </div>
         
     </main>

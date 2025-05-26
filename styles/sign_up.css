@@ -69,6 +69,13 @@
   border-radius: 10px;
 }
 
+.form-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .sign_up__inputs {
   display: flex;
   flex-direction: column;
@@ -104,6 +111,11 @@
   background: url("../assets/icons/lock.svg") no-repeat right;
   background-repeat: no-repeat;
   background-position: 95%;
+}
+
+.sign-up__inpts__alert-text{
+  font-size: 12px;
+  color: var(--error-color);
 }
 
 .sign_up__buttons {
@@ -206,7 +218,6 @@
 }
 
 @media (max-width: 490px) {
- 
   .body-sign_up {
     padding: 16px 0px;
   }
@@ -218,7 +229,6 @@
 
   .sign_up__headline {
     font-size: 47px;
-
   }
 
   .sign_up__line {
