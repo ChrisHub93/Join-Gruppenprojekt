@@ -37,3 +37,16 @@ async function postData(path, data = {}) {
       feedbackElementRef.textContent = "Please enter a valid email address.";
     }
   }
+
+  function validateInput(id, textId) {
+    const pwInputRef = document.getElementById(id);
+    const feedbackElementRef = document.getElementById(textId);
+  
+    if(!pwInputRef.value) {
+      pwInputRef.style.border = "1px solid var(--error-color)";
+      feedbackElementRef.textContent = "This Field is required";
+    } else {
+      feedbackElementRef.textContent = "";
+      pwInputRef.style.border = "1px solid var(--input-border)";
+    }
+  }
