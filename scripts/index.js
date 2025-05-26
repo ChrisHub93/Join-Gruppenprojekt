@@ -72,5 +72,8 @@ function validatePwInput() {
   if(!pwInputRef.value) {
     pwInputRef.style.border = "1px solid var(--error-color)";
     feedbackElementRef.textContent = "This Field is required";
+  } else {
+    feedbackElementRef.textContent = "";
+    pwInputRef.style.border = "1px solid var(--focus-color)";
   }
 }
