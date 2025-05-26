@@ -15,8 +15,8 @@ async function loadData(path = "") {
 }
 
 function search(dataValues) {
-  email = document.getElementById("inputEmail").value;
-  password = document.getElementById("inputPassword").value;
+  const email = document.getElementById("inputEmail").value;
+  const password = document.getElementById("inputPassword").value;
 
   for (listOfUser of dataValues) {
     let mails = listOfUser.email;
@@ -35,12 +35,12 @@ function search(dataValues) {
 }
 
 function clearPasswordInput() {
-  pwRef = document.getElementById("inputPassword");
+  const pwRef = document.getElementById("inputPassword");
   pwRef.value = "";
 }
 
 function showAlert() {
-  textRef = document.getElementById("logInAlert");
+  const textRef = document.getElementById("logInAlert");
   textRef.classList.remove("d-none");
 
   const collection = document.getElementsByClassName(
@@ -52,15 +52,25 @@ function showAlert() {
 }
 
 function validateEmailInput() {
-  const emailInput = document.getElementById("inputEmail");
-  const feedbackElement = document.getElementById("emailFeedback");
+  const emailInputRef = document.getElementById("inputEmail");
+  const feedbackElementRef = document.getElementById("emailFeedback");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if (emailRegex.test(emailInput.value)) {
-    feedbackElement.textContent = ""; // Email is valid
-    emailInput.style.border = "1px solid var(--focus-color)";
+  if (emailRegex.test(emailInputRef.value)) {
+    feedbackElementRef.textContent = "";
+    emailInputRef.style.border = "1px solid var(--focus-color)";
   } else {
-    emailInput.style.border = "1px solid var(--error-color)";
-    feedbackElement.textContent = "Please enter a valid email address.";
+    emailInputRef.style.border = "1px solid var(--error-color)";
+    feedbackElementRef.textContent = "Please enter a valid email address.";
+  }
+}
+
+function validatePwInput() {
+  const pwInputRef = document.getElementById("inputPassword");
+  const feedbackElementRef = document.getElementById("pwFeedback");
+
+  if(!pwInputRef.value) {
+    pwInputRef.style.border = "1px solid var(--error-color)";
+    feedbackElementRef.textContent = "This Field is required";
   }
 }

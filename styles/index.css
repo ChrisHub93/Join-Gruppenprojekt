@@ -80,7 +80,7 @@
 .log-in__inputs {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   margin-bottom: 48px;
   width: 130%;
 }
