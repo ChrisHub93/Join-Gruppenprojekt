@@ -29,30 +29,31 @@ function search(dataValues) {
     }
   }
   if (!pwAndUserFound) {
-    clearPasswordInput()
+    clearPasswordInput();
     showAlert();
   }
 }
 
 function clearPasswordInput() {
-  pwRef = document.getElementById('inputPassword');
+  pwRef = document.getElementById("inputPassword");
   pwRef.value = "";
 }
 
 function showAlert() {
   textRef = document.getElementById("logInAlert");
-  textRef.classList.remove('d-none');
+  textRef.classList.remove("d-none");
 
-  const collection = document.getElementsByClassName("log-in__inputs__inputfield");
+  const collection = document.getElementsByClassName(
+    "log-in__inputs__inputfield"
+  );
   for (let i = 0; i < collection.length; i++) {
     collection[i].style.border = "1px solid var(--error-color)";
   }
 }
 
-
 function validateEmailInput() {
-  const emailInput = document.getElementById('inputEmail');
-  const feedbackElement = document.getElementById('emailFeedback');
+  const emailInput = document.getElementById("inputEmail");
+  const feedbackElement = document.getElementById("emailFeedback");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (emailRegex.test(emailInput.value)) {

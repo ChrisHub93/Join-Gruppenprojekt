@@ -30,18 +30,17 @@
             <p class="log-in__headline">Log in</p>
             <div class="log-in__line"></div>
             <form onsubmit="logIn(); return false;" class="form-input">
-            <div class="log-in__inputs">
-                <input class="log-in__inputs__inputfield icon-mail" type="email" placeholder="Email" id="inputEmail" oninput="validateEmailInput()">
-                <span id="emailFeedback" style="color: red;"></span>
-                <input class="log-in__inputs__inputfield icon-lock" type="password" placeholder="Password" id="inputPassword" required>
-                <p id="logInAlert" class="log-in__inpts__alert-text d-none">Check your email and password. Please try again.</p>            
-            <div>
-            
-            <div class="log-in__buttons">
-                <button class="log-in__buttons__btn log-in__buttons__btn--dark">Log In</button>
-                <button onclick="location.href='./html/summary.html'" class="log-in__buttons__btn log-in__buttons__btn--bright">Guest Log in</button>
-            </div>
-        </form>
+                <div class="log-in__inputs">
+                    <input class="log-in__inputs__inputfield icon-mail" type="email" placeholder="Email" id="inputEmail" oninput="validateEmailInput()">
+                    <span id="emailFeedback" style="color: red;"></span>
+                    <input class="log-in__inputs__inputfield icon-lock" type="password" placeholder="Password" id="inputPassword" required>
+                    <p id="logInAlert" class="log-in__inpts__alert-text d-none">Check your email and password. Please try again.</p>            
+                </div>            
+                <div class="log-in__buttons">
+                    <button class="log-in__buttons__btn log-in__buttons__btn--dark">Log In</button>
+                    <button onclick="location.href='./html/summary.html'" class="log-in__buttons__btn log-in__buttons__btn--bright">Guest Log in</button>
+                </div>
+            </form>
         </div>
 
         <div class="mobile-sign-up">
