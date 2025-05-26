@@ -47,7 +47,7 @@ function activateMenu(clickedElement, menuKey) {
     clearMenu();
 
     clickedElement.classList.add('sidebar-menu-active');
-    const activeLink = clickedElement.querySelector('.sidebar-text');
+    let activeLink = clickedElement.querySelector('.sidebar-text');
     if (activeLink) activeLink.classList.add('a-active');
 }
 

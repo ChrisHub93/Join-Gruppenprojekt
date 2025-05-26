@@ -16,73 +16,91 @@
     <script src="../scripts/summary.js"></script>
 </head>
 <body onload="init(); showGreeting(); iconHoverSwaps();">
-    <header id="header"  class="page-box">
-    </header>
-    <main class="page-box flex-column30">
-            <div class="summary-headline center-between page-box">
-                <p class="text-360">Join 360</p>
-                <div class="seperator"></div>
-                <p class="text-headline">Key Metrics at a Glance</p>
-            </div>
-        <div class="center-gp80">
-            <div class="checkbox page-box">
-                <div class="center-between">
-                    <div class="summary-box checkboxtodo">
-                        <img class="todone-icon" src="../assets/icons/todo.png" data-alt-src="../assets/icons/todo-hover.png" alt="">
-                        <div>
-                            <p class="summary-number">4</p>
-                            <p class="summary-text">To-do</p>
-                        </div>
-                    </div>
-                    <div class="summary-box checkboxtodo">
-                        <img class="todone-icon" src="../assets/icons/done.png" data-alt-src="../assets/icons/done-hover.png" alt="">
-                        <div>
-                            <p class="summary-number">1</p>
-                            <p class="summary-text">Done</p>
-                        </div>
-                    </div>
+        <div class="page-box">
+        <aside id="sidebar" class="sidebar">
+                <img class="sidebar-logo" src="../assets/img/Capa 1 white.png" alt="">
+                <div class="menu-box">
+                    <div class="sidebar-menu" menu-data="summary" onclick="activateMenu(this, 'summary')"><a class="sidebar-text" href="../html/summary.html"><img src="../assets/icons/Summary.png" class="sidebar-icon" alt="">Summary</a></div>
+                    <div class="sidebar-menu" menu-data="add_task" onclick="activateMenu(this, 'add_task')"><a class="sidebar-text" href="../html/add_task.html"><img src="../assets/icons/Add task.png" class="sidebar-icon" alt="">Add Task</a></div>
+                    <div class="sidebar-menu" menu-data="board" onclick="activateMenu(this, 'board')"><a class="sidebar-text" href="../html/board.html"><img src="../assets/icons/Board.png" class="sidebar-icon" alt="">Board</a></div>
+                    <div class="sidebar-menu" menu-data="contacts" onclick="activateMenu(this, 'contacts')"><a class="sidebar-text" href="../html/contacts.html"><img src="../assets/icons/Contacts.png" class="sidebar-icon" alt="">Contacts</a></div>
                 </div>
-                <div class="checkboxurgent summary-box space-evenly">
-                    <div class="flex-gap18">
-                        <img class="summary-urgent" src="../assets/icons/prio-summary.png" alt="">
-                        <div>
-                            <p class="summary-number">2</p>
-                            <p class="summary-text">Urgent</p>
-                        </div>
-                    </div>
-                    <div class="seperator-urgent"></div>
-                        <div class="deadline">
-                            <p class="deadline-date">May 24, 2025</p>
-                            <p class="deadline-text">Upcoming Deadline</p>
-                        </div>
+                <div class="sidebar-policy">
+                    <a class="sidebar-text policy-color pt-policy" href="../html/privacy_policy.html">Privacy Policy</a>
+                    <a class="sidebar-text policy-color" href="../html/legal_notice.html">Legal Notice</a>
                 </div>
-                <div class="page-box center-between">
-                    <div class="summary-box checkboxoverall">
-                        <div class="checkboxbottom">
-                            <p class="summary-number">1</p>
-                            <p class="summary-text">Tasks in Board</p>
-                        </div>
-                    </div>
-                    <div class="summary-box checkboxoverall">
-                        <div class="checkboxbottom">
-                            <p class="summary-number">1</p>
-                            <p class="summary-text">Tasks in Progress</p>
-                        </div>
-                    </div>
-                    <div class="summary-box checkboxoverall">
-                        <div class="checkboxbottom">
-                            <p class="summary-number">1</p>
-                            <p class="summary-text">Awaiting Feedback</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="greeting-box page-box">
-                <p id="greeting" class="greeting"></p>
-            </div>
+        </aside>
         </div>
-    </main>
+        
+    
+        <header id="header"  class="page-box">
+        </header>
+        <main class="page-box flex-column30">
+                <div class="summary-headline center-between page-box">
+                    <p class="text-360">Join 360</p>
+                    <div class="seperator"></div>
+                    <p class="text-headline">Key Metrics at a Glance</p>
+                </div>
+            <div class="center-gp80">
+                <div class="checkbox page-box">
+                    <div class="center-between">
+                        <div class="summary-box checkboxtodo">
+                            <img class="todone-icon" src="../assets/icons/todo.png" data-alt-src="../assets/icons/todo-hover.png" alt="">
+                            <div>
+                                <p class="summary-number">4</p>
+                                <p class="summary-text">To-do</p>
+                            </div>
+                        </div>
+                        <div class="summary-box checkboxtodo">
+                            <img class="todone-icon" src="../assets/icons/done.png" data-alt-src="../assets/icons/done-hover.png" alt="">
+                            <div>
+                                <p class="summary-number">1</p>
+                                <p class="summary-text">Done</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkboxurgent summary-box space-evenly">
+                        <div class="flex-gap18">
+                            <img class="summary-urgent" src="../assets/icons/prio-summary.png" alt="">
+                            <div>
+                                <p class="summary-number">2</p>
+                                <p class="summary-text">Urgent</p>
+                            </div>
+                        </div>
+                        <div class="seperator-urgent"></div>
+                            <div class="deadline">
+                                <p class="deadline-date">May 24, 2025</p>
+                                <p class="deadline-text">Upcoming Deadline</p>
+                            </div>
+                    </div>
+                    <div class="page-box center-between">
+                        <div class="summary-box checkboxoverall">
+                            <div class="checkboxbottom">
+                                <p class="summary-number">1</p>
+                                <p class="summary-text">Tasks in Board</p>
+                            </div>
+                        </div>
+                        <div class="summary-box checkboxoverall">
+                            <div class="checkboxbottom">
+                                <p class="summary-number">1</p>
+                                <p class="summary-text">Tasks in Progress</p>
+                            </div>
+                        </div>
+                        <div class="summary-box checkboxoverall">
+                            <div class="checkboxbottom">
+                                <p class="summary-number">1</p>
+                                <p class="summary-text">Awaiting Feedback</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="greeting-box page-box">
+                    <p id="greeting" class="greeting"></p>
+                </div>
+            </div>
+        </main>
 
-<footer id="sidebar" class="sidebar"></footer>
+        <footer class="page-box">
+        </footer>
 </body>
 </html>

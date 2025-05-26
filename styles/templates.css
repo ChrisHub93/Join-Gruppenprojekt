@@ -115,12 +115,9 @@ header{
 }
 
 .sidebar-menu{
-    height: 46px;
     display: flex;
     align-items: center;
     gap: 8px;
-    padding-left: 56px;
-    padding-right: 56px;
     cursor: pointer;
 }
 
@@ -137,6 +134,9 @@ header{
 }
 
 .sidebar-text{
+    padding-left: 56px;
+    padding-right: 56px;
+    height: 46px;
     color: #CDCDCD;
     font-size: 16px;
     text-decoration: none;

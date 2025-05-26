@@ -1,14 +1,12 @@
 body{
     background-color: #F6F7F8;
-    padding-left: calc((100% - 1960px) / 2);
-    padding-right: calc((100% - 1960px) / 2);
 }
 
 .flex-column30{
     gap: 30px;
     display: flex;
     flex-direction: column;
-    padding-left: 328px;
+    margin-left: 328px;
     padding-top: 110px;
 }
 
