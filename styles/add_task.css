@@ -576,7 +576,7 @@ div[id^="bullet"] {
     width: auto;
     margin-left: 32px;
     margin-right: auto;
-    padding-top: 0px;
+    padding-top: 40px;
   }
 
   .typeOfTask {
@@ -609,6 +609,7 @@ div[id^="bullet"] {
 
   .markedFieldsResponsive {
     display: block !important;
+    padding-bottom: 80px;
   }
 
   footer {
