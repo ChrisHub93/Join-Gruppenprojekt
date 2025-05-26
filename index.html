@@ -32,9 +32,9 @@
             <form onsubmit="logIn(); return false;" class="form-input">
                 <div class="log-in__inputs">
                     <input class="log-in__inputs__inputfield icon-mail" type="email" placeholder="Email" id="inputEmail" onfocusout="validateEmailInput()" required>
-                    <span id="emailFeedback" style="color: red;"></span>
+                    <span id="emailFeedback" class="log-in__inpts__alert-text"></span>
                     <input class="log-in__inputs__inputfield icon-lock" type="password" placeholder="Password" id="inputPassword" onfocusout="validatePwInput()" required>
-                    <span id="pwFeedback" style="color: red;"></span>
+                    <span id="pwFeedback" class="log-in__inpts__alert-text"></span>
                     <p id="logInAlert" class="log-in__inpts__alert-text d-none">Check your email and password. Please try again.</p>            
                 </div>            
                 <div class="log-in__buttons">
