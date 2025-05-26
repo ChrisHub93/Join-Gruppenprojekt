@@ -329,6 +329,14 @@ footer {
   bottom: 72px;
 }
 
+.sectionFooter{
+  width: calc(100% - 232px);
+  z-index: 1;
+  position: absolute;
+  right: 0;
+  bottom: 72px;
+}
+
 .sectionButtons {
   width: 800px;
 
@@ -616,6 +624,7 @@ div[id^="bullet"] {
     bottom: 8px;
     width: calc(100% - 200px);
   }
+  
 
   .sectionButtons {
     width: auto;
