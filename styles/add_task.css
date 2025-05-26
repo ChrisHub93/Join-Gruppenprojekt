@@ -609,7 +609,7 @@ div[id^="bullet"] {
 
   .markedFieldsResponsive {
     display: block !important;
-    padding-bottom: 80px;
+    padding-bottom: 120px;
   }
 
   footer {
@@ -628,8 +628,9 @@ div[id^="bullet"] {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
-    margin-right: 32px;
-    margin-left: auto;
+    /* margin-right: 32px;
+    margin-left: auto; */
+    padding-right: 32px;
   }
 }
 
@@ -744,5 +745,7 @@ div[id^="bullet"] {
   .buttons {
     padding-top: 8px;
     padding-bottom: 8px;
+    background-color: var(--bg-color);
   }
+
 }
