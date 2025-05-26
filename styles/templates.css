@@ -133,7 +133,6 @@ header{
 }
 
 .sidebar-menu-active:hover{
-    cursor: default;
     background-color: #091931;
 }
 
