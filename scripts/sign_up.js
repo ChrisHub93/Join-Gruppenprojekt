@@ -10,7 +10,7 @@ async function getInpuValueAndPost() {
   let email = document.getElementById("inputEmail").value;
   let password = document.getElementById("inputPassword").value;
   let passwordConfirm = document.getElementById("inputePasswordConfirm").value;
-  await postData("/users/", { email: email, password: password });
+  await postData("/users/", {name: name, email: email, password: password });
 }
 
 async function postData(path, data = {}) {
