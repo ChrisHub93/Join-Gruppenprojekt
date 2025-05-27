@@ -1,17 +1,25 @@
 let pwCheck = false;
 
-function initSignUp() {}
+function initSignUp() {
+    pwCheck = false;
+}
 
 async function signUp() {
+  validateAllInputs();
   if (pwCheck) {
     await getInpuValueAndPost();
     window.location.href = "../index.html";
   } else {
-    validateEmailInput();
-    validateInput('inputName', 'nameFeedback');
-    validateInput('inputPassword', 'passwortFeedback');
-    confirmPassword();
+    validateAllInputs();
   }
+}
+
+function validateAllInputs() {
+  validateEmailInput();
+  validateInput("inputName", "nameFeedback");
+  validateInput("inputPassword", "passwortFeedback");
+  validateInput("inputePasswordConfirm", "confirmPasswortFeedback")
+  validateConfirmPassword();
 }
 
 async function getInpuValueAndPost() {
@@ -60,12 +68,13 @@ function validateInput(id, textId) {
   }
 }
 
-function confirmPassword() {
+function validateConfirmPassword() {
   let pwInput = "";
   let confirmPwInput = "";
+  pwCheck = false;
   pwInput = document.getElementById("inputPassword").value;
   confirmPwInput = document.getElementById("inputePasswordConfirm").value;
-  if (pwInput === confirmPwInput) {
+  if (pwInput === confirmPwInput && confirmPwInput != "") {
     hideUserFeedback();
     pwCheck = true;
   } else {
