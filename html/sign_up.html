@@ -30,7 +30,7 @@
                 <p class="sign_up__headline">Sign up</p>
             </div>
             <div class="sign_up__line"></div>
-            <form onsubmit="submit()" class="form-input">
+            <form onsubmit="signUp(); return false;" class="form-input">
                 <div class="sign_up__inputs">
                     <input onfocusout="validateInput('inputName', 'nameFeedback')" class="sign_up__inputs__inputfield icon-user" type="text" placeholder="Name" id="inputName">
                     <span id="nameFeedback" class="sign-up__inpts__alert-text"></span>
@@ -38,7 +38,7 @@
                     <span id="emailFeedback" class="sign-up__inpts__alert-text"></span>
                     <input onfocusout="validateInput('inputPassword', 'passwortFeedback')" class="sign_up__inputs__inputfield icon-lock" type="password" placeholder="Password" id="inputPassword">
                     <span id="passwortFeedback" class="sign-up__inpts__alert-text"></span>
-                    <input onfocusout="" class="sign_up__inputs__inputfield icon-lock" type="password" placeholder="Confirm Password" id="inputePasswordConfirm">
+                    <input onfocusout="confirmPassword()" class="sign_up__inputs__inputfield icon-lock" type="password" placeholder="Confirm Password" id="inputePasswordConfirm">
                     <span id="confirmPasswortFeedback" class="sign-up__inpts__alert-text"></span>
                 </div>
                 <div class="form-check">
