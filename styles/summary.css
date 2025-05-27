@@ -2,6 +2,11 @@ body{
     background-color: #F6F7F8;
 }
 
+.overflow{
+    overflow-y: auto;
+    height: calc(100vh - 96px);
+}
+
 .flex-column30{
     gap: 30px;
     display: flex;
@@ -10,7 +15,7 @@ body{
     padding-top: 110px;
 }
 
-.center-gp80{
+.overview{
     display: flex;
     align-items: center;
     gap: 80px;
@@ -161,4 +166,17 @@ body{
 
 .summary-box:hover .seperator-urgent{
     background-color: white;
+}
+
+@media (max-width:1155px) {
+    .overview{
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width:1100px) {
+    .sidebar {
+        width: 200px !important;
+  }
 }

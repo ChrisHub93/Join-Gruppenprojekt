@@ -134,6 +134,7 @@ header{
 }
 
 .sidebar-text{
+    width: 100%;
     padding-left: 56px;
     padding-right: 56px;
     height: 46px;
@@ -151,19 +152,20 @@ header{
 
 .sidebar-policy{
     padding-top: 243px;
-    gap: 8px;
+    gap: 16px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
 }
 
-.policy-color{
-    padding-bottom: 8px;
+.policy-text{
+    font-size: 16px;
+    text-decoration: none;
     color: #a8a8a8;
     cursor: pointer;
 }
 
-.policy-color:hover{
+.policy-text:hover{
     color: #29ABE2;
     font-weight: bold;
 }

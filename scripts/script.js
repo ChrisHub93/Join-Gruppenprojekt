@@ -3,7 +3,7 @@ const BASE_URL = 'https://join-464-default-rtdb.europe-west1.firebasedatabase.ap
 
 function init() {
     renderHeader();
-    renderSidebar();
+    // renderSidebar();
     activeMenuStorage();
 }
 
