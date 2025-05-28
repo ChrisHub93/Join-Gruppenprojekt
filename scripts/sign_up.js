@@ -47,7 +47,7 @@ function validateNameInput() {
   const nameInputRef = document.getElementById("inputName");
   const feedbackElementRef = document.getElementById("nameFeedback");
 
-  if (!nameInputRef.value) {
+  if (nameInputRef.value.trim() === '') {
     nameInputRef.style.border = "1px solid var(--error-color)";
     feedbackElementRef.textContent = "This Field is required";
     nameCheck = false;
@@ -78,7 +78,7 @@ function validatePasswordInput() {
   const pwInputRef = document.getElementById("inputPassword");
   const feedbackElementRef = document.getElementById("passwortFeedback");
 
-  if (!pwInputRef.value) {
+  if (pwInputRef.value.trim() === '') {
     pwInputRef.style.border = "1px solid var(--error-color)";
     feedbackElementRef.textContent = "This Field is required";
     pwCheck = false;
