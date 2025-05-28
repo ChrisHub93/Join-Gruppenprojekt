@@ -1,101 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contacts</title>
-    <link rel="icon" type="image/xcon" href="../assets/img/Capa 1.png">
+    <link rel="icon" type="image/xcon" href="../assets/img/Capa 1.png" />
 
-    <link rel="stylesheet" href="../styles/templates.css">
-    <link rel="stylesheet" href="../styles/fonts.css">
-    <link rel="stylesheet" href="../styles/style.css">
-    <link rel="stylesheet" href="../styles/contacts.css">
-
-    
-</head>
-<body>
+    <link rel="stylesheet" href="../styles/templates.css" />
+    <link rel="stylesheet" href="../styles/fonts.css" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="../styles/contacts.css" />
+  </head>
+  <body>
     <div class="page-box">
-        <aside id="sidebar" class="sidebar">
-                <img class="sidebar-logo" src="../assets/img/Capa 1 white.png" alt="">
-                <div class="menu-box">
-                    <div class="sidebar-menu" menu-data="summary" onclick="activateMenu(this, 'summary')"><a class="sidebar-text" href="../html/summary.html"><img src="../assets/icons/Summary.png" class="sidebar-icon" alt="">Summary</a></div>
-                    <div class="sidebar-menu" menu-data="add_task" onclick="activateMenu(this, 'add_task')"><a class="sidebar-text" href="../html/add_task.html"><img src="../assets/icons/Add task.png" class="sidebar-icon" alt="">Add Task</a></div>
-                    <div class="sidebar-menu" menu-data="board" onclick="activateMenu(this, 'board')"><a class="sidebar-text" href="../html/board.html"><img src="../assets/icons/Board.png" class="sidebar-icon" alt="">Board</a></div>
-                    <div class="sidebar-menu sidebar-menu-active" menu-data="contacts" onclick="activateMenu(this, 'contacts')"><a class="sidebar-text" href="../html/contacts.html"><img src="../assets/icons/Contacts.png" class="sidebar-icon" alt="">Contacts</a></div>
-                </div>
-                <div class="sidebar-policy">
-                    <a class="policy-text" href="../html/privacy_policy.html">Privacy Policy</a>
-                    <a class="policy-text" href="../html/legal_notice.html">Legal Notice</a>
-                </div>
-        </aside>
+      <aside id="sidebar" class="sidebar">
+        <img class="sidebar-logo" src="../assets/img/Capa 1 white.png" alt="" />
+        <div class="menu-box">
+          <div
+            class="sidebar-menu"
+            menu-data="summary"
+            onclick="activateMenu(this, 'summary')"
+          >
+            <a class="sidebar-text" href="../html/summary.html"
+              ><img
+                src="../assets/icons/Summary.png"
+                class="sidebar-icon"
+                alt=""
+              />Summary</a
+            >
+          </div>
+          <div
+            class="sidebar-menu"
+            menu-data="add_task"
+            onclick="activateMenu(this, 'add_task')"
+          >
+            <a class="sidebar-text" href="../html/add_task.html"
+              ><img
+                src="../assets/icons/Add task.png"
+                class="sidebar-icon"
+                alt=""
+              />Add Task</a
+            >
+          </div>
+          <div
+            class="sidebar-menu"
+            menu-data="board"
+            onclick="activateMenu(this, 'board')"
+          >
+            <a class="sidebar-text" href="../html/board.html"
+              ><img
+                src="../assets/icons/Board.png"
+                class="sidebar-icon"
+                alt=""
+              />Board</a
+            >
+          </div>
+          <div
+            class="sidebar-menu sidebar-menu-active"
+            menu-data="contacts"
+            onclick="activateMenu(this, 'contacts')"
+          >
+            <a class="sidebar-text" href="../html/contacts.html"
+              ><img
+                src="../assets/icons/Contacts.png"
+                class="sidebar-icon"
+                alt=""
+              />Contacts</a
+            >
+          </div>
+        </div>
+        <div class="sidebar-policy">
+          <a class="policy-text" href="../html/privacy_policy.html"
+            >Privacy Policy</a
+          >
+          <a class="policy-text" href="../html/legal_notice.html"
+            >Legal Notice</a
+          >
+        </div>
+      </aside>
     </div>
-    <header id="header"  class="page-box">
-        <p class="header-name">Kanban Project Management Tool</p>
-            <img class="headerLogo d-none" src="/assets/img/Capa 1.png" alt="">
-            <div class="header-top-profile">
-                <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
-                <p onclick="showNavbar()" class="personal-icon">G</p>
-            </div>
-            <div id="navbar" class="navbar d-none">
-                    <a class="navbarlink d-none" href="../html/help.html">Help</a>
-                    <a class="navbarlink" href="../html/legal_notice.html">Legal Notice</a>
-                    <a class="navbarlink" href="../html/privacy_policy.html">Privacy Policy</a>
-                    <a class="navbarlink" href="../index.html">Log Out</a>
-            </div>
+    <header id="header" class="page-box">
+      <p class="header-name">Kanban Project Management Tool</p>
+      <img class="headerLogo d-none" src="/assets/img/Capa 1.png" alt="" />
+      <div class="header-top-profile">
+        <a href="../html/help.html"
+          ><img class="help-icon" src="../assets/icons/help.png" alt=""
+        /></a>
+        <p onclick="showNavbar()" class="personal-icon">G</p>
+      </div>
+      <div id="navbar" class="navbar d-none">
+        <a class="navbarlink d-none" href="../html/help.html">Help</a>
+        <a class="navbarlink" href="../html/legal_notice.html">Legal Notice</a>
+        <a class="navbarlink" href="../html/privacy_policy.html"
+          >Privacy Policy</a
+        >
+        <a class="navbarlink" href="../index.html">Log Out</a>
+      </div>
     </header>
 
     <main>
-    <section class="contacts">
-        
-
+      <section class="contacts">
         <div class="contactsWidth">
-
-        <div class="addNewContactBtn">
+          <div class="addNewContactBtn">
             <span>Add new contact</span>
-            <img class="addNewPersonImg" src="/assets/icons/person_add.png" alt="">
-        </div>
+            <img
+              class="addNewPersonImg"
+              src="/assets/icons/person_add.png"
+              alt=""
+            />
+          </div>
 
-        <div id="alphabeticalOrderA" class="alphabeticalOrderA">
+          <div id="alphabeticalOrderA" class="alphabeticalOrderA">
             <span class="order">A</span>
             <div class="seperator"></div>
             <div class="contactInfo">
-                <div class="circleFirstLetters">
-                    <span>A</span>
-                    <span>M</span>
-                </div>
-                <div class="maininfoAboutContact">
-                    <span class="name">Anton Mayer</span>
-                    <span class="email">antom@gmail.com</span>
-                </div>
+              <div class="circleFirstLetters">
+                <span>A</span>
+                <span>M</span>
+              </div>
+              <div class="maininfoAboutContact">
+                <span class="name">Anton Mayer</span>
+                <span class="email">antom@gmail.com</span>
+              </div>
             </div>
+          </div>
+
+          <div id="alphabeticalOrderB"></div>
+          <div id="alphabeticalOrderD"></div>
+          <div id="alphabeticalOrderE"></div>
+          <div id="alphabeticalOrderM"></div>
+          <div id="alphabeticalOrderT"></div>
+        </div>
+      </section>
+
+      <section class="infoTitle">
+        <div class="pageTitle">
+          <h1>Contacts</h1>
+          <div class="titleSeperator"></div>
+          <span class="subTitle">Better with a team</span>
         </div>
 
-        <div id="alphabeticalOrderB"></div>
-        <div id="alphabeticalOrderD"></div>
-        <div id="alphabeticalOrderE"></div>
-        <div id="alphabeticalOrderM"></div>
-        <div id="alphabeticalOrderT"></div>
+
+
+        <div id="allInfoAboutContact"> <!-- here open Overlay with info about contact -->
+
+          <div class="moreAboutcontactInfo">
+
+            <div class="moreAboutcircleFirstLetters">
+              <span>A</span>
+              <span>M</span>
+            </div>
+
+            <div class="editinfoAboutContact">
+              <h2>Anton Mayer</h2>
+              <div class="editOrDeleteFlex">
+                <div class="edit editOrDeleteFlex">
+                  <img src="/assets/icons/Property 1=edit.png" alt="" />
+                  <span>Edit</span>
+                </div>
+
+                <div class="delete editOrDeleteFlex">
+                  <img src="/assets/icons/Property 1=delete.png" alt="" />
+                  <span>Delete</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <span class="contactInformation">Contact Information</span>
+
+          <div class="emailOverlay">
+            <span>Email</span>
+            <span class="email">antom@gmail.com</span>
+          </div>
+
+          <div class="phoneOverlay">
+            <span>Phone</span>
+            <span>+49 1111 111 11 1</span>
+          </div>
 
         </div>
-        
-    </section>
-
-    <section class="infoTitle">
-        <h1>Contacts</h1>
-        <div class="titleSeperator"></div>
-        <span>Better with a team</span>
-
-        <div id="moreInfoAboutContact"></div>
-    </section>
+      </section>
     </main>
 
-
-
-
-    <footer class="page-box">
-    </footer>
+    <footer class="page-box"></footer>
     <script src="../scripts/script.js"></script>
     <script src="../scripts/templates.js"></script>
     <script src="/scripts/contacts.js"></script>
-</body>
+  </body>
 </html>

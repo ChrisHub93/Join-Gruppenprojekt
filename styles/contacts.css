@@ -104,6 +104,99 @@ main {
 }
 
 .email {
-  color: var(--focus-color);
+  color: var(--email-color);
   font-size: 14px;
+}
+
+.pageTitle {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-top: 112px;
+  margin-left: 40px;
+}
+
+.pageTitle h1 {
+  font-size: 48px;
+}
+
+.titleSeperator {
+  background-color: var(--contact-title-seperator);
+  width: 3px;
+  height: 56px;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.subTitle {
+  color: var(--darkBtn-color);
+  font-size: 24px;
+}
+
+.moreAboutcontactInfo {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-radius: 8px;
+  padding: 24px 40px 24px;
+}
+
+.moreAboutcircleFirstLetters {
+  background-color: orange;
+  height: 96px;
+  width: 96px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 40px;
+  border: 2px solid white;
+}
+
+.editinfoAboutContact {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin-left: 32px;
+}
+
+.editinfoAboutContact h2 {
+  font-size: 40px;
+  font-weight: normal;
+}
+
+.editOrDeleteFlex {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.edit img,
+.delete img {
+  height: 18px;
+  object-fit: contain;
+  margin-right: 4px;
+}
+
+.edit,
+.delete {
+  margin-right: 12px;
+  font-size: 14px;
+  color: var(--darkBtn-color);
+  cursor: pointer;
+}
+
+.edit:hover,
+.delete:hover {
+  color: var(--contact-title-seperator);
+}
+
+.contactInformation{
+    margin-left: 40px;
+}
+
+.emailOverlay, .phoneOverlay{
+    margin-left: 40px;
 }
