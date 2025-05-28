@@ -2,6 +2,7 @@ let nameCheck = false;
 let emailCheck = false;
 let pwCheck = false;
 let pwConfirmCheck = false;
+let checkBox = false;
 
 function initSignUp() {
     setChecksToFalse();
@@ -9,7 +10,7 @@ function initSignUp() {
 
 async function signUp() {
   validateAllInputs();
-  if (nameCheck && emailCheck && pwCheck && pwConfirmCheck) {
+  if (nameCheck && emailCheck && pwCheck && pwConfirmCheck && checkBox) {
     await getInpuValueAndPost();
     window.location.href = "../index.html";
   } else {
@@ -22,7 +23,7 @@ function validateAllInputs() {
   validateEmailInput();
   validatePasswordInput();
   validateConfirmPassword();
-  console.log(nameCheck, emailCheck, pwCheck, pwConfirmCheck);
+  validateCheckbox()
 }
 
 async function getInpuValueAndPost() {
@@ -103,6 +104,18 @@ function validateConfirmPassword() {
     clearPasswordInputs();
     showUserFeedback();
   }
+}
+
+function validateCheckbox() {
+    const boxRef = document.getElementById("check-privacy").checked;
+    const feedbackElementRef = document.getElementById("checkBoxFeedback");
+    if (boxRef) {
+        feedbackElementRef.textContent = "";
+        checkBox = true;
+    } else {
+        feedbackElementRef.innerHTML = "<br>Please accept the Privacy Policy";
+        checkBox = false;
+    }
 }
 
 function hideUserFeedback() {
