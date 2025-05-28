@@ -59,7 +59,7 @@ main {
 }
 
 .order {
-  margin-left: 32px;
+  padding-left: 32px;
 }
 
 .seperator {
@@ -193,10 +193,32 @@ main {
   color: var(--contact-title-seperator);
 }
 
-.contactInformation{
-    margin-left: 40px;
+.contactInformation {
+  margin-left: 40px;
+  margin-bottom: 24px;
 }
 
-.emailOverlay, .phoneOverlay{
-    margin-left: 40px;
+.contactInformation span {
+  font-size: 18px;
+}
+
+.emailOverlay,
+.phoneOverlay {
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.emailOverlay span,
+.phoneOverlay span {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.subTitleEmail,
+.subTitlePhoneOverlay {
+  font-weight: bold;
 }

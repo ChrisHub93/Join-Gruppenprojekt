@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../styles/style.css" />
     <link rel="stylesheet" href="../styles/contacts.css" />
   </head>
-  <body>
+  <body onload="init()">
     <div class="page-box">
       <aside id="sidebar" class="sidebar">
         <img class="sidebar-logo" src="../assets/img/Capa 1 white.png" alt="" />
@@ -111,7 +111,8 @@
           </div>
 
           <div id="alphabeticalOrderA" class="alphabeticalOrderA">
-            <span class="order">A</span>
+
+            <!-- <span class="order">A</span>
             <div class="seperator"></div>
             <div class="contactInfo">
               <div class="circleFirstLetters">
@@ -122,7 +123,8 @@
                 <span class="name">Anton Mayer</span>
                 <span class="email">antom@gmail.com</span>
               </div>
-            </div>
+            </div> -->
+
           </div>
 
           <div id="alphabeticalOrderB"></div>
@@ -168,15 +170,18 @@
 
           </div>
 
-          <span class="contactInformation">Contact Information</span>
+
+          <div class="contactInformation">
+          <span >Contact Information</span>
+          </div>
 
           <div class="emailOverlay">
-            <span>Email</span>
+            <span class="subTitleEmail">Email</span>
             <span class="email">antom@gmail.com</span>
           </div>
 
           <div class="phoneOverlay">
-            <span>Phone</span>
+            <span class="subTitlePhoneOverlay">Phone</span>
             <span>+49 1111 111 11 1</span>
           </div>
 
