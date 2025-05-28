@@ -54,12 +54,13 @@ main {
   margin-left: 16px;
 }
 
-.alphabeticalOrderA {
+/* .alphabeticalOrderA {
   padding-top: 24px;
-}
+} */
 
 .order {
   padding-left: 32px;
+  padding-top: 24px;
 }
 
 .seperator {

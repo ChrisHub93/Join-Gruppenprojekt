@@ -1,7 +1,7 @@
 async function init() {
   let contacts = await fetchData("/contacts/");
   let contactsArray = Object.values(contacts);
-  
+
   getListOfContacts(contactsArray);
 }
 
@@ -23,7 +23,9 @@ function getListOfContacts(contactsArray) {
 function getTemplate(emailOfUser, nameOfUser) {
   let alphabeticalOrderRef = document.getElementById("alphabeticalOrderA");
 
-  alphabeticalOrderRef.innerHTML += `<span class="order">A</span>
+  alphabeticalOrderRef.innerHTML += `<div class="order">
+              <span>A</span>
+            </div>
             <div class="seperator"></div>
             <div class="contactInfo">
               <div class="circleFirstLetters">
@@ -34,5 +36,6 @@ function getTemplate(emailOfUser, nameOfUser) {
                 <span class="name">${nameOfUser}</span>
                 <span class="email">${emailOfUser}</span>
               </div>
-            </div>`;
+            </div>
+          </div>`;
 }
