@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="../styles/templates.css">
     <link rel="stylesheet" href="../styles/fonts.css">
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/contacts.css">
 
-    <script src="../scripts/script.js"></script>
-    <script src="../scripts/templates.js"></script>
+    
 </head>
-<body onload="init()">
+<body>
     <div class="page-box">
         <aside id="sidebar" class="sidebar">
                 <img class="sidebar-logo" src="../assets/img/Capa 1 white.png" alt="">
@@ -21,7 +21,7 @@
                     <div class="sidebar-menu" menu-data="summary" onclick="activateMenu(this, 'summary')"><a class="sidebar-text" href="../html/summary.html"><img src="../assets/icons/Summary.png" class="sidebar-icon" alt="">Summary</a></div>
                     <div class="sidebar-menu" menu-data="add_task" onclick="activateMenu(this, 'add_task')"><a class="sidebar-text" href="../html/add_task.html"><img src="../assets/icons/Add task.png" class="sidebar-icon" alt="">Add Task</a></div>
                     <div class="sidebar-menu" menu-data="board" onclick="activateMenu(this, 'board')"><a class="sidebar-text" href="../html/board.html"><img src="../assets/icons/Board.png" class="sidebar-icon" alt="">Board</a></div>
-                    <div class="sidebar-menu" menu-data="contacts" onclick="activateMenu(this, 'contacts')"><a class="sidebar-text" href="../html/contacts.html"><img src="../assets/icons/Contacts.png" class="sidebar-icon" alt="">Contacts</a></div>
+                    <div class="sidebar-menu sidebar-menu-active" menu-data="contacts" onclick="activateMenu(this, 'contacts')"><a class="sidebar-text" href="../html/contacts.html"><img src="../assets/icons/Contacts.png" class="sidebar-icon" alt="">Contacts</a></div>
                 </div>
                 <div class="sidebar-policy">
                     <a class="policy-text" href="../html/privacy_policy.html">Privacy Policy</a>
@@ -29,10 +29,73 @@
                 </div>
         </aside>
     </div>
-    <header id="header"  class="page-box"></header>
+    <header id="header"  class="page-box">
+        <p class="header-name">Kanban Project Management Tool</p>
+            <img class="headerLogo d-none" src="/assets/img/Capa 1.png" alt="">
+            <div class="header-top-profile">
+                <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
+                <p onclick="showNavbar()" class="personal-icon">G</p>
+            </div>
+            <div id="navbar" class="navbar d-none">
+                    <a class="navbarlink d-none" href="../html/help.html">Help</a>
+                    <a class="navbarlink" href="../html/legal_notice.html">Legal Notice</a>
+                    <a class="navbarlink" href="../html/privacy_policy.html">Privacy Policy</a>
+                    <a class="navbarlink" href="../index.html">Log Out</a>
+            </div>
+    </header>
+
+    <main>
+    <section class="contacts">
+        
+
+        <div class="contactsWidth">
+
+        <div class="addNewContactBtn">
+            <span>Add new contact</span>
+            <img class="addNewPersonImg" src="/assets/icons/person_add.png" alt="">
+        </div>
+
+        <div id="alphabeticalOrderA" class="alphabeticalOrderA">
+            <span class="order">A</span>
+            <div class="seperator"></div>
+            <div class="contactInfo">
+                <div class="circleFirstLetters">
+                    <span>A</span>
+                    <span>M</span>
+                </div>
+                <div class="maininfoAboutContact">
+                    <span class="name">Anton Mayer</span>
+                    <span class="email">antom@gmail.com</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="alphabeticalOrderB"></div>
+        <div id="alphabeticalOrderD"></div>
+        <div id="alphabeticalOrderE"></div>
+        <div id="alphabeticalOrderM"></div>
+        <div id="alphabeticalOrderT"></div>
+
+        </div>
+        
+    </section>
+
+    <section class="infoTitle">
+        <h1>Contacts</h1>
+        <div class="titleSeperator"></div>
+        <span>Better with a team</span>
+
+        <div id="moreInfoAboutContact"></div>
+    </section>
+    </main>
+
+
 
 
     <footer class="page-box">
     </footer>
+    <script src="../scripts/script.js"></script>
+    <script src="../scripts/templates.js"></script>
+    <script src="/scripts/contacts.js"></script>
 </body>
 </html>
