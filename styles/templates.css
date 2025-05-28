@@ -82,12 +82,16 @@ header{
     background-color: #2A3D59;
 }
 
+.hide-help{
+    display: none;
+}
+
 .sidebar{
     padding-bottom: 64px;
     padding-top: 64px;
     position: absolute;
     top: 0;
-    background-color: #2A3647;
+    background-color: var(--bg-sidebar);
     display: flex;
     align-items: center;
     flex-direction: column;

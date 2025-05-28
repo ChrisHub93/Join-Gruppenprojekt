@@ -18,8 +18,9 @@
     --darkBtn-color: #2b3647;
     --seperator-snd-color: #9b9b9b;
     --input-border: #d1d1d1;
+    --bg-sidebar: #2A3647;
   }
 
   .d-none{
-    display: none !important;
+    display: none;
   }

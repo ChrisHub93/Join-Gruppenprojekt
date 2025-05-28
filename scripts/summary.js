@@ -1,3 +1,8 @@
+function initSummary() {
+    iconHoverSwaps();
+    showGreeting();
+}
+
 function iconHoverSwaps() {
     let boxes = document.getElementsByClassName("summary-box");
     for (let i = 0; i < boxes.length; i++) {
@@ -27,4 +32,18 @@ function getGreeting() {
 function showGreeting() {
     let greeting = getGreeting();
     document.getElementById("greeting").textContent = greeting;
+    let loadingMobile = window.innerWidth < 768;
+    let overlay = document.getElementById("greeting-overlay");
+    let mainContent = document.getElementById("main-content");
+
+    if (loadingMobile) {
+        overlay.style.display = "flex";
+        setTimeout(() => {
+            overlay.style.display = "none";
+            mainContent.style.display = "block";
+        }, 2000);
+    } else {
+        overlay.style.display = "none";
+        mainContent.style.display = "block";
+    }
 }
