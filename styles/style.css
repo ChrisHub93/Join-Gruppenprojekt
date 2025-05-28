@@ -19,6 +19,9 @@
     --seperator-snd-color: #9b9b9b;
     --input-border: #d1d1d1;
     --bg-sidebar: #2A3647;
+    --contact-seperator: #e8e8e8;
+    --email-color: #007cee;
+    --contact-title-seperator: #29abe2; 
   }
 
   .d-none{

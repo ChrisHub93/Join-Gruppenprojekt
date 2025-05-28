@@ -637,8 +637,6 @@ div[id^="bullet"] {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
-    /* margin-right: 32px;
-    margin-left: auto; */
     padding-right: 32px;
   }
 }
@@ -735,7 +733,7 @@ div[id^="bullet"] {
   }
 
   .markedFieldsResponsive {
-    display: block !important;
+    padding-bottom: 140px;
   }
 
   footer {
