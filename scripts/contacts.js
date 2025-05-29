@@ -43,5 +43,11 @@ function getTemplate(emailOfUser, firstNameOfUser, lastNameOfUser) {
 }
 
 function compare(firstUser, nextUser) {
-  return firstUser.firstname.localeCompare(nextUser.firstname);
+  if (firstUser.firstname.toLowerCase() < nextUser.firstname.toLowerCase()){
+    return -1;
+  } else if (firstUser.firstname.toLowerCase() > nextUser.firstname.toLowerCase()){
+    return 1;
+  } else {
+    return 0;
+  }
 }
