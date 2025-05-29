@@ -5,14 +5,17 @@ let pwConfirmCheck = false;
 let checkBox = false;
 
 function initSignUp() {
-    setChecksToFalse();
+  setChecksToFalse();
 }
 
 async function signUp() {
   validateAllInputs();
   if (nameCheck && emailCheck && pwCheck && pwConfirmCheck && checkBox) {
     await getInpuValueAndPost();
-    window.location.href = "../index.html";
+    showSuccesMessage();
+    setTimeout(() => {
+      window.location.href = "../index.html";
+    }, 1000);
   } else {
     validateAllInputs();
   }
@@ -23,7 +26,7 @@ function validateAllInputs() {
   validateEmailInput();
   validatePasswordInput();
   validateConfirmPassword();
-  validateCheckbox()
+  validateCheckbox();
 }
 
 async function getInpuValueAndPost() {
@@ -48,7 +51,7 @@ function validateNameInput() {
   const nameInputRef = document.getElementById("inputName");
   const feedbackElementRef = document.getElementById("nameFeedback");
 
-  if (nameInputRef.value.trim() === '') {
+  if (nameInputRef.value.trim() === "") {
     nameInputRef.style.border = "1px solid var(--error-color)";
     feedbackElementRef.textContent = "This Field is required";
     nameCheck = false;
@@ -79,7 +82,7 @@ function validatePasswordInput() {
   const pwInputRef = document.getElementById("inputPassword");
   const feedbackElementRef = document.getElementById("passwortFeedback");
 
-  if (pwInputRef.value.trim() === '') {
+  if (pwInputRef.value.trim() === "") {
     pwInputRef.style.border = "1px solid var(--error-color)";
     feedbackElementRef.textContent = "This Field is required";
     pwCheck = false;
@@ -107,15 +110,15 @@ function validateConfirmPassword() {
 }
 
 function validateCheckbox() {
-    const boxRef = document.getElementById("check-privacy").checked;
-    const feedbackElementRef = document.getElementById("checkBoxFeedback");
-    if (boxRef) {
-        feedbackElementRef.textContent = "";
-        checkBox = true;
-    } else {
-        feedbackElementRef.innerHTML = "<br>Please accept the Privacy Policy";
-        checkBox = false;
-    }
+  const boxRef = document.getElementById("check-privacy").checked;
+  const feedbackElementRef = document.getElementById("checkBoxFeedback");
+  if (boxRef) {
+    feedbackElementRef.textContent = "";
+    checkBox = true;
+  } else {
+    feedbackElementRef.innerHTML = "<br>Please accept the Privacy Policy";
+    checkBox = false;
+  }
 }
 
 function hideUserFeedback() {
@@ -144,4 +147,10 @@ function setChecksToFalse() {
   emailCheck = false;
   pwCheck = false;
   pwConfirmCheck = false;
+}
+
+function showSuccesMessage() {
+  const ref = document.getElementById("overlay");
+  ref.classList.remove("d-none");
+  ref.classList.add("overlay");
 }
