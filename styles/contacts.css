@@ -65,6 +65,10 @@ main {
   padding-top: 24px;
 }
 
+.paddingTop{
+  padding-top: 24px;
+}
+
 .seperator {
   height: 1px;
   background-color: var(--contact-seperator);
