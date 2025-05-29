@@ -176,7 +176,6 @@ body{
 }
 
 .greeting-overlay {
-  position: fixed;
   left: 0;
   width: 100%;
   height: calc(100vh - 180px);
@@ -184,7 +183,6 @@ body{
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
 }
 
 @media (max-width:1190px) {
@@ -321,8 +319,9 @@ body{
 
     footer{
         display: flex !important;
-        position: sticky;
+        position: fixed;
         bottom: 0;
+        width: 100%;
     }
 
     .menu-box{
@@ -338,6 +337,18 @@ body{
         padding-left: 1px;
         padding-right: 1px;
         flex-direction: column;
+        width: 90px;
+        justify-content: center;
+        height: 76px;
+        gap: 4px;
+    }
+
+    .sidebar-menu{
+        border-radius: 16px;
+    }
+
+    .sidebar-menu:hover{
+        border-radius: 16px;
     }
 
     .greeting-media{
@@ -350,5 +361,127 @@ body{
 
     main{
         display: none;
+    }
+}
+
+@media (max-width:545px){
+    header{
+        height: 80px;
+    }
+
+    .headerLogo{
+        height: 39.02px;
+        padding-left: 16px;
+    }
+
+    .personal-icon{
+        height: 40px;
+        width: 40px;
+    }
+
+    .flex-column30{
+        padding-top: 48px;
+        margin-left: 16px;
+    }
+
+    .text-360{
+        font-size: 47px;
+    }
+
+    .text-headline{
+        font-size: 20px;
+    }
+
+    .seperator{
+        width: 90px;
+    }
+
+    .checkbox{
+        width: 396px;
+        height: 384px;
+    }
+
+    .summary-box:hover{
+        transform: scale(1);
+    }
+
+    .checkboxtodo{
+        height: 110px;
+        width: 186px;
+    }
+
+    .checkboxtodo:hover{
+        width: 194px;
+        height: 120px;
+    }
+
+    .checkboxurgent{
+        width: 396px;
+        height: 110px;
+    }
+
+    .checkboxurgent:hover{
+        height: 120px;
+    }
+
+    .summary-urgent{
+        height: 40px;
+    }
+
+    .seperator-urgent{
+        height: 68px;
+    }
+
+    .deadline{
+        gap: 8px;
+    }
+
+    .deadline-date{
+        font-size: 16px;
+    }
+
+    .deadline-text{
+        font-size: 14px;
+    }
+
+    .checkboxoverall{
+        height: 116px;
+        width: 116px;
+    }
+
+    .checkboxoverall:hover{
+        height: 124px;
+        width: 124px;
+    }
+
+    .checkboxbottom{
+        height: 91px;
+    }
+
+    .todone-icon{
+        height: 40px;
+        width: 40px;
+    }
+
+    .summary-number{
+        font-size: 47px;
+    }
+
+    .summary-text{
+        font-size: 14px;
+    }
+
+    .menu-box{
+        height: 80px;
+    }
+
+    .sidebar-text{
+        font-size: 14px;
+        width: 80px;
+    }
+
+    .sidebar-icon{
+        width: 24px;
+        height: 24px;
     }
 }
