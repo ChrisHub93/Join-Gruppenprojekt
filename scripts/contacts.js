@@ -1,6 +1,7 @@
 async function init() {
   let contacts = await fetchData("/contacts/");
   let contactsArray = Object.values(contacts);
+  contactsArray.sort(compare);
 
   getListOfContacts(contactsArray);
 }
@@ -14,13 +15,14 @@ async function fetchData(path) {
 function getListOfContacts(contactsArray) {
   for (user of contactsArray) {
     let emailOfUser = user.email;
-    let nameOfUser = user.name;
+    let firstNameOfUser = user.firstname;
+    let lastNameOfUser = user.lastname;
 
-    getTemplate(emailOfUser, nameOfUser);
+    getTemplate(emailOfUser, firstNameOfUser, lastNameOfUser);
   }
 }
 
-function getTemplate(emailOfUser, nameOfUser) {
+function getTemplate(emailOfUser, firstNameOfUser, lastNameOfUser) {
   let alphabeticalOrderRef = document.getElementById("alphabeticalOrderA");
 
   alphabeticalOrderRef.innerHTML += `<div class="order">
@@ -29,13 +31,17 @@ function getTemplate(emailOfUser, nameOfUser) {
             <div class="seperator"></div>
             <div class="contactInfo">
               <div class="circleFirstLetters">
-                <span>A</span>
-                <span>M</span>
+                <span>${firstNameOfUser.charAt(0)}</span>
+                <span>${lastNameOfUser.charAt(0)}</span>
               </div>
               <div class="maininfoAboutContact">
-                <span class="name">${nameOfUser}</span>
+                <span class="name">${firstNameOfUser} ${lastNameOfUser}</span>
                 <span class="email">${emailOfUser}</span>
               </div>
             </div>
           </div>`;
+}
+
+function compare(firstUser, nextUser) {
+  return firstUser.firstname.localeCompare(nextUser.firstname);
 }

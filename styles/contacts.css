@@ -21,6 +21,8 @@ main {
   width: 100%;
   padding-right: 48px;
   padding-left: 48px;
+  overflow-y: auto;
+  margin-bottom: 24px;
 }
 
 .infoTitle {
