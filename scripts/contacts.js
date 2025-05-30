@@ -30,7 +30,7 @@ function getTemplate(emailOfUser, firstNameOfUser, lastNameOfUser) {
             </div>
             
             <div class="contactInfo">
-              <div class="circleFirstLetters">
+              <div id="circleFirstLetters${firstNameOfUser}" class="circleFirstLetters">
                 <span>${firstNameOfUser.charAt(0)}</span>
                 <span>${lastNameOfUser.charAt(0)}</span>
               </div>
@@ -42,6 +42,7 @@ function getTemplate(emailOfUser, firstNameOfUser, lastNameOfUser) {
           </div>`;
 
           getSortTitle(firstNameOfUser);
+          randomNumber(firstNameOfUser);
 }
 
 function getSortTitle(firstNameOfUser){
@@ -60,4 +61,16 @@ function compare(firstUser, nextUser) {
   } else {
     return 0;
   }
+}
+
+
+function randomNumber(firstNameOfUser){
+  let numberForClass = Math.floor(Math.random()*8) +1;
+
+  console.log(numberForClass);
+
+  let circleFirstLettersRef = document.getElementById("circleFirstLetters"+firstNameOfUser);
+
+  circleFirstLettersRef.classList.add("bgForCircleFirstLetters"+numberForClass);
+  
 }

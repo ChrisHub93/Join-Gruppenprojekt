@@ -77,7 +77,7 @@ main {
 }
 
 .circleFirstLetters {
-  background-color: orange;
+  /* background-color: orange; */
   height: 32px;
   width: 32px;
   border-radius: 50%;
@@ -87,6 +87,39 @@ main {
   color: white;
   font-size: 10px;
   border: 2px solid white;
+}
+
+
+.bgForCircleFirstLetters1{
+  background-color: #ff7a00;
+}
+
+.bgForCircleFirstLetters2{
+  background-color: #9327ff; 
+}
+
+.bgForCircleFirstLetters3{
+  background-color: #6e52ff;
+}
+
+.bgForCircleFirstLetters4{
+  background-color: #fc71ff;
+}
+
+.bgForCircleFirstLetters5{
+  background-color: #ffbb2b;
+}
+
+.bgForCircleFirstLetters6{
+  background-color: #1fd7c1;
+}
+
+.bgForCircleFirstLetters7{
+  background-color: #462f8a;
+}
+
+.bgForCircleFirstLetters8{
+  background-color: #ff4646;
 }
 
 .contactInfo {
