@@ -23,10 +23,11 @@ function getListOfContacts(contactsArray) {
 }
 
 function getTemplate(emailOfUser, firstNameOfUser, lastNameOfUser) {
-  let alphabeticalOrderRef = document.getElementById("alphabeticalOrder" + firstNameOfUser.charAt(0).toUpperCase());
+  let alphabeticalOrderRef = document.getElementById(
+    "alphabeticalOrder" + firstNameOfUser.charAt(0).toUpperCase()
+  );
 
-  alphabeticalOrderRef.innerHTML += `<div id="order${firstNameOfUser.charAt(0).toUpperCase()}" class="order">
-              
+  alphabeticalOrderRef.innerHTML += `<div id="order${firstNameOfUser.charAt(0).toUpperCase()}" class="">
             </div>
             
             <div class="contactInfo">
@@ -41,36 +42,36 @@ function getTemplate(emailOfUser, firstNameOfUser, lastNameOfUser) {
             </div>
           </div>`;
 
-          getSortTitle(firstNameOfUser);
-          randomNumber(firstNameOfUser);
+  getSortTitle(firstNameOfUser);
+  randomNumber(firstNameOfUser);
 }
 
-function getSortTitle(firstNameOfUser){
-  let orderRef = document.getElementById("order"+firstNameOfUser.charAt(0).toUpperCase());
-  orderRef.innerHTML =` <div class="paddingTop">  
-                          <span>${firstNameOfUser.charAt(0).toUpperCase()}</span>
+function getSortTitle(firstNameOfUser) {
+  let orderRef = document.getElementById(
+    "order" + firstNameOfUser.charAt(0).toUpperCase()
+  );
+  orderRef.innerHTML = ` <div class="paddingTop">  
+                          <span>${firstNameOfUser
+                            .charAt(0)
+                            .toUpperCase()}</span>
                           </div>
                           <div class="seperator"></div>`;
 }
 
 function compare(firstUser, nextUser) {
-  if (firstUser.firstname.toUpperCase() < nextUser.firstname.toUpperCase()){
+  if (firstUser.firstname.toUpperCase() < nextUser.firstname.toUpperCase()) {
     return -1;
-  } else if (firstUser.firstname.toUpperCase() > nextUser.firstname.toUpperCase()){
+  } else if (
+    firstUser.firstname.toUpperCase() > nextUser.firstname.toUpperCase()
+  ) {
     return 1;
   } else {
     return 0;
   }
 }
 
-
-function randomNumber(firstNameOfUser){
-  let numberForClass = Math.floor(Math.random()*8) +1;
-
-  console.log(numberForClass);
-
-  let circleFirstLettersRef = document.getElementById("circleFirstLetters"+firstNameOfUser);
-
-  circleFirstLettersRef.classList.add("bgForCircleFirstLetters"+numberForClass);
-  
+function randomNumber(firstNameOfUser) {
+  let numberForClass = Math.floor(Math.random() * 8) + 1;
+  let circleFirstLettersRef = document.getElementById("circleFirstLetters" + firstNameOfUser);
+  circleFirstLettersRef.classList.add("bgForCircleFirstLetters" + numberForClass);
 }

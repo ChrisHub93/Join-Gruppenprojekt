@@ -29,6 +29,12 @@ main {
   height: calc(100vh - 96px);
   flex: 1;
   background-color: var(--bg-color);
+  overflow-x: hidden;
+}
+
+#allInfoAboutContact{
+  transform: translateX(100%);
+  transition: all 250ms ease;
 }
 
 .addNewContactBtn {
@@ -61,12 +67,13 @@ main {
 } */
 
 .order {
-  padding-left: 32px;
-  padding-top: 24px;
+  /* padding-left: 32px; */
+  /* padding-top: 24px; */
 }
 
 .paddingTop{
   padding-top: 24px;
+  padding-left: 32px;
 }
 
 .seperator {
@@ -78,8 +85,8 @@ main {
 
 .circleFirstLetters {
   /* background-color: orange; */
-  height: 32px;
-  width: 32px;
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -88,7 +95,6 @@ main {
   font-size: 10px;
   border: 2px solid white;
 }
-
 
 .bgForCircleFirstLetters1{
   background-color: #ff7a00;
