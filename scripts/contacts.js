@@ -23,12 +23,12 @@ function getListOfContacts(contactsArray) {
 }
 
 function getTemplate(emailOfUser, firstNameOfUser, lastNameOfUser) {
-  let alphabeticalOrderRef = document.getElementById("alphabeticalOrderA");
+  let alphabeticalOrderRef = document.getElementById("alphabeticalOrder" + firstNameOfUser.charAt(0).toUpperCase());
 
-  alphabeticalOrderRef.innerHTML += `<div class="order">
-              <span>A</span>
+  alphabeticalOrderRef.innerHTML += `<div id="order${firstNameOfUser.charAt(0).toUpperCase()}" class="order">
+              
             </div>
-            <div class="seperator"></div>
+            
             <div class="contactInfo">
               <div class="circleFirstLetters">
                 <span>${firstNameOfUser.charAt(0)}</span>
@@ -40,8 +40,24 @@ function getTemplate(emailOfUser, firstNameOfUser, lastNameOfUser) {
               </div>
             </div>
           </div>`;
+
+          getSortTitle(firstNameOfUser);
+}
+
+function getSortTitle(firstNameOfUser){
+  let orderRef = document.getElementById("order"+firstNameOfUser.charAt(0).toUpperCase());
+  orderRef.innerHTML =` <div class="paddingTop">  
+                          <span>${firstNameOfUser.charAt(0).toUpperCase()}</span>
+                          </div>
+                          <div class="seperator"></div>`;
 }
 
 function compare(firstUser, nextUser) {
-  return firstUser.firstname.localeCompare(nextUser.firstname);
+  if (firstUser.firstname.toUpperCase() < nextUser.firstname.toUpperCase()){
+    return -1;
+  } else if (firstUser.firstname.toUpperCase() > nextUser.firstname.toUpperCase()){
+    return 1;
+  } else {
+    return 0;
+  }
 }
