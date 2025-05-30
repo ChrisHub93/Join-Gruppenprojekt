@@ -13,6 +13,7 @@ body{
     flex-direction: column;
     margin-left: 328px;
     padding-top: 110px;
+    padding-bottom: 30px;
 }
 
 .overview{
@@ -105,7 +106,7 @@ body{
 .summary-box:hover{
     background-color: #2A3647;
     color: white;
-    transform: scale(1.1);
+    transform: scale(1.05);
     transition: transform 0.5s ease;
 }
 
@@ -189,6 +190,7 @@ body{
     .overview{
         flex-direction: column-reverse;
         align-items: flex-start;
+        gap: 30px;
     }
 }
 
@@ -291,6 +293,11 @@ body{
     .flex-column30{
         margin-left: 40px;
         padding-top: 44px;
+        align-items: center;
+    }
+
+    .summary-headline{
+        width: 479px;
     }
 
     .overview{
@@ -374,6 +381,10 @@ body{
         padding-left: 16px;
     }
 
+    .header-top-profile{
+        padding-right: 16px;
+    }
+
     .personal-icon{
         height: 40px;
         width: 40px;
@@ -382,6 +393,10 @@ body{
     .flex-column30{
         padding-top: 48px;
         margin-left: 16px;
+    }
+
+    .summary-headline{
+        width: 396px;
     }
 
     .text-360{
