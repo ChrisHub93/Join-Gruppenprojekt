@@ -86,6 +86,8 @@ function validatePasswordInput() {
   if (pwInputRef.value.trim() === "") {
     pwInputRef.style.border = "1px solid var(--error-color)";
     feedbackElementRef.textContent = "This Field is required";
+    pwInputRef.value = "";
+    showLockIcon("inputPassword", "inputPasswortBtn");
     pwCheck = false;
   } else {
     feedbackElementRef.textContent = "";
@@ -164,16 +166,24 @@ function showEyeIcon(inputId, btnId) {
 }
 
 function togglePwVisibility(inputId, imgId) {
-    const inputRef = document.getElementById(inputId);
-    const iconRef = document.getElementById(imgId);
+  const inputRef = document.getElementById(inputId);
+  const iconRef = document.getElementById(imgId);
 
-    if (inputRef.type === 'password') {
-        inputRef.type = 'text';
-        iconRef.src = '../assets/icons/visibility.svg'
-        iconRef.alt ='Hide password';
-    } else {
-        inputRef.type = 'password';
-        iconRef.src = '../assets/icons/visibility_off.svg'
-        iconRef.alt ='Show password';
-    }
+  if (inputRef.type === "password") {
+    inputRef.type = "text";
+    iconRef.src = "../assets/icons/visibility.svg";
+    iconRef.alt = "Hide password";
+  } else {
+    inputRef.type = "password";
+    iconRef.src = "../assets/icons/visibility_off.svg";
+    iconRef.alt = "Show password";
+  }
+}
+
+function showLockIcon(inputId, btnId) {
+  const inputLockIconRef = document.getElementById(inputId);
+  const iconBtnRef = document.getElementById(btnId);
+
+  inputLockIconRef.classList.add("icon-lock");
+  iconBtnRef.classList.add("d-none");
 }

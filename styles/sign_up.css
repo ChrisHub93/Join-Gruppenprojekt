@@ -16,6 +16,7 @@
   display: flex;
   justify-content: center;
   align-items: end;
+  z-index: 20;
 }
 
 .overlay__message-container{
