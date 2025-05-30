@@ -31,18 +31,20 @@ function getGreeting() {
 
 function showGreeting() {
     let greeting = getGreeting();
-    document.getElementById("greeting").textContent = greeting;
+    document.querySelectorAll(".greeting").forEach(gr => gr.textContent = greeting);
     let loadingMobile = window.innerWidth < 768;
     let overlay = document.getElementById("greeting-overlay");
     let mainContent = document.getElementById("main-content");
 
     if (loadingMobile) {
+        document.getElementById("greeting-overlay-text").textContent = greeting;
         overlay.style.display = "flex";
         setTimeout(() => {
             overlay.style.display = "none";
             mainContent.style.display = "block";
         }, 2000);
     } else {
+        document.getElementById("greeting-main-text").textContent = greeting;
         overlay.style.display = "none";
         mainContent.style.display = "block";
     }
