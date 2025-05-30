@@ -1,68 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="icon" type="image/xcon" href="../assets/img/Capa 1.png">
+    <link rel="icon" type="image/xcon" href="../assets/img/Capa 1.png" />
     <script src="../scripts/script.js"></script>
     <script src="../scripts/templates.js"></script>
     <link rel="stylesheet" href="../styles/style.css" />
     <link rel="stylesheet" href="../styles/fonts.css" />
-    <link rel="stylesheet" href="../styles/sign_up.css">
-    
+    <link rel="stylesheet" href="../styles/sign_up.css" />
 
     <title>Sign up</title>
-</head>
-<body onload="initSignUp()" class="body-sign_up">
+  </head>
+  <body onload="initSignUp()" class="body-sign_up">
     <div class="d-none" id="overlay">
-        <div id="overlayMessage" class="overlay__message-container">
-            <span>You Signed Up successfully</span>
-        </div>
+      <div id="overlayMessage" class="overlay__message-container">
+        <span>You Signed Up successfully</span>
+      </div>
     </div>
 
     <header class="header-sign_up">
-        <img class="header-sign_up__logo" src="../assets/img/Capa 1.png" alt="Join Logo">
+      <img
+        class="header-sign_up__logo"
+        src="../assets/img/Capa 1.png"
+        alt="Join Logo"
+      />
     </header>
 
     <main class="main-sign_up">
-
-        <div class="sign_up">
-            <div class="headline">
-                <button onclick="location.href='../index.html'" class="back-btn">
-                    <img src="../assets/icons/arrow-left-line.svg" alt="Arrow back">
-                </button>
-                <p class="sign_up__headline">Sign up</p>
-            </div>
-            <div class="sign_up__line"></div>
-            <form onsubmit="signUp(); return false;" class="form-input">
-                <div class="sign_up__inputs">
-                    <input onfocusout="validateNameInput()" class="sign_up__inputs__inputfield icon-user" type="text" placeholder="Name" id="inputName">
-                    <span id="nameFeedback" class="sign-up__inpts__alert-text"></span>
-                    <input onfocusout="validateEmailInput()" class="sign_up__inputs__inputfield icon-mail" type="email" placeholder="Email" id="inputEmail">
-                    <span id="emailFeedback" class="sign-up__inpts__alert-text"></span>
-                    <input onfocusout="validatePasswordInput()" class="sign_up__inputs__inputfield icon-lock" type="password" placeholder="Password" id="inputPassword">
-                    <span id="passwortFeedback" class="sign-up__inpts__alert-text"></span>
-                    <input onfocusout="validateConfirmPassword()" class="sign_up__inputs__inputfield icon-lock" type="password" placeholder="Confirm Password" id="inputPasswordConfirm">
-                    <span id="confirmPasswortFeedback" class="sign-up__inpts__alert-text"></span>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" id="check-privacy" name="check-privacy" value="true">
-                    <label for="check-privacy">I accept the <a class="sign_up__link" href="./html/privacy_policy.html">Privacy Policy</a></label>
-                    <span id="checkBoxFeedback" class="sign-up__inpts__alert-text"></span>
-                </div >
-                <div class="sign_up__buttons">
-                    <button class="sign_up__buttons__btn sign_up__buttons__btn--dark">Sign up</button>
-                </div>
-            </form>
+      <div class="sign_up">
+        <div class="headline">
+          <button onclick="location.href='../index.html'" class="back-btn">
+            <img src="../assets/icons/arrow-left-line.svg" alt="Arrow back" />
+          </button>
+          <p class="sign_up__headline">Sign up</p>
         </div>
-        
+        <div class="sign_up__line"></div>
+        <form onsubmit="signUp(); return false;" class="form-input">
+          <div class="sign_up__inputs">
+            <input
+              onfocusout="validateNameInput()"
+              class="sign_up__inputs__inputfield icon-user"
+              type="text"
+              placeholder="Name"
+              id="inputName"
+            />
+            <span id="nameFeedback" class="sign-up__inpts__alert-text"></span>
+            <input
+              onfocusout="validateEmailInput()"
+              class="sign_up__inputs__inputfield icon-mail"
+              type="email"
+              placeholder="Email"
+              id="inputEmail"
+            />
+            <span id="emailFeedback" class="sign-up__inpts__alert-text"></span>
+
+            <div class="password-wrapper">
+              <input
+                onfocus="showEyeIcon('inputPassword', 'inputPasswortBtn')"
+                onfocusout="validatePasswordInput()"
+                class="sign_up__inputs__inputfield icon-lock"
+                type="password"
+                placeholder="Password"
+                id="inputPassword"
+              />
+              <button
+                class="password-toggle-btn d-none"
+                type="button"
+                id="inputPasswortBtn"
+                onclick="togglePwVisibility('inputPassword', 'pwVisibilityIcon')"
+              >
+                <img
+                  id="pwVisibilityIcon"
+                  src="../assets/icons/visibility_off.svg"
+                  alt="Show password"
+                />
+              </button>
+            </div>
+            <span
+              id="passwortFeedback"
+              class="sign-up__inpts__alert-text"
+            ></span>
+
+            <div class="password-wrapper">
+              <input
+                onfocus="showEyeIcon('inputPasswordConfirm', 'inputPasswortConfirmBtn')"
+                onfocusout="validateConfirmPassword()"
+                class="sign_up__inputs__inputfield icon-lock"
+                type="password"
+                placeholder="Confirm Password"
+                id="inputPasswordConfirm"
+              />
+              <button
+                class="password-toggle-btn d-none"
+                type="button"
+                id="inputPasswortConfirmBtn"
+                onclick="togglePwVisibility('inputPasswordConfirm', 'pwConfirmVisibilityIcon')"
+              >
+                <img
+                  id="pwConfirmVisibilityIcon"
+                  src="../assets/icons/visibility_off.svg"
+                  alt="Show password"
+                />
+              </button>
+            </div>
+
+            <span
+              id="confirmPasswortFeedback"
+              class="sign-up__inpts__alert-text"
+            ></span>
+          </div>
+          <div class="form-check">
+            <input
+              type="checkbox"
+              id="check-privacy"
+              name="check-privacy"
+              value="true"
+            />
+            <label for="check-privacy"
+              >I accept the
+              <a class="sign_up__link" href="./html/privacy_policy.html"
+                >Privacy Policy</a
+              ></label
+            >
+            <span
+              id="checkBoxFeedback"
+              class="sign-up__inpts__alert-text"
+            ></span>
+          </div>
+          <div class="sign_up__buttons">
+            <button class="sign_up__buttons__btn sign_up__buttons__btn--dark">
+              Sign up
+            </button>
+          </div>
+        </form>
+      </div>
     </main>
 
     <footer class="footer-sign_up">
-        <a class="footer-sign_up__link" href="./html/privacy_policy.html">Privacy Policy</a>
-        <a class="footer-sign_up__link" href="./html/legal_notice.html">Legal notice</a>
+      <a class="footer-sign_up__link" href="./html/privacy_policy.html"
+        >Privacy Policy</a
+      >
+      <a class="footer-sign_up__link" href="./html/legal_notice.html"
+        >Legal notice</a
+      >
     </footer>
     <script src="../scripts/sign_up.js"></script>
-</body>
+  </body>
 </html>

@@ -118,6 +118,7 @@
   height: 48px;
   border-radius: 10px;
   border: 1px solid #d1d1d1;
+  width: 100%;
 }
 
 .sign_up__inputs__inputfield:hover {
@@ -140,6 +141,33 @@
   background: url("../assets/icons/lock.svg") no-repeat right;
   background-repeat: no-repeat;
   background-position: 95%;
+}
+
+.icon-visibility {
+  background: url("../assets/icons/visibility.svg") no-repeat right;
+  background-repeat: no-repeat;
+  background-position: 95%;
+}
+
+.visibility_off {
+  background: url("../assets/icons/visibility_off.svg") no-repeat right;
+  background-repeat: no-repeat;
+  background-position: 95%;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .sign-up__inpts__alert-text {

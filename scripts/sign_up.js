@@ -6,6 +6,7 @@ let checkBox = false;
 
 function initSignUp() {
   setChecksToFalse();
+  clearPasswordInputs();
 }
 
 async function signUp() {
@@ -104,7 +105,6 @@ function validateConfirmPassword() {
     pwConfirmCheck = true;
   } else {
     pwConfirmCheck = false;
-    clearPasswordInputs();
     showUserFeedback();
   }
 }
@@ -153,4 +153,27 @@ function showSuccesMessage() {
   const ref = document.getElementById("overlay");
   ref.classList.remove("d-none");
   ref.classList.add("overlay");
+}
+
+function showEyeIcon(inputId, btnId) {
+  const inputLockIconRef = document.getElementById(inputId);
+  const iconBtnRef = document.getElementById(btnId);
+
+  inputLockIconRef.classList.remove("icon-lock");
+  iconBtnRef.classList.remove("d-none");
+}
+
+function togglePwVisibility(inputId, imgId) {
+    const inputRef = document.getElementById(inputId);
+    const iconRef = document.getElementById(imgId);
+
+    if (inputRef.type === 'password') {
+        inputRef.type = 'text';
+        iconRef.src = '../assets/icons/visibility.svg'
+        iconRef.alt ='Hide password';
+    } else {
+        inputRef.type = 'password';
+        iconRef.src = '../assets/icons/visibility_off.svg'
+        iconRef.alt ='Show password';
+    }
 }
