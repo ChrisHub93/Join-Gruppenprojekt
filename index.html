@@ -1,60 +1,114 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="icon" type="image/xcon" href="./assets/img/Capa 1.png">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/xcon" href="./assets/img/Capa 1.png" />
     <script src="./scripts/script.js"></script>
     <script src="./scripts/templates.js"></script>
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/fonts.css" />
-    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/index.css" />
     <script src="./scripts/index.js"></script>
 
     <title>Join Login</title>
-</head>
-<body class="body-login">
-
+  </head>
+  <body class="body-login">
     <header class="header-login">
-        <img class="header-login__logo" src="./assets/img/Capa 1.png" alt="Join Logo">
-        <div class="header__sign-up">
-            <p class="header__sign-up__text">Not a join user?</p>
-            <button onclick="location.href='./html/sign_up.html'" class="header-login__sign-up__btn">Sign up</button>
-        </div>
+      <img
+        class="header-login__logo"
+        src="./assets/img/Capa 1.png"
+        alt="Join Logo"
+      />
+      <div class="header__sign-up">
+        <p class="header__sign-up__text">Not a join user?</p>
+        <button
+          onclick="location.href='./html/sign_up.html'"
+          class="header-login__sign-up__btn"
+        >
+          Sign up
+        </button>
+      </div>
     </header>
 
     <main class="main-login">
+      <div class="log-in">
+        <p class="log-in__headline">Log in</p>
+        <div class="log-in__line"></div>
+        <form onsubmit="logIn(); return false;" class="form-input">
+          <div class="log-in__inputs">
+            <input
+              class="log-in__inputs__inputfield icon-mail"
+              type="email"
+              placeholder="Email"
+              id="inputEmail"
+              onfocusout="validateEmailInput()"
+              required
+            />
+            <span id="emailFeedback" class="log-in__inpts__alert-text"></span>
 
-        <div class="log-in">
-            <p class="log-in__headline">Log in</p>
-            <div class="log-in__line"></div>
-            <form onsubmit="logIn(); return false;" class="form-input">
-                <div class="log-in__inputs">
-                    <input class="log-in__inputs__inputfield icon-mail" type="email" placeholder="Email" id="inputEmail" onfocusout="validateEmailInput()" required>
-                    <span id="emailFeedback" class="log-in__inpts__alert-text"></span>
-                    <input class="log-in__inputs__inputfield icon-lock" type="password" placeholder="Password" id="inputPassword" onfocusout="validatePwInput()" required>
-                    <span id="pwFeedback" class="log-in__inpts__alert-text"></span>
-                    <p id="logInAlert" class="log-in__inpts__alert-text d-none">Check your email and password. Please try again.</p>            
-                </div>            
-                <div class="log-in__buttons">
-                    <button class="log-in__buttons__btn log-in__buttons__btn--dark">Log In</button>
-                    <button onclick="location.href='./html/summary.html'" class="log-in__buttons__btn log-in__buttons__btn--bright">Guest Log in</button>
-                </div>
-            </form>
-        </div>
+            <div class="password-wrapper">
+              <input
+                class="log-in__inputs__inputfield icon-lock"
+                type="password"
+                placeholder="Password"
+                id="inputPassword"
+                onfocus="showEyeIcon('inputPassword', 'inputPasswortLogInBtn')"
+                onfocusout="validatePwInput()"
+                required
+              />
+              <button
+                class="password-toggle-btn d-none"
+                type="button"
+                id="inputPasswortLogInBtn"
+                onclick="togglePwVisibility('inputPassword', 'pwLogInIcon')"
+              >
+                <img
+                  id="pwLogInIcon"
+                  src="../assets/icons/visibility_off.svg"
+                  alt="Show password"
+                />
+              </button>
+            </div>
+            <span id="pwFeedback" class="log-in__inpts__alert-text"></span>
 
-        <div class="mobile-sign-up">
-            <p class="mobile-sign-up__text">Not a join user?</p>
-            <button onclick="location.href='./html/sign_up.html'" class="mobile-sign-up__btn">Sign up</button>
-        </div>
+            <p id="logInAlert" class="log-in__inpts__alert-text d-none">
+              Check your email and password. Please try again.
+            </p>
+          </div>
+          <div class="log-in__buttons">
+            <button class="log-in__buttons__btn log-in__buttons__btn--dark">
+              Log In
+            </button>
+            <button
+              onclick="location.href='./html/summary.html'"
+              class="log-in__buttons__btn log-in__buttons__btn--bright"
+            >
+              Guest Log in
+            </button>
+          </div>
+        </form>
+      </div>
 
+      <div class="mobile-sign-up">
+        <p class="mobile-sign-up__text">Not a join user?</p>
+        <button
+          onclick="location.href='./html/sign_up.html'"
+          class="mobile-sign-up__btn"
+        >
+          Sign up
+        </button>
+      </div>
     </main>
 
     <footer class="footer-login">
-        <a class="footer-login__link" href="./html/privacy_policy.html">Privacy Policy</a>
-        <a class="footer-login__link" href="./html/legal_notice.html">Legal notice</a>
+      <a class="footer-login__link" href="./html/privacy_policy.html"
+        >Privacy Policy</a
+      >
+      <a class="footer-login__link" href="./html/legal_notice.html"
+        >Legal notice</a
+      >
     </footer>
-
-</body>
+  </body>
 </html>

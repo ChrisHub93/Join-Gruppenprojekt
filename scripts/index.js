@@ -77,3 +77,26 @@ function validatePwInput() {
     pwInputRef.style.border = "1px solid var(--focus-color)";
   }
 }
+
+function togglePwVisibility(inputId, imgId) {
+  const inputRef = document.getElementById(inputId);
+  const iconRef = document.getElementById(imgId);
+
+  if (inputRef.type === "password") {
+    inputRef.type = "text";
+    iconRef.src = "../assets/icons/visibility.svg";
+    iconRef.alt = "Hide password";
+  } else {
+    inputRef.type = "password";
+    iconRef.src = "../assets/icons/visibility_off.svg";
+    iconRef.alt = "Show password";
+  }
+}
+
+function showEyeIcon(inputId, btnId) {
+  const inputLockIconRef = document.getElementById(inputId);
+  const iconBtnRef = document.getElementById(btnId);
+
+  inputLockIconRef.classList.remove("icon-lock");
+  iconBtnRef.classList.remove("d-none");
+}
