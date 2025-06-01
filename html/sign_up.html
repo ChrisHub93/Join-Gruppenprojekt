@@ -7,9 +7,12 @@
     <link rel="icon" type="image/xcon" href="../assets/img/Capa 1.png" />
     <script src="../scripts/script.js"></script>
     <script src="../scripts/templates.js"></script>
+    <script src="../scripts/sign_up.js"></script>
+    <script src="../scripts/validate_inputs.js"></script>
     <link rel="stylesheet" href="../styles/style.css" />
     <link rel="stylesheet" href="../styles/fonts.css" />
     <link rel="stylesheet" href="../styles/sign_up.css" />
+    
 
     <title>Sign up</title>
   </head>
@@ -44,32 +47,32 @@
               class="sign_up__inputs__inputfield icon-user"
               type="text"
               placeholder="Name"
-              id="inputName"
+              id="signUpInputName"
             />
-            <span id="nameFeedback" class="sign-up__inpts__alert-text"></span>
+            <span id="signUpNameFeedback" class="sign-up__inpts__alert-text"></span>
             <input
               onfocusout="validateEmailInput()"
               class="sign_up__inputs__inputfield icon-mail"
               type="email"
               placeholder="Email"
-              id="inputEmail"
+              id="signUpInputEmail"
             />
-            <span id="emailFeedback" class="sign-up__inpts__alert-text"></span>
+            <span id="signUpEmailFeedback" class="sign-up__inpts__alert-text"></span>
 
             <div class="password-wrapper">
               <input
-                onfocus="showEyeIcon('inputPassword', 'inputPasswortBtn')"
+                onfocus="showEyeIcon('signUpInputPassword', 'signUpInputPasswortBtn')"
                 onfocusout="validatePasswordInput()"
                 class="sign_up__inputs__inputfield icon-lock"
                 type="password"
                 placeholder="Password"
-                id="inputPassword"
+                id="signUpInputPassword"
               />
               <button
                 class="password-toggle-btn d-none"
                 type="button"
-                id="inputPasswortBtn"
-                onclick="togglePwVisibility('inputPassword', 'pwVisibilityIcon')"
+                id="signUpInputPasswortBtn"
+                onclick="togglePwVisibility('signUpInputPassword', 'pwVisibilityIcon')"
               >
                 <img
                   id="pwVisibilityIcon"
@@ -145,7 +148,6 @@
       <a class="footer-sign_up__link" href="./html/legal_notice.html"
         >Legal notice</a
       >
-    </footer>
-    <script src="../scripts/sign_up.js"></script>
+    </footer>    
   </body>
 </html>
