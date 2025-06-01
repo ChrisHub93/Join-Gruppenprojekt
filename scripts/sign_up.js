@@ -31,9 +31,9 @@ function validateAllInputs() {
 }
 
 async function getInpuValueAndPost() {
-  let name = document.getElementById("inputName").value;
-  let email = document.getElementById("inputEmail").value;
-  let password = document.getElementById("inputPassword").value;
+  let name = document.getElementById("signUpInputName").value;
+  let email = document.getElementById("signUpInputEmail").value;
+  let password = document.getElementById("signUpInputPassword").value;
   await postData("/users/", { name: name, email: email, password: password });
 }
 
@@ -48,9 +48,29 @@ async function postData(path, data = {}) {
   return (responseToJson = await response.json());
 }
 
+function showSuccesMessage() {
+  const ref = document.getElementById("overlay");
+  ref.classList.remove("d-none");
+  ref.classList.add("overlay");
+}
+
+function setChecksToFalse() {
+  nameCheck = false;
+  emailCheck = false;
+  pwCheck = false;
+  pwConfirmCheck = false;
+}
+
+function clearPasswordInputs() {
+  document.getElementById("signUpInputPassword").value = "";
+  document.getElementById("inputPasswordConfirm").value = "";
+}
+
+// Ab hier inpt valdidations ->
+
 function validateNameInput() {
-  const nameInputRef = document.getElementById("inputName");
-  const feedbackElementRef = document.getElementById("nameFeedback");
+  const nameInputRef = document.getElementById("signUpInputName");
+  const feedbackElementRef = document.getElementById("signUpNameFeedback");
 
   if (nameInputRef.value.trim() === "") {
     nameInputRef.style.border = "1px solid var(--error-color)";
@@ -64,8 +84,8 @@ function validateNameInput() {
 }
 
 function validateEmailInput() {
-  const emailInputRef = document.getElementById("inputEmail");
-  const feedbackElementRef = document.getElementById("emailFeedback");
+  const emailInputRef = document.getElementById("signUpInputEmail");
+  const feedbackElementRef = document.getElementById("signUpEmailFeedback");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (emailRegex.test(emailInputRef.value)) {
@@ -80,14 +100,14 @@ function validateEmailInput() {
 }
 
 function validatePasswordInput() {
-  const pwInputRef = document.getElementById("inputPassword");
+  const pwInputRef = document.getElementById("signUpInputPassword");
   const feedbackElementRef = document.getElementById("passwortFeedback");
 
   if (pwInputRef.value.trim() === "") {
     pwInputRef.style.border = "1px solid var(--error-color)";
     feedbackElementRef.textContent = "This Field is required";
     pwInputRef.value = "";
-    showLockIcon("inputPassword", "inputPasswortBtn");
+    showLockIcon("signUpInputPassword", "signUpInputPasswortBtn");
     pwCheck = false;
   } else {
     feedbackElementRef.textContent = "";
@@ -100,7 +120,7 @@ function validateConfirmPassword() {
   let pwInput = "";
   let confirmPwInput = "";
   pwConfirmCheck = false;
-  pwInput = document.getElementById("inputPassword").value;
+  pwInput = document.getElementById("signUpInputPassword").value;
   confirmPwInput = document.getElementById("inputPasswordConfirm").value;
   if (pwInput === confirmPwInput && confirmPwInput != "") {
     hideUserFeedback();
@@ -131,30 +151,12 @@ function hideUserFeedback() {
   feedbackElementRef.textContent = "";
 }
 
-function clearPasswordInputs() {
-  document.getElementById("inputPassword").value = "";
-  document.getElementById("inputPasswordConfirm").value = "";
-}
-
 function showUserFeedback() {
   const confirmPwInputRef = document.getElementById("inputPasswordConfirm");
   const feedbackElementRef = document.getElementById("confirmPasswortFeedback");
   confirmPwInputRef.style.border = "1px solid var(--error-color)";
   feedbackElementRef.textContent =
     "Your passwords don`t match. Please try again";
-}
-
-function setChecksToFalse() {
-  nameCheck = false;
-  emailCheck = false;
-  pwCheck = false;
-  pwConfirmCheck = false;
-}
-
-function showSuccesMessage() {
-  const ref = document.getElementById("overlay");
-  ref.classList.remove("d-none");
-  ref.classList.add("overlay");
 }
 
 function showEyeIcon(inputId, btnId) {
