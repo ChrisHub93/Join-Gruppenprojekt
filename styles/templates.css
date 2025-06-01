@@ -139,8 +139,6 @@ header{
     background-color: #091931;
     pointer-events: none;
     width: 100% !important;
-    padding-right: 14px;
-    justify-content: center;
 }
 
 .sidebar-text{
@@ -153,10 +151,6 @@ header{
     gap: 8px;
     align-items: center;
     display: flex;
-}
-
-.a-active{
-    cursor: default;
 }
 
 .sidebar-policy{
@@ -175,8 +169,8 @@ header{
 }
 
 .policy-text{
+    width: 121px;
     height: 36px;
-    width: 109px;
     color: #a8a8a8;
     cursor: pointer;
     font-size: 16px;
@@ -184,6 +178,10 @@ header{
     gap: 8px;
     align-items: center;
     display: flex;
+}
+
+.policy-text-active{
+    padding-left: 54px;
 }
 
 .policy-text:hover{
@@ -206,6 +204,10 @@ header{
 
     .sidebar-policy{
         width: 200px;
+    }
+
+    .policy-text-active{
+    padding-left: 40px;
     }
 
     .sidebar-text {
@@ -258,6 +260,12 @@ header{
         background-color: var(--bg-sidebar);
     }
 
+    .sidebar-menu-active{
+        height: 100%;
+        width: auto !important;
+        padding-right: 0px;
+    }
+
     .sidebar-text{
         padding-left: 1px;
         padding-right: 1px;
@@ -273,6 +281,7 @@ header{
     }
 
     .sidebar-menu:hover{
+        height: 90px;
         border-radius: 16px;
     }
 
@@ -282,6 +291,10 @@ header{
 
     .navbar{
         margin-top: 0px;
+    }
+
+    .menu-box.logged-out {
+        justify-content: space-between;
     }
 }
 
@@ -309,6 +322,10 @@ header{
         height: 80px;
     }
 
+    .sidebar-menu:hover{
+        height: 80px;
+    }
+
     .sidebar-text{
         font-size: 14px;
         width: 80px;
@@ -318,6 +335,8 @@ header{
         width: 24px;
         height: 24px;
     }
+
+    
 }
 
 @media (max-width:420px){

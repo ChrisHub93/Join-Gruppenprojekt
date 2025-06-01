@@ -73,30 +73,36 @@ function outsideNavbar() {
 
 function activateMenu(clickedElement, menuKey) {
     sessionStorage.setItem('activeMenu', menuKey);
+    if (clickedElement.classList.contains('policy-text')) {
+        sessionStorage.setItem('activePolicy', menuKey);
+    } else {
+        sessionStorage.removeItem('activePolicy');
+    }
     clearMenu();
-
         document.querySelectorAll(`[menu-data="${menuKey}"]`).forEach(menuElement => {
         menuElement.classList.add('sidebar-menu-active');
-        let activeLink = menuElement.querySelector('.sidebar-text');
-        if (activeLink) activeLink.classList.add('a-active');
+                if (menuElement.classList.contains('policy-text')) {
+            menuElement.classList.add('policy-text-active');
+        }
     });
 }
 
 function activeMenuStorage() {
     let activeMenu = sessionStorage.getItem('activeMenu') || 'summary';
+    let activePolicy = sessionStorage.getItem('activePolicy');
     clearMenu();
         
         document.querySelectorAll(`[menu-data="${activeMenu}"]`).forEach(menuElement => {
         menuElement.classList.add('sidebar-menu-active');
-        let activeLink = menuElement.querySelector('.sidebar-text');
-        if (activeLink) activeLink.classList.add('a-active');
-    });    
+        if (activePolicy && menuElement.classList.contains('policy-text')) {
+            menuElement.classList.add('policy-text-active');
+        }
+    });
 }
 
 function clearMenu() {
     document.querySelectorAll('.sidebar-menu').forEach(menu => {
         menu.classList.remove('sidebar-menu-active');
-        let link = menu.querySelector('.sidebar-text');
-        if (link) link.classList.remove('a-active');
+        menu.classList.remove('policy-text-active');
     })
 }
