@@ -1,3 +1,15 @@
+function validateSignUpInputs() {
+  validateNameInput();
+  validateEmailInput("signUpInputEmail", "signUpEmailFeedback");
+  validatePasswordInput(
+    "signUpInputPassword",
+    "passwortFeedback",
+    "signUpInputPasswortBtn"
+  );
+  validateConfirmPassword();
+  validateCheckbox();
+}
+
 function validateNameInput() {
   const nameInputRef = document.getElementById("signUpInputName");
   const feedbackElementRef = document.getElementById("signUpNameFeedback");
@@ -103,19 +115,19 @@ function validateEmailInput(inputId, feedbackId) {
   }
 }
 
-function validatePasswordInput(inputId,feedbackId, btnId) {
-    const pwInputRef = document.getElementById(inputId);
-    const feedbackElementRef = document.getElementById(feedbackId);
-  
-    if (pwInputRef.value.trim() === "") {
-      pwInputRef.style.border = "1px solid var(--error-color)";
-      feedbackElementRef.textContent = "This Field is required";
-      pwInputRef.value = "";
-      showLockIcon(inputId, btnId);
-      pwCheck = false;
-    } else {
-      feedbackElementRef.textContent = "";
-      pwInputRef.style.border = "1px solid var(--input-border)";
-      pwCheck = true;
-    }
+function validatePasswordInput(inputId, feedbackId, btnId) {
+  const pwInputRef = document.getElementById(inputId);
+  const feedbackElementRef = document.getElementById(feedbackId);
+
+  if (pwInputRef.value.trim() === "") {
+    pwInputRef.style.border = "1px solid var(--error-color)";
+    feedbackElementRef.textContent = "This Field is required";
+    pwInputRef.value = "";
+    showLockIcon(inputId, btnId);
+    pwCheck = false;
+  } else {
+    feedbackElementRef.textContent = "";
+    pwInputRef.style.border = "1px solid var(--input-border)";
+    pwCheck = true;
   }
+}

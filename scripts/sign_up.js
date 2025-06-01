@@ -7,7 +7,7 @@ let checkBox = false;
 function initSignUp() {}
 
 async function signUp() {
-  validateAllInputs();
+  validateSignUpInputs();
   if (nameCheck && emailCheck && pwCheck && pwConfirmCheck && checkBox) {
     await getInpuValueAndPost();
     showSuccesMessage();
@@ -15,14 +15,6 @@ async function signUp() {
       window.location.href = "../index.html";
     }, 1000);
   } 
-}
-
-function validateAllInputs() {
-  validateNameInput();
-  validateEmailInput("signUpInputEmail", "signUpEmailFeedback");
-  validatePasswordInput("signUpInputPassword","passwortFeedback","signUpInputPasswortBtn");
-  validateConfirmPassword();
-  validateCheckbox();
 }
 
 async function getInpuValueAndPost() {
