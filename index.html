@@ -43,19 +43,19 @@
               class="log-in__inputs__inputfield icon-mail"
               type="email"
               placeholder="Email"
-              id="inputEmail"
+              id="logInInputEmail"
               onfocusout="validateEmailInput()"
               required
             />
-            <span id="emailFeedback" class="log-in__inpts__alert-text"></span>
+            <span id="logInEmailFeedback" class="log-in__inpts__alert-text"></span>
 
             <div class="password-wrapper">
               <input
                 class="log-in__inputs__inputfield icon-lock"
                 type="password"
                 placeholder="Password"
-                id="inputPassword"
-                onfocus="showEyeIcon('inputPassword', 'inputPasswortLogInBtn')"
+                id="logInInputPassword"
+                onfocus="showEyeIcon('logInInputPassword', 'inputPasswortLogInBtn')"
                 onfocusout="validatePwInput()"
                 required
               />
@@ -63,7 +63,7 @@
                 class="password-toggle-btn d-none"
                 type="button"
                 id="inputPasswortLogInBtn"
-                onclick="togglePwVisibility('inputPassword', 'pwLogInIcon')"
+                onclick="togglePwVisibility('logInInputPassword', 'pwLogInIcon')"
               >
                 <img
                   id="pwLogInIcon"

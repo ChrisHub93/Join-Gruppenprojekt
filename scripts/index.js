@@ -15,8 +15,8 @@ async function loadData(path = "") {
 }
 
 function search(dataValues) {
-  const email = document.getElementById("inputEmail").value;
-  const password = document.getElementById("inputPassword").value;
+  const email = document.getElementById("logInInputEmail").value;
+  const password = document.getElementById("logInInputPassword").value;
 
   for (listOfUser of dataValues) {
     let mails = listOfUser.email;
@@ -34,11 +34,6 @@ function search(dataValues) {
   }
 }
 
-function clearPasswordInput() {
-  const pwRef = document.getElementById("inputPassword");
-  pwRef.value = "";
-}
-
 function showAlert() {
   const textRef = document.getElementById("logInAlert");
   textRef.classList.remove("d-none");
@@ -51,9 +46,15 @@ function showAlert() {
   }
 }
 
+function clearPasswordInput() {
+  const pwRef = document.getElementById("logInInputPassword");
+  pwRef.value = "";
+}
+
+// Ab hier input validations
 function validateEmailInput() {
-  const emailInputRef = document.getElementById("inputEmail");
-  const feedbackElementRef = document.getElementById("emailFeedback");
+  const emailInputRef = document.getElementById("logInInputEmail");
+  const feedbackElementRef = document.getElementById("logInEmailFeedback");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (emailRegex.test(emailInputRef.value)) {
@@ -66,7 +67,7 @@ function validateEmailInput() {
 }
 
 function validatePwInput() {
-  const pwInputRef = document.getElementById("inputPassword");
+  const pwInputRef = document.getElementById("logInInputPassword");
   const feedbackElementRef = document.getElementById("pwFeedback");
 
   if(!pwInputRef.value) {
