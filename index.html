@@ -44,10 +44,13 @@
               type="email"
               placeholder="Email"
               id="logInInputEmail"
-              onfocusout="validateEmailInput()"
+              onfocusout="validateEmailInput('logInInputEmail', 'logInEmailFeedback')"
               required
             />
-            <span id="logInEmailFeedback" class="log-in__inpts__alert-text"></span>
+            <span
+              id="logInEmailFeedback"
+              class="log-in__inpts__alert-text"
+            ></span>
 
             <div class="password-wrapper">
               <input
@@ -56,7 +59,7 @@
                 placeholder="Password"
                 id="logInInputPassword"
                 onfocus="showEyeIcon('logInInputPassword', 'inputPasswortLogInBtn')"
-                onfocusout="validatePwInput()"
+                onfocusout="validatePasswordInput('logInInputPassword', 'pwFeedback', 'inputPasswortLogInBtn')"
                 required
               />
               <button

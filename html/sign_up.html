@@ -51,7 +51,7 @@
             />
             <span id="signUpNameFeedback" class="sign-up__inpts__alert-text"></span>
             <input
-              onfocusout="validateEmailInput()"
+              onfocusout="validateEmailInput('signUpInputEmail', 'signUpEmailFeedback')"
               class="sign_up__inputs__inputfield icon-mail"
               type="email"
               placeholder="Email"
@@ -62,7 +62,7 @@
             <div class="password-wrapper">
               <input
                 onfocus="showEyeIcon('signUpInputPassword', 'signUpInputPasswortBtn')"
-                onfocusout="validatePasswordInput()"
+                onfocusout="validatePasswordInput('signUpInputPassword', 'passwortFeedback', 'signUpInputPasswortBtn')"
                 class="sign_up__inputs__inputfield icon-lock"
                 type="password"
                 placeholder="Password"
