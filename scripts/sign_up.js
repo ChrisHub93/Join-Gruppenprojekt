@@ -4,10 +4,7 @@ let pwCheck = false;
 let pwConfirmCheck = false;
 let checkBox = false;
 
-function initSignUp() {
-  setChecksToFalse();
-  clearPasswordInputs();
-}
+function initSignUp() {}
 
 async function signUp() {
   validateAllInputs();
@@ -50,16 +47,4 @@ function showSuccesMessage() {
   const ref = document.getElementById("overlay");
   ref.classList.remove("d-none");
   ref.classList.add("overlay");
-}
-
-function setChecksToFalse() {
-  nameCheck = false;
-  emailCheck = false;
-  pwCheck = false;
-  pwConfirmCheck = false;
-}
-
-function clearPasswordInputs() {
-  document.getElementById("signUpInputPassword").value = "";
-  document.getElementById("inputPasswordConfirm").value = "";
 }
