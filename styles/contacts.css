@@ -192,7 +192,7 @@ main {
 }
 
 .moreAboutcircleFirstLetters {
-  background-color: orange;
+  /* background-color: orange; */
   height: 96px;
   width: 96px;
   border-radius: 50%;
@@ -271,4 +271,13 @@ main {
 .subTitleEmail,
 .subTitlePhoneOverlay {
   font-weight: bold;
+}
+
+.darkBtn{
+ background-color: var(--darkBtn-color); 
+ color: white;
+}
+
+.darkBtn:hover{
+  background-color: var(--darkBtn-color);
 }
