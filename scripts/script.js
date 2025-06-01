@@ -3,17 +3,48 @@ const BASE_URL = 'https://join-464-default-rtdb.europe-west1.firebasedatabase.ap
 
 function init() {
     activeMenuStorage();
+    sidebarVisibility();
 }
 
-// function renderHeader() {
-//     let contentHeader = document.getElementById('header');
-//     contentHeader.innerHTML = getHeader();
+// function loginAsGuest() {
+//     sessionStorage.setItem('loginStatus', 'guest');
+//     sidebarVisibility();
 // }
 
-// function renderSidebar() {
-//     let contentSidebar = document.getElementById('sidebar');
-//     contentSidebar.innerHTML = getSidebar();
+// function loginAsUser() {
+//     sessionStorage.setItem('loginStatus', 'user');
+//     sidebarVisibility();
 // }
+
+function logout() {
+    sessionStorage.setItem('loginStatus', 'none');
+    sidebarVisibility();
+}
+
+function sidebarVisibility() {
+    let status = sessionStorage.getItem('loginStatus');
+    let isLoggedIn = status === 'user' || status === 'guest';
+
+    document.querySelectorAll('.logged-in').forEach(el =>
+        el.style.display = isLoggedIn ? 'flex' : 'none'
+    );
+
+    document.querySelectorAll('.logged-out').forEach(el =>
+        el.style.display = isLoggedIn ? 'none' : 'flex'
+    );
+    setSideBarMenu(isLoggedIn);
+}
+
+function setSideBarMenu(isLoggedIn) {
+    let menuBox = document.querySelector('.menu-box');
+
+    if (!isLoggedIn) {
+        menuBox.classList.add('logged-out');
+    } else {
+        menuBox.classList.remove('logged-out');
+    }
+}
+
 
 function showNavbar() {
     let navbar = document.getElementById('navbar');
@@ -46,7 +77,7 @@ function activateMenu(clickedElement, menuKey) {
 
         document.querySelectorAll(`[menu-data="${menuKey}"]`).forEach(menuElement => {
         menuElement.classList.add('sidebar-menu-active');
-        const activeLink = menuElement.querySelector('.sidebar-text');
+        let activeLink = menuElement.querySelector('.sidebar-text');
         if (activeLink) activeLink.classList.add('a-active');
     });
 }
@@ -57,7 +88,7 @@ function activeMenuStorage() {
         
         document.querySelectorAll(`[menu-data="${activeMenu}"]`).forEach(menuElement => {
         menuElement.classList.add('sidebar-menu-active');
-        const activeLink = menuElement.querySelector('.sidebar-text');
+        let activeLink = menuElement.querySelector('.sidebar-text');
         if (activeLink) activeLink.classList.add('a-active');
     });    
 }

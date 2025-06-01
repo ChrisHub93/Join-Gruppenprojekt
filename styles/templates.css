@@ -23,6 +23,8 @@ header{
     gap: 16px;
     align-items: center;
     padding-right: 40px;
+    padding-left: 50px;
+    position: relative;
 }
 
 .help-icon{
@@ -58,9 +60,8 @@ header{
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     padding: 10px;
-    right: 20px;
-    top: 92px;
-    position: fixed;
+    margin-top: 20px;
+    position: absolute;
     background-color: #2A3647;
     display: flex;
     flex-direction: column;
@@ -113,6 +114,10 @@ header{
     width: 232px;
 }
 
+.menu-box.logged-out {
+    justify-content: flex-start;
+}
+
 .sidebar-icon {
     width: 30px;
     height: 30px;
@@ -123,6 +128,7 @@ header{
     align-items: center;
     gap: 8px;
     cursor: pointer;
+    height: 46px;
 }
 
 .sidebar-menu:hover{
@@ -131,17 +137,16 @@ header{
 
 .sidebar-menu-active{
     background-color: #091931;
-}
-
-.sidebar-menu-active:hover{
-    background-color: #091931;
+    pointer-events: none;
+    width: 100% !important;
+    padding-right: 14px;
+    justify-content: center;
 }
 
 .sidebar-text{
     width: 100%;
     padding-left: 56px;
     padding-right: 56px;
-    height: 46px;
     color: #CDCDCD;
     font-size: 16px;
     text-decoration: none;
@@ -160,16 +165,182 @@ header{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    width: 232px;
+}
+
+.policy-box{
+    justify-content: center;
+    height: 35px;
+    display: flex;
 }
 
 .policy-text{
-    font-size: 16px;
-    text-decoration: none;
+    height: 36px;
+    width: 109px;
     color: #a8a8a8;
     cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    gap: 8px;
+    align-items: center;
+    display: flex;
 }
 
 .policy-text:hover{
     color: #29ABE2;
     font-weight: bold;
+}
+
+@media (max-width:1100px) {
+    .header-name{
+        padding-left: 250px;
+    }
+
+    .sidebar {
+    width: 200px !important;
+    }
+
+    .menu-box {
+        width: 200px;
+    }
+
+    .sidebar-policy{
+        width: 200px;
+    }
+
+    .sidebar-text {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}    
+
+@media (max-width: 768px){
+    header{
+        height: 90px;
+    }
+    
+    .sidebar{
+        display: none;
+    }
+
+    .header-name{
+        display: none;
+    }
+
+    .headerLogo{
+        display: block !important;
+        height: 51.2px;
+        padding-left: 40px;
+    }
+
+    .help-icon{
+        display: none;
+    }
+
+    .hide-help{
+        display: flex;
+    }
+
+    footer{
+        display: flex !important;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .menu-box{
+        height: 90px;
+        gap: 10px;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100%;
+        background-color: var(--bg-sidebar);
+    }
+
+    .sidebar-text{
+        padding-left: 1px;
+        padding-right: 1px;
+        flex-direction: column;
+        width: 90px;
+        justify-content: center;
+        height: 76px;
+        gap: 4px;
+    }
+
+    .sidebar-menu{
+        border-radius: 16px;
+    }
+
+    .sidebar-menu:hover{
+        border-radius: 16px;
+    }
+
+    .header-top-profile{
+        padding-left: 60px;
+    }
+
+    .navbar{
+        margin-top: 0px;
+    }
+}
+
+@media (max-width:545px){
+    header{
+        height: 80px;
+    }
+
+    .headerLogo{
+        height: 39.02px;
+        padding-left: 16px;
+    }
+
+    .header-top-profile{
+        padding-right: 16px;
+        padding-left: 90px;
+    }
+
+    .personal-icon{
+        height: 40px;
+        width: 40px;
+    }
+
+    .menu-box{
+        height: 80px;
+    }
+
+    .sidebar-text{
+        font-size: 14px;
+        width: 80px;
+    }
+
+    .sidebar-icon{
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media (max-width:420px){
+    .menu-box{
+        gap: 4px;
+    }
+
+    .sidebar-text{
+        width: 70px;
+        font-size: 12px;
+    }
+
+    .sidebar-icon{
+        width: 20px;
+        height: 20px;
+    }
+
+    .navbarlink{
+        font-size: 14px;
+        height: 30px;
+    }
+
+    .header-top-profile{
+        padding-left: 80px
+    }
 }
