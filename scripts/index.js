@@ -50,5 +50,3 @@ function clearPasswordInput() {
   const pwRef = document.getElementById("logInInputPassword");
   pwRef.value = "";
 }
-
-// Ab hier input validations ->

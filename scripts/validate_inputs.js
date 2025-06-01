@@ -1,5 +1,3 @@
-// einmalig
-// kann ohne Änderungen eingefügt werden
 function validateNameInput() {
   const nameInputRef = document.getElementById("signUpInputName");
   const feedbackElementRef = document.getElementById("signUpNameFeedback");
@@ -15,8 +13,6 @@ function validateNameInput() {
   }
 }
 
-// einmalig
-// kann ohne Änderungen eingefügt werden
 function validateConfirmPassword() {
   let pwInput = "";
   let confirmPwInput = "";
@@ -32,8 +28,6 @@ function validateConfirmPassword() {
   }
 }
 
-// einmalig
-// kann ohne Änderungen eingefügt werden
 function validateCheckbox() {
   const boxRef = document.getElementById("check-privacy").checked;
   const feedbackElementRef = document.getElementById("checkBoxFeedback");
@@ -46,8 +40,6 @@ function validateCheckbox() {
   }
 }
 
-// einmalig
-// kann ohne Änderungen eingefügt werden
 function hideUserFeedback() {
   const confirmPwInputRef = document.getElementById("inputPasswordConfirm");
   const feedbackElementRef = document.getElementById("confirmPasswortFeedback");
@@ -56,8 +48,6 @@ function hideUserFeedback() {
   feedbackElementRef.textContent = "";
 }
 
-// einmalig
-// kann ohne Änderungen eingefügt werden
 function showUserFeedback() {
   const confirmPwInputRef = document.getElementById("inputPasswordConfirm");
   const feedbackElementRef = document.getElementById("confirmPasswortFeedback");
@@ -66,8 +56,6 @@ function showUserFeedback() {
     "Your passwords don`t match. Please try again";
 }
 
-// einmalig
-// kann ohne Änderungen eingefügt werden
 function showLockIcon(inputId, btnId) {
   const inputLockIconRef = document.getElementById(inputId);
   const iconBtnRef = document.getElementById(btnId);
@@ -76,8 +64,6 @@ function showLockIcon(inputId, btnId) {
   iconBtnRef.classList.add("d-none");
 }
 
-// doppelt
-// kann ohne Änderungen eingefügt werden
 function showEyeIcon(inputId, btnId) {
   const inputLockIconRef = document.getElementById(inputId);
   const iconBtnRef = document.getElementById(btnId);
@@ -86,8 +72,6 @@ function showEyeIcon(inputId, btnId) {
   iconBtnRef.classList.remove("d-none");
 }
 
-// doppelt
-// kann ohne Änderungen eingefügt werden
 function togglePwVisibility(inputId, imgId) {
   const inputRef = document.getElementById(inputId);
   const iconRef = document.getElementById(imgId);
@@ -103,10 +87,6 @@ function togglePwVisibility(inputId, imgId) {
   }
 }
 
-// doppelt
-// funktion muss mit übergabe von variablen umgeschrieben werden!!!
-// Name der funktionsausführung ändern!!!
-// inputId, feedbackId
 function validateEmailInput(inputId, feedbackId) {
   const emailInputRef = document.getElementById(inputId);
   const feedbackElementRef = document.getElementById(feedbackId);
@@ -123,9 +103,6 @@ function validateEmailInput(inputId, feedbackId) {
   }
 }
 
-// doppelt aber anderer Name !!! nehme von signUp.js
-// funktion muss mit übergabe von variablen umgeschrieben werden!!!
-// inputID, feedbackId, btnId
 function validatePasswordInput(inputId,feedbackId, btnId) {
     const pwInputRef = document.getElementById(inputId);
     const feedbackElementRef = document.getElementById(feedbackId);
