@@ -32,9 +32,13 @@ main {
   overflow-x: hidden;
 }
 
-#allInfoAboutContact{
+.allInfoAboutContact{
   transform: translateX(100%);
   transition: all 250ms ease;
+}
+
+.showAllInfoAboutContact{
+  transform: translateX(0%);
 }
 
 .addNewContactBtn {

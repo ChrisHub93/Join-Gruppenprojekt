@@ -17,20 +17,16 @@ function getListOfContacts(contactsArray) {
     let emailOfUser = user.email;
     let firstNameOfUser = user.firstname;
     let lastNameOfUser = user.lastname;
+    let phoneOfUser = user.phone;
 
-    getTemplate(emailOfUser, firstNameOfUser, lastNameOfUser);
+    getTemplate(emailOfUser, firstNameOfUser, lastNameOfUser, phoneOfUser);
   }
 }
 
-function getTemplate(emailOfUser, firstNameOfUser, lastNameOfUser) {
-  let alphabeticalOrderRef = document.getElementById(
-    "alphabeticalOrder" + firstNameOfUser.charAt(0).toUpperCase()
-  );
-
-  alphabeticalOrderRef.innerHTML += `<div id="order${firstNameOfUser.charAt(0).toUpperCase()}" class="">
-            </div>
-            
-            <div class="contactInfo">
+function getTemplate(emailOfUser, firstNameOfUser, lastNameOfUser, phoneOfUser) {
+  let alphabeticalOrderRef = document.getElementById("alphabeticalOrder" + firstNameOfUser.charAt(0).toUpperCase());
+  alphabeticalOrderRef.innerHTML += `<div id="order${firstNameOfUser.charAt(0).toUpperCase()}" class=""></div>
+            <div class="contactInfo" onclick="moreDetailsAboutContact('${emailOfUser}', '${firstNameOfUser}', '${lastNameOfUser}', '${phoneOfUser}')">
               <div id="circleFirstLetters${firstNameOfUser}" class="circleFirstLetters">
                 <span>${firstNameOfUser.charAt(0)}</span>
                 <span>${lastNameOfUser.charAt(0)}</span>
@@ -75,3 +71,50 @@ function randomNumber(firstNameOfUser) {
   let circleFirstLettersRef = document.getElementById("circleFirstLetters" + firstNameOfUser);
   circleFirstLettersRef.classList.add("bgForCircleFirstLetters" + numberForClass);
 }
+
+function moreDetailsAboutContact(emailOfUser, firstNameOfUser, lastNameOfUser, phoneOfUser){
+  let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
+  allInfoAboutContactRef.classList.add("showAllInfoAboutContact");
+  allInfoAboutContactRef.innerHTML = `<div class="moreAboutcontactInfo">
+            <div class="moreAboutcircleFirstLetters">
+              <span>${firstNameOfUser.charAt(0)}</span>
+              <span>${lastNameOfUser.charAt(0)}</span>
+            </div>
+
+            <div class="editinfoAboutContact">
+              <h2>${firstNameOfUser} ${lastNameOfUser}</h2>
+              <div class="editOrDeleteFlex">
+                <div class="edit editOrDeleteFlex">
+                  <img src="/assets/icons/Property 1=edit.png" alt="" />
+                  <span>Edit</span>
+                </div>
+
+                <div class="delete editOrDeleteFlex">
+                  <img src="/assets/icons/Property 1=delete.png" alt="" />
+                  <span>Delete</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contactInformation">
+            <span>Contact Information</span>
+          </div>
+
+          <div class="emailOverlay">
+            <span class="subTitleEmail">Email</span>
+            <span class="email">${emailOfUser}</span>
+          </div>
+
+          <div class="phoneOverlay">
+            <span class="subTitlePhoneOverlay">Phone</span>
+            <span>${phoneOfUser}</span>
+          </div>` 
+  // getDetailsTemplate();
+}
+
+// function getDetailsTemplate(){
+
+
+ 
+// }
