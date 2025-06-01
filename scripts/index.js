@@ -51,7 +51,11 @@ function clearPasswordInput() {
   pwRef.value = "";
 }
 
-// Ab hier input validations
+// Ab hier input validations ->
+
+// doppelt
+// funktion muss mit übergabe von variablen umgeschrieben werden!!!
+// Name der funktionsausführung ändern!!!
 function validateEmailInput() {
   const emailInputRef = document.getElementById("logInInputEmail");
   const feedbackElementRef = document.getElementById("logInEmailFeedback");
@@ -66,6 +70,8 @@ function validateEmailInput() {
   }
 }
 
+// doppelt aber anderer Name !!! nehme von signUp.js
+// Name der funktionsausführung ändern!!!
 function validatePwInput() {
   const pwInputRef = document.getElementById("logInInputPassword");
   const feedbackElementRef = document.getElementById("pwFeedback");
@@ -79,6 +85,8 @@ function validatePwInput() {
   }
 }
 
+// doppelt
+// kann ohne Änderungen eingefügt werden
 function togglePwVisibility(inputId, imgId) {
   const inputRef = document.getElementById(inputId);
   const iconRef = document.getElementById(imgId);
@@ -94,6 +102,8 @@ function togglePwVisibility(inputId, imgId) {
   }
 }
 
+// doppelt
+// kann ohne Änderungen eingefügt werden
 function showEyeIcon(inputId, btnId) {
   const inputLockIconRef = document.getElementById(inputId);
   const iconBtnRef = document.getElementById(btnId);

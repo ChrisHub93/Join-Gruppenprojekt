@@ -68,6 +68,7 @@ function clearPasswordInputs() {
 
 // Ab hier inpt valdidations ->
 
+// doppelt
 function validateNameInput() {
   const nameInputRef = document.getElementById("signUpInputName");
   const feedbackElementRef = document.getElementById("signUpNameFeedback");
@@ -82,7 +83,9 @@ function validateNameInput() {
     nameCheck = true;
   }
 }
-
+// doppelt
+// funktion muss mit übergabe von variablen umgeschrieben werden!!!
+// Name der funktionsausführung ändern!!!
 function validateEmailInput() {
   const emailInputRef = document.getElementById("signUpInputEmail");
   const feedbackElementRef = document.getElementById("signUpEmailFeedback");
@@ -99,6 +102,7 @@ function validateEmailInput() {
   }
 }
 
+// doppelt aber anderer Name !!! nehme von signUp.js
 function validatePasswordInput() {
   const pwInputRef = document.getElementById("signUpInputPassword");
   const feedbackElementRef = document.getElementById("passwortFeedback");
@@ -116,6 +120,8 @@ function validatePasswordInput() {
   }
 }
 
+// einmalig
+// kann ohne Änderungen eingefügt werden
 function validateConfirmPassword() {
   let pwInput = "";
   let confirmPwInput = "";
@@ -131,6 +137,8 @@ function validateConfirmPassword() {
   }
 }
 
+// einmalig
+// kann ohne Änderungen eingefügt werden
 function validateCheckbox() {
   const boxRef = document.getElementById("check-privacy").checked;
   const feedbackElementRef = document.getElementById("checkBoxFeedback");
@@ -143,6 +151,8 @@ function validateCheckbox() {
   }
 }
 
+// einmalig
+// kann ohne Änderungen eingefügt werden
 function hideUserFeedback() {
   const confirmPwInputRef = document.getElementById("inputPasswordConfirm");
   const feedbackElementRef = document.getElementById("confirmPasswortFeedback");
@@ -151,6 +161,8 @@ function hideUserFeedback() {
   feedbackElementRef.textContent = "";
 }
 
+// einmalig
+// kann ohne Änderungen eingefügt werden
 function showUserFeedback() {
   const confirmPwInputRef = document.getElementById("inputPasswordConfirm");
   const feedbackElementRef = document.getElementById("confirmPasswortFeedback");
@@ -159,6 +171,8 @@ function showUserFeedback() {
     "Your passwords don`t match. Please try again";
 }
 
+// doppelt
+// kann ohne Änderungen eingefügt werden
 function showEyeIcon(inputId, btnId) {
   const inputLockIconRef = document.getElementById(inputId);
   const iconBtnRef = document.getElementById(btnId);
@@ -167,6 +181,8 @@ function showEyeIcon(inputId, btnId) {
   iconBtnRef.classList.remove("d-none");
 }
 
+// doppelt
+// kann ohne Änderungen eingefügt werden
 function togglePwVisibility(inputId, imgId) {
   const inputRef = document.getElementById(inputId);
   const iconRef = document.getElementById(imgId);
@@ -182,6 +198,8 @@ function togglePwVisibility(inputId, imgId) {
   }
 }
 
+// einmalig
+// kann ohne Änderungen eingefügt werden
 function showLockIcon(inputId, btnId) {
   const inputLockIconRef = document.getElementById(inputId);
   const iconBtnRef = document.getElementById(btnId);
