@@ -61,7 +61,7 @@ function logoAnimation() {
   headerLogoRef.classList.add("d-none");
   setTimeout(() => {
     hideOverlay(headerLogoRef);
-  }, 800);
+  }, 1000);
 }
 
 function hideOverlay(logoRef) {

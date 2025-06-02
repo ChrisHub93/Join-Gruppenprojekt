@@ -17,6 +17,7 @@
   transform-origin: top left;
   animation-fill-mode: forwards;
   animation-duration: 1s;
+  animation-delay: 0.2s;
   animation-name: overlay-fadeout;
 }
 
@@ -28,9 +29,11 @@
 .overlay-login__img{
   position: absolute;
   animation-name: move-Logo;
-  animation-duration: 0.8s;
+  animation-duration: 0.9s;
+  animation-delay: 0.1s;
   animation-fill-mode: forwards;
   transform-origin: top left;
+  top: 40%; left: 40%; width: 300px;height: 300px;
 }
 
 @keyframes move-Logo {
