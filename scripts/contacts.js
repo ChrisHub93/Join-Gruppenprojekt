@@ -94,9 +94,62 @@ function moreDetailsAboutContact( emailOfUser, firstNameOfUser, lastNameOfUser, 
 
     // detailedContactView = true;
 
-  } else if ( !newContactId){
+  } else if ( currentActiveContactId && currentActiveContactId !== newContactId){
       // detailedContactView = false;
+      let idRef = document.querySelectorAll('[id^="setNewBgFor"]');
+      for (const element of idRef) {
+        element.classList.remove("darkBtn");
+      }
+
+      let setNewBgForContactRef = document.getElementById("setNewBgFor"+firstNameOfUser);
+  setNewBgForContactRef.classList.add("darkBtn");
       
+       let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
+  // allInfoAboutContactRef.classList.remove("showAllInfoAboutContact");
+  // allInfoAboutContactRef.innerHTML = '';
+
+  let targetDivRef = document.getElementById("circleFirstLetters"+firstNameOfUser);
+  let divRef = Array.from(targetDivRef.classList);
+
+  allInfoAboutContactRef.innerHTML = `<div class="moreAboutcontactInfo">
+            <div class="moreAboutcircleFirstLetters ${divRef[1]}">
+              <span>${firstNameOfUser.charAt(0)}</span>
+              <span>${lastNameOfUser.charAt(0)}</span>
+            </div>
+
+            <div class="editinfoAboutContact">
+              <h2>${firstNameOfUser} ${lastNameOfUser}</h2>
+              <div class="editOrDeleteFlex">
+                <div class="edit editOrDeleteFlex">
+                  <img src="/assets/icons/Property 1=edit.png" alt="" />
+                  <span>Edit</span>
+                </div>
+
+                <div class="delete editOrDeleteFlex">
+                  <img src="/assets/icons/Property 1=delete.png" alt="" />
+                  <span>Delete</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contactInformation">
+            <span>Contact Information</span>
+          </div>
+
+          <div class="emailOverlay">
+            <span class="subTitleEmail">Email</span>
+            <span class="email">${emailOfUser}</span>
+          </div>
+
+          <div class="phoneOverlay">
+            <span class="subTitlePhoneOverlay">Phone</span>
+            <span>${phoneOfUser}</span>
+          </div>`;
+
+          currentActiveContactId = newContactId;
+               
+          // allInfoAboutContactRef.classList.add("showAllInfoAboutContact");
       
   }
 
