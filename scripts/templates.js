@@ -22,3 +22,42 @@ function getSubTasksTemplate(inputRef) {
                 </div>               
             </div>`;
 }
+
+
+function getDetailsOfContact(divRef, firstNameOfUser, lastNameOfUser, emailOfUser, phoneOfUser){
+    return `<div class="moreAboutcontactInfo">
+            <div class="moreAboutcircleFirstLetters ${divRef[1]}">
+              <span>${firstNameOfUser.charAt(0)}</span>
+              <span>${lastNameOfUser.charAt(0)}</span>
+            </div>
+
+            <div class="editinfoAboutContact">
+              <h2>${firstNameOfUser} ${lastNameOfUser}</h2>
+              <div class="editOrDeleteFlex">
+                <div class="edit editOrDeleteFlex">
+                  <img src="/assets/icons/Property 1=edit.png" alt="" />
+                  <span>Edit</span>
+                </div>
+
+                <div class="delete editOrDeleteFlex">
+                  <img src="/assets/icons/Property 1=delete.png" alt="" />
+                  <span>Delete</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contactInformation">
+            <span>Contact Information</span>
+          </div>
+
+          <div class="emailOverlay">
+            <span class="subTitleEmail">Email</span>
+            <span class="email">${emailOfUser}</span>
+          </div>
+
+          <div class="phoneOverlay">
+            <span class="subTitlePhoneOverlay">Phone</span>
+            <span>${phoneOfUser}</span>
+          </div>`;
+}
