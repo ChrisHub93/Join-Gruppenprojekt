@@ -1,48 +1,82 @@
 function validateSignUpInputs() {
-  validateNameInput();
+  validateNameInput('signUpInputName','signUpNameFeedback');
   validateEmailInput("signUpInputEmail", "signUpEmailFeedback");
   validatePasswordInput(
     "signUpInputPassword",
     "passwortFeedback",
     "signUpInputPasswortBtn"
   );
-  validateConfirmPassword();
-  validateCheckbox();
+  validateConfirmPassword(
+    "signUpInputPassword",
+    "inputPasswordConfirm",
+    "confirmPasswortFeedback"
+  );
+  validateCheckbox("check-privacy", "checkBoxFeedback");
 }
 
-function validateNameInput() {
-  const nameInputRef = document.getElementById("signUpInputName");
-  const feedbackElementRef = document.getElementById("signUpNameFeedback");
+function validateNameInput(inputId, feddbackId) {
+  const nameInputRef = document.getElementById(inputId);
 
   if (nameInputRef.value.trim() === "") {
-    nameInputRef.style.border = "1px solid var(--error-color)";
-    feedbackElementRef.textContent = "This Field is required";
+    showUserFeedback(inputId, feddbackId, "This Field is required");
     nameCheck = false;
   } else {
-    feedbackElementRef.textContent = "";
-    nameInputRef.style.border = "1px solid var(--input-border)";
+    hideUserFeedback(inputId, feddbackId);
     nameCheck = true;
   }
 }
 
-function validateConfirmPassword() {
-  let pwInput = "";
-  let confirmPwInput = "";
-  pwConfirmCheck = false;
-  pwInput = document.getElementById("signUpInputPassword").value;
-  confirmPwInput = document.getElementById("inputPasswordConfirm").value;
-  if (pwInput === confirmPwInput && confirmPwInput != "") {
-    hideUserFeedback();
-    pwConfirmCheck = true;
+function validateEmailInput(inputId, feedbackId) {
+  const emailInputRef = document.getElementById(inputId);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (emailRegex.test(emailInputRef.value)) {
+    hideUserFeedback(inputId, feedbackId);
+    emailCheck = true;
   } else {
-    pwConfirmCheck = false;
-    showUserFeedback();
+    showUserFeedback(
+      inputId,
+      feedbackId,
+      "Please enter a valid email address."
+    );
+    emailCheck = false;
   }
 }
 
-function validateCheckbox() {
-  const boxRef = document.getElementById("check-privacy").checked;
-  const feedbackElementRef = document.getElementById("checkBoxFeedback");
+function validatePasswordInput(inputId, feedbackId, btnId) {
+  const pwInputRef = document.getElementById(inputId);
+
+  if (pwInputRef.value.trim() === "") {
+    showUserFeedback(inputId, feedbackId, "This Field is required");
+    pwInputRef.value = "";
+    showLockIcon(inputId, btnId);
+    pwCheck = false;
+  } else {
+    hideUserFeedback(inputId, feedbackId);
+    pwCheck = true;
+  }
+}
+
+function validateConfirmPassword(pwInputId, confirmInputId, feedbackId) {
+  let pwInput = document.getElementById(pwInputId).value;
+  let confirmPwInput = document.getElementById(confirmInputId).value;
+
+  if (pwInput === confirmPwInput && confirmPwInput != "") {
+    hideUserFeedback(confirmInputId, feedbackId);
+    pwConfirmCheck = true;
+  } else {
+    showUserFeedback(
+      confirmInputId,
+      feedbackId,
+      "Your passwords don`t match. Please try again"
+    );
+    pwConfirmCheck = false;
+  }
+}
+
+function validateCheckbox(boxId, feddbackId) {
+  const boxRef = document.getElementById(boxId).checked;
+  const feedbackElementRef = document.getElementById(feddbackId);
   if (boxRef) {
     feedbackElementRef.textContent = "";
     checkBox = true;
@@ -50,22 +84,6 @@ function validateCheckbox() {
     feedbackElementRef.innerHTML = "<br>Please accept the Privacy Policy";
     checkBox = false;
   }
-}
-
-function hideUserFeedback() {
-  const confirmPwInputRef = document.getElementById("inputPasswordConfirm");
-  const feedbackElementRef = document.getElementById("confirmPasswortFeedback");
-
-  confirmPwInputRef.style.border = "1px solid var(--input-border)";
-  feedbackElementRef.textContent = "";
-}
-
-function showUserFeedback() {
-  const confirmPwInputRef = document.getElementById("inputPasswordConfirm");
-  const feedbackElementRef = document.getElementById("confirmPasswortFeedback");
-  confirmPwInputRef.style.border = "1px solid var(--error-color)";
-  feedbackElementRef.textContent =
-    "Your passwords don`t match. Please try again";
 }
 
 function showLockIcon(inputId, btnId) {
@@ -99,35 +117,18 @@ function togglePwVisibility(inputId, imgId) {
   }
 }
 
-function validateEmailInput(inputId, feedbackId) {
-  const emailInputRef = document.getElementById(inputId);
-  const feedbackElementRef = document.getElementById(feedbackId);
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+function hideUserFeedback(inpuId, feedbackId) {
+  const inputRef = document.getElementById(inpuId);
+  const feedbackRef = document.getElementById(feedbackId);
 
-  if (emailRegex.test(emailInputRef.value)) {
-    feedbackElementRef.textContent = "";
-    emailInputRef.style.border = "1px solid var(--input-border)";
-    emailCheck = true;
-  } else {
-    emailInputRef.style.border = "1px solid var(--error-color)";
-    feedbackElementRef.textContent = "Please enter a valid email address.";
-    emailCheck = false;
-  }
+  inputRef.style.border = "1px solid var(--input-border)";
+  feedbackRef.textContent = "";
 }
 
-function validatePasswordInput(inputId, feedbackId, btnId) {
-  const pwInputRef = document.getElementById(inputId);
-  const feedbackElementRef = document.getElementById(feedbackId);
+function showUserFeedback(inputId, feedbackId, alertText) {
+  const inputRef = document.getElementById(inputId);
+  const feedbacktRef = document.getElementById(feedbackId);
 
-  if (pwInputRef.value.trim() === "") {
-    pwInputRef.style.border = "1px solid var(--error-color)";
-    feedbackElementRef.textContent = "This Field is required";
-    pwInputRef.value = "";
-    showLockIcon(inputId, btnId);
-    pwCheck = false;
-  } else {
-    feedbackElementRef.textContent = "";
-    pwInputRef.style.border = "1px solid var(--input-border)";
-    pwCheck = true;
-  }
+  inputRef.style.border = "1px solid var(--error-color)";
+  feedbacktRef.textContent = alertText;
 }

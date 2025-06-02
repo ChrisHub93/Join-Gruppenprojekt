@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="../styles/style.css" />
     <link rel="stylesheet" href="../styles/fonts.css" />
     <link rel="stylesheet" href="../styles/sign_up.css" />
-    
 
     <title>Sign up</title>
   </head>
@@ -43,13 +42,16 @@
         <form onsubmit="signUp(); return false;" class="form-input">
           <div class="sign_up__inputs">
             <input
-              onfocusout="validateNameInput()"
+              onfocusout="validateNameInput('signUpInputName','signUpNameFeedback')"
               class="sign_up__inputs__inputfield icon-user"
               type="text"
               placeholder="Name"
               id="signUpInputName"
             />
-            <span id="signUpNameFeedback" class="sign-up__inpts__alert-text"></span>
+            <span
+              id="signUpNameFeedback"
+              class="sign-up__inpts__alert-text"
+            ></span>
             <input
               onfocusout="validateEmailInput('signUpInputEmail', 'signUpEmailFeedback')"
               class="sign_up__inputs__inputfield icon-mail"
@@ -57,7 +59,10 @@
               placeholder="Email"
               id="signUpInputEmail"
             />
-            <span id="signUpEmailFeedback" class="sign-up__inpts__alert-text"></span>
+            <span
+              id="signUpEmailFeedback"
+              class="sign-up__inpts__alert-text"
+            ></span>
 
             <div class="password-wrapper">
               <input
@@ -89,7 +94,7 @@
             <div class="password-wrapper">
               <input
                 onfocus="showEyeIcon('inputPasswordConfirm', 'inputPasswortConfirmBtn')"
-                onfocusout="validateConfirmPassword()"
+                onfocusout="validateConfirmPassword('signUpInputPassword', 'inputPasswordConfirm','confirmPasswortFeedback' )"
                 class="sign_up__inputs__inputfield icon-lock"
                 type="password"
                 placeholder="Confirm Password"
@@ -148,6 +153,6 @@
       <a class="footer-sign_up__link" href="./html/legal_notice.html"
         >Legal notice</a
       >
-    </footer>    
+    </footer>
   </body>
 </html>
