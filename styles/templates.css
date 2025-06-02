@@ -189,6 +189,13 @@ header{
     font-weight: bold;
 }
 
+.policy-mobile-box{
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
 @media (max-width:1100px) {
     .header-name{
         padding-left: 250px;
@@ -293,7 +300,15 @@ header{
         margin-top: 0px;
     }
 
+    .policy-text{
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+    }
+
     .menu-box.logged-out {
+        padding-right: 16px;
+        padding-left: 16px;
         justify-content: space-between;
     }
 }
@@ -339,7 +354,7 @@ header{
     
 }
 
-@media (max-width:420px){
+@media (max-width:423px){
     .menu-box{
         gap: 4px;
     }
@@ -361,5 +376,9 @@ header{
 
     .header-top-profile{
         padding-left: 80px
+    }
+
+    .policy-text{
+        font-size: 11px;
     }
 }
