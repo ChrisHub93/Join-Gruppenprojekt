@@ -1,5 +1,10 @@
 let pwAndUserFound = false;
 
+function initLogin() {
+  logoAnimation()
+  
+}
+
 async function logIn() {
   let data = await loadData("/users");
   let dataValues = Object.values(data);
@@ -49,4 +54,18 @@ function showAlert() {
 function clearPasswordInput() {
   const pwRef = document.getElementById("logInInputPassword");
   pwRef.value = "";
+}
+
+function logoAnimation() {
+  const headerLogoRef = document.getElementById("logInLogo");
+  headerLogoRef.classList.add("d-none");
+  setTimeout(() => {
+    hideOverlay(headerLogoRef);
+  }, 800);
+}
+
+function hideOverlay(logoRef) {
+  const overlayRef = document.getElementById("overlay-login");
+  overlayRef.classList.add("d-none")
+  logoRef.classList.remove("d-none");
 }

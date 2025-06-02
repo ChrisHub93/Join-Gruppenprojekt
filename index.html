@@ -15,13 +15,23 @@
 
     <title>Join Login</title>
   </head>
-  <body class="body-login">
+  <body onload="initLogin()" class="body-login">
+    <div class="overlay-login" id="overlay-login">
+      <div id="overlayLogin" class="overlay__login-container">
+        <img class="overlay-login__img" src="./assets/img/Capa 1.png" alt="Join Logo" />
+      </div>
+    </div>
+
     <header class="header-login">
-      <img
-        class="header-login__logo"
-        src="./assets/img/Capa 1.png"
-        alt="Join Logo"
-      />
+        <div class="logo-container">
+            <img
+            id="logInLogo"
+            class="header-login__logo"
+            src="./assets/img/Capa 1.png"
+            alt="Join Logo"
+          />
+        </div>
+     
       <div class="header__sign-up">
         <p class="header__sign-up__text">Not a join user?</p>
         <button
