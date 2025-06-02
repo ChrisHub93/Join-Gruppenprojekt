@@ -57,9 +57,7 @@ function getTemplate(emailOfUser, firstNameOfUser, lastNameOfUser, phoneOfUser) 
 function getSortTitle(firstNameOfUser) {
   let orderRef = document.getElementById("order" + firstNameOfUser.charAt(0).toUpperCase());
   orderRef.innerHTML = ` <div class="paddingTop">  
-                          <span>${firstNameOfUser
-                            .charAt(0)
-                            .toUpperCase()}</span>
+                          <span>${firstNameOfUser.charAt(0).toUpperCase()}</span>
                           </div>
                           <div class="seperator"></div>`;
 }
@@ -70,17 +68,50 @@ function randomNumber(firstNameOfUser) {
   circleFirstLettersRef.classList.add("bgForCircleFirstLetters" + numberForClass);
 }
 
+
+
+
+
+
+
+let currentActiveContactId = null;
+
 function moreDetailsAboutContact( emailOfUser, firstNameOfUser, lastNameOfUser, phoneOfUser){
-  let setNewBgForContactRef = document.getElementById("setNewBgFor"+firstNameOfUser);
+
+  let newContactId = firstNameOfUser +' '+ lastNameOfUser; 
+
+  if (currentActiveContactId === newContactId){
+
+    let idRef = document.querySelectorAll('[id^="setNewBgFor"]');
+      for (const element of idRef) {
+        element.classList.remove("darkBtn");
+      }
+
+      let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
+      allInfoAboutContactRef.classList.remove("showAllInfoAboutContact");
+
+      currentActiveContactId = null;
+
+    // detailedContactView = true;
+
+  } else if ( !newContactId){
+      // detailedContactView = false;
+      
+      
+  }
+
+  else {
+
+    currentActiveContactId = newContactId;
+
+    let setNewBgForContactRef = document.getElementById("setNewBgFor"+firstNameOfUser);
   setNewBgForContactRef.classList.add("darkBtn");
 
   let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
   allInfoAboutContactRef.classList.add("showAllInfoAboutContact");
 
-
   let targetDivRef = document.getElementById("circleFirstLetters"+firstNameOfUser);
   let divRef = Array.from(targetDivRef.classList);
-
 
   allInfoAboutContactRef.innerHTML = `<div class="moreAboutcontactInfo">
             <div class="moreAboutcircleFirstLetters ${divRef[1]}">
@@ -116,12 +147,11 @@ function moreDetailsAboutContact( emailOfUser, firstNameOfUser, lastNameOfUser, 
           <div class="phoneOverlay">
             <span class="subTitlePhoneOverlay">Phone</span>
             <span>${phoneOfUser}</span>
-          </div>` 
-  // getDetailsTemplate();
+          </div>`;
+  }
+      console.log("Aktiv", currentActiveContactId);
+      
+      
+    // console.log(detailedContactView);
+    
 }
-
-// function getDetailsTemplate(){
-
-
- 
-// }
