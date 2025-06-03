@@ -12,6 +12,28 @@
     <link rel="stylesheet" href="../styles/contacts.css" />
   </head>
   <body onload="init()">
+    <div id="overlay" class="overlay">
+
+      <div class="leftSide">
+        <div class="contentLeftSide">
+          <img src="../assets/img/Capa 1 white.png" alt="" />
+          <h2>Add Contact</h2>
+          <span>Tasks are better with a team!</span>
+          <div class="blueLine"></div>
+        </div>
+      </div>
+
+      <div class="rightSide">
+        <div class="profile">
+          <div class="profilePicture">
+            <img src="../assets/icons/person.svg" alt="">
+          </div>
+        </div>
+        <div class="inputSection"></div>
+      </div>
+
+    </div>
+
     <div class="page-box">
       <aside id="sidebar" class="sidebar">
         <img class="sidebar-logo" src="../assets/img/Capa 1 white.png" alt="" />
@@ -101,7 +123,7 @@
     <main>
       <section class="contacts">
         <div class="contactsWidth">
-          <div class="addNewContactBtn">
+          <div class="addNewContactBtn" onclick="openOverlay()">
             <span>Add new contact</span>
             <img
               class="addNewPersonImg"
@@ -110,7 +132,6 @@
             />
           </div>
 
-          <!-- Here render All Contacts -->
           <div id="alphabeticalOrderA"></div>
           <div id="alphabeticalOrderB"></div>
           <div id="alphabeticalOrderC"></div>
@@ -147,46 +168,7 @@
           <span class="subTitle">Better with a team</span>
         </div>
 
-        <div id="allInfoAboutContact" class="allInfoAboutContact">
-          <!-- here open Overlay with info about contact -->
-
-          <!-- <div class="moreAboutcontactInfo">
-            <div class="moreAboutcircleFirstLetters">
-              <span>A</span>
-              <span>M</span>
-            </div>
-
-            <div class="editinfoAboutContact">
-              <h2>Anton Mayer</h2>
-              <div class="editOrDeleteFlex">
-                <div class="edit editOrDeleteFlex">
-                  <img src="/assets/icons/Property 1=edit.png" alt="" />
-                  <span>Edit</span>
-                </div>
-
-                <div class="delete editOrDeleteFlex">
-                  <img src="/assets/icons/Property 1=delete.png" alt="" />
-                  <span>Delete</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="contactInformation">
-            <span>Contact Information</span>
-          </div>
-
-          <div class="emailOverlay">
-            <span class="subTitleEmail">Email</span>
-            <span class="email">antom@gmail.com</span>
-          </div>
-
-          <div class="phoneOverlay">
-            <span class="subTitlePhoneOverlay">Phone</span>
-            <span>+49 1111 111 11 1</span>
-          </div> -->
-
-        </div>
+        <div id="allInfoAboutContact" class="allInfoAboutContact"></div>
       </section>
     </main>
 

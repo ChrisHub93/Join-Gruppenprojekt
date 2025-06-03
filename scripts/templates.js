@@ -23,9 +23,8 @@ function getSubTasksTemplate(inputRef) {
             </div>`;
 }
 
-
-function getDetailsOfContact(divRef, firstNameOfUser, lastNameOfUser, emailOfUser, phoneOfUser){
-    return `<div class="moreAboutcontactInfo">
+function getDetailsOfContact(divRef,firstNameOfUser,lastNameOfUser,emailOfUser,phoneOfUser) {
+  return `<div class="moreAboutcontactInfo">
             <div class="moreAboutcircleFirstLetters ${divRef[1]}">
               <span>${firstNameOfUser.charAt(0)}</span>
               <span>${lastNameOfUser.charAt(0)}</span>
@@ -62,7 +61,7 @@ function getDetailsOfContact(divRef, firstNameOfUser, lastNameOfUser, emailOfUse
           </div>`;
 }
 
-function getTemplate(emailOfUser, firstNameOfUser, lastNameOfUser, phoneOfUser) {
+function getTemplate(emailOfUser,firstNameOfUser,lastNameOfUser,phoneOfUser) {
   return `<div id="order${firstNameOfUser.charAt(0).toUpperCase()}"></div>
             <div id="setNewBgFor${firstNameOfUser}" class="contactInfo" onclick="moreDetailsAboutContact('${emailOfUser}', '${firstNameOfUser}', '${lastNameOfUser}', '${phoneOfUser}')">
               <div id="circleFirstLetters${firstNameOfUser}" class="circleFirstLetters">
@@ -74,12 +73,14 @@ function getTemplate(emailOfUser, firstNameOfUser, lastNameOfUser, phoneOfUser) 
                 <span class="email">${emailOfUser}</span>
               </div>
             </div>
-          </div>`; 
+          </div>`;
 }
 
-function getSortTitleTemplate(firstNameOfUser){
+function getSortTitleTemplate(firstNameOfUser) {
   return `<div class="paddingTop">  
-                          <span>${firstNameOfUser.charAt(0).toUpperCase()}</span>
+                          <span>${firstNameOfUser
+                            .charAt(0)
+                            .toUpperCase()}</span>
                           </div>
                           <div class="seperator"></div>`;
 }

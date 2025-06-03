@@ -32,12 +32,12 @@ main {
   overflow-x: hidden;
 }
 
-.allInfoAboutContact{
+.allInfoAboutContact {
   transform: translateX(100%);
   transition: all 250ms ease;
 }
 
-.showAllInfoAboutContact{
+.showAllInfoAboutContact {
   transform: translateX(0%);
 }
 
@@ -75,7 +75,7 @@ main {
   /* padding-top: 24px; */
 }
 
-.paddingTop{
+.paddingTop {
   padding-top: 24px;
   padding-left: 32px;
 }
@@ -100,35 +100,35 @@ main {
   border: 2px solid white;
 }
 
-.bgForCircleFirstLetters1{
+.bgForCircleFirstLetters1 {
   background-color: #ff7a00;
 }
 
-.bgForCircleFirstLetters2{
-  background-color: #9327ff; 
+.bgForCircleFirstLetters2 {
+  background-color: #9327ff;
 }
 
-.bgForCircleFirstLetters3{
+.bgForCircleFirstLetters3 {
   background-color: #6e52ff;
 }
 
-.bgForCircleFirstLetters4{
+.bgForCircleFirstLetters4 {
   background-color: #fc71ff;
 }
 
-.bgForCircleFirstLetters5{
+.bgForCircleFirstLetters5 {
   background-color: #ffbb2b;
 }
 
-.bgForCircleFirstLetters6{
+.bgForCircleFirstLetters6 {
   background-color: #1fd7c1;
 }
 
-.bgForCircleFirstLetters7{
+.bgForCircleFirstLetters7 {
   background-color: #462f8a;
 }
 
-.bgForCircleFirstLetters8{
+.bgForCircleFirstLetters8 {
   background-color: #ff4646;
 }
 
@@ -273,11 +273,86 @@ main {
   font-weight: bold;
 }
 
-.darkBtn{
- background-color: var(--darkBtn-color); 
- color: white;
+.darkBtn {
+  background-color: var(--darkBtn-color);
+  color: white;
 }
 
-.darkBtn:hover{
+.darkBtn:hover {
   background-color: var(--darkBtn-color);
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.leftSide {
+  height: 500px;
+  width: 400px;
+  border-top-left-radius: 32px;
+  border-bottom-left-radius: 32px;
+  background-color: var(--bg-sidebar);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contentLeftSide{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 16px;
+}
+
+.contentLeftSide h2{
+  font-size: 48px;
+}
+
+.contentLeftSide span{
+  font-size: 22px;
+}
+
+.contentLeftSide img{
+  height: 64px;
+  object-fit: contain;
+}
+
+.blueLine{
+  height: 2px;
+  width: 80px;
+  background-color: var(--contact-title-seperator);
+}
+
+.rightSide {
+  height: 500px;
+  width: 800px;
+  background-color: white;
+  border-top-right-radius: 32px;
+  border-bottom-right-radius: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profilePicture{
+  height: 100px;
+  width: 100px;
+  background-color: var(--input-border);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profilePicture img{
+  
 }
