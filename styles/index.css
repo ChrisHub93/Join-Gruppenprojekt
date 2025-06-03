@@ -27,7 +27,7 @@
 
 .overlay-login__img{
   position: absolute;
-  top: 40%; left: 40%; width: 300px;height: 300px;
+  top: 30%; left: 40%; width: 300px;height: 300px;
   animation-name: move-Logo;
   animation-duration: 0.9s;
   animation-delay: 0.1s;
@@ -35,9 +35,8 @@
 }
 
 @keyframes move-Logo {
-  0% {top: 40%; left: 40%; width: 300px;height: 300px;}
+  0% {width: 300px;height: 300px;}
   100% {top: 30px; left:60px; width: 100px; height: 122px;}
-
 }
 
 .header-login {
@@ -258,7 +257,21 @@
   font-weight: bold;
 }
 
+@media (max-width: 980px){
+  .overlay-login__img{
+    top: 30%; left: 30%;
+  }
+}
+
 @media (max-width: 670px) {
+  .overlay-login__img{
+    top: 35%; left: 24%;
+  }
+
+  @keyframes move-Logo {
+    100% {top: 16px; left:32px; width: 64px; height: 78px;}
+  }
+
   .log-in__buttons__btn {
     font-size: 16px;
     width: 180px;
@@ -291,6 +304,10 @@
 }
 
 @media (max-width: 490px) {
+  .overlay-login__img{
+    top: 31%; left: 17%;
+  }
+
   .body-login {
     padding: 16px 0px;
   }
@@ -324,5 +341,11 @@
 
   .mobile-sign-up {
     display: flex;
+  }
+}
+
+@media (max-width: 375px) {
+  .overlay-login__img{
+    top: 40%; left: 40%; width: 104px; height: 118px;
   }
 }

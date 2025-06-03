@@ -1,7 +1,7 @@
 let pwAndUserFound = false;
 
 function initLogin() {
-  logoAnimation()
+ logoAnimation()
   
 }
 
