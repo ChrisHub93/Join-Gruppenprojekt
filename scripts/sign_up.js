@@ -12,7 +12,7 @@ async function signUp() {
     await getInpuValueAndPost();
     showSuccesMessage();
     setTimeout(() => {
-      window.location.href = "../index.html";
+      skipAnimationAndGoBack();
     }, 1000);
   } 
 }
@@ -39,4 +39,9 @@ function showSuccesMessage() {
   const ref = document.getElementById("overlay");
   ref.classList.remove("d-none");
   ref.classList.add("overlay");
+}
+
+function skipAnimationAndGoBack() {
+  sessionStorage.setItem("skipAnimation", "1");
+  location.href = "../index.html";
 }

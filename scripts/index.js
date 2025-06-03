@@ -1,8 +1,14 @@
 let pwAndUserFound = false;
 
 function initLogin() {
- logoAnimation()
-  
+  const skip = sessionStorage.getItem("skipAnimation");
+
+  if (skip === "1") {
+    sessionStorage.removeItem("skipAnimation");
+    skipLogoAnimation();
+  } else {
+    logoAnimation(); 
+  }
 }
 
 async function logIn() {
@@ -68,4 +74,12 @@ function hideOverlay(logoRef) {
   const overlayRef = document.getElementById("overlay-login");
   overlayRef.classList.add("d-none")
   logoRef.classList.remove("d-none");
+}
+
+function skipLogoAnimation() {
+  const headerLogoRef = document.getElementById("logInLogo");
+  const overlayRef = document.getElementById("overlay-login");
+
+  overlayRef.classList.add("d-none");
+  headerLogoRef.classList.remove("d-none");  
 }
