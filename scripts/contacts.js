@@ -97,26 +97,28 @@ function selectContact(newContactId, firstNameOfUser, lastNameOfUser, emailOfUse
 
 function openOverlay(){
   let overlayRef = document.getElementById("overlay");
-  overlayRef.classList.toggle("displayNone"); 
-  
-//   let contentOverlayRef = document.getElementById("contentOverlay");
-//   contentOverlayRef.classList.remove("hideContentOverlay");
-//   contentOverlayRef.classList.add("showContentOverlay");
-// }
-
-
- setTimeout(()=>{
   let contentOverlayRef = document.getElementById("contentOverlay");
-  contentOverlayRef.classList.remove("hideContentOverlay");
-  contentOverlayRef.classList.add("showContentOverlay");
-
-  overlayRef.classList.add("overlayBg");
-}, 10);
+  overlayRef.classList.toggle("displayNone"); 
+  setTimeout(()=>{
+    contentOverlayRef.classList.remove("hideContentOverlay");
+    contentOverlayRef.classList.add("showContentOverlay");
+    overlayRef.classList.add("overlayBg");
+  }, 10);
 
 }
 
-//  setTimeout(()=>{
-//   let contentOverlayRef = document.getElementById("contentOverlay");
-//   contentOverlayRef.classList.remove("hideContentOverlay");
-//   contentOverlayRef.classList.add("showContentOverlay");
-// }, 1000);
+function closeOverlay(event){
+  event.stopPropagation(event);
+  let overlayRef = document.getElementById("overlay");
+  let contentOverlayRef = document.getElementById("contentOverlay");
+  contentOverlayRef.classList.add("hideContentOverlay");
+  contentOverlayRef.classList.remove("showContentOverlay");
+  overlayRef.classList.remove("overlayBg");
+  setTimeout(()=>{
+    overlayRef.classList.toggle("displayNone"); 
+  }, 150);
+}
+
+function stopPropagation(event){
+  event.stopPropagation(event);
+}

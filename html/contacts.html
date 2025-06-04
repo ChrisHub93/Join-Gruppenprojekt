@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="../styles/contacts.css" />
   </head>
   <body onload="init()">
-    <div id="overlay" class="overlay displayNone">
+    <div id="overlay" class="overlay displayNone" onclick="closeOverlay(event)" >
 
-      <div id="contentOverlay" class="contentOverlay hideContentOverlay">
+      <div onclick="stopPropagation(event)" id="contentOverlay" class="contentOverlay hideContentOverlay">
 
       <div class="leftSide">
         <div class="contentLeftSide">
@@ -35,7 +35,7 @@
         <div class="inputSection">
 
           <div class="closeOverlay">
-            <img src="../assets/icons/iconoir_cancel.png" alt="">
+            <img onclick="closeOverlay(event)" src="../assets/icons/iconoir_cancel.png" alt="">
           </div>
 
           <div class="inputName">
