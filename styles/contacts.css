@@ -293,9 +293,25 @@ main {
   align-items: center;
 }
 
+.inputSection input {
+  width: 360px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid var(--snd-color);
+  padding-inline-start: 16px;
+  cursor: pointer;
+}
+
+.inputSection input:focus {
+  /* border: 1px solid var(--contacts-input-focus); */
+  /* border-color: var(--contacts-input-focus); */
+  outline: none;
+  border-color: var(--contacts-input-focus);
+}
+
 .leftSide {
-  height: 500px;
-  width: 400px;
+  height: 450px;
+  width: 350px;
   border-top-left-radius: 32px;
   border-bottom-left-radius: 32px;
   background-color: var(--bg-sidebar);
@@ -305,7 +321,7 @@ main {
   justify-content: center;
 }
 
-.contentLeftSide{
+.contentLeftSide {
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -313,28 +329,28 @@ main {
   gap: 16px;
 }
 
-.contentLeftSide h2{
+.contentLeftSide h2 {
   font-size: 48px;
 }
 
-.contentLeftSide span{
+.contentLeftSide span {
   font-size: 22px;
 }
 
-.contentLeftSide img{
-  height: 64px;
+.contentLeftSide img {
+  height: 56px;
   object-fit: contain;
 }
 
-.blueLine{
+.blueLine {
   height: 2px;
   width: 80px;
   background-color: var(--contact-title-seperator);
 }
 
 .rightSide {
-  height: 500px;
-  width: 800px;
+  height: 450px;
+  width: 600px;
   background-color: white;
   border-top-right-radius: 32px;
   border-bottom-right-radius: 32px;
@@ -343,7 +359,7 @@ main {
   align-items: center;
 }
 
-.profilePicture{
+.profilePicture {
   height: 100px;
   width: 100px;
   background-color: var(--input-border);
@@ -355,11 +371,117 @@ main {
   filter: drop-shadow(0px 0px 0.5px grey);
 }
 
-.profilePicture img{
-  
+.profilePicture img {
+  filter: brightness(0) invert(1);
+  height: 32px;
+  object-fit: contain;
 }
 
-.inputSection{
+.inputSection {
   display: flex;
   flex-direction: column;
+  margin-left: 56px;
+  margin-bottom: 40px;
+}
+
+.flexButtons {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.flexButtons button {
+  padding: 12px 10px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.clear {
+  background-color: white;
+  border: 1px solid;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clear .hoverIcon {
+  display: none;
+}
+
+.clear:hover .defaultIcon {
+  display: none;
+}
+
+.clear:hover .hoverIcon {
+  display: block;
+}
+
+.clear:hover {
+  box-shadow: 0px 4px 3px var(--snd-color);
+  border-color: var(--focus-color);
+  color: var(--focus-color);
+}
+
+.createTask {
+  background-color: var(--darkBtn-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.createTask:hover {
+  background-color: var(--focus-color);
+  box-shadow: 0px 4px 3px var(--snd-color);
+}
+
+.closeOverlay {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-bottom: 56px;
+}
+
+.closeOverlay img{
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.closeOverlay img:hover{
+  background-color: var(--bg-color);
+}
+
+.inputName,
+.inputEmail,
+.inputTel {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.inputName img,
+.inputEmail img,
+.inputTel img {
+  position: absolute;
+  right: 16px;
+}
+
+.inputEmail {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.inputName input:focus,
+.inputEmai input:focus,
+.inputTel input:focus {
+  /* outline: none;
+  border-color: red !important; */
 }

@@ -23,6 +23,7 @@
     --email-color: #007cee;
     --contact-title-seperator: #29abe2; 
     --contacts-overlay-bg: #b8b9ba;
+    --contacts-input-focus: #94d5f0;
   }
 
   .d-none{
