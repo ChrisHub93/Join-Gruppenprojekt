@@ -32,9 +32,9 @@ function getListOfContacts(contactsArray) {
     let lastNameOfUser = user.lastname;
     let phoneOfUser = user.phone;
     let alphabeticalOrderRef = document.getElementById("alphabeticalOrder" + firstNameOfUser.charAt(0).toUpperCase());
-    alphabeticalOrderRef.innerHTML += getTemplate(emailOfUser, firstNameOfUser, lastNameOfUser, phoneOfUser);
+    alphabeticalOrderRef.innerHTML += getBasicInfoAboutContact(emailOfUser, firstNameOfUser, lastNameOfUser, phoneOfUser);
     getSortTitle(firstNameOfUser);
-    randomNumber(firstNameOfUser);
+    randomBackgroundColor(firstNameOfUser);
   }
 }
 
@@ -43,7 +43,7 @@ function getSortTitle(firstNameOfUser) {
   orderRef.innerHTML = getSortTitleTemplate(firstNameOfUser);
 }
 
-function randomNumber(firstNameOfUser) {
+function randomBackgroundColor(firstNameOfUser) {
   let numberForClass = Math.floor(Math.random() * 8) + 1;
   let circleFirstLettersRef = document.getElementById("circleFirstLetters" + firstNameOfUser);
   circleFirstLettersRef.classList.add("bgForCircleFirstLetters" + numberForClass);
