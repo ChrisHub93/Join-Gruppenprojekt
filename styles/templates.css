@@ -3,6 +3,16 @@
     padding-right: calc((100% - 1960px) / 2);
 }
 
+.hidden-init {
+    display: none;
+}
+
+.overflow{
+    overflow-y: auto;
+    height: calc(100vh - 96px);
+    background-color: var(--bg-color);
+}
+
 .header-name{
     padding-left: 348px;
     font-size: 20px;
@@ -25,6 +35,10 @@ header{
     padding-right: 40px;
     padding-left: 50px;
     position: relative;
+}
+
+.help-header-top-profile{
+    padding-left: 70px;
 }
 
 .help-icon{
@@ -83,10 +97,6 @@ header{
     background-color: #2A3D59;
 }
 
-.hide-help{
-    display: none;
-}
-
 .sidebar{
     padding-bottom: 64px;
     padding-top: 64px;
@@ -112,6 +122,11 @@ header{
     height: 229px;
     justify-content: center;
     width: 232px;
+    visibility: hidden;
+}
+
+.menu-box.ready{
+    visibility: visible;
 }
 
 .menu-box.logged-out {

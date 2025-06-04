@@ -1,0 +1,28 @@
+.content-position{
+    margin-left: 328px;
+    padding-top: 110px;
+}
+
+h1{
+    font-size: 61px;
+    font-weight: 700;
+}
+
+.headline{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 100px;
+}
+
+.help-arrow{
+    height: 37px;
+    cursor: pointer;
+}
+
+.help-arrow:hover{
+    background-color: #EEEEEE;
+    border-radius: 42px;
+    transform: scale(1.15);
+    transition: transform 0.5s ease;
+}

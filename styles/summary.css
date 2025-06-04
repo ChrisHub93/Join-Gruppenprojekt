@@ -8,12 +8,6 @@
   justify-content: center;
 }
 
-.overflow{
-    overflow-y: auto;
-    height: calc(100vh - 96px);
-    background-color: var(--bg-color);
-}
-
 .flex-column30{
     gap: 30px;
     display: flex;

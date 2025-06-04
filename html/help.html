@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../styles/templates.css">
     <link rel="stylesheet" href="../styles/fonts.css">
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/help.css">
 
     <script src="../scripts/script.js"></script>
     <script src="../scripts/templates.js"></script>
@@ -38,20 +39,27 @@
         <p class="header-name">Kanban Project Management Tool</p>
         <img class="headerLogo d-none" src="../assets/img/Capa 1.png" alt="">
         <div class="profile-navbar">
-            <div id="profile" class="header-top-profile">
+            <div id="profile" class="header-top-profile help-header-top-profile">
+                <a href="../html/help.html"><img class="help-icon d-none" src="../assets/icons/help.png" alt=""></a>
                 <p onclick="showNavbar()" class="personal-icon">G</p>
             </div>
             <div id="navbar" class="navbar d-none">
-                <a class="navbarlink hide-help" href="../html/help.html">Help</a>
-                <a class="navbarlink" href="../html/legal_notice.html">Legal Notice</a>
-                <a class="navbarlink" href="../html/privacy_policy.html">Privacy Policy</a>
+                <a class="navbarlink d-none" href="../html/help.html">Help</a>
+                <a class="navbarlink" menu-data="legal_notice" onclick="activateMenu(this, 'legal_notice')" href="../html/legal_notice.html">Legal Notice</a>
+                <a class="navbarlink" menu-data="privacy_policy" onclick="activateMenu(this, 'privacy_policy')" href="../html/privacy_policy.html">Privacy Policy</a>
                 <a class="navbarlink" href="../index.html">Log Out</a>
             </div>
         </div>
     </header>
     
-    <main>
-        
+    <main class="page-box overflow">
+        <div class="content-position">
+            <div class="headline">
+                <h1>Help</h1>
+                <img onclick="history.back()" class="help-arrow" src="../assets/icons/arrow-left-line.svg" alt="">
+            </div>
+        </div>
+
     </main>
 
     <footer class="page-box d-none">
