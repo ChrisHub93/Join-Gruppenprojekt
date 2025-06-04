@@ -29,16 +29,27 @@
             <img src="../assets/icons/person.svg" alt="">
           </div>
         </div>
+
         <div class="inputSection">
 
           <div class="closeOverlay">
             <img src="../assets/icons/iconoir_cancel.png" alt="">
           </div>
 
-          <input type="text" placeholder="Name">
-          <input type="text" placeholder="Email">
-          <input type="text" placeholder="Phone">
-
+          <div class="inputName">
+            <input type="text" id="name" name="name" placeholder="Name">
+            <img src="../assets/icons/person.png" alt="">
+          </div>
+          
+          <div class="inputEmail">
+            <input type="email" id="email" name="email" placeholder="Email">
+            <img src="../assets/icons/mail.svg" alt="">
+          </div>
+          
+          <div class="inputTel">
+            <input type="tel" id="phone" name="phone" placeholder="Phone">
+            <img src="../assets/icons/call.png" alt="">
+          </div>
           
             <div class="flexButtons">
             <button class="clear">
@@ -56,13 +67,11 @@
             </button>
 
             <button class="createTask" onclick="">
-              Create Task
+              Create Contact
               <img src="/assets/icons/check.png" alt="" />
             </button>
           </div>
           
-
-
         </div>
       </div>
 
