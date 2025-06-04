@@ -94,3 +94,31 @@ function selectContact(newContactId, firstNameOfUser, lastNameOfUser, emailOfUse
     let divRef = Array.from(targetDivRef.classList);
     allInfoAboutContactRef.innerHTML = getDetailsOfContact(divRef, firstNameOfUser, lastNameOfUser, emailOfUser, phoneOfUser);
 }
+
+function openOverlay(){
+  let overlayRef = document.getElementById("overlay");
+  let contentOverlayRef = document.getElementById("contentOverlay");
+  overlayRef.classList.toggle("displayNone"); 
+  setTimeout(()=>{
+    contentOverlayRef.classList.remove("hideContentOverlay");
+    contentOverlayRef.classList.add("showContentOverlay");
+    overlayRef.classList.add("overlayBg");
+  }, 10);
+
+}
+
+function closeOverlay(event){
+  event.stopPropagation(event);
+  let overlayRef = document.getElementById("overlay");
+  let contentOverlayRef = document.getElementById("contentOverlay");
+  contentOverlayRef.classList.add("hideContentOverlay");
+  contentOverlayRef.classList.remove("showContentOverlay");
+  overlayRef.classList.remove("overlayBg");
+  setTimeout(()=>{
+    overlayRef.classList.toggle("displayNone"); 
+  }, 150);
+}
+
+function stopPropagation(event){
+  event.stopPropagation(event);
+}

@@ -29,3 +29,7 @@
   .d-none{
     display: none;
   }
+
+  .displayNone{
+    display: none !important;
+  }
