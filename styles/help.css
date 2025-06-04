@@ -1,6 +1,7 @@
 .content-position{
     margin-left: 328px;
     padding-top: 110px;
+    padding-right: 100px;
 }
 
 h1{
@@ -12,7 +13,12 @@ h1{
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding-right: 100px;
+}
+
+.help-top-box{
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
 }
 
 .help-arrow{
