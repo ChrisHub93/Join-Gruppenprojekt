@@ -15,7 +15,7 @@ function getSubTasksTemplate(inputRef) {
                     <div class="subTasksSeperatorSecond"></div>
                 <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
             </div>
-                <div id="trashOrCheck" class="editOrTrash d-none">
+                <div id="trashOrCheck" class="editOrTrash displayNone">
                     <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
                         <div class="subTasksSeperatorSecond"></div>
                     <img onclick="acceptTask('${inputRef.value}')" src="/assets/icons/Property 1=check.png" alt="">

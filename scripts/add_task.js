@@ -276,17 +276,17 @@ function completeDeleteTask(id) {
 function addDisplayNone(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
-  ref.classList.add("d-none");
+  ref.classList.add("displayNone");
 }
 
 function removeDisplayNone(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
-  ref.classList.remove("d-none");
+  ref.classList.remove("displayNone");
 }
 
 function toggleDisplayNone(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
-  ref.classList.toggle("d-none");
+  ref.classList.toggle("displayNone");
 }
