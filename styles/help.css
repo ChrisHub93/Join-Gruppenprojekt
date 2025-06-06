@@ -37,7 +37,7 @@ h3{
 .help-arrow{
     position: fixed;
     top: 225px;
-    right: 20px;
+    left: min(calc(50% + 980px - 133px), calc(100vw - 133px));
     height: 37px;
     cursor: pointer;
     z-index: 90;
@@ -55,12 +55,55 @@ h3{
 }
 
 .what-join{
-    gap: 16px;
+    gap: 24px;
     display: flex;
     flex-direction: column;
+    padding-bottom: 40px;
 }
 
 .use-box{
     display: flex;
     gap: 35px;
+}
+
+@media (max-width:1100px) {
+    .help-arrow{
+        left: min(calc(100vw - 100px))
+    }
+}
+
+@media (max-width:768px) {
+    .content-position{
+    padding-right: 40px;
+    margin-left: 40px;
+    padding-top: 44px;
+    }
+
+    .help-arrow{
+        top: 128px;
+        left: min(calc(100vw - 60px))
+    }
+}
+
+@media (max-width:545px) {
+    .help-arrow{
+        height: 32px;
+    }
+
+    .content-position{
+        margin-left: 16px;
+        padding-right: 16px;
+    }
+
+    h1{
+        font-size: 47px;
+    }
+
+    h2{
+        font-size: 27px;
+    }
+
+    h3{
+        font-size: 20px;
+    }
 }

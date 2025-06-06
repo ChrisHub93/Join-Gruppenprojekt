@@ -242,6 +242,10 @@ header{
     header{
         height: 90px;
     }
+
+    .overflow{
+        height: calc(100vh - 180px);
+    }
     
     .sidebar{
         display: none;
@@ -331,6 +335,10 @@ header{
 @media (max-width:545px){
     header{
         height: 80px;
+    }
+
+    .overflow{
+        height: calc(100vh - 160px);
     }
 
     .headerLogo{

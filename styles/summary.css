@@ -234,10 +234,6 @@
 }
 
 @media (max-width: 768px) {
-    .overflow{
-        height: calc(100vh - 180px);
-    }
-
     .flex-column30{
         margin-left: 40px;
         padding-top: 44px;
@@ -288,10 +284,6 @@
 @media (max-width:545px){
     .greeting-overlay{
         height: calc(100vh - 160px); 
-    }
-
-    .overflow{
-        height: calc(100vh - 160px);
     }
 
     .flex-column30{
