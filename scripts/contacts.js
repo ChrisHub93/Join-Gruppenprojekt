@@ -98,7 +98,7 @@ function selectContact(newContactId, firstNameOfUser, lastNameOfUser, emailOfUse
 function openOverlay(){
   let overlayRef = document.getElementById("overlay");
   let contentOverlayRef = document.getElementById("contentOverlay");
-  overlayRef.classList.toggle("displayNone"); 
+  overlayRef.classList.toggle("d-nonevip"); 
   setTimeout(()=>{
     contentOverlayRef.classList.remove("hideContentOverlay");
     contentOverlayRef.classList.add("showContentOverlay");
@@ -115,10 +115,33 @@ function closeOverlay(event){
   contentOverlayRef.classList.remove("showContentOverlay");
   overlayRef.classList.remove("overlayBg");
   setTimeout(()=>{
-    overlayRef.classList.toggle("displayNone"); 
+    overlayRef.classList.toggle("d-nonevip"); 
   }, 150);
 }
 
 function stopPropagation(event){
   event.stopPropagation(event);
+}
+
+function createContact(){
+  let nameRef = document.getElementById("name").value;
+  let emailRef = document.getElementById("email").value;
+  let phoneRef = document.getElementById("phone").value;
+
+  let fullName = nameRef.split(" ");
+  let firstNameOfUser = fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
+  let lastnameOfUser = fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
+
+  postData("/contacts/", {email: emailRef, firstname: firstNameOfUser, lastname: lastnameOfUser, phone: phoneRef});
+}
+
+async function postData(path, data = {}) {
+  let response = await fetch(BASE_URL + path + ".json", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return (responseToJson = await response.json());
 }
