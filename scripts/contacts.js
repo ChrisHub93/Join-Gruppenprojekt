@@ -130,9 +130,11 @@ function createContact(){
 
   let fullName = nameRef.split(" ");
   let firstNameOfUser = fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
-  let lastnameOfUser = fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
+  let lastNameOfUser = fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
 
-  postData("/contacts/", {email: emailRef, firstname: firstNameOfUser, lastname: lastnameOfUser, phone: phoneRef});
+  postData("/contacts/", {email: emailRef, firstname: firstNameOfUser, lastname: lastNameOfUser, phone: phoneRef});
+
+  getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef);
 }
 
 async function postData(path, data = {}) {
@@ -144,4 +146,11 @@ async function postData(path, data = {}) {
     body: JSON.stringify(data),
   });
   return (responseToJson = await response.json());
+}
+
+function getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef) {
+  let alphabeticalOrderRef = document.getElementById("alphabeticalOrder" + firstNameOfUser.charAt(0).toUpperCase());
+  alphabeticalOrderRef.innerHTML += getBasicInfoAboutContact(emailRef, firstNameOfUser, lastNameOfUser, phoneRef);
+  getSortTitle(firstNameOfUser);
+  randomBackgroundColor(firstNameOfUser);  
 }
