@@ -212,6 +212,8 @@ main {
   align-items: center;
 }
 
+
+
 .edit img,
 .delete img {
   height: 18px;
@@ -230,6 +232,26 @@ main {
 .edit:hover,
 .delete:hover {
   color: var(--contact-title-seperator);
+}
+
+.hoverIcon{
+  display: none !important;
+}
+
+.edit:hover .defaultIcon{
+  display: none !important;
+}
+
+.edit:hover .hoverIcon{
+  display: block !important;
+}
+
+.delete:hover .defaultIcon{
+  display: none !important;
+}
+
+.delete:hover .hoverIcon{
+  display: block !important;
 }
 
 .contactInformation {

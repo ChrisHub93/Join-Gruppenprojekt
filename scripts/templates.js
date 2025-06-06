@@ -34,12 +34,14 @@ function getDetailsOfContact(divRef,firstNameOfUser,lastNameOfUser,emailOfUser,p
               <h2>${firstNameOfUser} ${lastNameOfUser}</h2>
               <div class="editOrDeleteFlex">
                 <div class="edit editOrDeleteFlex">
-                  <img src="/assets/icons/Property 1=edit.png" alt="" />
+                  <img class="defaultIcon" src="/assets/icons/Property 1=edit.png" alt="" />
+                  <img class="hoverIcon" src="/assets/icons/edit-hover.png" alt="" />
                   <span>Edit</span>
                 </div>
 
                 <div class="delete editOrDeleteFlex">
-                  <img src="/assets/icons/Property 1=delete.png" alt="" />
+                  <img class="defaultIcon" src="/assets/icons/Property 1=delete.png" alt="" />
+                  <img class="hoverIcon" src="/assets/icons/delete-hover.png" alt="" />
                   <span>Delete</span>
                 </div>
               </div>
