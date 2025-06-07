@@ -1,4 +1,9 @@
-@font-face {
+/* @font-face {
   font-family: 'Inter';
   src: url('../fonts/inter-v18-latin-regular.woff2') format('woff2');
+} */
+ 
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter/Inter-VariableFont_opsz\,wght.ttf');
 }
