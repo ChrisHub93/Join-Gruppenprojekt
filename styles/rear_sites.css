@@ -4,7 +4,7 @@
     padding-right: 100px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 30px;
 }
 
 h1{
@@ -28,12 +28,6 @@ h3{
     justify-content: space-between;
 }
 
-.help-top-box{
-    gap: 30px;
-    display: flex;
-    flex-direction: column;
-}
-
 .help-arrow{
     position: fixed;
     top: 225px;
@@ -50,14 +44,17 @@ h3{
     transition: transform 0.5s ease;
 }
 
-.join-color{
+span{
     color: #29ABE2;
 }
 
-.what-join{
+.content-box{
     gap: 24px;
     display: flex;
     flex-direction: column;
+}
+
+.padbot{
     padding-bottom: 40px;
 }
 
@@ -66,7 +63,15 @@ h3{
     gap: 35px;
 }
 
+ul{
+    padding-left: 20px;
+}
+
 @media (max-width:1100px) {
+    .content-position{
+        margin-left: 240px;
+    }
+
     .help-arrow{
         left: min(calc(100vw - 100px))
     }
