@@ -34,7 +34,7 @@ function getListOfContacts(contactsArray) {
     let alphabeticalOrderRef = document.getElementById("alphabeticalOrder" + firstNameOfUser.charAt(0).toUpperCase());
     alphabeticalOrderRef.innerHTML += getBasicInfoAboutContact(emailOfUser, firstNameOfUser, lastNameOfUser, phoneOfUser);
     getSortTitle(firstNameOfUser);
-    randomBackgroundColor(firstNameOfUser);
+    randomBackgroundColor(firstNameOfUser, lastNameOfUser);
   }
 }
 
@@ -43,9 +43,9 @@ function getSortTitle(firstNameOfUser) {
   orderRef.innerHTML = getSortTitleTemplate(firstNameOfUser);
 }
 
-function randomBackgroundColor(firstNameOfUser) {
+function randomBackgroundColor(firstNameOfUser, lastNameOfUser) {
   let numberForClass = Math.floor(Math.random() * 8) + 1;
-  let circleFirstLettersRef = document.getElementById("circleFirstLetters" + firstNameOfUser);
+  let circleFirstLettersRef = document.getElementById("circleFirstLetters" + firstNameOfUser + lastNameOfUser);
   circleFirstLettersRef.classList.add("bgForCircleFirstLetters" + numberForClass);
 }
 
@@ -75,10 +75,10 @@ function clickedOnNewContact(newContactId, firstNameOfUser, lastNameOfUser, emai
       for (const element of idRef) {
         element.classList.remove("darkBtn");
       }
-      let setNewBgForContactRef = document.getElementById("setNewBgFor"+firstNameOfUser);
+      let setNewBgForContactRef = document.getElementById("setNewBgFor"+firstNameOfUser+lastNameOfUser);
       setNewBgForContactRef.classList.add("darkBtn");
       let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
-      let targetDivRef = document.getElementById("circleFirstLetters"+firstNameOfUser);
+      let targetDivRef = document.getElementById("circleFirstLetters"+firstNameOfUser+lastNameOfUser);
       let divRef = Array.from(targetDivRef.classList);
       allInfoAboutContactRef.innerHTML = getDetailsOfContact(divRef, firstNameOfUser, lastNameOfUser, emailOfUser, phoneOfUser);
       currentActiveContactId = newContactId;
@@ -86,11 +86,11 @@ function clickedOnNewContact(newContactId, firstNameOfUser, lastNameOfUser, emai
 
 function selectContact(newContactId, firstNameOfUser, lastNameOfUser, emailOfUser, phoneOfUser){
     currentActiveContactId = newContactId;
-    let setNewBgForContactRef = document.getElementById("setNewBgFor"+firstNameOfUser);
+    let setNewBgForContactRef = document.getElementById("setNewBgFor"+firstNameOfUser+lastNameOfUser);
     setNewBgForContactRef.classList.add("darkBtn");
     let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
     allInfoAboutContactRef.classList.add("showAllInfoAboutContact");
-    let targetDivRef = document.getElementById("circleFirstLetters"+firstNameOfUser);
+    let targetDivRef = document.getElementById("circleFirstLetters"+firstNameOfUser+lastNameOfUser);
     let divRef = Array.from(targetDivRef.classList);
     allInfoAboutContactRef.innerHTML = getDetailsOfContact(divRef, firstNameOfUser, lastNameOfUser, emailOfUser, phoneOfUser);
 }

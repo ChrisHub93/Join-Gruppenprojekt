@@ -65,8 +65,8 @@ function getDetailsOfContact(divRef,firstNameOfUser,lastNameOfUser,emailOfUser,p
 
 function getBasicInfoAboutContact(emailOfUser,firstNameOfUser,lastNameOfUser,phoneOfUser) {
   return `<div id="order${firstNameOfUser.charAt(0).toUpperCase()}"></div>
-            <div id="setNewBgFor${firstNameOfUser}" class="contactInfo" onclick="moreDetailsAboutContact('${emailOfUser}', '${firstNameOfUser}', '${lastNameOfUser}', '${phoneOfUser}')">
-              <div id="circleFirstLetters${firstNameOfUser}" class="circleFirstLetters">
+            <div id="setNewBgFor${firstNameOfUser+lastNameOfUser}" class="contactInfo" onclick="moreDetailsAboutContact('${emailOfUser}', '${firstNameOfUser}', '${lastNameOfUser}', '${phoneOfUser}')">
+              <div id="circleFirstLetters${firstNameOfUser+lastNameOfUser}" class="circleFirstLetters">
                 <span>${firstNameOfUser.charAt(0)}</span>
                 <span>${lastNameOfUser.charAt(0)}</span>
               </div>
