@@ -27,6 +27,8 @@ h1 {
 .headline__input {
   width: 280px;
   border-radius: 10px;
+  font-size: 20px;
+  padding: 0 10px;
 }
 
 .headline__inputs__imgs {
