@@ -17,6 +17,11 @@ h1 {
   align-items: center;
 }
 
+.content__headline__text{
+    font-size: 20px;
+    font-weight: 700;
+}
+
 .headline__inputs {
   display: flex;
   gap: 32px;
