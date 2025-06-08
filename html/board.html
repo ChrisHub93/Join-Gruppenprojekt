@@ -1,169 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Board</title>
-    <link rel="icon" type="image/xcon" href="../assets/img/Capa 1.png">
+    <link rel="icon" type="image/xcon" href="../assets/img/Capa 1.png" />
 
-    <link rel="stylesheet" href="../styles/templates.css">
-    <link rel="stylesheet" href="../styles/fonts.css">
-    <link rel="stylesheet" href="../styles/style.css">
-    <link rel="stylesheet" href="../styles/board.css">
+    <link rel="stylesheet" href="../styles/templates.css" />
+    <link rel="stylesheet" href="../styles/fonts.css" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="../styles/board.css" />
 
     <script src="../scripts/script.js"></script>
     <script src="../scripts/templates.js"></script>
-</head>
-<body onload="init()">
+  </head>
+  <body onload="init()">
     <div class="page-box">
-        <aside id="sidebar" class="sidebar">
-                <img class="sidebar-logo" src="../assets/img/Capa 1 white.png" alt="">
-                <div class="menu-box">
-                    <div class="sidebar-menu" menu-data="summary" onclick="activateMenu(this, 'summary')"><a class="sidebar-text" href="../html/summary.html"><img src="../assets/icons/Summary.png" class="sidebar-icon" alt="">Summary</a></div>
-                    <div class="sidebar-menu" menu-data="add_task" onclick="activateMenu(this, 'add_task')"><a class="sidebar-text" href="../html/add_task.html"><img src="../assets/icons/Add task.png" class="sidebar-icon" alt="">Add Task</a></div>
-                    <div class="sidebar-menu" menu-data="board" onclick="activateMenu(this, 'board')"><a class="sidebar-text" href="../html/board.html"><img src="../assets/icons/Board.png" class="sidebar-icon" alt="">Board</a></div>
-                    <div class="sidebar-menu" menu-data="contacts" onclick="activateMenu(this, 'contacts')"><a class="sidebar-text" href="../html/contacts.html"><img src="../assets/icons/Contacts.png" class="sidebar-icon" alt="">Contacts</a></div>
-                </div>
-                <div class="sidebar-policy">
-                    <div class="policy-box">
-                        <a class="policy-text" menu-data="privacy_policy" onclick="activateMenu(this, 'privacy_policy')" href="../html/privacy_policy.html">Privacy Policy</a>
-                    </div>
-                    <div class="policy-box">
-                        <a class="policy-text" menu-data="legal_notice" onclick="activateMenu(this, 'legal_notice')" href="../html/legal_notice.html">Legal Notice</a>
-                    </div>
-                </div>
-        </aside>
+      <aside id="sidebar" class="sidebar">
+        <img class="sidebar-logo" src="../assets/img/Capa 1 white.png" alt="" />
+        <div class="menu-box">
+          <div
+            class="sidebar-menu"
+            menu-data="summary"
+            onclick="activateMenu(this, 'summary')"
+          >
+            <a class="sidebar-text" href="../html/summary.html"
+              ><img
+                src="../assets/icons/Summary.png"
+                class="sidebar-icon"
+                alt=""
+              />Summary</a
+            >
+          </div>
+          <div
+            class="sidebar-menu"
+            menu-data="add_task"
+            onclick="activateMenu(this, 'add_task')"
+          >
+            <a class="sidebar-text" href="../html/add_task.html"
+              ><img
+                src="../assets/icons/Add task.png"
+                class="sidebar-icon"
+                alt=""
+              />Add Task</a
+            >
+          </div>
+          <div
+            class="sidebar-menu"
+            menu-data="board"
+            onclick="activateMenu(this, 'board')"
+          >
+            <a class="sidebar-text" href="../html/board.html"
+              ><img
+                src="../assets/icons/Board.png"
+                class="sidebar-icon"
+                alt=""
+              />Board</a
+            >
+          </div>
+          <div
+            class="sidebar-menu"
+            menu-data="contacts"
+            onclick="activateMenu(this, 'contacts')"
+          >
+            <a class="sidebar-text" href="../html/contacts.html"
+              ><img
+                src="../assets/icons/Contacts.png"
+                class="sidebar-icon"
+                alt=""
+              />Contacts</a
+            >
+          </div>
+        </div>
+        <div class="sidebar-policy">
+          <div class="policy-box">
+            <a
+              class="policy-text"
+              menu-data="privacy_policy"
+              onclick="activateMenu(this, 'privacy_policy')"
+              href="../html/privacy_policy.html"
+              >Privacy Policy</a
+            >
+          </div>
+          <div class="policy-box">
+            <a
+              class="policy-text"
+              menu-data="legal_notice"
+              onclick="activateMenu(this, 'legal_notice')"
+              href="../html/legal_notice.html"
+              >Legal Notice</a
+            >
+          </div>
+        </div>
+      </aside>
     </div>
 
     <header class="page-box">
-        <p class="header-name">Kanban Project Management Tool</p>
-        <img class="headerLogo d-none" src="../assets/img/Capa 1.png" alt="">
-        <div class="profile-navbar">
-            <div class="header-top-profile">
-                <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
-                <p id="profile" onclick="showNavbar()" class="personal-icon">G</p>
-            </div>
-            <div id="navbar" class="navbar d-none">
-                <a class="navbarlink" href="../html/help.html">Help</a>
-                <a class="navbarlink" menu-data="legal_notice" onclick="activateMenu(this, 'legal_notice')" href="../html/legal_notice.html">Legal Notice</a>
-                <a class="navbarlink" menu-data="privacy_policy" onclick="activateMenu(this, 'privacy_policy')" href="../html/privacy_policy.html">Privacy Policy</a>
-                <a class="navbarlink" href="../index.html">Log Out</a>
-            </div>
+      <p class="header-name">Kanban Project Management Tool</p>
+      <img class="headerLogo d-none" src="../assets/img/Capa 1.png" alt="" />
+      <div class="profile-navbar">
+        <div class="header-top-profile">
+          <a href="../html/help.html"
+            ><img class="help-icon" src="../assets/icons/help.png" alt=""
+          /></a>
+          <p id="profile" onclick="showNavbar()" class="personal-icon">G</p>
         </div>
+        <div id="navbar" class="navbar d-none">
+          <a class="navbarlink" href="../html/help.html">Help</a>
+          <a
+            class="navbarlink"
+            menu-data="legal_notice"
+            onclick="activateMenu(this, 'legal_notice')"
+            href="../html/legal_notice.html"
+            >Legal Notice</a
+          >
+          <a
+            class="navbarlink"
+            menu-data="privacy_policy"
+            onclick="activateMenu(this, 'privacy_policy')"
+            href="../html/privacy_policy.html"
+            >Privacy Policy</a
+          >
+          <a class="navbarlink" href="../index.html">Log Out</a>
+        </div>
+      </div>
     </header>
-    
+
     <main class="main-board">
-            <div class="headline">
-                <h1>Board</h1>
-                <div class="headline__inputs">
-                    <input class="headline__input" type="text" placeholder="Find Task">
+      <div class="headline">
+        <h1>Board</h1>
+        <div class="headline__inputs">
+          <input class="headline__input" type="text" placeholder="Find Task" />
 
-                    <div class="headline__inputs__imgs">
-                        <img src="../assets/icons/Vector 3.svg" alt="linke">
-                        <img src="../assets/icons/Property 1=Default.svg" alt="search icon">
-                    </div>
-                    <button class="addTaskBtn">Add Task 
-                        <img src="../assets/icons/add.svg" alt="Add icon">
-                    </button>
-             </div>
+          <div class="headline__inputs__imgs">
+            <img src="../assets/icons/Vector 3.svg" alt="linke" />
+            <img
+              src="../assets/icons/Property 1=Default.svg"
+              alt="search icon"
+            />
+          </div>
+          <button class="addTaskBtn">
+            Add Task
+            <img src="../assets/icons/add.svg" alt="Add icon" />
+          </button>
+        </div>
+      </div>
+      <div class="container">
+        <div class="container__content">
+          <div class="content__headline">
+            <h2>To do</h2>
+            <button>
+              <img src="../assets/icons/Capa 1.svg" alt="" />
+            </button>
+          </div>
+          <div id="toDoContent">
+            <div class="emptyContainer">
+              <p class="emptyContainer__text">No Tasks To do</p>
+              <p></p>
             </div>
-            <div class="container">
-                <div class="container__content">
-                    <div class="content__headline">
-                        <h2>To do</h2>
-                        <button>
-                            <img src="../assets/icons/Capa 1.svg" alt="">
-                        </button>
-                    </div>
-                    <div id="toDoContent">
-
-                        <div class="emptyContainer">
-                            <p class="emptyContainer__text">No Tasks To do<p>
-                        </div>
-
-                    </div>
-
-                   
-
+          </div>
+        </div>
+        <div class="container__content">
+          <div class="content__headline">
+            <h2>In progress</h2>
+            <button>
+              <img src="../assets/icons/Capa 1.svg" alt="" />
+            </button>
+          </div>
+          <div id="inProgressContent">
+            <div class="filledContainer">
+              <div class="filledContainer__category">
+                <p>User Story</p>
+              </div>
+              <div class="filledContainer__title">
+                <p>Kochewelt Page & Recipe Recommander</p>
+              </div>
+              <div class="filledContainer__description">
+                <p>Build with start page with recipe recommandation...</p>
+              </div>
+              <div class="filledContainer__status">
+                <div
+                  class="statusLine"
+                  role="progressbar"
+                  aria-label="Example with label"
+                  aria-valuenow="25"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  <div
+                    id="status-bar-js"
+                    class="progress-bar"
+                    style="width: 50%"
+                  ></div>
                 </div>
-                <div class="container__content">
-                    <div class="content__headline">
-                        <h2>In progress</h2>
-                        <button>
-                            <img src="../assets/icons/Capa 1.svg" alt="">
-                        </button>
-                    </div>
-                    <div id="inProgressContent">
-
-                        <div class="filledContainer">
-                            
-                            <div class="filledContainer__category">
-                                <p>User Story</p>
-                            </div>
-                            <div class="filledContainer__title">
-                                <p>Kochewelt Page & Recipe Recommander</p>
-                                
-                            </div>
-                            <div class="filledContainer__description">
-                                <p>Build with start page with recipe recommandation...</p>
-                            </div>
-                            <div class="filledContainer__status">                            
-                                <div class="statusLine" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                    <div id="status-bar-js" class="progress-bar" style="width: 50%;"></div>
-                                </div>
-                                <p>1/2 Subtasks</p>
-                            </div>
-                            <div class="taskInfo">
-                                <div id="assignedTo" class="assignedTo">
-                                    <div class="assigned">
-                                        <span>A</span>
-                                        <span>M</span>
-                                    </div>
-                                    <div class="assigned assignedPlusOne ">
-                                        <span>C</span>
-                                        <span>M</span>
-                                    </div>
-                                    <div class="assigned assignedPlusTwo ">
-                                        <span>K</span>
-                                        <span>A</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="priority">
-                                    <img src="../assets/icons/Prio media.png" alt="prio icon">
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-
+                <p>1/2 Subtasks</p>
+              </div>
+              <div class="taskInfo">
+                <div id="assignedTo" class="assignedTo">
+                  <div class="assigned">
+                    <span>A</span>
+                    <span>M</span>
+                  </div>
+                  <div class="assigned assignedPlusOne">
+                    <span>C</span>
+                    <span>M</span>
+                  </div>
+                  <div class="assigned assignedPlusTwo">
+                    <span>K</span>
+                    <span>A</span>
+                  </div>
                 </div>
-                <div class="container__content">
-                    <div class="content__headline">
-                        <h2>Await feedback</h2>
-                        <button>
-                            <img src="../assets/icons/Capa 1.svg" alt="">
-                        </button>
-                    </div>
+
+                <div class="priority">
+                  <img src="../assets/icons/Prio media.png" alt="prio icon" />
                 </div>
-                <div class="container__content">
-                    <div class="content__headline">
-                        <h2>Done</h2>
-                        <button>
-                            <img src="../assets/icons/Capa 1.svg" alt="">
-                        </button>
-                    </div>
-                </div>                
+              </div>
             </div>
+          </div>
+        </div>
+        <div class="container__content">
+          <div class="content__headline">
+            <h2>Await feedback</h2>
+            <button>
+              <img src="../assets/icons/Capa 1.svg" alt="" />
+            </button>
+          </div>
+        </div>
+        <div class="container__content">
+          <div class="content__headline">
+            <h2>Done</h2>
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer class="page-box d-none">
-            <div class="menu-box">
-                <div class="sidebar-menu" menu-data="summary" onclick="activateMenu(this, 'summary')"><a class="sidebar-text" href="../html/summary.html"><img src="../assets/icons/Summary.png" class="sidebar-icon" alt="">Summary</a></div>
-                <div class="sidebar-menu" menu-data="board" onclick="activateMenu(this, 'board')"><a class="sidebar-text" href="../html/board.html"><img src="../assets/icons/Board.png" class="sidebar-icon" alt="">Board</a></div>
-                <div class="sidebar-menu" menu-data="add_task" onclick="activateMenu(this, 'add_task')"><a class="sidebar-text" href="../html/add_task.html"><img src="../assets/icons/Add task.png" class="sidebar-icon" alt="">Add Task</a></div>
-                <div class="sidebar-menu" menu-data="contacts" onclick="activateMenu(this, 'contacts')"><a class="sidebar-text" href="../html/contacts.html"><img src="../assets/icons/Contacts.png" class="sidebar-icon" alt="">Contacts</a></div>
-            </div>
+      <div class="menu-box">
+        <div
+          class="sidebar-menu"
+          menu-data="summary"
+          onclick="activateMenu(this, 'summary')"
+        >
+          <a class="sidebar-text" href="../html/summary.html"
+            ><img
+              src="../assets/icons/Summary.png"
+              class="sidebar-icon"
+              alt=""
+            />Summary</a
+          >
+        </div>
+        <div
+          class="sidebar-menu"
+          menu-data="board"
+          onclick="activateMenu(this, 'board')"
+        >
+          <a class="sidebar-text" href="../html/board.html"
+            ><img
+              src="../assets/icons/Board.png"
+              class="sidebar-icon"
+              alt=""
+            />Board</a
+          >
+        </div>
+        <div
+          class="sidebar-menu"
+          menu-data="add_task"
+          onclick="activateMenu(this, 'add_task')"
+        >
+          <a class="sidebar-text" href="../html/add_task.html"
+            ><img
+              src="../assets/icons/Add task.png"
+              class="sidebar-icon"
+              alt=""
+            />Add Task</a
+          >
+        </div>
+        <div
+          class="sidebar-menu"
+          menu-data="contacts"
+          onclick="activateMenu(this, 'contacts')"
+        >
+          <a class="sidebar-text" href="../html/contacts.html"
+            ><img
+              src="../assets/icons/Contacts.png"
+              class="sidebar-icon"
+              alt=""
+            />Contacts</a
+          >
+        </div>
+      </div>
     </footer>
-</body>
+  </body>
 </html>
