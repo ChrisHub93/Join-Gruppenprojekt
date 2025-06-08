@@ -13,13 +13,13 @@ h1 {
 .headline {
   display: flex;
   justify-content: space-between;
-  padding: 96px;
+  padding: 48px;
   align-items: center;
 }
 
-.content__headline__text{
-    font-size: 20px;
-    font-weight: 700;
+.content__headline__text {
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .headline__inputs {
@@ -58,7 +58,8 @@ h1 {
   display: flex;
   flex: 1;
   gap: 24px;
-  justify-content: center;
+  padding-left: 48px;
+  overflow-x: auto;
 }
 
 .container__content {
@@ -67,17 +68,20 @@ h1 {
   height: 100%;
   background-color: var(--bg-color);
   flex-direction: column;
+  overflow-y: clip;
 }
 
 .content__headline {
+  width: 252px;
   display: flex;
   height: 47px;
-  width: 100%;
   justify-content: space-between;
   padding: 10px;
 }
 
 .emptyContainer {
+  width: 252px;
+  margin-top: 10px;
   background-color: var(--board-tasks-bg);
   border-radius: 10px;
   border: 2px dashed #a8a8a8;
@@ -94,11 +98,12 @@ h1 {
 .filledContainer {
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
   border-radius: 24px;
   background-color: var(--sng-bg-color);
   padding: 16px;
   gap: 10px;
-  min-width: 252px;
+  width: 252px;
   filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.08));
 }
 
@@ -163,13 +168,13 @@ h1 {
   font-size: 12px;
   border: 1px solid white;
 }
-.assignedPlusOne{
-    position: absolute;
-    left: 24px;
-    background-color: blue;
+.assignedPlusOne {
+  position: absolute;
+  left: 24px;
+  background-color: blue;
 }
-.assignedPlusTwo{
-    position: absolute;
-    left: 48px;
-    background-color: red;
+.assignedPlusTwo {
+  position: absolute;
+  left: 48px;
+  background-color: red;
 }
