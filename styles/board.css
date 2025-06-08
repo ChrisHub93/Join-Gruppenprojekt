@@ -17,11 +17,6 @@ h1 {
   align-items: center;
 }
 
-.content__headline__text {
-  font-size: 20px;
-  font-weight: 700;
-}
-
 .headline__inputs {
   display: flex;
   gap: 32px;
@@ -79,6 +74,27 @@ h1 {
   padding: 10px;
 }
 
+.content__headline__text {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.content__headline__btn {
+  border: 2px solid black;
+  border-radius: 8px;
+    font-weight: 500;
+    display: flex;
+    font-size: 18px;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.content__headline__btn:hover {
+  cursor: pointer;
+  border-color: var(--focus-color);
+    color: var(--focus-color);
+}
+
 .emptyContainer {
   width: 252px;
   margin-top: 10px;
@@ -105,6 +121,10 @@ h1 {
   gap: 10px;
   width: 252px;
   filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.08));
+}
+
+.filledContainer:hover {
+    cursor: pointer;
 }
 
 .filledContainer__category {
