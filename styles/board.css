@@ -17,6 +17,16 @@ h1 {
   align-items: center;
 }
 
+.headline__btn-mobile {
+  display: none;
+  border: none;
+  background-color: var(--bg-color);
+}
+
+.headline__btn-mobile:hover {
+  cursor: pointer;
+}
+
 .headline__inputs {
   display: flex;
   gap: 32px;
@@ -232,31 +242,49 @@ h1 {
 }
 
 @media (max-width: 790px) {
-    .container {
-        flex-wrap: wrap;
-        margin-right: 15px;
-      }
+  .container {
+    flex-wrap: wrap;
+    margin-right: 15px;
+  }
 }
-
 
 @media (max-width: 768px) {
   .main-board {
     margin-left: 0;
   }
-
-
 }
 
 @media (max-width: 545px) {
-    h1{
-        font-size: 47px;
+  h1 {
+    font-size: 47px;
+  }
+
+  .headline {
+    gap: 30px;
+  }
+
+  .addTaskBtn {
+    display: none;
+  }
+
+  .headline__text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .headline__btn-mobile {
+    display: block;
+  }
+}
+
+@media (max-width: 423px) {
+    .headline__inputs {
+        width: 100%;
     }
 
-    .headline{
-        gap: 30px;
-    }
-
-    .addTaskBtn {
-        display: none;
+    .headline__input{
+        width: 100%;
     }
 }
