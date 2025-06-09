@@ -29,11 +29,11 @@ h1 {
   border-radius: 10px;
   font-size: 20px;
   padding: 0 10px;
-  border: 1px solid #A8A8A8;
+  border: 1px solid #a8a8a8;
 }
 
-.headline__input:hover{
-    cursor: pointer;
+.headline__input:hover {
+  cursor: pointer;
 }
 
 .headline__inputs__imgs {
@@ -42,10 +42,10 @@ h1 {
   top: 10px;
 }
 
-.headline__inputs__imgs__search:hover{
-    background-color: #D1D1D1;
-    border-radius: 50%;
-    cursor: pointer;
+.headline__inputs__imgs__search:hover {
+  background-color: #d1d1d1;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .addTaskBtn {
@@ -63,7 +63,7 @@ h1 {
 }
 
 .addTaskBtn:hover {
-    background-color: var(--focus-color);
+  background-color: var(--focus-color);
 }
 
 .container {
@@ -99,17 +99,17 @@ h1 {
 .content__headline__btn {
   border: 2px solid black;
   border-radius: 8px;
-    font-weight: 500;
-    display: flex;
-    font-size: 18px;
-    justify-content: center;
-    align-items: flex-end;
+  font-weight: 500;
+  display: flex;
+  font-size: 18px;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .content__headline__btn:hover {
   cursor: pointer;
   border-color: var(--focus-color);
-    color: var(--focus-color);
+  color: var(--focus-color);
 }
 
 .emptyContainer {
@@ -141,7 +141,7 @@ h1 {
 }
 
 .filledContainer:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .filledContainer__category {
@@ -205,13 +205,58 @@ h1 {
   font-size: 12px;
   border: 1px solid white;
 }
+
 .assignedPlusOne {
   position: absolute;
   left: 24px;
   background-color: blue;
 }
+
 .assignedPlusTwo {
   position: absolute;
   left: 48px;
   background-color: red;
+}
+
+@media (max-width: 1100px) {
+  .main-board {
+    margin-left: 200px;
+  }
+}
+
+@media (max-width: 940px) {
+  .headline {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 790px) {
+    .container {
+        flex-wrap: wrap;
+        margin-right: 15px;
+      }
+}
+
+
+@media (max-width: 768px) {
+  .main-board {
+    margin-left: 0;
+  }
+
+
+}
+
+@media (max-width: 545px) {
+    h1{
+        font-size: 47px;
+    }
+
+    .headline{
+        gap: 30px;
+    }
+
+    .addTaskBtn {
+        display: none;
+    }
 }
