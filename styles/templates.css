@@ -264,8 +264,8 @@ header{
         display: none;
     }
 
-    .hide-help{
-        display: flex;
+    .d-none{
+        display: flex !important;
     }
 
     footer{
