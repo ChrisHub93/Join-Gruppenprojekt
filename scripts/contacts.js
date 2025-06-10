@@ -157,12 +157,15 @@ async function createContact(event){
   await postData("/test/", {email: emailRef.value, firstname: firstNameOfUser, lastname: lastNameOfUser, phone: phoneRef.value});
 
   getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef);
-  nameRef.value ='';
-  emailRef.value ='';
-  phoneRef.value = '';
+  clearInputFields(nameRef, emailRef, phoneRef);
   closeOverlayAfterCreatedContact(event);
 }
 
+function clearInputFields(nameRef, emailRef, phoneRef){
+  nameRef.value ='';
+  emailRef.value ='';
+  phoneRef.value = '';
+}
 
 function closeOverlayAfterCreatedContact(event){
   event.stopPropagation(event);
@@ -200,25 +203,23 @@ async function openEditOverlay(event){
   event.stopPropagation(event);
   let contacts = await fetchData("/contacts/");
   let contactsArray = Object.values(contacts);
-
   let user = contactsArray.find( currentUser => currentUser.firstname +' '+ currentUser.lastname == currentActiveContactId);
+  toggleEditOverlay();
+  inputFieldsGetValuesOfContact(user);
+  profileGetCorrectBackground(user);
 
-  console.log(user);
+}
 
+function toggleEditOverlay(){
   let overlayRef = document.getElementById("editOverlay");
   let contentOverlayRef = document.getElementById("contentEditOverlay");
   overlayRef.classList.toggle("d-nonevip"); 
   contentOverlayRef.classList.remove("d-nonevip");
-
   setTimeout(()=>{
     contentOverlayRef.classList.remove("hideContentOverlay");
     contentOverlayRef.classList.add("showContentOverlay");
     overlayRef.classList.add("overlayBg");
   }, 10);
-  
-  inputFieldsGetValuesOfContact(user);
-  profileGetCorrectBackground(user);
-
 }
 
 function closeEditOverlay(event){
@@ -237,7 +238,6 @@ function inputFieldsGetValuesOfContact(user){
   let inputNameRef = document.getElementById("nameEdit");
   let inputEmailRef = document.getElementById("emailEdit");
   let inputPhoneRef = document.getElementById("phoneEdit");
-
   inputNameRef.value = user.firstname + ' ' + user.lastname;
   inputEmailRef.value = user.email;
   inputPhoneRef.value = user.phone;
