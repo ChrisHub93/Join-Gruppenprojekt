@@ -120,6 +120,27 @@ function closeOverlay(event){
   }, 150);
 }
 
+function cancelOverlay(event){
+
+  let nameRef = document.getElementById("name");
+  let emailRef = document.getElementById("email");
+  let phoneRef = document.getElementById("phone");
+  
+  nameRef.value = '';
+  emailRef.value = '';
+  phoneRef.value = '';
+
+  event.stopPropagation(event);
+  let overlayRef = document.getElementById("overlay");
+  let contentOverlayRef = document.getElementById("contentOverlay");
+  contentOverlayRef.classList.add("hideContentOverlay");
+  contentOverlayRef.classList.remove("showContentOverlay");
+  overlayRef.classList.remove("overlayBg");
+  setTimeout(()=>{
+    overlayRef.classList.toggle("d-nonevip"); 
+  }, 150);
+}
+
 function stopPropagation(event){
   event.stopPropagation(event);
 }
