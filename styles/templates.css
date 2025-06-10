@@ -1,6 +1,5 @@
 .page-box{
-    padding-left: calc((100% - 1960px) / 2);
-    padding-right: calc((100% - 1960px) / 2);
+    padding-right: calc((100% - 1920px));
 }
 
 .hidden-init {
