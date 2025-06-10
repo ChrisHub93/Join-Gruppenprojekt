@@ -99,6 +99,7 @@ function openOverlay(){
   let overlayRef = document.getElementById("overlay");
   let contentOverlayRef = document.getElementById("contentOverlay");
   overlayRef.classList.toggle("d-nonevip"); 
+  contentOverlayRef.classList.remove("d-nonevip");
   setTimeout(()=>{
     contentOverlayRef.classList.remove("hideContentOverlay");
     contentOverlayRef.classList.add("showContentOverlay");
@@ -123,18 +124,36 @@ function stopPropagation(event){
   event.stopPropagation(event);
 }
 
-function createContact(){
-  let nameRef = document.getElementById("name").value;
-  let emailRef = document.getElementById("email").value;
-  let phoneRef = document.getElementById("phone").value;
+async function createContact(event){
+  let nameRef = document.getElementById("name");
+  let emailRef = document.getElementById("email");
+  let phoneRef = document.getElementById("phone");
 
-  let fullName = nameRef.split(" ");
+  let fullName = nameRef.value.split(" ");
   let firstNameOfUser = fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
   let lastNameOfUser = fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
 
-  postData("/contacts/", {email: emailRef, firstname: firstNameOfUser, lastname: lastNameOfUser, phone: phoneRef});
+  await postData("/contacts/", {email: emailRef.value, firstname: firstNameOfUser, lastname: lastNameOfUser, phone: phoneRef.value});
 
   getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef);
+  nameRef.value ='';
+  emailRef.value ='';
+  phoneRef.value = '';
+  closeOverlayAfterCreatedContact(event);
+}
+
+
+function closeOverlayAfterCreatedContact(event){
+  event.stopPropagation(event);
+  let overlayRef = document.getElementById("overlay");
+  let contentOverlayRef = document.getElementById("contentOverlay");
+  contentOverlayRef.classList.remove("showContentOverlay");
+  contentOverlayRef.classList.add("d-nonevip");
+  overlayRef.classList.remove("overlayBg");
+  setTimeout(()=>{
+    overlayRef.classList.toggle("d-nonevip"); 
+  }, 150);
+  contentOverlayRef.classList.add("hideContentOverlay");
 }
 
 async function postData(path, data = {}) {
@@ -150,7 +169,7 @@ async function postData(path, data = {}) {
 
 function getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef) {
   let alphabeticalOrderRef = document.getElementById("alphabeticalOrder" + firstNameOfUser.charAt(0).toUpperCase());
-  alphabeticalOrderRef.innerHTML += getBasicInfoAboutContact(emailRef, firstNameOfUser, lastNameOfUser, phoneRef);
+  alphabeticalOrderRef.innerHTML += getBasicInfoAboutContact(emailRef.value, firstNameOfUser, lastNameOfUser, phoneRef.value);
   getSortTitle(firstNameOfUser);
-  randomBackgroundColor(firstNameOfUser);  
+  randomBackgroundColor(firstNameOfUser, lastNameOfUser);  
 }
