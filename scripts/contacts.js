@@ -154,7 +154,7 @@ async function createContact(event){
   let firstNameOfUser = fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
   let lastNameOfUser = fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
 
-  await postData("/contacts/", {email: emailRef.value, firstname: firstNameOfUser, lastname: lastNameOfUser, phone: phoneRef.value});
+  await postData("/test/", {email: emailRef.value, firstname: firstNameOfUser, lastname: lastNameOfUser, phone: phoneRef.value});
 
   getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef);
   nameRef.value ='';
@@ -193,4 +193,64 @@ function getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phon
   alphabeticalOrderRef.innerHTML += getBasicInfoAboutContact(emailRef.value, firstNameOfUser, lastNameOfUser, phoneRef.value);
   getSortTitle(firstNameOfUser);
   randomBackgroundColor(firstNameOfUser, lastNameOfUser);  
+}
+
+
+async function openEditOverlay(event){
+  event.stopPropagation(event);
+  let contacts = await fetchData("/contacts/");
+  let contactsArray = Object.values(contacts);
+
+  let user = contactsArray.find( currentUser => currentUser.firstname +' '+ currentUser.lastname == currentActiveContactId);
+
+  console.log(user);
+
+  let overlayRef = document.getElementById("editOverlay");
+  let contentOverlayRef = document.getElementById("contentEditOverlay");
+  overlayRef.classList.toggle("d-nonevip"); 
+  contentOverlayRef.classList.remove("d-nonevip");
+
+  setTimeout(()=>{
+    contentOverlayRef.classList.remove("hideContentOverlay");
+    contentOverlayRef.classList.add("showContentOverlay");
+    overlayRef.classList.add("overlayBg");
+  }, 10);
+  
+  inputFieldsGetValuesOfContact(user);
+  profileGetCorrectBackground(user);
+
+}
+
+function closeEditOverlay(event){
+  event.stopPropagation(event);
+  let overlayRef = document.getElementById("editOverlay");
+  let contentOverlayRef = document.getElementById("contentEditOverlay");
+  contentOverlayRef.classList.add("hideContentOverlay"); 
+  contentOverlayRef.classList.remove("showContentOverlay");
+  overlayRef.classList.remove("overlayBg");
+  setTimeout(()=>{
+    overlayRef.classList.toggle("d-nonevip"); 
+  }, 150);
+}
+
+function inputFieldsGetValuesOfContact(user){
+  let inputNameRef = document.getElementById("nameEdit");
+  let inputEmailRef = document.getElementById("emailEdit");
+  let inputPhoneRef = document.getElementById("phoneEdit");
+
+  inputNameRef.value = user.firstname + ' ' + user.lastname;
+  inputEmailRef.value = user.email;
+  inputPhoneRef.value = user.phone;
+}
+
+function profileGetCorrectBackground(user){
+  let firstLetterOfFirstNameRef = document.getElementById("firstLetterOfFirstName");
+  let firstLetterOfLastNameRef = document.getElementById("fistLetterOfLastName");
+  firstLetterOfFirstNameRef.innerText = user.firstname.charAt(0).toUpperCase();
+  firstLetterOfLastNameRef.innerText = user.lastname.charAt(0).toUpperCase();
+
+  let targetDivRef = document.getElementById("moreAboutcircleFirstLetters");
+  let bgClassRef = Array.from(targetDivRef.classList);
+  let circleFirstLettersRef = document.getElementById("circleFirstLetters");
+  circleFirstLettersRef.classList.add(bgClassRef[1]);
 }

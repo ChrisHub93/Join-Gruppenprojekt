@@ -25,7 +25,7 @@ function getSubTasksTemplate(inputRef) {
 
 function getDetailsOfContact(divRef,firstNameOfUser,lastNameOfUser,emailOfUser,phoneOfUser) {
   return `<div class="moreAboutcontactInfo">
-            <div class="moreAboutcircleFirstLetters ${divRef[1]}">
+            <div id="moreAboutcircleFirstLetters" class="moreAboutcircleFirstLetters ${divRef[1]}">
               <span>${firstNameOfUser.charAt(0)}</span>
               <span>${lastNameOfUser.charAt(0)}</span>
             </div>
@@ -33,8 +33,8 @@ function getDetailsOfContact(divRef,firstNameOfUser,lastNameOfUser,emailOfUser,p
             <div class="editinfoAboutContact">
               <h2>${firstNameOfUser} ${lastNameOfUser}</h2>
               <div class="editOrDeleteFlex">
-                <div class="edit editOrDeleteFlex">
-                  <img class="defaultIcon" src="/assets/icons/Property 1=edit.png" alt="" />
+                <div onclick ="openEditOverlay(event)" class="edit editOrDeleteFlex">
+                  <img  class="defaultIcon" src="/assets/icons/Property 1=edit.png" alt="" />
                   <img class="hoverIcon" src="/assets/icons/edit-hover.png" alt="" />
                   <span>Edit</span>
                 </div>
