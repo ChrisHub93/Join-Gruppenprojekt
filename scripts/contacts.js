@@ -205,8 +205,6 @@ async function openEditOverlay(event){
 
   console.log(user);
 
-
-
   let overlayRef = document.getElementById("editOverlay");
   let contentOverlayRef = document.getElementById("contentEditOverlay");
   overlayRef.classList.toggle("d-nonevip"); 
@@ -217,11 +215,29 @@ async function openEditOverlay(event){
     overlayRef.classList.add("overlayBg");
   }, 10);
   
+  inputFieldsGetValuesOfContact(user);
+  profileGetCorrectBackground(user);
 
-  let inputNameRef = document.getElementById("name");
-  let inputEmailRef = document.getElementById("email");
-  let inputPhoneRef = document.getElementById("phone");
+}
 
-  inputNameRef.value = user.email;
+function inputFieldsGetValuesOfContact(user){
+  let inputNameRef = document.getElementById("nameEdit");
+  let inputEmailRef = document.getElementById("emailEdit");
+  let inputPhoneRef = document.getElementById("phoneEdit");
 
+  inputNameRef.value = user.firstname + ' ' + user.lastname;
+  inputEmailRef.value = user.email;
+  inputPhoneRef.value = user.phone;
+}
+
+function profileGetCorrectBackground(user){
+  let firstLetterOfFirstNameRef = document.getElementById("firstLetterOfFirstName");
+  let firstLetterOfLastNameRef = document.getElementById("fistLetterOfLastName");
+  firstLetterOfFirstNameRef.innerText = user.firstname.charAt(0).toUpperCase();
+  firstLetterOfLastNameRef.innerText = user.lastname.charAt(0).toUpperCase();
+
+  let targetDivRef = document.getElementById("moreAboutcircleFirstLetters");
+  let bgClassRef = Array.from(targetDivRef.classList);
+  let circleFirstLettersRef = document.getElementById("circleFirstLetters");
+  circleFirstLettersRef.classList.add(bgClassRef[1]);
 }

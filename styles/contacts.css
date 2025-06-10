@@ -90,6 +90,23 @@ main {
   border: 2px solid white;
 }
 
+.circleFirstLettersEdit {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 10px;
+  border: 2px solid white;
+  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1));
+}
+
+.circleFirstLettersEdit span{
+  font-size: 40px;
+}
+
 .bgForCircleFirstLetters1 {
   background-color: #ff7a00;
 }

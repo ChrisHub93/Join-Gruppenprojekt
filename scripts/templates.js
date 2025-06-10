@@ -25,7 +25,7 @@ function getSubTasksTemplate(inputRef) {
 
 function getDetailsOfContact(divRef,firstNameOfUser,lastNameOfUser,emailOfUser,phoneOfUser) {
   return `<div class="moreAboutcontactInfo">
-            <div class="moreAboutcircleFirstLetters ${divRef[1]}">
+            <div id="moreAboutcircleFirstLetters" class="moreAboutcircleFirstLetters ${divRef[1]}">
               <span>${firstNameOfUser.charAt(0)}</span>
               <span>${lastNameOfUser.charAt(0)}</span>
             </div>
