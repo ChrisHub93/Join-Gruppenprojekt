@@ -209,6 +209,7 @@ async function openEditOverlay(event){
   let contentOverlayRef = document.getElementById("contentEditOverlay");
   overlayRef.classList.toggle("d-nonevip"); 
   contentOverlayRef.classList.remove("d-nonevip");
+
   setTimeout(()=>{
     contentOverlayRef.classList.remove("hideContentOverlay");
     contentOverlayRef.classList.add("showContentOverlay");
@@ -218,6 +219,18 @@ async function openEditOverlay(event){
   inputFieldsGetValuesOfContact(user);
   profileGetCorrectBackground(user);
 
+}
+
+function closeEditOverlay(event){
+  event.stopPropagation(event);
+  let overlayRef = document.getElementById("editOverlay");
+  let contentOverlayRef = document.getElementById("contentEditOverlay");
+  contentOverlayRef.classList.add("hideContentOverlay"); 
+  contentOverlayRef.classList.remove("showContentOverlay");
+  overlayRef.classList.remove("overlayBg");
+  setTimeout(()=>{
+    overlayRef.classList.toggle("d-nonevip"); 
+  }, 150);
 }
 
 function inputFieldsGetValuesOfContact(user){
