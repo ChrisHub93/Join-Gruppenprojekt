@@ -12,73 +12,137 @@
     <link rel="stylesheet" href="../styles/contacts.css" />
   </head>
   <body onload="init()">
-    <div id="overlay" class="overlay d-nonevip" onclick="closeOverlay(event)" >
-
-      <div onclick="stopPropagation(event)" id="contentOverlay" class="contentOverlay hideContentOverlay">
-
-      <div class="leftSide">
-        <div class="contentLeftSide">
-          <img src="../assets/img/Capa 1 white.png" alt="" />
-          <h2>Add Contact</h2>
-          <span>Tasks are better with a team!</span>
-          <div class="blueLine"></div>
-        </div>
-      </div>
-
-      <div class="rightSide">
-        <div class="profile">
-          <div class="profilePicture">
-            <img src="../assets/icons/person.svg" alt="">
+    <div id="overlay" class="overlay d-nonevip" onclick="closeOverlay(event)">
+      <div
+        onclick="stopPropagation(event)"
+        id="contentOverlay"
+        class="contentOverlay hideContentOverlay"
+      >
+        <div class="leftSide">
+          <div class="contentLeftSide">
+            <img src="../assets/img/Capa 1 white.png" alt="" />
+            <h2>Add Contact</h2>
+            <span>Tasks are better with a team!</span>
+            <div class="blueLine"></div>
           </div>
         </div>
 
-        <div class="inputSection">
-
-          <div class="closeOverlay">
-            <img onclick="closeOverlay(event)" src="../assets/icons/iconoir_cancel.png" alt="">
+        <div class="rightSide">
+          <div class="profile">
+            <div class="profilePicture">
+              <img src="../assets/icons/person.svg" alt="" />
+            </div>
           </div>
 
-          <div class="inputName">
-            <input type="text" id="name" name="name" placeholder="Name">
-            <img src="../assets/icons/person.png" alt="">
-          </div>
-          
-          <div class="inputEmail">
-            <input type="email" id="email" name="email" placeholder="Email">
-            <img src="../assets/icons/mail.svg" alt="">
-          </div>
-          
-          <div class="inputTel">
-            <input type="tel" id="phone" name="phone" placeholder="Phone">
-            <img src="../assets/icons/call.png" alt="">
-          </div>
-          
+          <div class="inputSection">
+            <div class="closeOverlay">
+              <img
+                onclick="closeOverlay(event)"
+                src="../assets/icons/iconoir_cancel.png"
+                alt=""
+              />
+            </div>
+
+            <div class="inputName">
+              <input type="text" id="name" name="name" placeholder="Name" />
+              <img src="../assets/icons/person.png" alt="" />
+            </div>
+
+            <div class="inputEmail">
+              <input type="email" id="email" name="email" placeholder="Email" />
+              <img src="../assets/icons/mail.svg" alt="" />
+            </div>
+
+            <div class="inputTel">
+              <input type="tel" id="phone" name="phone" placeholder="Phone" />
+              <img src="../assets/icons/call.png" alt="" />
+            </div>
+
             <div class="flexButtons">
-            <button class="clear" onclick="cancelOverlay(event)">
-              Cancel
-              <img
-                class="defaultIcon"
-                src="/assets/icons/iconoir_cancel.png"
-                alt=""
-              />
-              <img
-                class="hoverIcon"
-                src="/assets/icons/iconoir_cancel_hover.png"
-                alt=""
-              />
-            </button>
+              <button class="clear" onclick="cancelOverlay(event)">
+                Cancel
+                <img
+                  class="defaultIcon"
+                  src="/assets/icons/iconoir_cancel.png"
+                  alt=""
+                />
+                <img
+                  class="hoverIcon"
+                  src="/assets/icons/iconoir_cancel_hover.png"
+                  alt=""
+                />
+              </button>
 
-            <button class="createTask" onclick="createContact(event)">
-              Create Contact
-              <img src="/assets/icons/check.png" alt="" />
-            </button>
+              <button class="createTask" onclick="createContact(event)">
+                Create Contact
+                <img src="/assets/icons/check.png" alt="" />
+              </button>
+            </div>
           </div>
-          
         </div>
       </div>
+    </div>
 
+
+
+    <div id="editOverlay" class="editOverlay d-nonevip">
+      <div onclick="" id="contentEditOverlay" class="contentOverlay hideContentOverlay">
+        <div class="leftSide">
+          <div class="contentLeftSide">
+            <img src="../assets/img/Capa 1 white.png" alt="" />
+            <h2>Edit contact</h2>
+            <div class="blueLine"></div>
+          </div>
+        </div>
+
+        <div class="rightSide">
+          <div class="profile">
+            
+
+            <div
+              id="circleFirstLetters"
+              class="circleFirstLetters bgForCircleFirstLetters5"
+            >
+              <span>A</span>
+              <span>S</span>
+            </div>
+          </div>
+
+          <div class="inputSection">
+            <div class="closeOverlay">
+              <img
+                onclick=""
+                src="../assets/icons/iconoir_cancel.png"
+                alt=""
+              />
+            </div>
+
+            <div class="inputName">
+              <input type="text" id="name" name="name" placeholder="Name" />
+              <img src="../assets/icons/person.png" alt="" />
+            </div>
+
+            <div class="inputEmail">
+              <input type="email" id="email" name="email" placeholder="Email" />
+              <img src="../assets/icons/mail.svg" alt="" />
+            </div>
+
+            <div class="inputTel">
+              <input type="tel" id="phone" name="phone" placeholder="Phone" />
+              <img src="../assets/icons/call.png" alt="" />
+            </div>
+
+            <div class="flexButtons">
+              <button class="clear" onclick="">Delete</button>
+
+              <button class="createTask" onclick="">
+                Save
+                <img src="/assets/icons/check.png" alt="" />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-
     </div>
 
     <div class="page-box">
