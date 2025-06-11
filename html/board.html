@@ -162,14 +162,13 @@
             <p class="content__headline__text">To do</p>
             <button class="content__headline__btn">+</button>
           </div>
-          <div id="toDoContent" class="idContentContainer" ondrop="moveTo('To do')" ondragover="allowDrop(event); highlight('toDoContent')" ondragleave="removeHighlight('toDoContent')">
-            <!-- Dummy "Empty Container" START-->
-            <div class="emptyContainer">
-              <p class="emptyContainer__text">No Tasks To do</p>
-              <p></p>
-            </div>
-            <!-- Dummy "Empty Container" END-->
+          
+          <div id="toDoContent" class="idContentContainer" ondrop="moveTo('To do'); removeHighlight('toDoContentDropContent')" ondragover="allowDrop(event); highlight('toDoContentDropContent')" ondragleave="removeHighlight('toDoContentDropContent')">
+            
           </div>
+          <div id="toDoContentDropContent"></div>
+          
+          
         </div>
 
         <div class="container__content">
@@ -177,58 +176,12 @@
             <p class="content__headline__text">In progress</p>
             <button class="content__headline__btn">+</button>
           </div>
-          <div id="inProgressContent" class="idContentContainer" ondrop="moveTo('In progress')" ondragover="allowDrop(event); highlight('inProgressContent')" ondragleave="removeHighlight('inProgressContent')">
-            <!-- Dummy "Filled Container" START-->
-            <div class="filledContainer">
-              <div class="filledContainer__category">
-                <p>User Story</p>
-              </div>
-              <div class="filledContainer__title">
-                <p>Kochewelt Page & Recipe Recommander</p>
-              </div>
-              <div class="filledContainer__description">
-                <p>Build with start page with recipe recommandation...</p>
-              </div>
-              <div class="filledContainer__status">
-                <div
-                  class="statusLine"
-                  role="progressbar"
-                  aria-label="Example with label"
-                  aria-valuenow="25"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >
-                  <div
-                    id="status-bar-js"
-                    class="progress-bar"
-                    style="width: 50%"
-                  ></div>
-                </div>
-                <p>1/2 Subtasks</p>
-              </div>
-              <div class="taskInfo">
-                <div id="assignedTo" class="assignedTo">
-                  <div class="assigned">
-                    <span>A</span>
-                    <span>M</span>
-                  </div>
-                  <div class="assigned assignedPlusOne">
-                    <span>C</span>
-                    <span>M</span>
-                  </div>
-                  <div class="assigned assignedPlusTwo">
-                    <span>K</span>
-                    <span>A</span>
-                  </div>
-                </div>
-
-                <div class="priority">
-                  <img src="../assets/icons/Prio media.png" alt="prio icon" />
-                </div>
-              </div>
-            </div>
-            <!-- Dummy "Filled Container" END-->
+          
+          <div id="inProgressContent" class="idContentContainer" ondrop="moveTo('In progress'); removeHighlight('inProgressContentDropContent')" ondragover="allowDrop(event); highlight('inProgressContentDropContent')" ondragleave="removeHighlight('inProgressContentDropContent')">
+            
           </div>
+          <div id="inProgressContentDropContent"></div>
+          
         </div>
 
         <div class="container__content">
@@ -236,113 +189,23 @@
             <p class="content__headline__text">Await feedback</p>
             <button class="content__headline__btn">+</button>
           </div>
-          <div id="awaitFeedbackContent" class="idContentContainer" ondrop="moveTo('Await feedback')" ondragover="allowDrop(event); highlight('awaitFeedbackContent')" ondragleave="removeHighlight('awaitFeedbackContent')">
-            <!-- Test Start -->
-            <div class="filledContainer">
-                <div class="filledContainer__category">
-                  <p>User Story</p>
-                </div>
-                <div class="filledContainer__title">
-                  <p>Kochewelt Page & Recipe Recommander</p>
-                </div>
-                <div class="filledContainer__description">
-                  <p>Build with start page with recipe recommandation...</p>
-                </div>
-                <div class="filledContainer__status">
-                  <div
-                    class="statusLine"
-                    role="progressbar"
-                    aria-label="Example with label"
-                    aria-valuenow="25"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  >
-                    <div
-                      id="status-bar-js"
-                      class="progress-bar"
-                      style="width: 50%"
-                    ></div>
-                  </div>
-                  <p>1/2 Subtasks</p>
-                </div>
-                <div class="taskInfo">
-                  <div id="assignedTo" class="assignedTo">
-                    <div class="assigned">
-                      <span>A</span>
-                      <span>M</span>
-                    </div>
-                    <div class="assigned assignedPlusOne">
-                      <span>C</span>
-                      <span>M</span>
-                    </div>
-                    <div class="assigned assignedPlusTwo">
-                      <span>K</span>
-                      <span>A</span>
-                    </div>
-                  </div>
-  
-                  <div class="priority">
-                    <img src="../assets/icons/Prio media.png" alt="prio icon" />
-                  </div>
-                </div>
-              </div>
-              <div class="filledContainer">
-                <div class="filledContainer__category">
-                  <p>User Story</p>
-                </div>
-                <div class="filledContainer__title">
-                  <p>Kochewelt Page & Recipe Recommander</p>
-                </div>
-                <div class="filledContainer__description">
-                  <p>Build with start page with recipe recommandation...</p>
-                </div>
-                <div class="filledContainer__status">
-                  <div
-                    class="statusLine"
-                    role="progressbar"
-                    aria-label="Example with label"
-                    aria-valuenow="25"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  >
-                    <div
-                      id="status-bar-js"
-                      class="progress-bar"
-                      style="width: 50%"
-                    ></div>
-                  </div>
-                  <p>1/2 Subtasks</p>
-                </div>
-                <div class="taskInfo">
-                  <div id="assignedTo" class="assignedTo">
-                    <div class="assigned">
-                      <span>A</span>
-                      <span>M</span>
-                    </div>
-                    <div class="assigned assignedPlusOne">
-                      <span>C</span>
-                      <span>M</span>
-                    </div>
-                    <div class="assigned assignedPlusTwo">
-                      <span>K</span>
-                      <span>A</span>
-                    </div>
-                  </div>
-  
-                  <div class="priority">
-                    <img src="../assets/icons/Prio media.png" alt="prio icon" />
-                  </div>
-                </div>
-              </div>
-             <!-- Test Ende -->
+          
+          <div id="awaitFeedbackContent" class="idContentContainer" ondrop="moveTo('Await feedback'); removeHighlight('awaitFeedbackContentDropContent')" ondragover="allowDrop(event); highlight('awaitFeedbackContentDropContent')" ondragleave="removeHighlight('awaitFeedbackContentDropContent')">           
           </div>
+          <div id="awaitFeedbackContentDropContent"></div>
+          
         </div>
 
         <div class="container__content">
           <div class="content__headline">
             <p class="content__headline__text">Done</p>
           </div>
-          <div id="doneContent" class="idContentContainer" ondrop="moveTo('Done')" ondragover="allowDrop(event); highlight('doneContent')" ondragleave="removeHighlight('doneContent')" ></div>
+          
+          <div id="doneContent" class="idContentContainer" ondrop="moveTo('Done'); removeHighlight('doneDropContent')" ondragover="allowDrop(event); highlight('doneDropContent')" ondragleave="removeHighlight('doneDropContent')" >
+            
+          </div>
+          <div id="doneDropContent"></div>
+          
         </div>
       </div>
     </main>
