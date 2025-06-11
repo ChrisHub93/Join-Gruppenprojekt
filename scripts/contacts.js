@@ -154,7 +154,7 @@ async function createContact(event){
   let firstNameOfUser = fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
   let lastNameOfUser = fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
 
-  await postData("/test/", {email: emailRef.value, firstname: firstNameOfUser, lastname: lastNameOfUser, phone: phoneRef.value});
+  await postData(`/contacts/`, {email: emailRef.value, firstname: firstNameOfUser, lastname: lastNameOfUser, phone: phoneRef.value});
 
   getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef);
   clearInputFields(nameRef, emailRef, phoneRef);
@@ -253,4 +253,52 @@ function profileGetCorrectBackground(user){
   let bgClassRef = Array.from(targetDivRef.classList);
   let circleFirstLettersRef = document.getElementById("circleFirstLetters");
   circleFirstLettersRef.classList.add(bgClassRef[1]);
+}
+
+async function saveEditedContact(){
+  let contacts = await fetchData("/contacts/");
+  let keys = Object.keys(contacts);
+  let contactsArry = Object.values(contacts);
+
+  console.log(keys);
+  console.log(contactsArry);
+  
+  
+  let inputNameRef = document.getElementById("nameEdit");
+  let inputEmailRef = document.getElementById("emailEdit");
+  let inputPhoneRef = document.getElementById("phoneEdit");
+
+  let fullName = inputNameRef.value.split(" ");
+  let firstName = fullName[0];
+  let lastName = fullName[1] || "";
+
+  for (let index = 0; index < contactsArry.length; index++) {
+
+    let contact = contactsArry[index];
+    let fullContactName = contact.firstname + ' ' + contact.lastname;
+
+    if(fullContactName  == currentActiveContactId){
+
+      let key = keys[index];
+
+      await putData(`contacts/${key}`, {
+        firstname: firstName,
+        lastname: lastName,
+        email:inputEmailRef.value,
+        phone: inputPhoneRef.value
+      });
+      break;
+    }
+  }
+}
+
+async function putData(path="", data={}) {
+    let response = await fetch(BASE_URL + path + ".json",{
+        method:"PUT",
+        headers:{
+            "Content-Type":"application/json",
+        },
+        body: JSON.stringify(data),
+    });
+    return responseToJson = await response.json();
 }
