@@ -13,8 +13,9 @@
 
     <script src="../scripts/script.js"></script>
     <script src="../scripts/templates.js"></script>
+    <script src="../scripts/board.js"></script>
   </head>
-  <body onload="init()">
+  <body onload="init(); loadTasks()">
     <div class="page-box">
       <aside id="sidebar" class="sidebar">
         <img class="sidebar-logo" src="../assets/img/Capa 1 white.png" alt="" />
@@ -161,7 +162,7 @@
             <p class="content__headline__text">To do</p>
             <button class="content__headline__btn">+</button>
           </div>
-          <div id="toDoContent" class="idContentContainer">
+          <div id="toDoContent" class="idContentContainer" ondrop="moveTo('To do')" ondragover="allowDrop(event); highlight('toDoContent')" ondragleave="removeHighlight('toDoContent')">
             <!-- Dummy "Empty Container" START-->
             <div class="emptyContainer">
               <p class="emptyContainer__text">No Tasks To do</p>
@@ -176,7 +177,7 @@
             <p class="content__headline__text">In progress</p>
             <button class="content__headline__btn">+</button>
           </div>
-          <div id="inProgressContent" class="idContentContainer">
+          <div id="inProgressContent" class="idContentContainer" ondrop="moveTo('In progress')" ondragover="allowDrop(event); highlight('inProgressContent')" ondragleave="removeHighlight('inProgressContent')">
             <!-- Dummy "Filled Container" START-->
             <div class="filledContainer">
               <div class="filledContainer__category">
@@ -235,7 +236,7 @@
             <p class="content__headline__text">Await feedback</p>
             <button class="content__headline__btn">+</button>
           </div>
-          <div id="awaitFeedbackContent" class="idContentContainer">
+          <div id="awaitFeedbackContent" class="idContentContainer" ondrop="moveTo('Await feedback')" ondragover="allowDrop(event); highlight('awaitFeedbackContent')" ondragleave="removeHighlight('awaitFeedbackContent')">
             <!-- Test Start -->
             <div class="filledContainer">
                 <div class="filledContainer__category">
@@ -341,7 +342,7 @@
           <div class="content__headline">
             <p class="content__headline__text">Done</p>
           </div>
-          <div id="doneContent" class="idContentContainer"></div>
+          <div id="doneContent" class="idContentContainer" ondrop="moveTo('Done')" ondragover="allowDrop(event); highlight('doneContent')" ondragleave="removeHighlight('doneContent')" ></div>
         </div>
       </div>
     </main>
