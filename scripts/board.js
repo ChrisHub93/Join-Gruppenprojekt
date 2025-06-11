@@ -66,37 +66,37 @@ function loadTasks() {
   awaitFeedbackContentRef.innerHTML = "";
   doneContentRef.innerHTML = "";
 
-  for (let index = 0; index < statusToDo.length; index++) {
-    if (statusToDo.length === 0) {
-      toDoContentRef.innerHTML = getEmptyTemplate();
-    } else {
+  if (statusToDo.length === 0) {
+    toDoContentRef.innerHTML = getEmptyTemplate();
+  } else {
+    for (let index = 0; index < statusToDo.length; index++) {
       const element = statusToDo[index];
       toDoContentRef.innerHTML += getTaskTemplate(element);
     }
   }
 
-  for (let index = 0; index < statusInProgress.length; index++) {
-    if (statusInProgress.length == 0) {
-      inProgressContentRef.innerHTML = getEmptyTemplate();
-    } else {
+  if (statusInProgress.length == 0) {
+    inProgressContentRef.innerHTML = getEmptyTemplate();
+  } else {
+    for (let index = 0; index < statusInProgress.length; index++) {
       const element = statusInProgress[index];
       inProgressContentRef.innerHTML += getTaskTemplate(element);
     }
   }
 
-  for (let index = 0; index < statusAwaitFeedback.length; index++) {
-    if (statusAwaitFeedback.length == 0) {
-      awaitFeedbackContentRef.innerHTML = getEmptyTemplate();
-    } else {
+  if (statusAwaitFeedback.length == 0) {
+    awaitFeedbackContentRef.innerHTML = getEmptyTemplate();
+  } else {
+    for (let index = 0; index < statusAwaitFeedback.length; index++) {
       const element = statusAwaitFeedback[index];
       awaitFeedbackContentRef.innerHTML += getTaskTemplate(element);
     }
   }
 
-  for (let index = 0; index < statusDone.length; index++) {
-    if (statusDone.length == 0) {
-      doneContentRef.innerHTML = getEmptyTemplate();
-    } else {
+  if (statusDone.length == 0) {
+    doneContentRef.innerHTML = getEmptyTemplate();
+  } else {
+    for (let index = 0; index < statusDone.length; index++) {
       const element = statusDone[index];
 
       doneContentRef.innerHTML += getTaskTemplate(element);
