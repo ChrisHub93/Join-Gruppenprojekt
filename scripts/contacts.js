@@ -260,9 +260,6 @@ async function saveEditedContact(){
   let keys = Object.keys(contacts);
   let contactsArry = Object.values(contacts);
 
-  console.log(keys);
-  console.log(contactsArry);
-  
   
   let inputNameRef = document.getElementById("nameEdit");
   let inputEmailRef = document.getElementById("emailEdit");
@@ -273,14 +270,10 @@ async function saveEditedContact(){
   let lastName = fullName[1] || "";
 
   for (let index = 0; index < contactsArry.length; index++) {
-
     let contact = contactsArry[index];
     let fullContactName = contact.firstname + ' ' + contact.lastname;
-
     if(fullContactName  == currentActiveContactId){
-
       let key = keys[index];
-
       await putData(`contacts/${key}`, {
         firstname: firstName,
         lastname: lastName,
