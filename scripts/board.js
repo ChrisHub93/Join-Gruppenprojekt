@@ -184,7 +184,7 @@ function getTaskTemplate(element) {
 function getDragTemplate() {
   return `
    <div class="emptyContainer">
-              <p class="emptyContainer__text">No Tasks To do</p>
+              <p class="emptyContainer__text"></p>
               <p></p>
             </div>
   `;
