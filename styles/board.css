@@ -149,6 +149,14 @@ h1 {
   justify-content: center;
 }
 
+.dragContainer {
+    width: 252px;
+    height: 250px;
+    background-color: var(--board-tasks-bg);
+    border-radius: 10px;
+    border: 2px dashed #a8a8a8;
+  }
+
 .filledContainer {
   display: flex;
   flex-direction: column;

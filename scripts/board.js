@@ -183,7 +183,7 @@ function getTaskTemplate(element) {
 
 function getDragTemplate() {
   return `
-   <div class="emptyContainer">
+   <div class="dragContainer">
               <p class="emptyContainer__text"></p>
               <p></p>
             </div>
