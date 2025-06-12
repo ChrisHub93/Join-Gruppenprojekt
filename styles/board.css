@@ -129,7 +129,7 @@ h1 {
 .idContentContainer {
   overflow-y: auto;
   margin-bottom: 10px;
-  min-height: 300px;
+  min-height: 230px;
   overflow-x: hidden;
 }
 
