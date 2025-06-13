@@ -23,9 +23,17 @@ function getSubTasksTemplate(inputRef) {
             </div>`;
 }
 
-function getDetailsOfContact(divRef,firstNameOfUser,lastNameOfUser,emailOfUser,phoneOfUser) {
+function getDetailsOfContact(
+  divRef,
+  firstNameOfUser,
+  lastNameOfUser,
+  emailOfUser,
+  phoneOfUser
+) {
   return `<div class="moreAboutcontactInfo">
-            <div id="moreAboutcircleFirstLetters" class="moreAboutcircleFirstLetters ${divRef[1]}">
+            <div id="moreAboutcircleFirstLetters" class="moreAboutcircleFirstLetters ${
+              divRef[1]
+            }">
               <span>${firstNameOfUser.charAt(0)}</span>
               <span>${lastNameOfUser.charAt(0)}</span>
             </div>
@@ -63,10 +71,19 @@ function getDetailsOfContact(divRef,firstNameOfUser,lastNameOfUser,emailOfUser,p
           </div>`;
 }
 
-function getBasicInfoAboutContact(emailOfUser,firstNameOfUser,lastNameOfUser,phoneOfUser) {
+function getBasicInfoAboutContact(
+  emailOfUser,
+  firstNameOfUser,
+  lastNameOfUser,
+  phoneOfUser
+) {
   return `<div id="order${firstNameOfUser.charAt(0).toUpperCase()}"></div>
-            <div id="setNewBgFor${firstNameOfUser+lastNameOfUser}" class="contactInfo" onclick="moreDetailsAboutContact('${emailOfUser}', '${firstNameOfUser}', '${lastNameOfUser}', '${phoneOfUser}')">
-              <div id="circleFirstLetters${firstNameOfUser+lastNameOfUser}" class="circleFirstLetters">
+            <div id="setNewBgFor${
+              firstNameOfUser + lastNameOfUser
+            }" class="contactInfo" onclick="moreDetailsAboutContact('${emailOfUser}', '${firstNameOfUser}', '${lastNameOfUser}', '${phoneOfUser}')">
+              <div id="circleFirstLetters${
+                firstNameOfUser + lastNameOfUser
+              }" class="circleFirstLetters">
                 <span>${firstNameOfUser.charAt(0)}</span>
                 <span>${lastNameOfUser.charAt(0)}</span>
               </div>
@@ -85,4 +102,282 @@ function getSortTitleTemplate(firstNameOfUser) {
                             .toUpperCase()}</span>
                           </div>
                           <div class="seperator"></div>`;
+}
+
+function getAddTaskTemplate() {
+  return;
+  `<div class="form">
+        <div class="typeOfTask">
+          <div class="column mb12">
+            <span class="mgBottom">Title<mark>*</mark></span>
+            <input
+              onfocusout="checkEmptyTitle()"
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Enter a title"
+              required
+            />
+            <span id="errorTitle" class="opacity">This field is required</span>
+          </div>
+
+          <div class="column">
+            <span class="mgBottom">Description</span>
+            <textarea
+              name="description"
+              id="description"
+              placeholder="Enter a Description"
+            ></textarea>
+          </div>
+
+          <div class="column">
+            <span class="mgBottom">Due Date<mark>*</mark></span>
+            <input
+              onfocusout="checkEmptyDate()"
+              type="date"
+              name="date"
+              id="date"
+              required
+            />
+            <span id="errorDate" class="opacity">This field is required</span>
+          </div>
+        </div>
+
+        <div class="seperator"></div>
+
+        <div class="priority">
+          <div class="column">
+            <span class="mgBottom">Priority</span>
+            <div class="choose">
+              <div
+                id="urgent"
+                class="priorityBtn"
+                onclick="setPriorityUrgent('urgent')"
+              >
+                <span>Urgent</span>
+                <img
+                  id="standardUrgentIcon"
+                  class=""
+                  src="/assets/icons/Prio alta.png"
+                  alt=""
+                />
+                <img
+                  id="activeUrgentIcon"
+                  class="d-nonevip"
+                  src="/assets/icons/Prio alta active.png"
+                  alt=""
+                />
+              </div>
+
+              <div
+                id="medium"
+                class="priorityBtn"
+                onclick="setPriorityMedium('medium')"
+              >
+                <span>Medium</span>
+                <img
+                  id="standardMediumIcon"
+                  class=""
+                  src="/assets/icons/Prio media.png"
+                  alt=""
+                />
+                <img
+                  id="activeMediumIcon"
+                  class="d-nonevip"
+                  src="/assets/icons/Prio media active.png"
+                  alt=""
+                />
+              </div>
+
+              <div id="low" class="priorityBtn" onclick="setPriorityLow('low')">
+                <span id="low">Low</span>
+                <img
+                  id="standardLowIcon"
+                  class=""
+                  src="/assets/icons/Prio baja.png"
+                  alt=""
+                />
+                <img
+                  id="activeLowIcon"
+                  class="d-nonevip"
+                  src="/assets/icons/Prio baja active.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="container gapBetweenNextElement">
+            <span class="mgBottom">Assigned to</span>
+
+            <div class="category">
+              <div
+                id="assignedContainer"
+                class="inputSelectContact"
+                onclick="openAssignedTo()"
+              >
+                <span id="selectMember" class="select inputFlex">
+                  Select Contacts to Assign
+                </span>
+                <img
+                  id="arrow"
+                  class="arrow inputStyleArrow"
+                  src="/assets/icons/arrow_drop_down.png"
+                  alt=""
+                />
+              </div>
+              <ul id="allMembers" class="options">
+                <li
+                  onclick="getContact('contact1')"
+                  id="contact1"
+                  class="optionsCategory inputFlex"
+                >
+                  Contact 1
+                  <input type="checkbox" class="checkBox" />
+                  <img
+                    onclick="setCheckBox('contact1', event)"
+                    id="checkBoxImg1"
+                    class="checkBoxImg"
+                    src="/assets/icons/Check button.png"
+                    alt=""
+                  />
+                </li>
+
+                <li
+                  onclick="getContact('contact2')"
+                  id="contact2"
+                  class="optionsCategory inputFlex"
+                >
+                  Contact 2
+                  <input type="checkbox" class="checkBox" />
+                  <img
+                    onclick="setCheckBox('contact2', event)"
+                    id="checkBoxImg2"
+                    class="checkBoxImg"
+                    src="/assets/icons/Check button.png"
+                    alt=""
+                  />
+                </li>
+
+                <li
+                  onclick="getContact('contact3')"
+                  id="contact3"
+                  class="optionsCategory inputFlex"
+                >
+                  Contact 3
+                  <input type="checkbox" class="checkBox" />
+                  <img
+                    onclick="setCheckBox('contact3', event)"
+                    id="checkBoxImg3"
+                    class="checkBoxImg"
+                    src="/assets/icons/Check button.png"
+                    alt=""
+                  />
+                </li>
+
+                <li
+                  onclick="getContact('contact4')"
+                  id="contact4"
+                  class="optionsCategory inputFlex"
+                >
+                  Contact 4
+                  <input type="checkbox" class="checkBox" />
+                  <img
+                    onclick="setCheckBox('contact4', event)"
+                    id="checkBoxImg4"
+                    class="checkBoxImg"
+                    src="/assets/icons/Check button.png"
+                    alt=""
+                  />
+                </li>
+
+                <li
+                  onclick="getContact('contact5')"
+                  id="contact5"
+                  class="optionsCategory inputFlex"
+                >
+                  Contact 5
+                  <input type="checkbox" class="checkBox" />
+                  <img
+                    onclick="setCheckBox('contact5', event)"
+                    id="checkBoxImg5"
+                    class="checkBoxImg"
+                    src="/assets/icons/Check button.png"
+                    alt=""
+                  />
+                </li>
+              </ul>
+            </div>
+            <div id="assignedMembers"></div>
+          </div>
+
+          <div class="container gapBetweenNextElement">
+            <span class="mgBottom">Category<mark>*</mark></span>
+            <div class="category">
+              <div class="select inputFlex" id="" onclick="openTaskCategory()">
+                <span id="select">Select task category</span>
+                <img
+                  id="arrowCategory"
+                  class="arrow"
+                  src="/assets/icons/arrow_drop_down.png"
+                  alt=""
+                />
+              </div>
+              <ul id="allOptions" class="options">
+                <li
+                  onclick="getCategory('index1')"
+                  id="index1"
+                  class="optionsCategory"
+                >
+                  Technical Task
+                </li>
+                <li
+                  onclick="getCategory('index2')"
+                  id="index2"
+                  class="optionsCategory"
+                >
+                  User Story
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="columnSubTask">
+            <span class="mgBottom">Subtasks</span>
+            <input
+              type="text"
+              name="subtasks"
+              id="subTaskInput"
+              placeholder="Add new subtask"
+            />
+            <img
+              onclick="chooseSubTask()"
+              id="plusIcon"
+              class="plusIcon"
+              src="/assets/icons/Subtasks-plus.png"
+              alt=""
+            />
+
+            <div id="cancelOrCheck" class="cancelOrCheck d-nonevip">
+              <img
+                onclick="deleteTask()"
+                src="/assets/icons/iconoir_cancel.png"
+                alt=""
+              />
+              <div class="subTasksSeperator"></div>
+              <img
+                onclick="addTask()"
+                src="/assets/icons/Property 1=check.png"
+                alt=""
+              />
+            </div>
+          </div>
+
+          <div id="subTasks"></div>
+
+          <div class="markedFieldsResponsive d-none">
+            <span><mark class="marked">*</mark>This field is required</span>
+          </div>
+        </div>
+      </div>`;
 }
