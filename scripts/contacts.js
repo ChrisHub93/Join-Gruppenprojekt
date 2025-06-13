@@ -159,13 +159,20 @@ async function createContact(event){
   getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef);
   clearInputFields(nameRef, emailRef, phoneRef);
   closeOverlayAfterCreatedContact(event);
+  moreDetailsAboutContact(emailRef.value, firstNameOfUser, lastNameOfUser, phoneRef.value);
 
+  showSuccess();
 
+}
 
+function showSuccess(){
+  let successfullyCreatedRef = document.getElementById("successfullyCreated");
+   successfullyCreatedRef.classList.add("showSuccess");
 
-  moreDetailsAboutContact(emailRef, firstNameOfUser, lastNameOfUser, phoneRef);
-
-
+   setTimeout( () => {
+    successfullyCreatedRef.classList.add("hideSuccess");
+    // successfullyCreatedRef.classList.remove("showSuccess");
+   }, 2000);
 }
 
 function clearInputFields(nameRef, emailRef, phoneRef){
