@@ -206,12 +206,12 @@ function getAddTaskTemplate() {
             </div>
           </div>
 
-          <div class="container gapBetweenNextElement">
+          <div class="  gapBetweenNextElement">
             <span class="mgBottom">Assigned to</span>
 
             <div class="category">
               <div
-                id="assignedContainer"
+                id="assigned "
                 class="inputSelectContact"
                 onclick="openAssignedTo()"
               >
@@ -310,7 +310,7 @@ function getAddTaskTemplate() {
             <div id="assignedMembers"></div>
           </div>
 
-          <div class="container gapBetweenNextElement">
+          <div class="  gapBetweenNextElement">
             <span class="mgBottom">Category<mark>*</mark></span>
             <div class="category">
               <div class="select inputFlex" id="" onclick="openTaskCategory()">

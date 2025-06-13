@@ -249,3 +249,8 @@ function openAddTaskOverlay() {
   addOverlayRef.classList.remove('d-nonevip');
   openAddTaskOverlayRef.innerHTML = getAddTaskTemplate();
 }
+
+function closeAddTaskOverlay() {  
+  const addOverlayRef = document.getElementById('overlayAddTask');
+  addOverlayRef.classList.add('d-nonevip');
+}

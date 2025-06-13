@@ -133,8 +133,8 @@
         <div id="dialogTaskContent" class="dialog_open_task"></div>       
     </div>
 
-    <div id="overlayAddTask" class="overlayTask d-nonevip" onclick="closeOverlay(event)">
-        <div id="addTaskContent" class="overlayTask__addTaskContent"></div>
+    <div id="overlayAddTask" class="overlayTask d-nonevip" onclick="closeAddTaskOverlay()">
+        <div id="addTaskContent" class="overlayTask__addTaskContent" onclick="event.stopPropagation()"></div>
     </div>
 
     <main class="main-board">
