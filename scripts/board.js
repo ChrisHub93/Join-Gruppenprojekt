@@ -3,7 +3,7 @@ let todos = [
     id: 0,
     title: "Test new Task",
     category: "User Story",
-    description: "build with start",
+    description: "Build with start page with recipe recommandation...",
     assignedTo: "",
     subTasks: "Task1",
     priority: "medium",
@@ -175,13 +175,13 @@ function renderOverlayTaskContent(tasksRef) {
 function getTaskTemplate(element) {
   return `<div onclick="overlayTask(${element["id"]})" class="filledContainer" draggable = "true" ondragstart="startDragging(${element["id"]})">
               <div class="filledContainer__category">
-                <p>User Story</p>
+                <p>${element.category}</p>
               </div>
               <div class="filledContainer__title">
                 <p>${element.title}</p>
               </div>
               <div class="filledContainer__description">
-                <p>Build with start page with recipe recommandation...</p>
+                <p>${element.description}</p>
               </div>
               <div class="filledContainer__status">
                 <div
@@ -198,7 +198,7 @@ function getTaskTemplate(element) {
                     style="width: 50%"
                   ></div>
                 </div>
-                <p>1/2 Subtasks</p>
+                <p>1/3 Subtasks</p>
               </div>
               <div class="taskInfo">
                 <div id="assignedTo" class="assignedTo">
@@ -227,9 +227,7 @@ function getTaskTemplate(element) {
 
 function getDragTemplate() {
   return `
-   <div class="emptyContainer">
-              <p class="emptyContainer__text"></p>
-              <p></p>
+   <div class="dragContainer">
             </div>
   `;
 }
