@@ -157,9 +157,10 @@ async function createContact(event){
   await postData(`/contacts/`, {email: emailRef.value, firstname: firstNameOfUser, lastname: lastNameOfUser, phone: phoneRef.value});
 
   getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef);
-  clearInputFields(nameRef, emailRef, phoneRef);
+  
   closeOverlayAfterCreatedContact(event);
   moreDetailsAboutContact(emailRef.value, firstNameOfUser, lastNameOfUser, phoneRef.value);
+  clearInputFields(nameRef, emailRef, phoneRef);
 
   showSuccess();
 
