@@ -240,3 +240,8 @@ function getEmptyTemplate() {
             </div>
   `;
 }
+
+
+function openAddTaskOverlay() {
+  
+}
