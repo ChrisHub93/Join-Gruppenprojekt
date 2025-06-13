@@ -31,104 +31,167 @@ function getListOfContacts(contactsArray) {
     let firstNameOfUser = user.firstname;
     let lastNameOfUser = user.lastname;
     let phoneOfUser = user.phone;
-    let alphabeticalOrderRef = document.getElementById("alphabeticalOrder" + firstNameOfUser.charAt(0).toUpperCase());
-    alphabeticalOrderRef.innerHTML += getBasicInfoAboutContact(emailOfUser, firstNameOfUser, lastNameOfUser, phoneOfUser);
+    let alphabeticalOrderRef = document.getElementById(
+      "alphabeticalOrder" + firstNameOfUser.charAt(0).toUpperCase()
+    );
+    alphabeticalOrderRef.innerHTML += getBasicInfoAboutContact(
+      emailOfUser,
+      firstNameOfUser,
+      lastNameOfUser,
+      phoneOfUser
+    );
     getSortTitle(firstNameOfUser);
     randomBackgroundColor(firstNameOfUser, lastNameOfUser);
   }
 }
 
 function getSortTitle(firstNameOfUser) {
-  let orderRef = document.getElementById("order" + firstNameOfUser.charAt(0).toUpperCase());
+  let orderRef = document.getElementById(
+    "order" + firstNameOfUser.charAt(0).toUpperCase()
+  );
   orderRef.innerHTML = getSortTitleTemplate(firstNameOfUser);
 }
 
 function randomBackgroundColor(firstNameOfUser, lastNameOfUser) {
   let numberForClass = Math.floor(Math.random() * 8) + 1;
-  let circleFirstLettersRef = document.getElementById("circleFirstLetters" + firstNameOfUser + lastNameOfUser);
-  circleFirstLettersRef.classList.add("bgForCircleFirstLetters" + numberForClass);
+  let circleFirstLettersRef = document.getElementById(
+    "circleFirstLetters" + firstNameOfUser + lastNameOfUser
+  );
+  circleFirstLettersRef.classList.add(
+    "bgForCircleFirstLetters" + numberForClass
+  );
 }
 
-function moreDetailsAboutContact( emailOfUser, firstNameOfUser, lastNameOfUser, phoneOfUser){
-  let newContactId = firstNameOfUser +' '+ lastNameOfUser; 
-  if (currentActiveContactId === newContactId){
-      sameContact();
-  } else if ( currentActiveContactId && currentActiveContactId !== newContactId){
-      clickedOnNewContact(newContactId, firstNameOfUser, lastNameOfUser, emailOfUser, phoneOfUser);
+function moreDetailsAboutContact(
+  emailOfUser,
+  firstNameOfUser,
+  lastNameOfUser,
+  phoneOfUser
+) {
+  let newContactId = firstNameOfUser + " " + lastNameOfUser;
+  if (currentActiveContactId === newContactId) {
+    sameContact();
+  } else if (
+    currentActiveContactId &&
+    currentActiveContactId !== newContactId
+  ) {
+    clickedOnNewContact(
+      newContactId,
+      firstNameOfUser,
+      lastNameOfUser,
+      emailOfUser,
+      phoneOfUser
+    );
   } else {
-      selectContact(newContactId, firstNameOfUser, lastNameOfUser, emailOfUser, phoneOfUser);
-  } 
+    selectContact(
+      newContactId,
+      firstNameOfUser,
+      lastNameOfUser,
+      emailOfUser,
+      phoneOfUser
+    );
+  }
 }
 
-function sameContact(){
-let idRef = document.querySelectorAll('[id^="setNewBgFor"]');
-      for (let cssElement of idRef) {
-        cssElement.classList.remove("darkBtn");
-      }
-      let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
-      allInfoAboutContactRef.classList.remove("showAllInfoAboutContact");
-      currentActiveContactId = null;
-}
-
-function clickedOnNewContact(newContactId, firstNameOfUser, lastNameOfUser, emailOfUser, phoneOfUser){
+function sameContact() {
   let idRef = document.querySelectorAll('[id^="setNewBgFor"]');
-      for (const element of idRef) {
-        element.classList.remove("darkBtn");
-      }
-      let setNewBgForContactRef = document.getElementById("setNewBgFor"+firstNameOfUser+lastNameOfUser);
-      setNewBgForContactRef.classList.add("darkBtn");
-      let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
-      let targetDivRef = document.getElementById("circleFirstLetters"+firstNameOfUser+lastNameOfUser);
-      let divRef = Array.from(targetDivRef.classList);
-      allInfoAboutContactRef.innerHTML = getDetailsOfContact(divRef, firstNameOfUser, lastNameOfUser, emailOfUser, phoneOfUser);
-      currentActiveContactId = newContactId;
+  for (let cssElement of idRef) {
+    cssElement.classList.remove("darkBtn");
+  }
+  let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
+  allInfoAboutContactRef.classList.remove("showAllInfoAboutContact");
+  currentActiveContactId = null;
 }
 
-function selectContact(newContactId, firstNameOfUser, lastNameOfUser, emailOfUser, phoneOfUser){
-    currentActiveContactId = newContactId;
-    let setNewBgForContactRef = document.getElementById("setNewBgFor"+firstNameOfUser+lastNameOfUser);
-    setNewBgForContactRef.classList.add("darkBtn");
-    let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
-    allInfoAboutContactRef.classList.add("showAllInfoAboutContact");
-    let targetDivRef = document.getElementById("circleFirstLetters"+firstNameOfUser+lastNameOfUser);
-    let divRef = Array.from(targetDivRef.classList);
-    allInfoAboutContactRef.innerHTML = getDetailsOfContact(divRef, firstNameOfUser, lastNameOfUser, emailOfUser, phoneOfUser);
+function clickedOnNewContact(
+  newContactId,
+  firstNameOfUser,
+  lastNameOfUser,
+  emailOfUser,
+  phoneOfUser
+) {
+  let idRef = document.querySelectorAll('[id^="setNewBgFor"]');
+  for (const element of idRef) {
+    element.classList.remove("darkBtn");
+  }
+  let setNewBgForContactRef = document.getElementById(
+    "setNewBgFor" + firstNameOfUser + lastNameOfUser
+  );
+  setNewBgForContactRef.classList.add("darkBtn");
+  let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
+  let targetDivRef = document.getElementById(
+    "circleFirstLetters" + firstNameOfUser + lastNameOfUser
+  );
+  let divRef = Array.from(targetDivRef.classList);
+  allInfoAboutContactRef.innerHTML = getDetailsOfContact(
+    divRef,
+    firstNameOfUser,
+    lastNameOfUser,
+    emailOfUser,
+    phoneOfUser
+  );
+  currentActiveContactId = newContactId;
 }
 
-function openOverlay(){
+function selectContact(
+  newContactId,
+  firstNameOfUser,
+  lastNameOfUser,
+  emailOfUser,
+  phoneOfUser
+) {
+  currentActiveContactId = newContactId;
+  let setNewBgForContactRef = document.getElementById(
+    "setNewBgFor" + firstNameOfUser + lastNameOfUser
+  );
+  setNewBgForContactRef.classList.add("darkBtn");
+  let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
+  allInfoAboutContactRef.classList.add("showAllInfoAboutContact");
+  let targetDivRef = document.getElementById(
+    "circleFirstLetters" + firstNameOfUser + lastNameOfUser
+  );
+  let divRef = Array.from(targetDivRef.classList);
+  allInfoAboutContactRef.innerHTML = getDetailsOfContact(
+    divRef,
+    firstNameOfUser,
+    lastNameOfUser,
+    emailOfUser,
+    phoneOfUser
+  );
+}
+
+function openOverlay() {
   let overlayRef = document.getElementById("overlay");
   let contentOverlayRef = document.getElementById("contentOverlay");
-  overlayRef.classList.toggle("d-nonevip"); 
+  overlayRef.classList.toggle("d-nonevip");
   contentOverlayRef.classList.remove("d-nonevip");
-  setTimeout(()=>{
+  setTimeout(() => {
     contentOverlayRef.classList.remove("hideContentOverlay");
     contentOverlayRef.classList.add("showContentOverlay");
     overlayRef.classList.add("overlayBg");
   }, 10);
-
 }
 
-function closeOverlay(event){
+function closeOverlay(event) {
   event.stopPropagation(event);
   let overlayRef = document.getElementById("overlay");
   let contentOverlayRef = document.getElementById("contentOverlay");
   contentOverlayRef.classList.add("hideContentOverlay");
   contentOverlayRef.classList.remove("showContentOverlay");
   overlayRef.classList.remove("overlayBg");
-  setTimeout(()=>{
-    overlayRef.classList.toggle("d-nonevip"); 
+  setTimeout(() => {
+    overlayRef.classList.toggle("d-nonevip");
   }, 150);
 }
 
-function cancelOverlay(event){
-
+function cancelOverlay(event) {
   let nameRef = document.getElementById("name");
   let emailRef = document.getElementById("email");
   let phoneRef = document.getElementById("phone");
-  
-  nameRef.value = '';
-  emailRef.value = '';
-  phoneRef.value = '';
+
+  nameRef.value = "";
+  emailRef.value = "";
+  phoneRef.value = "";
 
   event.stopPropagation(event);
   let overlayRef = document.getElementById("overlay");
@@ -136,61 +199,57 @@ function cancelOverlay(event){
   contentOverlayRef.classList.add("hideContentOverlay");
   contentOverlayRef.classList.remove("showContentOverlay");
   overlayRef.classList.remove("overlayBg");
-  setTimeout(()=>{
-    overlayRef.classList.toggle("d-nonevip"); 
+  setTimeout(() => {
+    overlayRef.classList.toggle("d-nonevip");
   }, 150);
 }
 
-function stopPropagation(event){
+function stopPropagation(event) {
   event.stopPropagation(event);
 }
 
-async function createContact(event){
+async function createContact(event) {
   let nameRef = document.getElementById("name");
   let emailRef = document.getElementById("email");
   let phoneRef = document.getElementById("phone");
-
   let fullName = nameRef.value.split(" ");
   let firstNameOfUser = fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
-  let lastNameOfUser = fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
-
-  await postData(`/contacts/`, {email: emailRef.value, firstname: firstNameOfUser, lastname: lastNameOfUser, phone: phoneRef.value});
-
+  let lastNameOfUser =fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
+  await postData(`/contacts/`, {email: emailRef.value, firstname: firstNameOfUser, lastname: lastNameOfUser, phone: phoneRef.value,});
   getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef);
-  
   closeOverlayAfterCreatedContact(event);
-  moreDetailsAboutContact(emailRef.value, firstNameOfUser, lastNameOfUser, phoneRef.value);
+  moreDetailsAboutContact(emailRef.value,firstNameOfUser,lastNameOfUser,phoneRef.value);
   clearInputFields(nameRef, emailRef, phoneRef);
-
   showSuccess();
-
 }
 
-function showSuccess(){
+function showSuccess() {
   let successfullyCreatedRef = document.getElementById("successfullyCreated");
-   successfullyCreatedRef.classList.add("showSuccess");
 
-   setTimeout( () => {
+  setTimeout(() => {
+    successfullyCreatedRef.classList.add("showSuccess");
+  }, 500);
+
+  setTimeout(() => {
     successfullyCreatedRef.classList.add("hideSuccess");
-    // successfullyCreatedRef.classList.remove("showSuccess");
-   }, 2000);
+  }, 2000);
 }
 
-function clearInputFields(nameRef, emailRef, phoneRef){
-  nameRef.value ='';
-  emailRef.value ='';
-  phoneRef.value = '';
+function clearInputFields(nameRef, emailRef, phoneRef) {
+  nameRef.value = "";
+  emailRef.value = "";
+  phoneRef.value = "";
 }
 
-function closeOverlayAfterCreatedContact(event){
+function closeOverlayAfterCreatedContact(event) {
   event.stopPropagation(event);
   let overlayRef = document.getElementById("overlay");
   let contentOverlayRef = document.getElementById("contentOverlay");
   contentOverlayRef.classList.remove("showContentOverlay");
   contentOverlayRef.classList.add("d-nonevip");
   overlayRef.classList.remove("overlayBg");
-  setTimeout(()=>{
-    overlayRef.classList.toggle("d-nonevip"); 
+  setTimeout(() => {
+    overlayRef.classList.toggle("d-nonevip");
   }, 150);
   contentOverlayRef.classList.add("hideContentOverlay");
 }
@@ -206,61 +265,79 @@ async function postData(path, data = {}) {
   return (responseToJson = await response.json());
 }
 
-function getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef) {
-  let alphabeticalOrderRef = document.getElementById("alphabeticalOrder" + firstNameOfUser.charAt(0).toUpperCase());
-  alphabeticalOrderRef.innerHTML += getBasicInfoAboutContact(emailRef.value, firstNameOfUser, lastNameOfUser, phoneRef.value);
+function getListOfCreatedContact(
+  firstNameOfUser,
+  lastNameOfUser,
+  emailRef,
+  phoneRef
+) {
+  let alphabeticalOrderRef = document.getElementById(
+    "alphabeticalOrder" + firstNameOfUser.charAt(0).toUpperCase()
+  );
+  alphabeticalOrderRef.innerHTML += getBasicInfoAboutContact(
+    emailRef.value,
+    firstNameOfUser,
+    lastNameOfUser,
+    phoneRef.value
+  );
   getSortTitle(firstNameOfUser);
-  randomBackgroundColor(firstNameOfUser, lastNameOfUser);  
+  randomBackgroundColor(firstNameOfUser, lastNameOfUser);
 }
 
-
-async function openEditOverlay(event){
+async function openEditOverlay(event) {
   event.stopPropagation(event);
   let contacts = await fetchData("/contacts/");
   let contactsArray = Object.values(contacts);
-  let user = contactsArray.find( currentUser => currentUser.firstname +' '+ currentUser.lastname == currentActiveContactId);
+  let user = contactsArray.find(
+    (currentUser) =>
+      currentUser.firstname + " " + currentUser.lastname ==
+      currentActiveContactId
+  );
   toggleEditOverlay();
   inputFieldsGetValuesOfContact(user);
   profileGetCorrectBackground(user);
-
 }
 
-function toggleEditOverlay(){
+function toggleEditOverlay() {
   let overlayRef = document.getElementById("editOverlay");
   let contentOverlayRef = document.getElementById("contentEditOverlay");
-  overlayRef.classList.toggle("d-nonevip"); 
+  overlayRef.classList.toggle("d-nonevip");
   contentOverlayRef.classList.remove("d-nonevip");
-  setTimeout(()=>{
+  setTimeout(() => {
     contentOverlayRef.classList.remove("hideContentOverlay");
     contentOverlayRef.classList.add("showContentOverlay");
     overlayRef.classList.add("overlayBg");
   }, 10);
 }
 
-function closeEditOverlay(event){
+function closeEditOverlay(event) {
   event.stopPropagation(event);
   let overlayRef = document.getElementById("editOverlay");
   let contentOverlayRef = document.getElementById("contentEditOverlay");
-  contentOverlayRef.classList.add("hideContentOverlay"); 
+  contentOverlayRef.classList.add("hideContentOverlay");
   contentOverlayRef.classList.remove("showContentOverlay");
   overlayRef.classList.remove("overlayBg");
-  setTimeout(()=>{
-    overlayRef.classList.toggle("d-nonevip"); 
+  setTimeout(() => {
+    overlayRef.classList.toggle("d-nonevip");
   }, 150);
 }
 
-function inputFieldsGetValuesOfContact(user){
+function inputFieldsGetValuesOfContact(user) {
   let inputNameRef = document.getElementById("nameEdit");
   let inputEmailRef = document.getElementById("emailEdit");
   let inputPhoneRef = document.getElementById("phoneEdit");
-  inputNameRef.value = user.firstname + ' ' + user.lastname;
+  inputNameRef.value = user.firstname + " " + user.lastname;
   inputEmailRef.value = user.email;
   inputPhoneRef.value = user.phone;
 }
 
-function profileGetCorrectBackground(user){
-  let firstLetterOfFirstNameRef = document.getElementById("firstLetterOfFirstName");
-  let firstLetterOfLastNameRef = document.getElementById("fistLetterOfLastName");
+function profileGetCorrectBackground(user) {
+  let firstLetterOfFirstNameRef = document.getElementById(
+    "firstLetterOfFirstName"
+  );
+  let firstLetterOfLastNameRef = document.getElementById(
+    "fistLetterOfLastName"
+  );
   firstLetterOfFirstNameRef.innerText = user.firstname.charAt(0).toUpperCase();
   firstLetterOfLastNameRef.innerText = user.lastname.charAt(0).toUpperCase();
 
@@ -270,12 +347,11 @@ function profileGetCorrectBackground(user){
   circleFirstLettersRef.classList.add(bgClassRef[1]);
 }
 
-async function saveEditedContact(){
+async function saveEditedContact() {
   let contacts = await fetchData("/contacts/");
   let keys = Object.keys(contacts);
   let contactsArry = Object.values(contacts);
 
-  
   let inputNameRef = document.getElementById("nameEdit");
   let inputEmailRef = document.getElementById("emailEdit");
   let inputPhoneRef = document.getElementById("phoneEdit");
@@ -286,27 +362,27 @@ async function saveEditedContact(){
 
   for (let index = 0; index < contactsArry.length; index++) {
     let contact = contactsArry[index];
-    let fullContactName = contact.firstname + ' ' + contact.lastname;
-    if(fullContactName  == currentActiveContactId){
+    let fullContactName = contact.firstname + " " + contact.lastname;
+    if (fullContactName == currentActiveContactId) {
       let key = keys[index];
       await putData(`contacts/${key}`, {
         firstname: firstName,
         lastname: lastName,
-        email:inputEmailRef.value,
-        phone: inputPhoneRef.value
+        email: inputEmailRef.value,
+        phone: inputPhoneRef.value,
       });
       break;
     }
   }
 }
 
-async function putData(path="", data={}) {
-    let response = await fetch(BASE_URL + path + ".json",{
-        method:"PUT",
-        headers:{
-            "Content-Type":"application/json",
-        },
-        body: JSON.stringify(data),
-    });
-    return responseToJson = await response.json();
+async function putData(path = "", data = {}) {
+  let response = await fetch(BASE_URL + path + ".json", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return (responseToJson = await response.json());
 }
