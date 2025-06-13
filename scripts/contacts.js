@@ -365,12 +365,7 @@ async function saveEditedContact() {
     let fullContactName = contact.firstname + " " + contact.lastname;
     if (fullContactName == currentActiveContactId) {
       let key = keys[index];
-      await putData(`contacts/${key}`, {
-        firstname: firstName,
-        lastname: lastName,
-        email: inputEmailRef.value,
-        phone: inputPhoneRef.value,
-      });
+      await putData(`contacts/${key}`, {firstname: firstName,lastname: lastName,email: inputEmailRef.value, phone: inputPhoneRef.value,});
       break;
     }
   }
