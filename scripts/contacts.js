@@ -159,6 +159,13 @@ async function createContact(event){
   getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef);
   clearInputFields(nameRef, emailRef, phoneRef);
   closeOverlayAfterCreatedContact(event);
+
+
+
+
+  moreDetailsAboutContact(emailRef, firstNameOfUser, lastNameOfUser, phoneRef);
+
+
 }
 
 function clearInputFields(nameRef, emailRef, phoneRef){
