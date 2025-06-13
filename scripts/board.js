@@ -243,5 +243,9 @@ function getEmptyTemplate() {
 
 
 function openAddTaskOverlay() {
-  
+  const addOverlayRef = document.getElementById('overlayAddTask');
+  const openAddTaskOverlayRef = document.getElementById('addTaskContent');
+
+  addOverlayRef.classList.remove('d-nonevip');
+  openAddTaskOverlayRef.innerHTML = getAddTaskTemplate();
 }

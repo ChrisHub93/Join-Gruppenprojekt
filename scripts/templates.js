@@ -105,8 +105,7 @@ function getSortTitleTemplate(firstNameOfUser) {
 }
 
 function getAddTaskTemplate() {
-  return;
-  `<div class="form">
+  return `<div class="form">
         <div class="typeOfTask">
           <div class="column mb12">
             <span class="mgBottom">Title<mark>*</mark></span>
