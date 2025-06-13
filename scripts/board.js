@@ -128,8 +128,52 @@ function removeHighlight(id) {
   document.getElementById(id).innerHTML = "";
 }
 
+function overlayTask(element) {
+    let tasksRef = todos[element];
+    let addOverlayRef = document.getElementById('overlayTask')
+    let dialogTaskContentRef = document.getElementById("dialogTaskContent")
+    addOverlayRef.classList.remove('d-nonevip');
+    dialogTaskContentRef.innerHTML = renderOverlayTaskContent(tasksRef);
+}
+
+function closeOverlay(event) {
+    let addOverlayRef = document.getElementById('overlayTask');
+    if(event.target === addOverlayRef || event.target.classList.contains('closeIcon')){
+    addOverlayRef.classList.add('d-nonevip');
+    }
+}
+
+function renderOverlayTaskContent(tasksRef) {
+  return `
+          <div class="flex_between">
+            <div class="filledContainer__category">
+              <p>${tasksRef.category}</p>
+            </div>
+              <img onclick="closeOverlay(event)" class="closeIcon" src="../assets/icons/close.png" alt="">
+          </div>
+            <div class="filledContainer__title">
+              <p>${tasksRef.title}</p>
+            </div>
+            <div class="filledContainer__description">
+              <p>${tasksRef.description}</p>
+            </div>
+            <div class="filledContainer__dueDate">
+              <p>Due Date: ${tasksRef.date}</p>
+            </div>
+            <div class="filledContainer__priority">
+              <p>Priority: ${tasksRef.priority}</p>
+            </div>
+            <div class="filledContainer__assignedTo">
+              <p>Assigned to: ${tasksRef.assignedTo}</p>
+            </div>
+            <div class="filledContainer__subTasks">
+              <p>Subtasks: ${tasksRef.subTasks}</p>
+            </div>
+  `
+}
+
 function getTaskTemplate(element) {
-  return `<div class="filledContainer" draggable = "true" ondragstart="startDragging(${element["id"]})">
+  return `<div onclick="overlayTask(${element["id"]})" class="filledContainer" draggable = "true" ondragstart="startDragging(${element["id"]})">
               <div class="filledContainer__category">
                 <p>User Story</p>
               </div>
