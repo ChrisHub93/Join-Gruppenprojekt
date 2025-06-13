@@ -122,52 +122,253 @@ select:focus {
 }
 
 .inputStyleArrow {
-    cursor: pointer;
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 24px;
-    width: 24px;
-    object-fit: cover;
+  cursor: pointer;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 24px;
+  width: 24px;
+  object-fit: cover;
 }
 
 .category li {
-    cursor: pointer;
-    border: 1px solid white;
+  cursor: pointer;
+  border: 1px solid white;
 }
 
 .optionsCategory {
-    background-color: white;
-    border-radius: 8px;
-    width: 100%;
-    padding-block: 8px;
-    padding-inline: 16px;
-    font-size: 16px;
+  background-color: white;
+  border-radius: 8px;
+  width: 100%;
+  padding-block: 8px;
+  padding-inline: 16px;
+  font-size: 16px;
 }
 
 .show {
-    max-height: 200px;
-  }
+  max-height: 200px;
+}
 
-  .gapBetweenNextElement {
-    margin-bottom: 24px;
+.gapBetweenNextElement {
+  margin-bottom: 24px;
 }
 
 .priorityUrgentBg {
-    background-color: var(--priority-urgent-bg);
-    color: white;
-    font-weight: bold;
+  background-color: var(--priority-urgent-bg);
+  color: white;
+  font-weight: bold;
+}
+
+.priorityMediumBg {
+  background-color: var(--priority-medium-bg);
+  color: white;
+  font-weight: bold;
+}
+
+.priorityLowBg {
+  background-color: var(--priority-low-bg);
+  color: white;
+  font-weight: bold;
+}
+
+.checkBox {
+  width: 13px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  display: none;
+}
+
+.checkBoxImg {
+  height: 18px;
+  object-fit: cover;
+  height: 18px;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.checkBoxImg:hover {
+  background-color: white;
+  height: 18px;
+  border-radius: 50%;
+}
+
+.filterChecked {
+  filter: brightness(0) invert(1);
+  height: 18px;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.filterChecked:hover {
+  background-color: white;
+  height: 18px;
+  border-radius: 50%;
+  transition: all 200ms ease-in;
+}
+
+.assignedBg {
+  background-color: var(--darkBtn-color) !important;
+  color: white;
+}
+
+.assignedBg:hover {
+  background: var(--selected-hover-bg) !important;
+}
+
+.cancelOrCheck {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 12px;
+  top: 56%;
+  cursor: pointer;
+}
+
+.cancelOrCheck img {
+  height: 20px;
+  width: 20px;
+  object-fit: contain;
+}
+
+.subTasksSeperator {
+  width: 1px;
+  background-color: var(--snd-color);
+  margin-left: 2px;
+  margin-right: 2px;
+  height: 20px;
+}
+
+#subTasks {
+  display: flex;
+  flex-direction: column;
+}
+
+#subTasks input {
+  border: none;
+  font-size: 14px;
+  background-color: transparent;
+  padding-block: 4px;
+  padding-inline: 8px;
+}
+
+.editOrTrash {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 12px;
+  top: 10%;
+  cursor: pointer;
+}
+
+.editOrTrash img {
+  height: 20px;
+  width: 20px;
+  object-fit: contain;
+}
+
+.subTasksSeperatorSecond {
+  width: 1px;
+  background-color: var(--seperator-snd-color);
+  margin-left: 2px;
+  margin-right: 2px;
+  height: 20px;
+}
+
+.activeInput {
+  background-color: white !important;
+  border-radius: 0;
+  border-bottom: 1px solid var(--focus-color) !important;
+  padding-inline: 16px !important;
+}
+
+.relative {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.relative:hover {
+  background-color: var(--snd-color);
+}
+
+.relative input,
+.relative img {
+  background-color: transparent;
+}
+
+div[id^="bullet"] {
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  background-color: black;
+  margin-left: 16px;
+}
+
+.columnSubTask {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.mgBottom {
+  display: inline-block;
+  margin-bottom: 8px;
+}
+input,
+textarea {
+  border: 1px solid var(--snd-color);
+  border-radius: 8px;
+  width: 100%;
+  padding-block: 8px;
+  padding-inline: 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.plusIcon {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  object-fit: contain;
+  right: 12px;
+  top: 55%;
+  cursor: pointer;
+}
+
+mark {
+  background-color: var(--bg-color);
+  color: red;
+}
+
+.marked {
+    display: flex;
   }
   
-  .priorityMediumBg {
-    background-color: var(--priority-medium-bg);
-    color: white;
-    font-weight: bold;
+  .markedFields span {
+    display: flex;
+    font-size: 14px;
   }
   
-  .priorityLowBg {
-    background-color: var(--priority-low-bg);
-    color: white;
-    font-weight: bold;
+  .markedFieldsResponsive span {
+    display: flex;
+    font-size: 14px;
+  }
+
+  .inputError {
+    border: 1px solid var(--error-color);
+  }
+  
+  #errorTitle,
+  #errorDate {
+    font-size: 10px;
+    color: var(--error-color);
+    margin-top: 4px;
   }
