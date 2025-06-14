@@ -1,11 +1,18 @@
 .form {
   background-color: var(--bg-color);
   display: flex;
-
+  flex-direction: column;
   width: 800px;
-
   margin-right: auto;
   margin-left: auto;
+  padding: 50px;
+  border-radius: 30px;
+  gap: 8px;
+}
+
+.AddTaskContentContainer{
+    display: flex;
+    height: 360px;
 }
 
 .seperator {
@@ -16,9 +23,11 @@
   min-height: 360px;
 }
 
-.pririty {
+.priority {
   display: flex;
   flex-direction: column;
+  gap: 25px;
+  overflow-y: auto;
 }
 
 .column {
@@ -30,9 +39,9 @@
 .typeOfTask {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   width: 400px;
   height: 360px;
+  gap: 15px;
 }
 
 .priorityBtn {
@@ -57,9 +66,9 @@
 
 .choose {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
+  gap: 8px;
 }
 
 .inputSelectContact {
@@ -148,10 +157,6 @@ select:focus {
 
 .show {
   max-height: 200px;
-}
-
-.gapBetweenNextElement {
-  margin-bottom: 24px;
 }
 
 .priorityUrgentBg {
@@ -318,10 +323,6 @@ div[id^="bullet"] {
   margin-bottom: 8px;
 }
 
-.mgBottom {
-  display: inline-block;
-  margin-bottom: 8px;
-}
 input,
 textarea {
   border: 1px solid var(--snd-color);
@@ -349,26 +350,26 @@ mark {
 }
 
 .marked {
-    display: flex;
-  }
-  
-  .markedFields span {
-    display: flex;
-    font-size: 14px;
-  }
-  
-  .markedFieldsResponsive span {
-    display: flex;
-    font-size: 14px;
-  }
+  display: flex;
+}
 
-  .inputError {
-    border: 1px solid var(--error-color);
-  }
-  
-  #errorTitle,
-  #errorDate {
-    font-size: 10px;
-    color: var(--error-color);
-    margin-top: 4px;
-  }
+.markedFields span {
+  display: flex;
+  font-size: 14px;
+}
+
+.markedFieldsResponsive span {
+  display: flex;
+  font-size: 14px;
+}
+
+.inputError {
+  border: 1px solid var(--error-color);
+}
+
+#errorTitle,
+#errorDate {
+  font-size: 10px;
+  color: var(--error-color);
+  margin-top: 4px;
+}
