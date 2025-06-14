@@ -133,9 +133,11 @@ function getSortTitleTemplate(firstNameOfUser) {
 
 function getAddTaskTemplate() {
   return `<div class="form">
+        <h1>Add Task</h1>
+        <div class="AddTaskContentContainer">
         <div class="typeOfTask">
           <div class="column mb12">
-            <span class="mgBottom">Title<mark>*</mark></span>
+            <span class=" ">Title<mark>*</mark></span>
             <input
               onfocusout="checkEmptyTitle()"
               type="text"
@@ -148,16 +150,17 @@ function getAddTaskTemplate() {
           </div>
 
           <div class="column">
-            <span class="mgBottom">Description</span>
+            <span class="">Description</span>
             <textarea
               name="description"
               id="description"
+              class="description"
               placeholder="Enter a Description"
             ></textarea>
           </div>
 
           <div class="column">
-            <span class="mgBottom">Due Date<mark>*</mark></span>
+            <span class=" ">Due Date<mark>*</mark></span>
             <input
               onfocusout="checkEmptyDate()"
               type="date"
@@ -173,7 +176,7 @@ function getAddTaskTemplate() {
 
         <div class="priority">
           <div class="column">
-            <span class="mgBottom">Priority</span>
+            <span class=" ">Priority</span>
             <div class="choose">
               <div
                 id="urgent"
@@ -197,19 +200,19 @@ function getAddTaskTemplate() {
 
               <div
                 id="medium"
-                class="priorityBtn"
+                class="priorityBtn priorityMediumBg"
                 onclick="setPriorityMedium('medium')"
               >
                 <span>Medium</span>
                 <img
                   id="standardMediumIcon"
-                  class=""
+                  class="d-nonevip"
                   src="/assets/icons/Prio media.png"
                   alt=""
                 />
                 <img
                   id="activeMediumIcon"
-                  class="d-nonevip"
+                  class=""
                   src="/assets/icons/Prio media active.png"
                   alt=""
                 />
@@ -233,8 +236,8 @@ function getAddTaskTemplate() {
             </div>
           </div>
 
-          <div class="  gapBetweenNextElement">
-            <span class="mgBottom">Assigned to</span>
+          <div class="   ">
+            <span class=" ">Assigned to</span>
 
             <div class="category">
               <div
@@ -337,8 +340,8 @@ function getAddTaskTemplate() {
             <div id="assignedMembers"></div>
           </div>
 
-          <div class="  gapBetweenNextElement">
-            <span class="mgBottom">Category<mark>*</mark></span>
+          <div class="   ">
+            <span class=" ">Category<mark>*</mark></span>
             <div class="category">
               <div class="select inputFlex" id="" onclick="openTaskCategory()">
                 <span id="select">Select task category</span>
@@ -369,7 +372,7 @@ function getAddTaskTemplate() {
           </div>
 
           <div class="columnSubTask">
-            <span class="mgBottom">Subtasks</span>
+            <span class=" ">Subtasks</span>
             <input
               type="text"
               name="subtasks"
@@ -403,6 +406,29 @@ function getAddTaskTemplate() {
 
           <div class="markedFieldsResponsive d-none">
             <span><mark class="marked">*</mark>This field is required</span>
+          </div>
+        </div>
+        </div>
+        <div class="buttons">
+          <div class="flexButtons">
+            <button class="clear">
+              Cancel
+              <img
+                class="defaultIcon"
+                src="/assets/icons/iconoir_cancel.png"
+                alt=""
+              />
+              <img
+                class="hoverIcon"
+                src="/assets/icons/iconoir_cancel_hover.png"
+                alt=""
+              />
+            </button>
+
+            <button class="createTask" onclick="createTask()">
+              Create Task
+              <img src="/assets/icons/check.png" alt="" />
+            </button>
           </div>
         </div>
       </div>`;
