@@ -78,6 +78,7 @@ function getBasicInfoAboutContact(
   phoneOfUser
 ) {
   return `<div id="order${firstNameOfUser.charAt(0).toUpperCase()}"></div>
+            <div id="allMainInfoAbout${firstNameOfUser+lastNameOfUser}">
             <div id="setNewBgFor${
               firstNameOfUser + lastNameOfUser
             }" class="contactInfo" onclick="moreDetailsAboutContact('${emailOfUser}', '${firstNameOfUser}', '${lastNameOfUser}', '${phoneOfUser}')">
@@ -102,11 +103,13 @@ function getEditedBasicInfoAboutContact(
   emailOfUser,
   phoneOfUser
 ) {
-  return `
-            
+  return `<div id="order${firstNameOfUser.charAt(0).toUpperCase()}"></div>
+            <div id="setNewBgFor${
+              firstNameOfUser + lastNameOfUser
+            }" class="contactInfo" onclick="moreDetailsAboutContact('${emailOfUser}', '${firstNameOfUser}', '${lastNameOfUser}', '${phoneOfUser}')">
               <div id="circleFirstLetters${
-                firstNameOfUser + lastNameOfUser
-              }" class="circleFirstLetters ${divRef[1]}">
+                firstNameOfUser
+              }${lastNameOfUser} " class="circleFirstLetters ${divRef[1]}">
                 <span>${firstNameOfUser.charAt(0)}</span>
                 <span>${lastNameOfUser.charAt(0)}</span>
               </div>
@@ -115,6 +118,7 @@ function getEditedBasicInfoAboutContact(
                 <span class="email">${emailOfUser}</span>
               </div>
             </div>
+          </div>
           `;
 }
 
