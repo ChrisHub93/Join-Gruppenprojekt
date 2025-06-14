@@ -129,7 +129,16 @@ function getSortTitleTemplate(firstNameOfUser) {
 
 function getAddTaskTemplate() {
   return `<div class="form">
-        <h1>Add Task</h1>
+        <div class="hedalineAddTask">
+          <h1>Add Task</h1>
+          <button class="hedalineAddTask__closeBtn">
+            <img
+              
+              src="../assets/icons/close.png"
+              alt="add icon mobile"
+            />
+          </button>
+        </div>
         <div class="AddTaskContentContainer">
         <div class="typeOfTask">
           <div class="column mb12">
