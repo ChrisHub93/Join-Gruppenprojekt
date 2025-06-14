@@ -366,35 +366,28 @@ async function saveEditedContact(event) {
   let lastName = fullName[1] || "";
 
   for (let index = 0; index < contactsArry.length; index++) {
-
     let contact = contactsArry[index];
     let fullContactName = contact.firstname + " " + contact.lastname;
 
     if (fullContactName == currentActiveContactId) {
       let key = keys[index];
-
       await putData(`contacts/${key}`, {firstname: firstName,lastname: lastName,email: inputEmailRef.value, phone: inputPhoneRef.value,});
-
       currentActiveContactId = firstName + ' ' + lastName;
-
       closeOverlayAfterEditedContact(event);
 
       let targetDivRef = document.getElementById("circleFirstLetters" + contact.firstname + contact.lastname);
       let divRef = Array.from(targetDivRef.classList);
-
-
-
-      // need to change variables for moreDetailsAboutContact
-      let targetSetNewBgForRef = document.getElementById("setNewBgFor" + contact.firstname + contact.lastname);
+      
+      let targetSetNewBgForRef = document.getElementById("allMainInfoAbout" + contact.firstname + contact.lastname);
       targetSetNewBgForRef.innerHTML = '';
       targetSetNewBgForRef.innerHTML = getEditedBasicInfoAboutContact(divRef, firstName,lastName,inputEmailRef.value,inputPhoneRef.value);
 
       let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
       allInfoAboutContactRef.innerHTML ='';
       allInfoAboutContactRef.innerHTML = getDetailsOfContact(divRef,firstName,lastName,inputEmailRef.value,inputPhoneRef.value);
-      
-      console.log(currentActiveContactId);
-      
+
+      let setNewBgForContactRef = document.getElementById("setNewBgFor" + firstName + lastName);
+      setNewBgForContactRef.classList.add("darkBtn");
     }
   }
 }
