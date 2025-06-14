@@ -163,11 +163,16 @@ function renderOverlayTaskContent(tasksRef) {
             <div class="filledContainer__priority">
               <p>Priority: ${tasksRef.priority}</p>
             </div>
-            <div class="filledContainer__assignedTo">
-              <p>Assigned to: ${tasksRef.assignedTo}</p>
+            <div class="filledContainer__assignedTo flex_column_overlayTask">
+              <p>Assigned to:</p>
+              <div>${tasksRef.assignedTo}</div>
             </div>
-            <div class="filledContainer__subTasks">
-              <p>Subtasks: ${tasksRef.subTasks}</p>
+            <div class="filledContainer__subTasks flex_column_overlayTask">
+              <p>Subtasks:</p>
+                <label class="subtask_checkbox">${tasksRef.subTasks}
+                  <input class="subtask_overlay_input" type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
             </div>
   `
 }
