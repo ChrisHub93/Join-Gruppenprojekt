@@ -146,10 +146,11 @@ function getAddTaskTemplate() {
           </div>
 
           <div class="column">
-            <span class=" ">Description</span>
+            <span class="">Description</span>
             <textarea
               name="description"
               id="description"
+              class="description"
               placeholder="Enter a Description"
             ></textarea>
           </div>
@@ -403,6 +404,28 @@ function getAddTaskTemplate() {
             <span><mark class="marked">*</mark>This field is required</span>
           </div>
         </div>
+        </div>
+        <div class="buttons">
+          <div class="flexButtons">
+            <button class="clear">
+              Cancel
+              <img
+                class="defaultIcon"
+                src="/assets/icons/iconoir_cancel.png"
+                alt=""
+              />
+              <img
+                class="hoverIcon"
+                src="/assets/icons/iconoir_cancel_hover.png"
+                alt=""
+              />
+            </button>
+
+            <button class="createTask" onclick="createTask()">
+              Create Task
+              <img src="/assets/icons/check.png" alt="" />
+            </button>
+          </div>
         </div>
       </div>`;
 }
