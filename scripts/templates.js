@@ -95,6 +95,29 @@ function getBasicInfoAboutContact(
           </div>`;
 }
 
+function getEditedBasicInfoAboutContact(
+  divRef, 
+  firstNameOfUser,
+  lastNameOfUser,
+  emailOfUser,
+  phoneOfUser
+) {
+  return `
+            
+              <div id="circleFirstLetters${
+                firstNameOfUser + lastNameOfUser
+              }" class="circleFirstLetters ${divRef[1]}">
+                <span>${firstNameOfUser.charAt(0)}</span>
+                <span>${lastNameOfUser.charAt(0)}</span>
+              </div>
+              <div class="maininfoAboutContact">
+                <span class="name">${firstNameOfUser} ${lastNameOfUser}</span>
+                <span class="email">${emailOfUser}</span>
+              </div>
+            </div>
+          `;
+}
+
 function getSortTitleTemplate(firstNameOfUser) {
   return `<div class="paddingTop">  
                           <span>${firstNameOfUser

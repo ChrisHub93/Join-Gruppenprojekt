@@ -91,6 +91,9 @@ function moreDetailsAboutContact(
       phoneOfUser
     );
   }
+
+  console.log(currentActiveContactId);
+  
 }
 
 function sameContact() {
@@ -254,6 +257,8 @@ function closeOverlayAfterCreatedContact(event) {
   contentOverlayRef.classList.add("hideContentOverlay");
 }
 
+
+
 async function postData(path, data = {}) {
   let response = await fetch(BASE_URL + path + ".json", {
     method: "POST",
@@ -347,7 +352,7 @@ function profileGetCorrectBackground(user) {
   circleFirstLettersRef.classList.add(bgClassRef[1]);
 }
 
-async function saveEditedContact() {
+async function saveEditedContact(event) {
   let contacts = await fetchData("/contacts/");
   let keys = Object.keys(contacts);
   let contactsArry = Object.values(contacts);
@@ -361,12 +366,35 @@ async function saveEditedContact() {
   let lastName = fullName[1] || "";
 
   for (let index = 0; index < contactsArry.length; index++) {
+
     let contact = contactsArry[index];
     let fullContactName = contact.firstname + " " + contact.lastname;
+
     if (fullContactName == currentActiveContactId) {
       let key = keys[index];
+
       await putData(`contacts/${key}`, {firstname: firstName,lastname: lastName,email: inputEmailRef.value, phone: inputPhoneRef.value,});
-      break;
+
+      currentActiveContactId = firstName + ' ' + lastName;
+
+      closeOverlayAfterEditedContact(event);
+
+      let targetDivRef = document.getElementById("circleFirstLetters" + contact.firstname + contact.lastname);
+      let divRef = Array.from(targetDivRef.classList);
+
+
+
+      // need to change variables for moreDetailsAboutContact
+      let targetSetNewBgForRef = document.getElementById("setNewBgFor" + contact.firstname + contact.lastname);
+      targetSetNewBgForRef.innerHTML = '';
+      targetSetNewBgForRef.innerHTML = getEditedBasicInfoAboutContact(divRef, firstName,lastName,inputEmailRef.value,inputPhoneRef.value);
+
+      let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
+      allInfoAboutContactRef.innerHTML ='';
+      allInfoAboutContactRef.innerHTML = getDetailsOfContact(divRef,firstName,lastName,inputEmailRef.value,inputPhoneRef.value);
+      
+      console.log(currentActiveContactId);
+      
     }
   }
 }
@@ -380,4 +408,17 @@ async function putData(path = "", data = {}) {
     body: JSON.stringify(data),
   });
   return (responseToJson = await response.json());
+}
+
+function closeOverlayAfterEditedContact(event) {
+  event.stopPropagation(event);
+  let overlayRef = document.getElementById("editOverlay");
+  let contentOverlayRef = document.getElementById("contentEditOverlay");
+  contentOverlayRef.classList.remove("showContentOverlay");
+  contentOverlayRef.classList.add("d-nonevip");
+  overlayRef.classList.remove("overlayBg");
+  setTimeout(() => {
+    overlayRef.classList.toggle("d-nonevip");
+  }, 150);
+  contentOverlayRef.classList.add("hideContentOverlay");
 }
