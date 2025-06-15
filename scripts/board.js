@@ -132,14 +132,29 @@ function overlayTask(element) {
     let tasksRef = todos[element];
     let addOverlayRef = document.getElementById('overlayTask')
     let dialogTaskContentRef = document.getElementById("dialogTaskContent")
-    addOverlayRef.classList.remove('d-nonevip');
+    addOverlayRef.classList.add('active');
+    dialogTaskContentRef.style.transform = 'translateX(100%)';
+    dialogTaskContentRef.style.opacity = '0';
     dialogTaskContentRef.innerHTML = renderOverlayTaskContent(tasksRef);
+
+    requestAnimationFrame(() => {
+        dialogTaskContentRef.style.transform = 'translateX(0)';
+        dialogTaskContentRef.style.opacity = '1';
+    });
 }
 
 function closeOverlay(event) {
     let addOverlayRef = document.getElementById('overlayTask');
+    let dialogTaskContentRef = document.getElementById("dialogTaskContent")
     if(event.target === addOverlayRef || event.target.classList.contains('closeIcon')){
-    addOverlayRef.classList.add('d-nonevip');
+      dialogTaskContentRef.style.transform = 'translateX(100%)';
+      dialogTaskContentRef.style.opacity = '0';
+
+      setTimeout(() => {
+        addOverlayRef.classList.remove('active');
+        dialogTaskContentRef.style.transform = '';
+        dialogTaskContentRef.style.opacity = '';
+      }, 300);
     }
 }
 
@@ -176,7 +191,7 @@ function renderOverlayTaskContent(tasksRef) {
               <p class="cursor_overlay_task">Priority: </p>
               <div class="flex_gap10">
                 <p class="cursor_overlay_task">${tasksRef.priority.charAt(0).toUpperCase() + tasksRef.priority.slice(1).toLowerCase()}</p>
-                <img src="../assets/icons/priority-${tasksRef.priority}.png" alt="${tasksRef.priority} priority icon">
+                <img class="prio_overlay_task" src="../assets/icons/priority-${tasksRef.priority}.png" alt="${tasksRef.priority} priority icon">
               </div>
             </div>
             <div class="filledContainer__assignedTo flex_column_overlayTask">
