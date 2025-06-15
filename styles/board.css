@@ -290,6 +290,13 @@ h1 {
   gap: 16px;
 }
 
+.subtask_toggle{
+  display: flex;
+  padding: 6px 16px;
+  gap: 16px;
+  align-items: center;
+}
+
 .subtask_overlay_input {
   height: 16px;
   border: 2px solid #2A3647;
@@ -305,6 +312,59 @@ h1 {
   padding: 4px;
   border-radius: 25px;
   background-color: #0C2E621F;
+  image-rendering: auto;
+  transform: scale(1.06);
+}
+
+.flex_gap25{
+  display: flex;
+  gap: 25px;
+}
+
+.flex_gap10{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cursor_overlay_task{
+  cursor: default;
+}
+
+.overlay_text_black{
+  color: black;
+}
+
+.seperator_overlay_task{
+  background-color: #D1D1D1;
+  width: 1px;
+  height: 24px;
+}
+
+.flex_end_gp8{
+  gap: 8px;
+  justify-content: end;
+  display: flex;
+}
+
+.bottom_overlay_task{
+  cursor: pointer;
+  gap: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.bottom_overlay_task:hover{
+  color: #29abe2;
+  font-weight: 700;
+}
+
+.delete_task:hover img {
+  content: url("../assets/icons/delete-hover.png");
+}
+
+.edit_task:hover img {
+  content: url("../assets/icons/edit-hover.png");
 }
 
 @media (max-width: 1100px) {

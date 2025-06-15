@@ -17,7 +17,7 @@ let todos = [
     description: "build with start",
     assignedTo: "",
     subTasks: "Task1",
-    priority: "medium",
+    priority: "low",
     date: "11/11/25",
     status: "In progress",
   },
@@ -28,7 +28,7 @@ let todos = [
     description: "build with start",
     assignedTo: "",
     subTasks: "Task1",
-    priority: "medium",
+    priority: "urgent",
     date: "11/11/25",
     status: "Await feedback",
   },
@@ -143,36 +143,63 @@ function closeOverlay(event) {
     }
 }
 
+function toggleSubtask(img) {
+  let fileName = img.src.split('/').pop();
+  let isChecked = fileName === 'subtask-checked.png';
+
+    if (isChecked) {
+      img.src = '../assets/icons/subtask-unchecked.png';
+    } else {
+      img.src = '../assets/icons/subtask-checked.png';
+    }
+}
+
 function renderOverlayTaskContent(tasksRef) {
   return `
           <div class="flex_between">
             <div class="filledContainer__category">
-              <p>${tasksRef.category}</p>
+              <p class="cursor_overlay_task">${tasksRef.category}</p>
             </div>
               <img onclick="closeOverlay(event)" class="closeIcon" src="../assets/icons/close.png" alt="">
           </div>
             <div class="filledContainer__title">
-              <p>${tasksRef.title}</p>
+              <h1 class="cursor_overlay_task">${tasksRef.title}</h1>
             </div>
             <div class="filledContainer__description">
-              <p>${tasksRef.description}</p>
+              <p class="cursor_overlay_task overlay_text_black">${tasksRef.description}</p>
             </div>
-            <div class="filledContainer__dueDate">
-              <p>Due Date: ${tasksRef.date}</p>
+            <div class="filledContainer__dueDate flex_gap25">
+              <p class="cursor_overlay_task">Due Date:</p>
+              <p class="cursor_overlay_task">${tasksRef.date}</p>
             </div>
-            <div class="filledContainer__priority">
-              <p>Priority: ${tasksRef.priority}</p>
+            <div class="filledContainer__priority flex_gap25">
+              <p class="cursor_overlay_task">Priority: </p>
+              <div class="flex_gap10">
+                <p class="cursor_overlay_task">${tasksRef.priority.charAt(0).toUpperCase() + tasksRef.priority.slice(1).toLowerCase()}</p>
+                <img src="../assets/icons/priority-${tasksRef.priority}.png" alt="${tasksRef.priority} priority icon">
+              </div>
             </div>
             <div class="filledContainer__assignedTo flex_column_overlayTask">
-              <p>Assigned to:</p>
+              <p class="cursor_overlay_task">Assigned to:</p>
               <div>${tasksRef.assignedTo}</div>
             </div>
             <div class="filledContainer__subTasks flex_column_overlayTask">
-              <p>Subtasks:</p>
-                <label class="subtask_checkbox">${tasksRef.subTasks}
-                  <input class="subtask_overlay_input" type="checkbox">
-                  <span class="checkmark"></span>
-                </label>
+              <p class="cursor_overlay_task">Subtasks:</p>
+                <div class="subtask_toggle">
+                  <img class="subtask-icon" src="../assets/icons/subtask-unchecked.png" onclick="toggleSubtask(this)">
+                  <p class="cursor_overlay_task">${tasksRef.subTasks}</p>
+                </div>
+            </div>
+            <div class="flex_end_gp8">
+              <div class="bottom_overlay_task delete_task">
+                <img src="../assets/icons/Property 1=delete.png">
+                <p>Delete</p>
+              </div>
+              <div class="seperator_overlay_task"></div>
+              <div class="bottom_overlay_task edit_task">
+                <img src="../assets/icons/Property 1=edit.png">
+                <p>Edit</p>
+              </div>
             </div>
   `
 }
