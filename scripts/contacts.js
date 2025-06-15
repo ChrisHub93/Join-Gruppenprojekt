@@ -91,8 +91,6 @@ function moreDetailsAboutContact(
       phoneOfUser
     );
   }
-
-  console.log(currentActiveContactId);
 }
 
 function sameContact() {
@@ -465,4 +463,95 @@ function closeOverlayAfterEditedContact(event) {
     overlayRef.classList.toggle("d-nonevip");
   }, 150);
   contentOverlayRef.classList.add("hideContentOverlay");
+}
+
+async function deleteUser(){
+  let contacts = await fetchData("/contacts/");
+  let keys = Object.keys(contacts);
+  let contactsArry = Object.values(contacts);
+
+  for (let index = 0; index < contactsArry.length; index++) {
+
+    let contact = contactsArry[index];
+    let fullContactName = contact.firstname + " " + contact.lastname;
+
+    if (fullContactName == currentActiveContactId) {
+      let key = keys[index];
+      
+      let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
+      allInfoAboutContactRef.classList.remove("showAllInfoAboutContact");
+      currentActiveContactId = null;
+
+
+      let setNewBgForRef = document.getElementById("allMainInfoAbout" + contact.firstname + contact.lastname);
+      setNewBgForRef.remove();
+
+
+      let mainDiv = document.getElementById(
+        "alphabeticalOrder" + contact.firstname.charAt(0).toUpperCase()
+      );
+
+      if (mainDiv) {
+        let hasChildDiv = mainDiv.querySelectorAll('[id^="allMainInfoAbout"]');
+        if (hasChildDiv.length === 0) {
+          mainDiv.innerHTML = "";
+        } else {
+          return;
+        }
+      }
+
+      await deleteData(`contacts/${key}`);
+    }
+  }
+}
+
+
+async function deleteData(path="") {
+    let response = await fetch(BASE_URL + path + ".json",{
+        method:"DELETE",
+    });
+    return responseToJson = await response.json();
+}
+
+
+
+async function deleteUserInOverlay(event){
+  let contacts = await fetchData("/contacts/");
+  let keys = Object.keys(contacts);
+  let contactsArry = Object.values(contacts);
+
+  for (let index = 0; index < contactsArry.length; index++) {
+
+    let contact = contactsArry[index];
+    let fullContactName = contact.firstname + " " + contact.lastname;
+
+    if (fullContactName == currentActiveContactId) {
+      let key = keys[index];
+      
+      let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
+      allInfoAboutContactRef.classList.remove("showAllInfoAboutContact");
+      currentActiveContactId = null;
+
+
+      let setNewBgForRef = document.getElementById("allMainInfoAbout" + contact.firstname + contact.lastname);
+      setNewBgForRef.remove();
+
+
+      let mainDiv = document.getElementById(
+        "alphabeticalOrder" + contact.firstname.charAt(0).toUpperCase()
+      );
+
+      if (mainDiv) {
+        let hasChildDiv = mainDiv.querySelectorAll('[id^="allMainInfoAbout"]');
+        if (hasChildDiv.length === 0) {
+          mainDiv.innerHTML = "";
+        } else {
+          return;
+        }
+      }
+
+      await deleteData(`contacts/${key}`);
+      closeOverlayAfterEditedContact(event);
+    }
+  }
 }

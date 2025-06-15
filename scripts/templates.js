@@ -47,7 +47,7 @@ function getDetailsOfContact(
                   <span>Edit</span>
                 </div>
 
-                <div class="delete editOrDeleteFlex">
+                <div onclick ="deleteUser()" class="delete editOrDeleteFlex">
                   <img class="defaultIcon" src="/assets/icons/Property 1=delete.png" alt="" />
                   <img class="hoverIcon" src="/assets/icons/delete-hover.png" alt="" />
                   <span>Delete</span>
@@ -104,6 +104,7 @@ function getEditedBasicInfoAboutContact(
   phoneOfUser
 ) {
   return `<div id="order${firstNameOfUser.charAt(0).toUpperCase()}"></div>
+            <div id="allMainInfoAbout${firstNameOfUser+lastNameOfUser}">
             <div id="setNewBgFor${
               firstNameOfUser + lastNameOfUser
             }" class="contactInfo" onclick="moreDetailsAboutContact('${emailOfUser}', '${firstNameOfUser}', '${lastNameOfUser}', '${phoneOfUser}')">
