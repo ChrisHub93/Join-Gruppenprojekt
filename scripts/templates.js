@@ -134,7 +134,7 @@ function getSortTitleTemplate(firstNameOfUser) {
 function getAddTaskTemplate() {
   return `<div class="form">
         <div class="hedalineAddTask">
-          <h1>Add Task</h1>
+          <h1 class="hedalineAddTask__headline">Add Task</h1>
           <button class="hedalineAddTask__closeBtn" onclick="closeAddTaskOverlay()">
             <img
 
