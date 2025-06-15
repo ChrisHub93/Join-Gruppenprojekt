@@ -370,17 +370,23 @@ async function saveEditedContact(event) {
     let fullContactName = contact.firstname + " " + contact.lastname;
 
     if (fullContactName == currentActiveContactId) {
+
       let key = keys[index];
       await putData(`contacts/${key}`, {firstname: firstName,lastname: lastName,email: inputEmailRef.value, phone: inputPhoneRef.value,});
       currentActiveContactId = firstName + ' ' + lastName;
       closeOverlayAfterEditedContact(event);
 
-      let targetDivRef = document.getElementById("circleFirstLetters" + contact.firstname + contact.lastname);
-      let divRef = Array.from(targetDivRef.classList);
+      let targetId = document.getElementById("circleFirstLetters" + contact.firstname + contact.lastname);
+      let divRef = Array.from(targetId.classList);
       
       let targetSetNewBgForRef = document.getElementById("allMainInfoAbout" + contact.firstname + contact.lastname);
       targetSetNewBgForRef.innerHTML = '';
-      targetSetNewBgForRef.innerHTML = getEditedBasicInfoAboutContact(divRef, firstName,lastName,inputEmailRef.value,inputPhoneRef.value);
+      // targetSetNewBgForRef.innerHTML = getEditedBasicInfoAboutContact(divRef, firstName,lastName,inputEmailRef.value,inputPhoneRef.value);
+
+
+      let alphabeticalOrderRef = document.getElementById("alphabeticalOrder" + firstName.charAt(0).toUpperCase());
+      alphabeticalOrderRef.innerHTML = getEditedBasicInfoAboutContact(divRef, firstName,lastName,inputEmailRef.value,inputPhoneRef.value);
+      getSortTitle(firstName);
 
       let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
       allInfoAboutContactRef.innerHTML ='';
