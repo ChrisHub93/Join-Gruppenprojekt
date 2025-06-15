@@ -108,8 +108,7 @@ function getEditedBasicInfoAboutContact(
               firstNameOfUser + lastNameOfUser
             }" class="contactInfo" onclick="moreDetailsAboutContact('${emailOfUser}', '${firstNameOfUser}', '${lastNameOfUser}', '${phoneOfUser}')">
               <div id="circleFirstLetters${
-                firstNameOfUser
-              }${lastNameOfUser} " class="circleFirstLetters ${divRef[1]}">
+                firstNameOfUser+lastNameOfUser}" class="circleFirstLetters ${divRef[1]}">
                 <span>${firstNameOfUser.charAt(0)}</span>
                 <span>${lastNameOfUser.charAt(0)}</span>
               </div>
