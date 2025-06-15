@@ -15,8 +15,8 @@
   justify-content: space-between;
 }
 
-.hedalineAddTask__headline{
-    font-size: 61px;
+.hedalineAddTask__headline {
+  font-size: 61px;
 }
 
 .hedalineAddTask__closeBtn {
@@ -465,16 +465,35 @@ mark {
   height: 120px;
 }
 
+@media (max-width: px) {
+}
 
-@media(max-width:px){}
+@media (max-width: 825px) {
+  .form {
+    padding: 25px;
+    width: 760px;
+  }
 
-@media(max-width:825px){
-    .form{
-        padding: 25px;
-        width: 760px;
+  .hedalineAddTask__headline {
+    font-size: 54px;
+  }
+}
+
+@media(max-width:768px){
+    .AddTaskContentContainer{
+        flex-direction: column;
+        overflow-y: auto;
     }
 
-    .hedalineAddTask__headline{
-        font-size: 54px;
+    .seperator{
+        display: none;
+    }
+
+    .typeOfTask{
+        overflow-y: unset;
+    }
+
+    .priority{
+        overflow-y: unset;
     }
 }

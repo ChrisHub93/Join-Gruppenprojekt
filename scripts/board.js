@@ -250,12 +250,15 @@ function getEmptyTemplate() {
 function openAddTaskOverlay() {
   const addOverlayRef = document.getElementById('overlayAddTask');
   const openAddTaskOverlayRef = document.getElementById('addTaskContent');
-
+  
+  document.body.style.overflow = 'hidden';
   addOverlayRef.classList.remove('d-nonevip');
   openAddTaskOverlayRef.innerHTML = getAddTaskTemplate();
 }
 
 function closeAddTaskOverlay() {  
   const addOverlayRef = document.getElementById('overlayAddTask');
+  
+  document.body.style.overflow = '';
   addOverlayRef.classList.add('d-nonevip');
 }
