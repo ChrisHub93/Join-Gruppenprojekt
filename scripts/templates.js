@@ -420,7 +420,7 @@ function getAddTaskTemplate() {
         </div>
         <div class="buttons">
           <div class="flexButtons">
-            <button class="clear">
+            <button class="clear" onclick="closeAddTaskOverlay()">
               Cancel
               <img
                 class="defaultIcon"
