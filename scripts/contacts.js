@@ -213,10 +213,30 @@ async function createContact(event) {
   let emailRef = document.getElementById("email");
   let phoneRef = document.getElementById("phone");
   let fullName = nameRef.value.split(" ");
+
+  nameRef.classList.remove("error");
+  emailRef.classList.remove("error");
+  phoneRef.classList.remove("error");
+  if(fullName.length <= 1){
+      console.log("empty last");
+      nameRef.classList.add("error");
+      return; 
+    } else if (emailRef.value == ''){
+      console.log("empty email");
+      emailRef.classList.add("error");
+      return;
+      
+    } else if (phoneRef.value == ''){
+      console.log("empty phone");
+      phoneRef.classList.add("error");
+      return;
+    }
+
   let firstNameOfUser =
     fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
   let lastNameOfUser =
     fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
+
   await postData(`/contacts/`, {
     email: emailRef.value,
     firstname: firstNameOfUser,
@@ -492,5 +512,42 @@ async function deleteUserInOverlay(event){
       deleteContact(keys, index, contact);
       closeOverlayAfterEditedContact(event);
     }
+  }
+}
+
+function checkEmptyName(){
+  let nameRef = document.getElementById("name");
+  let fullName = nameRef.value.split(" ");
+  let requiredNameFieldRef = document.getElementById("requiredNameField");
+  if (fullName.length <= 1 || fullName[1] == '') {
+    nameRef.classList.add("error");
+    requiredNameFieldRef.classList.remove("opacity");
+  } else {
+    nameRef.classList.remove("error");
+    requiredNameFieldRef.classList.add("opacity");
+  }
+}
+
+function checkEmptyEmail(){
+  let emailRef = document.getElementById("email");
+  let requiredEmailFieldRef = document.getElementById("requiredEmailField");
+  if (!emailRef.value) {
+    emailRef.classList.add("error");
+    requiredEmailFieldRef.classList.remove("opacity");
+  } else {
+    emailRef.classList.remove("error");
+    requiredEmailFieldRef.classList.add("opacity");
+  }
+}
+
+function checkEmptyPhone(){
+  let phoneRef = document.getElementById("phone");
+  let requiredPhoneFieldRef = document.getElementById("requiredPhoneField");
+  if (!phoneRef.value) {
+    phoneRef.classList.add("error");
+    requiredPhoneFieldRef.classList.remove("opacity");
+  } else {
+    phoneRef.classList.remove("error");
+    requiredPhoneFieldRef.classList.add("opacity");
   }
 }

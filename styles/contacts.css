@@ -367,6 +367,23 @@ main {
   border-color: var(--contacts-input-focus);
 }
 
+.error {
+  border-color: var(--error-color) !important;
+}
+
+.opacity {
+  opacity: 0;
+}
+
+#requiredNameField,
+#requiredEmailField,
+#requiredPhoneField {
+  margin-bottom: 16px;
+  margin-top: 4px;
+  font-size: 10px;
+  color: var(--error-color);
+}
+
 .leftSide {
   height: 450px;
   width: 350px;
@@ -439,7 +456,7 @@ main {
   display: flex;
   flex-direction: column;
   margin-left: 56px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .flexButtons {
@@ -447,7 +464,6 @@ main {
   justify-content: start;
   align-items: center;
   gap: 16px;
-  margin-top: 40px;
 }
 
 .flexButtons button {
@@ -532,11 +548,6 @@ main {
   right: 16px;
 }
 
-.inputEmail {
-  margin-top: 24px;
-  margin-bottom: 24px;
-}
-
 .successfullyCreated {
   display: flex;
   justify-content: center;
@@ -552,12 +563,12 @@ main {
   transform: translateX(500%);
 }
 
-.showSuccess{
+.showSuccess {
   transform: translateX(0%);
   transition: all 500ms ease;
 }
 
-.hideSuccess{
+.hideSuccess {
   transform: translateX(500%);
   transition: all 500ms ease;
 }
