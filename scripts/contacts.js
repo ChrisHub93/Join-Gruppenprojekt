@@ -182,6 +182,25 @@ function closeOverlay(event) {
   setTimeout(() => {
     overlayRef.classList.toggle("d-nonevip");
   }, 150);
+  setInputToDefault();
+}
+
+function setInputToDefault(){
+  let nameRef = document.getElementById("name");
+  let emailRef = document.getElementById("email");
+  let phoneRef = document.getElementById("phone");
+  nameRef.value ='';
+  emailRef.value ='';
+  phoneRef.value ='';
+  nameRef.classList.remove("error");
+  emailRef.classList.remove("error");
+  phoneRef.classList.remove("error");
+  let requiredNameFieldRef = document.getElementById("requiredNameField");
+  let requiredEmailFieldRef = document.getElementById("requiredEmailField");
+  let requiredPhoneFieldRef = document.getElementById("requiredPhoneField");
+  requiredNameFieldRef.classList.add("opacity");
+  requiredEmailFieldRef.classList.add("opacity");
+  requiredPhoneFieldRef.classList.add("opacity");
 }
 
 function cancelOverlay(event) {
@@ -213,22 +232,32 @@ async function createContact(event) {
   let emailRef = document.getElementById("email");
   let phoneRef = document.getElementById("phone");
   let fullName = nameRef.value.split(" ");
-
   nameRef.classList.remove("error");
   emailRef.classList.remove("error");
   phoneRef.classList.remove("error");
+
+  let requiredNameFieldRef = document.getElementById("requiredNameField");
+  let requiredEmailFieldRef = document.getElementById("requiredEmailField");
+  let requiredPhoneFieldRef = document.getElementById("requiredPhoneField");
+  requiredNameFieldRef.classList.add("opacity");
+  requiredEmailFieldRef.classList.add("opacity");
+  requiredPhoneFieldRef.classList.add("opacity");
+
   if(fullName.length <= 1){
       console.log("empty last");
       nameRef.classList.add("error");
+      requiredNameFieldRef.classList.remove("opacity");
       return; 
     } else if (emailRef.value == ''){
       console.log("empty email");
       emailRef.classList.add("error");
+      requiredEmailFieldRef.classList.remove("opacity");
       return;
       
     } else if (phoneRef.value == ''){
       console.log("empty phone");
       phoneRef.classList.add("error");
+      requiredPhoneFieldRef.classList.remove("opacity");
       return;
     }
 
@@ -383,10 +412,43 @@ async function saveEditedContact(event) {
   let contacts = await fetchData("/contacts/");
   let keys = Object.keys(contacts);
   let contactsArry = Object.values(contacts);
+
   let inputNameRef = document.getElementById("nameEdit");
   let inputEmailRef = document.getElementById("emailEdit");
   let inputPhoneRef = document.getElementById("phoneEdit");
   let fullName = inputNameRef.value.split(" ");
+
+  inputNameRef.classList.remove("error");
+  inputEmailRef.classList.remove("error");
+  inputPhoneRef.classList.remove("error");
+
+  
+  let requiredNameEditFieldRef = document.getElementById("requiredNameEditField");
+  let requiredEmailEditFieldRef = document.getElementById("requiredEmailEditField");
+  let requiredPhoneEditFieldRef = document.getElementById("requiredPhoneEditField");
+  requiredNameEditFieldRef.classList.add("opacity");
+  requiredEmailEditFieldRef.classList.add("opacity");
+  requiredPhoneEditFieldRef.classList.add("opacity");
+
+  if(fullName.length <= 1){
+      console.log("empty edit last");
+      inputNameRef.classList.add("error");
+      requiredNameEditFieldRef.classList.remove("opacity");
+      return; 
+    } else if (inputEmailRef.value == ''){
+      console.log("empty email");
+      inputEmailRef.classList.add("error");
+      requiredEmailEditFieldRef.classList.remove("opacity");
+      return;
+      
+    } else if (inputPhoneRef.value == ''){
+      console.log("empty phone");
+      inputPhoneRef.classList.add("error");
+      requiredPhoneEditFieldRef.classList.remove("opacity");
+      return;
+    }
+
+
   let firstName = fullName[0];
   let lastName = fullName[1];
   for (let index = 0; index < contactsArry.length; index++) {
@@ -549,5 +611,42 @@ function checkEmptyPhone(){
   } else {
     phoneRef.classList.remove("error");
     requiredPhoneFieldRef.classList.add("opacity");
+  }
+}
+
+function checkEmptyEditedName(){
+  let nameEditRef = document.getElementById("nameEdit");
+  let fullName = nameEditRef.value.split(" ");
+  let requiredNameEditFieldRef = document.getElementById("requiredNameEditField");
+  if (fullName.length <= 1 || fullName[1] == '') {
+    nameEditRef.classList.add("error");
+    requiredNameEditFieldRef.classList.remove("opacity");
+  } else {
+    nameEditRef.classList.remove("error");
+    requiredNameEditFieldRef.classList.add("opacity");
+  }
+}
+
+function checkEmptyEditedEmail(){
+  let emailEditRef = document.getElementById("emailEdit");
+  let requiredEmailEditFieldRef = document.getElementById("requiredEmailEditField");
+  if (!emailEditRef.value) {
+    emailEditRef.classList.add("error");
+    requiredEmailEditFieldRef.classList.remove("opacity");
+  } else {
+    emailEditRef.classList.remove("error");
+    requiredEmailEditFieldRef.classList.add("opacity");
+  }
+}
+
+function checkEmptyEditedPhone(){
+  let phoneEditRef = document.getElementById("phoneEdit");
+  let requiredPhoneEditFieldRef = document.getElementById("requiredPhoneEditField");
+  if (!phoneEditRef.value) {
+    phoneEditRef.classList.add("error");
+    requiredPhoneEditFieldRef.classList.remove("opacity");
+  } else {
+    phoneEditRef.classList.remove("error");
+    requiredPhoneEditFieldRef.classList.add("opacity");
   }
 }

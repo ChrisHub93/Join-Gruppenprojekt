@@ -384,6 +384,15 @@ main {
   color: var(--error-color);
 }
 
+#requiredNameEditField,
+#requiredEmailEditField,
+#requiredPhoneEditField {
+  margin-bottom: 16px;
+  margin-top: 4px;
+  font-size: 10px;
+  color: var(--error-color);
+}
+
 .leftSide {
   height: 450px;
   width: 350px;

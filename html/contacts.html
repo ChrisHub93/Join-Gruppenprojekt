@@ -121,19 +121,22 @@
             </div>
 
             <div class="inputName">
-              <input type="text" id="nameEdit" name="name" placeholder="Name" />
+              <input onfocusout="checkEmptyEditedName()" type="text" id="nameEdit" name="name" placeholder="Name" />
               <img src="../assets/icons/person.png" alt="" />
             </div>
+            <span id="requiredNameEditField" class="opacity">This Field is required</span>
 
             <div class="inputEmail">
-              <input type="email" id="emailEdit" name="email" placeholder="Email" />
+              <input onfocusout="checkEmptyEditedEmail()" type="email" id="emailEdit" name="email" placeholder="Email" />
               <img src="../assets/icons/mail.svg" alt="" />
             </div>
+            <span id="requiredEmailEditField" class="opacity">This Field is required</span>
 
             <div class="inputTel">
-              <input type="tel" id="phoneEdit" name="phone" placeholder="Phone" />
+              <input onfocusout="checkEmptyEditedPhone()" type="tel" id="phoneEdit" name="phone" placeholder="Phone" />
               <img src="../assets/icons/call.png" alt="" />
             </div>
+            <span id="requiredPhoneEditField" class="opacity">This Field is required</span>
 
             <div class="flexButtons">
               <button class="clear" onclick="deleteUserInOverlay(event)">Delete</button>
