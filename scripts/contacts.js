@@ -227,59 +227,53 @@ function stopPropagation(event) {
   event.stopPropagation(event);
 }
 
+
+function removeError(nameRef, emailRef, phoneRef){
+  nameRef.classList.remove("error");
+  emailRef.classList.remove("error");
+  phoneRef.classList.remove("error");
+}
+
+function removeOpacity(requiredNameFieldRef, requiredEmailFieldRef, requiredPhoneFieldRef){
+  requiredNameFieldRef.classList.add("opacity");
+  requiredEmailFieldRef.classList.add("opacity");
+  requiredPhoneFieldRef.classList.add("opacity");
+}
+
+
 async function createContact(event) {
   let nameRef = document.getElementById("name");
   let emailRef = document.getElementById("email");
   let phoneRef = document.getElementById("phone");
   let fullName = nameRef.value.split(" ");
-  nameRef.classList.remove("error");
-  emailRef.classList.remove("error");
-  phoneRef.classList.remove("error");
+  removeError(nameRef, emailRef, phoneRef)
 
   let requiredNameFieldRef = document.getElementById("requiredNameField");
   let requiredEmailFieldRef = document.getElementById("requiredEmailField");
   let requiredPhoneFieldRef = document.getElementById("requiredPhoneField");
-  requiredNameFieldRef.classList.add("opacity");
-  requiredEmailFieldRef.classList.add("opacity");
-  requiredPhoneFieldRef.classList.add("opacity");
-
+  removeOpacity(requiredNameFieldRef, requiredEmailFieldRef, requiredPhoneFieldRef);
+  
   if(fullName.length <= 1){
-      console.log("empty last");
       nameRef.classList.add("error");
       requiredNameFieldRef.classList.remove("opacity");
       return; 
     } else if (emailRef.value == ''){
-      console.log("empty email");
       emailRef.classList.add("error");
       requiredEmailFieldRef.classList.remove("opacity");
       return;
-      
     } else if (phoneRef.value == ''){
-      console.log("empty phone");
       phoneRef.classList.add("error");
       requiredPhoneFieldRef.classList.remove("opacity");
       return;
     }
 
-  let firstNameOfUser =
-    fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
-  let lastNameOfUser =
-    fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
+  let firstNameOfUser = fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
+  let lastNameOfUser = fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
 
-  await postData(`/contacts/`, {
-    email: emailRef.value,
-    firstname: firstNameOfUser,
-    lastname: lastNameOfUser,
-    phone: phoneRef.value,
-  });
+  await postData(`/contacts/`, {email: emailRef.value, firstname: firstNameOfUser, lastname: lastNameOfUser, phone: phoneRef.value,});
   getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef);
   closeOverlayAfterCreatedContact(event);
-  moreDetailsAboutContact(
-    emailRef.value,
-    firstNameOfUser,
-    lastNameOfUser,
-    phoneRef.value
-  );
+  moreDetailsAboutContact(emailRef.value, firstNameOfUser, lastNameOfUser, phoneRef.value);
   clearInputFields(nameRef, emailRef, phoneRef);
   showSuccess();
 }
@@ -408,6 +402,18 @@ function profileGetCorrectBackground(user) {
   circleFirstLettersRef.classList.add(bgClassRef[1]);
 }
 
+function removeEditError(inputNameRef, inputEmailRef, inputPhoneRef){
+  inputNameRef.classList.remove("error");
+  inputEmailRef.classList.remove("error");
+  inputPhoneRef.classList.remove("error");
+}
+
+function addOpacity(requiredNameEditFieldRef, requiredEmailEditFieldRef, requiredPhoneEditFieldRef){
+  requiredNameEditFieldRef.classList.add("opacity");
+  requiredEmailEditFieldRef.classList.add("opacity");
+  requiredPhoneEditFieldRef.classList.add("opacity");
+}
+
 async function saveEditedContact(event) {
   let contacts = await fetchData("/contacts/");
   let keys = Object.keys(contacts);
@@ -417,37 +423,27 @@ async function saveEditedContact(event) {
   let inputEmailRef = document.getElementById("emailEdit");
   let inputPhoneRef = document.getElementById("phoneEdit");
   let fullName = inputNameRef.value.split(" ");
-
-  inputNameRef.classList.remove("error");
-  inputEmailRef.classList.remove("error");
-  inputPhoneRef.classList.remove("error");
-
+  removeEditError(inputNameRef, inputEmailRef, inputPhoneRef);
   
   let requiredNameEditFieldRef = document.getElementById("requiredNameEditField");
   let requiredEmailEditFieldRef = document.getElementById("requiredEmailEditField");
   let requiredPhoneEditFieldRef = document.getElementById("requiredPhoneEditField");
-  requiredNameEditFieldRef.classList.add("opacity");
-  requiredEmailEditFieldRef.classList.add("opacity");
-  requiredPhoneEditFieldRef.classList.add("opacity");
-
+  addOpacity(requiredNameEditFieldRef, requiredEmailEditFieldRef, requiredPhoneEditFieldRef)
+  
   if(fullName.length <= 1){
-      console.log("empty edit last");
       inputNameRef.classList.add("error");
       requiredNameEditFieldRef.classList.remove("opacity");
       return; 
     } else if (inputEmailRef.value == ''){
-      console.log("empty email");
       inputEmailRef.classList.add("error");
       requiredEmailEditFieldRef.classList.remove("opacity");
       return;
       
     } else if (inputPhoneRef.value == ''){
-      console.log("empty phone");
       inputPhoneRef.classList.add("error");
       requiredPhoneEditFieldRef.classList.remove("opacity");
       return;
     }
-
 
   let firstName = fullName[0];
   let lastName = fullName[1];
