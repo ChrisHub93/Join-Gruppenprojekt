@@ -132,7 +132,37 @@ function getSortTitleTemplate(firstNameOfUser) {
 }
 
 function getAddTaskTemplate() {
-  return `<div class="form">
+  return `<header class="page-box d-noneHeader">
+      <p class="header-name">Kanban Project Management Tool</p>
+      <img class="headerLogo d-none" src="../assets/img/Capa 1.png" alt="" />
+      <div class="profile-navbar">
+        <div class="header-top-profile">
+          <a href="../html/help.html"
+            ><img class="help-icon" src="../assets/icons/help.png" alt=""
+          /></a>
+          <p id="profile" onclick="showNavbar()" class="personal-icon">G</p>
+        </div>
+        <div id="navbar" class="navbar d-none">
+          <a class="navbarlink" href="../html/help.html">Help</a>
+          <a
+            class="navbarlink"
+            menu-data="legal_notice"
+            onclick="activateMenu(this, 'legal_notice')"
+            href="../html/legal_notice.html"
+            >Legal Notice</a
+          >
+          <a
+            class="navbarlink"
+            menu-data="privacy_policy"
+            onclick="activateMenu(this, 'privacy_policy')"
+            href="../html/privacy_policy.html"
+            >Privacy Policy</a
+          >
+          <a class="navbarlink" href="../index.html">Log Out</a>
+        </div>
+      </div>
+    </header>
+  <div class="form">
         <div class="hedalineAddTask">
           <h1 class="hedalineAddTask__headline">Add Task</h1>
           <button class="hedalineAddTask__closeBtn" onclick="closeAddTaskOverlay()">
@@ -440,5 +470,62 @@ function getAddTaskTemplate() {
             </button>
           </div>
         </div>
-      </div>`;
+      </div>
+      <footer class="page-box d-none">
+      <div class="menu-box">
+        <div
+          class="sidebar-menu"
+          menu-data="summary"
+          onclick="activateMenu(this, 'summary')"
+        >
+          <a class="sidebar-text" href="../html/summary.html"
+            ><img
+              src="../assets/icons/Summary.png"
+              class="sidebar-icon"
+              alt=""
+            />Summary</a
+          >
+        </div>
+        <div
+          class="sidebar-menu"
+          menu-data="board"
+          onclick="activateMenu(this, 'board')"
+        >
+          <a class="sidebar-text" href="../html/board.html"
+            ><img
+              src="../assets/icons/Board.png"
+              class="sidebar-icon"
+              alt=""
+            />Board</a
+          >
+        </div>
+        <div
+          class="sidebar-menu"
+          menu-data="add_task"
+          onclick="activateMenu(this, 'add_task')"
+        >
+          <a class="sidebar-text" href="../html/add_task.html"
+            ><img
+              src="../assets/icons/Add task.png"
+              class="sidebar-icon"
+              alt=""
+            />Add Task</a
+          >
+        </div>
+        <div
+          class="sidebar-menu"
+          menu-data="contacts"
+          onclick="activateMenu(this, 'contacts')"
+        >
+          <a class="sidebar-text" href="../html/contacts.html"
+            ><img
+              src="../assets/icons/Contacts.png"
+              class="sidebar-icon"
+              alt=""
+            />Contacts</a
+          >
+        </div>
+      </div>
+    </footer>
+      `;
 }
