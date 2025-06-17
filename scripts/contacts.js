@@ -1,6 +1,6 @@
 let currentActiveContactId = null;
 
-async function init() {
+async function initContacts() {
   let contacts = await fetchData("/contacts/");
   let contactsArray = Object.values(contacts);
   contactsArray.sort(compare);
@@ -227,13 +227,11 @@ function cancelOverlay(event) {
   let requiredPhoneFieldRef = document.getElementById("requiredPhoneField");
   removeError(nameRef, emailRef, phoneRef);
   addOpacity(requiredNameFieldRef, requiredEmailFieldRef, requiredPhoneFieldRef);
-
 }
 
 function stopPropagation(event) {
   event.stopPropagation(event);
 }
-
 
 function addError(nameRef, emailRef, phoneRef){
   nameRef.classList.add("error");
@@ -469,12 +467,10 @@ async function saveEditedContact(event) {
   let inputEmailRef = document.getElementById("emailEdit");
   let inputPhoneRef = document.getElementById("phoneEdit");
   let fullName = inputNameRef.value.split(" ");
-  // removeEditError(inputNameRef, inputEmailRef, inputPhoneRef);
   
   let requiredNameEditFieldRef = document.getElementById("requiredNameEditField");
   let requiredEmailEditFieldRef = document.getElementById("requiredEmailEditField");
   let requiredPhoneEditFieldRef = document.getElementById("requiredPhoneEditField");
-  // addEditOpacity(requiredNameEditFieldRef, requiredEmailEditFieldRef, requiredPhoneEditFieldRef);
   
   if(fullName.length <= 1 && inputEmailRef.value == '' && inputPhoneRef.value == ''){
     addEditError(inputNameRef, inputEmailRef, inputPhoneRef);
