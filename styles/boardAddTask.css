@@ -1,3 +1,9 @@
+.test-footer{
+    height: 90px;
+    width: 100%;
+    background-color: aqua;
+}
+
 .overlayAddTask {
   position: fixed;
   top: 0;
@@ -505,9 +511,15 @@ mark {
   .d-noneHeader {
     display: flex;
   }
+
+  .overlayTask__addTaskContent{
+    height: 100%;
+  }
+
   .form {
     width: 100vw;
     border-radius: unset;
+    height: 78vh;
   }
 
   .AddTaskContentContainer {

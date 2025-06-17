@@ -471,61 +471,7 @@ function getAddTaskTemplate() {
           </div>
         </div>
       </div>
-      <footer class="page-box d-none">
-      <div class="menu-box">
-        <div
-          class="sidebar-menu"
-          menu-data="summary"
-          onclick="activateMenu(this, 'summary')"
-        >
-          <a class="sidebar-text" href="../html/summary.html"
-            ><img
-              src="../assets/icons/Summary.png"
-              class="sidebar-icon"
-              alt=""
-            />Summary</a
-          >
-        </div>
-        <div
-          class="sidebar-menu"
-          menu-data="board"
-          onclick="activateMenu(this, 'board')"
-        >
-          <a class="sidebar-text" href="../html/board.html"
-            ><img
-              src="../assets/icons/Board.png"
-              class="sidebar-icon"
-              alt=""
-            />Board</a
-          >
-        </div>
-        <div
-          class="sidebar-menu"
-          menu-data="add_task"
-          onclick="activateMenu(this, 'add_task')"
-        >
-          <a class="sidebar-text" href="../html/add_task.html"
-            ><img
-              src="../assets/icons/Add task.png"
-              class="sidebar-icon"
-              alt=""
-            />Add Task</a
-          >
-        </div>
-        <div
-          class="sidebar-menu"
-          menu-data="contacts"
-          onclick="activateMenu(this, 'contacts')"
-        >
-          <a class="sidebar-text" href="../html/contacts.html"
-            ><img
-              src="../assets/icons/Contacts.png"
-              class="sidebar-icon"
-              alt=""
-            />Contacts</a
-          >
-        </div>
-      </div>
-    </footer>
+      <div class="test-footer"></div>
+      
       `;
 }
