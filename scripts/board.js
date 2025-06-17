@@ -4,7 +4,7 @@ let todos = [
     title: "Test new Task",
     category: "User Story",
     description: "Build with start page with recipe recommandation...",
-    assignedTo: "",
+    assignedTo: ["Chris Mü", "Kenan Ce", "Dave Ha"],
     subTasks: "Task1",
     priority: "medium",
     date: "11/11/25",
@@ -169,6 +169,40 @@ function toggleSubtask(img) {
     }
 }
 
+function getInitials(name) {
+  return name
+    .split(' ')
+    .map(word => word[0])
+    .join('')
+    .toUpperCase(); 
+}
+
+function getAssignedInitials(assignedToArray) {
+  if (assignedToArray === "") {
+    return`
+    <p class="assigned_to_empty">Nobody assigned yet</p>`;
+  } else {
+      return assignedToArray.map(name => {
+    let initials = getInitials(name);
+    let assignedColor = getAvatarColorClass(name);
+    return `
+    <div class="assigned_to_line">
+      <p class="assigned_to_icon ${assignedColor}">${initials}</p>
+      <p class="assigned_to_name">${name}</p>
+    </div>`;
+  }).join('');
+  }
+}
+
+function getAvatarColorClass(name) {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  let index = Math.abs(hash) % 15;
+  return `initials_color_${index}`;
+}
+
 function renderOverlayTaskContent(tasksRef) {
   return `
           <div class="flex_between">
@@ -196,7 +230,7 @@ function renderOverlayTaskContent(tasksRef) {
             </div>
             <div class="filledContainer__assignedTo flex_column_overlayTask">
               <p class="cursor_overlay_task">Assigned to:</p>
-              <div>${tasksRef.assignedTo}</div>
+              <div class="assigned_to_container">${getAssignedInitials(tasksRef.assignedTo)}</div>
             </div>
             <div class="filledContainer__subTasks flex_column_overlayTask">
               <p class="cursor_overlay_task">Subtasks:</p>

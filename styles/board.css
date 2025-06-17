@@ -405,6 +405,37 @@ h1 {
   content: url("../assets/icons/edit-hover.png");
 }
 
+.assigned_to_container{
+  gap: 4px;
+  flex-direction: column;
+  display: flex;
+}
+
+.assigned_to_line{
+  gap: 16px;
+  padding: 7px 16px;
+  display: flex;
+  align-items: center;
+  cursor: default;
+}
+
+.assigned_to_icon{
+  width: 42px;
+  height: 42px;
+  color: white;
+  border-radius: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.assigned_to_empty{
+  padding: 7px 16px;
+  font-weight: 700;
+}
+
 @media (max-width: 1100px) {
   .main-board {
     margin-left: 200px;
