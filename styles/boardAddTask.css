@@ -510,6 +510,10 @@ mark {
     display: flex;
   }
 
+  .hedalineAddTask__closeBtn{
+    display: none;
+  }
+
   .overlayTask__addTaskContent {
     height: 100%;
   }
@@ -548,4 +552,14 @@ mark {
     width: 100%;
     background-color: var(--bg-sidebar);
   }
+}
+
+@media (max-width: 545px) {
+    .addTask-footer{
+        height: 80px;
+    }
+
+    .form{
+        height: 80vh;
+    }
 }
