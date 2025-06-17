@@ -1,7 +1,5 @@
-.test-footer{
-    height: 90px;
-    width: 100%;
-    background-color: aqua;
+.addTask-footer {
+  display: none;
 }
 
 .overlayAddTask {
@@ -512,7 +510,11 @@ mark {
     display: flex;
   }
 
-  .overlayTask__addTaskContent{
+  .hedalineAddTask__closeBtn{
+    display: none;
+  }
+
+  .overlayTask__addTaskContent {
     height: 100%;
   }
 
@@ -534,9 +536,31 @@ mark {
 
   .typeOfTask {
     overflow-y: unset;
+    width: 100%;
   }
 
   .priority {
     overflow-y: unset;
   }
+
+  .addTask-footer {
+    display: flex;
+    height: 90px;
+    gap: 10px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    background-color: var(--bg-sidebar);
+  }
+}
+
+@media (max-width: 545px) {
+    .addTask-footer{
+        height: 80px;
+    }
+
+    .form{
+        height: 80vh;
+    }
 }
