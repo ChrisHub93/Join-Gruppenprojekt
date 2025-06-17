@@ -1,14 +1,24 @@
-.overlayAddTask{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
+.test-footer{
+    height: 90px;
+    width: 100%;
+    background-color: aqua;
+}
+
+.overlayAddTask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.d-noneHeader {
+  display: none;
 }
 
 .form {
@@ -21,6 +31,11 @@
   padding: 50px;
   border-radius: 30px;
   gap: 8px;
+}
+
+.form > .AddTaskContentContainer {
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 .hedalineAddTask {
@@ -492,28 +507,36 @@ mark {
   }
 }
 
-@media(max-width:768px){
-    .form{
-        height: 100vh;
-        width: 100vw;
-        border-radius: unset;
-    }
+@media (max-width: 768px) {
+  .d-noneHeader {
+    display: flex;
+  }
 
-    .AddTaskContentContainer{
-        flex-direction: column;
-        overflow-y: auto;
-        height: 100%;
-    }
+  .overlayTask__addTaskContent{
+    height: 100%;
+  }
 
-    .seperator{
-        display: none;
-    }
+  .form {
+    width: 100vw;
+    border-radius: unset;
+    height: 78vh;
+  }
 
-    .typeOfTask{
-        overflow-y: unset;
-    }
+  .AddTaskContentContainer {
+    flex-direction: column;
+    overflow-y: auto;
+    height: 100%;
+  }
 
-    .priority{
-        overflow-y: unset;
-    }
+  .seperator {
+    display: none;
+  }
+
+  .typeOfTask {
+    overflow-y: unset;
+  }
+
+  .priority {
+    overflow-y: unset;
+  }
 }
