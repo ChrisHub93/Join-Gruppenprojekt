@@ -180,9 +180,16 @@ main {
 .titleSeperator {
   background-color: var(--contact-title-seperator);
   width: 3px;
-  height: 56px;
+  height: 59px;
   margin-left: 24px;
   margin-right: 24px;
+}
+
+
+.titleSeperatorMobile {
+  background-color: var(--contact-title-seperator);
+  width: 90px;
+  height: 3px;
 }
 
 .subTitle {
@@ -580,4 +587,40 @@ main {
 .hideSuccess {
   transform: translateX(500%);
   transition: all 500ms ease;
+}
+
+@media (max-width:1250px){
+  .moreAboutcircleFirstLetters{
+    height: 80px;
+    width: 80px;
+    font-size: 27px;
+  }
+
+  .editinfoAboutContact h2{
+    font-size: 36px;
+  }
+
+  .pageTitle{
+    flex-direction: column;
+    align-items: start;
+    gap: 16px;
+  }
+
+  .titleSeperator{
+    display: none;
+  }
+
+  .titleSeperatorMobile{
+    display: block;
+  }
+
+  .contacts{
+    width: 400px;
+  }
+}
+
+@media (max-width: 1100px){
+  main{
+    width: calc(100% - 200px);
+  }
 }
