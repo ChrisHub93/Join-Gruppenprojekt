@@ -1,7 +1,5 @@
-.test-footer{
-    height: 90px;
-    width: 100%;
-    background-color: aqua;
+.addTask-footer {
+  display: none;
 }
 
 .overlayAddTask {
@@ -512,7 +510,7 @@ mark {
     display: flex;
   }
 
-  .overlayTask__addTaskContent{
+  .overlayTask__addTaskContent {
     height: 100%;
   }
 
@@ -538,5 +536,16 @@ mark {
 
   .priority {
     overflow-y: unset;
+  }
+
+  .addTask-footer {
+    display: flex;
+    height: 90px;
+    gap: 10px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    background-color: var(--bg-sidebar);
   }
 }
