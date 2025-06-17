@@ -536,6 +536,7 @@ mark {
 
   .typeOfTask {
     overflow-y: unset;
+    width: 100%;
   }
 
   .priority {
