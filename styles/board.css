@@ -435,6 +435,13 @@ h1 {
   font-weight: 700;
 }
 
+.edit_close_container{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 40px;
+}
+
 .duedate_edit{
   padding-right: 40px;
   background: url('../assets/icons/calendar.png') no-repeat right 10px center;
@@ -444,6 +451,69 @@ h1 {
 .border_edit_active:focus-visible{
   border-color:#29ABE2;
   outline: none;
+}
+
+.form_edit_task{
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form_edit_container{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.prio_edit_container{
+  justify-content: space-between;
+  display: flex;
+  gap: 16px;
+}
+
+.prio_edit_button{
+  box-shadow: 0px 0px 4px 0px  rgba(0, 0, 0, 0.1);
+  border: rgba(0, 0, 0, 0.1);
+  background: none;
+  display: flex;
+  gap: 8px;
+  padding: 16px 10px;
+  border-radius: 10px;
+  flex: 1;
+  font-weight: 400;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.prio_edit_button:hover{
+  box-shadow: 0px 4px 4px 0px  rgba(0, 0, 0, 0.25);
+}
+
+h4{
+  color: #2b3647;
+}
+
+.prio_edit_button.urgent.active {
+  background-color: #FF3D00;
+  color: white;
+  border: 2px solid #FF3D00;
+  box-shadow: none;
+}
+
+.prio_edit_button.medium.active {
+  background-color: #FFA800;
+  color: white;
+  border: 2px solid #FFA800;
+  box-shadow: none;
+}
+
+.prio_edit_button.low.active {
+  background-color: #7AE229;
+  color: white;
+  border: 2px solid #7AE229;
+  box-shadow: none;
 }
 
 @media (max-width: 1100px) {

@@ -230,28 +230,57 @@ function editOverlayTask(tasksRef) {
     dialogTaskEditRef.innerHTML = renderOverlayTaskEdit(tasksEditRef);
 }
 
+function renderPrioButton(prioName, activePrio) {
+  let prioGet = prioName.toLowerCase();
+  let isActive = prioGet === activePrio.toLowerCase();
+  let prioFullName = prioName.charAt(0).toUpperCase() + prioName.slice(1);
+  let iconPath = `../assets/icons/priority-${prioGet}.png`;
+
+  return `
+    <button 
+      class="prio_edit_button ${prioGet} ${isActive ? 'active' : ''}" 
+      data-prio="${prioGet}" 
+      type="button"
+      onclick="setPrioActive(this)">
+      ${prioFullName} <img class="prio_overlay_task" src="${iconPath}">
+    </button>
+  `;
+}
+
+function setPrioActive(clickedButton) {
+  let prioButtons = clickedButton.parentElement.querySelectorAll('.prio_edit_button');
+  prioButtons.forEach(btn => btn.classList.remove('active'));
+  clickedButton.classList.add('active');
+}
+
 function renderOverlayTaskEdit(tasksEditRef) {
+  let prio = tasksEditRef.priority.toLowerCase();
+
   return`
-        <div>
+        <div class="edit_close_container">
           <img onclick="closeOverlay(event)" class="closeIcon" src="../assets/icons/close.png" alt="">
         </div>
-        <form>
-          <div>
-            <label for="title">Title</label><br>
+        <form class="form_edit_task">
+          <div class="form_edit_container">
+            <label for="title">Title</label>
             <input class="border_edit_active" type="text" id="title" name="title" value="${tasksEditRef.title}" required>
           </div>
-          <div>
-            <label for="description">Description</label><br>
+          <div class="form_edit_container">
+            <label for="description">Description</label>
             <textarea class="border_edit_active" id="description" name="description">${tasksEditRef.description}</textarea>
           </div>
-          <div>
-            <label for="date">Due Date</label><br>
+          <div class="form_edit_container">
+            <label for="date">Due Date</label>
             <input class="duedate_edit border_edit_active" type="text" id="date" name="date" value="${tasksEditRef.date}" placeholder="dd/mm/yyyy" required>
           </div>
           <div>
-          <button>Urgent</button>
-          <button>Medium</button>
-          <button>Low</button>
+          <div class="form_edit_container">
+            <h4>Priority</h4>
+            <div class="prio_edit_container">
+              ${renderPrioButton('urgent', prio)}
+              ${renderPrioButton('medium', prio)}
+              ${renderPrioButton('low', prio)}
+            </div>
           </div>
         </form>
   `
