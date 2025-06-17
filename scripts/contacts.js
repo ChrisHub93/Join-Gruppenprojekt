@@ -1,6 +1,6 @@
 let currentActiveContactId = null;
 
-async function init() {
+async function initContacts() {
   let contacts = await fetchData("/contacts/");
   let contactsArray = Object.values(contacts);
   contactsArray.sort(compare);
