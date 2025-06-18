@@ -435,6 +435,8 @@ function openAddTaskOverlay() {
 
 function closeAddTaskOverlay() {  
   const addOverlayRef = document.getElementById('overlayAddTask');
+
+resetAllPriorities();
   
   document.body.style.overflow = '';
   addOverlayRef.classList.add('d-nonevip');

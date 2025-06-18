@@ -4,6 +4,35 @@ let priorityLow = false;
 let checkTitle = false;
 let checkDate = false;
 
+async function initAddTask() {
+ await loadContacts();
+}
+
+async function loadContacts() {
+  let contacts = await fetchData("/contacts/");
+  let contactsArray = Object.values(contacts);
+  contactsArray.sort(compare);
+  console.log(contactsArray);
+}
+
+async function fetchData(path) {
+  let response = await fetch(BASE_URL + path + ".json");
+  let responseAsJson = await response.json();
+  return responseAsJson;
+}
+
+function compare(firstUser, nextUser) {
+  if (firstUser.firstname.toUpperCase() < nextUser.firstname.toUpperCase()) {
+    return -1;
+  } else if (
+    firstUser.firstname.toUpperCase() > nextUser.firstname.toUpperCase()
+  ) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
 function toggleVisibility(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
