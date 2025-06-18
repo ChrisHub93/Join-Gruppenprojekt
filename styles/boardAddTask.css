@@ -193,9 +193,9 @@ select:focus {
 }
 
 .category {
-    background-color: white;
-    border-radius: 8px;
-  }
+  background-color: white;
+  border-radius: 8px;
+}
 
 .category li {
   cursor: pointer;
@@ -212,8 +212,8 @@ select:focus {
 }
 
 .border-color {
-    border-color: var(--focus-color);
-  }
+  border-color: var(--focus-color);
+}
 
 .show {
   max-height: 200px;
@@ -500,8 +500,8 @@ mark {
   height: 120px;
 }
 .opacity {
-    opacity: 0;
-  }
+  opacity: 0;
+}
 
 @media (max-width: px) {
 }
@@ -522,18 +522,21 @@ mark {
     display: flex;
   }
 
-  .hedalineAddTask__closeBtn{
+  .hedalineAddTask__closeBtn {
     display: none;
   }
 
   .overlayTask__addTaskContent {
     height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .form {
     width: 100vw;
     border-radius: unset;
-    height: 78vh;
+    height: 34vh;
+    flex: 1;
   }
 
   .AddTaskContentContainer {
@@ -568,11 +571,11 @@ mark {
 }
 
 @media (max-width: 545px) {
-    .addTask-footer{
-        height: 80px;
-    }
+  .addTask-footer {
+    height: 80px;
+  }
 
-    .form{
-        height: 80vh;
-    }
+  .form {
+    height: 80vh;
+  }
 }
