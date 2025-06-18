@@ -289,12 +289,16 @@ async function createContact(event) {
   let firstNameOfUser = fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
   let lastNameOfUser = fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
 
-  await postData(`/contacts/`, {email: emailRef.value, firstname: firstNameOfUser, lastname: lastNameOfUser, phone: phoneRef.value,});
+  await postData(`/contacts/`, {id: getId(), email: emailRef.value, firstname: firstNameOfUser, lastname: lastNameOfUser, phone: phoneRef.value,});
   getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef);
   closeOverlayAfterCreatedContact(event);
   moreDetailsAboutContact(emailRef.value, firstNameOfUser, lastNameOfUser, phoneRef.value);
   clearInputFields(nameRef, emailRef, phoneRef);
   showSuccess();
+}
+
+function getId() {
+  return self.crypto.randomUUID()
 }
 
 function showSuccess() {

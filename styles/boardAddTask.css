@@ -139,7 +139,7 @@
 
 .options {
   max-height: 0px;
-  overflow: hidden;
+  overflow-y: auto;
   transition: all 0.2s ease;
   padding: 0;
   margin: 0;
@@ -192,6 +192,11 @@ select:focus {
   object-fit: cover;
 }
 
+.category {
+    background-color: white;
+    border-radius: 8px;
+  }
+
 .category li {
   cursor: pointer;
   border: 1px solid white;
@@ -205,6 +210,10 @@ select:focus {
   padding-inline: 16px;
   font-size: 16px;
 }
+
+.border-color {
+    border-color: var(--focus-color);
+  }
 
 .show {
   max-height: 200px;

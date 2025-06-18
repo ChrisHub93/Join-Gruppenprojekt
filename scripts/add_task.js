@@ -5,14 +5,44 @@ let checkTitle = false;
 let checkDate = false;
 
 async function initAddTask() {
- await loadContacts();
+  let contacts = await loadContacts();
+  console.log(contacts);
+  renderContactList(contacts);
+
+}
+
+function renderContactList(contacts) {
+  const allMembersRef = document.getElementById("allMembers");
+
+  if (contacts) {
+    for (contact of contacts) {
+      allMembersRef.innerHTML += getContactList(contact);
+    }
+  }
+}
+
+function getContactList(contact) {
+  return `  <li
+                  onclick="getContact('${contact.id}')"
+                  id="contact${contact.id}"
+                  class="optionsCategory inputFlex">
+                  ${contact.firstname + " "} ${ contact.lastname}
+                  <input type="checkbox" class="checkBox" />
+                  <img
+                    onclick="setCheckBox('contact${contact.id}', event)"
+                    id="checkBoxImg${contact.id}"
+                    class="checkBoxImg"
+                    src="/assets/icons/Check button.png"
+                    alt=""
+                  />
+                </li>
+  `;
 }
 
 async function loadContacts() {
   let contacts = await fetchData("/contacts/");
   let contactsArray = Object.values(contacts);
-  contactsArray.sort(compare);
-  console.log(contactsArray);
+  return contactsArray.sort(compare);
 }
 
 async function fetchData(path) {
@@ -64,7 +94,7 @@ function openAssignedTo() {
 }
 
 function getContact(id) {
-  let membersRef = document.getElementById(id);
+  let membersRef = document.getElementById("contact" + id);
   inputRef = membersRef.querySelector("input");
   checkBoxImg = membersRef.querySelector("img");
   if (!inputRef.checked && membersRef.classList.contains("assignedBg")) {

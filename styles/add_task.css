@@ -267,10 +267,10 @@ select:focus {
 
 .options {
   max-height: 0px;
-  overflow: hidden;
   transition: all 0.2s ease;
   padding: 0;
   margin: 0;
+  overflow-y: auto;
 }
 
 .show {
