@@ -1,14 +1,18 @@
 let priorityUrgent = false;
 let priorityMedium = false;
 let priorityLow = false;
+
 let checkTitle = false;
 let checkDate = false;
+
+let setPriority = "";
+let assignedTo = [];
+let subtasks = [];
 
 async function initAddTask() {
   let contacts = await loadContacts();
   console.log(contacts);
   renderContactList(contacts);
-
 }
 
 function renderContactList(contacts) {
@@ -26,7 +30,7 @@ function getContactList(contact) {
                   onclick="getContact('${contact.id}')"
                   id="contact${contact.id}"
                   class="optionsCategory inputFlex">
-                  ${contact.firstname + " "} ${ contact.lastname}
+                  ${contact.firstname + " "} ${contact.lastname}
                   <input type="checkbox" class="checkBox" />
                   <img
                     onclick="setCheckBox('contact${contact.id}', event)"
@@ -97,15 +101,21 @@ function getContact(id) {
   let membersRef = document.getElementById("contact" + id);
   inputRef = membersRef.querySelector("input");
   checkBoxImg = membersRef.querySelector("img");
-  if (!inputRef.checked && membersRef.classList.contains("assignedBg")) {
-    getInputCheckedFalse(membersRef, inputRef);
-  } else if (!inputRef.checked) {
+
+  if (!inputRef.checked) {
     getInputCheckedTrue(membersRef, inputRef);
   } else if (inputRef.checked && membersRef.classList.contains("assignedBg")) {
     getInputCheckedFalse(membersRef, inputRef);
-  } else if (inputRef.checked) {
-    membersRef.classList.toggle("assignedBg");
-    checkBoxImg.classList.toggle("filterChecked");
+  }
+  toggleAssignment(id)
+}
+
+function toggleAssignment(id) {
+  const index = assignedTo.indexOf(id);
+  if (index !== -1) {
+    assignedTo.splice(index, 1);
+  } else {
+    assignedTo.push(id);
   }
 }
 
@@ -182,6 +192,7 @@ function setPriorityUrgent(id) {
     urgentRef.classList.toggle("priorityUrgentBg");
     addDisplayNone("standardUrgentIcon");
     removeDisplayNone("activeUrgentIcon");
+    setPriority = "urgent";
   } else if (priorityUrgent) {
     resetAllPriorities();
   }
@@ -195,6 +206,7 @@ function setPriorityMedium(id) {
     urgentRef.classList.toggle("priorityMediumBg");
     addDisplayNone("standardMediumIcon");
     removeDisplayNone("activeMediumIcon");
+    setPriority = "medium";
   } else if (priorityMedium) {
     resetAllPriorities();
   }
@@ -208,6 +220,7 @@ function setPriorityLow(id) {
     urgentRef.classList.toggle("priorityLowBg");
     addDisplayNone("standardLowIcon");
     removeDisplayNone("activeLowIcon");
+    setPriority = "low";
   } else if (priorityLow) {
     resetAllPriorities();
   }
@@ -246,8 +259,8 @@ function addDisplayNone(id) {
 function createTask() {
   checkEmptyTitle();
   checkEmptyDate();
-  if(checkTitle && checkDate) {
-    loadDataToServer()
+  if (checkTitle && checkDate) {
+    postDataToServer();
   }
 }
 
@@ -288,7 +301,7 @@ function chooseSubTask() {
     inputRef.innerHTML = inputRef.value;
     addDisplayNone("plusIcon");
     toggleDisplayNone("cancelOrCheck");
-  }  else if (addedTaskRef.innerHTML != "") {
+  } else if (addedTaskRef.innerHTML != "") {
     inputRef.value = "Write Legal Imprint";
     inputRef.innerHTML = inputRef.value;
     addDisplayNone("plusIcon");
@@ -359,10 +372,38 @@ function toggleDisplayNone(id) {
   ref.classList.toggle("d-nonevip");
 }
 
+async function postDataToServer() {
+  let title = document.getElementById("title");
+  let description = document.getElementById("description");
+  let date = document.getElementById("date");
+  let priority = setPriority;
+  let category = document.getElementById("select");
+  let subtasks = ["task1", "task2", "task3"];
 
-function loadDataToServer() {
-    let title = document.getElementById("title");
-    let description = document.getElementById("description");
-    let date = document.getElementById("date");
+  await postData(`/tasks/`, {
+    id: getId(),
+    title: title.value,
+    description: description.value,
+    date: date.value,
+    priority: priority,
+    assignedTo: assignedTo,
+    category: category.value,
+    subTasks: subtasks,
+    status: "To do",
+  });
+}
 
+async function postData(path, data = {}) {
+  let response = await fetch(BASE_URL + path + ".json", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return (responseToJson = await response.json());
+}
+
+function getId() {
+  return self.crypto.randomUUID()
 }
