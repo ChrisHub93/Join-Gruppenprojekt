@@ -239,7 +239,7 @@ function getAddTaskTemplate() {
 
               <div
                 id="medium"
-                class="priorityBtn priorityMediumBg"
+                class="priorityBtn"
                 onclick="setPriorityMedium('medium')"
               >
                 <span>Medium</span>

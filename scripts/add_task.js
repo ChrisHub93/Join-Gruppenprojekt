@@ -1,6 +1,8 @@
 let priorityUrgent = false;
 let priorityMedium = false;
 let priorityLow = false;
+let checkTitle = false;
+let checkDate = false;
 
 function toggleVisibility(id) {
   let ref = document.getElementById(id);
@@ -185,6 +187,9 @@ function addDisplayNone(id) {
 function createTask() {
   checkEmptyTitle();
   checkEmptyDate();
+  if(checkTitle && checkDate) {
+    loadDataToServer()
+  }
 }
 
 function checkEmptyTitle() {
@@ -193,9 +198,11 @@ function checkEmptyTitle() {
   if (!titleRef.value) {
     titleRef.classList.add("inputError");
     errorTitleRef.classList.remove("opacity");
+    checkTitle = false;
   } else {
     titleRef.classList.remove("inputError");
     errorTitleRef.classList.add("opacity");
+    checkTitle = true;
   }
 }
 
@@ -205,9 +212,11 @@ function checkEmptyDate() {
   if (!dateRef.value) {
     dateRef.classList.add("inputError");
     errorDateRef.classList.remove("opacity");
+    checkDate = false;
   } else {
     dateRef.classList.remove("inputError");
     errorDateRef.classList.add("opacity");
+    checkDate = true;
   }
 }
 
@@ -289,4 +298,12 @@ function toggleDisplayNone(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
   ref.classList.toggle("d-nonevip");
+}
+
+
+function loadDataToServer() {
+    let title = document.getElementById("title");
+    let description = document.getElementById("description");
+    let date = document.getElementById("date");
+
 }

@@ -145,7 +145,7 @@
       <div class="headline">
         <div class="headline__text">
           <h1>Board</h1>
-          <button class="headline__btn-mobile" onclick="openAddTaskOverlay()">
+          <button class="headline__btn-mobile" onclick="openAddTaskOverlay(); setPriorityMedium(`medium`)">
             <img
               src="../assets/icons/plus add task mobile.svg"
               alt="add icon mobile"
@@ -163,7 +163,7 @@
               alt="search icon"
             />
           </div>
-          <button class="addTaskBtn" onclick="openAddTaskOverlay()">
+          <button class="addTaskBtn" onclick="openAddTaskOverlay(); setPriorityMedium(`medium`)">
             Add Task
             <img src="../assets/icons/add.svg" alt="Add icon" />
           </button>

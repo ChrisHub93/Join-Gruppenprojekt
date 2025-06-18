@@ -490,6 +490,9 @@ mark {
 .description {
   height: 120px;
 }
+.opacity {
+    opacity: 0;
+  }
 
 @media (max-width: px) {
 }
