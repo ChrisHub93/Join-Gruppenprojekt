@@ -241,6 +241,7 @@ function renderPrioButton(prioName, activePrio) {
   let isActive = prioGet === activePrio.toLowerCase();
   let prioFullName = prioName.charAt(0).toUpperCase() + prioName.slice(1);
   let iconPath = `../assets/icons/priority-${prioGet}.png`;
+  let iconPathClicked = `../assets/icons/priority-clicked-${prioGet}.png`;
 
   return `
     <button 
@@ -248,26 +249,46 @@ function renderPrioButton(prioName, activePrio) {
       data-prio="${prioGet}" 
       type="button"
       onclick="setPrioActive(this)">
-      ${prioFullName} <img class="prio_overlay_task" src="${iconPath}">
+      ${prioFullName} <img class="prio_overlay_task" src="${isActive ? iconPathClicked : iconPath}">
     </button>
   `;
 }
 
 function setPrioActive(clickedButton) {
-  let prioButtons =
-    clickedButton.parentElement.querySelectorAll(".prio_edit_button");
-  prioButtons.forEach((btn) => btn.classList.remove("active"));
-  clickedButton.classList.add("active");
+  let prioButtons = clickedButton.parentElement.querySelectorAll(".prio_edit_button");
+  let prioButtonClicked = clickedButton.classList.contains("active");
+    prioButtons.forEach((btn) => {
+      btn.classList.remove("active");
+      let prio = btn.dataset.prio;
+      let icon = btn.querySelector("img");
+      icon.src = `../assets/icons/priority-${prio}.png`;
+    });
+    if (!prioButtonClicked) {
+      clickedButton.classList.add("active");
+      let prio = clickedButton.dataset.prio;
+      let icon = clickedButton.querySelector("img");
+      icon.src = `../assets/icons/priority-clicked-${prio}.png`;
+    }}
+
+let flatpickrInstance = null;
+function toggleFlatpickr() {
+  if (!flatpickrInstance) {
+    flatpickrInstance = flatpickr("#date", {
+      dateFormat: "d/m/Y",
+      allowInput: true,
+    });
+  }
 }
 
 function renderOverlayTaskEdit(tasksEditRef) {
   let prio = tasksEditRef.priority.toLowerCase();
+  toggleFlatpickr();
 
   return `
         <div class="edit_close_container">
           <img onclick="closeOverlay(event)" class="closeIcon" src="../assets/icons/close.png" alt="">
         </div>
-        <form class="form_edit_task">
+        <div class="form_edit_task">
           <div class="form_edit_container">
             <label for="title">Title</label>
             <input class="border_edit_active" type="text" id="title" name="title" value="${
@@ -282,11 +303,10 @@ function renderOverlayTaskEdit(tasksEditRef) {
           </div>
           <div class="form_edit_container">
             <label for="date">Due Date</label>
-            <input class="duedate_edit border_edit_active" type="text" id="date" name="date" value="${
+            <input onclick="toggleFlatpickr(event)" class="duedate_edit border_edit_active" type="text" id="date" name="date" value="${
               tasksEditRef.date
             }" placeholder="dd/mm/yyyy" required>
           </div>
-          <div>
           <div class="form_edit_container">
             <h4>Priority</h4>
             <div class="prio_edit_container">
@@ -295,7 +315,40 @@ function renderOverlayTaskEdit(tasksEditRef) {
               ${renderPrioButton("low", prio)}
             </div>
           </div>
-        </form>
+          <div class="form_edit_container">
+            <span>Assigned to</span>
+              <div class="category">
+                <div id="assignedContainer" class="inputSelectContact" onclick="openAssignedTo()">
+                  <span id="selectMember" class="select inputFlex">
+                    Select Contacts to Assign
+                  </span>
+                  <img id="arrow" class="arrow inputStyleArrow" src="/assets/icons/arrow_drop_down.png"/>
+                </div>
+                <ul id="allMembers" class="options">
+                
+                </ul>
+              </div>
+                <div id="assignedMembers"></div>
+          </div>
+          <div class="form_edit_container">
+            <label for="subTaskInput">Subtasks</label>
+            <div class="edit_subtask_input">  
+              <input class="border_edit_active" type="text" name="subtasks" id="subTaskInput" placeholder="Add new subtask"/>
+              <img onclick="chooseSubTask()" id="plusIcon" class="plusIcon_edit" src="../assets/icons/Subtasks-plus.png"/>
+              <div id="cancelOrCheck" class="cancelOrCheck d-nonevip">
+                <img ="deleteTask()" src="../assets/icons/iconoir_cancel.png"/>
+                <div class="subTasksSeperator"></div>
+                <img onclick="addTask()" src="../assets/icons/Property 1=check.png"/>
+              </div>
+            </div>
+            <div id="subTasks"></div>
+          </div>
+          <div class="edit_okay_box">
+          <button class="edit_okay"> Ok
+          <img src="../assets/icons/check.png">
+          </button>
+          </div>
+        </div>
   `;
 }
 
@@ -372,9 +425,7 @@ function renderOverlayTaskContent(tasksRef) {
                 <p>Delete</p>
               </div>
               <div class="seperator_overlay_task"></div>
-              <div onclick="editOverlayTask('${
-                tasksRef.id
-              }')" class="bottom_overlay_task edit_task">
+              <div onclick="editOverlayTask('${tasksRef.id}'); initAddTask()" class="bottom_overlay_task edit_task">
                 <img src="../assets/icons/Property 1=edit.png">
                 <p>Edit</p>
               </div>

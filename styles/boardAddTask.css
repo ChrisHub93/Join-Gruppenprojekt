@@ -192,6 +192,11 @@ select:focus {
   object-fit: cover;
 }
 
+.inputStyleArrow:hover{
+  background-color: #D1D1D1;
+  border-radius: 25px;
+}
+
 .category {
   background-color: white;
   border-radius: 8px;
