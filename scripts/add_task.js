@@ -318,9 +318,6 @@ function addTask() {
   removeDisplayNone("plusIcon");
   toggleDisplayNone("cancelOrCheck");
   inputRef.value = "";
-
-
-  
 }
 
 function editTask(id) {
@@ -332,28 +329,27 @@ function editTask(id) {
   } else{
   addDisplayNone("editOrTrash"+id);
   toggleDisplayNone("trashOrCheck"+id);
-  // inputField.focus();
+  
   inputField.classList.add("activeInput");
   let bulletRef = `bullet${id}`;
   toggleDisplayNone(bulletRef);
   let length = inputField.value.length;
   inputField.setSelectionRange(length, length);
 
-  let target = '[id^="editOrTrash"]';
-  let hideRef = document.querySelectorAll(target);
-  hideRef[0].classList.add("opacity");
+  let target = "editOrTrash"+id;
+  let hideRef = document.getElementById(target);
+  hideRef.classList.add("opacity");
 
   }  
 }
 
 function acceptTask(id) {
-  // toggleDisplayNone("editOrTrash"+id);
-  toggleDisplayNone("trashOrCheck"+id);
-
-  let target = '[id^="editOrTrash"]';
-  let hideRef = document.querySelectorAll(target);
-  hideRef[0].classList.remove("opacity");
   
+  toggleDisplayNone("trashOrCheck"+id);
+  
+  let target = "editOrTrash"+id;
+  let hideRef = document.getElementById(target);
+  hideRef.classList.remove("opacity");
 
   let inputRef = document.getElementById(id);
   inputField = inputRef.querySelector("input");
