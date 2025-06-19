@@ -8,14 +8,14 @@ function getProfile() {
 function getSubTasksTemplate(inputRef) {
   return `<div id="${inputRef.value}" class="relative">
             <div id="bullet${inputRef.value}" class="bullet"></div>
-                <input onclick="editTask('${inputRef.value}')" type ="text" value="${inputRef.value}"/>
+                <input onclick="editTask('${inputRef.value}')" type ="text" value="${inputRef.value}" class="subTaskAdded"/>
 
-            <div id="editOrTrash" class="editOrTrash">
+            <div id="editOrTrash${inputRef.value}" class="editOrTrash d-nonevip">
                 <img onclick="editTask('${inputRef.value}')" src="/assets/icons/Property 1=edit.png" alt="">
                     <div class="subTasksSeperatorSecond"></div>
                 <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
             </div>
-                <div id="trashOrCheck" class="editOrTrash d-nonevip">
+                <div id="trashOrCheck${inputRef.value}" class="trashOrCheck d-nonevip">
                     <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
                         <div class="subTasksSeperatorSecond"></div>
                     <img onclick="acceptTask('${inputRef.value}')" src="/assets/icons/Property 1=check.png" alt="">

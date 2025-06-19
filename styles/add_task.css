@@ -393,7 +393,7 @@ footer {
 }
 
 .opacity {
-  opacity: 0;
+  opacity: 0 !important;
 }
 
 .mb12 {
@@ -474,12 +474,26 @@ footer {
   flex-direction: column;
 }
 
-#subTasks input {
+/* #subTasks input {
   border: none;
   font-size: 14px;
   background-color: transparent;
   padding-block: 4px;
   padding-inline: 8px;
+  width: 100%;
+} */
+
+.subTaskAdded{
+  border: none;
+  font-size: 14px;
+  background-color: transparent;
+  padding-block: 4px;
+  padding-inline: 8px;
+  width: 100%;
+}
+
+.subTaskAdded:focus{
+  outline: none;
 }
 
 .editOrTrash {
@@ -492,7 +506,23 @@ footer {
   cursor: pointer;
 }
 
+.trashOrCheck{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 12px;
+  top: 10%;
+  cursor: pointer;
+}
+
 .editOrTrash img {
+  height: 20px;
+  width: 20px;
+  object-fit: contain;
+}
+
+.trashOrCheck img {
   height: 20px;
   width: 20px;
   object-fit: contain;
@@ -518,15 +548,21 @@ footer {
   display: flex;
   align-items: center;
   border-radius: 8px;
+  margin-bottom: 8px;
 }
 
-.relative:hover {
+.relative:hover{
   background-color: var(--snd-color);
+}
+
+.relative:hover [id^=editOrTrash]{
+  display: flex !important;
 }
 
 .relative input,
 .relative img {
   background-color: transparent;
+  /* z-index: 1; */
 }
 
 div[id^="bullet"] {

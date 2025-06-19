@@ -11,7 +11,6 @@ let subtasks = [];
 
 async function initAddTask() {
   let contacts = await loadContacts();
-  console.log(contacts);
   renderContactList(contacts);
 }
 
@@ -297,14 +296,9 @@ function chooseSubTask() {
   let inputRef = document.getElementById("subTaskInput");
   let addedTaskRef = document.getElementById("subTasks");
 
-  if (addedTaskRef.innerHTML == "") {
-    inputRef.value = "Contact Form";
-    inputRef.innerHTML = inputRef.value;
-    addDisplayNone("plusIcon");
-    toggleDisplayNone("cancelOrCheck");
-  } else if (addedTaskRef.innerHTML != "") {
-    inputRef.value = "Write Legal Imprint";
-    inputRef.innerHTML = inputRef.value;
+  if (inputRef.value == '') {
+    inputRef.value = '';
+  } else if (inputRef.value != "") {
     addDisplayNone("plusIcon");
     toggleDisplayNone("cancelOrCheck");
   }
@@ -324,24 +318,43 @@ function addTask() {
   removeDisplayNone("plusIcon");
   toggleDisplayNone("cancelOrCheck");
   inputRef.value = "";
+
+
+  
 }
 
 function editTask(id) {
-  addDisplayNone("editOrTrash");
-  toggleDisplayNone("trashOrCheck");
   let inputRef = document.getElementById(id);
   inputField = inputRef.querySelector("input");
-  inputField.focus();
+
+  if(inputField.classList[1]== "activeInput"){
+    return;
+  } else{
+  addDisplayNone("editOrTrash"+id);
+  toggleDisplayNone("trashOrCheck"+id);
+  // inputField.focus();
   inputField.classList.add("activeInput");
   let bulletRef = `bullet${id}`;
   toggleDisplayNone(bulletRef);
   let length = inputField.value.length;
   inputField.setSelectionRange(length, length);
+
+  let target = '[id^="editOrTrash"]';
+  let hideRef = document.querySelectorAll(target);
+  hideRef[0].classList.add("opacity");
+
+  }  
 }
 
 function acceptTask(id) {
-  toggleDisplayNone("editOrTrash");
-  toggleDisplayNone("trashOrCheck");
+  // toggleDisplayNone("editOrTrash"+id);
+  toggleDisplayNone("trashOrCheck"+id);
+
+  let target = '[id^="editOrTrash"]';
+  let hideRef = document.querySelectorAll(target);
+  hideRef[0].classList.remove("opacity");
+  
+
   let inputRef = document.getElementById(id);
   inputField = inputRef.querySelector("input");
   inputField.blur();
