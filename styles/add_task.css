@@ -53,8 +53,19 @@ mark {
   color: red;
 }
 
-input,
+/* durch klassen ersetzen */
+/* input,
 textarea {
+  border: 1px solid var(--snd-color);
+  border-radius: 8px;
+  width: 100%;
+  padding-block: 8px;
+  padding-inline: 16px;
+  font-size: 16px;
+  cursor: pointer;
+} */
+
+.inputTitle, .textareaDescription, .inputDate, .inputSubTask{
   border: 1px solid var(--snd-color);
   border-radius: 8px;
   width: 100%;
@@ -76,13 +87,23 @@ textarea {
   cursor: pointer;
 }
 
-input:focus,
+/* input:focus,
 textarea:focus {
+  border-color: var(--focus-color);
+  outline: none;
+} */
+
+.inputTitle:focus, .inputDate:focus, .inputSubTask:focus{
   border-color: var(--focus-color);
   outline: none;
 }
 
-textarea {
+.textareaDescription:focus{
+  border-color: var(--focus-color);
+  outline: none;
+}
+
+.textareaDescription {
   height: 80px;
 }
 
