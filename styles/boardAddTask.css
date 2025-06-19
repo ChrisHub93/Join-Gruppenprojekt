@@ -503,6 +503,20 @@ mark {
   opacity: 0;
 }
 
+.succesTag {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 46px;
+  position: absolute;
+  height: 74px;
+  width: 317px;
+  border-radius: 20px;
+  background-color: var(--darkBtn-color);
+  font-size: 20px;
+  color: white;
+}
+
 @media (max-width: px) {
 }
 
