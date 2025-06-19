@@ -5,7 +5,7 @@ let todos = [
     category: "User Story",
     description: "Build with start page with recipe recommandation...",
     assignedTo: ["Chris Mü", "Kenan Ce", "Dave Ha"],
-    subTasks: ["Task1", "Task2",],
+    subTasks: ["Task1", "Task2"],
     priority: "medium",
     date: "10/06/2025",
     status: "To do",
@@ -129,77 +129,83 @@ function removeHighlight(id) {
 }
 
 function overlayTask(element) {
-    let tasksRef = todos[element];
-    let addOverlayRef = document.getElementById('overlayTask')
-    let dialogTaskContentRef = document.getElementById("dialogTaskContent")
-    addOverlayRef.classList.add('active');
-    dialogTaskContentRef.style.transform = 'translateX(100%)';
-    dialogTaskContentRef.style.opacity = '0';
-    dialogTaskContentRef.innerHTML = renderOverlayTaskContent(tasksRef);
+  let tasksRef = todos[element];
+  let addOverlayRef = document.getElementById("overlayTask");
+  let dialogTaskContentRef = document.getElementById("dialogTaskContent");
+  addOverlayRef.classList.add("active");
+  dialogTaskContentRef.style.transform = "translateX(100%)";
+  dialogTaskContentRef.style.opacity = "0";
+  dialogTaskContentRef.innerHTML = renderOverlayTaskContent(tasksRef);
 
-    requestAnimationFrame(() => {
-        dialogTaskContentRef.style.transform = 'translateX(0)';
-        dialogTaskContentRef.style.opacity = '1';
-    });
+  requestAnimationFrame(() => {
+    dialogTaskContentRef.style.transform = "translateX(0)";
+    dialogTaskContentRef.style.opacity = "1";
+  });
 }
 
 function closeOverlay(event) {
-    let addOverlayTaskRef = document.getElementById('overlayTask');
-    let addOverlayEditRef = document.getElementById('overlayTaskEdit');
-    let dialogTaskContentRef = document.getElementById("dialogTaskContent")
-    let dialogTaskEditContent = document.getElementById("dialogTaskEditContent");
-    if(event.target === addOverlayTaskRef || event.target.closest('#overlayTask .closeIcon')){
-      dialogTaskContentRef.style.transform = 'translateX(100%)';
-      dialogTaskContentRef.style.opacity = '0';
-
-      setTimeout(() => {
-        addOverlayTaskRef.classList.remove('active');
-        dialogTaskContentRef.style.transform = '';
-        dialogTaskContentRef.style.opacity = '';
-      }, 300);
-    }
-
-      else if (event.target === addOverlayEditRef || event.target.closest('#overlayTaskEdit .closeIcon')) {
-    dialogTaskEditContent.style.transform = 'translateX(100%)';
-    dialogTaskEditContent.style.opacity = '0';
+  let addOverlayTaskRef = document.getElementById("overlayTask");
+  let addOverlayEditRef = document.getElementById("overlayTaskEdit");
+  let dialogTaskContentRef = document.getElementById("dialogTaskContent");
+  let dialogTaskEditContent = document.getElementById("dialogTaskEditContent");
+  if (
+    event.target === addOverlayTaskRef ||
+    event.target.closest("#overlayTask .closeIcon")
+  ) {
+    dialogTaskContentRef.style.transform = "translateX(100%)";
+    dialogTaskContentRef.style.opacity = "0";
 
     setTimeout(() => {
-      addOverlayEditRef.classList.remove('active');
-      dialogTaskEditContent.style.transform = '';
-      dialogTaskEditContent.style.opacity = '';
+      addOverlayTaskRef.classList.remove("active");
+      dialogTaskContentRef.style.transform = "";
+      dialogTaskContentRef.style.opacity = "";
+    }, 300);
+  } else if (
+    event.target === addOverlayEditRef ||
+    event.target.closest("#overlayTaskEdit .closeIcon")
+  ) {
+    dialogTaskEditContent.style.transform = "translateX(100%)";
+    dialogTaskEditContent.style.opacity = "0";
+
+    setTimeout(() => {
+      addOverlayEditRef.classList.remove("active");
+      dialogTaskEditContent.style.transform = "";
+      dialogTaskEditContent.style.opacity = "";
     }, 300);
   }
 }
 
 function toggleSubtask(img) {
-  let fileName = img.src.split('/').pop();
-  let isChecked = fileName === 'subtask-checked.png';
+  let fileName = img.src.split("/").pop();
+  let isChecked = fileName === "subtask-checked.png";
 
-    if (isChecked) {
-      img.src = '../assets/icons/subtask-unchecked.png';
-    } else {
-      img.src = '../assets/icons/subtask-checked.png';
-    }
+  if (isChecked) {
+    img.src = "../assets/icons/subtask-unchecked.png";
+  } else {
+    img.src = "../assets/icons/subtask-checked.png";
+  }
 }
 
 function getInitials(name) {
   return name
-    .split(' ')
-    .map(word => word[0])
-    .join('')
-    .toUpperCase(); 
+    .split(" ")
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
 }
 
 function getAssignedInitials(assignedToArray) {
   if (assignedToArray === "") {
-    return`
+    return `
     <p class="assigned_to_empty">Nobody assigned yet</p>`;
   } else {
-    return assignedToArray.map(name => {
-    let initials = getInitials(name);
-    let assignedColor = getAvatarColorClass(name);
-    return assignedLineRender(initials, name, assignedColor);
-  }).join('');
+    return assignedToArray
+      .map((name) => {
+        let initials = getInitials(name);
+        let assignedColor = getAvatarColorClass(name);
+        return assignedLineRender(initials, name, assignedColor);
+      })
+      .join("");
   }
 }
 
@@ -214,20 +220,20 @@ function getAvatarColorClass(name) {
 
 function subtasksOverlay(subtasks) {
   if (subtasks === "") {
-    return '';
+    return "";
   } else {
     return subtasksOverlayRender(subtasks);
   }
 }
 
 function editOverlayTask(tasksRef) {
-    let tasksEditRef = todos[tasksRef];
-    let addOverlayRef = document.getElementById('overlayTask')
-    let addOverlayEditRef = document.getElementById('overlayTaskEdit')
-    let dialogTaskEditRef = document.getElementById("dialogTaskEditContent")
-    addOverlayRef.classList.remove('active')
-    addOverlayEditRef.classList.add('active')
-    dialogTaskEditRef.innerHTML = renderOverlayTaskEdit(tasksEditRef);
+  let tasksEditRef = todos[tasksRef];
+  let addOverlayRef = document.getElementById("overlayTask");
+  let addOverlayEditRef = document.getElementById("overlayTaskEdit");
+  let dialogTaskEditRef = document.getElementById("dialogTaskEditContent");
+  addOverlayRef.classList.remove("active");
+  addOverlayEditRef.classList.add("active");
+  dialogTaskEditRef.innerHTML = renderOverlayTaskEdit(tasksEditRef);
 }
 
 function renderPrioButton(prioName, activePrio) {
@@ -238,7 +244,7 @@ function renderPrioButton(prioName, activePrio) {
 
   return `
     <button 
-      class="prio_edit_button ${prioGet} ${isActive ? 'active' : ''}" 
+      class="prio_edit_button ${prioGet} ${isActive ? "active" : ""}" 
       data-prio="${prioGet}" 
       type="button"
       onclick="setPrioActive(this)">
@@ -248,46 +254,53 @@ function renderPrioButton(prioName, activePrio) {
 }
 
 function setPrioActive(clickedButton) {
-  let prioButtons = clickedButton.parentElement.querySelectorAll('.prio_edit_button');
-  prioButtons.forEach(btn => btn.classList.remove('active'));
-  clickedButton.classList.add('active');
+  let prioButtons =
+    clickedButton.parentElement.querySelectorAll(".prio_edit_button");
+  prioButtons.forEach((btn) => btn.classList.remove("active"));
+  clickedButton.classList.add("active");
 }
 
 function renderOverlayTaskEdit(tasksEditRef) {
   let prio = tasksEditRef.priority.toLowerCase();
 
-  return`
+  return `
         <div class="edit_close_container">
           <img onclick="closeOverlay(event)" class="closeIcon" src="../assets/icons/close.png" alt="">
         </div>
         <form class="form_edit_task">
           <div class="form_edit_container">
             <label for="title">Title</label>
-            <input class="border_edit_active" type="text" id="title" name="title" value="${tasksEditRef.title}" required>
+            <input class="border_edit_active" type="text" id="title" name="title" value="${
+              tasksEditRef.title
+            }" required>
           </div>
           <div class="form_edit_container">
             <label for="description">Description</label>
-            <textarea class="border_edit_active" id="description" name="description">${tasksEditRef.description}</textarea>
+            <textarea class="border_edit_active" id="description" name="description">${
+              tasksEditRef.description
+            }</textarea>
           </div>
           <div class="form_edit_container">
             <label for="date">Due Date</label>
-            <input class="duedate_edit border_edit_active" type="text" id="date" name="date" value="${tasksEditRef.date}" placeholder="dd/mm/yyyy" required>
+            <input class="duedate_edit border_edit_active" type="text" id="date" name="date" value="${
+              tasksEditRef.date
+            }" placeholder="dd/mm/yyyy" required>
           </div>
           <div>
           <div class="form_edit_container">
             <h4>Priority</h4>
             <div class="prio_edit_container">
-              ${renderPrioButton('urgent', prio)}
-              ${renderPrioButton('medium', prio)}
-              ${renderPrioButton('low', prio)}
+              ${renderPrioButton("urgent", prio)}
+              ${renderPrioButton("medium", prio)}
+              ${renderPrioButton("low", prio)}
             </div>
           </div>
         </form>
-  `
+  `;
 }
 
 function assignedLineRender(initials, name, assignedColor) {
-  return  `
+  return `
     <div class="assigned_to_line">
       <p class="assigned_to_icon ${assignedColor}">${initials}</p>
       <p class="assigned_to_name">${name}</p>
@@ -297,12 +310,16 @@ function assignedLineRender(initials, name, assignedColor) {
 function subtasksOverlayRender(subtasks) {
   return `
     <div class="subtask_container">
-      ${subtasks.map(subtask => `
+      ${subtasks
+        .map(
+          (subtask) => `
         <div class="subtask_toggle">
           <img class="subtask-icon" src="../assets/icons/subtask-unchecked.png" onclick="toggleSubtask(this)">
           <p class="cursor_overlay_task">${subtask}</p>
         </div>
-      `).join('')}
+      `
+        )
+        .join("")}
     </div>
   `;
 }
@@ -319,7 +336,9 @@ function renderOverlayTaskContent(tasksRef) {
               <h1 class="cursor_overlay_task">${tasksRef.title}</h1>
             </div>
             <div class="filledContainer__description">
-              <p class="cursor_overlay_task overlay_text_black">${tasksRef.description}</p>
+              <p class="cursor_overlay_task overlay_text_black">${
+                tasksRef.description
+              }</p>
             </div>
             <div class="filledContainer__dueDate flex_gap25">
               <p class="cursor_overlay_task">Due Date:</p>
@@ -328,13 +347,20 @@ function renderOverlayTaskContent(tasksRef) {
             <div class="filledContainer__priority flex_gap25">
               <p class="cursor_overlay_task">Priority: </p>
               <div class="flex_gap10">
-                <p class="cursor_overlay_task">${tasksRef.priority.charAt(0).toUpperCase() + tasksRef.priority.slice(1).toLowerCase()}</p>
-                <img class="prio_overlay_task" src="../assets/icons/priority-${tasksRef.priority}.png" alt="${tasksRef.priority} priority icon">
+                <p class="cursor_overlay_task">${
+                  tasksRef.priority.charAt(0).toUpperCase() +
+                  tasksRef.priority.slice(1).toLowerCase()
+                }</p>
+                <img class="prio_overlay_task" src="../assets/icons/priority-${
+                  tasksRef.priority
+                }.png" alt="${tasksRef.priority} priority icon">
               </div>
             </div>
             <div class="filledContainer__assignedTo flex_column_overlayTask">
               <p class="cursor_overlay_task">Assigned to:</p>
-              <div class="assigned_to_container">${getAssignedInitials(tasksRef.assignedTo)}</div>
+              <div class="assigned_to_container">${getAssignedInitials(
+                tasksRef.assignedTo
+              )}</div>
             </div>
             <div class="filledContainer__subTasks flex_column_overlayTask">
               <p class="cursor_overlay_task">Subtasks:</p>
@@ -346,12 +372,14 @@ function renderOverlayTaskContent(tasksRef) {
                 <p>Delete</p>
               </div>
               <div class="seperator_overlay_task"></div>
-              <div onclick="editOverlayTask('${tasksRef.id}')" class="bottom_overlay_task edit_task">
+              <div onclick="editOverlayTask('${
+                tasksRef.id
+              }')" class="bottom_overlay_task edit_task">
                 <img src="../assets/icons/Property 1=edit.png">
                 <p>Edit</p>
               </div>
             </div>
-  `
+  `;
 }
 
 function getTaskTemplate(element) {
@@ -423,22 +451,20 @@ function getEmptyTemplate() {
   `;
 }
 
-
 function openAddTaskOverlay() {
-  const addOverlayRef = document.getElementById('overlayAddTask');
-  const openAddTaskOverlayRef = document.getElementById('addTaskContent');
-  
-  document.body.style.overflow = 'hidden';
-  addOverlayRef.classList.remove('d-nonevip');
+  const addOverlayRef = document.getElementById("overlayAddTask");
+  const openAddTaskOverlayRef = document.getElementById("addTaskContent");
+
+  document.body.style.overflow = "hidden";
+  addOverlayRef.classList.remove("d-nonevip");
   openAddTaskOverlayRef.innerHTML = getAddTaskTemplate();
-  initAddTask()
+  initAddTask();
 }
 
-function closeAddTaskOverlay() {  
-  const addOverlayRef = document.getElementById('overlayAddTask');
+function closeAddTaskOverlay() {
+  const addOverlayRef = document.getElementById("overlayAddTask");
 
-resetAllPriorities();
-  
-  document.body.style.overflow = '';
-  addOverlayRef.classList.add('d-nonevip');
+  resetAllPriorities();
+  document.body.style.overflow = "";
+  addOverlayRef.classList.add("d-nonevip");
 }

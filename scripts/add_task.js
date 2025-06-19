@@ -261,6 +261,7 @@ function createTask() {
   checkEmptyDate();
   if (checkTitle && checkDate) {
     postDataToServer();
+    closeAddTaskOverlay();
   }
 }
 
