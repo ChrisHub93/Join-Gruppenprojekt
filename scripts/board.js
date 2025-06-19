@@ -464,7 +464,19 @@ function openAddTaskOverlay() {
 function closeAddTaskOverlay() {
   const addOverlayRef = document.getElementById("overlayAddTask");
 
-  resetAllPriorities();
-  document.body.style.overflow = "";
-  addOverlayRef.classList.add("d-nonevip");
+    resetAllPriorities();
+    document.body.style.overflow = "";
+    addOverlayRef.classList.add("d-nonevip");
+}
+
+function closeAddTaskOverlaySuccses() {
+  const addOverlayRef = document.getElementById("overlayAddTask");
+
+  document.getElementById("AddTaskSuccesMessage").style.display = "flex";
+  setTimeout(() => {
+    resetAllPriorities();
+    document.body.style.overflow = "";
+    addOverlayRef.classList.add("d-nonevip");
+    document.getElementById("AddTaskSuccesMessage").style.display = "none";
+  }, 700);
 }
