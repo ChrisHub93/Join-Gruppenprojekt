@@ -226,7 +226,17 @@ function subtasksOverlay(subtasks) {
   }
 }
 
+function taskOverlaySync() {
+  let dialogTaskContentRef = document.getElementById("dialogTaskContent");
+  let dialogTaskEditContentRef = document.getElementById("dialogTaskEditContent");
+
+  if (dialogTaskContentRef && dialogTaskEditContentRef) {
+    dialogTaskEditContentRef.style.height = dialogTaskContentRef.offsetHeight + "px";
+  }
+}
+
 function editOverlayTask(tasksRef) {
+  taskOverlaySync();
   let tasksEditRef = todos[tasksRef];
   let addOverlayRef = document.getElementById("overlayTask");
   let addOverlayEditRef = document.getElementById("overlayTaskEdit");
@@ -285,9 +295,12 @@ function renderOverlayTaskEdit(tasksEditRef) {
   toggleFlatpickr();
 
   return `
+      <div class="edit_dialog_wrapper">
         <div class="edit_close_container">
           <img onclick="closeOverlay(event)" class="closeIcon" src="../assets/icons/close.png" alt="">
         </div>
+
+      <div class="edit_dialog_scrollable">
         <div class="form_edit_task">
           <div class="form_edit_container">
             <label for="title">Title</label>
@@ -343,6 +356,8 @@ function renderOverlayTaskEdit(tasksEditRef) {
             </div>
             <div id="subTasks"></div>
           </div>
+        </div>
+        </div>
           <div class="edit_okay_box">
           <button class="edit_okay"> Ok
           <img src="../assets/icons/check.png">
