@@ -5,6 +5,10 @@ async function initContacts() {
   let contactsArray = Object.values(contacts);
   contactsArray.sort(compare);
   getListOfContacts(contactsArray);
+  if(window.innerWidth <= 1100 ){
+    let addPersonRef = document.getElementById("addPerson");
+    addPersonRef.classList.remove("d-nonevip");
+  }
 }
 
 async function fetchData(path) {
@@ -69,10 +73,6 @@ function moreDetailsAboutContact(
   phoneOfUser
 ) {
   let newContactId = firstNameOfUser + " " + lastNameOfUser;
-
-
-  
-
   if (currentActiveContactId === newContactId) {
     sameContact();
   } else if (
@@ -96,10 +96,12 @@ function moreDetailsAboutContact(
     );
   }
 
-
   if(window.innerWidth <= 1100 ){
-    
     showMobileVersion();
+    let addPersonRef = document.getElementById("addPerson");
+    let chooseEditOrDeleteMobileRef = document.getElementById("chooseEditOrDeleteMobile");
+    addPersonRef.classList.remove("d-nonevip");
+    chooseEditOrDeleteMobileRef.classList.remove("d-nonevip");
   }
 }
 
@@ -111,13 +113,19 @@ function showMobileVersion(){
 }
 
 window.addEventListener("resize", function(event) {
+  let contactsRef = document.getElementById("contacts");
+  let addPersonRef = document.getElementById("addPerson");
+  let chooseEditOrDeleteMobileRef = document.getElementById("chooseEditOrDeleteMobile");
     if(window.innerWidth > 1100){
-      let contactsRef = document.getElementById("contacts");
       contactsRef.classList.remove("d-nonevip");
+      addPersonRef.classList.add("d-nonevip");
+      chooseEditOrDeleteMobileRef.classList.add("d-nonevip");
     } else if(currentActiveContactId && window.innerWidth <= 1100){
-      let contactsRef = document.getElementById("contacts");
       contactsRef.classList.add("d-nonevip");
-}
+      chooseEditOrDeleteMobileRef.classList.remove("d-nonevip");
+    } else if (window.innerWidth <= 1100){
+      addPersonRef.classList.remove("d-nonevip");
+    }
 });
 
 function sameContact() {
@@ -737,9 +745,15 @@ function checkEmptyEditedPhone(){
 function closeMobileOverlay(){
  sameContact();
 
- let contactsRef = document.getElementById("contacts");
+    let contactsRef = document.getElementById("contacts");
     let infoTitleRef = document.getElementById("infoTitle");
 
     contactsRef.classList.remove("d-nonevip");
     infoTitleRef.classList.remove("d-Block");
+
+    let chooseEditOrDeleteMobileRef = document.getElementById("chooseEditOrDeleteMobile");
+    chooseEditOrDeleteMobileRef.classList.add("d-nonevip");
+
+    let addPersonRef = document.getElementById("addPerson");
+    addPersonRef.classList.remove("d-nonevip");
 }

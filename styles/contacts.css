@@ -615,7 +615,9 @@ main {
 
 
 .chooseEditOrDeleteMobile{
-  padding: 12px;
+  /* padding: 12px; */
+  height: 56px;
+  width: 56px;
   background-color: var(--darkBtn-color);
   border-radius: 50%;
   display: flex;
@@ -625,7 +627,7 @@ main {
   right: 24px;
   bottom: 40px;
   cursor: pointer;
-  display: none;
+  /* display: none; */
 }
 
 .iconchooseEditOrDeleteMobile{
@@ -741,10 +743,18 @@ main {
   .addPerson {
     bottom: 100px;
   }
+
+  .chooseEditOrDeleteMobile{
+    bottom: 100px;
+  }
 }
 
 @media (max-width: 545px) {
   .addPerson {
+    bottom: 80px;
+  }
+
+  .chooseEditOrDeleteMobile{
     bottom: 80px;
   }
 }
