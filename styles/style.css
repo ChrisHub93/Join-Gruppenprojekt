@@ -26,6 +26,8 @@
     --contacts-input-focus: #94d5f0;
     --board-tasks-bg: #E7E7E7;
     --text-grey: #A8A8A8;
+    --choose-shadow: #babbbc;
+    --choose-hover-bg: #eeeeee;
   }
 
   .d-none{

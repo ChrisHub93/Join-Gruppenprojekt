@@ -46,22 +46,46 @@
             </div>
 
             <div class="inputName">
-              <input onfocusout="checkEmptyName()" type="text" id="name" name="name" placeholder="Name" />
+              <input
+                onfocusout="checkEmptyName()"
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Name"
+              />
               <img src="../assets/icons/person.png" alt="" />
             </div>
-            <span id="requiredNameField" class="opacity">This Field is required</span>
+            <span id="requiredNameField" class="opacity"
+              >This Field is required</span
+            >
 
             <div class="inputEmail">
-              <input onfocusout="checkEmptyEmail()" type="email" id="email" name="email" placeholder="Email" />
+              <input
+                onfocusout="checkEmptyEmail()"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email"
+              />
               <img src="../assets/icons/mail.svg" alt="" />
             </div>
-            <span id="requiredEmailField" class="opacity">This Field is required</span>
+            <span id="requiredEmailField" class="opacity"
+              >This Field is required</span
+            >
 
             <div class="inputTel">
-              <input onfocusout="checkEmptyPhone()" type="tel" id="phone" name="phone" placeholder="Phone" />
+              <input
+                onfocusout="checkEmptyPhone()"
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Phone"
+              />
               <img src="../assets/icons/call.png" alt="" />
             </div>
-            <span id="requiredPhoneField" class="opacity">This Field is required</span>
+            <span id="requiredPhoneField" class="opacity"
+              >This Field is required</span
+            >
 
             <div class="flexButtons">
               <button class="clear" onclick="cancelOverlay(event)">
@@ -88,10 +112,16 @@
       </div>
     </div>
 
-
-
-    <div id="editOverlay" class="editOverlay d-nonevip" onclick="closeEditOverlay(event)">
-      <div onclick="stopPropagation(event)" id="contentEditOverlay" class="contentOverlay hideContentOverlay">
+    <div
+      id="editOverlay"
+      class="editOverlay d-nonevip"
+      onclick="closeEditOverlay(event)"
+    >
+      <div
+        onclick="stopPropagation(event)"
+        id="contentEditOverlay"
+        class="contentOverlay hideContentOverlay"
+      >
         <div class="leftSide">
           <div class="contentLeftSide">
             <img src="../assets/img/Capa 1 white.png" alt="" />
@@ -102,12 +132,7 @@
 
         <div class="rightSide">
           <div class="profile">
-            
-
-            <div
-              id="circleFirstLetters"
-              class="circleFirstLettersEdit"
-            >
+            <div id="circleFirstLetters" class="circleFirstLettersEdit">
               <span id="firstLetterOfFirstName"></span>
               <span id="fistLetterOfLastName"></span>
             </div>
@@ -123,25 +148,51 @@
             </div>
 
             <div class="inputName">
-              <input onfocusout="checkEmptyEditedName()" type="text" id="nameEdit" name="name" placeholder="Name" />
+              <input
+                onfocusout="checkEmptyEditedName()"
+                type="text"
+                id="nameEdit"
+                name="name"
+                placeholder="Name"
+              />
               <img src="../assets/icons/person.png" alt="" />
             </div>
-            <span id="requiredNameEditField" class="opacity">This Field is required</span>
+            <span id="requiredNameEditField" class="opacity"
+              >This Field is required</span
+            >
 
             <div class="inputEmail">
-              <input onfocusout="checkEmptyEditedEmail()" type="email" id="emailEdit" name="email" placeholder="Email" />
+              <input
+                onfocusout="checkEmptyEditedEmail()"
+                type="email"
+                id="emailEdit"
+                name="email"
+                placeholder="Email"
+              />
               <img src="../assets/icons/mail.svg" alt="" />
             </div>
-            <span id="requiredEmailEditField" class="opacity">This Field is required</span>
+            <span id="requiredEmailEditField" class="opacity"
+              >This Field is required</span
+            >
 
             <div class="inputTel">
-              <input onfocusout="checkEmptyEditedPhone()" type="tel" id="phoneEdit" name="phone" placeholder="Phone" />
+              <input
+                onfocusout="checkEmptyEditedPhone()"
+                type="tel"
+                id="phoneEdit"
+                name="phone"
+                placeholder="Phone"
+              />
               <img src="../assets/icons/call.png" alt="" />
             </div>
-            <span id="requiredPhoneEditField" class="opacity">This Field is required</span>
+            <span id="requiredPhoneEditField" class="opacity"
+              >This Field is required</span
+            >
 
             <div class="flexButtons">
-              <button class="clear" onclick="deleteUserInOverlay(event)">Delete</button>
+              <button class="clear" onclick="deleteUserInOverlay(event)">
+                Delete
+              </button>
 
               <button class="createTask" onclick="saveEditedContact(event)">
                 Save
@@ -154,26 +205,94 @@
     </div>
 
     <div class="page-box">
-    <aside id="sidebar" class="sidebar">
-            <img class="sidebar-logo" src="../assets/img/Capa 1 white.png" alt="">
-            <div class="menu-box">
-                <div class="sidebar-menu" menu-data="summary" onclick="activateMenu(this, 'summary')"><a class="sidebar-text" href="../html/summary.html"><img src="../assets/icons/Summary.png" class="sidebar-icon" alt="">Summary</a></div>
-                <div class="sidebar-menu" menu-data="add_task" onclick="activateMenu(this, 'add_task')"><a class="sidebar-text" href="../html/add_task.html"><img src="../assets/icons/Add task.png" class="sidebar-icon" alt="">Add Task</a></div>
-                <div class="sidebar-menu" menu-data="board" onclick="activateMenu(this, 'board')"><a class="sidebar-text" href="../html/board.html"><img src="../assets/icons/Board.png" class="sidebar-icon" alt="">Board</a></div>
-                <div class="sidebar-menu" menu-data="contacts" onclick="activateMenu(this, 'contacts')"><a class="sidebar-text" href="../html/contacts.html"><img src="../assets/icons/Contacts.png" class="sidebar-icon" alt="">Contacts</a></div>
-            </div>
-            <div class="d-none">
-                <div class="sidebar-menu d-none"><a class="sidebar-text" href="../index.html"><img src="../assets/icons/Summary.png" class="sidebar-icon" alt="">Log In</a></div>
-            </div>
-                <div class="sidebar-policy">
-                    <div class="policy-box">
-                        <a class="policy-text" menu-data="privacy_policy" onclick="activateMenu(this, 'privacy_policy')" href="../html/privacy_policy.html">Privacy Policy</a>
-                    </div>
-                    <div class="policy-box">
-                        <a class="policy-text" menu-data="legal_notice" onclick="activateMenu(this, 'legal_notice')" href="../html/legal_notice.html">Legal Notice</a>
-                    </div>
-                </div>
-    </aside>
+      <aside id="sidebar" class="sidebar">
+        <img class="sidebar-logo" src="../assets/img/Capa 1 white.png" alt="" />
+        <div class="menu-box">
+          <div
+            class="sidebar-menu"
+            menu-data="summary"
+            onclick="activateMenu(this, 'summary')"
+          >
+            <a class="sidebar-text" href="../html/summary.html"
+              ><img
+                src="../assets/icons/Summary.png"
+                class="sidebar-icon"
+                alt=""
+              />Summary</a
+            >
+          </div>
+          <div
+            class="sidebar-menu"
+            menu-data="add_task"
+            onclick="activateMenu(this, 'add_task')"
+          >
+            <a class="sidebar-text" href="../html/add_task.html"
+              ><img
+                src="../assets/icons/Add task.png"
+                class="sidebar-icon"
+                alt=""
+              />Add Task</a
+            >
+          </div>
+          <div
+            class="sidebar-menu"
+            menu-data="board"
+            onclick="activateMenu(this, 'board')"
+          >
+            <a class="sidebar-text" href="../html/board.html"
+              ><img
+                src="../assets/icons/Board.png"
+                class="sidebar-icon"
+                alt=""
+              />Board</a
+            >
+          </div>
+          <div
+            class="sidebar-menu"
+            menu-data="contacts"
+            onclick="activateMenu(this, 'contacts')"
+          >
+            <a class="sidebar-text" href="../html/contacts.html"
+              ><img
+                src="../assets/icons/Contacts.png"
+                class="sidebar-icon"
+                alt=""
+              />Contacts</a
+            >
+          </div>
+        </div>
+        <div class="d-none">
+          <div class="sidebar-menu d-none">
+            <a class="sidebar-text" href="../index.html"
+              ><img
+                src="../assets/icons/Summary.png"
+                class="sidebar-icon"
+                alt=""
+              />Log In</a
+            >
+          </div>
+        </div>
+        <div class="sidebar-policy">
+          <div class="policy-box">
+            <a
+              class="policy-text"
+              menu-data="privacy_policy"
+              onclick="activateMenu(this, 'privacy_policy')"
+              href="../html/privacy_policy.html"
+              >Privacy Policy</a
+            >
+          </div>
+          <div class="policy-box">
+            <a
+              class="policy-text"
+              menu-data="legal_notice"
+              onclick="activateMenu(this, 'legal_notice')"
+              href="../html/legal_notice.html"
+              >Legal Notice</a
+            >
+          </div>
+        </div>
+      </aside>
     </div>
     <header id="header" class="page-box">
       <p class="header-name">Kanban Project Management Tool</p>
@@ -234,27 +353,43 @@
           <div id="alphabeticalOrderZ"></div>
         </div>
 
+        <div
+          onclick="openOverlayMobile()"
+          id="addPerson"
+          class="addPerson d-nonevip"
+        >
+          <img
+            class="iconAddPerson"
+            src="../assets/icons/person_add.png"
+            alt=""
+          />
 
-        <div onclick="openOverlayMobile()" id="addPerson" class="addPerson d-nonevip"><img class="iconAddPerson" src="../assets/icons/person_add.png" alt=""></div>
+          
+        </div>
 
+        
       </section>
 
       <section id="infoTitle" class="infoTitle">
         <div class="sectionInfoTitle">
-        <div class="pageTitle">
-          <h1>Contacts</h1>
-          <div class="titleSeperator"></div>
-          <span class="subTitle">Better with a team</span>
-          <div class="titleSeperatorMobile d-none"></div>
+          <div class="pageTitle">
+            <h1>Contacts</h1>
+            <div class="titleSeperator"></div>
+            <span class="subTitle">Better with a team</span>
+            <div class="titleSeperatorMobile d-none"></div>
+          </div>
+
+          <div>
+            <img
+              class="arrowToGoBack"
+              onclick="closeMobileOverlay()"
+              src="../assets/icons/arrow-left-line.svg"
+              alt=""
+            />
+          </div>
         </div>
 
-        <div><img class="arrowToGoBack" onclick="closeMobileOverlay()" src="../assets/icons/arrow-left-line.svg" alt=""></div>
-
-        </div>
-
-        <div id="allInfoAboutContact" class="allInfoAboutContact">
-          
-        </div>
+        <div id="allInfoAboutContact" class="allInfoAboutContact"></div>
 
         <div id="successfullyCreatedMobile" class="successfullyCreatedMobile">
           <p>Contact successfully Created</p>
@@ -264,81 +399,110 @@
           <p>Contact successfully Created</p>
         </div>
 
+        <div onclick="openChooseOverlay()"
+          id="chooseEditOrDeleteMobile"
+          class="chooseEditOrDeleteMobile d-nonevip"
+        >
+          <img
+            class="iconchooseEditOrDeleteMobile"
+            src="../assets/icons/more_vert.png"
+            alt=""
+          />
+        </div>
+
+        <div id="chooseOverlayForMobile" class="chooseOverlayForMobile">
+          <div class="editMobileVersion">
+            <img src="../assets/icons/Property 1=edit.png" alt="">
+            <span>Edit</span>
+          </div>
+          <div class="deleteMobileVersion">
+            <img src="../assets/icons/Property 1=delete.png" alt="">
+            <span>Delete</span>
+          </div>
+        </div>
+
         
-
-        <div id="chooseEditOrDeleteMobile" class="chooseEditOrDeleteMobile d-nonevip"><img class="iconchooseEditOrDeleteMobile" src="../assets/icons/more_vert.png" alt=""></div>
-
-        
-
       </section>
     </main>
 
     <!-- mobileOverlay -->
-    <div id="overlayMobile" class="overlayMobile d-nonevip" onclick="closeOverlayMobile(event)">
+    <div
+      id="overlayMobile"
+      class="overlayMobile d-nonevip"
+      onclick="closeOverlayMobile(event)"
+    >
       <div
         onclick="stopPropagation(event)"
         id="contentOverlayMobile"
         class="contentOverlayMobile hideContentOverlayMobile"
       >
         <div class="leftSideMobile">
-
           <div class="closeOverlayMobile">
-              <img
-                onclick="closeOverlayMobile(event)"
-                src="../assets/icons/close_white.png"
-                alt=""
-              />
-            </div>
+            <img
+              onclick="closeOverlayMobile(event)"
+              src="../assets/icons/close_white.png"
+              alt=""
+            />
+          </div>
 
           <div class="contentLeftSideMobile">
-            
             <h2>Add Contact</h2>
             <span>Tasks are better with a team!</span>
             <div class="blueLine"></div>
           </div>
-
-          
-
         </div>
 
-        
-
         <div class="rightSideMobile">
-
           <div class="profileMobile">
             <div class="profilePictureMobile">
               <img src="../assets/icons/person.svg" alt="" />
             </div>
           </div>
-          
 
           <div class="inputSectionMobile">
-            
-
             <div class="inputName">
-              <input onfocusout="checkEmptyName()" type="text" id="nameMobile" name="nameMobile" placeholder="Name" />
+              <input
+                onfocusout="checkEmptyName()"
+                type="text"
+                id="nameMobile"
+                name="nameMobile"
+                placeholder="Name"
+              />
               <img src="../assets/icons/person.png" alt="" />
             </div>
-            <span id="requiredNameFieldMobile" class="opacity">This Field is required</span>
+            <span id="requiredNameFieldMobile" class="opacity"
+              >This Field is required</span
+            >
 
             <div class="inputEmail">
-              <input onfocusout="checkEmptyEmail()" type="email" id="emailMobile" name="emailMobile" placeholder="Email" />
+              <input
+                onfocusout="checkEmptyEmail()"
+                type="email"
+                id="emailMobile"
+                name="emailMobile"
+                placeholder="Email"
+              />
               <img src="../assets/icons/mail.svg" alt="" />
             </div>
-            <span id="requiredEmailFieldMobile" class="opacity">This Field is required</span>
+            <span id="requiredEmailFieldMobile" class="opacity"
+              >This Field is required</span
+            >
 
             <div class="inputTel">
-              <input onfocusout="checkEmptyPhone()" type="tel" id="phoneMobile" name="phoneMobile" placeholder="Phone" />
+              <input
+                onfocusout="checkEmptyPhone()"
+                type="tel"
+                id="phoneMobile"
+                name="phoneMobile"
+                placeholder="Phone"
+              />
               <img src="../assets/icons/call.png" alt="" />
             </div>
-            <span id="requiredPhoneFieldMobile" class="opacity">This Field is required</span>
-
-
-            
+            <span id="requiredPhoneFieldMobile" class="opacity"
+              >This Field is required</span
+            >
 
             <div class="flexButtonsMobile">
-              
-
               <button class="createTask" onclick="createContactMobile(event)">
                 Create Contact
                 <img src="/assets/icons/check.png" alt="" />
@@ -350,12 +514,60 @@
     </div>
 
     <footer class="page-box d-none">
-            <div class="menu-box">
-                <div class="sidebar-menu" menu-data="summary" onclick="activateMenu(this, 'summary')"><a class="sidebar-text" href="../html/summary.html"><img src="../assets/icons/Summary.png" class="sidebar-icon" alt="">Summary</a></div>
-                <div class="sidebar-menu" menu-data="board" onclick="activateMenu(this, 'board')"><a class="sidebar-text" href="../html/board.html"><img src="../assets/icons/Board.png" class="sidebar-icon" alt="">Board</a></div>
-                <div class="sidebar-menu" menu-data="add_task" onclick="activateMenu(this, 'add_task')"><a class="sidebar-text" href="../html/add_task.html"><img src="../assets/icons/Add task.png" class="sidebar-icon" alt="">Add Task</a></div>
-                <div class="sidebar-menu" menu-data="contacts" onclick="activateMenu(this, 'contacts')"><a class="sidebar-text" href="../html/contacts.html"><img src="../assets/icons/Contacts.png" class="sidebar-icon" alt="">Contacts</a></div>
-            </div>
+      <div class="menu-box">
+        <div
+          class="sidebar-menu"
+          menu-data="summary"
+          onclick="activateMenu(this, 'summary')"
+        >
+          <a class="sidebar-text" href="../html/summary.html"
+            ><img
+              src="../assets/icons/Summary.png"
+              class="sidebar-icon"
+              alt=""
+            />Summary</a
+          >
+        </div>
+        <div
+          class="sidebar-menu"
+          menu-data="board"
+          onclick="activateMenu(this, 'board')"
+        >
+          <a class="sidebar-text" href="../html/board.html"
+            ><img
+              src="../assets/icons/Board.png"
+              class="sidebar-icon"
+              alt=""
+            />Board</a
+          >
+        </div>
+        <div
+          class="sidebar-menu"
+          menu-data="add_task"
+          onclick="activateMenu(this, 'add_task')"
+        >
+          <a class="sidebar-text" href="../html/add_task.html"
+            ><img
+              src="../assets/icons/Add task.png"
+              class="sidebar-icon"
+              alt=""
+            />Add Task</a
+          >
+        </div>
+        <div
+          class="sidebar-menu"
+          menu-data="contacts"
+          onclick="activateMenu(this, 'contacts')"
+        >
+          <a class="sidebar-text" href="../html/contacts.html"
+            ><img
+              src="../assets/icons/Contacts.png"
+              class="sidebar-icon"
+              alt=""
+            />Contacts</a
+          >
+        </div>
+      </div>
     </footer>
     <script src="../scripts/script.js"></script>
     <script src="../scripts/templates.js"></script>

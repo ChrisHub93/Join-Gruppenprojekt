@@ -848,3 +848,9 @@ function showSuccessMobile() {
   successfullyCreatedRef.classList.remove("showSuccessMobile");
   successfullyCreatedRef.classList.remove("hideSuccessMobile");
 }
+
+function openChooseOverlay(){
+  let chooseOverlayForMobileRef = document.getElementById("chooseOverlayForMobile");
+
+  chooseOverlayForMobileRef.classList.add("showChooseOverlay");
+}
