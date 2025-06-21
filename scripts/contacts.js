@@ -69,6 +69,13 @@ function moreDetailsAboutContact(
   phoneOfUser
 ) {
   let newContactId = firstNameOfUser + " " + lastNameOfUser;
+
+
+  if(window.innerWidth <= 1100 ){
+    console.log("width is shorter than 1100px");
+    return 
+  }
+
   if (currentActiveContactId === newContactId) {
     sameContact();
   } else if (

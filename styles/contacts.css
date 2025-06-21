@@ -13,8 +13,8 @@ main {
   justify-content: start;
   height: calc(100vh - 96px);
   width: 480px;
-  box-shadow: 4px 0px 4px var(--snd-color);
-  z-index: 1;
+  /* box-shadow: 4px 0px 4px var(--snd-color);
+  z-index: 1; */
 }
 
 .contactsWidth {
@@ -184,7 +184,6 @@ main {
   margin-left: 24px;
   margin-right: 24px;
 }
-
 
 .titleSeperatorMobile {
   background-color: var(--contact-title-seperator);
@@ -589,38 +588,130 @@ main {
   transition: all 500ms ease;
 }
 
-@media (max-width:1250px){
-  .moreAboutcircleFirstLetters{
+.addPerson {
+  /* height: 56px;
+  width: 56px; */
+  padding: 12px;
+  background-color: var(--darkBtn-color);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 24px;
+  bottom: 40px;
+  cursor: pointer;
+}
+
+.iconAddPerson {
+  height: 32px;
+  width: 32px;
+  object-fit: cover;
+}
+
+.addPerson:hover {
+  background-color: var(--contact-title-seperator);
+}
+
+@media (max-width: 1250px) {
+  .moreAboutcircleFirstLetters {
     height: 80px;
     width: 80px;
     font-size: 27px;
   }
 
-  .editinfoAboutContact h2{
+  .editinfoAboutContact h2 {
     font-size: 36px;
   }
 
-  .pageTitle{
+  .pageTitle {
     flex-direction: column;
     align-items: start;
     gap: 16px;
   }
 
-  .titleSeperator{
+  .titleSeperator {
     display: none;
   }
 
-  .titleSeperatorMobile{
+  .titleSeperatorMobile {
     display: block;
   }
 
-  .contacts{
+  .contacts {
     width: 400px;
+  }
+
+  .contactsWidth {
+    padding-right: 36px;
+    padding-left: 36px;
   }
 }
 
-@media (max-width: 1100px){
-  main{
+@media (max-width: 1100px) {
+  main {
     width: calc(100% - 200px);
+  }
+
+  .addNewContactBtn {
+    display: none;
+  }
+
+  .contacts {
+    width: 100%;
+  }
+
+  .infoTitle {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    width: 100%;
+  }
+
+  .addNewContactBtn {
+    display: none;
+  }
+
+  .contacts {
+    width: 100%;
+  }
+
+  .infoTitle {
+    display: none;
+  }
+
+  .addPerson {
+    bottom: 100px;
+  }
+}
+
+@media (max-width: 545px) {
+  .addPerson {
+    bottom: 80px;
+  }
+}
+
+@media (max-width: 400px) {
+  .contactsWidth {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+}
+
+@media (max-width: 370px) {
+  .contactsWidth {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .contactInfo{
+    padding: 12px 12px 12px;
+  }
+
+  .paddingTop{
+    padding-left: 24px;
   }
 }
