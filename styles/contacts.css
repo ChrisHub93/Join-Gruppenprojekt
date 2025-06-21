@@ -613,6 +613,23 @@ main {
   background-color: var(--contact-title-seperator);
 }
 
+.d-Block {
+  display: block !important;
+}
+
+.sectionInfoTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrowToGoBack {
+  height: 32px;
+  width: 32px;
+  object-fit: contain;
+  cursor: pointer;
+}
+
 @media (max-width: 1250px) {
   .moreAboutcircleFirstLetters {
     height: 80px;
@@ -664,6 +681,10 @@ main {
   .infoTitle {
     display: none;
   }
+
+  .editinfoAboutContact h2 {
+    font-weight: bold;
+  }
 }
 
 @media (max-width: 768px) {
@@ -707,11 +728,11 @@ main {
     padding-left: 12px;
   }
 
-  .contactInfo{
+  .contactInfo {
     padding: 12px 12px 12px;
   }
 
-  .paddingTop{
+  .paddingTop {
     padding-left: 24px;
   }
 }

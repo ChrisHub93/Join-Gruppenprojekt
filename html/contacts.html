@@ -195,7 +195,7 @@
     </header>
 
     <main>
-      <section class="contacts">
+      <section id="contacts" class="contacts">
         <div class="contactsWidth">
           <div class="addNewContactBtn" onclick="openOverlay()">
             <span>Add new contact</span>
@@ -239,7 +239,8 @@
 
       </section>
 
-      <section class="infoTitle">
+      <section id="infoTitle" class="infoTitle">
+        <div class="sectionInfoTitle">
         <div class="pageTitle">
           <h1>Contacts</h1>
           <div class="titleSeperator"></div>
@@ -247,11 +248,17 @@
           <div class="titleSeperatorMobile d-none"></div>
         </div>
 
+        <div><img class="arrowToGoBack" onclick="closeMobileOverlay()" src="../assets/icons/arrow-left-line.svg" alt=""></div>
+
+        </div>
+
         <div id="allInfoAboutContact" class="allInfoAboutContact"></div>
 
         <div id="successfullyCreated" class="successfullyCreated">
           <p>Contact successfully Created</p>
         </div>
+
+        
 
       </section>
     </main>

@@ -40,7 +40,7 @@ function getDetailsOfContact(
 
             <div class="editinfoAboutContact">
               <h2>${firstNameOfUser} ${lastNameOfUser}</h2>
-              <div class="editOrDeleteFlex">
+              <div id="editOrDeleteSection" class="editOrDeleteFlex">
                 <div onclick ="openEditOverlay(event)" class="edit editOrDeleteFlex">
                   <img  class="defaultIcon" src="/assets/icons/Property 1=edit.png" alt="" />
                   <img class="hoverIcon" src="/assets/icons/edit-hover.png" alt="" />

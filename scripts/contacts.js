@@ -71,10 +71,7 @@ function moreDetailsAboutContact(
   let newContactId = firstNameOfUser + " " + lastNameOfUser;
 
 
-  if(window.innerWidth <= 1100 ){
-    console.log("width is shorter than 1100px");
-    return 
-  }
+  
 
   if (currentActiveContactId === newContactId) {
     sameContact();
@@ -97,6 +94,19 @@ function moreDetailsAboutContact(
       emailOfUser,
       phoneOfUser
     );
+  }
+
+
+  if(window.innerWidth <= 1100 ){
+    console.log("width is shorter than 1100px");
+    let contactsRef = document.getElementById("contacts");
+    let infoTitleRef = document.getElementById("infoTitle");
+    let editOrDeleteSectionRef = document.getElementById("editOrDeleteSection");
+
+    contactsRef.classList.add("d-nonevip");
+    infoTitleRef.classList.add("d-Block");
+    editOrDeleteSectionRef.classList.add("d-nonevip");
+
   }
 }
 
@@ -712,4 +722,14 @@ function checkEmptyEditedPhone(){
     phoneEditRef.classList.remove("error");
     requiredPhoneEditFieldRef.classList.add("opacity");
   }
+}
+
+function closeMobileOverlay(){
+ sameContact();
+
+ let contactsRef = document.getElementById("contacts");
+    let infoTitleRef = document.getElementById("infoTitle");
+
+    contactsRef.classList.remove("d-nonevip");
+    infoTitleRef.classList.remove("d-Block");
 }
