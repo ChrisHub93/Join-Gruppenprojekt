@@ -706,6 +706,22 @@ h4{
     padding: 32px 24px;
     gap: 16px;
   }
+
+  .prio_edit_button{
+    font-size: 16px;
+  }
+
+  .prio_edit_button.urgent.active {
+    font-size: 16px;
+}
+
+  .prio_edit_button.medium.active {
+    font-size: 16px;
+}
+
+  .prio_edit_button.low.active {
+    font-size: 16px;
+}
 }
 
 @media (max-width: 423px) {
@@ -749,6 +765,15 @@ h4{
 
   h1{
     font-size: 36px;
+  }
+
+  .prio_edit_container{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .prio_edit_button{
+    width: 110px;  
   }
 }
 

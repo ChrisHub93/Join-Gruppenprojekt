@@ -132,15 +132,20 @@ function overlayTask(element) {
   let tasksRef = todos[element];
   let addOverlayRef = document.getElementById("overlayTask");
   let dialogTaskContentRef = document.getElementById("dialogTaskContent");
+  let addOverlayEditRef = document.getElementById("overlayTaskEdit");
+  let checkOpenOverlayEdit = addOverlayEditRef.classList.contains("active");
+  let checkOpenOverlay = addOverlayRef.classList.contains("active");
+  addOverlayEditRef.classList.remove("active");
   addOverlayRef.classList.add("active");
-  dialogTaskContentRef.style.transform = "translateX(100%)";
-  dialogTaskContentRef.style.opacity = "0";
   dialogTaskContentRef.innerHTML = renderOverlayTaskContent(tasksRef);
-
-  requestAnimationFrame(() => {
+  if (!checkOpenOverlay && !checkOpenOverlayEdit) {
+    dialogTaskContentRef.style.transform = "translateX(100%)";
+    dialogTaskContentRef.style.opacity = "0";
+    requestAnimationFrame(() => {
     dialogTaskContentRef.style.transform = "translateX(0)";
     dialogTaskContentRef.style.opacity = "1";
-  });
+    });
+  }
 }
 
 function closeOverlay(event) {
@@ -150,7 +155,8 @@ function closeOverlay(event) {
   let dialogTaskEditContent = document.getElementById("dialogTaskEditContent");
   if (
     event.target === addOverlayTaskRef ||
-    event.target.closest("#overlayTask .closeIcon")
+    event.target.closest("#overlayTask .closeIcon") ||
+    event.target.closest(".delete_task")
   ) {
     dialogTaskContentRef.style.transform = "translateX(100%)";
     dialogTaskContentRef.style.opacity = "0";
@@ -280,6 +286,11 @@ function setPrioActive(clickedButton) {
       icon.src = `../assets/icons/priority-clicked-${prio}.png`;
     }}
 
+function deleteBoardTask(tasksRef) {
+    todos.splice(tasksRef, 1);
+    loadTasks();
+}
+
 let flatpickrInstance = null;
 function toggleFlatpickr() {
   if (!flatpickrInstance) {
@@ -359,7 +370,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
         </div>
         </div>
           <div class="edit_okay_box">
-          <button class="edit_okay"> Ok
+          <button onclick="overlayTask(${tasksEditRef.id})" class="edit_okay"> Ok
           <img src="../assets/icons/check.png">
           </button>
           </div>
@@ -435,7 +446,7 @@ function renderOverlayTaskContent(tasksRef) {
               ${subtasksOverlay(tasksRef.subTasks)}
             </div>
             <div class="flex_end_gp8">
-              <div class="bottom_overlay_task delete_task">
+              <div onclick="deleteBoardTask('${tasksRef}'); closeOverlay(event);" class="bottom_overlay_task delete_task">
                 <img src="../assets/icons/Property 1=delete.png">
                 <p>Delete</p>
               </div>
