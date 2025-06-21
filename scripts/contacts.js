@@ -757,3 +757,19 @@ function closeMobileOverlay(){
     let addPersonRef = document.getElementById("addPerson");
     addPersonRef.classList.remove("d-nonevip");
 }
+
+function openOverlayMobile(){
+  console.log("add new task mobile");
+
+  let overlayMobileRef = document.getElementById("overlayMobile");
+  overlayMobileRef.classList.toggle("d-nonevip");
+
+   let contentOverlayMobileRef = document.getElementById("contentOverlayMobile");
+  contentOverlayMobileRef.classList.remove("d-nonevip");
+
+  contentOverlayMobileRef.classList.remove("hideContentOverlay");
+    contentOverlayMobileRef.classList.add("showContentOverlay");
+    overlayMobileRef.classList.add("overlayBg");
+  
+
+}
