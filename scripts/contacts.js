@@ -786,14 +786,14 @@ function closeOverlayMobile(event) {
 }
 
 async function createContactMobile(event) {
-  let nameRef = document.getElementById("name");
-  let emailRef = document.getElementById("email");
-  let phoneRef = document.getElementById("phone");
+  let nameRef = document.getElementById("nameMobile");
+  let emailRef = document.getElementById("emailMobile");
+  let phoneRef = document.getElementById("phoneMobile");
   let fullName = nameRef.value.split(" ");
 
-  let requiredNameFieldRef = document.getElementById("requiredNameField");
-  let requiredEmailFieldRef = document.getElementById("requiredEmailField");
-  let requiredPhoneFieldRef = document.getElementById("requiredPhoneField");
+  let requiredNameFieldRef = document.getElementById("requiredNameFieldMobile");
+  let requiredEmailFieldRef = document.getElementById("requiredEmailFieldMobile");
+  let requiredPhoneFieldRef = document.getElementById("requiredPhoneFieldMobile");
 
     if (fullName.length <= 1 && emailRef.value == '' && phoneRef.value == ''){
       addError(nameRef, emailRef, phoneRef);
@@ -817,9 +817,34 @@ async function createContactMobile(event) {
   let lastNameOfUser = fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
 
   await postData(`/contacts/`, {id: getId(), email: emailRef.value, firstname: firstNameOfUser, lastname: lastNameOfUser, phone: phoneRef.value,});
-  // getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef);
-  // closeOverlayAfterCreatedContact(event);
-  // moreDetailsAboutContact(emailRef.value, firstNameOfUser, lastNameOfUser, phoneRef.value);
-  // clearInputFields(nameRef, emailRef, phoneRef);
-  // showSuccess();
+  getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef);
+  closeOverlayAfterCreatedContactMobile(event);
+  moreDetailsAboutContact(emailRef.value, firstNameOfUser, lastNameOfUser, phoneRef.value);
+  clearInputFields(nameRef, emailRef, phoneRef);
+  showSuccessMobile();
+}
+
+function closeOverlayAfterCreatedContactMobile(event) {
+  event.stopPropagation(event);
+  let overlayRef = document.getElementById("overlayMobile");
+  let contentOverlayRef = document.getElementById("contentOverlayMobile");
+  contentOverlayRef.classList.remove("showContentOverlayMobile");
+  contentOverlayRef.classList.add("d-nonevip");
+  overlayRef.classList.remove("overlayBg");
+  setTimeout(() => {
+    overlayRef.classList.toggle("d-nonevip");
+  }, 150);
+  contentOverlayRef.classList.add("hideContentOverlayMobile");
+}
+
+function showSuccessMobile() {
+  let successfullyCreatedRef = document.getElementById("successfullyCreatedMobile");
+  setTimeout(() => {
+    successfullyCreatedRef.classList.add("showSuccessMobile");
+  }, 500);
+  setTimeout(() => {
+    successfullyCreatedRef.classList.add("hideSuccessMobile");
+  }, 1500);
+  successfullyCreatedRef.classList.remove("showSuccessMobile");
+  successfullyCreatedRef.classList.remove("hideSuccessMobile");
 }

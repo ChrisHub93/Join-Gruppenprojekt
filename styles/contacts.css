@@ -13,8 +13,6 @@ main {
   justify-content: start;
   height: calc(100vh - 96px);
   width: 480px;
-  /* box-shadow: 4px 0px 4px var(--snd-color);
-  z-index: 1; */
 }
 
 .contactsWidth {
@@ -30,6 +28,7 @@ main {
   flex: 1;
   background-color: var(--bg-color);
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .allInfoAboutContact {
@@ -403,7 +402,6 @@ main {
   border-color: var(--contacts-input-focus);
 }
 
-
 .inputSectionMobile input {
   width: 320px;
   height: 40px;
@@ -418,7 +416,6 @@ main {
   outline: none;
   border-color: var(--contacts-input-focus);
 }
-
 
 .error {
   border-color: var(--error-color) !important;
@@ -549,7 +546,7 @@ main {
   padding-top: 32px;
 }
 
-.profileMobile{
+.profileMobile {
   position: absolute;
   top: 39%;
 }
@@ -624,7 +621,7 @@ main {
   font-size: 21px;
 }
 
-.flexButtonsMobile button{
+.flexButtonsMobile button {
   padding: 12px 10px;
   border-radius: 10px;
   font-size: 16px;
@@ -684,7 +681,6 @@ main {
   display: flex;
   justify-content: end;
   align-items: center;
-  /* margin-bottom: 56px; */
   margin-top: 24px;
   width: 100%;
   padding-right: 16px;
@@ -745,9 +741,32 @@ main {
   transition: all 500ms ease;
 }
 
+.successfullyCreatedMobile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  background-color: var(--darkBtn-color);
+  padding: 32px 16px;
+  width: fit-content;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  transform: translateY(500%);
+}
+
+.showSuccessMobile {
+  transform: translateY(100%);
+  transition: all 250ms ease;
+}
+
+.hideSuccessMobile {
+  transform: translateY(500%);
+  transition: all 250ms ease;
+}
+
 .addPerson {
-  /* height: 56px;
-  width: 56px; */
   padding: 12px;
   background-color: var(--darkBtn-color);
   border-radius: 50%;
@@ -770,9 +789,7 @@ main {
   background-color: var(--contact-title-seperator);
 }
 
-
-.chooseEditOrDeleteMobile{
-  /* padding: 12px; */
+.chooseEditOrDeleteMobile {
   height: 56px;
   width: 56px;
   background-color: var(--darkBtn-color);
@@ -784,16 +801,15 @@ main {
   right: 24px;
   bottom: 40px;
   cursor: pointer;
-  /* display: none; */
 }
 
-.iconchooseEditOrDeleteMobile{
+.iconchooseEditOrDeleteMobile {
   height: 32px;
   width: 32px;
   object-fit: cover;
 }
 
-.chooseEditOrDeleteMobile:hover{
+.chooseEditOrDeleteMobile:hover {
   background-color: var(--contact-title-seperator);
 }
 
@@ -863,19 +879,15 @@ main {
     width: 100%;
   }
 
-  .infoTitle {
-    /* display: none; */
-  }
-
   .editinfoAboutContact h2 {
     font-weight: bold;
   }
 
-  .editOrDeleteFlex{
+  .editOrDeleteFlex {
     display: none !important;
   }
 
-  .arrowToGoBack{
+  .arrowToGoBack {
     display: block;
   }
 }
@@ -893,15 +905,11 @@ main {
     width: 100%;
   }
 
-  .infoTitle {
-    /* display: none; */
-  }
-
   .addPerson {
     bottom: 100px;
   }
 
-  .chooseEditOrDeleteMobile{
+  .chooseEditOrDeleteMobile {
     bottom: 100px;
   }
 }
@@ -911,7 +919,7 @@ main {
     bottom: 80px;
   }
 
-  .chooseEditOrDeleteMobile{
+  .chooseEditOrDeleteMobile {
     bottom: 80px;
   }
 }
