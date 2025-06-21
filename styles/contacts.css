@@ -680,7 +680,7 @@ main {
   }
 
   .infoTitle {
-    display: none;
+    /* display: none; */
   }
 
   .editinfoAboutContact h2 {
@@ -710,7 +710,7 @@ main {
   }
 
   .infoTitle {
-    display: none;
+    /* display: none; */
   }
 
   .addPerson {

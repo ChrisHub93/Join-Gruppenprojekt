@@ -98,7 +98,7 @@ function moreDetailsAboutContact(
 
 
   if(window.innerWidth <= 1100 ){
-    console.log("width is shorter than 1100px");
+    
     showMobileVersion();
   }
 }
@@ -111,7 +111,7 @@ function showMobileVersion(){
 }
 
 window.addEventListener("resize", function(event) {
-    if(window.innerWidth >= 1100){
+    if(window.innerWidth > 1100){
       let contactsRef = document.getElementById("contacts");
       contactsRef.classList.remove("d-nonevip");
     } else if(currentActiveContactId && window.innerWidth <= 1100){
