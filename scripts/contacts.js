@@ -10,7 +10,7 @@ async function initContacts() {
     addPersonRef.classList.remove("d-nonevip");
   }
 
-  openOverlayMobile();
+
 }
 
 async function fetchData(path) {
@@ -768,9 +768,24 @@ function openOverlayMobile(){
    let contentOverlayMobileRef = document.getElementById("contentOverlayMobile");
   contentOverlayMobileRef.classList.remove("d-nonevip");
 
-  contentOverlayMobileRef.classList.remove("hideContentOverlay");
-    contentOverlayMobileRef.classList.add("showContentOverlay");
-    overlayMobileRef.classList.add("overlayBg");
-  
 
+  setTimeout(() =>{
+    contentOverlayMobileRef.classList.remove("hideContentOverlayMobile");
+    contentOverlayMobileRef.classList.add("showContentOverlayMobile");
+    overlayMobileRef.classList.add("overlayBg");
+  }, 10);
+
+}
+
+function closeOverlayMobile(event) {
+  event.stopPropagation(event);
+  let overlayRef = document.getElementById("overlayMobile");
+  let contentOverlayRef = document.getElementById("contentOverlayMobile");
+  contentOverlayRef.classList.add("hideContentOverlayMobile");
+  contentOverlayRef.classList.remove("showContentOverlayMobile");
+  overlayRef.classList.remove("overlayBg");
+  setTimeout(() => {
+    overlayRef.classList.toggle("d-nonevip");
+  }, 150);
+  setInputToDefault();
 }

@@ -374,8 +374,18 @@ main {
   transition: all 500ms ease;
 }
 
+.hideContentOverlayMobile {
+  transform: translateY(200%);
+  transition: all 500ms ease;
+}
+
 .showContentOverlay {
   transform: translateX(0);
+  transition: all 500ms ease;
+}
+
+.showContentOverlayMobile {
+  transform: translateY(0);
   transition: all 500ms ease;
 }
 
@@ -683,6 +693,10 @@ main {
 .closeOverlay img {
   cursor: pointer;
   border-radius: 50%;
+}
+
+.closeOverlayMobile img {
+  cursor: pointer;
 }
 
 .closeOverlay img:hover {
