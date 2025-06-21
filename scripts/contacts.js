@@ -761,20 +761,15 @@ function closeMobileOverlay(){
 }
 
 function openOverlayMobile(){
-
   let overlayMobileRef = document.getElementById("overlayMobile");
   overlayMobileRef.classList.toggle("d-nonevip");
-
-   let contentOverlayMobileRef = document.getElementById("contentOverlayMobile");
+  let contentOverlayMobileRef = document.getElementById("contentOverlayMobile");
   contentOverlayMobileRef.classList.remove("d-nonevip");
-
-
   setTimeout(() =>{
     contentOverlayMobileRef.classList.remove("hideContentOverlayMobile");
     contentOverlayMobileRef.classList.add("showContentOverlayMobile");
     overlayMobileRef.classList.add("overlayBg");
   }, 10);
-
 }
 
 function closeOverlayMobile(event) {
@@ -788,4 +783,43 @@ function closeOverlayMobile(event) {
     overlayRef.classList.toggle("d-nonevip");
   }, 150);
   setInputToDefault();
+}
+
+async function createContactMobile(event) {
+  let nameRef = document.getElementById("name");
+  let emailRef = document.getElementById("email");
+  let phoneRef = document.getElementById("phone");
+  let fullName = nameRef.value.split(" ");
+
+  let requiredNameFieldRef = document.getElementById("requiredNameField");
+  let requiredEmailFieldRef = document.getElementById("requiredEmailField");
+  let requiredPhoneFieldRef = document.getElementById("requiredPhoneField");
+
+    if (fullName.length <= 1 && emailRef.value == '' && phoneRef.value == ''){
+      addError(nameRef, emailRef, phoneRef);
+      removeOpacity(requiredNameFieldRef, requiredEmailFieldRef, requiredPhoneFieldRef);
+      return;
+    } else if(fullName.length <= 1){
+      nameRef.classList.add("error");
+      requiredNameFieldRef.classList.remove("opacity");
+      return; 
+    } else if (emailRef.value == ''){
+      emailRef.classList.add("error");
+      requiredEmailFieldRef.classList.remove("opacity");
+      return;
+    } else if (phoneRef.value == ''){
+      phoneRef.classList.add("error");
+      requiredPhoneFieldRef.classList.remove("opacity");
+      return;
+    }
+
+  let firstNameOfUser = fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
+  let lastNameOfUser = fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
+
+  await postData(`/contacts/`, {id: getId(), email: emailRef.value, firstname: firstNameOfUser, lastname: lastNameOfUser, phone: phoneRef.value,});
+  // getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef);
+  // closeOverlayAfterCreatedContact(event);
+  // moreDetailsAboutContact(emailRef.value, firstNameOfUser, lastNameOfUser, phoneRef.value);
+  // clearInputFields(nameRef, emailRef, phoneRef);
+  // showSuccess();
 }
