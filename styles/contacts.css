@@ -613,6 +613,31 @@ main {
   background-color: var(--contact-title-seperator);
 }
 
+
+.chooseEditOrDeleteMobile{
+  padding: 12px;
+  background-color: var(--darkBtn-color);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 24px;
+  bottom: 40px;
+  cursor: pointer;
+  display: none;
+}
+
+.iconchooseEditOrDeleteMobile{
+  height: 32px;
+  width: 32px;
+  object-fit: cover;
+}
+
+.chooseEditOrDeleteMobile:hover{
+  background-color: var(--contact-title-seperator);
+}
+
 .d-Block {
   display: block !important;
 }
