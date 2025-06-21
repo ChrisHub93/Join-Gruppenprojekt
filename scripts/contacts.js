@@ -9,6 +9,8 @@ async function initContacts() {
     let addPersonRef = document.getElementById("addPerson");
     addPersonRef.classList.remove("d-nonevip");
   }
+
+  openOverlayMobile();
 }
 
 async function fetchData(path) {
@@ -759,7 +761,6 @@ function closeMobileOverlay(){
 }
 
 function openOverlayMobile(){
-  console.log("add new task mobile");
 
   let overlayMobileRef = document.getElementById("overlayMobile");
   overlayMobileRef.classList.toggle("d-nonevip");

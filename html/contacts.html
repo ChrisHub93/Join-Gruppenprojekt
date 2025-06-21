@@ -273,62 +273,60 @@
         class="contentOverlayMobile hideContentOverlay"
       >
         <div class="leftSideMobile">
-          <div class="contentLeftSide">
-            <img src="../assets/img/Capa 1 white.png" alt="" />
+
+          <div class="closeOverlayMobile">
+              <img
+                onclick="closeOverlay(event)"
+                src="../assets/icons/close_white.png"
+                alt=""
+              />
+            </div>
+
+          <div class="contentLeftSideMobile">
+            
             <h2>Add Contact</h2>
             <span>Tasks are better with a team!</span>
             <div class="blueLine"></div>
           </div>
+
+          
+
         </div>
 
+        
+
         <div class="rightSideMobile">
-          <div class="profile">
-            <div class="profilePicture">
+
+          <div class="profileMobile">
+            <div class="profilePictureMobile">
               <img src="../assets/icons/person.svg" alt="" />
             </div>
           </div>
+          
 
-          <div class="inputSection">
-            <div class="closeOverlay">
-              <img
-                onclick="closeOverlay(event)"
-                src="../assets/icons/iconoir_cancel.png"
-                alt=""
-              />
-            </div>
+          <div class="inputSectionMobile">
+            
 
             <div class="inputName">
               <input onfocusout="checkEmptyName()" type="text" id="name" name="name" placeholder="Name" />
               <img src="../assets/icons/person.png" alt="" />
             </div>
-            <span id="requiredNameField" class="opacity">This Field is required</span>
+            <span id="requiredNameFieldMobile" class="opacity">This Field is required</span>
 
             <div class="inputEmail">
               <input onfocusout="checkEmptyEmail()" type="email" id="email" name="email" placeholder="Email" />
               <img src="../assets/icons/mail.svg" alt="" />
             </div>
-            <span id="requiredEmailField" class="opacity">This Field is required</span>
+            <span id="requiredEmailFieldMobile" class="opacity">This Field is required</span>
 
             <div class="inputTel">
               <input onfocusout="checkEmptyPhone()" type="tel" id="phone" name="phone" placeholder="Phone" />
               <img src="../assets/icons/call.png" alt="" />
             </div>
-            <span id="requiredPhoneField" class="opacity">This Field is required</span>
+            <span id="requiredPhoneFieldMobile" class="opacity">This Field is required</span>
 
-            <div class="flexButtons">
-              <button class="clear" onclick="cancelOverlay(event)">
-                Cancel
-                <img
-                  class="defaultIcon"
-                  src="/assets/icons/iconoir_cancel.png"
-                  alt=""
-                />
-                <img
-                  class="hoverIcon"
-                  src="/assets/icons/iconoir_cancel_hover.png"
-                  alt=""
-                />
-              </button>
+            <div class="flexButtonsMobile">
+              
 
               <button class="createTask" onclick="createContact(event)">
                 Create Contact

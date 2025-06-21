@@ -393,6 +393,23 @@ main {
   border-color: var(--contacts-input-focus);
 }
 
+
+.inputSectionMobile input {
+  width: 320px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid var(--snd-color);
+  padding-inline-start: 16px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.inputSectionMobile input:focus {
+  outline: none;
+  border-color: var(--contacts-input-focus);
+}
+
+
 .error {
   border-color: var(--error-color) !important;
 }
@@ -405,6 +422,15 @@ main {
 #requiredEmailField,
 #requiredPhoneField {
   margin-bottom: 16px;
+  margin-top: 4px;
+  font-size: 10px;
+  color: var(--error-color);
+}
+
+#requiredNameFieldMobile,
+#requiredEmailFieldMobile,
+#requiredPhoneFieldMobile {
+  margin-bottom: 4px;
   margin-top: 4px;
   font-size: 10px;
   color: var(--error-color);
@@ -439,8 +465,9 @@ main {
   background-color: var(--bg-sidebar);
   color: white;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: start;
+  justify-content: start;
+  flex-direction: column;
 }
 
 .contentLeftSide {
@@ -451,11 +478,29 @@ main {
   gap: 16px;
 }
 
+.contentLeftSideMobile {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: 8px;
+  margin-left: 16px;
+  margin-top: 60px;
+}
+
 .contentLeftSide h2 {
   font-size: 48px;
 }
 
+.contentLeftSideMobile h2 {
+  font-size: 48px;
+}
+
 .contentLeftSide span {
+  font-size: 22px;
+}
+
+.contentLeftSideMobile span {
   font-size: 22px;
 }
 
@@ -482,7 +527,7 @@ main {
 }
 
 .rightSideMobile {
-  height: 450px;
+  height: 350px;
   width: 350px;
   background-color: white;
   border-bottom-left-radius: 32px;
@@ -491,6 +536,12 @@ main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding-top: 32px;
+}
+
+.profileMobile{
+  position: absolute;
+  top: 39%;
 }
 
 .profilePicture {
@@ -511,11 +562,36 @@ main {
   object-fit: contain;
 }
 
+.profilePictureMobile {
+  height: 120px;
+  width: 120px;
+  background-color: var(--input-border);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid white;
+  filter: drop-shadow(0px 0px 0.5px grey);
+}
+
+.profilePictureMobile img {
+  filter: brightness(0) invert(1);
+  height: 32px;
+  object-fit: contain;
+}
+
 .inputSection {
   display: flex;
   flex-direction: column;
   margin-left: 56px;
   margin-bottom: 20px;
+}
+
+.inputSectionMobile {
+  display: flex;
+  flex-direction: column;
+  margin-left: 16px;
+  margin-right: 16px;
 }
 
 .flexButtons {
@@ -525,9 +601,22 @@ main {
   gap: 16px;
 }
 
+.flexButtonsMobile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
 .flexButtons button {
   padding: 12px 10px;
-  border-radius: 8px;
+  border-radius: 10px;
+  font-size: 21px;
+}
+
+.flexButtonsMobile button{
+  padding: 12px 10px;
+  border-radius: 10px;
   font-size: 16px;
 }
 
@@ -579,6 +668,16 @@ main {
   justify-content: end;
   align-items: center;
   margin-bottom: 56px;
+}
+
+.closeOverlayMobile {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  /* margin-bottom: 56px; */
+  margin-top: 24px;
+  width: 100%;
+  padding-right: 16px;
 }
 
 .closeOverlay img {
