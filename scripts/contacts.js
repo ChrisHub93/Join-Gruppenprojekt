@@ -99,16 +99,26 @@ function moreDetailsAboutContact(
 
   if(window.innerWidth <= 1100 ){
     console.log("width is shorter than 1100px");
-    let contactsRef = document.getElementById("contacts");
-    let infoTitleRef = document.getElementById("infoTitle");
-    let editOrDeleteSectionRef = document.getElementById("editOrDeleteSection");
-
-    contactsRef.classList.add("d-nonevip");
-    infoTitleRef.classList.add("d-Block");
-    editOrDeleteSectionRef.classList.add("d-nonevip");
-
+    showMobileVersion();
   }
 }
+
+function showMobileVersion(){
+  let contactsRef = document.getElementById("contacts");
+  let infoTitleRef = document.getElementById("infoTitle");
+  contactsRef.classList.add("d-nonevip");
+  infoTitleRef.classList.add("d-Block");
+}
+
+window.addEventListener("resize", function(event) {
+    if(window.innerWidth >= 1100){
+      let contactsRef = document.getElementById("contacts");
+      contactsRef.classList.remove("d-nonevip");
+    } else if(currentActiveContactId && window.innerWidth <= 1100){
+      let contactsRef = document.getElementById("contacts");
+      contactsRef.classList.add("d-nonevip");
+}
+});
 
 function sameContact() {
   let idRef = document.querySelectorAll('[id^="setNewBgFor"]');

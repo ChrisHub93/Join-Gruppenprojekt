@@ -628,6 +628,7 @@ main {
   width: 32px;
   object-fit: contain;
   cursor: pointer;
+  display: none;
 }
 
 @media (max-width: 1250px) {
@@ -684,6 +685,14 @@ main {
 
   .editinfoAboutContact h2 {
     font-weight: bold;
+  }
+
+  .editOrDeleteFlex{
+    display: none !important;
+  }
+
+  .arrowToGoBack{
+    display: block;
   }
 }
 
