@@ -78,16 +78,30 @@ function allowDrop(event) {
 }
 
 async function moveTo(status) {
-  console.log(todos);
-  
-  todos[currentDraggedElement].status = "(status)";
-  await status;
-  console.log(status);
-  console.log(todos);
-  
-  
-  putDataStatus(`status/${status}`);
+  let tasks = await fetchData("/tasks/");
+  let keys = Object.keys(tasks);
+  console.log("todos (vorher):", todos);
+
+  const index = todos.findIndex(task => task.id == currentDraggedElement);
+  if (index === -1) {
+    console.error("Task mit ID nicht gefunden:", currentDraggedElement);
+    return;
+  }
+
+  todos[index].status = status;
+
+  let path = "/tasks/"
+  await putDataStatus(`tasks/${keys}`, todos[index]);
+  deleteTasks(path, keys)
+
   loadTasks();
+}
+
+async function deleteTasks(path, keys) {
+    let response = await fetch(BASE_URL + path + keys + ".json", {
+        method: "DELETE",
+    });
+    return (responseToJson = await response.json());
 }
 
 async function putDataStatus(path = "", data = {}) {
