@@ -1,7 +1,11 @@
 let todos = [];
 
-function loadTasks() {
-  todos.flat();
+async function loadTasks() {
+  console.log(todos);
+  
+  await logIn();
+  todos = todos[0];
+  // todos.flat();
   console.log(todos);
   
   let toDoContentRef = document.getElementById("toDoContent");
@@ -73,8 +77,9 @@ function allowDrop(event) {
   event.preventDefault();
 }
 
-function moveTo(status) {
+async function moveTo(status) {
   todos[currentDraggedElement]["status"] = status;
+  postDataToServer();
   loadTasks();
 }
 
