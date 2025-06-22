@@ -13,15 +13,15 @@ async function loadTasks() {
   let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
   let doneContentRef = document.getElementById("doneContent");
 
-  let statusToDo = todos.filter((task) => task["status"] == "To do");
+  let statusToDo = todos.filter((task) => task.status === "To do");
 
   let statusInProgress = todos.filter(
-    (task) => task["status"] == "In progress"
+    (task) => task.status === "In progress"
   );
   let statusAwaitFeedback = todos.filter(
-    (task) => task["status"] == "Await feedback"
+    (task) => task.status === "Await feedback"
   );
-  let statusDone = todos.filter((task) => task["status"] == "Done");
+  let statusDone = todos.filter((task) => task.status === "Done");
 
   toDoContentRef.innerHTML = "";
   inProgressContentRef.innerHTML = "";
@@ -79,7 +79,9 @@ function allowDrop(event) {
 
 async function moveTo(status) {
   let tasks = await fetchData("/tasks/");
-  let keys = Object.keys(tasks);
+  // let keys = Object.keys(tasks);
+  // console.log("alle oder einer:", keys);  spuckt alle Keys in ein Array
+  
   console.log("todos (vorher):", todos);
 
   const index = todos.findIndex(task => task.id == currentDraggedElement);
@@ -90,9 +92,10 @@ async function moveTo(status) {
 
   todos[index].status = status;
 
-  let path = "/tasks/"
-  await putDataStatus(`tasks/${keys}`, todos[index]);
-  deleteTasks(path, keys)
+  let taskKey = Object.keys(tasks).find(key => tasks[key].id === currentDraggedElement);
+
+  await putDataStatus(`tasks/${taskKey}`, todos[index]);
+
 
   loadTasks();
 }
