@@ -78,9 +78,27 @@ function allowDrop(event) {
 }
 
 async function moveTo(status) {
-  todos[currentDraggedElement]["status"] = status;
-  postDataToServer();
+  console.log(todos);
+  
+  todos[currentDraggedElement].status = "(status)";
+  await status;
+  console.log(status);
+  console.log(todos);
+  
+  
+  putDataStatus(`status/${status}`);
   loadTasks();
+}
+
+async function putDataStatus(path = "", data = {}) {
+  let response = await fetch(BASE_URL + path + ".json", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return (responseToJson = await response.json());
 }
 
 function highlight(id) {

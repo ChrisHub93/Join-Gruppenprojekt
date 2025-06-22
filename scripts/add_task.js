@@ -391,7 +391,7 @@ async function postDataToServer() {
   let subtasks = ["task1", "task2", "task3"];
 
   await postData(`/tasks/`, {
-    id: getId(),
+    id: generateTimeBasedId(),
     title: title.value,
     description: description.value,
     date: date.value,
@@ -416,4 +416,8 @@ async function postData(path, data = {}) {
 
 function getId() {
   return self.crypto.randomUUID()
+}
+
+function generateTimeBasedId() {
+  return Date.now() + Math.floor(Math.random() * 1000);
 }
