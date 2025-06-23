@@ -397,7 +397,7 @@ async function postDataToServer() {
     date: date.value,
     priority: priority,
     assignedTo: assignedTo,
-    category: category.value,
+    category: category.innerText,
     subTasks: subtasks,
     status: "To do",
   });

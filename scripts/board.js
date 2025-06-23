@@ -1,11 +1,10 @@
 let todos = [];
+let currentDraggedElement;
 
 async function loadTasks() {
-  console.log(todos);
-  
-  await logIn();
-  todos = todos[0];
-  // todos.flat();
+
+  let tasks = await fetchData("/tasks/");
+  todos = Object.values(tasks);
   console.log(todos);
   
   let toDoContentRef = document.getElementById("toDoContent");
@@ -13,6 +12,7 @@ async function loadTasks() {
   let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
   let doneContentRef = document.getElementById("doneContent");
 
+  console.log("TodDOs vor filter:",todos);
   let statusToDo = todos.filter((task) => task.status === "To do");
 
   let statusInProgress = todos.filter(
@@ -21,6 +21,8 @@ async function loadTasks() {
   let statusAwaitFeedback = todos.filter(
     (task) => task.status === "Await feedback"
   );
+
+
   let statusDone = todos.filter((task) => task.status === "Done");
 
   toDoContentRef.innerHTML = "";
@@ -66,8 +68,6 @@ async function loadTasks() {
   }
 }
 
-let currentDraggedElement;
-
 function startDragging(id) {
   currentDraggedElement = id;
   console.log(currentDraggedElement);
@@ -79,8 +79,6 @@ function allowDrop(event) {
 
 async function moveTo(status) {
   let tasks = await fetchData("/tasks/");
-  // let keys = Object.keys(tasks);
-  // console.log("alle oder einer:", keys);  spuckt alle Keys in ein Array
   
   console.log("todos (vorher):", todos);
 
