@@ -396,7 +396,7 @@ async function postDataToServer() {
     description: description.value,
     date: date.value,
     priority: priority,
-    assignedTo: assignedTo,
+    assignedTo: await searchContacts() ,
     category: category.innerText,
     subTasks: subtasks,
     status: "To do",
@@ -420,4 +420,21 @@ function getId() {
 
 function generateTimeBasedId() {
   return Date.now() + Math.floor(Math.random() * 1000);
+}
+
+async function searchContacts() {
+  let contacts = await fetchData("/contacts/");
+  let contactsArray = Object.values(contacts);
+
+  for (id of assignedTo) {
+
+    for (search of contactsArray) {
+      if (search.id == id) {
+        console.log("Gefunden");
+        console.log(search.firstname);
+      } else {
+        console.log("nicht gefunden");
+      }
+    }
+  }
 }
