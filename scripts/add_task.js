@@ -106,7 +106,7 @@ function getContact(id) {
   } else if (inputRef.checked && membersRef.classList.contains("assignedBg")) {
     getInputCheckedFalse(membersRef, inputRef);
   }
-  toggleAssignment(id)
+  toggleAssignment(id);
 }
 
 function toggleAssignment(id) {
@@ -296,8 +296,8 @@ function chooseSubTask() {
   let inputRef = document.getElementById("subTaskInput");
   let addedTaskRef = document.getElementById("subTasks");
 
-  if (inputRef.value == '') {
-    inputRef.value = '';
+  if (inputRef.value == "") {
+    inputRef.value = "";
   } else if (inputRef.value != "") {
     addDisplayNone("plusIcon");
     toggleDisplayNone("cancelOrCheck");
@@ -324,30 +324,28 @@ function editTask(id) {
   let inputRef = document.getElementById(id);
   inputField = inputRef.querySelector("input");
 
-  if(inputField.classList[1]== "activeInput"){
+  if (inputField.classList[1] == "activeInput") {
     return;
-  } else{
-  addDisplayNone("editOrTrash"+id);
-  toggleDisplayNone("trashOrCheck"+id);
-  
-  inputField.classList.add("activeInput");
-  let bulletRef = `bullet${id}`;
-  toggleDisplayNone(bulletRef);
-  let length = inputField.value.length;
-  inputField.setSelectionRange(length, length);
+  } else {
+    addDisplayNone("editOrTrash" + id);
+    toggleDisplayNone("trashOrCheck" + id);
 
-  let target = "editOrTrash"+id;
-  let hideRef = document.getElementById(target);
-  hideRef.classList.add("opacity");
+    inputField.classList.add("activeInput");
+    let bulletRef = `bullet${id}`;
+    toggleDisplayNone(bulletRef);
+    let length = inputField.value.length;
+    inputField.setSelectionRange(length, length);
 
-  }  
+    let target = "editOrTrash" + id;
+    let hideRef = document.getElementById(target);
+    hideRef.classList.add("opacity");
+  }
 }
 
 function acceptTask(id) {
-  
-  toggleDisplayNone("trashOrCheck"+id);
-  
-  let target = "editOrTrash"+id;
+  toggleDisplayNone("trashOrCheck" + id);
+
+  let target = "editOrTrash" + id;
   let hideRef = document.getElementById(target);
   hideRef.classList.remove("opacity");
 
@@ -396,11 +394,12 @@ async function postDataToServer() {
     description: description.value,
     date: date.value,
     priority: priority,
-    assignedTo: await searchContacts() ,
+    assignedTo: await searchContacts(),
     category: category.innerText,
     subTasks: subtasks,
     status: "To do",
   });
+  loadTasks();
 }
 
 async function postData(path, data = {}) {
@@ -415,7 +414,7 @@ async function postData(path, data = {}) {
 }
 
 function getId() {
-  return self.crypto.randomUUID()
+  return self.crypto.randomUUID();
 }
 
 function generateTimeBasedId() {
@@ -423,18 +422,17 @@ function generateTimeBasedId() {
 }
 
 async function searchContacts() {
+  let assigneContacts = [];
   let contacts = await fetchData("/contacts/");
   let contactsArray = Object.values(contacts);
 
   for (id of assignedTo) {
-
     for (search of contactsArray) {
       if (search.id == id) {
-        console.log("Gefunden");
-        console.log(search.firstname);
-      } else {
-        console.log("nicht gefunden");
+        assigneContacts.push(search.firstname + " " + search.lastname);
       }
     }
   }
+  console.log(assigneContacts);
+  return assigneContacts;
 }

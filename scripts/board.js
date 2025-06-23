@@ -5,14 +5,14 @@ async function loadTasks() {
 
   let tasks = await fetchData("/tasks/");
   todos = Object.values(tasks);
-  console.log(todos);
+  // console.log(todos);
   
   let toDoContentRef = document.getElementById("toDoContent");
   let inProgressContentRef = document.getElementById("inProgressContent");
   let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
   let doneContentRef = document.getElementById("doneContent");
 
-  console.log("TodDOs vor filter:",todos);
+  // console.log("TodDOs vor filter:",todos);
   let statusToDo = todos.filter((task) => task.status === "To do");
 
   let statusInProgress = todos.filter(
