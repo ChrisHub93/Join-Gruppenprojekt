@@ -125,7 +125,7 @@ function removeHighlight(id) {
 }
 
 function overlayTask(element) {
-  let tasksRef = todos[element];
+  let tasksRef = searchElement(element);
   let addOverlayRef = document.getElementById("overlayTask");
   let dialogTaskContentRef = document.getElementById("dialogTaskContent");
   let addOverlayEditRef = document.getElementById("overlayTaskEdit");
@@ -133,7 +133,7 @@ function overlayTask(element) {
   let checkOpenOverlay = addOverlayRef.classList.contains("active");
   addOverlayEditRef.classList.remove("active");
   addOverlayRef.classList.add("active");
-  dialogTaskContentRef.innerHTML = renderOverlayTaskContent(tasksRef);
+  dialogTaskContentRef.innerHTML = renderOverlayTaskContent(todos[tasksRef]);
   if (!checkOpenOverlay && !checkOpenOverlayEdit) {
     dialogTaskContentRef.style.transform = "translateX(100%)";
     dialogTaskContentRef.style.opacity = "0";
@@ -142,6 +142,15 @@ function overlayTask(element) {
     dialogTaskContentRef.style.opacity = "1";
     });
   }
+}
+
+function searchElement(id) {
+  const index = todos.findIndex(task => task.id == id);
+  if (index === -1) {
+    console.error("Task mit ID nicht gefunden:", id);
+    return;
+  }
+  return index;
 }
 
 function closeOverlay(event) {
@@ -239,13 +248,13 @@ function taskOverlaySync() {
 
 function editOverlayTask(tasksRef) {
   taskOverlaySync();
-  let tasksEditRef = todos[tasksRef];
+  let tasksEditRef = searchElement(tasksRef);
   let addOverlayRef = document.getElementById("overlayTask");
   let addOverlayEditRef = document.getElementById("overlayTaskEdit");
   let dialogTaskEditRef = document.getElementById("dialogTaskEditContent");
   addOverlayRef.classList.remove("active");
   addOverlayEditRef.classList.add("active");
-  dialogTaskEditRef.innerHTML = renderOverlayTaskEdit(tasksEditRef);
+  dialogTaskEditRef.innerHTML = renderOverlayTaskEdit(todos[tasksEditRef]);
 }
 
 function renderPrioButton(prioName, activePrio) {
