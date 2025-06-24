@@ -1,16 +1,22 @@
 let currentActiveContactId = null;
 
 async function initContacts() {
+
+  
   let contacts = await fetchData("/contacts/");
   let contactsArray = Object.values(contacts);
   contactsArray.sort(compare);
   getListOfContacts(contactsArray);
+
   if(window.innerWidth <= 1100 ){
     let addPersonRef = document.getElementById("addPerson");
     addPersonRef.classList.remove("d-nonevip");
+    let successfullyCreatedMobileRef = document.getElementById("successfullyCreatedMobile");
+    successfullyCreatedMobileRef.classList.remove("opacity");
+  } else if (window.innerWidth > 1100){
+    let successfullyCreatedMobileRef = document.getElementById("successfullyCreatedMobile");
+    successfullyCreatedMobileRef.classList.add("opacity");
   }
-
-
 }
 
 async function fetchData(path) {
@@ -104,7 +110,7 @@ function moreDetailsAboutContact(
     let chooseEditOrDeleteMobileRef = document.getElementById("chooseEditOrDeleteMobile");
     addPersonRef.classList.remove("d-nonevip");
     chooseEditOrDeleteMobileRef.classList.remove("d-nonevip");
-  }
+  } 
 }
 
 function showMobileVersion(){
@@ -127,7 +133,9 @@ window.addEventListener("resize", function(event) {
       chooseEditOrDeleteMobileRef.classList.remove("d-nonevip");
     } else if (window.innerWidth <= 1100){
       addPersonRef.classList.remove("d-nonevip");
-    }
+    } else if(window.innerWidth >1100){
+    
+  }
 });
 
 function sameContact() {

@@ -753,16 +753,16 @@ main {
   margin-left: auto;
   margin-right: auto;
   color: white;
-  transform: translateY(500%);
+  transform: translateY(600%);
 }
 
 .showSuccessMobile {
-  transform: translateY(100%);
+  transform: translateY(50%);
   transition: all 250ms ease;
 }
 
 .hideSuccessMobile {
-  transform: translateY(500%);
+  transform: translateY(600%);
   transition: all 250ms ease;
 }
 
@@ -974,6 +974,10 @@ main {
   .arrowToGoBack {
     display: block;
   }
+}
+
+@media (min-width:1100px){
+
 }
 
 @media (max-width: 768px) {
