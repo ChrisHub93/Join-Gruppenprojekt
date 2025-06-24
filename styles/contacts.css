@@ -517,8 +517,9 @@ main {
 }
 
 .blueLine {
-  height: 2px;
-  width: 80px;
+  height: 3px;
+  width: 90px;
+  border-radius: 3px;
   background-color: var(--contact-title-seperator);
 }
 

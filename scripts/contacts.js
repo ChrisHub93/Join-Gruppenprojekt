@@ -124,10 +124,12 @@ window.addEventListener("resize", function(event) {
   let contactsRef = document.getElementById("contacts");
   let addPersonRef = document.getElementById("addPerson");
   let chooseEditOrDeleteMobileRef = document.getElementById("chooseEditOrDeleteMobile");
+  let successfullyCreatedMobileRef = document.getElementById("successfullyCreatedMobile");
     if(window.innerWidth > 1100){
       contactsRef.classList.remove("d-nonevip");
       addPersonRef.classList.add("d-nonevip");
       chooseEditOrDeleteMobileRef.classList.add("d-nonevip");
+      successfullyCreatedMobileRef.classList.add("opacity");
     } else if(currentActiveContactId && window.innerWidth <= 1100){
       contactsRef.classList.add("d-nonevip");
       chooseEditOrDeleteMobileRef.classList.remove("d-nonevip");
@@ -868,4 +870,68 @@ function stopPropagationForMobile(event){
   let chooseOverlayForMobileRef = document.getElementById("chooseOverlayForMobile");
   chooseOverlayForMobileRef.classList.remove("showChooseOverlay");
   chooseOverlayForMobileRef.classList.add("hideChooseOverlay");
+}
+
+async function openEditOverlayMobile(event){
+  event.stopPropagation(event);
+  let editOverlayMobileRef = document.getElementById("editOverlayMobile");
+  editOverlayMobileRef.classList.toggle("d-nonevip");
+  let contentEditOverlayMobileRef = document.getElementById("contentEditOverlayMobile");
+  contentEditOverlayMobileRef.classList.remove("d-nonevip");
+  setTimeout(() =>{
+    contentEditOverlayMobileRef.classList.remove("hideContentOverlayMobile");
+    contentEditOverlayMobileRef.classList.add("showContentOverlayMobile");
+    editOverlayMobileRef.classList.add("overlayBg");
+  }, 10);
+
+  let contacts = await fetchData("/contacts/");
+  let contactsArray = Object.values(contacts);
+  let user = contactsArray.find(
+    (currentUser) =>
+      currentUser.firstname + " " + currentUser.lastname ==
+      currentActiveContactId
+  );
+  mobileInputFieldsGetValuesOfContact(user);
+  profileEditGetCorrectBackground(user);
+
+}
+
+
+function mobileInputFieldsGetValuesOfContact(user) {
+  let inputNameRef = document.getElementById("nameEditMobile");
+  let inputEmailRef = document.getElementById("emailEditMobile");
+  let inputPhoneRef = document.getElementById("phoneEditMobile");
+  inputNameRef.value = user.firstname + " " + user.lastname;
+  inputEmailRef.value = user.email;
+  inputPhoneRef.value = user.phone;
+}
+
+function profileEditGetCorrectBackground(user) {
+  let firstLetterOfFirstNameRef = document.getElementById(
+    "firstLetterOfFirstNameMobileEdit"
+  );
+  let firstLetterOfLastNameRef = document.getElementById(
+    "fistLetterOfLastNameMobileEdit"
+  );
+  firstLetterOfFirstNameRef.innerText = user.firstname.charAt(0).toUpperCase();
+  firstLetterOfLastNameRef.innerText = user.lastname.charAt(0).toUpperCase();
+
+  let targetDivRef = document.getElementById("moreAboutcircleFirstLetters");
+  let bgClassRef = Array.from(targetDivRef.classList);
+  let circleFirstLettersRef = document.getElementById("circleFirstLettersMobileEdit");
+  circleFirstLettersRef.classList.add(bgClassRef[1]);
+}
+
+
+function closeOverlayMobileEdit(event) {
+  event.stopPropagation(event);
+  let overlayRef = document.getElementById("editOverlayMobile");
+  let contentOverlayRef = document.getElementById("contentEditOverlayMobile");
+  contentOverlayRef.classList.add("hideContentOverlayMobile");
+  contentOverlayRef.classList.remove("showContentOverlayMobile");
+  overlayRef.classList.remove("overlayBg");
+  setTimeout(() => {
+    overlayRef.classList.toggle("d-nonevip");
+  }, 150);
+  setInputToDefault();
 }

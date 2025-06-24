@@ -411,7 +411,7 @@
           />
         </div>
         <div id="chooseOverlayForMobile" class="chooseOverlayForMobile">
-          <div class="editMobileVersion">
+          <div onclick="openEditOverlayMobile(event)" class="editMobileVersion">
             <img src="../assets/icons/Property 1=edit.png" alt="">
             <span>Edit</span>
           </div>
@@ -461,6 +461,8 @@
             <div class="profilePictureMobile">
               <img src="../assets/icons/person.svg" alt="" />
             </div>
+
+            
           </div>
 
           <div class="inputSectionMobile">
@@ -516,6 +518,108 @@
         </div>
       </div>
     </div>
+
+    <!-- edit overlay mobile -->
+
+    <div
+      id="editOverlayMobile"
+      class="overlayMobile d-nonevip"
+      onclick="closeOverlayMobileEdit(event)"
+    >
+      <div
+        onclick="stopPropagation(event)"
+        id="contentEditOverlayMobile"
+        class="contentOverlayMobile hideContentOverlayMobile"
+      >
+        <div class="leftSideMobile">
+          <div class="closeOverlayMobile">
+            <img
+              onclick="closeOverlayMobileEdit(event)"
+              src="../assets/icons/close_white.png"
+              alt=""
+            />
+          </div>
+
+          <div class="contentLeftSideMobile">
+            <h2>Edit contact</h2>
+            <!-- <span>Tasks are better with a team!</span> -->
+            <div class="blueLine"></div>
+          </div>
+        </div>
+
+        <div class="rightSideMobile">
+          <!-- <div class="profileMobile">
+            <div class="profilePictureMobile">
+              <img src="../assets/icons/person.svg" alt="" />
+            </div>
+          </div> -->
+
+          <div class="profileMobile">
+            <div id="circleFirstLettersMobileEdit" class="circleFirstLettersEdit">
+              <span id="firstLetterOfFirstNameMobileEdit"></span>
+              <span id="fistLetterOfLastNameMobileEdit"></span>
+            </div>
+          </div>
+
+          <div class="inputSectionMobile">
+            <div class="inputName">
+              <input
+                onfocusout="checkEmptyName()"
+                type="text"
+                id="nameEditMobile"
+                name="nameEditMobile"
+                placeholder="Name"
+              />
+              <img src="../assets/icons/person.png" alt="" />
+            </div>
+            <span id="requiredNameFieldMobile" class="opacity"
+              >This Field is required</span
+            >
+
+            <div class="inputEmail">
+              <input
+                onfocusout="checkEmptyEmail()"
+                type="email"
+                id="emailEditMobile"
+                name="emailEditMobile"
+                placeholder="Email"
+              />
+              <img src="../assets/icons/mail.svg" alt="" />
+            </div>
+            <span id="requiredEmailFieldMobile" class="opacity"
+              >This Field is required</span
+            >
+
+            <div class="inputTel">
+              <input
+                onfocusout="checkEmptyPhone()"
+                type="tel"
+                id="phoneEditMobile"
+                name="phoneEditMobile"
+                placeholder="Phone"
+              />
+              <img src="../assets/icons/call.png" alt="" />
+            </div>
+            <span id="requiredPhoneFieldMobile" class="opacity"
+              >This Field is required</span
+            >
+
+            <div class="flexButtonsMobile">
+
+              <button class="clear" onclick="deleteUserInOverlay(event)">
+                Delete
+              </button>
+
+              <button class="createTask" onclick="createContactMobile(event)">
+                Save
+                <img src="/assets/icons/check.png" alt="" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <footer class="page-box d-none">
       <div class="menu-box">
