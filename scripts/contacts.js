@@ -573,7 +573,7 @@ function removeOldContactInfo(contact){
 
 function getNewContactInfo(divRef, firstName, lastName, inputEmailRef, inputPhoneRef){
       let alphabeticalOrderRef = document.getElementById("alphabeticalOrder" + firstName.charAt(0).toUpperCase());
-      alphabeticalOrderRef.innerHTML = getEditedBasicInfoAboutContact(divRef, firstName, lastName, inputEmailRef, inputPhoneRef);
+      alphabeticalOrderRef.innerHTML += getEditedBasicInfoAboutContact(divRef, firstName, lastName, inputEmailRef, inputPhoneRef);
 }
 
 function showMoreDetails(divRef, firstName, lastName, inputEmailRef, inputPhoneRef){
