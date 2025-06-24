@@ -789,6 +789,13 @@ main {
   background-color: var(--contact-title-seperator);
 }
 
+.templateOptions{
+  /* position: relative; */
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
 .chooseEditOrDeleteMobile {
   height: 56px;
   width: 56px;
@@ -831,8 +838,8 @@ main {
   display: none;
 }
 
-.chooseOverlayForMobile{
-  transform: translateY(-124%) translateX(550%);
+.chooseOverlayForMobile {
+  transform: translateY(-50%) translateX(100%);
   background-color: #ffff;
   height: 100px;
   width: 116px;
@@ -847,12 +854,12 @@ main {
   padding: 10px;
 }
 
-.showChooseOverlay{
-  transform: translateY(-124%) translateX(404%);
+.showChooseOverlay {
+  transform: translateY(-50%) translateX(-5%);
   transition: all 250ms ease;
 }
 
-.editMobileVersion{
+.editMobileVersion {
   display: flex;
   justify-content: start;
   align-items: center;
@@ -863,18 +870,18 @@ main {
   cursor: pointer;
 }
 
-.editMobileVersion:hover{
+.editMobileVersion:hover {
   background-color: var(--choose-hover-bg);
   color: var(--contact-title-seperator);
 }
 
-.editMobileVersion img{
+.editMobileVersion img {
   height: 24px;
   width: 24px;
   object-fit: contain;
 }
 
-.deleteMobileVersion{
+.deleteMobileVersion {
   display: flex;
   justify-content: start;
   align-items: center;
@@ -885,15 +892,22 @@ main {
   cursor: pointer;
 }
 
-.deleteMobileVersion:hover{
+.deleteMobileVersion:hover {
   background-color: var(--choose-hover-bg);
   color: var(--contact-title-seperator);
 }
 
-.deleteMobileVersion img{
+.deleteMobileVersion img {
   height: 24px;
   width: 24px;
   object-fit: contain;
+}
+
+.InfoTemplate {
+  position: relative;
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }
 
 @media (max-width: 1250px) {
@@ -971,22 +985,45 @@ main {
   }
 
   .addPerson {
-    bottom: 100px;
+    bottom: 120px;
   }
 
   .chooseEditOrDeleteMobile {
-    bottom: 100px;
+    bottom: 120px;
   }
+
+  .chooseOverlayForMobile{
+    transform: translateY(-130%) translateX(100%);
+    transition: all 250ms ease;
+  }
+
+  .showChooseOverlay{
+    transform: translateY(-130%) translateX(-5%);
+    transition: all 250ms ease;
+  }
+
 }
 
 @media (max-width: 545px) {
   .addPerson {
-    bottom: 80px;
+    bottom: 100px;
   }
 
   .chooseEditOrDeleteMobile {
-    bottom: 80px;
+    bottom: 100px;
   }
+
+
+  .chooseOverlayForMobile{
+    transform: translateY(-110%) translateX(100%);
+    transition: all 250ms ease;
+  }
+
+  .showChooseOverlay{
+    transform: translateY(-110%) translateX(-5%);
+    transition: all 250ms ease;
+  }
+
 }
 
 @media (max-width: 400px) {
