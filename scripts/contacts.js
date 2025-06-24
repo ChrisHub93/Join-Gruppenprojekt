@@ -935,3 +935,75 @@ function closeOverlayMobileEdit(event) {
   }, 150);
   setInputToDefault();
 }
+
+
+async function saveEditedContactMobile(event) {
+  let contacts = await fetchData("/contacts/");
+  let keys = Object.keys(contacts);
+  let contactsArry = Object.values(contacts);
+
+  let inputNameRef = document.getElementById("nameEditMobile");
+  let inputEmailRef = document.getElementById("emailEditMobile");
+  let inputPhoneRef = document.getElementById("phoneEditMobile");
+  let fullName = inputNameRef.value.split(" ");
+  
+  let requiredNameEditFieldRef = document.getElementById("requiredNameEditFieldMobile");
+  let requiredEmailEditFieldRef = document.getElementById("requiredEmailEditFieldMobile");
+  let requiredPhoneEditFieldRef = document.getElementById("requiredPhoneEditFieldMobile");
+  
+  if(fullName.length <= 1 && inputEmailRef.value == '' && inputPhoneRef.value == ''){
+    addEditError(inputNameRef, inputEmailRef, inputPhoneRef);
+    removeEditOpacity(requiredNameEditFieldRef, requiredEmailEditFieldRef, requiredPhoneEditFieldRef);
+    return;
+  } else if(fullName.length <= 1 || fullName[1] == ''){
+      inputNameRef.classList.add("error");
+      requiredNameEditFieldRef.classList.remove("opacity");
+      return;
+    } else if (inputEmailRef.value == ''){
+      inputEmailRef.classList.add("error");
+      requiredEmailEditFieldRef.classList.remove("opacity");
+      return;
+    } else if (inputPhoneRef.value == ''){
+      inputPhoneRef.classList.add("error");
+      requiredPhoneEditFieldRef.classList.remove("opacity");
+      return;
+    }
+
+  let firstName = fullName[0];
+  let lastName = fullName[1];
+  for (let index = 0; index < contactsArry.length; index++) {
+    let contact = contactsArry[index];
+    let fullContactName = contact.firstname + " " + contact.lastname;
+    if (fullContactName == currentActiveContactId) {
+      saveContactMobile(event, contact, index, keys, inputEmailRef, inputPhoneRef, firstName, lastName);
+      stopPropagationForMobile(event);
+    }
+  }
+}
+
+async function saveContactMobile(event, contact, index, keys, inputEmailRef, inputPhoneRef, firstName, lastName ){
+      let key = keys[index];
+      await putData(`contacts/${key}`, {firstname: firstName, lastname: lastName, email: inputEmailRef.value, phone: inputPhoneRef.value,});
+      currentActiveContactId = firstName + " " + lastName;
+      closeOverlayAfterEditedContactMobile(event);
+      let targetId = document.getElementById("circleFirstLetters" + contact.firstname + contact.lastname);
+      let divRef = Array.from(targetId.classList);
+      removeOldContactInfo(contact);
+      getNewContactInfo(divRef, firstName, lastName, inputEmailRef.value, inputPhoneRef.value);
+      getSortTitle(firstName);
+      showMoreDetails(divRef, firstName, lastName, inputEmailRef.value, inputPhoneRef.value);
+      clearOrLetOrder(contact);
+}
+
+function closeOverlayAfterEditedContactMobile(event) {
+  event.stopPropagation(event);
+  let overlayRef = document.getElementById("editOverlayMobile");
+  let contentOverlayRef = document.getElementById("contentEditOverlayMobile");
+  contentOverlayRef.classList.remove("showContentOverlay");
+  contentOverlayRef.classList.add("d-nonevip");
+  overlayRef.classList.remove("overlayBg");
+  setTimeout(() => {
+    overlayRef.classList.toggle("d-nonevip");
+  }, 150);
+  contentOverlayRef.classList.add("hideContentOverlay");
+}
