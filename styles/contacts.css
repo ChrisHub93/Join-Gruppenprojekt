@@ -859,6 +859,11 @@ main {
   transition: all 250ms ease;
 }
 
+.hideChooseOverlay {
+  transform: translateY(-50%) translateX(100%);
+  transition: all 250ms ease;
+}
+
 .editMobileVersion {
   display: flex;
   justify-content: start;

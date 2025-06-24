@@ -851,6 +851,13 @@ function showSuccessMobile() {
 
 function openChooseOverlay(){
   let chooseOverlayForMobileRef = document.getElementById("chooseOverlayForMobile");
-
   chooseOverlayForMobileRef.classList.add("showChooseOverlay");
+  chooseOverlayForMobileRef.classList.remove("hideChooseOverlay");
+}
+
+function stopPropagationForMobile(event){
+  event.stopPropagation(event);
+  let chooseOverlayForMobileRef = document.getElementById("chooseOverlayForMobile");
+  chooseOverlayForMobileRef.classList.remove("showChooseOverlay");
+  chooseOverlayForMobileRef.classList.add("hideChooseOverlay");
 }

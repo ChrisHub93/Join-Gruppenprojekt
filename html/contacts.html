@@ -313,7 +313,7 @@
       </div>
     </header>
 
-    <main>
+    <main onclick="stopPropagationForMobile(event)"  >
       <section id="contacts" class="contacts">
         <div class="contactsWidth">
           <div class="addNewContactBtn" onclick="openOverlay()">
@@ -401,7 +401,7 @@
 
 
 
-        <div class="templateOptions">
+        <div onclick="stopPropagation(event)" class="templateOptions">
 
         <div onclick="openChooseOverlay()" id="chooseEditOrDeleteMobile" class=" chooseEditOrDeleteMobile d-nonevip">
           <img
