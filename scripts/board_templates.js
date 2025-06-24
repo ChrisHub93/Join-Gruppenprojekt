@@ -466,7 +466,7 @@ function renderOverlayTaskContent(tasksRef) {
               ${subtasksOverlay(tasksRef.subTasks)}
             </div>
             <div class="flex_end_gp8">
-              <div onclick="deleteBoardTask('${tasksRef}'); closeOverlay(event);" class="bottom_overlay_task delete_task">
+              <div onclick="deleteBoardTasks('${tasksRef.id}'); closeOverlay(event);" class="bottom_overlay_task delete_task">
                 <img src="../assets/icons/Property 1=delete.png">
                 <p>Delete</p>
               </div>

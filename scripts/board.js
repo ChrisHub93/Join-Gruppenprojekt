@@ -98,11 +98,20 @@ async function moveTo(status) {
   loadTasks();
 }
 
-async function deleteTasks(path, keys) {
-    let response = await fetch(BASE_URL + path + keys + ".json", {
+
+async function deleteBoardTasks(tasksRef) {
+  let tasks = await fetchData("/tasks/");
+  let key = Object.keys(tasks).find(key => tasks[key].id === tasksRef.id)
+  await deleteTasks("/tasks/", key)
+  loadTasks()
+}
+
+async function deleteTasks(path, key) {
+  console.log("FirebaseKey:", key);
+    let response = await fetch(BASE_URL + path + key + ".json", {
         method: "DELETE",
     });
-    return (responseToJson = await response.json());
+    return await response.json();
 }
 
 async function putDataStatus(path = "", data = {}) {
@@ -291,10 +300,10 @@ function setPrioActive(clickedButton) {
       icon.src = `../assets/icons/priority-clicked-${prio}.png`;
     }}
 
-function deleteBoardTask(tasksRef) {
-    todos.splice(tasksRef, 1);
-    loadTasks();
-}
+// function deleteBoardTask(tasksRef) {
+//     todos.splice(tasksRef, 1);
+//     loadTasks();
+// }
 
 let flatpickrInstance = null;
 function toggleFlatpickr() {
