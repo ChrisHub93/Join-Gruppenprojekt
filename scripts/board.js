@@ -101,7 +101,7 @@ async function moveTo(status) {
 
 async function deleteBoardTasks(tasksRef) {
   let tasks = await fetchData("/tasks/");
-  let key = Object.keys(tasks).find(key => tasks[key].id === tasksRef.id)
+  let key = Object.keys(tasks).find(key => String(tasks[key].id) === tasksRef)
   await deleteTasks("/tasks/", key)
   loadTasks()
 }
