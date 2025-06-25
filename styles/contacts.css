@@ -425,9 +425,18 @@ main {
   opacity: 0;
 }
 
-#requiredNameField,
+/* #requiredNameField,
 #requiredEmailField,
 #requiredPhoneField {
+  margin-bottom: 16px;
+  margin-top: 4px;
+  font-size: 10px;
+  color: var(--error-color);
+} */
+
+.requiredNameField,
+.requiredEmailField,
+.requiredPhoneField {
   margin-bottom: 16px;
   margin-top: 4px;
   font-size: 10px;
@@ -1044,14 +1053,34 @@ main {
 
   .profile{
     position: absolute;
-    top: 40%;
+    top: 38%;
   }
 
   .requiredNameEditField,
-.requiredEmailEditField,
-.requiredPhoneEditField {
-  margin: 0;
+  .requiredEmailEditField,
+  .requiredPhoneEditField {
+    margin: 0;
 }
+
+/* add contact  */ 
+/* need to delete other overlays for mobile */
+
+  .profilePicture{
+    height: 120px;
+    width: 120px;
+  }
+
+  .clear{
+    display: none;
+  }
+
+  .requiredNameField,
+.requiredEmailField,
+.requiredPhoneField {
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
 }
 
 @media (min-width: 1101px){

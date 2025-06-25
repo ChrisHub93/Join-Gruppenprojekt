@@ -21,6 +21,15 @@
         class="contentOverlay hideContentOverlay"
       >
         <div class="leftSide">
+
+          <div class="closeOverlayMobile">
+            <img
+              onclick="closeOverlayMobile(event)"
+              src="../assets/icons/close_white.png"
+              alt=""
+            />
+          </div>
+
           <div class="contentLeftSide">
             <img src="../assets/img/Capa 1 white.png" alt="" />
             <h2>Add Contact</h2>
@@ -55,7 +64,7 @@
               />
               <img src="../assets/icons/person.png" alt="" />
             </div>
-            <span id="requiredNameField" class="opacity "
+            <span id="requiredNameField" class="opacity requiredNameField "
               >This Field is required</span
             >
 
@@ -69,7 +78,7 @@
               />
               <img src="../assets/icons/mail.svg" alt="" />
             </div>
-            <span id="requiredEmailField" class="opacity"
+            <span id="requiredEmailField" class="opacity requiredEmailField"
               >This Field is required</span
             >
 
@@ -83,7 +92,7 @@
               />
               <img src="../assets/icons/call.png" alt="" />
             </div>
-            <span id="requiredPhoneField" class="opacity"
+            <span id="requiredPhoneField" class="opacity requiredPhoneField"
               >This Field is required</span
             >
 
