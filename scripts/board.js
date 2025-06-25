@@ -4,6 +4,9 @@ let currentDraggedElement;
 async function loadTasks() {
 
   let tasks = await fetchData("/tasks/");
+  if (tasks === null) {
+    return
+  }
   todos = Object.values(tasks);
   // console.log(todos);
   
@@ -215,7 +218,7 @@ function getInitials(name) {
 }
 
 function getAssignedInitials(assignedToArray) {
-  if (assignedToArray === "") {
+  if (assignedToArray === undefined) {
     return `
     <p class="assigned_to_empty">Nobody assigned yet</p>`;
   } else {
