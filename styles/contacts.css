@@ -569,8 +569,8 @@ main {
 }
 
 .profilePicture {
-  height: 100px;
-  width: 100px;
+  height: 120px;
+  width: 120px;
   background-color: var(--input-border);
   border-radius: 50%;
   display: flex;
@@ -651,6 +651,33 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.cancel{
+  background-color: white;
+  border: 1px solid;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cancel .hoverIcon {
+  display: none;
+}
+
+.cancel:hover .defaultIcon {
+  display: none;
+}
+
+.cancel:hover .hoverIcon {
+  display: block !important;
+}
+
+.cancel:hover {
+  box-shadow: 0px 4px 3px var(--snd-color);
+  border-color: var(--focus-color);
+  color: var(--focus-color);
 }
 
 .clear .hoverIcon {
@@ -1070,7 +1097,11 @@ main {
     width: 120px;
   }
 
-  .clear{
+  /* .clear{
+    display: none;
+  } */
+
+  .cancel{
     display: none;
   }
 
