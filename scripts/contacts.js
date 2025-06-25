@@ -1027,26 +1027,26 @@ async function deleteUserMobile(event){
       deleteContact(keys, index, contact);
     }
   }
-
-
-
-    let contactsRef = document.getElementById("contacts");
-    let infoTitleRef = document.getElementById("infoTitle");
-
-    contactsRef.classList.remove("d-nonevip");
-    infoTitleRef.classList.remove("d-Block");
-
-    let chooseEditOrDeleteMobileRef = document.getElementById("chooseEditOrDeleteMobile");
-    chooseEditOrDeleteMobileRef.classList.add("d-nonevip");
-
-    let addPersonRef = document.getElementById("addPerson");
-    addPersonRef.classList.remove("d-nonevip");
-
-    let chooseOverlayForMobileRef = document.getElementById("chooseOverlayForMobile");
-    chooseOverlayForMobileRef.classList.remove("showChooseOverlay");
-    chooseOverlayForMobileRef.classList.add("hideChooseOverlay");
+  showContactsInList();
 }
 
+function showContactsInList(){
+  let contactsRef = document.getElementById("contacts");
+  let infoTitleRef = document.getElementById("infoTitle");
+
+  contactsRef.classList.remove("d-nonevip");
+  infoTitleRef.classList.remove("d-Block");
+
+  let chooseEditOrDeleteMobileRef = document.getElementById("chooseEditOrDeleteMobile");
+  chooseEditOrDeleteMobileRef.classList.add("d-nonevip");
+
+  let addPersonRef = document.getElementById("addPerson");
+  addPersonRef.classList.remove("d-nonevip");
+
+  let chooseOverlayForMobileRef = document.getElementById("chooseOverlayForMobile");
+  chooseOverlayForMobileRef.classList.remove("showChooseOverlay");
+  chooseOverlayForMobileRef.classList.add("hideChooseOverlay");
+}
 
 async function deleteUserInOverlayMobile(event){
   let contacts = await fetchData("/contacts/");
@@ -1071,20 +1071,5 @@ async function deleteUserInOverlayMobile(event){
       addEditOpacity(requiredNameEditFieldRef, requiredEmailEditFieldRef, requiredPhoneEditFieldRef);
     }
   }
-
-  let contactsRef = document.getElementById("contacts");
-    let infoTitleRef = document.getElementById("infoTitle");
-
-    contactsRef.classList.remove("d-nonevip");
-    infoTitleRef.classList.remove("d-Block");
-
-    let chooseEditOrDeleteMobileRef = document.getElementById("chooseEditOrDeleteMobile");
-    chooseEditOrDeleteMobileRef.classList.add("d-nonevip");
-
-    let addPersonRef = document.getElementById("addPerson");
-    addPersonRef.classList.remove("d-nonevip");
-
-    let chooseOverlayForMobileRef = document.getElementById("chooseOverlayForMobile");
-    chooseOverlayForMobileRef.classList.remove("showChooseOverlay");
-    chooseOverlayForMobileRef.classList.add("hideChooseOverlay");
+  showContactsInList();
 }
