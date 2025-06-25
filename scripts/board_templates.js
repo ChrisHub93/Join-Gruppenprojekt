@@ -377,7 +377,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
           <div class="form_edit_container">
             <label for="subTaskInput">Subtasks</label>
             <div class="edit_subtask_input">  
-              <input class="border_edit_active" type="text" name="subtasks" id="subTaskInput" placeholder="Add new subtask"/>
+              <input class="border_edit_active" type="text" name="subtasks" id="subTaskInputEdit" placeholder="Add new subtask"/>
               <img onclick="chooseSubTask()" id="plusIcon" class="plusIcon_edit" src="../assets/icons/Subtasks-plus.png"/>
               <div id="cancelOrCheck" class="cancelOrCheck d-nonevip">
                 <img ="deleteTask()" src="../assets/icons/iconoir_cancel.png"/>
@@ -385,12 +385,14 @@ function renderOverlayTaskEdit(tasksEditRef) {
                 <img onclick="addTask()" src="../assets/icons/Property 1=check.png"/>
               </div>
             </div>
-            <div id="subTasks"></div>
+            <div id="subTasks">
+            ${subtasksOverlayEdit(tasksEditRef.subTasks)}
+            </div>
           </div>
         </div>
         </div>
           <div class="edit_okay_box">
-          <button onclick="overlayTask(${tasksEditRef.id})" class="edit_okay"> Ok
+          <button onclick="updateDataEdit(${tasksEditRef.id})" class="edit_okay"> Ok
           <img src="../assets/icons/check.png">
           </button>
           </div>
@@ -416,6 +418,31 @@ function subtasksOverlayRender(subtasks) {
           <img class="subtask-icon" src="../assets/icons/subtask-unchecked.png" onclick="toggleSubtask(this)">
           <p class="cursor_overlay_task">${subtask}</p>
         </div>
+      `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function subtasksOverlayRenderEdit(tasksEditRef) {
+  return `
+    <div class="subtask_container">
+      ${tasksEditRef
+        .map(
+          (subtask) => `
+        <ul>
+          <li>
+            <div class="flex_edit">
+              <p class="cursor_overlay_task">${subtask}</p>
+              <div class="hide_edit_subtask">
+                <img class="edit_icons" src="../assets/icons/edit.png">
+                <div class="seperator_edit"></div>
+                <img class="edit_icons" src="../assets/icons/delete.png">
+              </div>
+            </div>
+          </li>
+        </ul>
       `
         )
         .join("")}

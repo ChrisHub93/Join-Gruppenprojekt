@@ -242,10 +242,18 @@ function getAvatarColorClass(name) {
 }
 
 function subtasksOverlay(subtasks) {
-  if (subtasks === "") {
+  if (subtasks === undefined) {
     return "";
   } else {
     return subtasksOverlayRender(subtasks);
+  }
+}
+
+function subtasksOverlayEdit(tasksEditRef) {
+  if (tasksEditRef === undefined) {
+    return "";
+  } else {
+    return subtasksOverlayRenderEdit(tasksEditRef);
   }
 }
 
@@ -303,11 +311,6 @@ function setPrioActive(clickedButton) {
       icon.src = `../assets/icons/priority-clicked-${prio}.png`;
     }}
 
-// function deleteBoardTask(tasksRef) {
-//     todos.splice(tasksRef, 1);
-//     loadTasks();
-// }
-
 let flatpickrInstance = null;
 function toggleFlatpickr() {
   if (!flatpickrInstance) {
@@ -349,21 +352,45 @@ function closeAddTaskOverlaySuccses() {
   }, 700);
 }
 
-async function logIn() {
-  let data = await loadData("/tasks");
-  let tasktodos = Object.values(data);
-
-  todos.push(tasktodos)
-
- console.log(todos);
- 
-// console.log(todos);
-
-}
-
 async function loadData(path = "") {
   let response = await fetch(BASE_URL + path + ".json");
   let responseToJson = await response.json();
 
   return responseToJson;
+}
+
+async function updateDataEdit(tasksEditRef) {
+  let tasks = await fetchData("/tasks/");
+
+  let taskKeyEdit = Object.keys(tasks).find(k => String(tasks[k].id) === String(tasksEditRef));
+  let prioButton = document.querySelector('.prio_edit_button.active');
+  let priorityEdit = prioButton.dataset.prio;
+  let data = {
+    id: tasks[taskKeyEdit].id,
+    category: tasks[taskKeyEdit].category,
+    title: title.value,
+    description: description.value,
+    date: date.value,
+    priority: priorityEdit,
+    assignedTo: await searchContacts(),
+    subTasks: subtasks,
+    status: tasks[taskKeyEdit].status,
+  }
+
+  await putDataEdit(`/tasks/${taskKeyEdit}`, data);
+  await loadTasks();
+
+  overlayTask(data.id);
+
+}
+
+async function putDataEdit(path = "", data = {}) {
+  let response = await fetch(BASE_URL + path + ".json", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return await response.json();
 }

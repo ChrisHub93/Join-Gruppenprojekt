@@ -583,7 +583,7 @@ h4{
   color: white;
   display: flex;
   align-items: center;
-  padding: 12px 10px;
+  padding: 16px;
   cursor: pointer;
   gap: 5px;
   font-size: 20px;
@@ -594,6 +594,48 @@ h4{
   background-color: #29ABE2;
   transition: ease-in-out 0.3s;
   box-shadow: 0px 4px 4px 0px  rgba(0, 0, 0, 0.25);
+}
+
+.flex_edit{
+  display: flex;
+  justify-content: space-between;
+}
+
+.subtask_container{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hide_edit_subtask{
+  display: none;
+}
+
+ul{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 20px;
+}
+
+ul:hover{
+  background-color: #d1d1d1;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+ul:hover .hide_edit_subtask{
+  display: flex;
+  gap: 4px;
+}
+
+.seperator_edit{
+  width: 1px;
+  height: auto;
+  background-color: #a8a8a8;
+}
+
+.edit_icons:hover{
+  transform: scale(1.03);
 }
 
 @media (max-width: 1100px) {
