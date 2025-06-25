@@ -21,6 +21,15 @@
         class="contentOverlay hideContentOverlay"
       >
         <div class="leftSide">
+
+          <div class="closeOverlayMobile">
+            <img
+              onclick="closeOverlayMobile(event)"
+              src="../assets/icons/close_white.png"
+              alt=""
+            />
+          </div>
+
           <div class="contentLeftSide">
             <img src="../assets/img/Capa 1 white.png" alt="" />
             <h2>Add Contact</h2>
@@ -55,7 +64,7 @@
               />
               <img src="../assets/icons/person.png" alt="" />
             </div>
-            <span id="requiredNameField" class="opacity"
+            <span id="requiredNameField" class="opacity requiredNameField "
               >This Field is required</span
             >
 
@@ -69,7 +78,7 @@
               />
               <img src="../assets/icons/mail.svg" alt="" />
             </div>
-            <span id="requiredEmailField" class="opacity"
+            <span id="requiredEmailField" class="opacity requiredEmailField"
               >This Field is required</span
             >
 
@@ -83,12 +92,12 @@
               />
               <img src="../assets/icons/call.png" alt="" />
             </div>
-            <span id="requiredPhoneField" class="opacity"
+            <span id="requiredPhoneField" class="opacity requiredPhoneField"
               >This Field is required</span
             >
 
             <div class="flexButtons">
-              <button class="clear" onclick="cancelOverlay(event)">
+              <button class="cancel" onclick="cancelOverlay(event)">
                 Cancel
                 <img
                   class="defaultIcon"
@@ -123,6 +132,15 @@
         class="contentOverlay hideContentOverlay"
       >
         <div class="leftSide">
+
+            <div class="closeOverlayMobile">
+            <img
+              onclick="closeOverlayMobile(event)"
+              src="../assets/icons/close_white.png"
+              alt=""
+            />
+          </div>
+
           <div class="contentLeftSide">
             <img src="../assets/img/Capa 1 white.png" alt="" />
             <h2>Edit contact</h2>
@@ -157,7 +175,7 @@
               />
               <img src="../assets/icons/person.png" alt="" />
             </div>
-            <span id="requiredNameEditField" class="opacity"
+            <span id="requiredNameEditField" class="opacity requiredNameEditField"
               >This Field is required</span
             >
 
@@ -171,7 +189,7 @@
               />
               <img src="../assets/icons/mail.svg" alt="" />
             </div>
-            <span id="requiredEmailEditField" class="opacity"
+            <span id="requiredEmailEditField" class="opacity requiredEmailEditField"
               >This Field is required</span
             >
 
@@ -185,7 +203,7 @@
               />
               <img src="../assets/icons/call.png" alt="" />
             </div>
-            <span id="requiredPhoneEditField" class="opacity"
+            <span id="requiredPhoneEditField" class="opacity requiredPhoneEditField"
               >This Field is required</span
             >
 
@@ -313,7 +331,7 @@
       </div>
     </header>
 
-    <main onclick="stopPropagationForMobile(event)"  >
+    <main  onclick="stopPropagationForMobile(event)">
       <section id="contacts" class="contacts">
         <div class="contactsWidth">
           <div class="addNewContactBtn" onclick="openOverlay()">
@@ -354,7 +372,7 @@
         </div>
 
         <div
-          onclick="openOverlayMobile()"
+          onclick="openOverlay()"
           id="addPerson"
           class="addPerson d-nonevip"
         >
@@ -430,7 +448,7 @@
     </main>
 
     <!-- mobileOverlay -->
-    <div
+    <!-- <div
       id="overlayMobile"
       class="overlayMobile d-nonevip"
       onclick="closeOverlayMobile(event)"
@@ -517,11 +535,11 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- edit overlay mobile -->
 
-    <div
+    <!-- <div
       id="editOverlayMobile"
       class="overlayMobile d-nonevip"
       onclick="closeOverlayMobileEdit(event)"
@@ -542,17 +560,13 @@
 
           <div class="contentLeftSideMobile">
             <h2>Edit contact</h2>
-            <!-- <span>Tasks are better with a team!</span> -->
+            
             <div class="blueLine"></div>
           </div>
         </div>
 
         <div class="rightSideMobile">
-          <!-- <div class="profileMobile">
-            <div class="profilePictureMobile">
-              <img src="../assets/icons/person.svg" alt="" />
-            </div>
-          </div> -->
+         
 
           <div class="profileMobile">
             <div id="circleFirstLettersMobileEdit" class="circleFirstLettersEdit">
@@ -618,7 +632,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
 
     <footer class="page-box d-none">
