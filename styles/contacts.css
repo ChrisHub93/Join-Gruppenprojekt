@@ -434,6 +434,13 @@ main {
   color: var(--error-color);
 }
 
+.requiredNameEditField, .requiredEmailEditField, .requiredPhoneEditField{
+  margin-bottom: 16px;
+  margin-top: 4px;
+  font-size: 10px;
+  color: var(--error-color);
+} 
+
 #requiredNameFieldMobile,
 #requiredEmailFieldMobile,
 #requiredPhoneFieldMobile {
@@ -443,14 +450,14 @@ main {
   color: var(--error-color);
 }
 
-#requiredNameEditField,
+/* #requiredNameEditField,
 #requiredEmailEditField,
 #requiredPhoneEditField {
   margin-bottom: 16px;
   margin-top: 4px;
   font-size: 10px;
   color: var(--error-color);
-}
+} */
 
 .leftSide {
   height: 450px;
@@ -790,7 +797,7 @@ main {
   background-color: var(--contact-title-seperator);
 }
 
-.templateOptions{
+.templateOptions {
   /* position: relative; */
   display: flex;
   justify-content: end;
@@ -975,10 +982,160 @@ main {
   .arrowToGoBack {
     display: block;
   }
+
+  .contentOverlay {
+    flex-direction: column;
+  }
+
+  .leftSide {
+    height: 320px;
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+    border-bottom-left-radius: 0px;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+  }
+
+  .rightSide {
+    height: 350px;
+    width: 350px;
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    border-top-right-radius: 0px;
+    flex-direction: column;
+    padding-top: 32px;
+  }
+
+  .contentLeftSide{
+    justify-content: start;
+    gap: 8px;
+    margin-left: 16px;
+    margin-top: 60px;
+  }
+
+  .contentLeftSide img{
+    display: none;
+  }
+
+  .closeOverlay{
+    display: none;
+  }
+
+  .inputSection{
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 0px;
+    gap: 4px;
+  }
+
+  .inputSection input{
+    width: 320px;
+    font-size: 20px;
+  }
+
+  .flexButtons{
+    justify-content: center;
+  }
+
+  .flexButtons button{
+    font-size: 16px;
+  }
+
+  .profile{
+    position: absolute;
+    top: 40%;
+  }
+
+  .requiredNameEditField,
+.requiredEmailEditField,
+.requiredPhoneEditField {
+  margin: 0;
+}
 }
 
-@media (min-width:1100px){
+@media (min-width: 1101px){
+  .contentOverlay {
+    flex-direction: row;
+  }
 
+  .leftSide {
+    height: 450px;
+    width: 350px;
+    border-top-left-radius: 32px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 32px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .rightSide {
+    height: 450px;
+    width: 600px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 32px ;
+    border-top-right-radius: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding-top: 0px;
+  }
+
+  .contentLeftSide{
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+
+  .contentLeftSide img{
+    display: block;
+  }
+
+  .closeOverlayMobile{
+    display: none;
+  }
+
+  .closeOverlay{
+    display: flex;
+  }
+
+  .inputSection{
+    margin-right: 0px;
+    gap: 0px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 56px;
+    margin-bottom: 20px;
+  }
+
+  .inputSection input{
+    width: 360px;
+    font-size: 13px;
+  }
+
+  .flexButtons{
+    justify-content: start;
+  }
+
+  .flexButtons button{
+    font-size: 21px;
+  }
+
+  .profile{
+    position: unset;
+    /* top: 40%; */
+  }
+
+  .requiredNameEditField,
+.requiredEmailEditField,
+.requiredPhoneEditField {
+  margin-bottom: 16px;
+  margin-top: 4px;
+}
 }
 
 @media (max-width: 768px) {
@@ -1002,16 +1159,15 @@ main {
     bottom: 120px;
   }
 
-  .chooseOverlayForMobile{
+  .chooseOverlayForMobile {
     transform: translateY(-130%) translateX(100%);
     transition: all 250ms ease;
   }
 
-  .showChooseOverlay{
+  .showChooseOverlay {
     transform: translateY(-130%) translateX(-5%);
     transition: all 250ms ease;
   }
-
 }
 
 @media (max-width: 545px) {
@@ -1023,17 +1179,15 @@ main {
     bottom: 100px;
   }
 
-
-  .chooseOverlayForMobile{
+  .chooseOverlayForMobile {
     transform: translateY(-110%) translateX(100%);
     transition: all 250ms ease;
   }
 
-  .showChooseOverlay{
+  .showChooseOverlay {
     transform: translateY(-110%) translateX(-5%);
     transition: all 250ms ease;
   }
-
 }
 
 @media (max-width: 400px) {

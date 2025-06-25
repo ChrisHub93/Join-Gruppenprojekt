@@ -1,5 +1,28 @@
 let currentActiveContactId = null;
 
+
+window.addEventListener("resize", function(event) {
+  let contactsRef = document.getElementById("contacts");
+  let addPersonRef = document.getElementById("addPerson");
+  let chooseEditOrDeleteMobileRef = document.getElementById("chooseEditOrDeleteMobile");
+  let successfullyCreatedMobileRef = document.getElementById("successfullyCreatedMobile");
+  let chooseOverlayForMobileRef = document.getElementById("chooseOverlayForMobile");
+    if(window.innerWidth > 1100){
+      contactsRef.classList.remove("d-nonevip");
+      addPersonRef.classList.add("d-nonevip");
+      chooseEditOrDeleteMobileRef.classList.add("d-nonevip");
+      successfullyCreatedMobileRef.classList.add("opacity");
+      chooseOverlayForMobileRef.classList.remove("showChooseOverlay");
+      chooseOverlayForMobileRef.classList.add("hideChooseOverlay");
+    } else if(currentActiveContactId && window.innerWidth <= 1100){
+      contactsRef.classList.add("d-nonevip");
+      chooseEditOrDeleteMobileRef.classList.remove("d-nonevip");
+    } else if (window.innerWidth <= 1100){
+      addPersonRef.classList.remove("d-nonevip");
+
+    }
+});
+
 async function initContacts() {
 
   
@@ -123,28 +146,7 @@ function showMobileVersion(){
   infoTitleRef.classList.add("d-Block");
 }
 
-window.addEventListener("resize", function(event) {
-  let contactsRef = document.getElementById("contacts");
-  let addPersonRef = document.getElementById("addPerson");
-  let chooseEditOrDeleteMobileRef = document.getElementById("chooseEditOrDeleteMobile");
-  let successfullyCreatedMobileRef = document.getElementById("successfullyCreatedMobile");
-  let chooseOverlayForMobileRef = document.getElementById("chooseOverlayForMobile");
-    if(window.innerWidth > 1100){
-      contactsRef.classList.remove("d-nonevip");
-      addPersonRef.classList.add("d-nonevip");
-      chooseEditOrDeleteMobileRef.classList.add("d-nonevip");
-      successfullyCreatedMobileRef.classList.add("opacity");
-      chooseOverlayForMobileRef.classList.remove("showChooseOverlay");
-      chooseOverlayForMobileRef.classList.add("hideChooseOverlay");
-    } else if(currentActiveContactId && window.innerWidth <= 1100){
-      contactsRef.classList.add("d-nonevip");
-      chooseEditOrDeleteMobileRef.classList.remove("d-nonevip");
-    } else if (window.innerWidth <= 1100){
-      addPersonRef.classList.remove("d-nonevip");
-    } else if(window.innerWidth >1100){
-    
-  }
-});
+
 
 function sameContact() {
   let idRef = document.querySelectorAll('[id^="setNewBgFor"]');
