@@ -360,11 +360,13 @@ footer {
 
 .sectionButtons {
   width: 800px;
-
   display: flex;
   justify-content: space-between;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 160px;
+  z-index: 1;
+  align-items: center;
 }
 
 .marked {
@@ -674,7 +676,7 @@ div[id^="bullet"] {
 
   .markedFieldsResponsive {
     display: block !important;
-    padding-bottom: 120px;
+    /* padding-bottom: 120px; */
   }
 
   footer {
@@ -684,9 +686,16 @@ div[id^="bullet"] {
   
 
   .sectionButtons {
-    width: auto;
+    /* width: auto; */
     display: flex;
     justify-content: end;
+    padding-bottom: 16px;
+    width: 100%;
+    padding-right: 32px;
+    position: sticky;
+    bottom: 0;
+    background-color: var(--bg-color);
+    padding-top: 8px;
   }
 
   .buttons {
@@ -694,7 +703,18 @@ div[id^="bullet"] {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
-    padding-right: 32px;
+    /* padding-right: 32px; */
+  }
+}
+
+@media (max-width: 768px){
+  main{
+    width: 100%;
+    height: calc(100vh - 90px);
+  }
+
+  .sectionButtons{
+    bottom: 90px;
   }
 }
 
@@ -802,8 +822,10 @@ div[id^="bullet"] {
   }
 
   .sectionButtons {
-    width: auto;
-    flex-direction: column;
+    /* width: auto;
+    flex-direction: column; */
+    width: 100%;
+    padding-right: 12px;
   }
 
   .buttons {
@@ -812,4 +834,10 @@ div[id^="bullet"] {
     background-color: var(--bg-color);
   }
 
+}
+
+@media (max-width: 545px){
+  .sectionButtons{
+    bottom: 80px;
+  }
 }
