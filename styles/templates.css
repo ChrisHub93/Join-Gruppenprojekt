@@ -76,8 +76,9 @@ header{
     margin-top: 20px;
     position: absolute;
     background-color: #2A3647;
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
+    z-index: 1;
 }
 
 .navbarlink{
@@ -264,9 +265,9 @@ header{
         display: none;
     }
 
-    .d-none{
+    /* .d-none{
         display: flex;
-    }
+    } */
 
     footer{
         display: flex !important;

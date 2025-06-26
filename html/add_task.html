@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Task</title>
-    <link rel="stylesheet" href="/styles/style.css" />
-    <link rel="stylesheet" href="/styles/add_task.css" />
-    <link rel="stylesheet" href="/styles/fonts.css" />
-    <link rel="stylesheet" href="/styles/templates.css" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="../styles/add_task.css" />
+    <link rel="stylesheet" href="../styles/fonts.css" />
+    <link rel="stylesheet" href="../styles/templates.css" />
     
     <link rel="icon" type="image/x-icon" href="/assets/img/Capa 1.png" />
   </head>
@@ -15,7 +15,9 @@
   <body onload="setPriorityMedium(`medium`);init(); initAddTask()">
     <header id="header" class="page-box">
       <p class="header-name">Kanban Project Management Tool</p>
+      
             <img class="headerLogo d-none" src="/assets/img/Capa 1.png" alt="">
+            <div class="profile-navbar">
             <div class="header-top-profile">
                 <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
                 <p onclick="showNavbar()" class="personal-icon">G</p>
@@ -25,6 +27,7 @@
                     <a class="navbarlink" href="../html/legal_notice.html">Legal Notice</a>
                     <a class="navbarlink" href="../html/privacy_policy.html">Privacy Policy</a>
                     <a class="navbarlink" href="../index.html">Log Out</a>
+            </div>
             </div>
     </header>
     <div id="sidebar" class="sidebar">
