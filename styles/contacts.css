@@ -425,15 +425,6 @@ main {
   opacity: 0;
 }
 
-/* #requiredNameField,
-#requiredEmailField,
-#requiredPhoneField {
-  margin-bottom: 16px;
-  margin-top: 4px;
-  font-size: 10px;
-  color: var(--error-color);
-} */
-
 .requiredNameField,
 .requiredEmailField,
 .requiredPhoneField {
@@ -443,12 +434,14 @@ main {
   color: var(--error-color);
 }
 
-.requiredNameEditField, .requiredEmailEditField, .requiredPhoneEditField{
+.requiredNameEditField,
+.requiredEmailEditField,
+.requiredPhoneEditField {
   margin-bottom: 16px;
   margin-top: 4px;
   font-size: 10px;
   color: var(--error-color);
-} 
+}
 
 #requiredNameFieldMobile,
 #requiredEmailFieldMobile,
@@ -458,15 +451,6 @@ main {
   font-size: 10px;
   color: var(--error-color);
 }
-
-/* #requiredNameEditField,
-#requiredEmailEditField,
-#requiredPhoneEditField {
-  margin-bottom: 16px;
-  margin-top: 4px;
-  font-size: 10px;
-  color: var(--error-color);
-} */
 
 .leftSide {
   height: 450px;
@@ -653,7 +637,7 @@ main {
   align-items: center;
 }
 
-.cancel{
+.cancel {
   background-color: white;
   border: 1px solid;
   cursor: pointer;
@@ -834,7 +818,6 @@ main {
 }
 
 .templateOptions {
-  /* position: relative; */
   display: flex;
   justify-content: end;
   align-items: center;
@@ -1043,42 +1026,42 @@ main {
     padding-top: 32px;
   }
 
-  .contentLeftSide{
+  .contentLeftSide {
     justify-content: start;
     gap: 8px;
     margin-left: 16px;
     margin-top: 60px;
   }
 
-  .contentLeftSide img{
+  .contentLeftSide img {
     display: none;
   }
 
-  .closeOverlay{
+  .closeOverlay {
     display: none;
   }
 
-  .inputSection{
+  .inputSection {
     margin-left: 16px;
     margin-right: 16px;
     margin-bottom: 0px;
     gap: 4px;
   }
 
-  .inputSection input{
+  .inputSection input {
     width: 320px;
     font-size: 20px;
   }
 
-  .flexButtons{
+  .flexButtons {
     justify-content: center;
   }
 
-  .flexButtons button{
+  .flexButtons button {
     font-size: 16px;
   }
 
-  .profile{
+  .profile {
     position: absolute;
     top: 38%;
   }
@@ -1087,34 +1070,26 @@ main {
   .requiredEmailEditField,
   .requiredPhoneEditField {
     margin: 0;
-}
+  }
 
-/* add contact  */ 
-/* need to delete other overlays for mobile */
-
-  .profilePicture{
+  .profilePicture {
     height: 120px;
     width: 120px;
   }
 
-  /* .clear{
-    display: none;
-  } */
-
-  .cancel{
+  .cancel {
     display: none;
   }
 
   .requiredNameField,
-.requiredEmailField,
-.requiredPhoneField {
-  margin-bottom: 0px;
-  margin-top: 0px;
+  .requiredEmailField,
+  .requiredPhoneField {
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
 }
 
-}
-
-@media (min-width: 1101px){
+@media (min-width: 1101px) {
   .contentOverlay {
     flex-direction: row;
   }
@@ -1134,7 +1109,7 @@ main {
     height: 450px;
     width: 600px;
     border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 32px ;
+    border-bottom-right-radius: 32px;
     border-top-right-radius: 32px;
     display: flex;
     justify-content: center;
@@ -1143,7 +1118,7 @@ main {
     padding-top: 0px;
   }
 
-  .contentLeftSide{
+  .contentLeftSide {
     flex-direction: column;
     justify-content: center;
     gap: 16px;
@@ -1151,19 +1126,19 @@ main {
     margin-top: 0px;
   }
 
-  .contentLeftSide img{
+  .contentLeftSide img {
     display: block;
   }
 
-  .closeOverlayMobile{
+  .closeOverlayMobile {
     display: none;
   }
 
-  .closeOverlay{
+  .closeOverlay {
     display: flex;
   }
 
-  .inputSection{
+  .inputSection {
     margin-right: 0px;
     gap: 0px;
     display: flex;
@@ -1172,30 +1147,29 @@ main {
     margin-bottom: 20px;
   }
 
-  .inputSection input{
+  .inputSection input {
     width: 360px;
     font-size: 13px;
   }
 
-  .flexButtons{
+  .flexButtons {
     justify-content: start;
   }
 
-  .flexButtons button{
+  .flexButtons button {
     font-size: 21px;
   }
 
-  .profile{
+  .profile {
     position: unset;
-    /* top: 40%; */
   }
 
   .requiredNameEditField,
-.requiredEmailEditField,
-.requiredPhoneEditField {
-  margin-bottom: 16px;
-  margin-top: 4px;
-}
+  .requiredEmailEditField,
+  .requiredPhoneEditField {
+    margin-bottom: 16px;
+    margin-top: 4px;
+  }
 }
 
 @media (max-width: 768px) {
