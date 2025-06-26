@@ -665,6 +665,10 @@ async function deleteUser(){
       deleteContact(keys, index, contact);
     }
   }
+
+  if(window.innerWidth <= 1100){
+    closeMobileOverlay();
+  }
 }
 
 async function deleteContact(keys, index, contact){
