@@ -660,6 +660,7 @@ div[id^="bullet"] {
     width: auto;
     margin-right: 32px;
     margin-left: 32px;
+    height: auto;
   }
 
   .form {
@@ -696,6 +697,7 @@ div[id^="bullet"] {
     bottom: 0;
     background-color: var(--bg-color);
     padding-top: 8px;
+    margin-top: 40px;
   }
 
   .buttons {
