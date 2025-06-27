@@ -2,14 +2,13 @@ let todos = [];
 let currentDraggedElement;
 
 async function loadTasks() {
-
   let tasks = await fetchData("/tasks/");
   if (tasks === null) {
-    return
+    return;
   }
   todos = Object.values(tasks);
   // console.log(todos);
-  
+
   let toDoContentRef = document.getElementById("toDoContent");
   let inProgressContentRef = document.getElementById("inProgressContent");
   let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
@@ -18,13 +17,10 @@ async function loadTasks() {
   // console.log("TodDOs vor filter:",todos);
   let statusToDo = todos.filter((task) => task.status === "To do");
 
-  let statusInProgress = todos.filter(
-    (task) => task.status === "In progress"
-  );
+  let statusInProgress = todos.filter((task) => task.status === "In progress");
   let statusAwaitFeedback = todos.filter(
     (task) => task.status === "Await feedback"
   );
-
 
   let statusDone = todos.filter((task) => task.status === "Done");
 
@@ -82,10 +78,10 @@ function allowDrop(event) {
 
 async function moveTo(status) {
   let tasks = await fetchData("/tasks/");
-  
+
   console.log("todos (vorher):", todos);
 
-  const index = todos.findIndex(task => task.id == currentDraggedElement);
+  const index = todos.findIndex((task) => task.id == currentDraggedElement);
   if (index === -1) {
     console.error("Task mit ID nicht gefunden:", currentDraggedElement);
     return;
@@ -93,28 +89,30 @@ async function moveTo(status) {
 
   todos[index].status = status;
 
-  let taskKey = Object.keys(tasks).find(key => tasks[key].id === currentDraggedElement);
+  let taskKey = Object.keys(tasks).find(
+    (key) => tasks[key].id === currentDraggedElement
+  );
 
   await putDataStatus(`tasks/${taskKey}`, todos[index]);
-
 
   loadTasks();
 }
 
-
 async function deleteBoardTasks(tasksRef) {
   let tasks = await fetchData("/tasks/");
-  let key = Object.keys(tasks).find(key => String(tasks[key].id) === tasksRef)
-  await deleteTasks("/tasks/", key)
-  loadTasks()
+  let key = Object.keys(tasks).find(
+    (key) => String(tasks[key].id) === tasksRef
+  );
+  await deleteTasks("/tasks/", key);
+  loadTasks();
 }
 
 async function deleteTasks(path, key) {
   console.log("FirebaseKey:", key);
-    let response = await fetch(BASE_URL + path + key + ".json", {
-        method: "DELETE",
-    });
-    return await response.json();
+  let response = await fetch(BASE_URL + path + key + ".json", {
+    method: "DELETE",
+  });
+  return await response.json();
 }
 
 async function putDataStatus(path = "", data = {}) {
@@ -150,14 +148,14 @@ function overlayTask(element) {
     dialogTaskContentRef.style.transform = "translateX(100%)";
     dialogTaskContentRef.style.opacity = "0";
     requestAnimationFrame(() => {
-    dialogTaskContentRef.style.transform = "translateX(0)";
-    dialogTaskContentRef.style.opacity = "1";
+      dialogTaskContentRef.style.transform = "translateX(0)";
+      dialogTaskContentRef.style.opacity = "1";
     });
   }
 }
 
 function searchElement(id) {
-  const index = todos.findIndex(task => task.id == id);
+  const index = todos.findIndex((task) => task.id == id);
   if (index === -1) {
     console.error("Task mit ID nicht gefunden:", id);
     return;
@@ -259,10 +257,13 @@ function subtasksOverlayEdit(tasksEditRef) {
 
 function taskOverlaySync() {
   let dialogTaskContentRef = document.getElementById("dialogTaskContent");
-  let dialogTaskEditContentRef = document.getElementById("dialogTaskEditContent");
+  let dialogTaskEditContentRef = document.getElementById(
+    "dialogTaskEditContent"
+  );
 
   if (dialogTaskContentRef && dialogTaskEditContentRef) {
-    dialogTaskEditContentRef.style.height = dialogTaskContentRef.offsetHeight + "px";
+    dialogTaskEditContentRef.style.height =
+      dialogTaskContentRef.offsetHeight + "px";
   }
 }
 
@@ -290,26 +291,30 @@ function renderPrioButton(prioName, activePrio) {
       data-prio="${prioGet}" 
       type="button"
       onclick="setPrioActive(this)">
-      ${prioFullName} <img class="prio_overlay_task" src="${isActive ? iconPathClicked : iconPath}">
+      ${prioFullName} <img class="prio_overlay_task" src="${
+    isActive ? iconPathClicked : iconPath
+  }">
     </button>
   `;
 }
 
 function setPrioActive(clickedButton) {
-  let prioButtons = clickedButton.parentElement.querySelectorAll(".prio_edit_button");
+  let prioButtons =
+    clickedButton.parentElement.querySelectorAll(".prio_edit_button");
   let prioButtonClicked = clickedButton.classList.contains("active");
-    prioButtons.forEach((btn) => {
-      btn.classList.remove("active");
-      let prio = btn.dataset.prio;
-      let icon = btn.querySelector("img");
-      icon.src = `../assets/icons/priority-${prio}.png`;
-    });
-    if (!prioButtonClicked) {
-      clickedButton.classList.add("active");
-      let prio = clickedButton.dataset.prio;
-      let icon = clickedButton.querySelector("img");
-      icon.src = `../assets/icons/priority-clicked-${prio}.png`;
-    }}
+  prioButtons.forEach((btn) => {
+    btn.classList.remove("active");
+    let prio = btn.dataset.prio;
+    let icon = btn.querySelector("img");
+    icon.src = `../assets/icons/priority-${prio}.png`;
+  });
+  if (!prioButtonClicked) {
+    clickedButton.classList.add("active");
+    let prio = clickedButton.dataset.prio;
+    let icon = clickedButton.querySelector("img");
+    icon.src = `../assets/icons/priority-clicked-${prio}.png`;
+  }
+}
 
 let flatpickrInstance = null;
 function toggleFlatpickr() {
@@ -321,23 +326,39 @@ function toggleFlatpickr() {
   }
 }
 
-
 function openAddTaskOverlay() {
   const addOverlayRef = document.getElementById("overlayAddTask");
   const openAddTaskOverlayRef = document.getElementById("addTaskContent");
 
   document.body.style.overflow = "hidden";
   addOverlayRef.classList.remove("d-nonevip");
+
   openAddTaskOverlayRef.innerHTML = getAddTaskTemplate();
+  animateSlideIn();
   initAddTask();
+}
+
+function animateSlideIn() {
+  const taskContentRef = document.getElementById("addTaskOverlay");
+
+  taskContentRef.style.transition = "none";
+  taskContentRef.style.transform = "translateX(100%)";
+  taskContentRef.style.opacity = "0";
+
+  requestAnimationFrame(() => {
+    taskContentRef.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+
+    taskContentRef.style.transform = "translateX(0)";
+    taskContentRef.style.opacity = "1";
+  });
 }
 
 function closeAddTaskOverlay() {
   const addOverlayRef = document.getElementById("overlayAddTask");
 
-    resetAllPriorities();
-    document.body.style.overflow = "";
-    addOverlayRef.classList.add("d-nonevip");
+  resetAllPriorities();
+  document.body.style.overflow = "";
+  addOverlayRef.classList.add("d-nonevip");
 }
 
 function closeAddTaskOverlaySuccses() {
@@ -362,8 +383,10 @@ async function loadData(path = "") {
 async function updateDataEdit(tasksEditRef) {
   let tasks = await fetchData("/tasks/");
 
-  let taskKeyEdit = Object.keys(tasks).find(k => String(tasks[k].id) === String(tasksEditRef));
-  let prioButton = document.querySelector('.prio_edit_button.active');
+  let taskKeyEdit = Object.keys(tasks).find(
+    (k) => String(tasks[k].id) === String(tasksEditRef)
+  );
+  let prioButton = document.querySelector(".prio_edit_button.active");
   let priorityEdit = prioButton.dataset.prio;
   let data = {
     id: tasks[taskKeyEdit].id,
@@ -375,13 +398,12 @@ async function updateDataEdit(tasksEditRef) {
     assignedTo: await searchContacts(),
     subTasks: subtasks,
     status: tasks[taskKeyEdit].status,
-  }
+  };
 
   await putDataEdit(`/tasks/${taskKeyEdit}`, data);
   await loadTasks();
 
   overlayTask(data.id);
-
 }
 
 async function putDataEdit(path = "", data = {}) {

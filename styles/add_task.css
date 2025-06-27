@@ -13,11 +13,12 @@ main {
 
 .form {
   display: flex;
-
   width: 800px;
-
   margin-right: auto;
   margin-left: auto;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .seperator {

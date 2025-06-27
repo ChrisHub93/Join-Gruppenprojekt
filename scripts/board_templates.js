@@ -29,7 +29,7 @@ function getAddTaskTemplate() {
         </div>
       </div>
     </header>
-  <div class="form">
+  <div id="addTaskOverlay" class="form">
         <div class="hedalineAddTask">
           <h1 class="hedalineAddTask__headline">Add Task</h1>
           <button class="hedalineAddTask__closeBtn" onclick="closeAddTaskOverlay()">
