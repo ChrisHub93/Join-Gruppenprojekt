@@ -434,7 +434,7 @@ function subtasksOverlayRenderEdit(tasksEditRef) {
         <ul>
           <li>
             <div class="flex_edit">
-              <p class="cursor_overlay_task">${subtask}</p>
+              <p>${subtask}</p>
               <div class="hide_edit_subtask">
                 <img class="edit_icons" src="../assets/icons/edit.png">
                 <div class="seperator_edit"></div>

@@ -395,7 +395,7 @@ async function updateDataEdit(tasksEditRef) {
     date: date.value,
     priority: priorityEdit,
     assignedTo: await searchContacts(),
-    subTasks: subtasks,
+    subTasks: getUpdatedSubtasks(),
     status: tasks[taskKeyEdit].status,
   };
 
@@ -414,4 +414,21 @@ async function putDataEdit(path = "", data = {}) {
     body: JSON.stringify(data),
   });
   return await response.json();
+}
+
+function getUpdatedSubtasks() {
+    let editedSubtasks = document.querySelectorAll('.flex_edit');
+    let updatedSubtasks = [];
+
+  for (let el of editedSubtasks) {
+    let pTag = el.querySelector('p');
+
+    if (pTag) {
+      let text = pTag.textContent.trim();
+      if (text !== '') {
+        updatedSubtasks.push(text);
+      }
+    }
+  }
+  return updatedSubtasks;
 }
