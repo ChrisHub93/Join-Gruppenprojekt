@@ -30,6 +30,8 @@
   border-radius: 30px;
   gap: 8px;
 }
+
+
 .formTransform {
   transform: translateX(100%);
   opacity: 0;
