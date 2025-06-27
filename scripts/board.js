@@ -332,47 +332,29 @@ function openAddTaskOverlay() {
 
   document.body.style.overflow = "hidden";
   addOverlayRef.classList.remove("d-nonevip");
-
   openAddTaskOverlayRef.innerHTML = getAddTaskTemplate();
-  animateSlideIn();
-  initAddTask();
-}
 
-function animateSlideIn() {
   const taskContentRef = document.getElementById("addTaskOverlay");
+  taskContentRef.classList.remove("animate-out"); 
+  void taskContentRef.offsetWidth; 
+  taskContentRef.classList.add("animate-in");
 
-  taskContentRef.style.transition = "none";
-  taskContentRef.style.transform = "translateX(100%)";
-  taskContentRef.style.opacity = "0";
-
-  requestAnimationFrame(() => {
-    taskContentRef.style.transition = "transform 0.3s ease, opacity 0.3s ease";
-
-    taskContentRef.style.transform = "translateX(0)";
-    taskContentRef.style.opacity = "1";
-  });
+  initAddTask();
 }
 
 function closeAddTaskOverlay() {
   const addOverlayRef = document.getElementById("overlayAddTask");
-
-  animateSlideOut(() => {
-    document.body.style.overflow = "";
-    addOverlayRef.classList.add("d-nonevip");
-    resetAllPriorities();
-  });
-}
-
-function animateSlideOut(callback) {
   const taskContentRef = document.getElementById("addTaskOverlay");
 
-  taskContentRef.style.transition = "transform 0.3s ease, opacity 0.3s ease";
-  taskContentRef.style.transform = "translateX(100%)";
-  taskContentRef.style.opacity = "0";
+  taskContentRef.classList.remove("animate-in");
+  void taskContentRef.offsetWidth; 
+  taskContentRef.classList.add("animate-out");
 
-  taskContentRef.addEventListener("transitionend", function handler() {
-    taskContentRef.removeEventListener("transitionend", handler);
-    if (typeof callback === "function") callback();
+  taskContentRef.addEventListener("animationend", function handler() {
+    taskContentRef.removeEventListener("animationend", handler);
+    addOverlayRef.classList.add("d-nonevip");
+    document.body.style.overflow = "";
+    resetAllPriorities();
   });
 }
 
