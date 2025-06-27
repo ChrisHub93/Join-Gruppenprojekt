@@ -30,6 +30,11 @@
   border-radius: 30px;
   gap: 8px;
 }
+.formTransform {
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
 
 .form > .AddTaskContentContainer {
   flex-grow: 1;

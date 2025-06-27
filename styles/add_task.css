@@ -16,10 +16,9 @@ main {
   width: 800px;
   margin-right: auto;
   margin-left: auto;
-  transform: translateX(100%);
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
 }
+
+
 
 .seperator {
   width: 1px;
@@ -66,7 +65,10 @@ textarea {
   cursor: pointer;
 } */
 
-.inputTitle, .textareaDescription, .inputDate, .inputSubTask{
+.inputTitle,
+.textareaDescription,
+.inputDate,
+.inputSubTask {
   border: 1px solid var(--snd-color);
   border-radius: 8px;
   width: 100%;
@@ -94,12 +96,14 @@ textarea:focus {
   outline: none;
 } */
 
-.inputTitle:focus, .inputDate:focus, .inputSubTask:focus{
+.inputTitle:focus,
+.inputDate:focus,
+.inputSubTask:focus {
   border-color: var(--focus-color);
   outline: none;
 }
 
-.textareaDescription:focus{
+.textareaDescription:focus {
   border-color: var(--focus-color);
   outline: none;
 }
@@ -351,7 +355,7 @@ footer {
   bottom: 72px;
 }
 
-.sectionFooter{
+.sectionFooter {
   width: calc(100% - 232px);
   z-index: 1;
   position: absolute;
@@ -486,7 +490,7 @@ footer {
   width: 100%;
 } */
 
-.subTaskAdded{
+.subTaskAdded {
   border: none;
   font-size: 14px;
   background-color: transparent;
@@ -495,7 +499,7 @@ footer {
   width: 100%;
 }
 
-.subTaskAdded:focus{
+.subTaskAdded:focus {
   outline: none;
 }
 
@@ -509,7 +513,7 @@ footer {
   cursor: pointer;
 }
 
-.trashOrCheck{
+.trashOrCheck {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -554,11 +558,11 @@ footer {
   margin-bottom: 8px;
 }
 
-.relative:hover{
+.relative:hover {
   background-color: var(--snd-color);
 }
 
-.relative:hover [id^=editOrTrash]{
+.relative:hover [id^="editOrTrash"] {
   display: flex !important;
 }
 
@@ -685,7 +689,6 @@ div[id^="bullet"] {
     bottom: 8px;
     width: calc(100% - 200px);
   }
-  
 
   .sectionButtons {
     /* width: auto; */
@@ -710,13 +713,13 @@ div[id^="bullet"] {
   }
 }
 
-@media (max-width: 768px){
-  main{
+@media (max-width: 768px) {
+  main {
     width: 100%;
     height: calc(100vh - 90px);
   }
 
-  .sectionButtons{
+  .sectionButtons {
     bottom: 90px;
   }
 }
@@ -836,11 +839,10 @@ div[id^="bullet"] {
     padding-bottom: 8px;
     background-color: var(--bg-color);
   }
-
 }
 
-@media (max-width: 545px){
-  .sectionButtons{
+@media (max-width: 545px) {
+  .sectionButtons {
     bottom: 80px;
   }
 }
