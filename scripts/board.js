@@ -356,9 +356,24 @@ function animateSlideIn() {
 function closeAddTaskOverlay() {
   const addOverlayRef = document.getElementById("overlayAddTask");
 
-  resetAllPriorities();
-  document.body.style.overflow = "";
-  addOverlayRef.classList.add("d-nonevip");
+  animateSlideOut(() => {
+    document.body.style.overflow = "";
+    addOverlayRef.classList.add("d-nonevip");
+    resetAllPriorities();
+  });
+}
+
+function animateSlideOut(callback) {
+  const taskContentRef = document.getElementById("addTaskOverlay");
+
+  taskContentRef.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+  taskContentRef.style.transform = "translateX(100%)";
+  taskContentRef.style.opacity = "0";
+
+  taskContentRef.addEventListener("transitionend", function handler() {
+    taskContentRef.removeEventListener("transitionend", handler);
+    if (typeof callback === "function") callback();
+  });
 }
 
 function closeAddTaskOverlaySuccses() {
@@ -372,6 +387,8 @@ function closeAddTaskOverlaySuccses() {
     document.getElementById("AddTaskSuccesMessage").style.display = "none";
   }, 700);
 }
+
+
 
 async function loadData(path = "") {
   let response = await fetch(BASE_URL + path + ".json");
