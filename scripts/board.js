@@ -432,3 +432,44 @@ function getUpdatedSubtasks() {
   }
   return updatedSubtasks;
 }
+
+function editSubtask(iconElement) {
+  let ul = iconElement.closest("ul");
+  let currentText = ul.querySelector("p").innerText;
+
+  let newContainer = document.createElement("div");
+  newContainer.classList.add("subtask_edit_wrapper");
+  newContainer.innerHTML = `
+    <input type="text" value="${currentText}" class="subtask_input_edit">
+    <div class="edit_subtask_checkbox">
+      <img class="edit_icons" src="../assets/icons/check-subtask.png" onclick="saveSubtask(this)">
+      <div class="seperator_edit"></div>
+      <img class="edit_icons" src="../assets/icons/delete.png">
+    </div>
+  `;
+  ul.replaceWith(newContainer);
+  let inputActive = newContainer.querySelector("input");
+  inputActive.focus();
+  inputActive.setSelectionRange(inputActive.value.length, inputActive.value.length);
+}
+
+function saveSubtask(iconElement) {
+  let updatedSubtask = iconElement.closest(".subtask_edit_wrapper");
+  let newValue = updatedSubtask.querySelector("input").value;
+
+  let newUL = document.createElement("ul");
+  newUL.innerHTML = `
+    <li>
+      <div onclick="editSubtask(this)" class="flex_edit">
+        <p>${newValue}</p>
+        <div class="hide_edit_subtask">
+          <img class="edit_icons" src="../assets/icons/edit.png">
+          <div class="seperator_edit"></div>
+          <img class="edit_icons" src="../assets/icons/delete.png">
+        </div>
+      </div>
+    </li>
+  `;
+
+  updatedSubtask.replaceWith(newUL);
+}

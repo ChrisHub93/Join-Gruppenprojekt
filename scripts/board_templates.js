@@ -377,7 +377,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
           <div class="form_edit_container">
             <label for="subTaskInput">Subtasks</label>
             <div class="edit_subtask_input">  
-              <input class="border_edit_active" type="text" name="subtasks" id="subTaskInputEdit" placeholder="Add new subtask"/>
+              <input class="border_edit_active" type="text" name="subtasks" id="subTaskInput" placeholder="Add new subtask"/>
               <img onclick="chooseSubTask()" id="plusIcon" class="plusIcon_edit" src="../assets/icons/Subtasks-plus.png"/>
               <div id="cancelOrCheck" class="cancelOrCheck d-nonevip">
                 <img ="deleteTask()" src="../assets/icons/iconoir_cancel.png"/>
@@ -433,7 +433,7 @@ function subtasksOverlayRenderEdit(tasksEditRef) {
           (subtask) => `
         <ul>
           <li>
-            <div class="flex_edit">
+            <div onclick="editSubtask(this)" class="flex_edit">
               <p>${subtask}</p>
               <div class="hide_edit_subtask">
                 <img class="edit_icons" src="../assets/icons/edit.png">
