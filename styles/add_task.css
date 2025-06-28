@@ -711,6 +711,12 @@ div[id^="bullet"] {
     gap: 12px;
     /* padding-right: 32px; */
   }
+
+  .header-top-profile{
+    padding-right: 40px !important;
+    gap: 16px !important;
+  }
+
 }
 
 @media (max-width: 768px) {
@@ -722,6 +728,16 @@ div[id^="bullet"] {
   .sectionButtons {
     bottom: 90px;
   }
+
+   .header-top-profile{
+    padding-left: 70px !important;
+  }
+
+  /*
+  .navbar{
+    margin-top: 18px !important;
+  } */
+
 }
 
 @media (max-width: 630px) {
@@ -839,6 +855,11 @@ div[id^="bullet"] {
     padding-bottom: 8px;
     background-color: var(--bg-color);
   }
+
+  .header-top-profile{
+    padding-right: 40px !important;
+  }
+
 }
 
 @media (max-width: 545px) {
