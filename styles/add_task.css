@@ -665,7 +665,7 @@ div[id^="bullet"] {
     width: auto;
     margin-right: 32px;
     margin-left: 32px;
-    height: auto;
+    height: auto !important;
   }
 
   .form {
@@ -737,6 +737,10 @@ div[id^="bullet"] {
   .navbar{
     margin-top: 18px !important;
   } */
+
+  .markedFieldsResponsive{
+    padding-bottom: 120px;
+  }
 
 }
 
@@ -832,7 +836,7 @@ div[id^="bullet"] {
   }
 
   .markedFieldsResponsive {
-    padding-bottom: 140px;
+    padding-bottom: 100px;
   }
 
   footer {
