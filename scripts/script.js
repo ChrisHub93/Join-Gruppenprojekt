@@ -4,18 +4,16 @@ const BASE_URL = 'https://join-464-default-rtdb.europe-west1.firebasedatabase.ap
 function init() {
     activeMenuStorage();
     sidebarVisibility();
+    getProfile();
 }
 
 function loginAsGuest() {
     sessionStorage.setItem('loginStatus', 'guest');
 }
 
-// function loginAsUser() {
-//     sessionStorage.setItem('loginStatus', 'user');
-// }
-
 function logout() {
     sessionStorage.setItem('loginStatus', 'none');
+    sessionStorage.removeItem('loggedInUser')
 }
 
 function sidebarVisibility() {
@@ -125,4 +123,57 @@ function checkBlacklist() {
         return true;
     }
     return false;
+}
+
+function getInitials(name) {
+  return name
+    .split(" ")
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
+}
+
+function getAssignedInitials(assignedToArray) {
+  if (assignedToArray === undefined) {
+    return `
+    <p class="assigned_to_empty">Nobody assigned yet</p>`;
+  } else {
+    return assignedToArray
+      .map((name) => {
+        let initials = getInitials(name);
+        let assignedColor = getAvatarColorClass(name);
+        return assignedLineRender(initials, name, assignedColor);
+      })
+      .join("");
+  }
+}
+
+function getAvatarColorClass(name) {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  let index = Math.abs(hash) % 15;
+  return `initials_color_${index}`;
+}
+
+function getUserNameColorClass(name) {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  let index = Math.abs(hash) % 15;
+  return `user_color_${index}`;
+}
+
+function getProfile() {
+    let profileRef = document.getElementById('profile');
+    let username = sessionStorage.getItem('loggedInUser');
+    let usernameInitials = getInitials(username);
+    let colorClass = getUserNameColorClass(username);
+    if (username) {
+        profileRef.innerHTML = getProfileRender(colorClass, usernameInitials);
+    } else {
+        profileRef.innerHTML = getProfileRenderGuest();
+    }
 }

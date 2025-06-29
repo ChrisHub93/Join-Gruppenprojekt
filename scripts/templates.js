@@ -1,8 +1,14 @@
-function getProfile() {
+function getProfileRender(colorClass, username) { 
   return `
-                <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
-                <p onclick="showNavbar()" class="personal-icon">    </p>
+          <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
+          <p onclick="showNavbar()" class="personal-icon ${colorClass}">${username}</p>
     `;
+}
+
+function getProfileRenderGuest() {
+  return `                
+          <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
+          <p onclick="showNavbar()" class="personal-icon">G</p>`
 }
 
 function getSubTasksTemplate(inputRef) {

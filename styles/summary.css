@@ -26,6 +26,7 @@
 .summary-headline{
     height: 73px;
     width: 625px;
+    cursor: default;
 }
 
 .center-between{
@@ -145,6 +146,7 @@
     font-size: 47px;
     font-weight: 500;
     color: #2A3647;
+    cursor: default;
 }
 
 .todone-icon{
@@ -175,6 +177,11 @@
 
 .summary-box:hover .seperator-urgent{
     background-color: white;
+}
+
+.active_user_greeting{
+    font-size: 64px;
+    font-weight: 700;
 }
 
 @media (max-width:1190px) {

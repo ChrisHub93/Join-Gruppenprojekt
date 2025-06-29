@@ -35,6 +35,8 @@ function search(dataValues) {
 
     if (mails == email && passwords == password) {
       pwAndUserFound = true;
+      sessionStorage.setItem('loginStatus', 'user');
+      sessionStorage.setItem('loggedInUser', listOfUser.name);
       window.location.href = "../html/summary.html";
       return;
     }

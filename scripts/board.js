@@ -207,38 +207,6 @@ function toggleSubtask(img) {
   }
 }
 
-function getInitials(name) {
-  return name
-    .split(" ")
-    .map((word) => word[0])
-    .join("")
-    .toUpperCase();
-}
-
-function getAssignedInitials(assignedToArray) {
-  if (assignedToArray === undefined) {
-    return `
-    <p class="assigned_to_empty">Nobody assigned yet</p>`;
-  } else {
-    return assignedToArray
-      .map((name) => {
-        let initials = getInitials(name);
-        let assignedColor = getAvatarColorClass(name);
-        return assignedLineRender(initials, name, assignedColor);
-      })
-      .join("");
-  }
-}
-
-function getAvatarColorClass(name) {
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  let index = Math.abs(hash) % 15;
-  return `initials_color_${index}`;
-}
-
 function subtasksOverlay(subtasks) {
   if (subtasks === undefined) {
     return "";
@@ -442,9 +410,9 @@ function editSubtask(iconElement) {
   newContainer.innerHTML = `
     <input type="text" value="${currentText}" class="subtask_input_edit">
     <div class="edit_subtask_checkbox">
-      <img class="edit_icons" src="../assets/icons/check-subtask.png" onclick="saveSubtask(this)">
+      <img class="edit_icons edit_icons_subtask_change" src="../assets/icons/check-subtask.png" onclick="saveSubtask(this)">
       <div class="seperator_edit"></div>
-      <img class="edit_icons" src="../assets/icons/delete.png">
+      <img class="edit_icons edit_icons_subtask_change" src="../assets/icons/delete.png">
     </div>
   `;
   ul.replaceWith(newContainer);

@@ -31,21 +31,35 @@ function getGreeting() {
 
 function showGreeting() {
     let greeting = getGreeting();
+    let username = sessionStorage.getItem('loggedInUser');
+    let fullGreeting = checkUserOrGuest(greeting, username);
     document.querySelectorAll(".greeting").forEach(gr => gr.textContent = greeting);
     let loadingMobile = window.innerWidth < 768;
     let overlay = document.getElementById("greeting-overlay");
     let mainContent = document.getElementById("main-content");
-
     if (loadingMobile) {
-        document.getElementById("greeting-overlay-text").textContent = greeting;
-        overlay.style.display = "flex";
+        mobileGreeting(fullGreeting, overlay, mainContent);
+    } else {
+        document.getElementById("greeting-main-text").innerHTML = fullGreeting;
+        overlay.style.display = "none";
+        mainContent.style.display = "block";
+    }
+}
+
+function checkUserOrGuest(greeting, username) {
+    if (username) {
+        let colorClass = getUserNameColorClass(username);
+        return `${greeting},<br> <span class="${colorClass} active_user_greeting">${username}</span>`;
+    } else {
+        return greeting;
+    }
+}
+
+function mobileGreeting(fullGreeting, overlay, mainContent) {
+    document.getElementById("greeting-overlay-text").innerHTML = fullGreeting;
+    overlay.style.display = "flex";
         setTimeout(() => {
             overlay.style.display = "none";
             mainContent.style.display = "block";
         }, 2000);
-    } else {
-        document.getElementById("greeting-main-text").textContent = greeting;
-        overlay.style.display = "none";
-        mainContent.style.display = "block";
-    }
 }
