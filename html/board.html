@@ -21,7 +21,7 @@
         <script src="../scripts/board_templates.js"></script>
     <script src="../scripts/add_task.js"></script>
   </head>
-  <body onload="init(); loadTasks()">
+  <body onload="logIn(); init(); loadTasks()">
     <div class="page-box">
       <aside id="sidebar" class="sidebar">
         <img class="sidebar-logo" src="../assets/img/Capa 1 white.png" alt="" />
@@ -163,14 +163,14 @@
         <div class="headline__inputs">
           <input class="headline__input" type="text" placeholder="Find Task" />
 
-          <button class="headline__inputs__imgs">
+          <div class="headline__inputs__imgs">
             <img src="../assets/icons/Vector 3.svg" alt="linke" />
             <img
               class="headline__inputs__imgs__search"
               src="../assets/icons/Property 1=Default.svg"
               alt="search icon"
             />
-          </button>
+          </div>
           <button class="addTaskBtn" onclick="openAddTaskOverlay(); setPriorityMedium(`medium`)">
             Add Task
             <img src="../assets/icons/add.svg" alt="Add icon" />
