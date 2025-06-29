@@ -161,16 +161,16 @@
           </button>
         </div>
         <div class="headline__inputs">
-          <input class="headline__input" type="text" placeholder="Find Task" />
+          <input oninput="filterTasks()" id="filterTasks" class="headline__input" type="text" placeholder="Find Task" />
 
-          <button class="headline__inputs__imgs">
+          <div class="headline__inputs__imgs">
             <img src="../assets/icons/Vector 3.svg" alt="linke" />
             <img
               class="headline__inputs__imgs__search"
               src="../assets/icons/Property 1=Default.svg"
               alt="search icon"
             />
-          </button>
+          </div>
           <button class="addTaskBtn" onclick="openAddTaskOverlay(); setPriorityMedium(`medium`)">
             Add Task
             <img src="../assets/icons/add.svg" alt="Add icon" />

@@ -473,3 +473,77 @@ function saveSubtask(iconElement) {
 
   updatedSubtask.replaceWith(newUL);
 }
+
+function filterTasks() {
+  let searchInput = document.getElementById('filterTasks').value.trim();
+  console.log(searchInput)
+  let filteredTask = todos.slice(0).filter(todos => todos.title.includes(searchInput));
+  console.log(filteredTask);
+  todos = filteredTask;
+  loadSearch(todos);
+}
+
+function loadSearch(todos) {
+  let searchInput = document.getElementById('filterTasks').value;
+  if (searchInput === "") {
+    loadTasks();
+    return;
+  }
+
+  let toDoContentRef = document.getElementById("toDoContent");
+  let inProgressContentRef = document.getElementById("inProgressContent");
+  let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
+  let doneContentRef = document.getElementById("doneContent");
+
+  // console.log("TodDOs vor filter:",todos);
+  let statusToDo = todos.filter((task) => task.status === "To do");
+
+  let statusInProgress = todos.filter((task) => task.status === "In progress");
+  let statusAwaitFeedback = todos.filter(
+    (task) => task.status === "Await feedback"
+  );
+
+  let statusDone = todos.filter((task) => task.status === "Done");
+
+  toDoContentRef.innerHTML = "";
+  inProgressContentRef.innerHTML = "";
+  awaitFeedbackContentRef.innerHTML = "";
+  doneContentRef.innerHTML = "";
+
+  if (statusToDo.length === 0) {
+    toDoContentRef.innerHTML = getEmptyTemplate();
+  } else {
+    for (let index = 0; index < statusToDo.length; index++) {
+      const element = statusToDo[index];
+      toDoContentRef.innerHTML += getTaskTemplate(element);
+    }
+  }
+
+  if (statusInProgress.length == 0) {
+    inProgressContentRef.innerHTML = getEmptyTemplate();
+  } else {
+    for (let index = 0; index < statusInProgress.length; index++) {
+      const element = statusInProgress[index];
+      inProgressContentRef.innerHTML += getTaskTemplate(element);
+    }
+  }
+
+  if (statusAwaitFeedback.length == 0) {
+    awaitFeedbackContentRef.innerHTML = getEmptyTemplate();
+  } else {
+    for (let index = 0; index < statusAwaitFeedback.length; index++) {
+      const element = statusAwaitFeedback[index];
+      awaitFeedbackContentRef.innerHTML += getTaskTemplate(element);
+    }
+  }
+
+  if (statusDone.length == 0) {
+    doneContentRef.innerHTML = getEmptyTemplate();
+  } else {
+    for (let index = 0; index < statusDone.length; index++) {
+      const element = statusDone[index];
+
+      doneContentRef.innerHTML += getTaskTemplate(element);
+    }
+  }
+}
