@@ -475,9 +475,9 @@ function saveSubtask(iconElement) {
 }
 
 function filterTasks() {
-  let searchInput = document.getElementById('filterTasks').value.trim();
+  let searchInput = document.getElementById('filterTasks').value.trim().toLowerCase();
   console.log(searchInput)
-  let filteredTask = todos.slice(0).filter(todos => todos.title.includes(searchInput));
+  let filteredTask = todos.slice(0).filter(todos => todos.title.toLowerCase().includes(searchInput) || todos.description.toLowerCase().includes(searchInput));
   console.log(filteredTask);
   todos = filteredTask;
   loadSearch(todos);
