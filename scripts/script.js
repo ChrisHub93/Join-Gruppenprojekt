@@ -169,9 +169,9 @@ function getUserNameColorClass(name) {
 function getProfile() {
     let profileRef = document.getElementById('profile');
     let username = sessionStorage.getItem('loggedInUser');
-    let usernameInitials = getInitials(username);
-    let colorClass = getUserNameColorClass(username);
     if (username) {
+        let usernameInitials = getInitials(username);
+        let colorClass = getUserNameColorClass(username);
         profileRef.innerHTML = getProfileRender(colorClass, usernameInitials);
     } else {
         profileRef.innerHTML = getProfileRenderGuest();
