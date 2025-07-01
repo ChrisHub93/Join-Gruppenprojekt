@@ -1,6 +1,7 @@
 function initSummary() {
     iconHoverSwaps();
     showGreeting();
+    filterTaskSummary();
 }
 
 function iconHoverSwaps() {
@@ -63,3 +64,44 @@ function mobileGreeting(fullGreeting, overlay, mainContent) {
             mainContent.style.display = "block";
         }, 2000);
 }
+
+async function filterTaskSummary() {
+    let tasks = await fetchData("/tasks/");
+    todos = Object.values(tasks);
+    let checkboxRef = document.getElementById('checkbox')
+
+    let tasksToDo = todos.filter(task => task.status === "To do");
+    let tasksDone = todos.filter(task => task.status === "Done");
+    let tasksProgress = todos.filter(task => task.status === "In progress");
+    let tasksFeedback = todos.filter(task => task.status === "Await feedback");
+    let tasksUrgent = todos.filter(task => task.priority === "urgent");
+
+    tasksUrgent.sort((a,b) => new Date(a.date) - new Date(b.date));
+    let tasksPrioDate = tasksUrgent[0].date;
+    let urgentDate = formatDatetoEnglish(tasksPrioDate);
+    
+
+    checkboxRef.innerHTML = getCheckboxSummary(tasksToDo, tasksDone, tasksProgress, tasksFeedback, tasksUrgent, todos, urgentDate)   
+}
+
+async function fetchData(path) {
+  let response = await fetch(BASE_URL + path + ".json");
+  let responseAsJson = await response.json();
+  return responseAsJson;
+}
+
+function formatDatetoEnglish(tasksPrioDate) {
+    let date = new Date(tasksPrioDate);
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    const day = date.getDate();
+    const month = monthNames[date.getMonth()];
+    const year = date.getFullYear();
+
+    return `${month} ${day}, ${year}`;
+}
+
+
