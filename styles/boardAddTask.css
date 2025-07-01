@@ -66,7 +66,7 @@
 }
 @keyframes rotate {
   0% {transform: rotate(0deg);}
-  100% {transform: rotate(45deg);}
+  100% {transform: rotate(15deg);}
 }
 
 .animate-straight{
@@ -74,7 +74,7 @@
 }
 
 @keyframes straight {
-  0% {transform: rotate(45deg);}
+  0% {transform: rotate(15deg);}
   100% {transform: rotate(0deg);}
 }
 

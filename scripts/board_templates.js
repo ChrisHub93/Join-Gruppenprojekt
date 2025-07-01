@@ -507,7 +507,7 @@ function renderOverlayTaskContent(tasksRef) {
 }
 
 function getTaskTemplate(element) {
-  return `<div onclick="overlayTask(${element["id"]})" class="filledContainer" draggable = "true" ondragstart="startDragging(${element["id"]})">
+  return `<div id="${element["id"]}" onclick="overlayTask(${element["id"]})" class="filledContainer" draggable = "true" ondragstart="startDragging(${element["id"]})" ondragend="stopDragging()">
               <div class="filledContainer__category">
                 <p>${element.category}</p>
               </div>

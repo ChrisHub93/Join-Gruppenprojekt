@@ -70,10 +70,27 @@ async function loadTasks() {
 function startDragging(id) {
   currentDraggedElement = id;
   console.log(currentDraggedElement);
+  rotateAnimation()
+}
+
+function stopDragging() {
+  straightAnimation()
 }
 
 function allowDrop(event) {
   event.preventDefault();
+}
+
+function rotateAnimation() {
+  const taskRef = document.getElementById(currentDraggedElement);
+  taskRef.classList.remove("animate-straight");
+  taskRef.classList.add("animate-rotate");
+}
+
+function straightAnimation() {
+  const taskRef = document.getElementById(currentDraggedElement);
+  taskRef.classList.remove("animate-rotate");
+  taskRef.classList.add("animate-straight");
 }
 
 async function moveTo(status) {
