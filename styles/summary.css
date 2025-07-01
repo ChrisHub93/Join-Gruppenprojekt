@@ -184,7 +184,7 @@
     font-weight: 700;
 }
 
-@media (max-width:1190px) {
+@media (max-width:1200px) {
     .overview{
         flex-direction: column-reverse;
         align-items: flex-start;
