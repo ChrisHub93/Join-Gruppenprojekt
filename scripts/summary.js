@@ -1,5 +1,4 @@
 function initSummary() {
-    iconHoverSwaps();
     showGreeting();
     filterTaskSummary();
 }
@@ -69,19 +68,16 @@ async function filterTaskSummary() {
     let tasks = await fetchData("/tasks/");
     todos = Object.values(tasks);
     let checkboxRef = document.getElementById('checkbox')
-
     let tasksToDo = todos.filter(task => task.status === "To do");
     let tasksDone = todos.filter(task => task.status === "Done");
     let tasksProgress = todos.filter(task => task.status === "In progress");
     let tasksFeedback = todos.filter(task => task.status === "Await feedback");
     let tasksUrgent = todos.filter(task => task.priority === "urgent");
-
     tasksUrgent.sort((a,b) => new Date(a.date) - new Date(b.date));
     let tasksPrioDate = tasksUrgent[0].date;
     let urgentDate = formatDatetoEnglish(tasksPrioDate);
-    
-
-    checkboxRef.innerHTML = getCheckboxSummary(tasksToDo, tasksDone, tasksProgress, tasksFeedback, tasksUrgent, todos, urgentDate)   
+    checkboxRef.innerHTML = getCheckboxSummary(tasksToDo, tasksDone, tasksProgress, tasksFeedback, tasksUrgent, todos, urgentDate);
+    iconHoverSwaps();   
 }
 
 async function fetchData(path) {
