@@ -16,6 +16,7 @@
     padding-left: 348px;
     font-size: 20px;
     font-weight: 400;
+    cursor: default;
 }
 
 header{
@@ -41,13 +42,14 @@ header{
 }
 
 .help-icon{
-    width: 20px;
-    height: 20px;
+    object-fit: cover;
+    width: 30px;
+    height: 30px;
 }
 
 .help-icon:hover{
     cursor: pointer;
-    transform: scale(1.4);
+    transform: scale(1.3);
 }
 
 .personal-icon{
@@ -264,10 +266,6 @@ header{
     .help-icon{
         display: none;
     }
-
-    /* .d-none{
-        display: flex;
-    } */
 
     footer{
         display: flex !important;

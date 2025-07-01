@@ -21,7 +21,7 @@
         <script src="../scripts/board_templates.js"></script>
     <script src="../scripts/add_task.js"></script>
   </head>
-  <body onload="init(); loadTasks()">
+  <body onload="init(); loadTasks(); getProfile()">
     <div class="page-box">
       <aside id="sidebar" class="sidebar">
         <img class="sidebar-logo" src="../assets/img/Capa 1 white.png" alt="" />
@@ -106,12 +106,10 @@
       <p class="header-name">Kanban Project Management Tool</p>
       <img class="headerLogo d-none" src="../assets/img/Capa 1.png" alt="" />
       <div class="profile-navbar">
-        <div class="header-top-profile">
-          <a href="../html/help.html"
-            ><img class="help-icon" src="../assets/icons/help.png" alt=""
-          /></a>
-          <p id="profile" onclick="showNavbar()" class="personal-icon">G</p>
-        </div>
+            <div class="header-top-profile">
+                <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
+                <div id="profile"></div>
+            </div>
         <div id="navbar" class="navbar d-none">
           <a class="navbarlink" href="../html/help.html">Help</a>
           <a

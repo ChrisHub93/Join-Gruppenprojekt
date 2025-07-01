@@ -1,13 +1,11 @@
 function getProfileRender(colorClass, username) { 
   return `
-          <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
           <p onclick="showNavbar()" class="personal-icon ${colorClass}">${username}</p>
     `;
 }
 
 function getProfileRenderGuest() {
   return `                
-          <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
           <p onclick="showNavbar()" class="personal-icon">G</p>`
 }
 
@@ -140,14 +138,14 @@ function getSortTitleTemplate(firstNameOfUser) {
 function getCheckboxSummary(tasksToDo, tasksDone, tasksProgress, tasksFeedback, tasksUrgent, todos, urgentDate) {
   return `
           <div class="center-between">
-            <div class="summary-box checkboxtodo">
+            <div onclick="location.href = '../html/board.html'; activateMenu(this, 'board')" class="summary-box checkboxtodo">
                 <img class="todone-icon" src="../assets/icons/todo.png" data-alt-src="../assets/icons/todo-hover.png" alt="">
                 <div>
                     <p class="summary-number">${tasksToDo.length}</p>
                     <p class="summary-text">To-do</p>
                 </div>
             </div>
-            <div class="summary-box checkboxtodo">
+            <div onclick="location.href = '../html/board.html'; activateMenu(this, 'board')" class="summary-box checkboxtodo">
                 <img class="todone-icon" src="../assets/icons/done.png" data-alt-src="../assets/icons/done-hover.png" alt="">
                 <div>
                     <p class="summary-number">${tasksDone.length}</p>
@@ -155,7 +153,7 @@ function getCheckboxSummary(tasksToDo, tasksDone, tasksProgress, tasksFeedback, 
                 </div>
             </div>
         </div>
-        <div class="checkboxurgent summary-box space-evenly">
+        <div onclick="location.href = '../html/board.html'; activateMenu(this, 'board')" class="checkboxurgent summary-box space-evenly">
             <div class="flex-gap18">
                 <img class="summary-urgent" src="../assets/icons/prio-summary.png" alt="">
                 <div>
@@ -170,19 +168,19 @@ function getCheckboxSummary(tasksToDo, tasksDone, tasksProgress, tasksFeedback, 
                 </div>
         </div>
         <div class="page-box center-between">
-            <div class="summary-box checkboxoverall">
+            <div onclick="location.href = '../html/board.html'; activateMenu(this, 'board')" class="summary-box checkboxoverall">
                 <div class="checkboxbottom">
                     <p class="summary-number">${todos.length}</p>
                     <p class="summary-text">Tasks in Board</p>
                 </div>
             </div>
-            <div class="summary-box checkboxoverall">
+            <div onclick="location.href = '../html/board.html'; activateMenu(this, 'board')" class="summary-box checkboxoverall">
                 <div class="checkboxbottom">
                     <p class="summary-number">${tasksProgress.length}</p>
                     <p class="summary-text">Tasks in Progress</p>
                 </div>
             </div>
-            <div class="summary-box checkboxoverall">
+            <div onclick="location.href = '../html/board.html'; activateMenu(this, 'board')" class="summary-box checkboxoverall">
                 <div class="checkboxbottom">
                     <p class="summary-number">${tasksFeedback.length}</p>
                     <p class="summary-text">Awaiting Feedback</p>

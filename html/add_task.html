@@ -12,7 +12,7 @@
     <link rel="icon" type="image/x-icon" href="/assets/img/Capa 1.png" />
   </head>
 
-  <body onload="setPriorityMedium(`medium`);init(); initAddTask()">
+  <body onload="setPriorityMedium(`medium`);init(); initAddTask(); getProfile()">
     <header id="header" class="page-box">
       <p class="header-name">Kanban Project Management Tool</p>
       
@@ -20,7 +20,7 @@
             <div class="profile-navbar">
             <div class="header-top-profile">
                 <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
-                <p onclick="showNavbar()" class="personal-icon">G</p>
+                <div id="profile"></div>
             </div>
             <div id="navbar" class="navbar d-none">
                     <a class="navbarlink d-none" href="../html/help.html">Help</a>
@@ -39,8 +39,12 @@
                     <div class="sidebar-menu" menu-data="contacts" onclick="activateMenu(this, 'contacts')"><a class="sidebar-text" href="../html/contacts.html"><img src="../assets/icons/Contacts.png" class="sidebar-icon" alt="">Contacts</a></div>
                 </div>
                 <div class="sidebar-policy">
-                    <a class="policy-text" href="../html/privacy_policy.html">Privacy Policy</a>
-                    <a class="policy-text" href="../html/legal_notice.html">Legal Notice</a>
+                    <div class="policy-box">
+                        <a class="policy-text" menu-data="privacy_policy" onclick="activateMenu(this, 'privacy_policy')" href="../html/privacy_policy.html">Privacy Policy</a>
+                    </div>
+                    <div class="policy-box">
+                        <a class="policy-text" menu-data="legal_notice" onclick="activateMenu(this, 'legal_notice')" href="../html/legal_notice.html">Legal Notice</a>
+                    </div>
                 </div>
     </div>
 

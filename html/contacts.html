@@ -13,7 +13,7 @@
 
     <!-- <script src="../scripts/script.js"></script> -->
   </head>
-  <body onload="init(); initContacts()">
+  <body onload="init(); initContacts(); getProfile()">
     <div id="overlay" class="overlay d-nonevip" onclick="closeOverlay(event)">
       <div
         onclick="stopPropagation(event)"
@@ -315,12 +315,10 @@
     <header id="header" class="page-box">
       <p class="header-name">Kanban Project Management Tool</p>
       <img class="headerLogo d-none" src="/assets/img/Capa 1.png" alt="" />
-      <div class="header-top-profile">
-        <a href="../html/help.html"
-          ><img class="help-icon" src="../assets/icons/help.png" alt=""
-        /></a>
-        <p onclick="showNavbar()" class="personal-icon">G</p>
-      </div>
+            <div class="header-top-profile">
+                <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
+                <div id="profile"></div>
+            </div>
       <div id="navbar" class="navbar d-none">
         <a class="navbarlink d-none" href="../html/help.html">Help</a>
         <a class="navbarlink" href="../html/legal_notice.html">Legal Notice</a>

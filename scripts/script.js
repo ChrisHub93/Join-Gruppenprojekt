@@ -2,9 +2,13 @@ const BASE_URL = 'https://join-464-default-rtdb.europe-west1.firebasedatabase.ap
 
 
 function init() {
+    // let loginStatus = sessionStorage.getItem("loginStatus")
+    // if (loginStatus !== "user" && loginStatus !== "guest") {
+    //     window.location.href = "../index.html";
+    //     return;
+    // } aktivieren, wenn fertig mit dem Projekt
     activeMenuStorage();
     sidebarVisibility();
-    getProfile();
 }
 
 function loginAsGuest() {
