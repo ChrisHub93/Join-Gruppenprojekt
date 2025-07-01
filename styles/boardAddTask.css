@@ -31,6 +31,10 @@
   gap: 8px;
 }
 
+.animate-in {
+  animation: slideIn 0.3s ease forwards;
+}
+
 @keyframes slideIn {
   from {
     transform: translateX(100%);
@@ -40,6 +44,10 @@
     transform: translateX(0);
     opacity: 1;
   }
+}
+
+.animate-out {
+  animation: slideOut 0.3s ease forwards;
 }
 
 @keyframes slideOut {
@@ -53,14 +61,22 @@
   }
 }
 
-.animate-in {
-  animation: slideIn 0.3s ease forwards;
+.animate-rotate{
+  animation: rotate 0.3s ease forwards;
+}
+@keyframes rotate {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(45deg);}
 }
 
-.animate-out {
-  animation: slideOut 0.3s ease forwards;
+.animate-straight{
+  animation: straight 0.3s ease forwards;
 }
 
+@keyframes straight {
+  0% {transform: rotate(45deg);}
+  100% {transform: rotate(0deg);}
+}
 
 .formTransform {
   transform: translateX(100%);
