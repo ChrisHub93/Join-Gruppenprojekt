@@ -39,12 +39,12 @@
   }
 
 .hide-help{
-  display: none;
+  display: none !important;
 }
 
 @media (max-width: 768px) {
   .hide-help{
-    display: flex;
+    display: flex !important;
   }
 }
 
