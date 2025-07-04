@@ -584,6 +584,13 @@ mark {
   color: white;
 }
 
+.contacts_name_icon{
+    gap: 16px;
+    padding: 7px 16px;
+    display: flex;
+    align-items: center;
+}
+
 @media (max-width: px) {
 }
 

@@ -624,6 +624,25 @@ div[id^="bullet"] {
   font-size: 10px;
 }
 
+.contacts_name_icon{
+    gap: 16px;
+    padding: 7px 16px;
+    display: flex;
+    align-items: center;
+}
+
+.assigned_to_icon{
+  width: 42px;
+  height: 42px;
+  color: white;
+  border-radius: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 12px;
+}
+
 @media (max-width: 1100px) {
   .header-name {
     padding-left: calc(348px - 150px + 32px) !important;

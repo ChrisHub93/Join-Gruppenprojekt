@@ -19,17 +19,22 @@ function renderContactList(contacts) {
 
   if (contacts) {
     for (contact of contacts) {
-      allMembersRef.innerHTML += getContactList(contact);
+      let name = contact.firstname + " " + contact.lastname;
+      let assignedColor = getAvatarColorClass(name);
+      allMembersRef.innerHTML += getContactList(contact, assignedColor);
     }
   }
 }
 
-function getContactList(contact) {
+function getContactList(contact, assignedColor) {
   return `  <li
                   onclick="getContact('${contact.id}')"
                   id="contact${contact.id}"
                   class="optionsCategory inputFlex">
-                  ${contact.firstname + " "} ${contact.lastname}
+                  <div class="contacts_name_icon">
+                    <p class="assigned_to_icon ${assignedColor}">${contact.firstname.toUpperCase().charAt(0)}${contact.lastname.toUpperCase().charAt(0)}</p>
+                    ${contact.firstname + " "} ${contact.lastname}
+                  </div>
                   <input type="checkbox" class="checkBox" />
                   <img
                     onclick="setCheckBox('contact${contact.id}', event)"
