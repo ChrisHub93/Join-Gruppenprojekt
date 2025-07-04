@@ -311,7 +311,7 @@ function toggleFlatpickr() {
   }
 }
 
-function openAddTaskOverlay() {
+function openAddTaskOverlay(status) {
   const addOverlayRef = document.getElementById("overlayAddTask");
   const openAddTaskOverlayRef = document.getElementById("addTaskContent");
 
@@ -325,6 +325,9 @@ function openAddTaskOverlay() {
   taskContentRef.classList.add("animate-in");
 
   initAddTask();
+
+  currentStatus = status;
+  console.log('status:',currentStatus);
 }
 
 function closeAddTaskOverlay() {

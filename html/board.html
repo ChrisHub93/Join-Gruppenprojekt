@@ -169,7 +169,7 @@
               alt="search icon"
             />
           </div>
-          <button class="addTaskBtn" onclick="openAddTaskOverlay(); setPriorityMedium(`medium`)">
+          <button class="addTaskBtn" onclick="openAddTaskOverlay('To do'); setPriorityMedium(`medium`)">
             Add Task
             <img src="../assets/icons/add.svg" alt="Add icon" />
           </button>
@@ -180,7 +180,7 @@
         <div class="container__content">
           <div class="content__headline">
             <p class="content__headline__text">To do</p>
-            <button class="content__headline__btn">+</button>
+            <button onclick="openAddTaskOverlay('To do'); setPriorityMedium(`medium`)" class="content__headline__btn">+</button>
           </div>
 
           <div
@@ -196,7 +196,7 @@
         <div class="container__content">
           <div class="content__headline">
             <p class="content__headline__text">In progress</p>
-            <button class="content__headline__btn">+</button>
+            <button onclick="openAddTaskOverlay(`In progress`); setPriorityMedium(`medium`)" class="content__headline__btn">+</button>
           </div>
 
           <div
@@ -212,7 +212,7 @@
         <div class="container__content">
           <div class="content__headline">
             <p class="content__headline__text">Await feedback</p>
-            <button class="content__headline__btn">+</button>
+            <button onclick="openAddTaskOverlay('Await feedback'); setPriorityMedium(`medium`)" class="content__headline__btn">+</button>
           </div>
 
           <div

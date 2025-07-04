@@ -259,8 +259,9 @@ function createTask() {
   checkEmptyTitle();
   checkEmptyDate();
   if (checkTitle && checkDate) {
-    postDataToServer();
+    postDataToServer(currentStatus);
     closeAddTaskOverlaySuccses();
+    currentStatus = 'To do';
   }
 }
 
@@ -380,7 +381,9 @@ function toggleDisplayNone(id) {
   ref.classList.toggle("d-nonevip");
 }
 
-async function postDataToServer() {
+let currentStatus = 'To do';
+
+async function postDataToServer(currentStatus) {
   let title = document.getElementById("title");
   let description = document.getElementById("description");
   let date = document.getElementById("date");
@@ -397,7 +400,7 @@ async function postDataToServer() {
     assignedTo: await searchContacts(),
     category: category.innerText,
     subTasks: subtasks,
-    status: "To do",
+    status: currentStatus,
   });
   loadTasks();
 }
