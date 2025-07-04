@@ -827,8 +827,8 @@ div[id^="bullet"] {
   main {
     width: 100%;
     align-items: start;
-    max-height: calc(100vh - 80px);
-    height: auto;
+    /* max-height: calc(100vh - 80px);
+    height: auto; */
   }
 
   .markedFields {

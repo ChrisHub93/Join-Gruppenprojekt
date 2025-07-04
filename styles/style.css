@@ -42,6 +42,10 @@
   display: none !important;
 }
 
+span{
+  cursor: default;
+}
+
 @media (max-width: 768px) {
   .hide-help{
     display: flex !important;
