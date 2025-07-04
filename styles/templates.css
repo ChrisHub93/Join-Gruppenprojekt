@@ -80,26 +80,8 @@ header{
     background-color: #2A3647;
     flex-direction: column;
     z-index: 1000;
-    right: -250px;
     transition: right 0.5s ease-in-out;
 }
-
-@media (min-width: 769px) {
-    #navbar {
-        right: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    body{
-        overflow-x: hidden;
-    }
-    
-    #navbar.d-none {
-        right: -250px;
-    }
-}
-
 
 .navbarlink{
     text-decoration: none;
@@ -259,6 +241,14 @@ header{
 }    
 
 @media (max-width: 768px){
+    body{
+        overflow-x: hidden;
+    }
+    
+    #navbar.d-none {
+        right: -250px;
+    }
+
     header{
         height: 90px;
     }
@@ -388,9 +378,7 @@ header{
     .sidebar-icon{
         width: 24px;
         height: 24px;
-    }
-
-    
+    }    
 }
 
 @media (max-width:423px){

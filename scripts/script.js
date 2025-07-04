@@ -62,6 +62,8 @@ function showNavbar() {
             setTimeout(function() {
                 navbar.style.right = '20px';
             }, 0);
+        } else {
+            navbar.style.right = '';
         }
     } else {
         if (mobileCheck) {
