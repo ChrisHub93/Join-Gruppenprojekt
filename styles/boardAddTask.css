@@ -61,21 +61,29 @@
   }
 }
 
-.animate-rotate{
+.animate-rotate {
   animation: rotate 0.3s ease forwards;
 }
 @keyframes rotate {
-  0% {transform: rotate(0deg);}
-  100% {transform: rotate(15deg);}
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(15deg);
+  }
 }
 
-.animate-straight{
+.animate-straight {
   animation: straight 0.3s ease forwards;
 }
 
 @keyframes straight {
-  0% {transform: rotate(15deg);}
-  100% {transform: rotate(0deg);}
+  0% {
+    transform: rotate(15deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .formTransform {
@@ -245,8 +253,8 @@ select:focus {
   object-fit: cover;
 }
 
-.inputStyleArrow:hover{
-  background-color: #D1D1D1;
+.inputStyleArrow:hover {
+  background-color: #d1d1d1;
   border-radius: 25px;
 }
 

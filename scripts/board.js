@@ -70,7 +70,6 @@ async function loadTasks() {
 function startDragging(id) {
   currentDraggedElement = id;
   console.log(currentDraggedElement);
-  rotateAnimation()
 }
 
 function stopDragging() {
