@@ -78,10 +78,28 @@ header{
     margin-top: 20px;
     position: absolute;
     background-color: #2A3647;
-    /* display: flex; */
     flex-direction: column;
-    z-index: 1;
+    z-index: 1000;
+    right: -250px;
+    transition: right 0.5s ease-in-out;
 }
+
+@media (min-width: 769px) {
+    #navbar {
+        right: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    body{
+        overflow-x: hidden;
+    }
+    
+    #navbar.d-none {
+        right: -250px;
+    }
+}
+
 
 .navbarlink{
     text-decoration: none;

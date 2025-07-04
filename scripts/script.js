@@ -53,20 +53,39 @@ function setSideBarMenu(isLoggedIn) {
 function showNavbar() {
     let navbar = document.getElementById('navbar');
     let navbarhidden = navbar.classList.contains('d-none');
+    let mobileCheck = window.innerWidth <= 768;
 
     if (navbarhidden) {
-        navbar.classList.remove('d-none');
-        outsideNavbar();
+            navbar.classList.remove('d-none');
+            outsideNavbar();
+        if (mobileCheck) {
+            setTimeout(function() {
+                navbar.style.right = '20px';
+            }, 0);
+        }
     } else {
-        navbar.classList.add('d-none');
+        if (mobileCheck) {
+            navbar.style.right = '-250px';
+            setTimeout(function() {
+                navbar.classList.add('d-none');
+            }, 300);
+        } else {
+            navbar.classList.add('d-none');
+        }
     }
 }
 
 function outsideNavbar() {
+    let navbar = document.getElementById('navbar');
+    let isTransitioning = navbar.style.transitionDuration === "0.5s";
     function outsideClick(event) {
-        let navbar = document.getElementById('navbar');
+        if (isTransitioning) return;
+
         if (!navbar.contains(event.target)) {
-            navbar.classList.add('d-none');
+            navbar.style.right = '-250px';
+            setTimeout(function() {
+                navbar.classList.add('d-none');
+            }, 300);
             document.removeEventListener('click', outsideClick);
         }
     }
