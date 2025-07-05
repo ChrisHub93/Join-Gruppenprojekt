@@ -279,6 +279,10 @@ select:focus {
   font-size: 16px;
 }
 
+.optionsCategory:hover {
+  background-color: var(--snd-color);
+}
+
 .border-color {
   border-color: var(--focus-color);
 }

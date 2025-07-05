@@ -617,7 +617,8 @@ h4{
   display: none;
 }
 
-ul{
+/* Musste ausgeklammert werden, da es andere Elemente beeinflusst hat!!! */
+/* ul{
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 20px;
@@ -632,7 +633,7 @@ ul:hover{
 ul:hover .hide_edit_subtask{
   display: flex;
   gap: 2px;
-}
+} */
 
 .seperator_edit{
   width: 1px;
