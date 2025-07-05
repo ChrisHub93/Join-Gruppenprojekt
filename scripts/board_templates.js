@@ -184,14 +184,14 @@ function getAddTaskTemplate() {
                 <li
                   onclick="getCategory('index1')"
                   id="index1"
-                  class="optionsCategory"
+                  class="options__category"
                 >
                   Technical Task
                 </li>
                 <li
                   onclick="getCategory('index2')"
                   id="index2"
-                  class="optionsCategory"
+                  class="options__category"
                 >
                   User Story
                 </li>

@@ -283,6 +283,19 @@ select:focus {
   background-color: var(--snd-color);
 }
 
+.options__category{
+  background-color: white;
+  border-radius: 8px;
+  width: 100%;
+  padding-block: 8px;
+  padding-inline: 16px;
+  font-size: 16px;
+}
+
+.options__category:hover {
+  background-color: var(--snd-color);
+}
+
 .border-color {
   border-color: var(--focus-color);
 }
