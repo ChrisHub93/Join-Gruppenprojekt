@@ -368,7 +368,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
                   </span>
                   <img id="arrow" class="arrow inputStyleArrow" src="/assets/icons/arrow_drop_down.png"/>
                 </div>
-                <ul id="allMembers" class="options">
+                <ul id="editMembers" class="options">
                 
                 </ul>
               </div>
@@ -431,7 +431,7 @@ function subtasksOverlayRenderEdit(tasksEditRef) {
       ${tasksEditRef
         .map(
           (subtask) => `
-        <ul onclick="editSubtask(this)">
+        <ul class="subtask_list_edit" onclick="editSubtask(this)">
           <li>
             <div class="flex_edit">
               <p>${subtask}</p>

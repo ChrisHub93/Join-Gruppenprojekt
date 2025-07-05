@@ -317,7 +317,6 @@ h1 {
   width: 16px;
 }
 
-
 .subtask_toggle{
   display: flex;
   padding: 6px 16px;
@@ -617,23 +616,22 @@ h4{
   display: none;
 }
 
-/* Musste ausgeklammert werden, da es andere Elemente beeinflusst hat!!! */
-/* ul{
+.subtask_list_edit{
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 20px;
 }
 
-ul:hover{
+.subtask_list_edit:hover{
   background-color: #d1d1d1;
   border-radius: 6px;
   cursor: pointer;
 }
 
-ul:hover .hide_edit_subtask{
+.subtask_list_edit:hover .hide_edit_subtask{
   display: flex;
   gap: 2px;
-} */
+}
 
 .seperator_edit{
   width: 1px;
