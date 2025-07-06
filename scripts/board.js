@@ -556,12 +556,14 @@ function getContactListEdit(contact, assignedColor, isAssigned) {
                     <p class="assigned_to_icon ${assignedColor}">${contact.firstname.toUpperCase().charAt(0)}${contact.lastname.toUpperCase().charAt(0)}</p>
                     ${contact.firstname + " "} ${contact.lastname}
                   </div>
-                  <input type="checkbox" class="checkBox" />
+                  <input type="checkbox" class="checkBox" ${isAssigned ? "checked" : ""} />
                   <img
                     onclick="setCheckBox('contact${contact.id}', event)"
                     id="checkBoxImg${contact.id}"
                     class="checkBoxImg ${isAssigned ? 'filterChecked' : ''}"
-                    src="/assets/icons/Check button.png"
+                    src="${isAssigned 
+                      ? '/assets/icons/Check button true.png' 
+                      : '/assets/icons/Check button.png'}"
                     alt=""
                   />
                 </li>
