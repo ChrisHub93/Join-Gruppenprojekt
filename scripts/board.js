@@ -1,5 +1,6 @@
 let todos = [];
 let currentDraggedElement;
+let globalContacs = [];
 
 async function loadTasks() {
   let tasks = await fetchData("/tasks/");
@@ -579,4 +580,24 @@ function filterEditContactList() {
     let text = item.textContent.toLowerCase();
     item.style.display = text.includes(input) ? "flex" : "none";
   });
+}
+
+function toggleAssignEdit(contactId) {
+  console.log(globalContacts);
+  
+  let contact = globalContacts.find(c => c.id === "contact" + contactId);
+  if (!contact || !tasksEditRef) return;
+
+  let fullName = `${contact.firstname} ${contact.lastname}`;
+  let index = tasksEditRef.assignedTo.indexOf(fullName);
+
+  if (index === -1) {
+    tasksEditRef.assignedTo.push(fullName);
+  } else {
+    tasksEditRef.assignedTo.splice(index, 1);
+  }
+  renderContactListEdit(globalContacts, tasksEditRef.assignedTo);
+
+  let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
+  assignedMembersEditRef.innerHTML = getAssignedInitialsEditIcons(tasksEditRef.assignedTo);
 }
