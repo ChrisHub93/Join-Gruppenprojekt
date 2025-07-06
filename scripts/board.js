@@ -534,6 +534,8 @@ function openAssignedToEdit() {
 
 function renderContactListEdit(contacts, assignedTo = []) {
   let editMembersRef = document.getElementById("editMembers");
+  editMembersRef.innerHTML = "";
+
 
   if (contacts) {
     for (let contact of contacts) {
