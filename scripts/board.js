@@ -569,3 +569,14 @@ function getContactListEdit(contact, assignedColor, isAssigned) {
                 </li>
   `;
 }
+
+function filterEditContactList() {
+  let input = document.getElementById("contactSearchInputEdit").value.toLowerCase();
+  let editMembersRef = document.getElementById("editMembers");
+  let editMembersListItem = editMembersRef.querySelectorAll("li");
+
+  editMembersListItem.forEach(item => {
+    let text = item.textContent.toLowerCase();
+    item.style.display = text.includes(input) ? "flex" : "none";
+  });
+}

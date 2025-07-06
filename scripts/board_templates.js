@@ -362,13 +362,18 @@ function renderOverlayTaskEdit(tasksEditRef) {
           <div class="form_edit_container">
             <span>Assigned to</span>
               <div class="category">
-                <div id="assignedContainer" class="inputSelectContact" onclick='openAssignedToEdit(); initEditContacts(${JSON.stringify(tasksEditRef.assignedTo)});'>
-                  <span id="selectMember" class="select inputFlex">
-                    Select Contacts to Assign
-                  </span>
-                  <img id="arrow" class="arrow inputStyleArrow" src="/assets/icons/arrow_drop_down.png"/>
+                <div class="inputSelectContact">
+                  <input 
+                    type="text" 
+                    id="contactSearchInputEdit" 
+                    class="contactSearch" 
+                    placeholder="Select contacts to assign"
+                    onclick='openAssignedToEdit(); initEditContacts(${JSON.stringify(tasksEditRef.assignedTo)});'
+                    oninput="filterEditContactList()"
+                  />
+                  <img onclick='openAssignedToEdit()' id="arrow" class="arrow inputStyleArrow" src="/assets/icons/arrow_drop_down.png"/>
                 </div>
-                <ul id="editMembers" class="options">                
+                <ul id="editMembers" class="options">               
                 </ul>
               </div>
                 <div id="assignedMembersEdit" class="assigned_members_edit">
