@@ -132,6 +132,7 @@ h1 {
   margin-bottom: 10px;
   min-height: 230px;
   overflow-x: hidden;
+  width: 271px;
 }
 
 .emptyContainer {
@@ -161,9 +162,9 @@ h1 {
 .filledContainer {
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
   border-radius: 24px;
   background-color: var(--sng-bg-color);
+  margin: 16px 0;
   padding: 16px;
   gap: 10px;
   min-width: 252px;
@@ -177,6 +178,7 @@ h1 {
 
 .filledContainer:active{
     animation: rotate 0.3s ease 0.2s forwards;
+    z-index: 1;
 }
 
 .filledContainer__category {
@@ -716,6 +718,7 @@ h4{
     margin-bottom: 10px;
     overflow-x: auto;
     gap: 10px;
+    width: unset;
   }
 
   .subtask_toggle:hover img{

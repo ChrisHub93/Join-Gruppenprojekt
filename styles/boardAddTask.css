@@ -68,9 +68,11 @@
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
+    transform-origin: bottom left;
   }
   100% {
-    transform: rotate(15deg);
+    transform: rotate(4deg);
+    transform-origin: bottom left;
   }
 }
 
@@ -80,7 +82,7 @@
 
 @keyframes straight {
   0% {
-    transform: rotate(15deg);
+    transform: rotate(10deg);
   }
   100% {
     transform: rotate(0deg);
