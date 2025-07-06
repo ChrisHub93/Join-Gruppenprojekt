@@ -362,17 +362,19 @@ function renderOverlayTaskEdit(tasksEditRef) {
           <div class="form_edit_container">
             <span>Assigned to</span>
               <div class="category">
-                <div id="assignedContainer" class="inputSelectContact" onclick="openAssignedTo()">
+                <div id="assignedContainer" class="inputSelectContact" onclick='openAssignedToEdit(); initEditContacts(${JSON.stringify(tasksEditRef.assignedTo)});'>
                   <span id="selectMember" class="select inputFlex">
                     Select Contacts to Assign
                   </span>
                   <img id="arrow" class="arrow inputStyleArrow" src="/assets/icons/arrow_drop_down.png"/>
                 </div>
-                <ul id="editMembers" class="options">
-                
+                <ul id="editMembers" class="options">                
                 </ul>
               </div>
-                <div id="assignedMembers"></div>
+                <div id="assignedMembersEdit" class="assigned_members_edit">
+                ${getAssignedInitialsEditIcons(
+                tasksEditRef.assignedTo
+              )}</div>
           </div>
           <div class="form_edit_container">
             <label for="subTaskInput">Subtasks</label>
@@ -406,6 +408,11 @@ function assignedLineRender(initials, name, assignedColor) {
       <p class="assigned_to_icon ${assignedColor}">${initials}</p>
       <p class="assigned_to_name">${name}</p>
     </div>`;
+}
+
+function assignedIconEditRender(initials, assignedColor) {
+  return `
+      <p onclick="openAssignedToEdit()" class="initials_icon_edit assigned_to_icon ${assignedColor}">${initials}</p>`;
 }
 
 function subtasksOverlayRender(subtasks) {
@@ -498,7 +505,7 @@ function renderOverlayTaskContent(tasksRef) {
                 <p>Delete</p>
               </div>
               <div class="seperator_overlay_task"></div>
-              <div onclick="editOverlayTask('${tasksRef.id}'); initAddTask()" class="bottom_overlay_task edit_task">
+              <div onclick="editOverlayTask('${tasksRef.id}')" class="bottom_overlay_task edit_task">
                 <img src="../assets/icons/Property 1=edit.png">
                 <p>Edit</p>
               </div>

@@ -173,6 +173,20 @@ function getAssignedInitials(assignedToArray) {
   }
 }
 
+function getAssignedInitialsEditIcons(assignedToArray) {
+      if (assignedToArray === undefined) {
+            return "";
+  } else {
+    return assignedToArray
+      .map((name) => {
+        let initials = getInitials(name);
+        let assignedColor = getAvatarColorClass(name);
+        return assignedIconEditRender(initials, assignedColor);
+      })
+      .join("");
+  }
+}
+
 function getAvatarColorClass(name) {
   let hash = 0;
   for (let i = 0; i < name.length; i++) {

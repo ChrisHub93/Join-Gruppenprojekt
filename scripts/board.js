@@ -518,3 +518,50 @@ function loadSearch(todos) {
     }
   }
 }
+
+async function initEditContacts(assignedTo = []) {
+  let contacts = await loadContacts();
+  renderContactListEdit(contacts, assignedTo);
+}
+
+function openAssignedToEdit() {
+  toggleVisibility("editMembers");
+  toggleBorderColor("selectMember");
+  toggleArrow("arrow");
+  let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
+  assignedMembersEditRef.classList.toggle("d-nonevip");
+}
+
+function renderContactListEdit(contacts, assignedTo = []) {
+  let editMembersRef = document.getElementById("editMembers");
+
+  if (contacts) {
+    for (let contact of contacts) {
+      let name = contact.firstname + " " + contact.lastname;
+      let assignedColor = getAvatarColorClass(name);
+      let isAssigned = assignedTo.includes(name);
+      editMembersRef.innerHTML += getContactListEdit(contact, assignedColor, isAssigned);
+    }
+  }
+}
+
+function getContactListEdit(contact, assignedColor, isAssigned) {
+  return `  <li
+                  onclick="getContact('${contact.id}')"
+                  id="contact${contact.id}"
+                  class="optionsCategory inputFlex ${isAssigned ? 'assignedBg' : ''}">
+                  <div class="contacts_name_icon">
+                    <p class="assigned_to_icon ${assignedColor}">${contact.firstname.toUpperCase().charAt(0)}${contact.lastname.toUpperCase().charAt(0)}</p>
+                    ${contact.firstname + " "} ${contact.lastname}
+                  </div>
+                  <input type="checkbox" class="checkBox" />
+                  <img
+                    onclick="setCheckBox('contact${contact.id}', event)"
+                    id="checkBoxImg${contact.id}"
+                    class="checkBoxImg ${isAssigned ? 'filterChecked' : ''}"
+                    src="/assets/icons/Check button.png"
+                    alt=""
+                  />
+                </li>
+  `;
+}
