@@ -56,7 +56,7 @@ function getContactList(contact, assignedColor) {
                   id="contact${contact.id}"
                   class="optionsCategory inputFlex">
                   <div class="contacts_name_icon">
-                    <p class="assigned_to_icon ${assignedColor}">${contact.firstname.toUpperCase().charAt(0)}${contact.lastname.toUpperCase().charAt(0)}</p>
+                    <p id="contacts_name_icon${contact.id}" class="assigned_to_icon ${assignedColor}">${contact.firstname.toUpperCase().charAt(0)}${contact.lastname.toUpperCase().charAt(0)}</p>
                     ${contact.firstname + " "} ${contact.lastname}
                   </div>
                   <input type="checkbox" class="checkBox" />
@@ -136,6 +136,25 @@ function getContact(id) {
     getInputCheckedFalse(membersRef, inputRef);
   }
   toggleAssignment(id);
+  getIcon(membersRef, id);
+}
+
+async function getIcon(membersRef, id){
+ let mainDiv = membersRef.querySelector("p");
+ let assignedColor = mainDiv.classList[1];
+ console.log(assignedColor);
+
+ let contacts = await loadContacts();
+
+ console.log(contacts);
+
+ let currentSelectedUser = contacts.find((user) => user.id === id);
+ console.log(currentSelectedUser);
+
+ if (currentSelectedUser){
+  let assignedMembersRef = document.getElementById("assignedMembers");
+ assignedMembersRef.innerHTML += `<p id="contacts_name_icon${contact.id}" class="assigned_to_icon ${assignedColor}">${currentSelectedUser.firstname.toUpperCase().charAt(0)}${currentSelectedUser.lastname.toUpperCase().charAt(0)}</p>`;
+ }
 }
 
 function toggleAssignment(id) {

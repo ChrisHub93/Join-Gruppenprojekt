@@ -651,9 +651,17 @@ div[id^="bullet"] {
   cursor: pointer;
 }
 
-.selectContactInput:focus{
+.selectContactInput:focus {
   border-color: var(--focus-color);
   outline: none;
+}
+
+.assignedMembers{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 8px;
+  gap: 8px;
 }
 
 @media (max-width: 1100px) {
