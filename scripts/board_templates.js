@@ -525,10 +525,10 @@ function getTaskTemplate(element) {
                 <details class="filledContainer__details">
                   <summary class="summary__text">Category</summary>
                   <div class="summary__buttons">
-                  <button onclick="startDragging(${element["id"]}); moveTo('To do')">To Do</button>
-                  <button onclick="startDragging(${element["id"]}); moveTo('In progress')">In progress</button>
-                  <button onclick="startDragging(${element["id"]}); moveTo('Await feedback')">Await feedback</button>
-                  <button onclick="startDragging(${element["id"]}); moveTo('Done')">Done</button>
+                  <button class="summary__buttons__button" onclick="startDragging(${element["id"]}); moveTo('To do')">To Do</button>
+                  <button class="summary__buttons__button" onclick="startDragging(${element["id"]}); moveTo('In progress')">In progress</button>
+                  <button class="summary__buttons__button" onclick="startDragging(${element["id"]}); moveTo('Await feedback')">Await feedback</button>
+                  <button class="summary__buttons__button" onclick="startDragging(${element["id"]}); moveTo('Done')">Done</button>
                   </div>
                 </details>
               </div>
