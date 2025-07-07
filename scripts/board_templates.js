@@ -151,9 +151,7 @@ function getAddTaskTemplate() {
                 class="inputSelectContact"
                 onclick="openAssignedTo()"
               >
-                <span id="selectMember" class="select inputFlex">
-                  Select Contacts to Assign
-                </span>
+                <input id="userNameWord" oninput="filterContactsToAssign(userNameWord.value)" class="selectContactInput" type="text" placeholder="Select Contacts To Assign">
                 <img
                   id="arrow"
                   class="arrow inputStyleArrow"
@@ -165,7 +163,7 @@ function getAddTaskTemplate() {
                 
               </ul>
             </div>
-            <div id="assignedMembers"></div>
+            <div id="assignedMembers" class="assignedMembers"></div>
           </div>
 
           <div class="   ">

@@ -663,7 +663,7 @@ div[id^="bullet"] {
   display: flex;
   justify-content: start;
   align-items: center;
-  padding: 8px;
+  padding: 8px 8px 0px;
   gap: 8px;
 }
 

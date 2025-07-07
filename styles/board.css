@@ -481,8 +481,11 @@ h1 {
 }
 
 .assigned_to_icon {
-  width: 42px;
-  height: 42px;
+  /* width: 42px;
+  height: 42px; */
+  width: 32px;
+  height: 32px;
+  border: 2px solid white;
   color: white;
   border-radius: 45px;
   display: flex;
@@ -490,6 +493,29 @@ h1 {
   justify-content: center;
   font-weight: 400;
   font-size: 12px;
+}
+
+.assignedMembers{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 8px 8px 0px;
+  gap: 8px;
+}
+
+.selectContactInput {
+  border: 1px solid var(--snd-color);
+  border-radius: 8px;
+  width: 100%;
+  padding-block: 8px;
+  padding-inline: 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.selectContactInput:focus {
+  border-color: var(--focus-color);
+  outline: none;
 }
 
 .assigned_to_empty {
