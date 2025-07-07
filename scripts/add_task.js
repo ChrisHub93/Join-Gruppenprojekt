@@ -144,7 +144,7 @@ function getContact(id) {
       getIcon(membersRef, id);
     } 
  }
- 
+
  if(!activeUser){
   let selectedMember = document.getElementById("selected_name_icon"+id);
   if(selectedMember){
@@ -200,6 +200,7 @@ function setCheckBox(id, event) {
     checkBoxImg.src = "/assets/icons/Check button true.png";
     checkBoxImg.classList.add("filterChecked");
   }
+
 }
 
 function getInputCheckedFalse(membersRef, inputRef) {
