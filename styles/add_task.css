@@ -624,14 +624,16 @@ div[id^="bullet"] {
 
 .contacts_name_icon {
   gap: 16px;
-  padding: 7px 16px;
+  /* padding: 7px 16px; */
   display: flex;
   align-items: center;
 }
 
 .assigned_to_icon {
-  width: 42px;
-  height: 42px;
+  /* width: 42px;
+  height: 42px; */
+  width: 32px;
+  height: 32px;
   color: white;
   border-radius: 45px;
   display: flex;
