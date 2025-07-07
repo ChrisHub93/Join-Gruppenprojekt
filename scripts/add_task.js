@@ -136,25 +136,41 @@ function getContact(id) {
     getInputCheckedFalse(membersRef, inputRef);
   }
   toggleAssignment(id);
-  getIcon(membersRef, id);
+
+  let activeUser = assignedTo.find((currentId)=> currentId == id);
+ if(activeUser){
+  let selectedMember = document.getElementById("selected_name_icon"+id);
+    if(!selectedMember){
+      getIcon(membersRef, id);
+    } 
+ }
+ 
+ if(!activeUser){
+  let selectedMember = document.getElementById("selected_name_icon"+id);
+  if(selectedMember){
+      selectedMember.remove();
+    }
+ }
 }
 
 async function getIcon(membersRef, id){
+let assignedMembersRef = document.getElementById("assignedMembers");
+
  let mainDiv = membersRef.querySelector("p");
  let assignedColor = mainDiv.classList[1];
- console.log(assignedColor);
-
  let contacts = await loadContacts();
-
- console.log(contacts);
-
  let currentSelectedUser = contacts.find((user) => user.id === id);
- console.log(currentSelectedUser);
-
  if (currentSelectedUser){
-  let assignedMembersRef = document.getElementById("assignedMembers");
- assignedMembersRef.innerHTML += `<p id="contacts_name_icon${contact.id}" class="assigned_to_icon ${assignedColor}">${currentSelectedUser.firstname.toUpperCase().charAt(0)}${currentSelectedUser.lastname.toUpperCase().charAt(0)}</p>`;
+ assignedMembersRef.innerHTML += `<p id="selected_name_icon${currentSelectedUser.id}" class="assigned_to_icon ${assignedColor}">${currentSelectedUser.firstname.toUpperCase().charAt(0)}${currentSelectedUser.lastname.toUpperCase().charAt(0)}</p>`;
  }
+
+//  let activeUser = assignedTo.find((currentId)=> currentId == currentSelectedUser.id);
+//  console.log(activeUser);
+//  if(activeUser){
+//   let selectedMember = document.getElementById("selected_name_icon"+currentSelectedUser.id);
+//   selectedMember.remove();
+//  }
+ 
 }
 
 function toggleAssignment(id) {
