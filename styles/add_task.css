@@ -908,6 +908,7 @@ div[id^="bullet"] {
 
 @media (max-width: 545px) {
   .sectionButtons {
-    bottom: 80px;
+    /* bottom: 80px; */
+    bottom: 70px;
   }
 }
