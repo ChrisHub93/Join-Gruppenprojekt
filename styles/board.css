@@ -772,6 +772,11 @@ h4 {
     display: block;
   }
 
+  .filledContainer:active {
+    animation: none;
+    z-index: unset;
+  }
+
   .idContentContainer {
     display: flex;
     overflow-y: unset;
