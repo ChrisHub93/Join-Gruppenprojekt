@@ -158,13 +158,16 @@ function getInitials(name) {
     .toUpperCase();
 }
 
-function getAssignedInitials(assignedToArray) {
-  if (assignedToArray === undefined) {
+function getAssignedInitials(assignedToIds) {
+  if (assignedToIds === undefined) {
     return `
     <p class="assigned_to_empty">Nobody assigned yet</p>`;
   } else {
-    return assignedToArray
-      .map((name) => {
+    return assignedToIds
+      .map((id) => {
+        let contactRef = globalContacts.find(contact => contact.id === id);
+        if (!contactRef) return "";
+        let name = `${contactRef.firstname} ${contactRef.lastname}`;
         let initials = getInitials(name);
         let assignedColor = getAvatarColorClass(name);
         return assignedLineRender(initials, name, assignedColor);
@@ -173,12 +176,15 @@ function getAssignedInitials(assignedToArray) {
   }
 }
 
-function getAssignedInitialsEditIcons(assignedToArray) {
-      if (assignedToArray === undefined) {
+function getAssignedInitialsEditIcons(assignedToIds) {
+      if (assignedToIds === undefined) {
             return "";
   } else {
-    return assignedToArray
-      .map((name) => {
+    return assignedToIds
+      .map((id) => {
+        let contactRef = globalContacts.find(contact => contact.id === id);
+        if (!contactRef) return "";
+        let name = `${contactRef.firstname} ${contactRef.lastname}`;
         let initials = getInitials(name);
         let assignedColor = getAvatarColorClass(name);
         return assignedIconEditRender(initials, assignedColor);

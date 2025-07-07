@@ -1,6 +1,6 @@
 let todos = [];
 let currentDraggedElement;
-let globalContacs = [];
+let globalContacts = [];
 
 async function loadTasks() {
   let tasks = await fetchData("/tasks/");
@@ -8,7 +8,8 @@ async function loadTasks() {
     return;
   }
   todos = Object.values(tasks);
-  // console.log(todos);
+  let contactsData = await fetchData("/contacts/");
+  globalContacts = Object.values(contactsData);
 
   let toDoContentRef = document.getElementById("toDoContent");
   let inProgressContentRef = document.getElementById("inProgressContent");
@@ -582,22 +583,8 @@ function filterEditContactList() {
   });
 }
 
-function toggleAssignEdit(contactId) {
-  console.log(globalContacts);
-  
-  let contact = globalContacts.find(c => c.id === "contact" + contactId);
-  if (!contact || !tasksEditRef) return;
-
-  let fullName = `${contact.firstname} ${contact.lastname}`;
-  let index = tasksEditRef.assignedTo.indexOf(fullName);
-
-  if (index === -1) {
-    tasksEditRef.assignedTo.push(fullName);
-  } else {
-    tasksEditRef.assignedTo.splice(index, 1);
-  }
-  renderContactListEdit(globalContacts, tasksEditRef.assignedTo);
-
+function updateAssignedMembersEdit(assignedTo) {
   let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
-  assignedMembersEditRef.innerHTML = getAssignedInitialsEditIcons(tasksEditRef.assignedTo);
+  if (!assignedMembersEditRef) return;
+  assignedMembersEditRef.innerHTML = getAssignedInitialsEditIcons(assignedTo);
 }
