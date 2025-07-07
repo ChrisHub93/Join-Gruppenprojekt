@@ -9,9 +9,33 @@ let setPriority = "";
 let assignedTo = [];
 let subtasks = [];
 
+let debounceTimeOut = 0;
+let contactsToAssign;
+
+function filterContactsToAssign(userNameWord){
+  clearTimeout(debounceTimeOut);
+  debounceTimeOut = setTimeout(() => {
+    currentUser = contactsToAssign.filter((user) =>
+      user.firstname.toLowerCase().includes(userNameWord.toLowerCase())
+    );
+    if (userNameWord.length >= 2) {
+      let allMembersRef = document.getElementById("allMembers");
+      allMembersRef.innerHTML = '';
+      renderContactList(currentUser);
+    } else if (userNameWord.length <=2){
+      let allMembersRef = document.getElementById("allMembers");
+      allMembersRef.innerHTML = '';
+      initAddTask();
+    }
+  }, 300);
+}
+
 async function initAddTask() {
   let contacts = await loadContacts();
   renderContactList(contacts);
+  contactsToAssign = contacts;
+  console.log(contactsToAssign);
+  
 }
 
 function renderContactList(contacts) {
