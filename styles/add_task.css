@@ -634,6 +634,7 @@ div[id^="bullet"] {
   height: 42px; */
   width: 32px;
   height: 32px;
+  border: 2px solid white;
   color: white;
   border-radius: 45px;
   display: flex;
