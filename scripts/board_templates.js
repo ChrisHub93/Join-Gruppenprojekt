@@ -519,51 +519,62 @@ function renderOverlayTaskContent(tasksRef) {
 }
 
 function getTaskTemplate(element) {
-  return `<div id="${element["id"]}" onclick="overlayTask(${element["id"]})" class="filledContainer" draggable = "true" ondragstart="startDragging(${element["id"]})">
+  return `<div id="${element["id"]}"  class="filledContainer" draggable = "true" ondragstart="startDragging(${element["id"]})">
               <div class="filledContainer__category">
-                <p>${element.category}</p>
+                <p class="filledContainer__category__text">${element.category}</p>
+                <details class="filledContainer__details">
+                  <summary class="summary__text">Category</summary>
+                  <div class="summary__buttons">
+                  <button>To do</button>
+                  <button>In progress</button>
+                  <button>Await feedback</button>
+                  <button>Done</button>
+                  </div>
+                </details>
               </div>
-              <div class="filledContainer__title">
-                <p>${element.title}</p>
-              </div>
-              <div class="filledContainer__description">
-                <p>${element.description}</p>
-              </div>
-              <div class="filledContainer__status">
-                <div
-                  class="statusLine"
-                  role="progressbar"
-                  aria-label="Example with label"
-                  aria-valuenow="25"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >
+              <div class="clickableBox" onclick="overlayTask(${element["id"]})">
+                <div class="filledContainer__title">
+                  <p>${element.title}</p>
+                </div>
+                <div class="filledContainer__description">
+                  <p>${element.description}</p>
+                </div>
+                <div class="filledContainer__status">
                   <div
-                    id="status-bar-js"
-                    class="progress-bar"
-                    style="width: 50%"
-                  ></div>
+                    class="statusLine"
+                    role="progressbar"
+                    aria-label="Example with label"
+                    aria-valuenow="25"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >
+                    <div
+                      id="status-bar-js"
+                      class="progress-bar"
+                      style="width: 50%"
+                    ></div>
+                  </div>
+                  <p>1/3 Subtasks</p>
                 </div>
-                <p>1/3 Subtasks</p>
-              </div>
-              <div class="taskInfo">
-                <div id="assignedTo" class="assignedTo">
-                  <div class="assigned">
-                    <span>A</span>
-                    <span>M</span>
+                <div class="taskInfo">
+                  <div id="assignedTo" class="assignedTo">
+                    <div class="assigned">
+                      <span>A</span>
+                      <span>M</span>
+                    </div>
+                    <div class="assigned assignedPlusOne">
+                      <span>C</span>
+                      <span>M</span>
+                    </div>
+                    <div class="assigned assignedPlusTwo">
+                      <span>K</span>
+                      <span>A</span>
+                    </div>
                   </div>
-                  <div class="assigned assignedPlusOne">
-                    <span>C</span>
-                    <span>M</span>
-                  </div>
-                  <div class="assigned assignedPlusTwo">
-                    <span>K</span>
-                    <span>A</span>
-                  </div>
-                </div>
 
-                <div class="priority">
-                  <img src="../assets/icons/Prio media.png" alt="prio icon" />
+                  <div class="priority">
+                    <img src="../assets/icons/Prio media.png" alt="prio icon" />
+                  </div>
                 </div>
               </div>
             </div>
