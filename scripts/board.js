@@ -305,14 +305,14 @@ function openAddTaskOverlay(status) {
   openAddTaskOverlayRef.innerHTML = getAddTaskTemplate();
 
   const taskContentRef = document.getElementById("addTaskOverlay");
-  taskContentRef.classList.remove("animate-out"); 
-  void taskContentRef.offsetWidth; 
+  taskContentRef.classList.remove("animate-out");
+  void taskContentRef.offsetWidth;
   taskContentRef.classList.add("animate-in");
 
   initAddTask();
 
   currentStatus = status;
-  console.log('status:',currentStatus);
+  console.log("status:", currentStatus);
 }
 
 function closeAddTaskOverlay() {
@@ -320,7 +320,7 @@ function closeAddTaskOverlay() {
   const taskContentRef = document.getElementById("addTaskOverlay");
 
   taskContentRef.classList.remove("animate-in");
-  void taskContentRef.offsetWidth; 
+  void taskContentRef.offsetWidth;
   taskContentRef.classList.add("animate-out");
 
   taskContentRef.addEventListener("animationend", function handler() {
@@ -342,8 +342,6 @@ function closeAddTaskOverlaySuccses() {
     document.getElementById("AddTaskSuccesMessage").style.display = "none";
   }, 700);
 }
-
-
 
 async function loadData(path = "") {
   let response = await fetch(BASE_URL + path + ".json");
@@ -390,15 +388,15 @@ async function putDataEdit(path = "", data = {}) {
 }
 
 function getUpdatedSubtasks() {
-    let editedSubtasks = document.querySelectorAll('.flex_edit');
-    let updatedSubtasks = [];
+  let editedSubtasks = document.querySelectorAll(".flex_edit");
+  let updatedSubtasks = [];
 
   for (let el of editedSubtasks) {
-    let pTag = el.querySelector('p');
+    let pTag = el.querySelector("p");
 
     if (pTag) {
       let text = pTag.textContent.trim();
-      if (text !== '') {
+      if (text !== "") {
         updatedSubtasks.push(text);
       }
     }
@@ -423,7 +421,10 @@ function editSubtask(iconElement) {
   ul.replaceWith(newContainer);
   let inputActive = newContainer.querySelector("input");
   inputActive.focus();
-  inputActive.setSelectionRange(inputActive.value.length, inputActive.value.length);
+  inputActive.setSelectionRange(
+    inputActive.value.length,
+    inputActive.value.length
+  );
 }
 
 function saveSubtask(iconElement) {
@@ -448,16 +449,25 @@ function saveSubtask(iconElement) {
 }
 
 function filterTasks() {
-  let searchInput = document.getElementById('filterTasks').value.trim().toLowerCase();
-  console.log(searchInput)
-  let filteredTask = todos.slice(0).filter(todos => todos.title.toLowerCase().includes(searchInput) || todos.description.toLowerCase().includes(searchInput));
+  let searchInput = document
+    .getElementById("filterTasks")
+    .value.trim()
+    .toLowerCase();
+  console.log(searchInput);
+  let filteredTask = todos
+    .slice(0)
+    .filter(
+      (todos) =>
+        todos.title.toLowerCase().includes(searchInput) ||
+        todos.description.toLowerCase().includes(searchInput)
+    );
   console.log(filteredTask);
   todos = filteredTask;
   loadSearch(todos);
 }
 
 function loadSearch(todos) {
-  let searchInput = document.getElementById('filterTasks').value;
+  let searchInput = document.getElementById("filterTasks").value;
   if (searchInput === "") {
     loadTasks();
     return;
@@ -538,13 +548,16 @@ function renderContactListEdit(contacts, assignedTo = []) {
   let editMembersRef = document.getElementById("editMembers");
   editMembersRef.innerHTML = "";
 
-
   if (contacts) {
     for (let contact of contacts) {
       let name = contact.firstname + " " + contact.lastname;
       let assignedColor = getAvatarColorClass(name);
       let isAssigned = assignedTo.includes(name);
-      editMembersRef.innerHTML += getContactListEdit(contact, assignedColor, isAssigned);
+      editMembersRef.innerHTML += getContactListEdit(
+        contact,
+        assignedColor,
+        isAssigned
+      );
     }
   }
 }
@@ -553,19 +566,27 @@ function getContactListEdit(contact, assignedColor, isAssigned) {
   return `  <li
                   onclick="getContact('${contact.id}')"
                   id="contact${contact.id}"
-                  class="optionsCategory inputFlex ${isAssigned ? 'assignedBg' : ''}">
+                  class="optionsCategory inputFlex ${
+                    isAssigned ? "assignedBg" : ""
+                  }">
                   <div class="contacts_name_icon">
-                    <p class="assigned_to_icon ${assignedColor}">${contact.firstname.toUpperCase().charAt(0)}${contact.lastname.toUpperCase().charAt(0)}</p>
+                    <p class="assigned_to_icon ${assignedColor}">${contact.firstname
+    .toUpperCase()
+    .charAt(0)}${contact.lastname.toUpperCase().charAt(0)}</p>
                     ${contact.firstname + " "} ${contact.lastname}
                   </div>
-                  <input type="checkbox" class="checkBox" ${isAssigned ? "checked" : ""} />
+                  <input type="checkbox" class="checkBox" ${
+                    isAssigned ? "checked" : ""
+                  } />
                   <img
                     onclick="setCheckBox('contact${contact.id}', event)"
                     id="checkBoxImg${contact.id}"
-                    class="checkBoxImg ${isAssigned ? 'filterChecked' : ''}"
-                    src="${isAssigned 
-                      ? '/assets/icons/Check button true.png' 
-                      : '/assets/icons/Check button.png'}"
+                    class="checkBoxImg ${isAssigned ? "filterChecked" : ""}"
+                    src="${
+                      isAssigned
+                        ? "/assets/icons/Check button true.png"
+                        : "/assets/icons/Check button.png"
+                    }"
                     alt=""
                   />
                 </li>
@@ -573,11 +594,13 @@ function getContactListEdit(contact, assignedColor, isAssigned) {
 }
 
 function filterEditContactList() {
-  let input = document.getElementById("contactSearchInputEdit").value.toLowerCase();
+  let input = document
+    .getElementById("contactSearchInputEdit")
+    .value.toLowerCase();
   let editMembersRef = document.getElementById("editMembers");
   let editMembersListItem = editMembersRef.querySelectorAll("li");
 
-  editMembersListItem.forEach(item => {
+  editMembersListItem.forEach((item) => {
     let text = item.textContent.toLowerCase();
     item.style.display = text.includes(input) ? "flex" : "none";
   });
