@@ -402,7 +402,8 @@ async function postDataToServer(currentStatus) {
     description: description.value,
     date: date.value,
     priority: priority,
-    assignedTo: await searchContacts(),
+    // assignedTo: await searchContacts(),
+    assignedTo: assignedTo,
     category: category.innerText,
     subTasks: subtasks,
     status: currentStatus,
@@ -443,4 +444,9 @@ async function searchContacts() {
   }
   console.log(assigneContacts);
   return assigneContacts;
+}
+
+function getContactNameById(id) {
+  let contact = globalContacts.find(c => c.id === id);
+  return contact ? `${contact.firstname} ${contact.lastname}` : "Unbekannt";
 }

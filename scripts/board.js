@@ -1,5 +1,6 @@
 let todos = [];
 let currentDraggedElement;
+let globalContacts = [];
 
 async function loadTasks() {
   let tasks = await fetchData("/tasks/");
@@ -7,7 +8,8 @@ async function loadTasks() {
     return;
   }
   todos = Object.values(tasks);
-  // console.log(todos);
+  let contactsData = await fetchData("/contacts/");
+  globalContacts = Object.values(contactsData);
 
   let toDoContentRef = document.getElementById("toDoContent");
   let inProgressContentRef = document.getElementById("inProgressContent");
@@ -579,4 +581,10 @@ function filterEditContactList() {
     let text = item.textContent.toLowerCase();
     item.style.display = text.includes(input) ? "flex" : "none";
   });
+}
+
+function updateAssignedMembersEdit(assignedTo) {
+  let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
+  if (!assignedMembersEditRef) return;
+  assignedMembersEditRef.innerHTML = getAssignedInitialsEditIcons(assignedTo);
 }
