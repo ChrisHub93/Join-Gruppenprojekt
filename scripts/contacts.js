@@ -227,8 +227,6 @@ let overlayRef = document.getElementById("overlay");
     contentOverlayRef.classList.remove("showContentOverlay");
     contentOverlayRef.classList.add("hideContentOverlay");
   }
-
-  
   overlayRef.classList.toggle("d-nonevip");
   contentOverlayRef.classList.remove("d-nonevip");
   setTimeout(() => {
@@ -236,21 +234,20 @@ let overlayRef = document.getElementById("overlay");
     contentOverlayRef.classList.add("showContentOverlay");
     overlayRef.classList.add("overlayBg");
   }, 10);
-
-
-  
-
-
-// toggleEditOverlay();
-  
 }
 
 function closeOverlay(event) {
   event.stopPropagation(event);
   let overlayRef = document.getElementById("overlay");
   let contentOverlayRef = document.getElementById("contentOverlay");
-  contentOverlayRef.classList.add("hideContentOverlay");
-  contentOverlayRef.classList.remove("showContentOverlay");
+  contentOverlayRef.classList.remove("hideContentOverlayMobile");
+  if(window.innerWidth <=1100){
+    contentOverlayRef.classList.add("hideContentOverlayMobile");
+    contentOverlayRef.classList.remove("showContentOverlay");
+  } else if(window.innerWidth > 1100){
+    contentOverlayRef.classList.add("hideContentOverlay");
+    contentOverlayRef.classList.remove("showContentOverlay");
+  }
   overlayRef.classList.remove("overlayBg");
   setTimeout(() => {
     overlayRef.classList.toggle("d-nonevip");
@@ -450,23 +447,23 @@ async function openEditOverlay(event) {
 }
 
 function toggleEditOverlay() {
-  let overlayRef = document.getElementById("editOverlay");
-  let contentOverlayRef = document.getElementById("contentEditOverlay");
-  overlayRef.classList.toggle("d-nonevip");
-  contentOverlayRef.classList.remove("d-nonevip");
-  contentOverlayRef.classList.remove("hideContentOverlayMobile");
-  contentOverlayRef.classList.add("hideContentOverlay");
-  setTimeout(() => {
-    contentOverlayRef.classList.remove("hideContentOverlay");
-    contentOverlayRef.classList.add("showContentOverlay");
-    overlayRef.classList.add("overlayBg");
-  }, 10);
-}
+  // let overlayRef = document.getElementById("editOverlay");
+  // let contentOverlayRef = document.getElementById("contentEditOverlay");
+  // overlayRef.classList.toggle("d-nonevip");
+  // contentOverlayRef.classList.remove("d-nonevip");
+  // contentOverlayRef.classList.remove("hideContentOverlayMobile");
+  // contentOverlayRef.classList.add("hideContentOverlay");
+  // setTimeout(() => {
+  //   contentOverlayRef.classList.remove("hideContentOverlay");
+  //   contentOverlayRef.classList.add("showContentOverlay");
+  //   overlayRef.classList.add("overlayBg");
+  // }, 10);
 
-function closeEditOverlay(event) {
-  event.stopPropagation(event);
+
+
   let overlayRef = document.getElementById("editOverlay");
   let contentOverlayRef = document.getElementById("contentEditOverlay");
+  contentOverlayRef.classList.remove("hideContentOverlayMobile");
 
   if(window.innerWidth <= 1100){
     contentOverlayRef.classList.add("hideContentOverlayMobile");
@@ -475,11 +472,53 @@ function closeEditOverlay(event) {
     contentOverlayRef.classList.remove("showContentOverlay");
     contentOverlayRef.classList.add("hideContentOverlay");
   }
+  overlayRef.classList.toggle("d-nonevip");
+  contentOverlayRef.classList.remove("d-nonevip");
+  setTimeout(() => {
+    contentOverlayRef.classList.remove("hideContentOverlay");
+    contentOverlayRef.classList.add("showContentOverlay");
+    overlayRef.classList.add("overlayBg");
+  }, 10);
 
+}
+
+function closeEditOverlay(event) {
+  // event.stopPropagation(event);
+  // let overlayRef = document.getElementById("editOverlay");
+  // let contentOverlayRef = document.getElementById("contentEditOverlay");
+
+  // if(window.innerWidth <= 1100){
+  //   contentOverlayRef.classList.add("hideContentOverlayMobile");
+  //   contentOverlayRef.classList.remove("showContentOverlay");
+  // } else if (window.innerWidth > 1100){
+  //   contentOverlayRef.classList.remove("showContentOverlay");
+  //   contentOverlayRef.classList.add("hideContentOverlay");
+  // }
+
+  // overlayRef.classList.remove("overlayBg");
+  // setTimeout(() => {
+  //   overlayRef.classList.toggle("d-nonevip");
+  // }, 150);
+
+
+  event.stopPropagation(event);
+  let overlayRef = document.getElementById("editOverlay");
+  let contentOverlayRef = document.getElementById("contentEditOverlay");
+  contentOverlayRef.classList.remove("hideContentOverlayMobile");
+  if(window.innerWidth <=1100){
+    contentOverlayRef.classList.add("hideContentOverlayMobile");
+    contentOverlayRef.classList.remove("showContentOverlay");
+  } else if(window.innerWidth > 1100){
+    contentOverlayRef.classList.add("hideContentOverlay");
+    contentOverlayRef.classList.remove("showContentOverlay");
+  }
   overlayRef.classList.remove("overlayBg");
   setTimeout(() => {
     overlayRef.classList.toggle("d-nonevip");
   }, 150);
+
+
+
 
   let inputNameRef = document.getElementById("nameEdit");
   let inputEmailRef = document.getElementById("emailEdit");
@@ -813,8 +852,8 @@ function closeMobileOverlay(){
 
 function closeOverlayMobile(event) {
   event.stopPropagation(event);
-  let overlayRef = document.getElementById("overlayMobile");
-  let contentOverlayRef = document.getElementById("contentOverlayMobile");
+  let overlayRef = document.getElementById("overlay");
+  let contentOverlayRef = document.getElementById("contentOverlay");
   contentOverlayRef.classList.add("hideContentOverlayMobile");
   contentOverlayRef.classList.remove("showContentOverlayMobile");
   overlayRef.classList.remove("overlayBg");
