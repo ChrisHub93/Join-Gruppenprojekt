@@ -447,24 +447,9 @@ async function openEditOverlay(event) {
 }
 
 function toggleEditOverlay() {
-  // let overlayRef = document.getElementById("editOverlay");
-  // let contentOverlayRef = document.getElementById("contentEditOverlay");
-  // overlayRef.classList.toggle("d-nonevip");
-  // contentOverlayRef.classList.remove("d-nonevip");
-  // contentOverlayRef.classList.remove("hideContentOverlayMobile");
-  // contentOverlayRef.classList.add("hideContentOverlay");
-  // setTimeout(() => {
-  //   contentOverlayRef.classList.remove("hideContentOverlay");
-  //   contentOverlayRef.classList.add("showContentOverlay");
-  //   overlayRef.classList.add("overlayBg");
-  // }, 10);
-
-
-
   let overlayRef = document.getElementById("editOverlay");
   let contentOverlayRef = document.getElementById("contentEditOverlay");
   contentOverlayRef.classList.remove("hideContentOverlayMobile");
-
   if(window.innerWidth <= 1100){
     contentOverlayRef.classList.add("hideContentOverlayMobile");
     contentOverlayRef.classList.remove("showContentOverlay");
@@ -483,24 +468,6 @@ function toggleEditOverlay() {
 }
 
 function closeEditOverlay(event) {
-  // event.stopPropagation(event);
-  // let overlayRef = document.getElementById("editOverlay");
-  // let contentOverlayRef = document.getElementById("contentEditOverlay");
-
-  // if(window.innerWidth <= 1100){
-  //   contentOverlayRef.classList.add("hideContentOverlayMobile");
-  //   contentOverlayRef.classList.remove("showContentOverlay");
-  // } else if (window.innerWidth > 1100){
-  //   contentOverlayRef.classList.remove("showContentOverlay");
-  //   contentOverlayRef.classList.add("hideContentOverlay");
-  // }
-
-  // overlayRef.classList.remove("overlayBg");
-  // setTimeout(() => {
-  //   overlayRef.classList.toggle("d-nonevip");
-  // }, 150);
-
-
   event.stopPropagation(event);
   let overlayRef = document.getElementById("editOverlay");
   let contentOverlayRef = document.getElementById("contentEditOverlay");
@@ -516,9 +483,6 @@ function closeEditOverlay(event) {
   setTimeout(() => {
     overlayRef.classList.toggle("d-nonevip");
   }, 150);
-
-
-
 
   let inputNameRef = document.getElementById("nameEdit");
   let inputEmailRef = document.getElementById("emailEdit");
@@ -580,7 +544,6 @@ function removeEditOpacity(requiredNameEditFieldRef, requiredEmailEditFieldRef, 
   requiredEmailEditFieldRef.classList.remove("opacity");
   requiredPhoneEditFieldRef.classList.remove("opacity");
 }
-
 
 async function saveEditedContact(event) {
   let contacts = await fetchData("/contacts/");
