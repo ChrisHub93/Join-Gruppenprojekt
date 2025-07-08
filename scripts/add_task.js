@@ -325,8 +325,18 @@ function createTask() {
   checkEmptyDate();
   if (checkTitle && checkDate) {
     postDataToServer(currentStatus);
+    currentStatus = 'To do';
+  }
+}
+
+function createTaskBoard() {
+  checkEmptyTitle();
+  checkEmptyDate();
+  if (checkTitle && checkDate) {
+    postDataToServer(currentStatus);
     closeAddTaskOverlaySuccses();
     currentStatus = 'To do';
+    loadTasks();
   }
 }
 
@@ -469,7 +479,7 @@ async function postDataToServer(currentStatus) {
     subTasksOpen: subtasksOpen,
     status: currentStatus,
   });
-  loadTasks();
+  // loadTasks();
 }
 
 async function postData(path, data = {}) {
