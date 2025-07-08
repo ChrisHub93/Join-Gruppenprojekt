@@ -366,7 +366,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
                     id="contactSearchInputEdit" 
                     class="contactSearch" 
                     placeholder="Select contacts to assign"
-                    onclick='openAssignedToEdit(); initEditContacts(${JSON.stringify(tasksEditRef.assignedTo)});'
+                    onclick='openAssignedToEdit();'
                     oninput="filterEditContactList()"
                   />
                   <img onclick='openAssignedToEdit()' id="arrow" class="arrow inputStyleArrow" src="/assets/icons/arrow_drop_down.png"/>
@@ -508,7 +508,7 @@ function renderOverlayTaskContent(tasksRef) {
                 <p>Delete</p>
               </div>
               <div class="seperator_overlay_task"></div>
-              <div onclick="editOverlayTask('${tasksRef.id}')" class="bottom_overlay_task edit_task">
+              <div onclick='editOverlayTask("${tasksRef.id}"); initEditContacts(${JSON.stringify(tasksRef.assignedTo)});' class="bottom_overlay_task edit_task">
                 <img src="../assets/icons/Property 1=edit.png">
                 <p>Edit</p>
               </div>

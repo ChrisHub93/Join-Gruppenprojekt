@@ -365,7 +365,7 @@ async function updateDataEdit(tasksEditRef) {
     description: description.value,
     date: date.value,
     priority: priorityEdit,
-    assignedTo: await searchContacts(),
+    assignedTo: assignedToEditTemp,
     subTasks: getUpdatedSubtasks(),
     status: tasks[taskKeyEdit].status,
   };
@@ -534,6 +534,7 @@ function loadSearch(todos) {
 async function initEditContacts(assignedTo = []) {
   let contacts = await loadContacts();
   renderContactListEdit(contacts, assignedTo);
+  assignedToEditTemp = [...assignedTo];
 }
 
 function openAssignedToEdit() {
@@ -542,6 +543,9 @@ function openAssignedToEdit() {
   toggleArrow("arrow");
   let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
   assignedMembersEditRef.classList.toggle("d-nonevip");
+    initEditContacts(assignedToEditTemp);
+    updateAssignedMembersEdit(assignedToEditTemp);
+
 }
 
 function renderContactListEdit(contacts, assignedTo = []) {
@@ -552,7 +556,7 @@ function renderContactListEdit(contacts, assignedTo = []) {
     for (let contact of contacts) {
       let name = contact.firstname + " " + contact.lastname;
       let assignedColor = getAvatarColorClass(name);
-      let isAssigned = assignedTo.includes(name);
+      let isAssigned = assignedTo.includes(contact.id);
       editMembersRef.innerHTML += getContactListEdit(
         contact,
         assignedColor,
@@ -564,7 +568,7 @@ function renderContactListEdit(contacts, assignedTo = []) {
 
 function getContactListEdit(contact, assignedColor, isAssigned) {
   return `  <li
-                  onclick="getContact('${contact.id}')"
+                  onclick="getContactEdit('${contact.id}')"
                   id="contact${contact.id}"
                   class="optionsCategory inputFlex ${
                     isAssigned ? "assignedBg" : ""
@@ -610,4 +614,26 @@ function updateAssignedMembersEdit(assignedTo) {
   let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
   if (!assignedMembersEditRef) return;
   assignedMembersEditRef.innerHTML = getAssignedInitialsEditIcons(assignedTo);
+}
+
+function getContactEdit(id) {
+  let membersRef = document.getElementById("contact" + id);
+  inputRef = membersRef.querySelector("input");
+  checkBoxImg = membersRef.querySelector("img");
+
+  if (!inputRef.checked) {
+    getInputCheckedTrue(membersRef, inputRef);
+  } else if (inputRef.checked && membersRef.classList.contains("assignedBg")) {
+    getInputCheckedFalse(membersRef, inputRef);
+  }
+  toggleAssignmentEdit(id);
+}
+
+function toggleAssignmentEdit(id) {
+  let index = assignedToEditTemp.indexOf(id);
+  if (index !== -1) {
+    assignedToEditTemp.splice(index, 1);
+  } else {
+    assignedToEditTemp.push(id);
+  }
 }

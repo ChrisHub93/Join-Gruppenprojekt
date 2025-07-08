@@ -550,6 +550,9 @@ async function saveEditedContact(event) {
   let keys = Object.keys(contacts);
   let contactsArry = Object.values(contacts);
 
+  console.log(contacts);
+  
+
   let inputNameRef = document.getElementById("nameEdit");
   let inputEmailRef = document.getElementById("emailEdit");
   let inputPhoneRef = document.getElementById("phoneEdit");
