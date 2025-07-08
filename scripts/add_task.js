@@ -31,6 +31,7 @@ function filterContactsToAssign(userNameWord){
 }
 
 async function initAddTask() {
+  activateMenu(this, 'board')
   let contacts = await loadContacts();
   renderContactList(contacts);
   contactsToAssign = contacts;
