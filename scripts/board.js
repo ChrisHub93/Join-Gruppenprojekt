@@ -368,7 +368,7 @@ async function updateDataEdit(tasksEditRef) {
     date: date.value,
     priority: priorityEdit,
     assignedTo: assignedToEditTemp,
-    subTasks: getUpdatedSubtasks(),
+    subTasksOpen: getUpdatedSubtasks(),
     status: tasks[taskKeyEdit].status,
   };
 
