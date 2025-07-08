@@ -7,7 +7,7 @@ let checkDate = false;
 
 let setPriority = "";
 let assignedTo = [];
-let subtasks = [];
+let subtasksOpen = [];
 
 let debounceTimeOut = 0;
 let contactsToAssign;
@@ -383,6 +383,8 @@ function addTask() {
   addedTaskRef.innerHTML += getSubTasksTemplate(inputRef);
   removeDisplayNone("plusIcon");
   toggleDisplayNone("cancelOrCheck");
+  subtasksOpen.push(inputRef.value);
+  console.log(subtasksOpen);
   inputRef.value = "";
 }
 
@@ -453,8 +455,7 @@ async function postDataToServer(currentStatus) {
   let description = document.getElementById("description");
   let date = document.getElementById("date");
   let priority = setPriority;
-  let category = document.getElementById("select");
-  let subtasks = ["task1", "task2", "task3"];
+  let category = document.getElementById("select"); 
 
   await postData(`/tasks/`, {
     id: generateTimeBasedId(),
@@ -465,7 +466,7 @@ async function postDataToServer(currentStatus) {
     // assignedTo: await searchContacts(),
     assignedTo: assignedTo,
     category: category.innerText,
-    subTasks: subtasks,
+    subTasksOpen: subtasksOpen,
     status: currentStatus,
   });
   loadTasks();
