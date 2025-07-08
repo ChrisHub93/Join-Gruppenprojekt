@@ -390,19 +390,29 @@ async function putDataEdit(path = "", data = {}) {
 }
 
 function getUpdatedSubtasks() {
-  let editedSubtasks = document.querySelectorAll(".flex_edit");
+  // let editedSubtasks = document.querySelectorAll(".flex_edit");
+  let editedSubtasks = document.getElementById("subTasks");
+  let newSubTasks = editedSubtasks.querySelectorAll("input"); 
   let updatedSubtasks = [];
 
-  for (let el of editedSubtasks) {
-    let pTag = el.querySelector("p");
-
-    if (pTag) {
-      let text = pTag.textContent.trim();
-      if (text !== "") {
-        updatedSubtasks.push(text);
-      }
-    }
+  for (let index = 0; index < newSubTasks.length; index++) {
+    const element = newSubTasks[index];
+    let addedTask = element.offsetParent.id;
+    console.log(updatedSubtasks);
+    updatedSubtasks.push(addedTask);
   }
+
+  // for (let el of editedSubtasks) {
+  //   let pTag = el.querySelector("p");
+
+  //   if (pTag) {
+  //     let text = pTag.textContent.trim();
+  //     if (text !== "") {
+  //       updatedSubtasks.push(text);
+  //     }
+  //   }
+  // }
+  // return updatedSubtasks;
   return updatedSubtasks;
 }
 
