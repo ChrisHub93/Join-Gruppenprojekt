@@ -390,9 +390,9 @@ async function putDataEdit(path = "", data = {}) {
 }
 
 function getUpdatedSubtasks() {
-  // let editedSubtasks = document.querySelectorAll(".flex_edit");
-  let editedSubtasks = document.getElementById("subTasks");
-  let newSubTasks = editedSubtasks.querySelectorAll("input"); 
+  let editedSubtasks = document.querySelectorAll(".flex_edit");
+  let maindiv = document.getElementById("subTasks");
+  let newSubTasks = maindiv.querySelectorAll("input"); 
   let updatedSubtasks = [];
 
   for (let index = 0; index < newSubTasks.length; index++) {
@@ -402,18 +402,18 @@ function getUpdatedSubtasks() {
     updatedSubtasks.push(addedTask);
   }
 
-  // for (let el of editedSubtasks) {
-  //   let pTag = el.querySelector("p");
+  for (let el of editedSubtasks) {
+    let pTag = el.querySelector("p");
 
-  //   if (pTag) {
-  //     let text = pTag.textContent.trim();
-  //     if (text !== "") {
-  //       updatedSubtasks.push(text);
-  //     }
-  //   }
-  // }
-  // return updatedSubtasks;
+    if (pTag) {
+      let text = pTag.textContent.trim();
+      if (text !== "") {
+        updatedSubtasks.push(text);
+      }
+    }
+  }
   return updatedSubtasks;
+  // return updatedSubtasks;
 }
 
 function editSubtask(iconElement) {
