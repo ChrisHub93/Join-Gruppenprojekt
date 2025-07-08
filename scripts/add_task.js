@@ -324,9 +324,13 @@ function createTask() {
   checkEmptyTitle();
   checkEmptyDate();
   if (checkTitle && checkDate) {
+    closeAddTaskOverlaySuccses();
     postDataToServer(currentStatus);
     currentStatus = 'To do';
-  }
+    setTimeout(()=>{
+      window.location.href= "../html/board.html";
+    }, 700);    
+  }  
 }
 
 function createTaskBoard() {

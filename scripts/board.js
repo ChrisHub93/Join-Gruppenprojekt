@@ -333,6 +333,8 @@ function closeAddTaskOverlay() {
 
 function closeAddTaskOverlaySuccses() {
   const addOverlayRef = document.getElementById("overlayAddTask");
+  addOverlayRef.classList.remove("d-nonevip");
+
 
   document.getElementById("AddTaskSuccesMessage").style.display = "flex";
   setTimeout(() => {
