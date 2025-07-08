@@ -391,7 +391,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
               </div>
             </div>
             <div id="subTasks">
-            ${subtasksOverlayEdit(tasksEditRef.subTasks)}
+            ${subtasksOverlayEdit(tasksEditRef.subTasksOpen)}
             </div>
           </div>
         </div>
@@ -500,7 +500,7 @@ function renderOverlayTaskContent(tasksRef) {
             </div>
             <div class="filledContainer__subTasks flex_column_overlayTask">
               <p class="cursor_overlay_task">Subtasks:</p>
-              ${subtasksOverlay(tasksRef.subTasks)}
+              ${subtasksOverlay(tasksRef.subTasksOpen)}
             </div>
             <div class="flex_end_gp8">
               <div onclick="deleteBoardTasks('${tasksRef.id}'); closeOverlay(event);" class="bottom_overlay_task delete_task">

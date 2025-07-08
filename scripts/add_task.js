@@ -32,6 +32,7 @@ function filterContactsToAssign(userNameWord){
 
 async function initAddTask() {
 
+
   let contacts = await loadContacts();
   renderContactList(contacts);
   contactsToAssign = contacts;
