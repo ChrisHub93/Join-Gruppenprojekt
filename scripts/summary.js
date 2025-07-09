@@ -74,8 +74,8 @@ async function filterTaskSummary() {
     let tasksFeedback = todos.filter(task => task.status === "Await feedback");
     let tasksUrgent = todos.filter(task => task.priority === "urgent");
     tasksUrgent.sort((a,b) => new Date(a.date) - new Date(b.date));
-    let tasksPrioDate = tasksUrgent[0].date;
-    let urgentDate = formatDatetoEnglish(tasksPrioDate);
+    let tasksPrioDate = tasksUrgent[0]?.date ?? "";
+    let urgentDate = tasksPrioDate ? formatDatetoEnglish(tasksPrioDate) : "";
     checkboxRef.innerHTML = getCheckboxSummary(tasksToDo, tasksDone, tasksProgress, tasksFeedback, tasksUrgent, todos, urgentDate);
     iconHoverSwaps();   
 }
