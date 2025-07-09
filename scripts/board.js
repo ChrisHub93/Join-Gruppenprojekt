@@ -219,32 +219,35 @@ function closeOverlay(event) {
 }
 
 // Testbereich Start
-function toggleSubtask(img, id) {
+function toggleSubtask(img, id, clickedID) {
   let fileName = img.src.split("/").pop();
   let isChecked = fileName === "subtask-checked.png";
   console.log(id);
 
   if (isChecked) {
     img.src = "../assets/icons/subtask-unchecked.png";
-    postSubtaskClosed(id);
+    postSubtaskClosed(id, clickedID );
   } else {
     img.src = "../assets/icons/subtask-checked.png";
-    postSubtaskOpen(id);
+    postSubtaskOpen(id, clickedID);
   }
 }
 
-async function postSubtaskClosed(id) {
-  const clicked = ""; // document.getElementById("").value
+async function postSubtaskClosed(id, clickedID) {
+  console.log(clickedID);
+  const clickedValue = document.getElementById(clickedID).innerText
   const todoIndex = todos.findIndex((task) => task.id == id);
   let subTaskIndex = todos[todoIndex].subTasksClosed; //subTaskIndex = die gefundenen tasks im Array
   // hier muss der angeklickte String mit subTaskIndex verglichen werden und rausgespliced werden
-  let foundTaskIndex = todos[todoIndex].subTasksClosed.splice(subTaskIndex,1);
+  const clickedArrayfiltered = subTaskIndex.filter((task) => task == clickedValue);
+  let foundTaskIndex = todos[todoIndex].subTasksClosed.splice(clickedArrayfiltered ,1);
   todos[todoIndex].subTasksOpen.push(foundTaskIndex.toString());
   console.log("testSplice", foundTaskIndex);
   console.log("SubtaskClosed Array:",subtasksClosed);
 }
 
-function postSubtaskOpen(id) {
+function postSubtaskOpen(id, clickedID) {
+  console.log(clickedID);
   const todoIndex = todos.findIndex((task) => task.id == id);
   let subTaskIndex = todos[todoIndex].subTasksOpen;
   let foundTaskIndex = todos[todoIndex].subTasksOpen.splice(subTaskIndex,1);
