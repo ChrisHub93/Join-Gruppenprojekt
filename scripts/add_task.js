@@ -484,7 +484,6 @@ async function postDataToServer(currentStatus) {
     assignedTo: assignedTo,
     category: category.innerText,
     subTasksOpen: subtasksOpen,
-    subTasksClosed: ["empty"],
     status: currentStatus,
   });
   // loadTasks();

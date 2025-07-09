@@ -1,3 +1,4 @@
+let loadTodos = [];
 let todos = [];
 let currentDraggedElement;
 let globalContacts = [];
@@ -7,7 +8,8 @@ async function loadTasks() {
   if (tasks === null) {
     return;
   }
-  todos = Object.values(tasks);
+  loadTodos = Object.values(tasks);
+  addSubtasks();
   let contactsData = await fetchData("/contacts/");
   globalContacts = Object.values(contactsData);
 
@@ -71,6 +73,22 @@ async function loadTasks() {
       calculateAndRenderProgressBar(element);
     }
   }
+}
+
+function addSubtasks() {
+  todos = [];
+  
+  for (let task of loadTodos) {
+    if (task.subTasksOpen === undefined) {
+      task.subTasksOpen = [];
+    }
+    if (task.subTasksClosed === undefined) {
+      task.subTasksClosed = [];
+    }
+    todos.push(task);
+  }
+  
+  console.log(todos);
 }
 
 // prettier-ignore
