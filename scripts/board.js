@@ -235,25 +235,30 @@ function toggleSubtask(img, id, clickedID) {
 
 async function postSubtaskClosed(id, clickedID) {
   console.log(clickedID);
-  const clickedValue = document.getElementById(clickedID).innerText
+  const clickedValue = document.getElementById(clickedID).innerText.trim()
   const todoIndex = todos.findIndex((task) => task.id == id);
-  let subTaskIndex = todos[todoIndex].subTasksClosed; //subTaskIndex = die gefundenen tasks im Array
-  // hier muss der angeklickte String mit subTaskIndex verglichen werden und rausgespliced werden
-  const clickedArrayfiltered = subTaskIndex.filter((task) => task == clickedValue);
-  let foundTaskIndex = todos[todoIndex].subTasksClosed.splice(clickedArrayfiltered ,1);
-  todos[todoIndex].subTasksOpen.push(foundTaskIndex.toString());
-  console.log("testSplice", foundTaskIndex);
-  console.log("SubtaskClosed Array:",subtasksClosed);
+  let closedSubtasks = todos[todoIndex].subTasksClosed; //subTaskIndex = die gefundenen tasks im Array
+ 
+  const subTaskIndex = closedSubtasks.findIndex((task) => task.trim() === clickedValue);
+  const [movedSubtask] = closedSubtasks.splice(subTaskIndex, 1);
+  todos[todoIndex].subTasksOpen.push(movedSubtask);
+
+  console.log("Verschobener Subtask:", movedSubtask);
+  console.log("Aktueller Zustand:", todos[todoIndex]);
 }
 
 function postSubtaskOpen(id, clickedID) {
   console.log(clickedID);
+  const clickedValue = document.getElementById(clickedID).innerText.trim()
   const todoIndex = todos.findIndex((task) => task.id == id);
-  let subTaskIndex = todos[todoIndex].subTasksOpen;
-  let foundTaskIndex = todos[todoIndex].subTasksOpen.splice(subTaskIndex,1);
-  todos[todoIndex].subTasksClosed.push(foundTaskIndex.toString());
-  console.log("testSplice", foundTaskIndex);
-  console.log("SubtaskClosed Array:",subtasksClosed);
+  let openSubtasks = todos[todoIndex].subTasksOpen; //subTaskIndex = die gefundenen tasks im Array
+ 
+  const subTaskIndex = openSubtasks.findIndex((task) => task.trim() === clickedValue);
+  const [movedSubtask] = openSubtasks.splice(subTaskIndex, 1);
+  todos[todoIndex].subTasksClosed.push(movedSubtask);
+
+  console.log("Verschobener Subtask:", movedSubtask);
+  console.log("Aktueller Zustand:", todos[todoIndex]);
 }
 
 function closeOverlayAndPushToServer(id) {
