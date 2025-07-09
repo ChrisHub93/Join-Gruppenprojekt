@@ -25,6 +25,7 @@ function getSubTasksTemplate(inputRef) {
                     <img onclick="acceptTask('${inputRef.value}')" src="/assets/icons/Property 1=check.png" alt="">
                 </div>               
             </div>`;
+
 }
 
 function getDetailsOfContact(
