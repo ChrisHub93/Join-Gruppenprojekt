@@ -234,8 +234,10 @@ function toggleSubtask(img, id) {
 }
 
 async function postSubtaskClosed(id) {
+  const clicked = ""; // document.getElementById("").value
   const todoIndex = todos.findIndex((task) => task.id == id);
-  let subTaskIndex = todos[todoIndex].subTasksClosed;
+  let subTaskIndex = todos[todoIndex].subTasksClosed; //subTaskIndex = die gefundenen tasks im Array
+  // hier muss der angeklickte String mit subTaskIndex verglichen werden und rausgespliced werden
   let foundTaskIndex = todos[todoIndex].subTasksClosed.splice(subTaskIndex,1);
   todos[todoIndex].subTasksOpen.push(foundTaskIndex.toString());
   console.log("testSplice", foundTaskIndex);

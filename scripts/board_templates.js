@@ -423,10 +423,10 @@ function subtasksOverlayRender(taskRef) {
     <div class="subtask_container">
       ${taskRef.subTasksOpen
         .map(
-          (subtask) => `
+          (subtask, i) => `
         <div class="subtask_toggle">
           <img class="subtask-icon" src="../assets/icons/subtask-unchecked.png" onclick="toggleSubtask(this, ${taskRef.id})">
-          <p class="cursor_overlay_task">${subtask}</p>
+          <p id="subtask-open-${taskRef.id}-${i}" class="cursor_overlay_task">${subtask}</p>
         </div>
       `
         )
@@ -437,10 +437,10 @@ function subtasksOverlayRender(taskRef) {
         <div class="subtask_container">
           ${taskRef.subTasksClosed
             .map(
-              (subtask) => `
+              (subtask, i) => `
               <div class="subtask_toggle">
                 <img class="subtask-icon" src="../assets/icons/subtask-checked.png" onclick="toggleSubtask(this, ${taskRef.id})">
-                <p class="cursor_overlay_task">${subtask}</p>
+                <p id="subtask-closed-${taskRef.id}-${i}" class="cursor_overlay_task">${subtask}</p>
               </div>
             `
             )
