@@ -234,20 +234,11 @@ function toggleSubtask(img, id) {
 }
 
 async function postSubtaskClosed(id) {
-  const index = subtasksClosed.findIndex((task) => task.id == id);
-  let test = todos[index].subTasksClosed;
-  test = test.splice(index, 1).toString();
+  const index = todos.findIndex((task) => task.id == id);
+  let foundTask = todos[index].subTasksClosed;
+  foundTask = foundTask.splice(index, 1).toString();
   
- subtasksOpen.push(test);
-
-
-  // console.log("testSplice", test);
-  // console.log("SubtaskClosed Array:",subtasksClosed);
-  // console.log("SubtaskOpen Array:",subtasksOpen);
-
-  // 1. subtasClosed neu
-  // 2. das neue auf den server geladen wird
-  // 3. das sich das aktualisert wenn .
+  todos[index].subTasksOpen.push(foundTask);
 }
 
 function postSubtaskOpen(id) {
@@ -255,9 +246,7 @@ function postSubtaskOpen(id) {
   let foundTask = todos[index].subTasksOpen;
   foundTask = foundTask.splice(index, 1).toString();
   
-  subtasksClosed.push(foundTask);
-  // render open task und closedTask(durchgestrichen)
-  // render overlay neu
+  todos[index].subTasksClosed.push(foundTask);
 
   console.log("testSplice", foundTask);
   console.log("SubtaskClosed Array:",subtasksClosed);
