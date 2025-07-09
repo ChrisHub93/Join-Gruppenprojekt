@@ -418,20 +418,36 @@ function assignedIconEditRender(initials, assignedColor) {
       <p onclick="openAssignedToEdit()" class="initials_icon_edit assigned_to_icon ${assignedColor}">${initials}</p>`;
 }
 
-function subtasksOverlayRender(subtasks, id) {
+function subtasksOverlayRender(taskRef) {
   return `
     <div class="subtask_container">
-      ${subtasks
+      ${taskRef.subTasksOpen
         .map(
           (subtask) => `
         <div class="subtask_toggle">
-          <img class="subtask-icon" src="../assets/icons/subtask-unchecked.png" onclick="toggleSubtask(this, ${id})">
+          <img class="subtask-icon" src="../assets/icons/subtask-unchecked.png" onclick="toggleSubtask(this, ${taskRef.id})">
           <p class="cursor_overlay_task">${subtask}</p>
         </div>
       `
         )
         .join("")}
     </div>
+    ${taskRef.subTasksClosed && taskRef.subTasksClosed.length
+      ? `
+        <div class="subtask_container">
+          ${taskRef.subTasksClosed
+            .map(
+              (subtask) => `
+              <div class="subtask_toggle">
+                <img class="subtask-icon" src="../assets/icons/subtask-checked.png" onclick="toggleSubtask(this, ${taskRef.id})">
+                <p class="cursor_overlay_task">${subtask}</p>
+              </div>
+            `
+            )
+            .join("")}
+        </div>
+      `
+      : ""}
   `;
 }
 
@@ -466,7 +482,7 @@ function renderOverlayTaskContent(tasksRef) {
             <div class="filledContainer__category">
               <p class="cursor_overlay_task">${tasksRef.category}</p>
             </div>
-              <img onclick="closeOverlay(event)" class="closeIcon" src="../assets/icons/close.png" alt="">
+              <img onclick="closeOverlay(event); closeOverlayAndPushToServer(${tasksRef.id})" class="closeIcon" src="../assets/icons/close.png" alt="">
           </div>
             <div class="filledContainer__title">
               <h1 class="cursor_overlay_task">${tasksRef.title}</h1>
@@ -500,7 +516,7 @@ function renderOverlayTaskContent(tasksRef) {
             </div>
             <div class="filledContainer__subTasks flex_column_overlayTask">
               <p class="cursor_overlay_task">Subtasks:</p>
-              ${subtasksOverlay(tasksRef.subTasksOpen, tasksRef.id)}
+              ${subtasksOverlay(tasksRef)}
             </div>
             <div class="flex_end_gp8">
               <div onclick="deleteBoardTasks('${tasksRef.id}'); closeOverlay(event);" class="bottom_overlay_task delete_task">

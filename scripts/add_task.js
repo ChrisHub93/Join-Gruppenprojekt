@@ -8,6 +8,7 @@ let checkDate = false;
 let setPriority = "";
 let assignedTo = [];
 let subtasksOpen = [];
+let subtasksClosed = [];
 
 let debounceTimeOut = 0;
 let contactsToAssign;
@@ -483,6 +484,7 @@ async function postDataToServer(currentStatus) {
     assignedTo: assignedTo,
     category: category.innerText,
     subTasksOpen: subtasksOpen,
+    subTasksClosed: ["empty"],
     status: currentStatus,
   });
   // loadTasks();

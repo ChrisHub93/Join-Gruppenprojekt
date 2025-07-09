@@ -218,6 +218,7 @@ function closeOverlay(event) {
   }
 }
 
+// Testbereich Start
 function toggleSubtask(img, id) {
   let fileName = img.src.split("/").pop();
   let isChecked = fileName === "subtask-checked.png";
@@ -225,26 +226,56 @@ function toggleSubtask(img, id) {
 
   if (isChecked) {
     img.src = "../assets/icons/subtask-unchecked.png";
-    postSubtaskClosed();
+    postSubtaskClosed(id);
   } else {
     img.src = "../assets/icons/subtask-checked.png";
-    postSubtaskOpen();
+    postSubtaskOpen(id);
   }
 }
 
-function postSubtaskClosed() {
+async function postSubtaskClosed(id) {
+  const index = subtasksClosed.findIndex((task) => task.id == id);
+  let test = todos[index].subTasksClosed;
+  test = test.splice(index, 1).toString();
   
+ subtasksOpen.push(test);
+
+
+  // console.log("testSplice", test);
+  // console.log("SubtaskClosed Array:",subtasksClosed);
+  // console.log("SubtaskOpen Array:",subtasksOpen);
+
+  // 1. subtasClosed neu
+  // 2. das neue auf den server geladen wird
+  // 3. das sich das aktualisert wenn .
 }
 
-function postSubtaskOpen() {
+function postSubtaskOpen(id) {
+  const index = todos.findIndex((task) => task.id == id);
+  let foundTask = todos[index].subTasksOpen;
+  foundTask = foundTask.splice(index, 1).toString();
   
+  subtasksClosed.push(foundTask);
+  // render open task und closedTask(durchgestrichen)
+  // render overlay neu
+
+  console.log("testSplice", foundTask);
+  console.log("SubtaskClosed Array:",subtasksClosed);
 }
 
-function subtasksOverlay(subtasks, id) {
-  if (subtasks === undefined) {
+function closeOverlayAndPushToServer(id) {
+  console.log(todos);
+  console.log("subOpen:",subtasksOpen);
+  console.log("subClosed:",subtasksClosed);
+}
+
+// Testbereich ENDE
+
+function subtasksOverlay(taskRef) {
+  if (taskRef.subTasksOpen == undefined && taskRef.subTasksClose === undefined) {
     return "";
   } else {
-    return subtasksOverlayRender(subtasks, id);
+    return subtasksOverlayRender(taskRef);
   }
 }
 
