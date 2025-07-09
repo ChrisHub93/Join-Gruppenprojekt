@@ -236,8 +236,8 @@ function toggleSubtask(img, id) {
 async function postSubtaskClosed(id) {
   const todoIndex = todos.findIndex((task) => task.id == id);
   let subTaskIndex = todos[todoIndex].subTasksClosed;
-  let foundTaskIndex = todos[todoIndex].subTasksClosed.splice(subTaskIndex,1)[0];
-  todos[todoIndex].subTasksOpen.push(foundTaskIndex);
+  let foundTaskIndex = todos[todoIndex].subTasksClosed.splice(subTaskIndex,1);
+  todos[todoIndex].subTasksOpen.push(foundTaskIndex.toString());
   console.log("testSplice", foundTaskIndex);
   console.log("SubtaskClosed Array:",subtasksClosed);
 }
@@ -245,8 +245,8 @@ async function postSubtaskClosed(id) {
 function postSubtaskOpen(id) {
   const todoIndex = todos.findIndex((task) => task.id == id);
   let subTaskIndex = todos[todoIndex].subTasksOpen;
-  let foundTaskIndex = todos[todoIndex].subTasksOpen.splice(subTaskIndex,1)[0];
-  todos[todoIndex].subTasksClosed.push(foundTaskIndex);
+  let foundTaskIndex = todos[todoIndex].subTasksOpen.splice(subTaskIndex,1);
+  todos[todoIndex].subTasksClosed.push(foundTaskIndex.toString());
   console.log("testSplice", foundTaskIndex);
   console.log("SubtaskClosed Array:",subtasksClosed);
 }
