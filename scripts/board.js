@@ -253,9 +253,7 @@ function postSubtaskOpen(id) {
 }
 
 function closeOverlayAndPushToServer(id) {
-  console.log(todos);
-  console.log("subOpen:",subtasksOpen);
-  console.log("subClosed:",subtasksClosed);
+  
 }
 
 // Testbereich ENDE
