@@ -537,7 +537,7 @@ function getTaskTemplate(element) {
                 <div class="filledContainer__description">
                   <p>${element.description}</p>
                 </div>
-                <div class="filledContainer__status">
+                <div id="filledContainer-status${element["id"]}" class="filledContainer__status">
                   <div
                     class="statusLine"
                     role="progressbar"
@@ -547,12 +547,11 @@ function getTaskTemplate(element) {
                     aria-valuemax="100"
                   >
                     <div
-                      id="status-bar-js"
+                      id="status-bar-js${element["id"]}"
                       class="progress-bar"
-                      style="width: 50%"
                     ></div>
                   </div>
-                  <p>1/3 Subtasks</p>
+                  <p id="status-bar-number1${element["id"]}">1</p>/<p id="status-bar-number2${element["id"]}">3</p> <p>Subtasks</p>
                 </div>
                 <div class="taskInfo">
                   <div id="assignedTo" class="assignedTo">

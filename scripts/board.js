@@ -37,6 +37,7 @@ async function loadTasks() {
     for (let index = 0; index < statusToDo.length; index++) {
       const element = statusToDo[index];
       toDoContentRef.innerHTML += getTaskTemplate(element);
+      calculateAndRenderProgressBar(element);
     }
   }
 
@@ -46,6 +47,7 @@ async function loadTasks() {
     for (let index = 0; index < statusInProgress.length; index++) {
       const element = statusInProgress[index];
       inProgressContentRef.innerHTML += getTaskTemplate(element);
+      calculateAndRenderProgressBar(element);
     }
   }
 
@@ -55,6 +57,7 @@ async function loadTasks() {
     for (let index = 0; index < statusAwaitFeedback.length; index++) {
       const element = statusAwaitFeedback[index];
       awaitFeedbackContentRef.innerHTML += getTaskTemplate(element);
+      calculateAndRenderProgressBar(element);
     }
   }
 
@@ -65,7 +68,24 @@ async function loadTasks() {
       const element = statusDone[index];
 
       doneContentRef.innerHTML += getTaskTemplate(element);
+      calculateAndRenderProgressBar(element);
     }
+  }
+}
+
+// prettier-ignore
+function calculateAndRenderProgressBar(element) {
+  let percent = 0;
+  let tasksOpenLength = element.subTasksOpen?.length ?? 0;
+  let tasksClosedLength = element.subTasksClose?.length ?? 0;
+
+  if (tasksOpenLength === 0) {
+     document.getElementById("filledContainer-status" + element.id).style.display = "none";
+  } else {
+    percent = Math.round(((tasksClosedLength)/ tasksOpenLength) * 100);
+    document.getElementById('status-bar-js' + element.id).style = `width: ${percent}%`;
+    document.getElementById('status-bar-number1' + element.id).innerText = `${tasksClosedLength}`;
+    document.getElementById('status-bar-number2' + element.id).innerText = `${tasksOpenLength}`;
   }
 }
 
@@ -335,7 +355,6 @@ function closeAddTaskOverlaySuccses() {
   const addOverlayRef = document.getElementById("overlayAddTask");
   addOverlayRef.classList.remove("d-nonevip");
 
-
   document.getElementById("AddTaskSuccesMessage").style.display = "flex";
   setTimeout(() => {
     resetAllPriorities();
@@ -392,7 +411,7 @@ async function putDataEdit(path = "", data = {}) {
 function getUpdatedSubtasks() {
   let editedSubtasks = document.querySelectorAll(".flex_edit");
   let maindiv = document.getElementById("subTasks");
-  let newSubTasks = maindiv.querySelectorAll("input"); 
+  let newSubTasks = maindiv.querySelectorAll("input");
   let updatedSubtasks = [];
 
   for (let index = 0; index < newSubTasks.length; index++) {
@@ -555,9 +574,8 @@ function openAssignedToEdit() {
   toggleArrow("arrow");
   let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
   assignedMembersEditRef.classList.toggle("d-nonevip");
-    initEditContacts(assignedToEditTemp);
-    updateAssignedMembersEdit(assignedToEditTemp);
-
+  initEditContacts(assignedToEditTemp);
+  updateAssignedMembersEdit(assignedToEditTemp);
 }
 
 function renderContactListEdit(contacts, assignedTo = []) {
