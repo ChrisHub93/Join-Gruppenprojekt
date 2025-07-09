@@ -218,22 +218,33 @@ function closeOverlay(event) {
   }
 }
 
-function toggleSubtask(img) {
+function toggleSubtask(img, id) {
   let fileName = img.src.split("/").pop();
   let isChecked = fileName === "subtask-checked.png";
+  console.log(id);
 
   if (isChecked) {
     img.src = "../assets/icons/subtask-unchecked.png";
+    postSubtaskClosed();
   } else {
     img.src = "../assets/icons/subtask-checked.png";
+    postSubtaskOpen();
   }
 }
 
-function subtasksOverlay(subtasks) {
+function postSubtaskClosed() {
+  
+}
+
+function postSubtaskOpen() {
+  
+}
+
+function subtasksOverlay(subtasks, id) {
   if (subtasks === undefined) {
     return "";
   } else {
-    return subtasksOverlayRender(subtasks);
+    return subtasksOverlayRender(subtasks, id);
   }
 }
 

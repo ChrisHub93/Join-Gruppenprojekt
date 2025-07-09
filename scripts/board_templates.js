@@ -418,14 +418,14 @@ function assignedIconEditRender(initials, assignedColor) {
       <p onclick="openAssignedToEdit()" class="initials_icon_edit assigned_to_icon ${assignedColor}">${initials}</p>`;
 }
 
-function subtasksOverlayRender(subtasks) {
+function subtasksOverlayRender(subtasks, id) {
   return `
     <div class="subtask_container">
       ${subtasks
         .map(
           (subtask) => `
         <div class="subtask_toggle">
-          <img class="subtask-icon" src="../assets/icons/subtask-unchecked.png" onclick="toggleSubtask(this)">
+          <img class="subtask-icon" src="../assets/icons/subtask-unchecked.png" onclick="toggleSubtask(this, ${id})">
           <p class="cursor_overlay_task">${subtask}</p>
         </div>
       `
@@ -500,7 +500,7 @@ function renderOverlayTaskContent(tasksRef) {
             </div>
             <div class="filledContainer__subTasks flex_column_overlayTask">
               <p class="cursor_overlay_task">Subtasks:</p>
-              ${subtasksOverlay(tasksRef.subTasksOpen)}
+              ${subtasksOverlay(tasksRef.subTasksOpen, tasksRef.id)}
             </div>
             <div class="flex_end_gp8">
               <div onclick="deleteBoardTasks('${tasksRef.id}'); closeOverlay(event);" class="bottom_overlay_task delete_task">
