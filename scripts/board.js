@@ -265,7 +265,7 @@ async function postSubtaskClosed(id, clickedID) {
   console.log("Aktueller Zustand:", todos[todoIndex]);
 }
 
-function postSubtaskOpen(id, clickedID) {
+async function postSubtaskOpen(id, clickedID) {
   console.log(clickedID);
   const clickedValue = document.getElementById(clickedID).innerText.trim()
   const todoIndex = todos.findIndex((task) => task.id == id);
@@ -277,7 +277,28 @@ function postSubtaskOpen(id, clickedID) {
 
   console.log("Verschobener Subtask:", movedSubtask);
   console.log("Aktueller Zustand:", todos[todoIndex]);
+
+
+  let getTasks = await fetchData("tasks/");
+  let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
+// need to save subtasks to backend - notworking right now
+  if(taskKey){
+    await postData(`tasks/${taskKey}`, {
+      id: generateTimeBasedId(),
+    title: title.value,
+    description: description.value,
+    date: date.value,
+    priority: priority,
+    // assignedTo: await searchContacts(),
+    assignedTo: assignedTo,
+    category: category.innerText,
+    subTasksOpen: subtasksOpen,
+    status: currentStatus,
+    });
+  }
 }
+
+
 
 function closeOverlayAndPushToServer(id) {
   
