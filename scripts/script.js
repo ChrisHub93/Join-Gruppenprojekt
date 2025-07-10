@@ -97,7 +97,9 @@ function outsideNavbar() {
 }
 
 function activateMenu(clickedElement, menuKey) {
-    sessionStorage.setItem('activeMenu', menuKey);
+    if (menuKey !== 'help') {
+        sessionStorage.setItem('activeMenu', menuKey);
+    }
     if (clickedElement.classList.contains('policy-text') || clickedElement.classList.contains('navbarlink')) {
         sessionStorage.setItem('activePolicy', menuKey);
     } else {
