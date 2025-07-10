@@ -482,7 +482,7 @@ function renderOverlayTaskContent(tasksRef) {
             <div class="filledContainer__category">
               <p class="cursor_overlay_task">${tasksRef.category}</p>
             </div>
-              <img onclick="closeOverlay(event); closeOverlayAndPushToServer(${tasksRef.id})" class="closeIcon" src="../assets/icons/close.png" alt="">
+              <img onclick="closeOverlay(event); loadTasks();" class="closeIcon" src="../assets/icons/close.png" alt="">
           </div>
             <div class="filledContainer__title">
               <h1 class="cursor_overlay_task">${tasksRef.title}</h1>

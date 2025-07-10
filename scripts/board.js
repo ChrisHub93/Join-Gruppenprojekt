@@ -95,15 +95,16 @@ function addSubtasks() {
 function calculateAndRenderProgressBar(element) {
   let percent = 0;
   let tasksOpenLength = element.subTasksOpen?.length ?? 0;
-  let tasksClosedLength = element.subTasksClose?.length ?? 0;
+  let tasksClosedLength = element.subTasksClosed?.length ?? 0;
+  let tasksLength = tasksOpenLength + tasksClosedLength
 
-  if (tasksOpenLength === 0) {
+  if (tasksLength === 0) {
      document.getElementById("filledContainer-status" + element.id).style.display = "none";
   } else {
-    percent = Math.round(((tasksClosedLength)/ tasksOpenLength) * 100);
+    percent = Math.round(((tasksClosedLength)/ tasksLength) * 100);
     document.getElementById('status-bar-js' + element.id).style = `width: ${percent}%`;
     document.getElementById('status-bar-number1' + element.id).innerText = `${tasksClosedLength}`;
-    document.getElementById('status-bar-number2' + element.id).innerText = `${tasksOpenLength}`;
+    document.getElementById('status-bar-number2' + element.id).innerText = `${tasksLength}`;
   }
 }
 
@@ -233,7 +234,7 @@ function closeOverlay(event) {
       dialogTaskEditContent.style.transform = "";
       dialogTaskEditContent.style.opacity = "";
     }, 300);
-  }
+  }  
 }
 
 // Testbereich Start
@@ -323,14 +324,6 @@ async function patchData(path, data = {}) {
   });
   return response.json();
 }
-
-
-
-function closeOverlayAndPushToServer(id) {
-  
-}
-
-// Testbereich ENDE
 
 function subtasksOverlay(taskRef) {
   if (taskRef.subTasksOpen == undefined && taskRef.subTasksClose === undefined) {
@@ -633,6 +626,7 @@ function loadSearch(todos) {
     for (let index = 0; index < statusToDo.length; index++) {
       const element = statusToDo[index];
       toDoContentRef.innerHTML += getTaskTemplate(element);
+      calculateAndRenderProgressBar(element);
     }
   }
 
@@ -642,6 +636,7 @@ function loadSearch(todos) {
     for (let index = 0; index < statusInProgress.length; index++) {
       const element = statusInProgress[index];
       inProgressContentRef.innerHTML += getTaskTemplate(element);
+      calculateAndRenderProgressBar(element);
     }
   }
 
@@ -651,6 +646,7 @@ function loadSearch(todos) {
     for (let index = 0; index < statusAwaitFeedback.length; index++) {
       const element = statusAwaitFeedback[index];
       awaitFeedbackContentRef.innerHTML += getTaskTemplate(element);
+      calculateAndRenderProgressBar(element);
     }
   }
 
@@ -661,6 +657,7 @@ function loadSearch(todos) {
       const element = statusDone[index];
 
       doneContentRef.innerHTML += getTaskTemplate(element);
+      calculateAndRenderProgressBar(element);
     }
   }
 }
