@@ -261,6 +261,16 @@ async function postSubtaskClosed(id, clickedID) {
   const [movedSubtask] = closedSubtasks.splice(subTaskIndex, 1);
   todos[todoIndex].subTasksOpen.push(movedSubtask);
 
+    let getTasks = await fetchData("tasks/");
+  let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
+    if(taskKey){
+    await patchData(`tasks/${taskKey}`, {
+    subTasksOpen: todos[todoIndex].subTasksOpen,
+    subTasksClosed: todos[todoIndex].subTasksClosed
+  });
+}
+  
+
   console.log("Verschobener Subtask:", movedSubtask);
   console.log("Aktueller Zustand:", todos[todoIndex]);
 }
@@ -283,19 +293,35 @@ async function postSubtaskOpen(id, clickedID) {
   let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
 // need to save subtasks to backend - notworking right now
   if(taskKey){
-    await postData(`tasks/${taskKey}`, {
-      id: generateTimeBasedId(),
-    title: title.value,
-    description: description.value,
-    date: date.value,
-    priority: priority,
+    await patchData(`tasks/${taskKey}`, {
+    subTasksOpen: todos[todoIndex].subTasksOpen,
+    subTasksClosed: todos[todoIndex].subTasksClosed
+  });
+    // await postData(`tasks/${taskKey}`, {
+    //   id: todos[todoIndex].id,
+    // title: todos[todoIndex].title,
+    // description: todos[todoIndex].description,
+    // date: todos[todoIndex].date,
+    // priority: todos[todoIndex].priority,
     // assignedTo: await searchContacts(),
-    assignedTo: assignedTo,
-    category: category.innerText,
-    subTasksOpen: subtasksOpen,
-    status: currentStatus,
-    });
+    // assignedTo: todos[todoIndex].assignedTo,
+    // category: todos[todoIndex].category,
+    // subTasksOpen: todos[todoIndex].subtasksOpen,
+    // subTasksClosed: todos[todoIndex].subTasksClosed,
+    // status: todos[todoIndex].status,
+    // });
   }
+}
+
+async function patchData(path, data = {}) {
+  const response = await fetch(BASE_URL + path + ".json", {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
+  return response.json();
 }
 
 

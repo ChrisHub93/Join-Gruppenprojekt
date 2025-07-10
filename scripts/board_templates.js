@@ -391,7 +391,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
               </div>
             </div>
             <div id="subTasks">
-            ${subtasksOverlayEdit(tasksEditRef.subTasksOpen)}
+            ${subtasksOverlayEdit(tasksEditRef.subTasksOpen && tasksEditRef.subTasksClosed)}
             </div>
           </div>
         </div>
