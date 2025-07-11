@@ -4,8 +4,16 @@ let currentDraggedElement;
 let globalContacts = [];
 
 async function loadTasks() {
+  let toDoContentRef = document.getElementById("toDoContent");
+  let inProgressContentRef = document.getElementById("inProgressContent");
+  let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
+  let doneContentRef = document.getElementById("doneContent");
   let tasks = await fetchData("/tasks/");
   if (tasks === null) {
+    toDoContentRef.innerHTML = getEmptyTemplate();
+    inProgressContentRef.innerHTML = getEmptyTemplate();
+    awaitFeedbackContentRef.innerHTML = getEmptyTemplate();
+    doneContentRef.innerHTML = getEmptyTemplate();
     return;
   }
   loadTodos = Object.values(tasks);
@@ -13,10 +21,10 @@ async function loadTasks() {
   let contactsData = await fetchData("/contacts/");
   globalContacts = Object.values(contactsData);
 
-  let toDoContentRef = document.getElementById("toDoContent");
-  let inProgressContentRef = document.getElementById("inProgressContent");
-  let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
-  let doneContentRef = document.getElementById("doneContent");
+  // let toDoContentRef = document.getElementById("toDoContent");
+  // let inProgressContentRef = document.getElementById("inProgressContent");
+  // let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
+  // let doneContentRef = document.getElementById("doneContent");
 
   // console.log("TodDOs vor filter:",todos);
   let statusToDo = todos.filter((task) => task.status === "To do");

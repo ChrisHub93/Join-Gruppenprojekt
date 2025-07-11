@@ -65,9 +65,17 @@ function mobileGreeting(fullGreeting, overlay, mainContent) {
 }
 
 async function filterTaskSummary() {
+    let checkboxRef = document.getElementById('checkbox');
     let tasks = await fetchData("/tasks/");
+
+    if (tasks === null){
+        checkboxRef.innerHTML = getCheckboxSummaryEmpty();
+        iconHoverSwaps();
+        return; 
+    }
+
     todos = Object.values(tasks);
-    let checkboxRef = document.getElementById('checkbox')
+    // let checkboxRef = document.getElementById('checkbox')
     let tasksToDo = todos.filter(task => task.status === "To do");
     let tasksDone = todos.filter(task => task.status === "Done");
     let tasksProgress = todos.filter(task => task.status === "In progress");

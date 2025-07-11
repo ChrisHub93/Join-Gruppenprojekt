@@ -242,3 +242,58 @@ function getCheckboxSummary(tasksToDo, tasksDone, tasksProgress, tasksFeedback, 
         </div>
   `
 }
+
+function getCheckboxSummaryEmpty() {
+  return `
+          <div class="center-between">
+            <div onclick="location.href = '../html/board.html'; activateMenu(this, 'board')" class="summary-box checkboxtodo">
+                <img class="todone-icon" src="../assets/icons/todo.png" data-alt-src="../assets/icons/todo-hover.png" alt="">
+                <div>
+                    <p class="summary-number">0</p>
+                    <p class="summary-text">To-do</p>
+                </div>
+            </div>
+            <div onclick="location.href = '../html/board.html'; activateMenu(this, 'board')" class="summary-box checkboxtodo">
+                <img class="todone-icon" src="../assets/icons/done.png" data-alt-src="../assets/icons/done-hover.png" alt="">
+                <div>
+                    <p class="summary-number">0</p>
+                    <p class="summary-text">Done</p>
+                </div>
+            </div>
+        </div>
+        <div onclick="location.href = '../html/board.html'; activateMenu(this, 'board')" class="checkboxurgent summary-box space-evenly">
+            <div class="flex-gap18">
+                <img class="summary-urgent" src="../assets/icons/prio-summary.png" alt="">
+                <div>
+                    <p class="summary-number">0</p>
+                    <p class="summary-text">Urgent</p>
+                </div>
+            </div>
+            <div class="seperator-urgent"></div>
+                <div class="deadline">
+                    <p class="deadline-date"></p>
+                    <p class="deadline-text">Upcoming Deadline</p>
+                </div>
+        </div>
+        <div class="page-box center-between">
+            <div onclick="location.href = '../html/board.html'; activateMenu(this, 'board')" class="summary-box checkboxoverall">
+                <div class="checkboxbottom">
+                    <p class="summary-number">0</p>
+                    <p class="summary-text">Tasks in Board</p>
+                </div>
+            </div>
+            <div onclick="location.href = '../html/board.html'; activateMenu(this, 'board')" class="summary-box checkboxoverall">
+                <div class="checkboxbottom">
+                    <p class="summary-number">0</p>
+                    <p class="summary-text">Tasks in Progress</p>
+                </div>
+            </div>
+            <div onclick="location.href = '../html/board.html'; activateMenu(this, 'board')" class="summary-box checkboxoverall">
+                <div class="checkboxbottom">
+                    <p class="summary-number">0</p>
+                    <p class="summary-text">Awaiting Feedback</p>
+                </div>
+            </div>
+        </div>
+  `
+}
