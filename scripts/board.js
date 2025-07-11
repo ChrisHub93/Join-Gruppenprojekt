@@ -86,8 +86,7 @@ function addSubtasks() {
       task.subTasksClosed = [];
     }
     todos.push(task);
-  }
-  
+  }  
   console.log(todos);
 }
 
@@ -119,8 +118,6 @@ function allowDrop(event) {
 
 async function moveTo(status) {
   let tasks = await fetchData("/tasks/");
-
-  console.log("todos (vorher):", todos);
 
   const index = todos.findIndex((task) => task.id == currentDraggedElement);
   if (index === -1) {
@@ -241,7 +238,6 @@ function closeOverlay(event) {
 function toggleSubtask(img, id, clickedID) {
   let fileName = img.src.split("/").pop();
   let isChecked = fileName === "subtask-checked.png";
-  console.log(id);
 
   if (isChecked) {
     img.src = "../assets/icons/subtask-unchecked.png";
@@ -253,10 +249,9 @@ function toggleSubtask(img, id, clickedID) {
 }
 
 async function postSubtaskClosed(id, clickedID) {
-  console.log(clickedID);
   const clickedValue = document.getElementById(clickedID).innerText.trim()
   const todoIndex = todos.findIndex((task) => task.id == id);
-  let closedSubtasks = todos[todoIndex].subTasksClosed; //subTaskIndex = die gefundenen tasks im Array
+  let closedSubtasks = todos[todoIndex].subTasksClosed;
  
   const subTaskIndex = closedSubtasks.findIndex((task) => task.trim() === clickedValue);
   const [movedSubtask] = closedSubtasks.splice(subTaskIndex, 1);
@@ -277,10 +272,9 @@ async function postSubtaskClosed(id, clickedID) {
 }
 
 async function postSubtaskOpen(id, clickedID) {
-  console.log(clickedID);
   const clickedValue = document.getElementById(clickedID).innerText.trim()
   const todoIndex = todos.findIndex((task) => task.id == id);
-  let openSubtasks = todos[todoIndex].subTasksOpen; //subTaskIndex = die gefundenen tasks im Array
+  let openSubtasks = todos[todoIndex].subTasksOpen;
  
   const subTaskIndex = openSubtasks.findIndex((task) => task.trim() === clickedValue);
   const [movedSubtask] = openSubtasks.splice(subTaskIndex, 1);
