@@ -32,13 +32,9 @@ function filterContactsToAssign(userNameWord){
 }
 
 async function initAddTask() {
-
-
   let contacts = await loadContacts();
   renderContactList(contacts);
   contactsToAssign = contacts;
-  console.log(contactsToAssign);
-  
 }
 
 function renderContactList(contacts) {
@@ -401,7 +397,6 @@ function addTask() {
   removeDisplayNone("plusIcon");
   toggleDisplayNone("cancelOrCheck");
   subtasksOpen.push(inputRef.value);
-  console.log(subtasksOpen);
   inputRef.value = "";
 }
 
@@ -520,7 +515,6 @@ async function searchContacts() {
       }
     }
   }
-  console.log(assigneContacts);
   return assigneContacts;
 }
 
