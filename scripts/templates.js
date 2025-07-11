@@ -40,6 +40,27 @@ function getContactList(contact, assignedColor) {
   `;
 }
 
+function getContactListLoggedInUser(contact, assignedColor) {
+  return `  <li
+                  onclick="getContact('${contact.id}')"
+                  id="contact${contact.id}"
+                  class="optionsCategory inputFlex">
+                  <div class="contacts_name_icon">
+                    <p id="contacts_name_icon${contact.id}" class="assigned_to_icon ${assignedColor}">${contact.name.toUpperCase().charAt(0)}</p>
+                    ${contact.name + " (You)"}
+                  </div>
+                  <input type="checkbox" class="checkBox" />
+                  <img
+                    onclick="setCheckBox('contact${contact.id}', event)"
+                    id="checkBoxImg${contact.id}"
+                    class="checkBoxImg"
+                    src="/assets/icons/Check button.png"
+                    alt=""
+                  />
+                </li>
+  `;
+}
+
 function getSubTasksTemplate(inputRef) {
   return `<div id="${inputRef.value}" class="relative">
             <div id="bullet${inputRef.value}" class="bullet"></div>

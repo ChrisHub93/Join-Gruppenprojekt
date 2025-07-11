@@ -88,8 +88,31 @@ function filterContactsToAssign(userNameWord){
 
 async function initAddTask() {
   let contacts = await loadContacts();
+
+  // check if user is logged in
+  let username = sessionStorage.getItem('loggedInUser');
+  if(username){
+    console.log("user gefunden");
+    let currentUserLoggedIn = await loadUsers();
+    let loggedUser = currentUserLoggedIn.find((user)=> user.name === username);
+    if(loggedUser){
+      const allMembersRef = document.getElementById("allMembers");
+      let name = loggedUser.name;
+      
+      console.log(name);
+      let assignedColor = getAvatarColorClass(name);
+      allMembersRef.innerHTML += getContactListLoggedInUser(loggedUser, assignedColor);
+
+    }
+  }
   renderContactList(contacts);
   contactsToAssign = contacts;
+}
+
+async function loadUsers() {
+  let users = await fetchData("/users/");
+  let contactsArray = Object.values(users);
+  return contactsArray;
 }
 
 function renderContactList(contacts) {
@@ -150,11 +173,15 @@ function toggleBorderColor(id) {
   ref.classList.toggle("border-color");
 }
 
-function openAssignedTo() {
+async function openAssignedTo() {
   toggleVisibility("allMembers");
   toggleBorderColor("selectMember");
   toggleArrow("arrow");
+  
 }
+
+
+
 
 function getContact(id) {
   let membersRef = document.getElementById("contact" + id);
