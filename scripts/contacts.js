@@ -137,6 +137,14 @@ function moreDetailsAboutContact(
     addPersonRef.classList.remove("d-nonevip");
     chooseEditOrDeleteMobileRef.classList.remove("d-nonevip");
   } 
+
+  if (phoneOfUser === "undefined"){
+    let phoneOverlayRef = document.getElementById("phoneOverlay");
+    phoneOverlayRef.classList.add("d-nonevip");
+  } else if (phoneOfUser.value !== undefined){
+    let phoneOverlayRef = document.getElementById("phoneOverlay");
+    phoneOverlayRef.classList.remove("d-nonevip");
+  }
 }
 
 function showMobileVersion(){
@@ -214,13 +222,7 @@ function selectContact(
     phoneOfUser
   );
 
-  if (phoneOfUser === "undefined"){
-    let phoneOverlayRef = document.getElementById("phoneOverlay");
-    phoneOverlayRef.classList.add("d-nonevip");
-  } else if (phoneOfUser.value !== undefined){
-    let phoneOverlayRef = document.getElementById("phoneOverlay");
-    phoneOverlayRef.classList.remove("d-nonevip");
-  }
+  
 }
 
 function openOverlay() {
