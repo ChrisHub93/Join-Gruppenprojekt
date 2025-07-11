@@ -21,7 +21,11 @@ async function getInpuValueAndPost() {
   let name = document.getElementById("signUpInputName").value;
   let email = document.getElementById("signUpInputEmail").value;
   let password = document.getElementById("signUpInputPassword").value;
-  await postData("/users/", { name: name, email: email, password: password });
+  await postData("/users/", { name: name, email: email, password: password, id:getId() });
+}
+
+function getId() {
+  return self.crypto.randomUUID()
 }
 
 async function postData(path, data = {}) {
