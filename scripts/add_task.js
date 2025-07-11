@@ -1,19 +1,17 @@
 let priorityUrgent = false;
 let priorityMedium = false;
 let priorityLow = false;
-
 let checkTitle = false;
 let checkDate = false;
-
+let currentStatus = 'To do';
 let setPriority = "";
 let assignedTo = [];
 let subtasksOpen = [];
 let subtasksClosed = [];
-
 let debounceTimeOut = 0;
 let contactsToAssign;
 
-function clearAddTaskFields(){
+function clearInputFields(){
   let titleRef = document.getElementById("title");
   let errorTitleRef = document.getElementById("errorTitle");
   let descriptionRef = document.getElementById("description");
@@ -23,26 +21,25 @@ function clearAddTaskFields(){
   let subTasksRef = document.getElementById("subTasks");
   let userNameWordRef = document.getElementById("userNameWord");
   let assignedMembersRef = document.getElementById("assignedMembers");
-
   titleRef.value = '';
   titleRef.classList.remove("inputError");
   errorTitleRef.classList.add("opacity");
   descriptionRef.value = '';
   dateRef.value = '';
   dateRef.classList.remove("inputError");
-  errorDateRef.classList.add("opacity");
-  resetAllPriorities()
-  setPriorityMedium('medium');
+  errorDateRef.classList.add("opacity");  
+  subTaskInputRef.value = '';
+  subTasksRef.innerHTML = '';
+  userNameWordRef.value = '';
+  assignedMembersRef.innerHTML = '';
+}
 
-  assignedTo.splice(0, assignedTo.length);
+function removeClasses(){
   let allMembers = document.getElementById("allMembers");
   let listRef = allMembers.querySelectorAll("li");
   let inputRef = allMembers.querySelectorAll("input");
   let checkBoxImg = allMembers.querySelectorAll("img");
   let selectCategoryFieldRef = document.getElementById("selectCategoryField");
-  
-  userNameWordRef.value = '';
-  assignedMembersRef.innerHTML = '';
   for (let element of listRef) {
     element.classList.remove("assignedBg");
   }
@@ -53,8 +50,6 @@ function clearAddTaskFields(){
     element.src = "/assets/icons/Check button.png";
     element.classList.remove("filterChecked"); 
   }
-
-  // close contact list here
   allMembers.classList.remove("show");
   let ref = document.getElementById("arrow");
   let currentSrc = ref.getAttribute("src");
@@ -63,22 +58,22 @@ function clearAddTaskFields(){
   } else {
     ref.src = "/assets/icons/arrow_drop_down.png";
   }
-
   selectCategoryFieldRef.innerHTML='';
   selectCategoryFieldRef.innerHTML=getBasicSelectTemplate();
-
-  subTaskInputRef.value = '';
-  subTasksRef.innerHTML = '';
 }
 
-
+function clearAddTaskFields(){
+  clearInputFields();
+  resetAllPriorities();
+  setPriorityMedium('medium');
+  assignedTo.splice(0, assignedTo.length);
+  removeClasses();  
+}
 
 function filterContactsToAssign(userNameWord){
   clearTimeout(debounceTimeOut);
   debounceTimeOut = setTimeout(() => {
-    currentUser = contactsToAssign.filter((user) =>
-      user.firstname.toLowerCase().includes(userNameWord.toLowerCase())
-    );
+  currentUser = contactsToAssign.filter((user) => user.firstname.toLowerCase().includes(userNameWord.toLowerCase()));
     if (userNameWord.length >= 2) {
       let allMembersRef = document.getElementById("allMembers");
       allMembersRef.innerHTML = '';
@@ -99,7 +94,6 @@ async function initAddTask() {
 
 function renderContactList(contacts) {
   const allMembersRef = document.getElementById("allMembers");
-
   if (contacts) {
     for (contact of contacts) {
       let name = contact.firstname + " " + contact.lastname;
@@ -107,27 +101,6 @@ function renderContactList(contacts) {
       allMembersRef.innerHTML += getContactList(contact, assignedColor);
     }
   }
-}
-
-function getContactList(contact, assignedColor) {
-  return `  <li
-                  onclick="getContact('${contact.id}')"
-                  id="contact${contact.id}"
-                  class="optionsCategory inputFlex">
-                  <div class="contacts_name_icon">
-                    <p id="contacts_name_icon${contact.id}" class="assigned_to_icon ${assignedColor}">${contact.firstname.toUpperCase().charAt(0)}${contact.lastname.toUpperCase().charAt(0)}</p>
-                    ${contact.firstname + " "} ${contact.lastname}
-                  </div>
-                  <input type="checkbox" class="checkBox" />
-                  <img
-                    onclick="setCheckBox('contact${contact.id}', event)"
-                    id="checkBoxImg${contact.id}"
-                    class="checkBoxImg"
-                    src="/assets/icons/Check button.png"
-                    alt=""
-                  />
-                </li>
-  `;
 }
 
 async function loadContacts() {
@@ -163,7 +136,6 @@ function toggleVisibility(id) {
 function toggleArrow(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
-
   let currentSrc = ref.getAttribute("src");
   if (currentSrc.includes("arrow_drop_down.png")) {
     ref.src = "/assets/icons/arrow_drop_down2.png";
@@ -213,23 +185,14 @@ function getContact(id) {
 }
 
 async function getIcon(membersRef, id){
-let assignedMembersRef = document.getElementById("assignedMembers");
-
- let mainDiv = membersRef.querySelector("p");
- let assignedColor = mainDiv.classList[1];
- let contacts = await loadContacts();
- let currentSelectedUser = contacts.find((user) => user.id === id);
- if (currentSelectedUser){
- assignedMembersRef.innerHTML += `<p id="selected_name_icon${currentSelectedUser.id}" class="assigned_to_icon ${assignedColor}">${currentSelectedUser.firstname.toUpperCase().charAt(0)}${currentSelectedUser.lastname.toUpperCase().charAt(0)}</p>`;
- }
-
-//  let activeUser = assignedTo.find((currentId)=> currentId == currentSelectedUser.id);
-//  console.log(activeUser);
-//  if(activeUser){
-//   let selectedMember = document.getElementById("selected_name_icon"+currentSelectedUser.id);
-//   selectedMember.remove();
-//  }
- 
+  let assignedMembersRef = document.getElementById("assignedMembers");
+  let mainDiv = membersRef.querySelector("p");
+  let assignedColor = mainDiv.classList[1];
+  let contacts = await loadContacts();
+  let currentSelectedUser = contacts.find((user) => user.id === id);
+  if (currentSelectedUser){
+  assignedMembersRef.innerHTML += `<p id="selected_name_icon${currentSelectedUser.id}" class="assigned_to_icon ${assignedColor}">${currentSelectedUser.firstname.toUpperCase().charAt(0)}${currentSelectedUser.lastname.toUpperCase().charAt(0)}</p>`;
+  }
 }
 
 function toggleAssignment(id) {
@@ -259,7 +222,6 @@ function setCheckBox(id, event) {
     checkBoxImg.src = "/assets/icons/Check button true.png";
     checkBoxImg.classList.add("filterChecked");
   }
-
 }
 
 function getInputCheckedFalse(membersRef, inputRef) {
@@ -353,15 +315,12 @@ function resetAllPriorities() {
   priorityUrgent = false;
   priorityMedium = false;
   priorityLow = false;
-
   document.getElementById("urgent").classList.remove("priorityUrgentBg");
   removeDisplayNone("standardUrgentIcon");
   addDisplayNone("activeUrgentIcon");
-
   document.getElementById("medium").classList.remove("priorityMediumBg");
   removeDisplayNone("standardMediumIcon");
   addDisplayNone("activeMediumIcon");
-
   document.getElementById("low").classList.remove("priorityLowBg");
   removeDisplayNone("standardLowIcon");
   addDisplayNone("activeLowIcon");
@@ -433,8 +392,6 @@ function checkEmptyDate() {
 
 function chooseSubTask() {
   let inputRef = document.getElementById("subTaskInput");
-  let addedTaskRef = document.getElementById("subTasks");
-
   if (inputRef.value == "") {
     inputRef.value = "";
   } else if (inputRef.value != "") {
@@ -463,19 +420,16 @@ function addTask() {
 function editTask(id) {
   let inputRef = document.getElementById(id);
   inputField = inputRef.querySelector("input");
-
   if (inputField.classList[1] == "activeInput") {
     return;
   } else {
     addDisplayNone("editOrTrash" + id);
     toggleDisplayNone("trashOrCheck" + id);
-
     inputField.classList.add("activeInput");
     let bulletRef = `bullet${id}`;
     toggleDisplayNone(bulletRef);
     let length = inputField.value.length;
     inputField.setSelectionRange(length, length);
-
     let target = "editOrTrash" + id;
     let hideRef = document.getElementById(target);
     hideRef.classList.add("opacity");
@@ -484,11 +438,9 @@ function editTask(id) {
 
 function acceptTask(id) {
   toggleDisplayNone("trashOrCheck" + id);
-
   let target = "editOrTrash" + id;
   let hideRef = document.getElementById(target);
   hideRef.classList.remove("opacity");
-
   let inputRef = document.getElementById(id);
   inputField = inputRef.querySelector("input");
   inputField.blur();
@@ -520,8 +472,6 @@ function toggleDisplayNone(id) {
   ref.classList.toggle("d-nonevip");
 }
 
-let currentStatus = 'To do';
-
 async function postDataToServer(currentStatus) {
   let title = document.getElementById("title");
   let description = document.getElementById("description");
@@ -535,13 +485,11 @@ async function postDataToServer(currentStatus) {
     description: description.value,
     date: date.value,
     priority: priority,
-    // assignedTo: await searchContacts(),
     assignedTo: assignedTo,
     category: category.innerText,
     subTasksOpen: subtasksOpen,
     status: currentStatus,
   });
-  // loadTasks();
 }
 
 async function postData(path, data = {}) {
