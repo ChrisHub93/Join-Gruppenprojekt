@@ -237,7 +237,7 @@ function closeOverlay(event) {
 // Testbereich Start
 let isToggling = false;
 
-// Mit  isToggling wird verhindert, das mehrere Änderungen gleichzeitig gemacht werden können
+// Mit  isToggling wird verhindert, das nicht mehrere Änderungen gleichzeitig gemacht werden können
 async function toggleSubtask(img, id, clickedID) {
   if (isToggling) return;
   isToggling = true;
