@@ -237,6 +237,7 @@ function closeOverlay(event) {
 // Testbereich Start
 let isToggling = false;
 
+// Mit  isToggling wird verhindert, das mehrere Änderungen gleichzeitig gemacht werden können
 async function toggleSubtask(img, id, clickedID) {
   if (isToggling) return;
   isToggling = true;
@@ -265,16 +266,21 @@ async function postSubtaskClosed(id, clickedID) {
   let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
   if (!taskKey) return;
 
+  // Holt die Array´s sub...closed und sub...open aus dem Gefundene Array
   const task = getTasks[taskKey];
   const closedSubtasks = task.subTasksClosed || [];
   const openSubtasks = task.subTasksOpen || [];
 
+  // Suche den Index des Subtasks im sub...closed Array
   const subTaskIndex = closedSubtasks.findIndex((task) => task.trim() === clickedValue);
   if (subTaskIndex === -1) return;
 
+  // Entfernt den subtask aus sub...closed mit Hilfe des Index
+  // und pusht anschließend in sub...open
   const [movedSubtask] = closedSubtasks.splice(subTaskIndex, 1);
   openSubtasks.push(movedSubtask);
 
+  // Speichert den Zustand auf den Server
   await patchData(`tasks/${taskKey}`, {
     subTasksOpen: openSubtasks,
     subTasksClosed: closedSubtasks
