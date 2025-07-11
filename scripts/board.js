@@ -235,77 +235,77 @@ function closeOverlay(event) {
 }
 
 // Testbereich Start
-function toggleSubtask(img, id, clickedID) {
-  let fileName = img.src.split("/").pop();
-  let isChecked = fileName === "subtask-checked.png";
+let isToggling = false;
 
-  if (isChecked) {
-    img.src = "../assets/icons/subtask-unchecked.png";
-    postSubtaskClosed(id, clickedID );
-  } else {
-    img.src = "../assets/icons/subtask-checked.png";
-    postSubtaskOpen(id, clickedID);
+async function toggleSubtask(img, id, clickedID) {
+  if (isToggling) return;
+  isToggling = true;
+
+  try {
+    let fileName = img.src.split("/").pop();
+    let isChecked = fileName === "subtask-checked.png";
+
+    if (isChecked) {
+      img.src = "../assets/icons/subtask-unchecked.png";
+      await postSubtaskClosed(id, clickedID);
+    } else {
+      img.src = "../assets/icons/subtask-checked.png";
+      await postSubtaskOpen(id, clickedID);
+    }
+  } finally {
+    isToggling = false;
   }
 }
 
 async function postSubtaskClosed(id, clickedID) {
-  const clickedValue = document.getElementById(clickedID).innerText.trim()
-  const todoIndex = todos.findIndex((task) => task.id == id);
-  let closedSubtasks = todos[todoIndex].subTasksClosed;
- 
-  const subTaskIndex = closedSubtasks.findIndex((task) => task.trim() === clickedValue);
-  const [movedSubtask] = closedSubtasks.splice(subTaskIndex, 1);
-  todos[todoIndex].subTasksOpen.push(movedSubtask);
+  const clickedValue = document.getElementById(clickedID).innerText.trim();
 
-    let getTasks = await fetchData("tasks/");
+  // Hole aktuelle todos-Daten vom Server
+  let getTasks = await fetchData("tasks/");
   let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
-    if(taskKey){
-    await patchData(`tasks/${taskKey}`, {
-    subTasksOpen: todos[todoIndex].subTasksOpen,
-    subTasksClosed: todos[todoIndex].subTasksClosed
-  });
-}
-  
+  if (!taskKey) return;
 
-  console.log("Verschobener Subtask:", movedSubtask);
-  console.log("Aktueller Zustand:", todos[todoIndex]);
+  const task = getTasks[taskKey];
+  const closedSubtasks = task.subTasksClosed || [];
+  const openSubtasks = task.subTasksOpen || [];
+
+  const subTaskIndex = closedSubtasks.findIndex((task) => task.trim() === clickedValue);
+  if (subTaskIndex === -1) return;
+
+  const [movedSubtask] = closedSubtasks.splice(subTaskIndex, 1);
+  openSubtasks.push(movedSubtask);
+
+  await patchData(`tasks/${taskKey}`, {
+    subTasksOpen: openSubtasks,
+    subTasksClosed: closedSubtasks
+  });
+
+  console.log("Subtask verschoben (geschlossen → offen):", movedSubtask);
 }
 
 async function postSubtaskOpen(id, clickedID) {
-  const clickedValue = document.getElementById(clickedID).innerText.trim()
-  const todoIndex = todos.findIndex((task) => task.id == id);
-  let openSubtasks = todos[todoIndex].subTasksOpen;
- 
-  const subTaskIndex = openSubtasks.findIndex((task) => task.trim() === clickedValue);
-  const [movedSubtask] = openSubtasks.splice(subTaskIndex, 1);
-  todos[todoIndex].subTasksClosed.push(movedSubtask);
-
-  console.log("Verschobener Subtask:", movedSubtask);
-  console.log("Aktueller Zustand:", todos[todoIndex]);
-
+  const clickedValue = document.getElementById(clickedID).innerText.trim();
 
   let getTasks = await fetchData("tasks/");
   let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
-// need to save subtasks to backend - notworking right now
-  if(taskKey){
-    await patchData(`tasks/${taskKey}`, {
-    subTasksOpen: todos[todoIndex].subTasksOpen,
-    subTasksClosed: todos[todoIndex].subTasksClosed
+  if (!taskKey) return;
+
+  const task = getTasks[taskKey];
+  const closedSubtasks = task.subTasksClosed || [];
+  const openSubtasks = task.subTasksOpen || [];
+
+  const subTaskIndex = openSubtasks.findIndex((task) => task.trim() === clickedValue);
+  if (subTaskIndex === -1) return;
+
+  const [movedSubtask] = openSubtasks.splice(subTaskIndex, 1);
+  closedSubtasks.push(movedSubtask);
+
+  await patchData(`tasks/${taskKey}`, {
+    subTasksOpen: openSubtasks,
+    subTasksClosed: closedSubtasks
   });
-    // await postData(`tasks/${taskKey}`, {
-    //   id: todos[todoIndex].id,
-    // title: todos[todoIndex].title,
-    // description: todos[todoIndex].description,
-    // date: todos[todoIndex].date,
-    // priority: todos[todoIndex].priority,
-    // assignedTo: await searchContacts(),
-    // assignedTo: todos[todoIndex].assignedTo,
-    // category: todos[todoIndex].category,
-    // subTasksOpen: todos[todoIndex].subtasksOpen,
-    // subTasksClosed: todos[todoIndex].subTasksClosed,
-    // status: todos[todoIndex].status,
-    // });
-  }
+
+  console.log("Subtask verschoben (offen → geschlossen):", movedSubtask);
 }
 
 async function patchData(path, data = {}) {
