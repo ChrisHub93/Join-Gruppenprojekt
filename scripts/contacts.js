@@ -213,6 +213,14 @@ function selectContact(
     emailOfUser,
     phoneOfUser
   );
+
+  if (phoneOfUser === "undefined"){
+    let phoneOverlayRef = document.getElementById("phoneOverlay");
+    phoneOverlayRef.classList.add("d-nonevip");
+  } else if (phoneOfUser.value !== undefined){
+    let phoneOverlayRef = document.getElementById("phoneOverlay");
+    phoneOverlayRef.classList.remove("d-nonevip");
+  }
 }
 
 function openOverlay() {
@@ -503,6 +511,9 @@ function inputFieldsGetValuesOfContact(user) {
   inputNameRef.value = user.firstname + " " + user.lastname;
   inputEmailRef.value = user.email;
   inputPhoneRef.value = user.phone;
+  if(inputPhoneRef.value==="undefined"){
+    inputPhoneRef.value = '';
+  }
 }
 
 function profileGetCorrectBackground(user) {

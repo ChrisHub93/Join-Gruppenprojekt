@@ -122,7 +122,7 @@ function getDetailsOfContact(
             <span class="email">${emailOfUser}</span>
           </div>
 
-          <div class="phoneOverlay">
+          <div class="phoneOverlay" id="phoneOverlay">
             <span class="subTitlePhoneOverlay">Phone</span>
             <span>${phoneOfUser}</span>
           </div>`;
