@@ -13,6 +13,66 @@ let subtasksClosed = [];
 let debounceTimeOut = 0;
 let contactsToAssign;
 
+function clearAddTaskFields(){
+  let titleRef = document.getElementById("title");
+  let errorTitleRef = document.getElementById("errorTitle");
+  let descriptionRef = document.getElementById("description");
+  let dateRef = document.getElementById("date");
+  let errorDateRef = document.getElementById("errorDate");
+  let subTaskInputRef = document.getElementById("subTaskInput");
+  let subTasksRef = document.getElementById("subTasks");
+  let userNameWordRef = document.getElementById("userNameWord");
+  let assignedMembersRef = document.getElementById("assignedMembers");
+
+  titleRef.value = '';
+  titleRef.classList.remove("inputError");
+  errorTitleRef.classList.add("opacity");
+  descriptionRef.value = '';
+  dateRef.value = '';
+  dateRef.classList.remove("inputError");
+  errorDateRef.classList.add("opacity");
+  resetAllPriorities()
+  setPriorityMedium('medium');
+
+  assignedTo.splice(0, assignedTo.length);
+  let allMembers = document.getElementById("allMembers");
+  let listRef = allMembers.querySelectorAll("li");
+  let inputRef = allMembers.querySelectorAll("input");
+  let checkBoxImg = allMembers.querySelectorAll("img");
+  let selectCategoryFieldRef = document.getElementById("selectCategoryField");
+  
+  userNameWordRef.value = '';
+  assignedMembersRef.innerHTML = '';
+  for (let element of listRef) {
+    element.classList.remove("assignedBg");
+  }
+  for (const element of inputRef) {
+    element.checked = false;
+  }
+  for (const element of checkBoxImg) {
+    element.src = "/assets/icons/Check button.png";
+    element.classList.remove("filterChecked"); 
+  }
+
+  // close contact list here
+  allMembers.classList.remove("show");
+  let ref = document.getElementById("arrow");
+  let currentSrc = ref.getAttribute("src");
+  if (currentSrc.includes("arrow_drop_down.png")) {
+    ref.src = "/assets/icons/arrow_drop_down.png";
+  } else {
+    ref.src = "/assets/icons/arrow_drop_down.png";
+  }
+
+  selectCategoryFieldRef.innerHTML='';
+  selectCategoryFieldRef.innerHTML=getBasicSelectTemplate();
+
+  subTaskInputRef.value = '';
+  subTasksRef.innerHTML = '';
+}
+
+
+
 function filterContactsToAssign(userNameWord){
   clearTimeout(debounceTimeOut);
   debounceTimeOut = setTimeout(() => {

@@ -9,6 +9,16 @@ function getProfileRenderGuest() {
           <p onclick="showNavbar()" class="personal-icon">G</p>`
 }
 
+function getBasicSelectTemplate(){
+  return `<span id="select">Select task category</span>
+                <img
+                  id="arrowCategory"
+                  class="arrow"
+                  src="/assets/icons/arrow_drop_down.png"
+                  alt=""
+                />`;
+}
+
 function getSubTasksTemplate(inputRef) {
   return `<div id="${inputRef.value}" class="relative">
             <div id="bullet${inputRef.value}" class="bullet"></div>
