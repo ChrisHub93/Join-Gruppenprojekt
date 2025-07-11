@@ -1,0 +1,190 @@
+.overlayTask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  display: none;
+}
+
+.overlayTask.active {
+  display: flex;
+}
+
+.dialog_open_task {
+  width: 525px;
+  background-color: white;
+  padding: 48px 40px;
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.overlayTask.active .dialog_open_task {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.flex_between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex_column_overlayTask {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.flex_column_overlayTask_subtask {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.prio_overlay_task {
+  width: 17px;
+}
+
+.subtask_checkbox {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.subtask-icon {
+  cursor: pointer;
+  width: 16px;
+}
+
+.subtask_toggle {
+  display: flex;
+  padding: 6px 16px;
+  gap: 16px;
+  align-items: center;
+}
+
+.subtask_toggle:hover img {
+  background-color: #d1d1d1;
+  padding: 4px;
+  width: 24px;
+  border-radius: 8px;
+}
+
+.subtask_toggle:hover {
+  background-color: #e8e8e8;
+  border-radius: 10px;
+  padding-left: 10px;
+  gap: 10px;
+}
+
+.subtask_overlay_input {
+  height: 16px;
+  border: 2px solid #2a3647;
+  width: 16px;
+}
+
+.closeIcon {
+  padding-right: 4px;
+}
+
+.closeIcon:hover {
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 25px;
+  background-color: #0c2e621f;
+  image-rendering: auto;
+  transform: scale(1.06);
+}
+
+.flex_gap25 {
+  display: flex;
+  gap: 25px;
+}
+
+.flex_gap10 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cursor_overlay_task {
+  cursor: default;
+}
+
+.overlay_text_black {
+  color: black;
+}
+
+.seperator_overlay_task {
+  background-color: #d1d1d1;
+  width: 1px;
+  height: 24px;
+}
+
+.flex_end_gp8 {
+  gap: 8px;
+  justify-content: end;
+  display: flex;
+}
+
+.bottom_overlay_task {
+  cursor: pointer;
+  gap: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.bottom_overlay_task:hover {
+  color: #29abe2;
+  font-weight: 700;
+}
+
+.delete_task:hover img {
+  content: url("../assets/icons/delete-hover.png");
+}
+
+.edit_task:hover img {
+  content: url("../assets/icons/edit-hover.png");
+}
+
+.overlay_task_User_Story{
+    padding: 4px 16px;
+    border-radius: 8px;
+    background-color: #0038FF;
+    color: white;
+}
+
+.overlay_task_Technical_Task{
+    padding: 4px 16px;
+    border-radius: 8px;
+    background-color: #1FD7C1;
+    color: white;
+}
+
+@media (max-width: 545px) {
+
+    .dialog_open_task {
+        width: 396px;
+        padding: 32px 24px;
+        gap: 16px;
+    }
+
+}

@@ -384,7 +384,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
             <div class="edit_subtask_input">  
               <input class="border_edit_active" type="text" name="subtasks" id="subTaskInput" placeholder="Add new subtask"/>
               <img onclick="chooseSubTask()" id="plusIcon" class="plusIcon_edit" src="../assets/icons/Subtasks-plus.png"/>
-              <div id="cancelOrCheck" class="cancelOrCheck d-nonevip">
+              <div id="cancelOrCheck" class="cancelOrCheckEdit d-nonevip">
                 <img ="deleteTask()" src="../assets/icons/iconoir_cancel.png"/>
                 <div class="subTasksSeperator"></div>
                 <img onclick="addTask()" src="../assets/icons/Property 1=check.png"/>
@@ -480,7 +480,7 @@ function renderOverlayTaskContent(tasksRef) {
   return `
           <div class="flex_between">
             <div class="filledContainer__category">
-              <p class="cursor_overlay_task">${tasksRef.category}</p>
+              <p class="cursor_overlay_task overlay_task_${tasksRef.category.replaceAll(' ', '_')}">${tasksRef.category}</p>
             </div>
               <img onclick="closeOverlay(event); loadTasks();" class="closeIcon" src="../assets/icons/close.png" alt="">
           </div>
@@ -516,7 +516,9 @@ function renderOverlayTaskContent(tasksRef) {
             </div>
             <div class="filledContainer__subTasks flex_column_overlayTask">
               <p class="cursor_overlay_task">Subtasks:</p>
-              ${subtasksOverlay(tasksRef)}
+                <div class="flex_column_overlayTask_subtask">
+                ${subtasksOverlayRender(tasksRef)}
+                </div>
             </div>
             <div class="flex_end_gp8">
               <div onclick="deleteBoardTasks('${tasksRef.id}'); closeOverlay(event);" class="bottom_overlay_task delete_task">
