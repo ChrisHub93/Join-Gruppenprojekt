@@ -100,9 +100,9 @@ function activateMenu(clickedElement, menuKey) {
     if (menuKey !== 'help') {
         sessionStorage.setItem('activeMenu', menuKey);
     }
-    if (clickedElement.classList.contains('policy-text') || clickedElement.classList.contains('navbarlink')) {
+    if (menuKey !== 'help' && clickedElement.classList.contains('policy-text') || clickedElement.classList.contains('navbarlink')) {
         sessionStorage.setItem('activePolicy', menuKey);
-    } else {
+    } else if (menuKey !=='help') {
         sessionStorage.removeItem('activePolicy');
     }
     clearMenu();
