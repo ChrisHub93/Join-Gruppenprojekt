@@ -550,11 +550,6 @@ async function saveEditedContact(event) {
   let keys = Object.keys(contacts);
   let contactsArry = Object.values(contacts);
 
-  console.log(contacts);
-  console.log(contacts.id);
-  
-  
-
   let inputNameRef = document.getElementById("nameEdit");
   let inputEmailRef = document.getElementById("emailEdit");
   let inputPhoneRef = document.getElementById("phoneEdit");
@@ -588,14 +583,14 @@ async function saveEditedContact(event) {
     let contact = contactsArry[index];
     let fullContactName = contact.firstname + " " + contact.lastname;
     if (fullContactName == currentActiveContactId) {
-      saveContact(event, contact, index, keys, inputEmailRef, inputPhoneRef, firstName, lastName);
+      saveContact(event, contact, index, keys, inputEmailRef, inputPhoneRef, firstName, lastName, contact.id);
     }
   }
 }
 
- async function saveContact(event, contact, index, keys, inputEmailRef, inputPhoneRef, firstName, lastName ){
+ async function saveContact(event, contact, index, keys, inputEmailRef, inputPhoneRef, firstName, lastName, id ){
       let key = keys[index];
-      await putData(`contacts/${key}`, {firstname: firstName, lastname: lastName, email: inputEmailRef.value, phone: inputPhoneRef.value, id: contact.id});
+      await putData(`contacts/${key}`, {firstname: firstName, lastname: lastName, email: inputEmailRef.value, phone: inputPhoneRef.value, id: id});
       currentActiveContactId = firstName + " " + lastName;
       closeOverlayAfterEditedContact(event);
       let targetId = document.getElementById("circleFirstLetters" + contact.firstname + contact.lastname);
