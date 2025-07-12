@@ -97,10 +97,11 @@ function outsideNavbar() {
 }
 
 function activateMenu(clickedElement, menuKey) {
+
     if (menuKey !== 'help') {
         sessionStorage.setItem('activeMenu', menuKey);
     }
-    if (menuKey !== 'help' && clickedElement.classList.contains('policy-text') || clickedElement.classList.contains('navbarlink')) {
+    if (menuKey !== 'help' && (clickedElement.classList.contains('policy-text') || clickedElement.classList.contains('navbarlink'))) {
         sessionStorage.setItem('activePolicy', menuKey);
     } else if (menuKey !=='help') {
         sessionStorage.removeItem('activePolicy');
@@ -110,7 +111,8 @@ function activateMenu(clickedElement, menuKey) {
 }
 
 function activeMenuStorage() {
-    if (checkBlacklist()) return;
+    // if (checkBlacklist()) return;
+    if (window.location.pathname.includes("../html/help.html")) return;   
     let activeMenu = sessionStorage.getItem('activeMenu') || 'summary';
     let activePolicy = sessionStorage.getItem('activePolicy');
     clearMenu();
@@ -139,18 +141,18 @@ function addMenuactive(menuKey) {
     })
 }
 
-function checkBlacklist() {
-    let excludedPages = ['help.html'];
-    let currentPage = window.location.pathname.split('/').pop();
+// function checkBlacklist() {
+//     let excludedPages = ['help.html'];
+//     let currentPage = window.location.pathname.split('/').pop();
 
-    if (excludedPages.includes(currentPage)) {
-        clearMenu();
-        sessionStorage.removeItem('activeMenu');
-        sessionStorage.removeItem('activePolicy');
-        return true;
-    }
-    return false;
-}
+//     if (excludedPages.includes(currentPage)) {
+//         clearMenu();
+//         sessionStorage.removeItem('activeMenu');
+//         sessionStorage.removeItem('activePolicy');
+//         return true;
+//     }
+//     return false;
+// }
 
 function getInitials(name) {
   return name
