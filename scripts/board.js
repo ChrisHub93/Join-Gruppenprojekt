@@ -800,6 +800,20 @@ function renderAssignedTo(assignedToIds) {
     .join('');
 }
 
+function checkEmptyTitleEdit() {
+  let titleRef = document.getElementById("titleEdit");
+  let errorTitleRef = document.getElementById("errorTitleEdit");
+  if (!titleRef.value) {
+    titleRef.classList.add("inputError");
+    errorTitleRef.classList.remove("opacity");
+    checkTitle = false;
+  } else {
+    titleRef.classList.remove("inputError");
+    errorTitleRef.classList.add("opacity");
+    checkTitle = true;
+  }
+}
+
 function checkemptyDateEdit() {
   let dateRef = document.getElementById("dateEdit");
   let errorDateRef = document.getElementById("errorDateEdit");

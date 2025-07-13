@@ -531,6 +531,11 @@ h1 {
   background-color: red;
 }
 
+.errorTitleEdit{
+    font-size: 10px;
+    color: var(--error-color);
+}
+
 .errorDateEdit{
     font-size: 10px;
     color: var(--error-color);

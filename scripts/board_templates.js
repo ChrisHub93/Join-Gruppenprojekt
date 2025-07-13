@@ -331,9 +331,10 @@ function renderOverlayTaskEdit(tasksEditRef) {
         <div class="form_edit_task">
           <div class="form_edit_container">
             <label for="titleEdit">Title</label>
-            <input class="border_edit_active" type="text" id="titleEdit" name="titleEdit" value="${
+            <input onfocusout="checkEmptyTitleEdit()" class="border_edit_active" type="text" id="titleEdit" name="titleEdit" value="${
               tasksEditRef.title
             }" required>
+            <span class="opacity errorTitleEdit" id="errorTitleEdit">This field is required</span>
           </div>
           <div class="form_edit_container">
             <label for="descriptionEdit">Description</label>
