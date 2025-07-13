@@ -710,7 +710,7 @@ function renderContactListEdit(contacts, assignedTo = []) {
 function getContactListEdit(contact, assignedColor, isAssigned) {
   return `  <li
                   onclick="getContactEdit('${contact.id}')"
-                  id="contact${contact.id}"
+                  id="contactEdit${contact.id}"
                   class="optionsCategory inputFlex ${
                     isAssigned ? "assignedBg" : ""
                   }">
@@ -758,7 +758,7 @@ function updateAssignedMembersEdit(assignedTo) {
 }
 
 function getContactEdit(id) {
-  let membersRef = document.getElementById("contact" + id);
+  let membersRef = document.getElementById("contactEdit" + id);
   inputRef = membersRef.querySelector("input");
   checkBoxImg = membersRef.querySelector("img");
 
