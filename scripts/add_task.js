@@ -378,11 +378,11 @@ function createTask() {
   }  
 }
 
-function createTaskBoard() {
+async function createTaskBoard() {
   checkEmptyTitle();
   checkEmptyDate();
   if (checkTitle && checkDate) {
-    postDataToServer(currentStatus);
+    await postDataToServer(currentStatus);
     closeAddTaskOverlaySuccses();
     currentStatus = 'To do';
     loadTasks();

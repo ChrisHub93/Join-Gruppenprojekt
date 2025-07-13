@@ -251,7 +251,7 @@ function getAddTaskTemplate() {
               />
             </button>
 
-            <button class="createTask" onclick="createTaskBoard(currentStatus); loadTasks()">
+            <button class="createTask" onclick="createTaskBoard(currentStatus);">
               Create Task
               <img src="/assets/icons/check.png" alt="" />
             </button>
