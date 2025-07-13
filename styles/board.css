@@ -338,6 +338,10 @@ h1 {
   outline: none;
 }
 
+.noBorder{
+  border: none;
+}
+
 @media (max-width: 1100px) {
   .main-board {
     margin-left: 200px;

@@ -549,7 +549,7 @@ function editSubtask(iconElement) {
   let newContainer = document.createElement("div");
   newContainer.classList.add("subtask_edit_wrapper");
   newContainer.innerHTML = `
-    <input type="text" value="${currentText}" class="subtask_input_edit">
+    <input type="text" value="${currentText}" class="subtask_input_edit noBorder">
     <div class="edit_subtask_checkbox">
       <img class="edit_icons edit_icons_subtask_change" src="../assets/icons/check-subtask.png" onclick="saveSubtask(this)">
       <div class="seperator_edit"></div>
@@ -570,6 +570,7 @@ function saveSubtask(iconElement) {
   let newValue = updatedSubtask.querySelector("input").value;
 
   let newUL = document.createElement("ul");
+  newUL.classList.add("subtask_list_edit");
   newUL.innerHTML = `
     <li>
       <div onclick="editSubtask(this)" class="flex_edit">
