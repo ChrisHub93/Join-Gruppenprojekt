@@ -189,9 +189,20 @@ h1 {
 
 .filledContainer__category__text {
   color: white;
-  background-color: blue;
   padding: 4px 8px;
   border-radius: 8px;
+}
+
+.filledContainer__category__text--bgTechnical_Task {
+  background-color: #1fd7c1;
+  color: white;
+  width: fit-content;
+}
+
+.filledContainer__category__text--bgUser_Story {
+  background-color: blue;
+  color: white;
+  width: fit-content;
 }
 
 .filledContainer__details {
@@ -236,15 +247,15 @@ h1 {
   flex-direction: column;
 }
 
-.summary__buttons__button{
-    background-color: var(--sng-bg-color);
-    border: 1px solid #D1D1D1;
-    border-radius: 6px;
+.summary__buttons__button {
+  background-color: var(--sng-bg-color);
+  border: 1px solid #d1d1d1;
+  border-radius: 6px;
 }
 
 .summary__buttons__button:hover {
-    cursor: pointer;
-    border-color: var(--focus-color);
+  cursor: pointer;
+  border-color: var(--focus-color);
 }
 
 .filledContainer__title {
