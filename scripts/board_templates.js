@@ -204,7 +204,7 @@ function getAddTaskTemplate() {
               placeholder="Add new subtask"
             />
             <img
-              onclick="chooseSubTask()"
+              onclick="chooseSubTask('subTaskInput')"
               id="plusIcon"
               class="plusIcon"
               src="/assets/icons/Subtasks-plus.png"
@@ -219,7 +219,7 @@ function getAddTaskTemplate() {
               />
               <div class="subTasksSeperator"></div>
               <img
-                onclick="addTask()"
+                onclick="addTask('subTaskInput')"
                 src="/assets/icons/Property 1=check.png"
                 alt=""
               />
