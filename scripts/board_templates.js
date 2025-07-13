@@ -389,7 +389,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
               </div>
             </div>
             <div id="subTasks">
-            ${subtasksOverlayEdit(tasksEditRef.subTasksOpen && tasksEditRef.subTasksClosed)}
+            ${subtasksOverlayEdit(tasksEditRef)}
             </div>
           </div>
         </div>
@@ -452,7 +452,7 @@ function subtasksOverlayRender(taskRef) {
 function subtasksOverlayRenderEdit(tasksEditRef) {
   return `
     <div class="subtask_container">
-      ${tasksEditRef
+      ${tasksEditRef.subTasksOpen
         .map(
           (subtask) => `
         <ul class="subtask_list_edit" onclick="editSubtask(this)">
@@ -467,10 +467,24 @@ function subtasksOverlayRenderEdit(tasksEditRef) {
             </div>
           </li>
         </ul>
-      `
-        )
+      `)
         .join("")}
     </div>
+    ${tasksEditRef.subTasksClosed && tasksEditRef.subTasksClosed.length
+      ? `
+        <div class="subtask_container">
+          ${tasksEditRef.subTasksClosed
+            .map(
+              (subtask, i) => `
+              <div class="subtask_toggle">
+                <img class="subtask-icon" src="../assets/icons/subtask-checked.png" onclick="toggleSubtask(this, ${tasksEditRef.id}, 'subtask-closed-${tasksEditRef.id}-${i}')">
+                <p id="subtask-closed-${tasksEditRef.id}-${i}" class="cursor_overlay_task">${subtask}</p>
+              </div>
+            `
+            )
+            .join("")}
+        </div>` :""}
+    
   `;
 }
 

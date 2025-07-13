@@ -334,7 +334,7 @@ async function patchData(path, data = {}) {
 }
 
 function subtasksOverlay(taskRef) {
-  if (taskRef.subTasksOpen == undefined && taskRef.subTasksClose === undefined) {
+  if (taskRef.subTasksOpen == undefined && taskRef.subTasksClosed === undefined) {
     return "";
   } else {
     return subtasksOverlayRender(taskRef);
@@ -342,7 +342,7 @@ function subtasksOverlay(taskRef) {
 }
 
 function subtasksOverlayEdit(tasksEditRef) {
-  if (tasksEditRef === undefined) {
+  if (tasksEditRef.subTasksOpen === undefined && tasksEditRef.subTasksClosed === undefined ) {
     return "";
   } else {
     return subtasksOverlayRenderEdit(tasksEditRef);
