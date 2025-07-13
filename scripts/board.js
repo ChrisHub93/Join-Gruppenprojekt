@@ -781,3 +781,21 @@ function toggleAssignmentEdit(id) {
     assignedToEditTemp.push(id);
   }
 }
+
+function renderAssignedTo(assignedToIds) {
+  return assignedToIds
+    .map((id, index) => {
+             let contactRef = globalContacts.find(contact => contact.id === id);
+        if (!contactRef) return "";
+        let name = `${contactRef.firstname} ${contactRef.lastname}`;
+      let initials = getInitials(name);
+      let colorClass = getAvatarColorClass(name);
+      let leftOffset = index * 24;
+
+      return `
+        <div class="assigned ${colorClass}" style="position:absolute; left: ${leftOffset}px">
+          ${initials.split('').map(letter => `<span>${letter}</span>`).join('')}
+        </div>`;
+    })
+    .join('');
+}

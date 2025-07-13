@@ -306,24 +306,11 @@ h1 {
   align-items: center;
   display: flex;
   border-radius: 50%;
-  background-color: green;
   height: 32px;
   width: 32px;
   color: white;
   font-size: 12px;
   border: 1px solid white;
-}
-
-.assignedPlusOne {
-  position: absolute;
-  left: 24px;
-  background-color: blue;
-}
-
-.assignedPlusTwo {
-  position: absolute;
-  left: 48px;
-  background-color: red;
 }
 
 .inputTitle:focus,
