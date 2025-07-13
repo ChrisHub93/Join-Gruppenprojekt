@@ -330,20 +330,20 @@ function renderOverlayTaskEdit(tasksEditRef) {
       <div class="edit_dialog_scrollable">
         <div class="form_edit_task">
           <div class="form_edit_container">
-            <label for="title">Title</label>
-            <input class="border_edit_active" type="text" id="title" name="title" value="${
+            <label for="titleEdit">Title</label>
+            <input class="border_edit_active" type="text" id="titleEdit" name="titleEdit" value="${
               tasksEditRef.title
             }" required>
           </div>
           <div class="form_edit_container">
-            <label for="description">Description</label>
-            <textarea class="border_edit_active" id="description" name="description">${
+            <label for="descriptionEdit">Description</label>
+            <textarea class="border_edit_active" id="descriptionEdit" name="descriptionEdit">${
               tasksEditRef.description
             }</textarea>
           </div>
           <div class="form_edit_container">
-            <label for="date">Due Date</label>
-            <input onclick="toggleFlatpickr(event)" class="duedate_edit border_edit_active" type="text" id="date" name="date" value="${
+            <label for="dateEdit">Due Date</label>
+            <input onclick="toggleFlatpickr(event)" class="duedate_edit border_edit_active" type="text" id="dateEdit" name="dateEdit" value="${
               tasksEditRef.date
             }" placeholder="dd/mm/yyyy" required>
           </div>
@@ -378,7 +378,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
               )}</div>
           </div>
           <div class="form_edit_container">
-            <label for="subTaskInput">Subtasks</label>
+            <label for="subTaskInputEdit">Subtasks</label>
             <div class="edit_subtask_input">  
               <input class="border_edit_active" type="text" name="subtasks" id="subTaskInputEdit" placeholder="Add new subtask"/>
               <img onclick="chooseSubTask('subTaskInputEdit')" id="plusIcon" class="plusIcon_edit" src="../assets/icons/Subtasks-plus.png"/>

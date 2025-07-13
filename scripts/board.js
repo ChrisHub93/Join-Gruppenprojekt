@@ -476,8 +476,11 @@ async function loadData(path = "") {
 }
 
 async function updateDataEdit(tasksEditRef) {
-  let tasks = await fetchData("/tasks/");
 
+
+
+
+  let tasks = await fetchData("/tasks/");
   let taskKeyEdit = Object.keys(tasks).find(
     (k) => String(tasks[k].id) === String(tasksEditRef)
   );
@@ -486,9 +489,9 @@ async function updateDataEdit(tasksEditRef) {
   let data = {
     id: tasks[taskKeyEdit].id,
     category: tasks[taskKeyEdit].category,
-    title: title.value,
-    description: description.value,
-    date: date.value,
+    title: document.getElementById("titleEdit").value,
+    description: document.getElementById("descriptionEdit").value,
+    date: document.getElementById("dateEdit").value,
     priority: priorityEdit,
     assignedTo: assignedToEditTemp,
     subTasksOpen: getUpdatedSubtasks(),

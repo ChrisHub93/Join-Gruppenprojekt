@@ -28,7 +28,7 @@ function getContactList(contact, assignedColor) {
                     <p id="contacts_name_icon${contact.id}" class="assigned_to_icon ${assignedColor}">${contact.firstname.toUpperCase().charAt(0)}${contact.lastname.toUpperCase().charAt(0)}</p>
                     ${contact.firstname + " "} ${contact.lastname}
                   </div>
-                  <input type="checkbox" class="checkBox" />
+                  <input id="checkbox${contact.id}" type="checkbox" class="checkBox" />
                   <img
                     onclick="setCheckBox('contact${contact.id}', event)"
                     id="checkBoxImg${contact.id}"
