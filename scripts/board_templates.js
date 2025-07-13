@@ -460,7 +460,7 @@ function subtasksOverlayRenderEdit(tasksEditRef) {
             <div class="flex_edit">
               <p>${subtask}</p>
               <div class="hide_edit_subtask">
-                <img onclick="editSubtask(this)" class="edit_icons" src="../assets/icons/edit.png">
+                <img onclick="editSubtask(this, ${i})" class="edit_icons" src="../assets/icons/edit.png">
                 <div class="seperator_edit"></div>
                 <img onclick="completeDeleteTask('Subtask${subtask}-${i}')" class="edit_icons" src="../assets/icons/delete.png">
               </div>
