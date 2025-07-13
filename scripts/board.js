@@ -575,12 +575,12 @@ function saveSubtask(iconElement, id) {
   newUL.id = `Subtask${newValue}-${id}`;
   newUL.innerHTML = `
     <li>
-      <div onclick="editSubtask(this)" class="flex_edit">
+      <div class="flex_edit">
         <p>${newValue}</p>
         <div class="hide_edit_subtask">
-          <img class="edit_icons" src="../assets/icons/edit.png">
+          <img onclick="editSubtask(this)" class="edit_icons" src="../assets/icons/edit.png">
           <div class="seperator_edit"></div>
-          <img class="edit_icons" src="../assets/icons/delete.png">
+          <img onclick="completeDeleteTask('Subtask${newValue}-${id}')" class="edit_icons" src="../assets/icons/delete.png">
         </div>
       </div>
     </li>
