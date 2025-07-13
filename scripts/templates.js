@@ -62,21 +62,40 @@ function getContactListLoggedInUser(contact, assignedColor) {
 }
 
 function getSubTasksTemplate(inputRef) {
-  return `<div id="${inputRef.value}" class="relative">
-            <div id="bullet${inputRef.value}" class="bullet"></div>
-                <input onclick="editTask('${inputRef.value}')" type ="text" value="${inputRef.value}" class="subTaskAdded"/>
+  // return `<div id="${inputRef.value}" class="relative">
+  //           <div id="bullet${inputRef.value}" class="bullet"></div>
+  //               <input onclick="editTask('${inputRef.value}')" type ="text" value="${inputRef.value}" class="subTaskAdded"/>
 
-            <div id="editOrTrash${inputRef.value}" class="editOrTrash d-nonevip">
-                <img onclick="editTask('${inputRef.value}')" src="/assets/icons/Property 1=edit.png" alt="">
-                    <div class="subTasksSeperatorSecond"></div>
-                <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
+  //           <div id="editOrTrash${inputRef.value}" class="editOrTrash d-nonevip">
+  //               <img onclick="editTask('${inputRef.value}')" src="/assets/icons/Property 1=edit.png" alt="">
+  //                   <div class="subTasksSeperatorSecond"></div>
+  //               <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
+  //           </div>
+  //               <div id="trashOrCheck${inputRef.value}" class="trashOrCheck d-nonevip">
+  //                   <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
+  //                       <div class="subTasksSeperatorSecond"></div>
+  //                   <img onclick="acceptTask('${inputRef.value}')" src="/assets/icons/Property 1=check.png" alt="">
+  //               </div>               
+  //           </div>`;
+
+
+        //     return`<div class="subtask_toggle">
+        //   <img class="subtask-icon" src="../assets/icons/subtask-unchecked.png" onclick="toggleSubtask(this, ${taskRef.id}, 'subtask-open-${taskRef.id}-${i}')">
+        //   <p id="subtask-open-${taskRef.id}-${i}" class="cursor_overlay_task">${subtask}</p>
+        // </div>`;
+
+        return `<ul class="subtask_list_edit" onclick="editSubtask(this)">
+          <li>
+            <div class="flex_edit">
+              <p>${inputRef.value}</p>
+              <div class="hide_edit_subtask">
+                <img class="edit_icons" src="../assets/icons/edit.png">
+                <div class="seperator_edit"></div>
+                <img class="edit_icons" src="../assets/icons/delete.png">
+              </div>
             </div>
-                <div id="trashOrCheck${inputRef.value}" class="trashOrCheck d-nonevip">
-                    <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
-                        <div class="subTasksSeperatorSecond"></div>
-                    <img onclick="acceptTask('${inputRef.value}')" src="/assets/icons/Property 1=check.png" alt="">
-                </div>               
-            </div>`;
+          </li>
+        </ul>`
 
 }
 
