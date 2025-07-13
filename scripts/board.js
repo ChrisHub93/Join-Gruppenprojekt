@@ -785,9 +785,9 @@ function toggleAssignmentEdit(id) {
 function renderAssignedTo(assignedToIds) {
   return assignedToIds
     .map((id, index) => {
-             let contactRef = globalContacts.find(contact => contact.id === id);
-        if (!contactRef) return "";
-        let name = `${contactRef.firstname} ${contactRef.lastname}`;
+      let contactRef = globalContacts.find(contact => contact.id === id);
+      if (!contactRef) return "";
+      let name = `${contactRef.firstname} ${contactRef.lastname}`;
       let initials = getInitials(name);
       let colorClass = getAvatarColorClass(name);
       let leftOffset = index * 24;
