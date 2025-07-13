@@ -537,7 +537,7 @@ function renderOverlayTaskContent(tasksRef) {
 function getTaskTemplate(element) {
   return `<div id="${element["id"]}"  class="filledContainer" draggable = "true" ondragstart="startDragging(${element["id"]})">
               <div class="filledContainer__category">
-                <p class="filledContainer__category__text">${element.category}</p>
+                <p class="filledContainer__category__text filledContainer__category__text--bg${element.category.replaceAll(' ', '_')}">${element.category}</p>
                 <details class="filledContainer__details">
                   <summary class="summary__text">Category</summary>
                   <div class="summary__buttons">
