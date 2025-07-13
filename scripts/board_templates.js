@@ -45,6 +45,7 @@ function getAddTaskTemplate() {
           <div class="column mb12">
             <span class=" ">Title<mark>*</mark></span>
             <input
+              class="inputTitle"
               onfocusout="checkEmptyTitle()"
               type="text"
               name="title"
@@ -60,7 +61,7 @@ function getAddTaskTemplate() {
             <textarea
               name="description"
               id="description"
-              class="description"
+              class="description textareaDescription"
               placeholder="Enter a Description"
             ></textarea>
           </div>
@@ -68,6 +69,7 @@ function getAddTaskTemplate() {
           <div class="column">
             <span class=" ">Due Date<mark>*</mark></span>
             <input
+              class="inputDate"
               onfocusout="checkEmptyDate()"
               type="date"
               name="date"
@@ -200,6 +202,7 @@ function getAddTaskTemplate() {
           <div class="columnSubTask">
             <span class=" ">Subtasks</span>
             <input
+              class="inputSubTask"
               type="text"
               name="subtasks"
               id="subTaskInput"

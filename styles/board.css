@@ -326,6 +326,18 @@ h1 {
   background-color: red;
 }
 
+.inputTitle:focus,
+.inputDate:focus,
+.inputSubTask:focus {
+  border-color: var(--focus-color);
+  outline: none;
+}
+
+.textareaDescription:focus {
+  border-color: var(--focus-color);
+  outline: none;
+}
+
 @media (max-width: 1100px) {
   .main-board {
     margin-left: 200px;
