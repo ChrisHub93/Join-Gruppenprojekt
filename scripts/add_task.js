@@ -437,7 +437,10 @@ function deleteTask() {
 function addTask(id, renderedField, plusIconRef, CancelOrCheckRef) {
   let inputRef = document.getElementById(id);
   let addedTaskRef = document.getElementById(renderedField);
-  addedTaskRef.innerHTML += getSubTasksTemplate(inputRef);
+
+  let newID = generateTimeBasedId();
+
+  addedTaskRef.innerHTML += getSubTasksTemplate(inputRef, newID);
   removeDisplayNone(plusIconRef);
   toggleDisplayNone(CancelOrCheckRef);
   subtasksOpen.push(inputRef.value);

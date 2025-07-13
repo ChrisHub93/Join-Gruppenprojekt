@@ -455,12 +455,12 @@ function subtasksOverlayRenderEdit(tasksEditRef) {
       ${tasksEditRef.subTasksOpen
         .map(
           (subtask, i) => `
-        <ul class="subtask_list_edit" onclick="editSubtask(this)" id="Subtask${subtask}-${i}">
+        <ul class="subtask_list_edit"  id="Subtask${subtask}-${i}">
           <li>
             <div class="flex_edit">
               <p>${subtask}</p>
               <div class="hide_edit_subtask">
-                <img class="edit_icons" src="../assets/icons/edit.png">
+                <img onclick="editSubtask(this)" class="edit_icons" src="../assets/icons/edit.png">
                 <div class="seperator_edit"></div>
                 <img onclick="completeDeleteTask('Subtask${subtask}-${i}')" class="edit_icons" src="../assets/icons/delete.png">
               </div>

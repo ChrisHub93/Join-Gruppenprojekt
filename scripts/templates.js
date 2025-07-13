@@ -61,16 +61,16 @@ function getContactListLoggedInUser(contact, assignedColor) {
   `;
 }
 
-function getSubTasksTemplate(inputRef) {
+function getSubTasksTemplate(inputRef, newID) {
 
-        return `<ul class="subtask_list_edit" onclick="editSubtask(this)">
+        return `<ul id="${newID}" class="subtask_list_edit" onclick="editSubtask(this)">
           <li>
             <div class="flex_edit">
-              <p>${inputRef.value}</p>
+              <p >${inputRef.value}</p>
               <div class="hide_edit_subtask">
                 <img class="edit_icons" src="../assets/icons/edit.png">
                 <div class="seperator_edit"></div>
-                <img class="edit_icons" src="../assets/icons/delete.png">
+                <img onclick="completeDeleteTask('${newID}')" class="edit_icons" src="../assets/icons/delete.png">
               </div>
             </div>
           </li>
