@@ -193,6 +193,10 @@ h1 {
   border-radius: 8px;
 }
 
+.filledContainer__category__text:hover {
+  cursor: pointer;
+}
+
 .filledContainer__category__text--bgTechnical_Task {
   background-color: #1fd7c1;
   color: white;
@@ -374,6 +378,12 @@ h1 {
   .filledContainer:active {
     animation: none;
     z-index: unset;
+  }
+
+  .filledContainer__category__text {
+    color: white;
+    padding: 2px 4px;
+    border-radius: 8px;
   }
 
   .idContentContainer {
