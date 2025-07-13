@@ -444,6 +444,16 @@ function addTask(id, renderedField, plusIconRef, CancelOrCheckRef) {
   inputRef.value = "";
 }
 
+function addTaskHTML(id, renderedField, plusIconRef, CancelOrCheckRef) {
+  let inputRef = document.getElementById(id);
+  let addedTaskRef = document.getElementById(renderedField);
+  addedTaskRef.innerHTML += subtaskTemplateHTML(inputRef);
+  removeDisplayNone(plusIconRef);
+  toggleDisplayNone(CancelOrCheckRef);
+  subtasksOpen.push(inputRef.value);
+  inputRef.value = "";
+}
+
 function editTask(id) {
   let inputRef = document.getElementById(id);
   inputField = inputRef.querySelector("input");
