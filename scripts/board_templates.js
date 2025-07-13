@@ -204,7 +204,7 @@ function getAddTaskTemplate() {
               placeholder="Add new subtask"
             />
             <img
-              onclick="chooseSubTask('subTaskInput')"
+              onclick="chooseSubTask('subTaskInput', 'plusIcon', 'cancelOrCheck')"
               id="plusIcon"
               class="plusIcon"
               src="/assets/icons/Subtasks-plus.png"
@@ -219,7 +219,7 @@ function getAddTaskTemplate() {
               />
               <div class="subTasksSeperator"></div>
               <img
-                onclick="addTask('subTaskInput')"
+                onclick="addTask('subTaskInput', 'subTasks', 'plusIcon', 'cancelOrCheck')"
                 src="/assets/icons/Property 1=check.png"
                 alt=""
               />
@@ -381,14 +381,14 @@ function renderOverlayTaskEdit(tasksEditRef) {
             <label for="subTaskInputEdit">Subtasks</label>
             <div class="edit_subtask_input">  
               <input class="border_edit_active" type="text" name="subtasks" id="subTaskInputEdit" placeholder="Add new subtask"/>
-              <img onclick="chooseSubTask('subTaskInputEdit')" id="plusIcon" class="plusIcon_edit" src="../assets/icons/Subtasks-plus.png"/>
-              <div id="cancelOrCheck" class="cancelOrCheckEdit d-nonevip">
+              <img onclick="chooseSubTask('subTaskInputEdit', 'plusIconEdit', 'cancelOrCheckEdit')" id="plusIconEdit" class="plusIcon_edit" src="../assets/icons/Subtasks-plus.png"/>
+              <div id="cancelOrCheckEdit" class="cancelOrCheckEdit d-nonevip">
                 <img ="deleteTask()" src="../assets/icons/iconoir_cancel.png"/>
                 <div class="subTasksSeperator"></div>
-                <img onclick="addTask('subTaskInputEdit')" src="../assets/icons/Property 1=check.png"/>
+                <img onclick="addTask('subTaskInputEdit', 'subTasksEdit',  'plusIconEdit', 'cancelOrCheckEdit')" src="../assets/icons/Property 1=check.png"/>
               </div>
             </div>
-            <div id="subTasks">
+            <div id="subTasksEdit">
             ${subtasksOverlayEdit(tasksEditRef)}
             </div>
           </div>

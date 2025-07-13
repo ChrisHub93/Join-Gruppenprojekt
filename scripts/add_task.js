@@ -417,13 +417,13 @@ function checkEmptyDate() {
   }
 }
 
-function chooseSubTask(id) {
+function chooseSubTask(id, icon, cancelOrCheckIcon) {
   let inputRef = document.getElementById(id);
   if (inputRef.value == "") {
     inputRef.value = "";
   } else if (inputRef.value != "") {
-    addDisplayNone("plusIcon");
-    toggleDisplayNone("cancelOrCheck");
+    addDisplayNone(icon);
+    toggleDisplayNone(cancelOrCheckIcon);
   }
 }
 
@@ -434,12 +434,12 @@ function deleteTask() {
   toggleDisplayNone("cancelOrCheck");
 }
 
-function addTask(id) {
+function addTask(id, renderedField, plusIconRef, CancelOrCheckRef) {
   let inputRef = document.getElementById(id);
-  let addedTaskRef = document.getElementById("subTasks");
+  let addedTaskRef = document.getElementById(renderedField);
   addedTaskRef.innerHTML += getSubTasksTemplate(inputRef);
-  removeDisplayNone("plusIcon");
-  toggleDisplayNone("cancelOrCheck");
+  removeDisplayNone(plusIconRef);
+  toggleDisplayNone(CancelOrCheckRef);
   subtasksOpen.push(inputRef.value);
   inputRef.value = "";
 }
