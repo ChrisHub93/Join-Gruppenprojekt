@@ -799,3 +799,17 @@ function renderAssignedTo(assignedToIds) {
     })
     .join('');
 }
+
+function checkemptyDateEdit() {
+  let dateRef = document.getElementById("dateEdit");
+  let errorDateRef = document.getElementById("errorDateEdit");
+  if (!dateRef.value) {
+    dateRef.classList.add("inputError");
+    errorDateRef.classList.remove("opacity");
+    checkDate = false;
+  } else {
+    dateRef.classList.remove("inputError");
+    errorDateRef.classList.add("opacity");
+    checkDate = true;
+  }
+}

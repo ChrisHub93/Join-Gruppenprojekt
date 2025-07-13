@@ -530,3 +530,8 @@ h1 {
 .drag-area-highlight {
   background-color: red;
 }
+
+.errorDateEdit{
+    font-size: 10px;
+    color: var(--error-color);
+}

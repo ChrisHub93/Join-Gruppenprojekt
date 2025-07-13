@@ -343,10 +343,12 @@ function renderOverlayTaskEdit(tasksEditRef) {
           </div>
           <div class="form_edit_container">
             <label for="dateEdit">Due Date</label>
-            <input onclick="toggleFlatpickr(event)" class="duedate_edit border_edit_active" type="text" id="dateEdit" name="dateEdit" value="${
+            <input onfocusout="checkemptyDateEdit()" onclick="toggleFlatpickr(event)" class="duedate_edit border_edit_active" type="text" id="dateEdit" name="dateEdit" value="${
               tasksEditRef.date
             }" placeholder="dd/mm/yyyy" required>
+            <span class="errorDateEdit opacity" id="errorDateEdit">This field is required</span>
           </div>
+          
           <div class="form_edit_container">
             <h4>Priority</h4>
             <div class="prio_edit_container">
