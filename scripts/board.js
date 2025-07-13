@@ -370,6 +370,7 @@ function editOverlayTask(tasksRef) {
   addOverlayRef.classList.remove("active");
   addOverlayEditRef.classList.add("active");
   dialogTaskEditRef.innerHTML = renderOverlayTaskEdit(todos[tasksEditRef]);
+  toggleFlatpickr(document.getElementById('dateEdit'));
 }
 
 function renderPrioButton(prioName, activePrio) {
@@ -411,13 +412,24 @@ function setPrioActive(clickedButton) {
 }
 
 let flatpickrInstance = null;
-function toggleFlatpickr() {
-  if (!flatpickrInstance) {
-    flatpickrInstance = flatpickr("#date", {
+function toggleFlatpickr(inputElement) {
+  if (flatpickrInstance) {
+    flatpickrInstance.destroy();
+    flatpickrInstance = null;
+  }
+if (!flatpickrInstance) {
+    flatpickrInstance = flatpickr(inputElement, {
       dateFormat: "d/m/Y",
       allowInput: true,
+      defaultDate: inputElement.value || null,
     });
   }
+}
+
+function formatDateToDisplay(isoDate) {
+  if (!isoDate) return '';
+  let [year, month, day] = isoDate.split('-');
+  return `${day}/${month}/${year}`;
 }
 
 function openAddTaskOverlay(status) {

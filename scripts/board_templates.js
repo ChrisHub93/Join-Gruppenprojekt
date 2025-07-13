@@ -319,7 +319,6 @@ function getAddTaskTemplate() {
 
 function renderOverlayTaskEdit(tasksEditRef) {
   let prio = tasksEditRef.priority.toLowerCase();
-  toggleFlatpickr();
 
   return `
       <div class="edit_dialog_wrapper">
@@ -344,7 +343,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
           </div>
           <div class="form_edit_container">
             <label for="dateEdit">Due Date</label>
-            <input onfocusout="checkemptyDateEdit()" onclick="toggleFlatpickr(event)" class="duedate_edit border_edit_active" type="text" id="dateEdit" name="dateEdit" value="${
+            <input onfocusout="checkemptyDateEdit()" class="duedate_edit border_edit_active" type="text" id="dateEdit" name="dateEdit" value="${
               tasksEditRef.date
             }" placeholder="dd/mm/yyyy" required>
             <span class="errorDateEdit opacity" id="errorDateEdit">This field is required</span>
@@ -509,7 +508,7 @@ function renderOverlayTaskContent(tasksRef) {
             </div>
             <div class="filledContainer__dueDate flex_gap25">
               <p class="cursor_overlay_task">Due Date:</p>
-              <p class="cursor_overlay_task">${tasksRef.date}</p>
+              <p class="cursor_overlay_task">${formatDateToDisplay(tasksRef.date)}</p>
             </div>
             <div class="filledContainer__priority flex_gap25">
               <p class="cursor_overlay_task">Priority: </p>
