@@ -542,16 +542,17 @@ function getUpdatedSubtasks() {
   // return updatedSubtasks;
 }
 
-function editSubtask(iconElement) {
+function editSubtask(iconElement, id) {
   let ul = iconElement.closest("ul");
   let currentText = ul.querySelector("p").innerText;
 
   let newContainer = document.createElement("div");
   newContainer.classList.add("subtask_edit_wrapper");
+  newContainer.id = `edit-subtask-${id}`;
   newContainer.innerHTML = `
     <input type="text" value="${currentText}" class="subtask_input_edit noBorder">
     <div class="edit_subtask_checkbox">
-      <img class="edit_icons edit_icons_subtask_change" src="../assets/icons/check-subtask.png" onclick="saveSubtask(this)">
+      <img class="edit_icons edit_icons_subtask_change" src="../assets/icons/check-subtask.png" onclick="saveSubtask(this, '${id}')">
       <div class="seperator_edit"></div>
       <img class="edit_icons edit_icons_subtask_change" src="../assets/icons/delete.png">
     </div>
@@ -565,20 +566,21 @@ function editSubtask(iconElement) {
   );
 }
 
-function saveSubtask(iconElement) {
+function saveSubtask(iconElement, id) {
   let updatedSubtask = iconElement.closest(".subtask_edit_wrapper");
   let newValue = updatedSubtask.querySelector("input").value;
 
   let newUL = document.createElement("ul");
   newUL.classList.add("subtask_list_edit");
+  newUL.id = `Subtask${newValue}-${id}`;
   newUL.innerHTML = `
     <li>
-      <div onclick="editSubtask(this)" class="flex_edit">
+      <div class="flex_edit">
         <p>${newValue}</p>
         <div class="hide_edit_subtask">
-          <img class="edit_icons" src="../assets/icons/edit.png">
+          <img onclick="editSubtask(this)" class="edit_icons" src="../assets/icons/edit.png">
           <div class="seperator_edit"></div>
-          <img class="edit_icons" src="../assets/icons/delete.png">
+          <img onclick="completeDeleteTask('Subtask${newValue}-${id}')" class="edit_icons" src="../assets/icons/delete.png">
         </div>
       </div>
     </li>
@@ -778,4 +780,22 @@ function toggleAssignmentEdit(id) {
   } else {
     assignedToEditTemp.push(id);
   }
+}
+
+function renderAssignedTo(assignedToIds) {
+  return assignedToIds
+    .map((id, index) => {
+      let contactRef = globalContacts.find(contact => contact.id === id);
+      if (!contactRef) return "";
+      let name = `${contactRef.firstname} ${contactRef.lastname}`;
+      let initials = getInitials(name);
+      let colorClass = getAvatarColorClass(name);
+      let leftOffset = index * 24;
+
+      return `
+        <div class="assigned ${colorClass}" style="position:absolute; left: ${leftOffset}px">
+          ${initials.split('').map(letter => `<span>${letter}</span>`).join('')}
+        </div>`;
+    })
+    .join('');
 }

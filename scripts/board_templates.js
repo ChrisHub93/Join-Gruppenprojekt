@@ -460,7 +460,7 @@ function subtasksOverlayRenderEdit(tasksEditRef) {
             <div class="flex_edit">
               <p>${subtask}</p>
               <div class="hide_edit_subtask">
-                <img onclick="editSubtask(this)" class="edit_icons" src="../assets/icons/edit.png">
+                <img onclick="editSubtask(this, ${i})" class="edit_icons" src="../assets/icons/edit.png">
                 <div class="seperator_edit"></div>
                 <img onclick="completeDeleteTask('Subtask${subtask}-${i}')" class="edit_icons" src="../assets/icons/delete.png">
               </div>
@@ -549,7 +549,7 @@ function renderOverlayTaskContent(tasksRef) {
 function getTaskTemplate(element) {
   return `<div id="${element["id"]}"  class="filledContainer" draggable = "true" ondragstart="startDragging(${element["id"]})">
               <div class="filledContainer__category">
-                <p onclick="overlayTask(${element["id"]})" class="filledContainer__category__text filledContainer__category__text--bg${element.category.replaceAll(' ', '_')}">${element.category}"</p>
+                <p onclick="overlayTask(${element["id"]})" class="filledContainer__category__text filledContainer__category__text--bg${element.category.replaceAll(' ', '_')}">${element.category}</p>
                 <details class="filledContainer__details">
                   <summary class="summary__text">Category</summary>
                   <div class="summary__buttons">
@@ -585,18 +585,7 @@ function getTaskTemplate(element) {
                 </div>
                 <div class="taskInfo">
                   <div id="assignedTo" class="assignedTo">
-                    <div class="assigned">
-                      <span>A</span>
-                      <span>M</span>
-                    </div>
-                    <div class="assigned assignedPlusOne">
-                      <span>C</span>
-                      <span>M</span>
-                    </div>
-                    <div class="assigned assignedPlusTwo">
-                      <span>K</span>
-                      <span>A</span>
-                    </div>
+                      ${renderAssignedTo(element.assignedTo)}
                   </div>
 
                   <div class="priority">
