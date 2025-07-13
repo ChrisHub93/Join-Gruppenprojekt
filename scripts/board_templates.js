@@ -171,14 +171,9 @@ function getAddTaskTemplate() {
           <div class="   ">
             <span class=" ">Category<mark>*</mark></span>
             <div class="category">
-              <div class="select inputFlex" id="select" onclick="openTaskCategory()">
+              <div class="select inputFlex" id="selectCategoryField" onclick="openTaskCategory()">
                 <span id="select">Select task category</span>
-                <img
-                  id="arrowCategory"
-                  class="arrow"
-                  src="/assets/icons/arrow_drop_down.png"
-                  alt=""
-                />
+                <img id="arrowCategory" class="arrow" src="/assets/icons/arrow_drop_down.png" alt="">
               </div>
               <ul id="allOptions" class="options">
                 <li
