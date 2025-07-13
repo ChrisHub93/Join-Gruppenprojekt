@@ -554,7 +554,7 @@ function editSubtask(iconElement, id) {
     <div class="edit_subtask_checkbox">
       <img class="edit_icons edit_icons_subtask_change" src="../assets/icons/check-subtask.png" onclick="saveSubtask(this, '${id}')">
       <div class="seperator_edit"></div>
-      <img class="edit_icons edit_icons_subtask_change" src="../assets/icons/delete.png">
+      <img onclick="completeDeleteTask('edit-subtask-${id}')" class="edit_icons edit_icons_subtask_change" src="../assets/icons/delete.png">
     </div>
   `;
   ul.replaceWith(newContainer);
