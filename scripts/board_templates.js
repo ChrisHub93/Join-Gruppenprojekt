@@ -380,12 +380,12 @@ function renderOverlayTaskEdit(tasksEditRef) {
           <div class="form_edit_container">
             <label for="subTaskInput">Subtasks</label>
             <div class="edit_subtask_input">  
-              <input class="border_edit_active" type="text" name="subtasks" id="subTaskInput" placeholder="Add new subtask"/>
-              <img onclick="chooseSubTask()" id="plusIcon" class="plusIcon_edit" src="../assets/icons/Subtasks-plus.png"/>
+              <input class="border_edit_active" type="text" name="subtasks" id="subTaskInputEdit" placeholder="Add new subtask"/>
+              <img onclick="chooseSubTask('subTaskInputEdit')" id="plusIcon" class="plusIcon_edit" src="../assets/icons/Subtasks-plus.png"/>
               <div id="cancelOrCheck" class="cancelOrCheckEdit d-nonevip">
                 <img ="deleteTask()" src="../assets/icons/iconoir_cancel.png"/>
                 <div class="subTasksSeperator"></div>
-                <img onclick="addTask()" src="../assets/icons/Property 1=check.png"/>
+                <img onclick="addTask('subTaskInputEdit')" src="../assets/icons/Property 1=check.png"/>
               </div>
             </div>
             <div id="subTasks">
