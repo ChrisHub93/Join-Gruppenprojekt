@@ -19,7 +19,7 @@
   z-index: 20;
 }
 
-.overlay__message-container{
+.overlay__message-container {
   font-size: 20px;
   border-radius: 20px;
   padding: 25px 25px;
@@ -31,9 +31,13 @@
   animation-fill-mode: forwards;
 }
 
-@keyframes move{
-  0% {bottom:0px}
-  100% {bottom: 50%;}
+@keyframes move {
+  0% {
+    bottom: 0px;
+  }
+  100% {
+    bottom: 50%;
+  }
 }
 
 .header-sign_up {

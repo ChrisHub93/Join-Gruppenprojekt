@@ -165,26 +165,24 @@
   content: url("../assets/icons/edit-hover.png");
 }
 
-.overlay_task_User_Story{
-    padding: 4px 16px;
-    border-radius: 8px;
-    background-color: #0038FF;
-    color: white;
+.overlay_task_User_Story {
+  padding: 4px 16px;
+  border-radius: 8px;
+  background-color: #0038ff;
+  color: white;
 }
 
-.overlay_task_Technical_Task{
-    padding: 4px 16px;
-    border-radius: 8px;
-    background-color: #1FD7C1;
-    color: white;
+.overlay_task_Technical_Task {
+  padding: 4px 16px;
+  border-radius: 8px;
+  background-color: #1fd7c1;
+  color: white;
 }
 
 @media (max-width: 545px) {
-
-    .dialog_open_task {
-        width: 396px;
-        padding: 32px 24px;
-        gap: 16px;
-    }
-
+  .dialog_open_task {
+    width: 396px;
+    padding: 32px 24px;
+    gap: 16px;
+  }
 }

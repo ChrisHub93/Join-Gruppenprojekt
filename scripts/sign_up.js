@@ -23,7 +23,6 @@ async function getInpuValueAndPost() {
   let password = document.getElementById("signUpInputPassword").value;
   await postData("/users/", { name: name, email: email, password: password, id:getId() });
 
-  // need to get logged in user to contacts json
   let newUser = await fetchData("/users/");
   let values = Object.values(newUser);
   let findUser = values.find((currentUser)=> currentUser.name == name);

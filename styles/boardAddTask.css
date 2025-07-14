@@ -285,7 +285,7 @@ select:focus {
   background-color: var(--snd-color);
 }
 
-.options__category{
+.options__category {
   background-color: white;
   border-radius: 8px;
   width: 100%;
@@ -600,10 +600,10 @@ mark {
   color: white;
 }
 
-.contacts_name_icon{
-    gap: 16px;
-    display: flex;
-    align-items: center;
+.contacts_name_icon {
+  gap: 16px;
+  display: flex;
+  align-items: center;
 }
 
 @media (max-width: px) {

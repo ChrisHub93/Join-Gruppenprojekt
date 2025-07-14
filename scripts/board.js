@@ -2,6 +2,7 @@ let loadTodos = [];
 let todos = [];
 let currentDraggedElement;
 let globalContacts = [];
+let isToggling = false;
 
 async function loadTasks() {
   let toDoContentRef = document.getElementById("toDoContent");
@@ -9,6 +10,7 @@ async function loadTasks() {
   let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
   let doneContentRef = document.getElementById("doneContent");
   let tasks = await fetchData("/tasks/");
+
   if (tasks === null) {
     toDoContentRef.innerHTML = getEmptyTemplate();
     inProgressContentRef.innerHTML = getEmptyTemplate();
@@ -18,21 +20,14 @@ async function loadTasks() {
   }
   loadTodos = Object.values(tasks);
   addSubtasks();
+
   let contactsData = await fetchData("/contacts/");
   globalContacts = Object.values(contactsData);
-
-  // let toDoContentRef = document.getElementById("toDoContent");
-  // let inProgressContentRef = document.getElementById("inProgressContent");
-  // let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
-  // let doneContentRef = document.getElementById("doneContent");
-
   let statusToDo = todos.filter((task) => task.status === "To do");
-
   let statusInProgress = todos.filter((task) => task.status === "In progress");
   let statusAwaitFeedback = todos.filter(
     (task) => task.status === "Await feedback"
   );
-
   let statusDone = todos.filter((task) => task.status === "Done");
 
   toDoContentRef.innerHTML = "";
@@ -84,7 +79,7 @@ async function loadTasks() {
 
 function addSubtasks() {
   todos = [];
-  
+
   for (let task of loadTodos) {
     if (task.subTasksOpen === undefined) {
       task.subTasksOpen = [];
@@ -93,7 +88,7 @@ function addSubtasks() {
       task.subTasksClosed = [];
     }
     todos.push(task);
-  }  
+  }
 }
 
 // prettier-ignore
@@ -137,7 +132,6 @@ async function moveTo(status) {
   );
 
   await putDataStatus(`tasks/${taskKey}`, todos[index]);
-
   loadTasks();
 }
 
@@ -235,13 +229,9 @@ function closeOverlay(event) {
       dialogTaskEditContent.style.transform = "";
       dialogTaskEditContent.style.opacity = "";
     }, 300);
-  }  
+  }
 }
 
-// Testbereich Start
-let isToggling = false;
-
-// Mit  isToggling wird verhindert, das nicht mehrere Änderungen gleichzeitig gemacht werden können
 async function toggleSubtask(img, id, clickedID) {
   if (isToggling) return;
   isToggling = true;
@@ -264,30 +254,25 @@ async function toggleSubtask(img, id, clickedID) {
 
 async function postSubtaskClosed(id, clickedID) {
   const clickedValue = document.getElementById(clickedID).innerText.trim();
-
-  // Hole aktuelle todos-Daten vom Server
   let getTasks = await fetchData("tasks/");
   let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
   if (!taskKey) return;
 
-  // Holt die Array´s sub...closed und sub...open aus dem Gefundene Array
   const task = getTasks[taskKey];
   const closedSubtasks = task.subTasksClosed || [];
   const openSubtasks = task.subTasksOpen || [];
 
-  // Suche den Index des Subtasks im sub...closed Array
-  const subTaskIndex = closedSubtasks.findIndex((task) => task.trim() === clickedValue);
+  const subTaskIndex = closedSubtasks.findIndex(
+    (task) => task.trim() === clickedValue
+  );
   if (subTaskIndex === -1) return;
 
-  // Entfernt den subtask aus sub...closed mit Hilfe des Index
-  // und pusht anschließend in sub...open
   const [movedSubtask] = closedSubtasks.splice(subTaskIndex, 1);
   openSubtasks.push(movedSubtask);
 
-  // Speichert den Zustand auf den Server
   await patchData(`tasks/${taskKey}`, {
     subTasksOpen: openSubtasks,
-    subTasksClosed: closedSubtasks
+    subTasksClosed: closedSubtasks,
   });
 }
 
@@ -302,7 +287,9 @@ async function postSubtaskOpen(id, clickedID) {
   const closedSubtasks = task.subTasksClosed || [];
   const openSubtasks = task.subTasksOpen || [];
 
-  const subTaskIndex = openSubtasks.findIndex((task) => task.trim() === clickedValue);
+  const subTaskIndex = openSubtasks.findIndex(
+    (task) => task.trim() === clickedValue
+  );
   if (subTaskIndex === -1) return;
 
   const [movedSubtask] = openSubtasks.splice(subTaskIndex, 1);
@@ -310,23 +297,26 @@ async function postSubtaskOpen(id, clickedID) {
 
   await patchData(`tasks/${taskKey}`, {
     subTasksOpen: openSubtasks,
-    subTasksClosed: closedSubtasks
+    subTasksClosed: closedSubtasks,
   });
 }
 
 async function patchData(path, data = {}) {
   const response = await fetch(BASE_URL + path + ".json", {
-    method: 'PATCH',
+    method: "PATCH",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
   return response.json();
 }
 
 function subtasksOverlay(taskRef) {
-  if (taskRef.subTasksOpen == undefined && taskRef.subTasksClosed === undefined) {
+  if (
+    taskRef.subTasksOpen == undefined &&
+    taskRef.subTasksClosed === undefined
+  ) {
     return "";
   } else {
     return subtasksOverlayRender(taskRef);
@@ -334,7 +324,10 @@ function subtasksOverlay(taskRef) {
 }
 
 function subtasksOverlayEdit(tasksEditRef) {
-  if (tasksEditRef.subTasksOpen === undefined && tasksEditRef.subTasksClosed === undefined ) {
+  if (
+    tasksEditRef.subTasksOpen === undefined &&
+    tasksEditRef.subTasksClosed === undefined
+  ) {
     return "";
   } else {
     return subtasksOverlayRenderEdit(tasksEditRef);
@@ -362,7 +355,7 @@ function editOverlayTask(tasksRef) {
   addOverlayRef.classList.remove("active");
   addOverlayEditRef.classList.add("active");
   dialogTaskEditRef.innerHTML = renderOverlayTaskEdit(todos[tasksEditRef]);
-  toggleFlatpickr(document.getElementById('dateEdit'));
+  toggleFlatpickr(document.getElementById("dateEdit"));
 }
 
 function renderPrioButton(prioName, activePrio) {
@@ -409,7 +402,7 @@ function toggleFlatpickr(inputElement) {
     flatpickrInstance.destroy();
     flatpickrInstance = null;
   }
-if (!flatpickrInstance) {
+  if (!flatpickrInstance) {
     flatpickrInstance = flatpickr(inputElement, {
       dateFormat: "d/m/Y",
       allowInput: true,
@@ -419,8 +412,8 @@ if (!flatpickrInstance) {
 }
 
 function formatDateToDisplay(isoDate) {
-  if (!isoDate) return '';
-  let [year, month, day] = isoDate.split('-');
+  if (!isoDate) return "";
+  let [year, month, day] = isoDate.split("-");
   return `${day}/${month}/${year}`;
 }
 
@@ -481,7 +474,7 @@ async function loadData(path = "") {
 async function updateDataEdit(tasksEditRef) {
   let checkInputs = checkEditInputFields();
   if (!checkInputs) {
-    return
+    return;
   } else {
     let tasks = await fetchData("/tasks/");
     let taskKeyEdit = Object.keys(tasks).find(
@@ -500,23 +493,23 @@ async function updateDataEdit(tasksEditRef) {
       subTasksOpen: getUpdatedSubtasks(),
       status: tasks[taskKeyEdit].status,
     };
-  
+
     await putDataEdit(`/tasks/${taskKeyEdit}`, data);
     await loadTasks();
-  
+
     overlayTask(data.id);
-  }  
+  }
 }
 
 function checkEditInputFields() {
- let titleValue = document.getElementById("titleEdit").value.trim();
- let dateValue = document.getElementById("dateEdit").value.trim();
+  let titleValue = document.getElementById("titleEdit").value.trim();
+  let dateValue = document.getElementById("dateEdit").value.trim();
 
- if (titleValue === "" || dateValue === ""){
-  return false;
- } else {
-  return true;
- }
+  if (titleValue === "" || dateValue === "") {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 async function putDataEdit(path = "", data = {}) {
@@ -553,7 +546,6 @@ function getUpdatedSubtasks() {
     }
   }
   return updatedSubtasks;
-  // return updatedSubtasks;
 }
 
 function editSubtask(iconElement, id) {
@@ -795,24 +787,26 @@ function renderAssignedTo(assignedToIds) {
     return `
       <div>Currently unassigned</div>
     `;
-  }else {
+  } else {
     return assignedToIds
-    .map((id, index) => {
-      let contactRef = globalContacts.find(contact => contact.id === id);
-      if (!contactRef) return "";
-      let name = `${contactRef.firstname} ${contactRef.lastname}`;
-      let initials = getInitials(name);
-      let colorClass = getAvatarColorClass(name);
-      let leftOffset = index * 24;
+      .map((id, index) => {
+        let contactRef = globalContacts.find((contact) => contact.id === id);
+        if (!contactRef) return "";
+        let name = `${contactRef.firstname} ${contactRef.lastname}`;
+        let initials = getInitials(name);
+        let colorClass = getAvatarColorClass(name);
+        let leftOffset = index * 24;
 
-      return `
+        return `
         <div class="assigned ${colorClass}" style="position:absolute; left: ${leftOffset}px">
-          ${initials.split('').map(letter => `<span>${letter}</span>`).join('')}
+          ${initials
+            .split("")
+            .map((letter) => `<span>${letter}</span>`)
+            .join("")}
         </div>`;
-    })
-    .join('');
+      })
+      .join("");
   }
-  
 }
 
 function checkEmptyTitleEdit() {

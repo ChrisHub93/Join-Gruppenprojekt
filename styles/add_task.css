@@ -51,18 +51,6 @@ mark {
   color: red;
 }
 
-/* durch klassen ersetzen */
-/* input,
-textarea {
-  border: 1px solid var(--snd-color);
-  border-radius: 8px;
-  width: 100%;
-  padding-block: 8px;
-  padding-inline: 16px;
-  font-size: 16px;
-  cursor: pointer;
-} */
-
 .inputTitle,
 .textareaDescription,
 .inputDate,
@@ -87,12 +75,6 @@ textarea {
   background-position: center;
   cursor: pointer;
 }
-
-/* input:focus,
-textarea:focus {
-  border-color: var(--focus-color);
-  outline: none;
-} */
 
 .inputTitle:focus,
 .inputDate:focus,
@@ -479,15 +461,6 @@ footer {
   flex-direction: column;
 }
 
-/* #subTasks input {
-  border: none;
-  font-size: 14px;
-  background-color: transparent;
-  padding-block: 4px;
-  padding-inline: 8px;
-  width: 100%;
-} */
-
 .subTaskAdded {
   border: none;
   font-size: 14px;
@@ -567,7 +540,6 @@ footer {
 .relative input,
 .relative img {
   background-color: transparent;
-  /* z-index: 1; */
 }
 
 div[id^="bullet"] {
@@ -624,14 +596,11 @@ div[id^="bullet"] {
 
 .contacts_name_icon {
   gap: 16px;
-  /* padding: 7px 16px; */
   display: flex;
   align-items: center;
 }
 
 .assigned_to_icon {
-  /* width: 42px;
-  height: 42px; */
   width: 32px;
   height: 32px;
   border: 2px solid white;
@@ -659,7 +628,7 @@ div[id^="bullet"] {
   outline: none;
 }
 
-.assignedMembers{
+.assignedMembers {
   display: flex;
   justify-content: start;
   align-items: center;
@@ -758,7 +727,6 @@ div[id^="bullet"] {
 
   .markedFieldsResponsive {
     display: block !important;
-    /* padding-bottom: 120px; */
   }
 
   footer {
@@ -767,7 +735,6 @@ div[id^="bullet"] {
   }
 
   .sectionButtons {
-    /* width: auto; */
     display: flex;
     justify-content: end;
     padding-bottom: 16px;
@@ -785,7 +752,6 @@ div[id^="bullet"] {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
-    /* padding-right: 32px; */
   }
 
   .header-top-profile {
@@ -807,11 +773,6 @@ div[id^="bullet"] {
   .header-top-profile {
     padding-left: 70px !important;
   }
-
-  /*
-  .navbar{
-    margin-top: 18px !important;
-  } */
 
   .markedFieldsResponsive {
     padding-bottom: 120px;
@@ -901,8 +862,6 @@ div[id^="bullet"] {
   main {
     width: 100%;
     align-items: start;
-    /* max-height: calc(100vh - 80px);
-    height: auto; */
   }
 
   .markedFields {
@@ -922,8 +881,6 @@ div[id^="bullet"] {
   }
 
   .sectionButtons {
-    /* width: auto;
-    flex-direction: column; */
     width: 100%;
     padding-right: 12px;
   }
@@ -941,7 +898,6 @@ div[id^="bullet"] {
 
 @media (max-width: 545px) {
   .sectionButtons {
-    /* bottom: 80px; */
     bottom: 70px;
   }
 }

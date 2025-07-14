@@ -3,7 +3,7 @@ let priorityMedium = false;
 let priorityLow = false;
 let checkTitle = false;
 let checkDate = false;
-let currentStatus = 'To do';
+let currentStatus = "To do";
 let setPriority = "";
 let assignedTo = [];
 let subtasksOpen = [];
@@ -11,7 +11,7 @@ let subtasksClosed = [];
 let debounceTimeOut = 0;
 let contactsToAssign;
 
-function clearInputFields(){
+function clearInputFields() {
   let titleRef = document.getElementById("title");
   let errorTitleRef = document.getElementById("errorTitle");
   let descriptionRef = document.getElementById("description");
@@ -21,20 +21,20 @@ function clearInputFields(){
   let subTasksRef = document.getElementById("subTasks");
   let userNameWordRef = document.getElementById("userNameWord");
   let assignedMembersRef = document.getElementById("assignedMembers");
-  titleRef.value = '';
+  titleRef.value = "";
   titleRef.classList.remove("inputError");
   errorTitleRef.classList.add("opacity");
-  descriptionRef.value = '';
-  dateRef.value = '';
+  descriptionRef.value = "";
+  dateRef.value = "";
   dateRef.classList.remove("inputError");
-  errorDateRef.classList.add("opacity");  
-  subTaskInputRef.value = '';
-  subTasksRef.innerHTML = '';
-  userNameWordRef.value = '';
-  assignedMembersRef.innerHTML = '';
+  errorDateRef.classList.add("opacity");
+  subTaskInputRef.value = "";
+  subTasksRef.innerHTML = "";
+  userNameWordRef.value = "";
+  assignedMembersRef.innerHTML = "";
 }
 
-function removeClasses(){
+function removeClasses() {
   let allMembers = document.getElementById("allMembers");
   let listRef = allMembers.querySelectorAll("li");
   let inputRef = allMembers.querySelectorAll("input");
@@ -48,7 +48,7 @@ function removeClasses(){
   }
   for (const element of checkBoxImg) {
     element.src = "/assets/icons/Check button.png";
-    element.classList.remove("filterChecked"); 
+    element.classList.remove("filterChecked");
   }
   allMembers.classList.remove("show");
   let ref = document.getElementById("arrow");
@@ -58,29 +58,31 @@ function removeClasses(){
   } else {
     ref.src = "/assets/icons/arrow_drop_down.png";
   }
-  selectCategoryFieldRef.innerHTML='';
-  selectCategoryFieldRef.innerHTML=getBasicSelectTemplate();
+  selectCategoryFieldRef.innerHTML = "";
+  selectCategoryFieldRef.innerHTML = getBasicSelectTemplate();
 }
 
-function clearAddTaskFields(){
+function clearAddTaskFields() {
   clearInputFields();
   resetAllPriorities();
-  setPriorityMedium('medium');
+  setPriorityMedium("medium");
   assignedTo.splice(0, assignedTo.length);
-  removeClasses();  
+  removeClasses();
 }
 
-function filterContactsToAssign(userNameWord){
+function filterContactsToAssign(userNameWord) {
   clearTimeout(debounceTimeOut);
   debounceTimeOut = setTimeout(() => {
-  currentUser = contactsToAssign.filter((user) => user.firstname.toLowerCase().includes(userNameWord.toLowerCase()));
+    currentUser = contactsToAssign.filter((user) =>
+      user.firstname.toLowerCase().includes(userNameWord.toLowerCase())
+    );
     if (userNameWord.length >= 2) {
       let allMembersRef = document.getElementById("allMembers");
-      allMembersRef.innerHTML = '';
+      allMembersRef.innerHTML = "";
       renderContactList(currentUser);
-    } else if (userNameWord.length <=2){
+    } else if (userNameWord.length <= 2) {
       let allMembersRef = document.getElementById("allMembers");
-      allMembersRef.innerHTML = '';
+      allMembersRef.innerHTML = "";
       initAddTask();
     }
   }, 300);
@@ -88,19 +90,20 @@ function filterContactsToAssign(userNameWord){
 
 async function initAddTask() {
   let contacts = await loadContacts();
+  let username = sessionStorage.getItem("loggedInUser");
 
-  // check if user is logged in
-  let username = sessionStorage.getItem('loggedInUser');
-  
-  if(username){
+  if (username) {
     let currentUserLoggedIn = await loadUsers();
-    let loggedUser = currentUserLoggedIn.find((user)=> user.name === username);
-    if(loggedUser){
+    let loggedUser = currentUserLoggedIn.find((user) => user.name === username);
+    if (loggedUser) {
       const allMembersRef = document.getElementById("allMembers");
-      let name = loggedUser.name;      
+      let name = loggedUser.name;
       let assignedColor = getAvatarColorClass(name);
 
-      allMembersRef.innerHTML += getContactListLoggedInUser(loggedUser, assignedColor);
+      allMembersRef.innerHTML += getContactListLoggedInUser(
+        loggedUser,
+        assignedColor
+      );
     }
   }
   renderContactList(contacts);
@@ -175,11 +178,7 @@ async function openAssignedTo() {
   toggleVisibility("allMembers");
   toggleBorderColor("selectMember");
   toggleArrow("arrow");
-  
 }
-
-
-
 
 function getContact(id) {
   let membersRef = document.getElementById("contact" + id);
@@ -193,30 +192,34 @@ function getContact(id) {
   }
   toggleAssignment(id);
 
-  let activeUser = assignedTo.find((currentId)=> currentId == id);
- if(activeUser){
-  let selectedMember = document.getElementById("selected_name_icon"+id);
-    if(!selectedMember){
+  let activeUser = assignedTo.find((currentId) => currentId == id);
+  if (activeUser) {
+    let selectedMember = document.getElementById("selected_name_icon" + id);
+    if (!selectedMember) {
       getIcon(membersRef, id);
-    } 
- }
+    }
+  }
 
- if(!activeUser){
-  let selectedMember = document.getElementById("selected_name_icon"+id);
-  if(selectedMember){
+  if (!activeUser) {
+    let selectedMember = document.getElementById("selected_name_icon" + id);
+    if (selectedMember) {
       selectedMember.remove();
     }
- }
+  }
 }
 
-async function getIcon(membersRef, id){
+async function getIcon(membersRef, id) {
   let assignedMembersRef = document.getElementById("assignedMembers");
   let mainDiv = membersRef.querySelector("p");
   let assignedColor = mainDiv.classList[1];
   let contacts = await loadContacts();
   let currentSelectedUser = contacts.find((user) => user.id === id);
-  if (currentSelectedUser){
-  assignedMembersRef.innerHTML += `<p id="selected_name_icon${currentSelectedUser.id}" class="assigned_to_icon ${assignedColor}">${currentSelectedUser.firstname.toUpperCase().charAt(0)}${currentSelectedUser.lastname.toUpperCase().charAt(0)}</p>`;
+  if (currentSelectedUser) {
+    assignedMembersRef.innerHTML += `<p id="selected_name_icon${
+      currentSelectedUser.id
+    }" class="assigned_to_icon ${assignedColor}">${currentSelectedUser.firstname
+      .toUpperCase()
+      .charAt(0)}${currentSelectedUser.lastname.toUpperCase().charAt(0)}</p>`;
   }
 }
 
@@ -369,11 +372,11 @@ function createTask() {
   if (checkTitle && checkDate) {
     closeAddTaskOverlaySuccses();
     postDataToServer(currentStatus);
-    currentStatus = 'To do';
-    setTimeout(()=>{
-      window.location.href= "../html/board.html";
-    }, 700);    
-  }  
+    currentStatus = "To do";
+    setTimeout(() => {
+      window.location.href = "../html/board.html";
+    }, 700);
+  }
 }
 
 async function createTaskBoard() {
@@ -382,7 +385,7 @@ async function createTaskBoard() {
   if (checkTitle && checkDate) {
     await postDataToServer(currentStatus);
     closeAddTaskOverlaySuccses();
-    currentStatus = 'To do';
+    currentStatus = "To do";
     loadTasks();
   }
 }
@@ -515,7 +518,7 @@ async function postDataToServer(currentStatus) {
   let description = document.getElementById("description");
   let date = document.getElementById("date");
   let priority = setPriority;
-  let category = document.getElementById("select"); 
+  let category = document.getElementById("select");
 
   await postData(`/tasks/`, {
     id: generateTimeBasedId(),
@@ -565,6 +568,6 @@ async function searchContacts() {
 }
 
 function getContactNameById(id) {
-  let contact = globalContacts.find(c => c.id === id);
+  let contact = globalContacts.find((c) => c.id === id);
   return contact ? `${contact.firstname} ${contact.lastname}` : "Unbekannt";
 }

@@ -337,7 +337,6 @@ function removeOpacity(requiredNameFieldRef, requiredEmailFieldRef, requiredPhon
   requiredPhoneFieldRef.classList.remove("opacity");
 }
 
-
 async function createContact(event) {
   let nameRef = document.getElementById("name");
   let emailRef = document.getElementById("email");

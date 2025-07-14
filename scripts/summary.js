@@ -75,7 +75,6 @@ async function filterTaskSummary() {
     }
 
     todos = Object.values(tasks);
-    // let checkboxRef = document.getElementById('checkbox')
     let tasksToDo = todos.filter(task => task.status === "To do");
     let tasksDone = todos.filter(task => task.status === "Done");
     let tasksProgress = todos.filter(task => task.status === "In progress");
