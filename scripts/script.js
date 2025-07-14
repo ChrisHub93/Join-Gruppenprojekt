@@ -2,11 +2,11 @@ const BASE_URL =
   "https://join-464-default-rtdb.europe-west1.firebasedatabase.app/";
 
 function init() {
-  // let loginStatus = sessionStorage.getItem("loginStatus")
-  // if (loginStatus !== "user" && loginStatus !== "guest") {
-  //     window.location.href = "../index.html";
-  //     return;
-  // } aktivieren, wenn fertig mit dem Projekt
+  let loginStatus = sessionStorage.getItem("loginStatus")
+  if (loginStatus !== "user" && loginStatus !== "guest") {
+      window.location.href = "../index.html";
+      return;
+  }
   activeMenuStorage();
   sidebarVisibility();
 }
@@ -113,7 +113,6 @@ function activateMenu(clickedElement, menuKey) {
 }
 
 function activeMenuStorage() {
-  // if (checkBlacklist()) return;
   if (window.location.pathname.includes("../html/help.html")) return;
   let activeMenu = sessionStorage.getItem("activeMenu") || "summary";
   let activePolicy = sessionStorage.getItem("activePolicy");
@@ -155,19 +154,6 @@ function addMenuactive(menuKey) {
       }
     });
 }
-
-// function checkBlacklist() {
-//     let excludedPages = ['help.html'];
-//     let currentPage = window.location.pathname.split('/').pop();
-
-//     if (excludedPages.includes(currentPage)) {
-//         clearMenu();
-//         sessionStorage.removeItem('activeMenu');
-//         sessionStorage.removeItem('activePolicy');
-//         return true;
-//     }
-//     return false;
-// }
 
 function getInitials(name) {
   return name
