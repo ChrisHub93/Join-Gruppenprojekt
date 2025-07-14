@@ -95,7 +95,6 @@ function addSubtasks() {
     }
     todos.push(task);
   }  
-  console.log(todos);
 }
 
 // prettier-ignore
@@ -448,7 +447,6 @@ function openAddTaskOverlay(status) {
   initAddTask();
 
   currentStatus = status;
-  console.log("status:", currentStatus);
 }
 
 function closeAddTaskOverlay() {
@@ -488,32 +486,44 @@ async function loadData(path = "") {
 }
 
 async function updateDataEdit(tasksEditRef) {
+  let checkInputs = checkEditInputFields();
+  if (!checkInputs) {
+    return
+  } else {
+    let tasks = await fetchData("/tasks/");
+    let taskKeyEdit = Object.keys(tasks).find(
+      (k) => String(tasks[k].id) === String(tasksEditRef)
+    );
+    let prioButton = document.querySelector(".prio_edit_button.active");
+    let priorityEdit = prioButton.dataset.prio;
+    let data = {
+      id: tasks[taskKeyEdit].id,
+      category: tasks[taskKeyEdit].category,
+      title: document.getElementById("titleEdit").value,
+      description: document.getElementById("descriptionEdit").value,
+      date: document.getElementById("dateEdit").value,
+      priority: priorityEdit,
+      assignedTo: assignedToEditTemp,
+      subTasksOpen: getUpdatedSubtasks(),
+      status: tasks[taskKeyEdit].status,
+    };
+  
+    await putDataEdit(`/tasks/${taskKeyEdit}`, data);
+    await loadTasks();
+  
+    overlayTask(data.id);
+  }  
+}
 
+function checkEditInputFields() {
+ let titleValue = document.getElementById("titleEdit").value.trim();
+ let dateValue = document.getElementById("dateEdit").value.trim();
 
-
-
-  let tasks = await fetchData("/tasks/");
-  let taskKeyEdit = Object.keys(tasks).find(
-    (k) => String(tasks[k].id) === String(tasksEditRef)
-  );
-  let prioButton = document.querySelector(".prio_edit_button.active");
-  let priorityEdit = prioButton.dataset.prio;
-  let data = {
-    id: tasks[taskKeyEdit].id,
-    category: tasks[taskKeyEdit].category,
-    title: document.getElementById("titleEdit").value,
-    description: document.getElementById("descriptionEdit").value,
-    date: document.getElementById("dateEdit").value,
-    priority: priorityEdit,
-    assignedTo: assignedToEditTemp,
-    subTasksOpen: getUpdatedSubtasks(),
-    status: tasks[taskKeyEdit].status,
-  };
-
-  await putDataEdit(`/tasks/${taskKeyEdit}`, data);
-  await loadTasks();
-
-  overlayTask(data.id);
+ if (titleValue === "" || dateValue === ""){
+  return false;
+ } else {
+  return true;
+ }
 }
 
 async function putDataEdit(path = "", data = {}) {
@@ -529,7 +539,7 @@ async function putDataEdit(path = "", data = {}) {
 
 function getUpdatedSubtasks() {
   let editedSubtasks = document.querySelectorAll(".flex_edit");
-  let maindiv = document.getElementById("subTasks");
+  let maindiv = document.getElementById("subTasksEdit");
   let newSubTasks = maindiv.querySelectorAll("input");
   let updatedSubtasks = [];
 
