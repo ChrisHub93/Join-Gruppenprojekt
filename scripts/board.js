@@ -26,7 +26,6 @@ async function loadTasks() {
   // let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
   // let doneContentRef = document.getElementById("doneContent");
 
-  // console.log("TodDOs vor filter:",todos);
   let statusToDo = todos.filter((task) => task.status === "To do");
 
   let statusInProgress = todos.filter((task) => task.status === "In progress");
@@ -116,7 +115,6 @@ function calculateAndRenderProgressBar(element) {
 
 function startDragging(id) {
   currentDraggedElement = id;
-  console.log(currentDraggedElement);
 }
 
 function allowDrop(event) {
@@ -153,7 +151,6 @@ async function deleteBoardTasks(tasksRef) {
 }
 
 async function deleteTasks(path, key) {
-  console.log("FirebaseKey:", key);
   let response = await fetch(BASE_URL + path + key + ".json", {
     method: "DELETE",
   });
@@ -292,8 +289,6 @@ async function postSubtaskClosed(id, clickedID) {
     subTasksOpen: openSubtasks,
     subTasksClosed: closedSubtasks
   });
-
-  console.log("Subtask verschoben (geschlossen → offen):", movedSubtask);
 }
 
 async function postSubtaskOpen(id, clickedID) {
@@ -317,8 +312,6 @@ async function postSubtaskOpen(id, clickedID) {
     subTasksOpen: openSubtasks,
     subTasksClosed: closedSubtasks
   });
-
-  console.log("Subtask verschoben (offen → geschlossen):", movedSubtask);
 }
 
 async function patchData(path, data = {}) {
@@ -546,7 +539,6 @@ function getUpdatedSubtasks() {
   for (let index = 0; index < newSubTasks.length; index++) {
     const element = newSubTasks[index];
     let addedTask = element.offsetParent.id;
-    console.log(updatedSubtasks);
     updatedSubtasks.push(addedTask);
   }
 
@@ -616,7 +608,6 @@ function filterTasks() {
     .getElementById("filterTasks")
     .value.trim()
     .toLowerCase();
-  console.log(searchInput);
   let filteredTask = todos
     .slice(0)
     .filter(
@@ -624,7 +615,6 @@ function filterTasks() {
         todos.title.toLowerCase().includes(searchInput) ||
         todos.description.toLowerCase().includes(searchInput)
     );
-  console.log(filteredTask);
   todos = filteredTask;
   loadSearch(todos);
 }
@@ -640,15 +630,11 @@ function loadSearch(todos) {
   let inProgressContentRef = document.getElementById("inProgressContent");
   let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
   let doneContentRef = document.getElementById("doneContent");
-
-  // console.log("TodDOs vor filter:",todos);
   let statusToDo = todos.filter((task) => task.status === "To do");
-
   let statusInProgress = todos.filter((task) => task.status === "In progress");
   let statusAwaitFeedback = todos.filter(
     (task) => task.status === "Await feedback"
   );
-
   let statusDone = todos.filter((task) => task.status === "Done");
 
   toDoContentRef.innerHTML = "";

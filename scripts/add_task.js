@@ -91,18 +91,16 @@ async function initAddTask() {
 
   // check if user is logged in
   let username = sessionStorage.getItem('loggedInUser');
+  
   if(username){
-    console.log("user gefunden");
     let currentUserLoggedIn = await loadUsers();
     let loggedUser = currentUserLoggedIn.find((user)=> user.name === username);
     if(loggedUser){
       const allMembersRef = document.getElementById("allMembers");
-      let name = loggedUser.name;
-      
-      console.log(name);
+      let name = loggedUser.name;      
       let assignedColor = getAvatarColorClass(name);
-      allMembersRef.innerHTML += getContactListLoggedInUser(loggedUser, assignedColor);
 
+      allMembersRef.innerHTML += getContactListLoggedInUser(loggedUser, assignedColor);
     }
   }
   renderContactList(contacts);
