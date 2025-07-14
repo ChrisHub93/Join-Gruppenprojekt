@@ -795,7 +795,12 @@ function toggleAssignmentEdit(id) {
 }
 
 function renderAssignedTo(assignedToIds) {
-  return assignedToIds
+  if (assignedToIds === undefined) {
+    return `
+      <div>Currently unassigned</div>
+    `;
+  }else {
+    return assignedToIds
     .map((id, index) => {
       let contactRef = globalContacts.find(contact => contact.id === id);
       if (!contactRef) return "";
@@ -810,6 +815,8 @@ function renderAssignedTo(assignedToIds) {
         </div>`;
     })
     .join('');
+  }
+  
 }
 
 function checkEmptyTitleEdit() {
