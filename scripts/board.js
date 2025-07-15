@@ -732,8 +732,8 @@ function getContactListEdit(contact, assignedColor, isAssigned) {
                     class="checkBoxImg ${isAssigned ? "filterChecked" : ""}"
                     src="${
                       isAssigned
-                        ? "/assets/icons/Check button true.png"
-                        : "/assets/icons/Check button.png"
+                        ? "../assets/icons/Check button true.png"
+                        : "../assets/icons/Check button.png"
                     }"
                     alt=""
                   />

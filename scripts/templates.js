@@ -14,7 +14,7 @@ function getBasicSelectTemplate(){
                 <img
                   id="arrowCategory"
                   class="arrow"
-                  src="/assets/icons/arrow_drop_down.png"
+                  src="../assets/icons/arrow_drop_down.png"
                   alt=""
                 />`;
 }
@@ -33,7 +33,7 @@ function getContactList(contact, assignedColor) {
                     onclick="setCheckBox('contact${contact.id}', event)"
                     id="checkBoxImg${contact.id}"
                     class="checkBoxImg"
-                    src="/assets/icons/Check button.png"
+                    src="../assets/icons/Check button.png"
                     alt=""
                   />
                 </li>
@@ -54,7 +54,7 @@ function getContactListLoggedInUser(contact, assignedColor) {
                     onclick="setCheckBox('contact${contact.id}', event)"
                     id="checkBoxImg${contact.id}"
                     class="checkBoxImg"
-                    src="/assets/icons/Check button.png"
+                    src="../assets/icons/Check button.png"
                     alt=""
                   />
                 </li>
@@ -83,14 +83,14 @@ return `<div id="${inputRef.value}" class="relative">
                 <input onclick="editTask('${inputRef.value}')" type ="text" value="${inputRef.value}" class="subTaskAdded"/>
 
             <div id="editOrTrash${inputRef.value}" class="editOrTrash d-nonevip">
-                <img onclick="editTask('${inputRef.value}')" src="/assets/icons/Property 1=edit.png" alt="">
+                <img onclick="editTask('${inputRef.value}')" src="../assets/icons/Property 1=edit.png" alt="">
                     <div class="subTasksSeperatorSecond"></div>
-                <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
+                <img onclick="completeDeleteTask('${inputRef.value}')" src="../assets/icons/Property 1=delete.png" alt="">
             </div>
                 <div id="trashOrCheck${inputRef.value}" class="trashOrCheck d-nonevip">
-                    <img onclick="completeDeleteTask('${inputRef.value}')" src="/assets/icons/Property 1=delete.png" alt="">
+                    <img onclick="completeDeleteTask('${inputRef.value}')" src="../assets/icons/Property 1=delete.png" alt="">
                         <div class="subTasksSeperatorSecond"></div>
-                    <img onclick="acceptTask('${inputRef.value}')" src="/assets/icons/Property 1=check.png" alt="">
+                    <img onclick="acceptTask('${inputRef.value}')" src="../assets/icons/Property 1=check.png" alt="">
                 </div>               
             </div>`;
 }
@@ -114,14 +114,14 @@ function getDetailsOfContact(
               <h2>${firstNameOfUser} ${lastNameOfUser}</h2>
               <div id="editOrDeleteSection" class="editOrDeleteFlex">
                 <div onclick ="openEditOverlay(event)" class="edit editOrDeleteFlex">
-                  <img  class="defaultIcon" src="/assets/icons/Property 1=edit.png" alt="" />
-                  <img class="hoverIcon" src="/assets/icons/edit-hover.png" alt="" />
+                  <img  class="defaultIcon" src="../assets/icons/Property 1=edit.png" alt="" />
+                  <img class="hoverIcon" src="../assets/icons/edit-hover.png" alt="" />
                   <span>Edit</span>
                 </div>
 
                 <div onclick ="deleteUser()" class="delete editOrDeleteFlex">
-                  <img class="defaultIcon" src="/assets/icons/Property 1=delete.png" alt="" />
-                  <img class="hoverIcon" src="/assets/icons/delete-hover.png" alt="" />
+                  <img class="defaultIcon" src="../assets/icons/Property 1=delete.png" alt="" />
+                  <img class="hoverIcon" src="../assets/icons/delete-hover.png" alt="" />
                   <span>Delete</span>
                 </div>
               </div>
