@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="../styles/fonts.css" />
     <link rel="stylesheet" href="../styles/templates.css" />
     
-    <link rel="icon" type="image/x-icon" href="/assets/img/Capa 1.png" />
+    <link rel="icon" type="image/x-icon" href="../assets/img/Capa 1.png" />
   </head>
 
   <body onload="setPriorityMedium(`medium`);init(); initAddTask(); getProfile()">
     <header id="header" class="page-box">
       <p class="header-name">Kanban Project Management Tool</p>
       
-            <img class="headerLogo d-none" src="/assets/img/Capa 1.png" alt="">
+            <img class="headerLogo d-none" src="../assets/img/Capa 1.png" alt="">
             <div class="profile-navbar">
             <div class="header-top-profile">
                 <a href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
@@ -113,13 +113,13 @@
                 <img
                   id="standardUrgentIcon"
                   class=""
-                  src="/assets/icons/Prio alta.png"
+                  src="../assets/icons/Prio alta.png"
                   alt=""
                 />
                 <img
                   id="activeUrgentIcon"
                   class="d-nonevip"
-                  src="/assets/icons/Prio alta active.png"
+                  src="../assets/icons/Prio alta active.png"
                   alt=""
                 />
               </div>
@@ -133,13 +133,13 @@
                 <img
                   id="standardMediumIcon"
                   class=""
-                  src="/assets/icons/Prio media.png"
+                  src="../assets/icons/Prio media.png"
                   alt=""
                 />
                 <img
                   id="activeMediumIcon"
                   class="d-nonevip"
-                  src="/assets/icons/Prio media active.png"
+                  src="../assets/icons/Prio media active.png"
                   alt=""
                 />
               </div>
@@ -149,13 +149,13 @@
                 <img
                   id="standardLowIcon"
                   class=""
-                  src="/assets/icons/Prio baja.png"
+                  src="../assets/icons/Prio baja.png"
                   alt=""
                 />
                 <img
                   id="activeLowIcon"
                   class="d-nonevip"
-                  src="/assets/icons/Prio baja active.png"
+                  src="../assets/icons/Prio baja active.png"
                   alt=""
                 />
               </div>
@@ -180,7 +180,7 @@
                 <img
                   id="arrow"
                   class="arrow inputStyleArrow"
-                  src="/assets/icons/arrow_drop_down.png"
+                  src="../assets/icons/arrow_drop_down.png"
                   alt=""
                 />
               </div>
@@ -199,7 +199,7 @@
                 <img
                   id="arrowCategory"
                   class="arrow"
-                  src="/assets/icons/arrow_drop_down.png"
+                  src="../assets/icons/arrow_drop_down.png"
                   alt=""
                 />
               </div>
@@ -235,20 +235,20 @@
               onclick="chooseSubTask('subTaskInput', 'plusIcon', 'cancelOrCheck')"
               id="plusIcon"
               class="plusIcon"
-              src="/assets/icons/Subtasks-plus.png"
+              src="../assets/icons/Subtasks-plus.png"
               alt=""
             />
 
             <div id="cancelOrCheck" class="cancelOrCheck d-nonevip">
               <img
                 onclick="deleteTask()"
-                src="/assets/icons/iconoir_cancel.png"
+                src="../assets/icons/iconoir_cancel.png"
                 alt=""
               />
               <div class="subTasksSeperator"></div>
               <img
                 onclick="addTaskHTML('subTaskInput', 'subTasks', 'plusIcon', 'cancelOrCheck')"
-                src="/assets/icons/Property 1=check.png"
+                src="../assets/icons/Property 1=check.png"
                 alt=""
               />
             </div>
@@ -274,19 +274,19 @@
               Clear
               <img
                 class="defaultIcon"
-                src="/assets/icons/iconoir_cancel.png"
+                src="../assets/icons/iconoir_cancel.png"
                 alt=""
               />
               <img
                 class="hoverIcon"
-                src="/assets/icons/iconoir_cancel_hover.png"
+                src="../assets/icons/iconoir_cancel_hover.png"
                 alt=""
               />
             </button>
 
             <button class="createTask" onclick="createTask()">
               Create Task
-              <img src="/assets/icons/check.png" alt="" />
+              <img src="../assets/icons/check.png" alt="" />
             </button>
           </div>
         </div>
@@ -305,9 +305,9 @@
             </div>
     </footer>
 
-    <script src="/scripts/add_task.js"></script>
-    <script src="/scripts/templates.js"></script>
-    <script src="/scripts/script.js"></script>
-    <script src="/scripts/board.js"></script>
+    <script src="../scripts/add_task.js"></script>
+    <script src="../scripts/templates.js"></script>
+    <script src="../scripts/script.js"></script>
+    <script src="../scripts/board.js"></script>
   </body>
 </html>
