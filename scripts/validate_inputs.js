@@ -108,11 +108,11 @@ function togglePwVisibility(inputId, imgId) {
 
   if (inputRef.type === "password") {
     inputRef.type = "text";
-    iconRef.src = "../assets/icons/visibility.svg";
+    iconRef.src = "./assets/icons/visibility.svg";
     iconRef.alt = "Hide password";
   } else {
     inputRef.type = "password";
-    iconRef.src = "../assets/icons/visibility_off.svg";
+    iconRef.src = "./assets/icons/visibility_off.svg";
     iconRef.alt = "Show password";
   }
 }
