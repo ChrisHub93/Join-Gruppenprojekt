@@ -95,13 +95,13 @@ function getAddTaskTemplate() {
                 <img
                   id="standardUrgentIcon"
                   class=""
-                  src="/assets/icons/Prio alta.png"
+                  src="../assets/icons/Prio alta.png"
                   alt=""
                 />
                 <img
                   id="activeUrgentIcon"
                   class="d-nonevip"
-                  src="/assets/icons/Prio alta active.png"
+                  src="../assets/icons/Prio alta active.png"
                   alt=""
                 />
               </div>
@@ -115,13 +115,13 @@ function getAddTaskTemplate() {
                 <img
                   id="standardMediumIcon"
                   class="d-nonevip"
-                  src="/assets/icons/Prio media.png"
+                  src="../assets/icons/Prio media.png"
                   alt=""
                 />
                 <img
                   id="activeMediumIcon"
                   class=""
-                  src="/assets/icons/Prio media active.png"
+                  src="../assets/icons/Prio media active.png"
                   alt=""
                 />
               </div>
@@ -131,13 +131,13 @@ function getAddTaskTemplate() {
                 <img
                   id="standardLowIcon"
                   class=""
-                  src="/assets/icons/Prio baja.png"
+                  src="../assets/icons/Prio baja.png"
                   alt=""
                 />
                 <img
                   id="activeLowIcon"
                   class="d-nonevip"
-                  src="/assets/icons/Prio baja active.png"
+                  src="../assets/icons/Prio baja active.png"
                   alt=""
                 />
               </div>
@@ -157,7 +157,7 @@ function getAddTaskTemplate() {
                 <img
                   id="arrow"
                   class="arrow inputStyleArrow"
-                  src="/assets/icons/arrow_drop_down.png"
+                  src="../assets/icons/arrow_drop_down.png"
                   alt=""
                 />
               </div>
@@ -173,7 +173,7 @@ function getAddTaskTemplate() {
             <div class="category">
               <div class="select inputFlex" id="selectCategoryField" onclick="openTaskCategory()">
                 <span id="select">Select task category</span>
-                <img id="arrowCategory" class="arrow" src="/assets/icons/arrow_drop_down.png" alt="">
+                <img id="arrowCategory" class="arrow" src="../assets/icons/arrow_drop_down.png" alt="">
               </div>
               <ul id="allOptions" class="options">
                 <li
@@ -207,20 +207,20 @@ function getAddTaskTemplate() {
               onclick="chooseSubTask('subTaskInput', 'plusIcon', 'cancelOrCheck')"
               id="plusIcon"
               class="plusIcon"
-              src="/assets/icons/Subtasks-plus.png"
+              src="../assets/icons/Subtasks-plus.png"
               alt=""
             />
 
             <div id="cancelOrCheck" class="cancelOrCheck d-nonevip">
               <img
                 onclick="deleteTask()"
-                src="/assets/icons/iconoir_cancel.png"
+                src="../assets/icons/iconoir_cancel.png"
                 alt=""
               />
               <div class="subTasksSeperator"></div>
               <img
                 onclick="addTask('subTaskInput', 'subTasks', 'plusIcon', 'cancelOrCheck')"
-                src="/assets/icons/Property 1=check.png"
+                src="../assets/icons/Property 1=check.png"
                 alt=""
               />
             </div>
@@ -239,19 +239,19 @@ function getAddTaskTemplate() {
               Cancel
               <img
                 class="defaultIcon"
-                src="/assets/icons/iconoir_cancel.png"
+                src="../assets/icons/iconoir_cancel.png"
                 alt=""
               />
               <img
                 class="hoverIcon"
-                src="/assets/icons/iconoir_cancel_hover.png"
+                src="../assets/icons/iconoir_cancel_hover.png"
                 alt=""
               />
             </button>
 
             <button class="createTask" onclick="createTaskBoard(currentStatus);">
               Create Task
-              <img src="/assets/icons/check.png" alt="" />
+              <img src="../assets/icons/check.png" alt="" />
             </button>
           </div>
         </div>
@@ -369,7 +369,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
                     onclick='openAssignedToEdit();'
                     oninput="filterEditContactList()"
                   />
-                  <img onclick='openAssignedToEdit()' id="arrow" class="arrow inputStyleArrow" src="/assets/icons/arrow_drop_down.png"/>
+                  <img onclick='openAssignedToEdit()' id="arrow" class="arrow inputStyleArrow" src="../assets/icons/arrow_drop_down.png"/>
                 </div>
                 <ul id="editMembers" class="options">               
                 </ul>
