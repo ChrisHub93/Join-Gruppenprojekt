@@ -37,7 +37,7 @@ function search(dataValues) {
       pwAndUserFound = true;
       sessionStorage.setItem('loginStatus', 'user');
       sessionStorage.setItem('loggedInUser', listOfUser.name);
-      window.location.href = "../html/summary.html";
+      window.location.href = "./html/summary.html";
       return;
     }
   }
