@@ -47,16 +47,16 @@ function removeClasses() {
     element.checked = false;
   }
   for (const element of checkBoxImg) {
-    element.src = "/assets/icons/Check button.png";
+    element.src = "../assets/icons/Check button.png";
     element.classList.remove("filterChecked");
   }
   allMembers.classList.remove("show");
   let ref = document.getElementById("arrow");
   let currentSrc = ref.getAttribute("src");
   if (currentSrc.includes("arrow_drop_down.png")) {
-    ref.src = "/assets/icons/arrow_drop_down.png";
+    ref.src = "../assets/icons/arrow_drop_down.png";
   } else {
-    ref.src = "/assets/icons/arrow_drop_down.png";
+    ref.src = "../assets/icons/arrow_drop_down.png";
   }
   selectCategoryFieldRef.innerHTML = "";
   selectCategoryFieldRef.innerHTML = getBasicSelectTemplate();
@@ -162,9 +162,9 @@ function toggleArrow(id) {
   if (!ref) return;
   let currentSrc = ref.getAttribute("src");
   if (currentSrc.includes("arrow_drop_down.png")) {
-    ref.src = "/assets/icons/arrow_drop_down2.png";
+    ref.src = "../assets/icons/arrow_drop_down2.png";
   } else {
-    ref.src = "/assets/icons/arrow_drop_down.png";
+    ref.src = "../assets/icons/arrow_drop_down.png";
   }
 }
 
@@ -244,10 +244,10 @@ function setCheckBox(id, event) {
     !membersRef.classList.contains("assignedBg")
   ) {
     inputRef.checked = true;
-    checkBoxImg.src = "/assets/icons/Check button true.png";
+    checkBoxImg.src = "../assets/icons/Check button true.png";
   } else if (!inputRef.checked) {
     inputRef.checked = true;
-    checkBoxImg.src = "/assets/icons/Check button true.png";
+    checkBoxImg.src = "../assets/icons/Check button true.png";
     checkBoxImg.classList.add("filterChecked");
   }
 }
@@ -255,7 +255,7 @@ function setCheckBox(id, event) {
 function getInputCheckedFalse(membersRef, inputRef) {
   checkBoxImg = membersRef.querySelector("img");
   inputRef.checked = false;
-  checkBoxImg.src = "/assets/icons/Check button.png";
+  checkBoxImg.src = "../assets/icons/Check button.png";
   membersRef.classList.remove("assignedBg");
   checkBoxImg.classList.remove("filterChecked");
 }
@@ -263,7 +263,7 @@ function getInputCheckedFalse(membersRef, inputRef) {
 function getInputCheckedTrue(membersRef, inputRef) {
   checkBoxImg = membersRef.querySelector("img");
   inputRef.checked = true;
-  checkBoxImg.src = "/assets/icons/Check button true.png";
+  checkBoxImg.src = "../assets/icons/Check button true.png";
   membersRef.classList.add("assignedBg");
   checkBoxImg.classList.add("filterChecked");
 }
@@ -273,7 +273,7 @@ function getCheckBoxFalse(id) {
   inputRef = membersRef.querySelector("input");
   imgRef = membersRef.querySelector("img");
   inputRef.checked = false;
-  imgRef.src = "/assets/icons/Check button.png";
+  imgRef.src = "../assets/icons/Check button.png";
   imgRef.classList.remove("filterChecked");
 }
 
