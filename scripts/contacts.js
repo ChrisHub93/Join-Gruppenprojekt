@@ -854,8 +854,11 @@ function closeOverlayMobile(event) {
 
 function openChooseOverlay(){
   let chooseOverlayForMobileRef = document.getElementById("chooseOverlayForMobile");
+  chooseOverlayForMobileRef.style.display = "flex";
+  setTimeout(() => {
   chooseOverlayForMobileRef.classList.add("showChooseOverlay");
   chooseOverlayForMobileRef.classList.remove("hideChooseOverlay");
+  }, 30);
 }
 
 function stopPropagationForMobile(event){
@@ -863,4 +866,9 @@ function stopPropagationForMobile(event){
   let chooseOverlayForMobileRef = document.getElementById("chooseOverlayForMobile");
   chooseOverlayForMobileRef.classList.remove("showChooseOverlay");
   chooseOverlayForMobileRef.classList.add("hideChooseOverlay");
+
+  setTimeout(() => {
+  chooseOverlayForMobileRef.style.display = "none";
+  }, 50);
+
 }

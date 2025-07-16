@@ -831,11 +831,11 @@ main {
   background-color: var(--contact-title-seperator);
 }
 
-.templateOptions {
+/* .templateOptions {
   display: flex;
   justify-content: end;
   align-items: center;
-}
+} */
 
 .chooseEditOrDeleteMobile {
   height: 56px;
@@ -888,7 +888,7 @@ main {
   border-top-right-radius: 20px;
   border-bottom-left-radius: 20px;
   filter: drop-shadow(0 4px 2px var(--choose-shadow));
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -906,7 +906,9 @@ main {
 }
 
 .templateOptions {
-  position: relative;
+    bottom: 40px;
+    position: fixed;
+    right: 24px;
 }
 
 #chooseOverlayForMobile {
