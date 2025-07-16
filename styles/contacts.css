@@ -68,6 +68,7 @@ main {
 .paddingTop {
   padding-top: 24px;
   padding-left: 32px;
+  cursor: default;
 }
 
 .seperator {
@@ -78,6 +79,7 @@ main {
 }
 
 .circleFirstLetters {
+  flex-shrink: 0;
   height: 40px;
   width: 40px;
   border-radius: 50%;
@@ -157,6 +159,8 @@ main {
   justify-content: start;
   align-items: start;
   margin-left: 32px;
+  overflow: hidden;
+  flex: 1;
 }
 
 .name{
@@ -227,11 +231,12 @@ main {
   justify-content: start;
   align-items: start;
   margin-left: 32px;
+  overflow: hidden;
 }
 
 .editinfoAboutContact h2 {
   font-size: 40px;
-  font-weight: normal;
+  font-weight: 500;
 }
 
 .editOrDeleteFlex {
@@ -956,6 +961,7 @@ main {
     height: 80px;
     width: 80px;
     font-size: 27px;
+    flex-shrink: 0;
   }
 
   .editinfoAboutContact h2 {
