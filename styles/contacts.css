@@ -1253,4 +1253,19 @@ main {
   .paddingTop {
     padding-left: 24px;
   }
+
+  .contentOverlay {
+    width: 309px;
+  }
+  .leftSide {
+    width: 100%;
+  }
+
+  .rightSide {
+    width: 100%;
+  }
+
+  .inputSection input {
+    width: 100%;
+  }
 }
