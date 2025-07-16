@@ -163,7 +163,7 @@ main {
   flex: 1;
 }
 
-.name{
+.name {
   font-size: 20px;
 }
 
@@ -831,12 +831,6 @@ main {
   background-color: var(--contact-title-seperator);
 }
 
-/* .templateOptions {
-  display: flex;
-  justify-content: end;
-  align-items: center;
-} */
-
 .chooseEditOrDeleteMobile {
   height: 56px;
   width: 56px;
@@ -906,9 +900,9 @@ main {
 }
 
 .templateOptions {
-    bottom: 40px;
-    position: fixed;
-    right: 24px;
+  bottom: 40px;
+  position: fixed;
+  right: 24px;
 }
 
 #chooseOverlayForMobile {
@@ -917,7 +911,7 @@ main {
   bottom: -60px;
   z-index: 1001;
   background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .editMobileVersion {
@@ -1223,10 +1217,6 @@ main {
     bottom: 120px;
   }
 
-  /* .chooseEditOrDeleteMobile {
-    bottom: 120px;
-  } */
-
   .chooseOverlayForMobile {
     transform: translateY(-130%) translateX(100%);
     transition: all 250ms ease;
@@ -1242,10 +1232,6 @@ main {
   .addPerson {
     bottom: 100px;
   }
-
-  /* .chooseEditOrDeleteMobile {
-    bottom: 100px;
-  } */
 
   .chooseOverlayForMobile {
     transform: translateY(-110%) translateX(100%);
