@@ -846,8 +846,8 @@ main {
   justify-content: center;
   align-items: center;
   position: absolute;
-  right: 24px;
-  bottom: 40px;
+  right: 0;
+  bottom: 80px;
   cursor: pointer;
 }
 
@@ -913,8 +913,8 @@ main {
 
 #chooseOverlayForMobile {
   position: absolute;
-  right: 0;
-  bottom: 60px;
+  right: -10px;
+  bottom: -60px;
   z-index: 1001;
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); 
@@ -1219,9 +1219,9 @@ main {
     bottom: 120px;
   }
 
-  .chooseEditOrDeleteMobile {
+  /* .chooseEditOrDeleteMobile {
     bottom: 120px;
-  }
+  } */
 
   .chooseOverlayForMobile {
     transform: translateY(-130%) translateX(100%);
@@ -1239,9 +1239,9 @@ main {
     bottom: 100px;
   }
 
-  .chooseEditOrDeleteMobile {
+  /* .chooseEditOrDeleteMobile {
     bottom: 100px;
-  }
+  } */
 
   .chooseOverlayForMobile {
     transform: translateY(-110%) translateX(100%);
