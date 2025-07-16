@@ -1118,10 +1118,6 @@ main {
     flex-direction: row;
   }
 
-  .infoTitle {
-    overflow-y: auto;
-  }
-
   .leftSide {
     height: 450px;
     width: 350px;
@@ -1226,6 +1222,12 @@ main {
     transform: translateY(-130%) translateX(-5%);
     transition: all 250ms ease;
   }
+  
+  @media (max-height: 670px){
+    .infoTitle {
+      overflow-y: auto;
+    }
+  }
 }
 
 @media (max-width: 545px) {
@@ -1243,6 +1245,10 @@ main {
     transition: all 250ms ease;
   }
 }
+
+
+
+
 
 @media (max-width: 400px) {
   .contactsWidth {
