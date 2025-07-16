@@ -18,6 +18,7 @@ function loginAsGuest() {
 function logout() {
   sessionStorage.setItem("loginStatus", "none");
   sessionStorage.removeItem("loggedInUser");
+  sessionStorage.removeItem("activeMenu");
 }
 
 function sidebarVisibility() {
