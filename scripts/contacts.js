@@ -373,7 +373,13 @@ async function createContact(event) {
   closeOverlayAfterCreatedContact(event);
   moreDetailsAboutContact(emailRef.value, firstNameOfUser, lastNameOfUser, phoneRef.value);
   clearInputFields(nameRef, emailRef, phoneRef);
+  resetErrorStatus([nameRef, emailRef, phoneRef], [requiredNameFieldRef, requiredEmailFieldRef, requiredPhoneFieldRef]);
   showSuccess();
+}
+
+function resetErrorStatus(inputs, warnings) {
+  inputs.forEach(input => input.classList.remove("error"));
+  warnings.forEach(warn => warn.classList.add("opacity"));
 }
 
 function getId() {
@@ -382,14 +388,18 @@ function getId() {
 
 function showSuccess() {
   let successfullyCreatedRef = document.getElementById("successfullyCreated");
+   successfullyCreatedRef.style.display = "flex";
   setTimeout(() => {
     successfullyCreatedRef.classList.add("showSuccess");
+    successfullyCreatedRef.classList.remove("hideSuccess");
   }, 500);
   setTimeout(() => {
+    successfullyCreatedRef.classList.remove("showSuccess");
     successfullyCreatedRef.classList.add("hideSuccess");
   }, 2000);
-  successfullyCreatedRef.classList.remove("showSuccess");
-  successfullyCreatedRef.classList.remove("hideSuccess");
+  setTimeout(() => {
+    successfullyCreatedRef.style.display = "none";
+  }, 2500); 
 }
 
 function clearInputFields(nameRef, emailRef, phoneRef) {
@@ -748,7 +758,9 @@ function checkEmptyName(){
 function checkEmptyEmail(){
   let emailRef = document.getElementById("email");
   let requiredEmailFieldRef = document.getElementById("requiredEmailField");
-  if (!emailRef.value) {
+  let email = emailRef.value.trim();
+  let emailValidation = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  if (!email || !emailValidation.test(email)) {
     emailRef.classList.add("error");
     requiredEmailFieldRef.classList.remove("opacity");
   } else {
@@ -760,7 +772,9 @@ function checkEmptyEmail(){
 function checkEmptyPhone(){
   let phoneRef = document.getElementById("phone");
   let requiredPhoneFieldRef = document.getElementById("requiredPhoneField");
-  if (!phoneRef.value) {
+  let phoneNumber = phoneRef.value.trim();
+  let phoneValidation = /^\d+$/;
+  if (!phoneNumber || !phoneValidation.test(phone)) {
     phoneRef.classList.add("error");
     requiredPhoneFieldRef.classList.remove("opacity");
   } else {

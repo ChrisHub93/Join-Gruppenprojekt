@@ -31,7 +31,7 @@ h3 {
 .help-arrow {
   position: fixed;
   top: 225px;
-  left: min(calc(50% + 980px - 133px), calc(100vw - 133px));
+  left: min(calc(900px + 980px - 133px), calc(100vw - 133px));
   height: 37px;
   cursor: pointer;
   z-index: 90;

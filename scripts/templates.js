@@ -116,13 +116,13 @@ function getDetailsOfContact(
                 <div onclick ="openEditOverlay(event)" class="edit editOrDeleteFlex">
                   <img  class="defaultIcon" src="../assets/icons/Property 1=edit.png" alt="" />
                   <img class="hoverIcon" src="../assets/icons/edit-hover.png" alt="" />
-                  <span>Edit</span>
+                  <p>Edit</p>
                 </div>
 
                 <div onclick ="deleteUser()" class="delete editOrDeleteFlex">
                   <img class="defaultIcon" src="../assets/icons/Property 1=delete.png" alt="" />
                   <img class="hoverIcon" src="../assets/icons/delete-hover.png" alt="" />
-                  <span>Delete</span>
+                  <p>Delete</p>
                 </div>
               </div>
             </div>

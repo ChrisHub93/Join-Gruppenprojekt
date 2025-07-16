@@ -42,9 +42,13 @@
   display: none !important;
 }
 
-span {
+h2{
   cursor: default;
 }
+
+/* span {
+  cursor: default;
+} */
 
 @media (max-width: 768px) {
   .hide-help {

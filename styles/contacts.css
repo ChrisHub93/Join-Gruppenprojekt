@@ -159,9 +159,13 @@ main {
   margin-left: 32px;
 }
 
+.name{
+  font-size: 20px;
+}
+
 .email {
   color: var(--email-color);
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .pageTitle {
@@ -170,6 +174,7 @@ main {
   align-items: center;
   margin-top: 112px;
   margin-left: 40px;
+  cursor: default;
 }
 
 .pageTitle h1 {
@@ -213,6 +218,7 @@ main {
   color: white;
   font-size: 40px;
   border: 2px solid white;
+  cursor: default;
 }
 
 .editinfoAboutContact {
@@ -244,9 +250,9 @@ main {
 .edit,
 .delete {
   margin-right: 12px;
-  font-size: 14px;
+  font-size: 16px;
   color: var(--darkBtn-color);
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .edit:hover,
@@ -277,6 +283,7 @@ main {
 .contactInformation {
   margin-left: 40px;
   margin-bottom: 24px;
+  cursor: default;
 }
 
 .contactInformation span {
@@ -291,12 +298,14 @@ main {
   align-items: start;
   justify-content: center;
   margin-bottom: 16px;
+  cursor: default;
+  gap: 15px;
 }
 
 .emailOverlay span,
 .phoneOverlay span {
   margin-bottom: 8px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .subTitleEmail,
@@ -745,7 +754,7 @@ main {
 }
 
 .successfullyCreated {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   height: 40px;
