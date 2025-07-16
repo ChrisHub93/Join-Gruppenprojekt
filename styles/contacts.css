@@ -444,7 +444,7 @@ main {
 .requiredPhoneField {
   margin-bottom: 16px;
   margin-top: 4px;
-  font-size: 10px;
+  font-size: 14px;
   color: var(--error-color);
 }
 
