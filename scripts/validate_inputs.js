@@ -14,14 +14,16 @@ function validateSignUpInputs() {
   validateCheckbox("check-privacy", "checkBoxFeedback");
 }
 
-function validateNameInput(inputId, feddbackId) {
+function validateNameInput(inputId, feedbackId) {
   const nameInputRef = document.getElementById(inputId);
+  const nameValue = nameInputRef.value.trim();
+  const nameParts = nameValue.split(" ").filter(part => part.length > 0);
 
-  if (nameInputRef.value.trim() === "") {
-    showUserFeedback(inputId, feddbackId, "This Field is required");
+  if (nameParts.length < 2) {
+    showUserFeedback(inputId, feedbackId, "Please enter your first and last name");
     nameCheck = false;
   } else {
-    hideUserFeedback(inputId, feddbackId);
+    hideUserFeedback(inputId, feedbackId);
     nameCheck = true;
   }
 }
