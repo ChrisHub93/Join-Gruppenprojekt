@@ -1222,11 +1222,12 @@ main {
     transform: translateY(-130%) translateX(-5%);
     transition: all 250ms ease;
   }
+}
 
-  @media (max-height: 670px) {
-    .infoTitle {
-      overflow-y: auto;
-    }
+@media (max-height: 670px) {
+  .infoTitle {
+    overflow-y: auto;
+    height: 130vh;
   }
 }
 
