@@ -56,7 +56,6 @@
 .header-login {
   display: flex;
   justify-content: space-between;
-  max-width: 1920px;
 }
 
 .logo-container {
@@ -95,7 +94,6 @@
   flex: 1;
   justify-content: center;
   align-items: center;
-  max-width: 1920px;
   flex-direction: column;
 }
 
@@ -258,7 +256,6 @@
   align-content: center;
   gap: 16px;
   height: 35px;
-  max-width: 1920px;
   margin-top: 20px;
   padding-bottom: 20px;
 }
