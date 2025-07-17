@@ -196,14 +196,19 @@ function getContact(id) {
   if (activeUser) {
     let selectedMember = document.getElementById("selected_name_icon" + id);
     if (!selectedMember) {
-      getIcon(membersRef, id);
-    }
+    getIcon(membersRef, id).then(() => {
+      updateAssignedMembersDisplay();
+    });
+  } else {
+    updateAssignedMembersDisplay();
+  }
   }
 
   if (!activeUser) {
     let selectedMember = document.getElementById("selected_name_icon" + id);
     if (selectedMember) {
       selectedMember.remove();
+      updateAssignedMembersDisplay();
     }
   }
 }
@@ -275,6 +280,29 @@ function getCheckBoxFalse(id) {
   inputRef.checked = false;
   imgRef.src = "../assets/icons/Check button.png";
   imgRef.classList.remove("filterChecked");
+}
+
+function updateAssignedMembersDisplay() {
+  let container = document.getElementById("assignedMembers");
+  let icons = Array.from(container.querySelectorAll(".assigned_to_icon"));
+  let existingPlus = container.querySelector(".assignedPlusOne");
+  if (existingPlus) existingPlus.remove();
+  icons.forEach(icon => icon.style.display = "flex");
+
+  if (icons.length > 5) {
+    let hiddenIcons = icons.slice(5);
+    hiddenIcons.forEach(icon => icon.style.display = "none");
+
+        let tooltipText = hiddenIcons
+      .map(icon => icon.textContent)
+      .join(", ");
+
+    let plusOne = document.createElement("p");
+    plusOne.classList.add("assignedPlusOne");
+    plusOne.textContent = `+${hiddenIcons.length}`;
+    plusOne.setAttribute("data-tooltip", tooltipText);
+    container.appendChild(plusOne);
+  }
 }
 
 function openTaskCategory() {
