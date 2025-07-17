@@ -230,6 +230,7 @@
   height: 35px;
   max-width: 1920px;
   margin-top: 19px;
+  padding-bottom: 20px;
 }
 
 .footer-sign_up__link {
@@ -305,5 +306,9 @@
   .sign_up__buttons {
     flex-direction: column;
     gap: 21px;
+  }
+
+  .header-sign_up {
+    margin-bottom: 20px;
   }
 }
