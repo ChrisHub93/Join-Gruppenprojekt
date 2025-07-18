@@ -591,7 +591,8 @@ function getTaskTemplate(element) {
                   </div>
 
                   <div class="priority">
-                    <img src="../assets/icons/Prio media.png" alt="prio icon" />
+                    <img class="prio_overlay_task" src="../assets/icons/priority-${
+                  element.priority}.png" alt="${element.priority} priority icon">
                   </div>
                 </div>
               </div>
