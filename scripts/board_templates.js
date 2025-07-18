@@ -149,7 +149,7 @@ function getAddTaskTemplate() {
 
             <div class="category">
               <div
-                id="assigned "
+                id="assigned"
                 class="inputSelectContact"
                 onclick="openAssignedTo()"
               >
