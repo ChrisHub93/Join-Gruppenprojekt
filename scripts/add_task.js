@@ -3,6 +3,7 @@ let priorityMedium = false;
 let priorityLow = false;
 let checkTitle = false;
 let checkDate = false;
+let checkCategory = false;
 let currentStatus = "To do";
 let setPriority = "";
 let assignedTo = [];
@@ -397,7 +398,8 @@ function addDisplayNone(id) {
 function createTask() {
   checkEmptyTitle();
   checkEmptyDate();
-  if (checkTitle && checkDate) {
+  checkEmptyCategory()
+  if (checkTitle && checkDate && checkCategory) {
     closeAddTaskOverlaySuccses();
     postDataToServer(currentStatus);
     currentStatus = "To do";
@@ -410,7 +412,8 @@ function createTask() {
 async function createTaskBoard() {
   checkEmptyTitle();
   checkEmptyDate();
-  if (checkTitle && checkDate) {
+  checkEmptyCategory()
+  if (checkTitle && checkDate && checkCategory) {
     await postDataToServer(currentStatus);
     closeAddTaskOverlaySuccses();
     currentStatus = "To do";
@@ -443,6 +446,19 @@ function checkEmptyDate() {
     dateRef.classList.remove("inputError");
     errorDateRef.classList.add("opacity");
     checkDate = true;
+  }
+}
+
+function checkEmptyCategory() {
+  const category = document.getElementById("select").innerText;
+  const errorCatRef = document.getElementById("selectCategoryField");
+
+  if (category === 'Select task category') {
+    errorCatRef.classList.add("inputError");
+    checkCategory = false;
+  } else {
+    errorCatRef.classList.remove("inputError");
+    checkCategory = true;
   }
 }
 
