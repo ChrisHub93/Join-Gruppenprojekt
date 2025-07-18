@@ -783,31 +783,45 @@ function toggleAssignmentEdit(id) {
 }
 
 function renderAssignedTo(assignedToIds) {
-  if (assignedToIds === undefined) {
-    return `
-      <div>Currently unassigned</div>
-    `;
-  } else {
-    return assignedToIds
-      .map((id, index) => {
-        let contactRef = globalContacts.find((contact) => contact.id === id);
-        if (!contactRef) return "";
-        let name = `${contactRef.firstname} ${contactRef.lastname}`;
-        let initials = getInitials(name);
-        let colorClass = getAvatarColorClass(name);
-        let leftOffset = index * 24;
+  if (!assignedToIds || assignedToIds.length === 0) {
+    return `<div>Currently unassigned</div>`;
+  }
 
-        return `
+  const MAX_VISIBLE = 5;
+  const visibleIds = assignedToIds.slice(0, MAX_VISIBLE);
+  const extraCount = assignedToIds.length - MAX_VISIBLE;
+
+  let html = visibleIds
+    .map((id, index) => {
+      let contactRef = globalContacts.find((contact) => contact.id === id);
+      if (!contactRef) return "";
+      let name = `${contactRef.firstname} ${contactRef.lastname}`;
+      let initials = getInitials(name);
+      let colorClass = getAvatarColorClass(name);
+      let leftOffset = index * 24;
+
+      return `
         <div class="assigned ${colorClass}" style="position:absolute; left: ${leftOffset}px">
           ${initials
             .split("")
             .map((letter) => `<span>${letter}</span>`)
             .join("")}
         </div>`;
-      })
-      .join("");
+    })
+    .join("");
+
+  // Falls es mehr als 5 gibt, "+X" hinzufügen
+  if (extraCount > 0) {
+    let leftOffset = MAX_VISIBLE * 24;
+    html += `
+      <div class="assigned more" style="position:absolute; left: ${leftOffset}px">
+        +${extraCount}
+      </div>`;
   }
+
+  return html;
 }
+
 
 function checkEmptyTitleEdit() {
   let titleRef = document.getElementById("titleEdit");
