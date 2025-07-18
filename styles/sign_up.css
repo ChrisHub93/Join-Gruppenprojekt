@@ -43,7 +43,6 @@
 .header-sign_up {
   display: flex;
   justify-content: space-between;
-  max-width: 1920px;
 }
 
 .header-sign_up__logo {
@@ -56,7 +55,6 @@
   flex: 1;
   justify-content: center;
   align-items: center;
-  max-width: 1920px;
 }
 
 .sign_up {
@@ -230,7 +228,6 @@
   justify-content: center;
   gap: 16px;
   height: 35px;
-  max-width: 1920px;
   margin-top: 19px;
   padding-bottom: 20px;
 }
