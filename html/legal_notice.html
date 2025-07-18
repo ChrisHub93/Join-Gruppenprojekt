@@ -14,7 +14,7 @@
     <script src="../scripts/script.js"></script>
     <script src="../scripts/templates.js"></script>
 </head>
-<body onload="init()">
+<body onload="init(); getProfile()">
     <div class="page-box">
     <aside id="sidebar" class="sidebar">
             <img class="sidebar-logo" src="../assets/img/Capa 1 white.png" alt="">
@@ -42,6 +42,17 @@
     <header class="page-box">
         <p class="header-name">Kanban Project Management Tool</p>
         <img class="headerLogo d-none" src="../assets/img/Capa 1.png" alt="">
+        <div class="profile-navbar">
+            <div class="header-top-profile">
+                <a href=""><img class="d-none" src="" alt=""></a>
+                <div id="profile"></div>
+            </div>
+            <div id="navbar" class="navbar d-none">
+                <a onclick="activateMenu(this, 'legal_notice')" class="navbarlink" href="../html/legal_notice.html">Legal Notice</a>
+                <a onclick="activateMenu(this, 'privacy_policy')" class="navbarlink" href="../html/privacy_policy.html">Privacy Policy</a>
+                <a onclick="logout()" class="navbarlink" href="../index.html">Log Out</a>
+            </div>
+        </div>
     </header>
     
     <main class="page-box overflow">
