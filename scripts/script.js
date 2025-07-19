@@ -99,7 +99,8 @@ function activateMenu(clickedElement, menuKey) {
   if (
     menuKey !== "help" &&
     (clickedElement.classList.contains("policy-text") ||
-      clickedElement.classList.contains("navbarlink"))
+      clickedElement.classList.contains("navbarlink") ||
+      clickedElement.classList.contains("footer-login__link"))
   ) {
     sessionStorage.setItem("activePolicy", menuKey);
   } else if (menuKey !== "help") {
@@ -122,7 +123,8 @@ function activeMenuStorage() {
       if (
         activePolicy &&
         (menuElement.classList.contains("policy-text") ||
-          menuElement.classList.contains("navbarlink"))
+          menuElement.classList.contains("navbarlink") ||
+          menuElement.classList.contains("footer-login__link"))
       ) {
         menuElement.classList.add("policy-text-active");
       }
@@ -145,7 +147,8 @@ function addMenuactive(menuKey) {
       menuElement.classList.add("sidebar-menu-active");
       if (
         menuElement.classList.contains("policy-text") ||
-        menuElement.classList.contains("navbarlink")
+        menuElement.classList.contains("navbarlink") ||
+        menuElement.classList.contains("footer-login__link")
       ) {
         menuElement.classList.add("policy-text-active");
       }
@@ -214,6 +217,8 @@ function getUserNameColorClass(name) {
 }
 
 function getProfile() {
+    let status = sessionStorage.getItem("loginStatus");
+  if (status !== "user" && status !== "guest") return;
   let profileRef = document.getElementById("profile");
   let username = sessionStorage.getItem("loggedInUser");
   if (username) {
