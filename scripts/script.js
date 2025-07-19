@@ -189,7 +189,7 @@ function getAssignedInitialsEditIcons(assignedToIds) {
         let name = `${contactRef.firstname} ${contactRef.lastname}`;
         let initials = getInitials(name);
         let assignedColor = getAvatarColorClass(name);
-        return assignedIconEditRender(initials, assignedColor);
+        return assignedIconEditRender(initials, assignedColor, id);
       })
       .join("");
   }

@@ -760,6 +760,7 @@ function updateAssignedMembersEdit(assignedTo) {
   assignedMembersEditRef.innerHTML = getAssignedInitialsEditIcons(assignedTo);
 }
 
+// TESBEREICH START!!!!!!!-----------------------------------------------------------------------------------------
 function getContactEdit(id) {
   let membersRef = document.getElementById("contactEdit" + id);
   inputRef = membersRef.querySelector("input");
@@ -773,6 +774,7 @@ function getContactEdit(id) {
   toggleAssignmentEdit(id);
 }
 
+// TESBEREICH ENDE!!!!!-----------------------------------------------------------------------------------------
 function toggleAssignmentEdit(id) {
   let index = assignedToEditTemp.indexOf(id);
   if (index !== -1) {

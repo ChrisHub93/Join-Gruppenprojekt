@@ -414,9 +414,9 @@ function assignedLineRender(initials, name, assignedColor) {
     </div>`;
 }
 
-function assignedIconEditRender(initials, assignedColor) {
+function assignedIconEditRender(initials, assignedColor, id) {
   return `
-      <p onclick="openAssignedToEdit()" class="initials_icon_edit assigned_to_icon ${assignedColor}">${initials}</p>`;
+      <p id="selected_name_icon_edit${id}" onclick="openAssignedToEdit()" class="initials_icon_edit assigned_to_icon ${assignedColor}">${initials}</p>`;
 }
 
 function subtasksOverlayRender(taskRef) {
