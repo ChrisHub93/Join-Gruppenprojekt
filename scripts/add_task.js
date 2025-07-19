@@ -176,9 +176,36 @@ function toggleBorderColor(id) {
 }
 
 async function openAssignedTo() {
-  toggleVisibility("allMembers");
-  toggleBorderColor("selectMember");
-  toggleArrow("arrow");
+  let allMembers = document.getElementById("allMembers");
+  let membersAreVisible = allMembers.classList.toggle("show");
+
+  toggleBorderColor("selectMember", membersAreVisible ? "add" : "remove");
+  toggleArrow("arrow", membersAreVisible ? "open" : "close");
+
+  if (membersAreVisible) {
+    setTimeout(() => {
+      document.addEventListener("click", handleClickOutsideAllMembers);
+    }, 0);
+  } else {
+    document.removeEventListener("click", handleClickOutsideAllMembers);
+  }
+}
+
+function handleClickOutsideAllMembers(event) {
+  let allMembers = document.getElementById("allMembers");
+  let input = document.getElementById("userNameWord");
+  let arrow = document.getElementById("arrow");
+
+  if (
+    !allMembers.contains(event.target) &&
+    !input.contains(event.target) &&
+    !arrow.contains(event.target)
+  ) {
+    allMembers.classList.remove("show");
+    toggleBorderColor("selectMember", "remove");
+    toggleArrow("arrow", "close");
+    document.removeEventListener("click", handleClickOutsideAllMembers);
+  }
 }
 
 function getContact(id) {

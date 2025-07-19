@@ -684,12 +684,42 @@ async function initEditContacts(assignedTo = []) {
 }
 
 function openAssignedToEdit() {
-  toggleVisibility("editMembers");
-  toggleBorderColor("selectMember");
-  toggleArrow("arrow");
+  let editMembers = document.getElementById("editMembers");
   let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
+
+  let editIsVisible = editMembers.classList.toggle("show");
+
+  toggleBorderColor("selectMember", editIsVisible ? "add" : "remove");
+  toggleArrow("arrow", editIsVisible ? "open" : "close");
+
   assignedMembersEditRef.classList.toggle("d-nonevip");
   initEditContacts(assignedToEditTemp);
+
+
+  if (editIsVisible) {
+    setTimeout(() => {
+      document.addEventListener("click", handleClickOutsideEditContacts);
+    }, 0);
+  }
+}
+
+function handleClickOutsideEditContacts(event) {
+  let editMembers = document.getElementById("editMembers");
+  let input = document.getElementById("contactSearchInputEdit");
+  let arrow = document.getElementById("arrow");
+  let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
+
+  if (
+    !editMembers.contains(event.target) &&
+    !input.contains(event.target) &&
+    !arrow.contains(event.target)
+  ) {
+    editMembers.classList.remove("show");
+    assignedMembersEditRef.classList.add("d-nonevip");
+    toggleBorderColor("selectMember", "remove");
+    toggleArrow("arrow", "close");
+    document.removeEventListener("click", handleClickOutsideEditContacts);
+  }
 }
 
 function renderContactListEdit(contacts, assignedTo = []) {
@@ -723,12 +753,12 @@ function getContactListEdit(contact, assignedColor, isAssigned) {
     .charAt(0)}${contact.lastname.toUpperCase().charAt(0)}</p>
                     ${contact.firstname + " "} ${contact.lastname}
                   </div>
-                  <input type="checkbox" class="checkBox" ${
+                  <input id="checkboxEdit${contact.id}" type="checkbox" class="checkBox" ${
                     isAssigned ? "checked" : ""
                   } />
                   <img
-                    onclick="setCheckBox('contact${contact.id}', event)"
-                    id="checkBoxImg${contact.id}"
+                    onclick="getContactEdit('${contact.id}', event)"
+                    id="checkBoxImgEdit${contact.id}"
                     class="checkBoxImg ${isAssigned ? "filterChecked" : ""}"
                     src="${
                       isAssigned
@@ -753,12 +783,6 @@ function filterEditContactList() {
     item.style.display = text.includes(input) ? "flex" : "none";
   });
 }
-
-// function updateAssignedMembersEdit(assignedTo) {
-//   let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
-//   if (!assignedMembersEditRef) return;
-//   assignedMembersEditRef.innerHTML = getAssignedInitialsEditIcons(assignedTo);
-// }
 
 async function updateAssignedMembersEdit(assignedTo) {
   let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
@@ -815,21 +839,19 @@ async function updateAssignedMembersEdit(assignedTo) {
   }
 }
 
-// TESBEREICH START!!!!!!!-----------------------------------------------------------------------------------------
 function getContactEdit(id) {
   let membersRef = document.getElementById("contactEdit" + id);
-  inputRef = membersRef.querySelector("input");
-  checkBoxImg = membersRef.querySelector("img");
+  let inputRef = document.getElementById("checkboxEdit" + id);
+  let checkBoxImg = document.getElementById("checkBoxImgEdit" + id);
 
   if (!inputRef.checked) {
-    getInputCheckedTrue(membersRef, inputRef);
+    getInputCheckedTrue(membersRef, inputRef, checkBoxImg);
   } else if (inputRef.checked && membersRef.classList.contains("assignedBg")) {
-    getInputCheckedFalse(membersRef, inputRef);
+    getInputCheckedFalse(membersRef, inputRef, checkBoxImg);
   }
   toggleAssignmentEdit(id);
 }
 
-// TESBEREICH ENDE!!!!!-----------------------------------------------------------------------------------------
 function toggleAssignmentEdit(id) {
   let index = assignedToEditTemp.indexOf(id);
   if (index !== -1) {
@@ -867,7 +889,6 @@ function renderAssignedTo(assignedToIds) {
     })
     .join("");
 
-  // Falls es mehr als 5 gibt, "+X" hinzufügen
   if (extraCount > 0) {
     let leftOffset = MAX_VISIBLE * 24;
     html += `
