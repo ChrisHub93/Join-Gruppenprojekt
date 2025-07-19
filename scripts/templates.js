@@ -30,7 +30,7 @@ function getContactList(contact, assignedColor) {
                   </div>
                   <input id="checkbox${contact.id}" type="checkbox" class="checkBox" />
                   <img
-                    onclick="setCheckBox('contact${contact.id}', event)"
+                    onclick="getContact('${contact.id}'); event.stopPropagation();"
                     id="checkBoxImg${contact.id}"
                     class="checkBoxImg"
                     src="../assets/icons/Check button.png"
@@ -51,7 +51,7 @@ function getContactListLoggedInUser(contact, assignedColor) {
                   </div>
                   <input type="checkbox" class="checkBox" />
                   <img
-                    onclick="setCheckBox('contact${contact.id}', event)"
+                    onclick="getContact('${contact.id}'); event.stopPropagation();"
                     id="checkBoxImg${contact.id}"
                     class="checkBoxImg"
                     src="../assets/icons/Check button.png"

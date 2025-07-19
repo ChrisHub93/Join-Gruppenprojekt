@@ -183,13 +183,13 @@ async function openAssignedTo() {
 
 function getContact(id) {
   let membersRef = document.getElementById("contact" + id);
-  inputRef = membersRef.querySelector("input");
-  checkBoxImg = membersRef.querySelector("img");
+  let inputRef = document.getElementById("checkbox" + id);
+  let checkBoxImg = document.getElementById("checkBoxImg" + id);
 
   if (!inputRef.checked) {
-    getInputCheckedTrue(membersRef, inputRef);
+    getInputCheckedTrue(membersRef, inputRef, checkBoxImg);
   } else if (inputRef.checked && membersRef.classList.contains("assignedBg")) {
-    getInputCheckedFalse(membersRef, inputRef);
+    getInputCheckedFalse(membersRef, inputRef, checkBoxImg);
   }
   toggleAssignment(id);
 
@@ -258,16 +258,14 @@ function setCheckBox(id, event) {
   }
 }
 
-function getInputCheckedFalse(membersRef, inputRef) {
-  checkBoxImg = membersRef.querySelector("img");
+function getInputCheckedFalse(membersRef, inputRef, checkBoxImg) {
   inputRef.checked = false;
   checkBoxImg.src = "../assets/icons/Check button.png";
   membersRef.classList.remove("assignedBg");
   checkBoxImg.classList.remove("filterChecked");
 }
 
-function getInputCheckedTrue(membersRef, inputRef) {
-  checkBoxImg = membersRef.querySelector("img");
+function getInputCheckedTrue(membersRef, inputRef, checkBoxImg) {
   inputRef.checked = true;
   checkBoxImg.src = "../assets/icons/Check button true.png";
   membersRef.classList.add("assignedBg");
