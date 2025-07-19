@@ -202,6 +202,7 @@ function getAddTaskTemplate() {
               name="subtasks"
               id="subTaskInput"
               placeholder="Add new subtask"
+              oninput="chooseSubTask('subTaskInput', 'plusIcon', 'cancelOrCheck')"
             />
             <img
               onclick="chooseSubTask('subTaskInput', 'plusIcon', 'cancelOrCheck')"

@@ -466,9 +466,11 @@ function chooseSubTask(id, icon, cancelOrCheckIcon) {
   let inputRef = document.getElementById(id);
   if (inputRef.value == "") {
     inputRef.value = "";
+    addDisplayNone(cancelOrCheckIcon);
+    removeDisplayNone(icon)
   } else if (inputRef.value != "") {
     addDisplayNone(icon);
-    toggleDisplayNone(cancelOrCheckIcon);
+    removeDisplayNone(cancelOrCheckIcon);
   }
 }
 
