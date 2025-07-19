@@ -300,3 +300,42 @@ h4 {
   top: 25%;
   cursor: pointer;
 }
+
+.plusWrapperEdit {
+  position: relative;
+  display: inline-block;
+}
+
+.assignedPlusOneEdit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background-color: #2A3647;
+  color: white;
+  font-size: 12px;
+  margin-left: 5px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.bubbleTooltipEdit {
+  display: none;
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: column;
+  background-color: transparent;
+  padding: 6px;
+  border-radius: 6px;
+  z-index: 10;
+  display: none;
+  gap: 5px;
+}
+
+.plusWrapperEdit:hover .bubbleTooltipEdit {
+  display: flex;
+}

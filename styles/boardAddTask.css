@@ -606,6 +606,44 @@ mark {
   align-items: center;
 }
 
+.plusWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.assignedPlusOne {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background-color: #2A3647;
+  color: white;
+  font-size: 12px;
+  margin-left: 5px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.bubbleTooltip {
+  display: none;
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: column;
+  background-color: transparent;
+  padding: 6px;
+  border-radius: 6px;
+  z-index: 10;
+  gap: 5px;
+}
+
+.plusWrapper:hover .bubbleTooltip {
+  display: flex;
+}
+
 @media (max-width: px) {
 }
 

@@ -285,24 +285,37 @@ function getCheckBoxFalse(id) {
 
 function updateAssignedMembersDisplay() {
   let container = document.getElementById("assignedMembers");
-  let icons = Array.from(container.querySelectorAll(".assigned_to_icon"));
-  let existingPlus = container.querySelector(".assignedPlusOne");
-  if (existingPlus) existingPlus.remove();
+
+  let existingWrapper = container.querySelector(".plusWrapper");
+  if (existingWrapper) existingWrapper.remove();
+
+  let icons = Array.from(container.querySelectorAll(".assigned_to_icon"))
+  .filter(icon => !icon.closest(".bubbleTooltip"));
   icons.forEach(icon => icon.style.display = "flex");
 
   if (icons.length > 5) {
     let hiddenIcons = icons.slice(5);
     hiddenIcons.forEach(icon => icon.style.display = "none");
 
-        let tooltipText = hiddenIcons
-      .map(icon => icon.textContent)
-      .join(", ");
+    let plusWrapper = document.createElement("div");
+    plusWrapper.classList.add("plusWrapper");
 
     let plusOne = document.createElement("p");
     plusOne.classList.add("assignedPlusOne");
     plusOne.textContent = `+${hiddenIcons.length}`;
-    plusOne.setAttribute("data-tooltip", tooltipText);
-    container.appendChild(plusOne);
+
+    let bubbleTooltip = document.createElement("div");
+    bubbleTooltip.classList.add("bubbleTooltip");
+
+    hiddenIcons.forEach(icon => {
+      let clone = icon.cloneNode(true);
+      clone.style.display = "flex";
+      bubbleTooltip.appendChild(clone);
+    });
+
+    plusWrapper.appendChild(plusOne);
+    plusWrapper.appendChild(bubbleTooltip);
+    container.appendChild(plusWrapper);
   }
 }
 

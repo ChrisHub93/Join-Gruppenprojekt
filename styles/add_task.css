@@ -669,8 +669,12 @@ div[id^="bullet"] {
   color: white;
 }
 
-.assignedPlusOne {
+.plusWrapper {
   position: relative;
+  display: inline-block;
+}
+
+.assignedPlusOne {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -681,45 +685,26 @@ div[id^="bullet"] {
   color: white;
   font-size: 12px;
   margin-left: 5px;
-  cursor: default;
+  cursor: pointer;
   z-index: 1;
 }
 
-.assignedPlusOne::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 120%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #333;
-  color: #fff;
-  padding: 6px 8px;
-  border-radius: 6px;
-  font-size: 12px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease-in-out;
-  z-index: 10;
-}
-
-.assignedPlusOne::before {
-  content: "";
+.bubbleTooltip {
+  display: none;
   position: absolute;
   bottom: 110%;
   left: 50%;
   transform: translateX(-50%);
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent #333 transparent;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-  pointer-events: none;
+  flex-direction: column;
+  background-color: transparent;
+  padding: 6px;
+  border-radius: 6px;
+  z-index: 10;
+  gap: 5px;
 }
 
-.assignedPlusOne:hover::after,
-.assignedPlusOne:hover::before {
-  opacity: 1;
+.plusWrapper:hover .bubbleTooltip {
+  display: flex;
 }
 
 @media (max-width: 1100px) {

@@ -680,6 +680,7 @@ async function initEditContacts(assignedTo = []) {
   let contacts = await loadContacts();
   renderContactListEdit(contacts, assignedTo);
   assignedToEditTemp = [...assignedTo];
+  updateAssignedMembersEdit(assignedToEditTemp);
 }
 
 function openAssignedToEdit() {
@@ -689,7 +690,6 @@ function openAssignedToEdit() {
   let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
   assignedMembersEditRef.classList.toggle("d-nonevip");
   initEditContacts(assignedToEditTemp);
-  updateAssignedMembersEdit(assignedToEditTemp);
 }
 
 function renderContactListEdit(contacts, assignedTo = []) {
@@ -754,10 +754,65 @@ function filterEditContactList() {
   });
 }
 
-function updateAssignedMembersEdit(assignedTo) {
+// function updateAssignedMembersEdit(assignedTo) {
+//   let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
+//   if (!assignedMembersEditRef) return;
+//   assignedMembersEditRef.innerHTML = getAssignedInitialsEditIcons(assignedTo);
+// }
+
+async function updateAssignedMembersEdit(assignedTo) {
   let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
   if (!assignedMembersEditRef) return;
-  assignedMembersEditRef.innerHTML = getAssignedInitialsEditIcons(assignedTo);
+  assignedMembersEditRef.innerHTML = "";
+
+  let contacts = await loadContacts();
+  let visibleCount = 5;
+  let total = assignedTo.length;
+
+  assignedTo.forEach((id, index) => {
+    const user = contacts.find(c => c.id === id);
+    if (!user) return;
+
+    let initials = `${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`;
+    let icon = document.createElement("p");
+    let colorClass = getAvatarColorClass(`${user.firstname} ${user.lastname}`);
+    icon.className = `assigned_to_icon ${colorClass}`;
+    icon.textContent = initials;
+
+    if (index < visibleCount) {
+      assignedMembersEditRef.appendChild(icon);
+    }
+  });
+
+  if (total > visibleCount) {
+    let hiddenUsers = assignedTo.slice(visibleCount).map(id =>
+      contacts.find(c => c.id === id)
+    );
+
+    let plusWrapper = document.createElement("div");
+    plusWrapper.classList.add("plusWrapperEdit");
+
+    let plusIcon = document.createElement("p");
+    plusIcon.className = "assignedPlusOneEdit";
+    plusIcon.textContent = `+${total - visibleCount}`;
+
+    let tooltip = document.createElement("div");
+    tooltip.classList.add("bubbleTooltipEdit");
+
+    hiddenUsers.forEach(user => {
+      if (!user) return;
+      let initials = `${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`;
+      let colorClass = getAvatarColorClass(`${user.firstname} ${user.lastname}`);
+      let icon = document.createElement("p");
+      icon.className = `assigned_to_icon ${colorClass}`;
+      icon.textContent = initials;
+      tooltip.appendChild(icon);
+    });
+
+    plusWrapper.appendChild(plusIcon);
+    plusWrapper.appendChild(tooltip);
+    assignedMembersEditRef.appendChild(plusWrapper);
+  }
 }
 
 // TESBEREICH START!!!!!!!-----------------------------------------------------------------------------------------
