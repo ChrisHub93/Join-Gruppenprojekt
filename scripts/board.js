@@ -685,14 +685,12 @@ async function initEditContacts(assignedTo = []) {
 
 function openAssignedToEdit() {
   let editMembers = document.getElementById("editMembers");
-  let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
 
   let editIsVisible = editMembers.classList.toggle("show");
 
   toggleBorderColor("selectMember", editIsVisible ? "add" : "remove");
   toggleArrow("arrow", editIsVisible ? "open" : "close");
 
-  assignedMembersEditRef.classList.toggle("d-nonevip");
   initEditContacts(assignedToEditTemp);
 
 
@@ -707,7 +705,6 @@ function handleClickOutsideEditContacts(event) {
   let editMembers = document.getElementById("editMembers");
   let input = document.getElementById("contactSearchInputEdit");
   let arrow = document.getElementById("arrow");
-  let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
 
   if (
     !editMembers.contains(event.target) &&
@@ -715,7 +712,6 @@ function handleClickOutsideEditContacts(event) {
     !arrow.contains(event.target)
   ) {
     editMembers.classList.remove("show");
-    assignedMembersEditRef.classList.add("d-nonevip");
     toggleBorderColor("selectMember", "remove");
     toggleArrow("arrow", "close");
     document.removeEventListener("click", handleClickOutsideEditContacts);
