@@ -184,10 +184,10 @@ async function openAssignedTo() {
 
   if (membersAreVisible) {
     setTimeout(() => {
-      document.addEventListener("click", handleClickOutsideAllMembers);
+      document.addEventListener("click", handleClickOutsideAllMembers, true);
     }, 0);
   } else {
-    document.removeEventListener("click", handleClickOutsideAllMembers);
+    document.removeEventListener("click", handleClickOutsideAllMembers, true);
   }
 }
 
@@ -204,7 +204,7 @@ function handleClickOutsideAllMembers(event) {
     allMembers.classList.remove("show");
     toggleBorderColor("selectMember", "remove");
     toggleArrow("arrow", "close");
-    document.removeEventListener("click", handleClickOutsideAllMembers);
+    document.removeEventListener("click", handleClickOutsideAllMembers, true);
   }
 }
 
@@ -262,26 +262,6 @@ function toggleAssignment(id) {
     assignedTo.splice(index, 1);
   } else {
     assignedTo.push(id);
-  }
-}
-
-function setCheckBox(id, event) {
-  event.stopPropagation(event);
-  let membersRef = document.getElementById(id);
-  inputRef = membersRef.querySelector("input");
-  checkBoxImg = membersRef.querySelector("img");
-  if (inputRef.checked) {
-    getCheckBoxFalse(id);
-  } else if (
-    !inputRef.checked &&
-    !membersRef.classList.contains("assignedBg")
-  ) {
-    inputRef.checked = true;
-    checkBoxImg.src = "../assets/icons/Check button true.png";
-  } else if (!inputRef.checked) {
-    inputRef.checked = true;
-    checkBoxImg.src = "../assets/icons/Check button true.png";
-    checkBoxImg.classList.add("filterChecked");
   }
 }
 
