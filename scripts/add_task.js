@@ -12,10 +12,13 @@ let subtasksClosed = [];
 let debounceTimeOut = 0;
 let contactsToAssign;
 
-window.addEventListener("DOMContentLoaded", () => {
+function upToDate() {
+  window.addEventListener("DOMContentLoaded", () => {
   const dateInput = document.getElementById("date");
   dateInput.min = getTodayStr();
 });
+}
+
 
 function clearInputFields() {
   let titleRef = document.getElementById("title");
@@ -114,6 +117,7 @@ async function initAddTask() {
   }
   renderContactList(contacts);
   contactsToAssign = contacts;
+  upToDate();
 }
 
 async function loadUsers() {
