@@ -341,30 +341,38 @@ async function createContact(event) {
   let nameRef = document.getElementById("name");
   let emailRef = document.getElementById("email");
   let phoneRef = document.getElementById("phone");
-  let fullName = nameRef.value.split(" ");
+  
+  let nameValue = nameRef.value.trim().replace(/\s+/g, " ");
+let emailValue = emailRef.value.trim().replace(/\s+/g, "");
+let phoneValue = phoneRef.value.trim().replace(/\s+/g, "");
+
+  let namePattern = /^[A-Za-zÀ-ÖØ-öø-ÿ]+( [A-Za-zÀ-ÖØ-öø-ÿ]+)+$/;
+  let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  let phonePattern = /^[\d +()-]{6,}$/;
 
   let requiredNameFieldRef = document.getElementById("requiredNameField");
   let requiredEmailFieldRef = document.getElementById("requiredEmailField");
   let requiredPhoneFieldRef = document.getElementById("requiredPhoneField");
 
-    if (fullName.length <= 1 && emailRef.value == '' && phoneRef.value == ''){
+    if (!namePattern.test(nameValue) && emailValue === '' && phoneValue === ''){
       addError(nameRef, emailRef, phoneRef);
       removeOpacity(requiredNameFieldRef, requiredEmailFieldRef, requiredPhoneFieldRef);
       return;
-    } else if(fullName.length <= 1){
+    } else if(!namePattern.test(nameValue)){
       nameRef.classList.add("error");
       requiredNameFieldRef.classList.remove("opacity");
       return; 
-    } else if (emailRef.value == ''){
+    } else if (!emailPattern.test(emailValue)){
       emailRef.classList.add("error");
       requiredEmailFieldRef.classList.remove("opacity");
       return;
-    } else if (phoneRef.value == ''){
+    } else if (!phonePattern.test(phoneValue)){
       phoneRef.classList.add("error");
       requiredPhoneFieldRef.classList.remove("opacity");
       return;
     }
 
+  let fullName = nameRef.value.split(" ");
   let firstNameOfUser = fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
   let lastNameOfUser = fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
 
