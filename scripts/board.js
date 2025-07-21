@@ -575,25 +575,30 @@ function editSubtask(iconElement, id) {
 
 function saveSubtask(iconElement, id) {
   let updatedSubtask = iconElement.closest(".subtask_edit_wrapper");
-  let newValue = updatedSubtask.querySelector("input").value;
+  let newValue = updatedSubtask.querySelector("input").value.trim();
 
-  let newUL = document.createElement("ul");
-  newUL.classList.add("subtask_list_edit");
-  newUL.id = `Subtask${newValue}-${id}`;
-  newUL.innerHTML = `
-    <li>
-      <div class="flex_edit">
-        <p>${newValue}</p>
-        <div class="hide_edit_subtask">
-          <img onclick="editSubtask(this)" class="edit_icons" src="../assets/icons/edit.png">
-          <div class="seperator_edit"></div>
-          <img onclick="completeDeleteTask('Subtask${newValue}-${id}')" class="edit_icons" src="../assets/icons/delete.png">
+  if (newValue === "") {
+    return
+  } else {
+    let newUL = document.createElement("ul");
+    newUL.classList.add("subtask_list_edit");
+    newUL.id = `Subtask${newValue}-${id}`;
+    newUL.innerHTML = `
+      <li>
+        <div class="flex_edit">
+          <p>${newValue}</p>
+          <div class="hide_edit_subtask">
+            <img onclick="editSubtask(this)" class="edit_icons" src="../assets/icons/edit.png">
+            <div class="seperator_edit"></div>
+            <img onclick="completeDeleteTask('Subtask${newValue}-${id}')" class="edit_icons" src="../assets/icons/delete.png">
+          </div>
         </div>
-      </div>
-    </li>
-  `;
-
-  updatedSubtask.replaceWith(newUL);
+      </li>
+    `;
+  
+    updatedSubtask.replaceWith(newUL);
+  }
+  
 }
 
 function filterTasks() {
