@@ -773,9 +773,8 @@ div[id^="bullet"] {
     padding-right: 32px;
     position: sticky;
     bottom: 0;
-    background-color: var(--bg-color);
     padding-top: 8px;
-    margin-top: 40px;
+    margin-top: unset;
   }
 
   .buttons {
