@@ -70,7 +70,7 @@ function validateConfirmPassword(pwInputId, confirmInputId, feedbackId) {
     showUserFeedback(
       confirmInputId,
       feedbackId,
-      "Your passwords don`t match. Please try again"
+      "Passwords don`t match. Please try again"
     );
     pwConfirmCheck = false;
   }
