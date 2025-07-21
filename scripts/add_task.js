@@ -418,6 +418,7 @@ function createTask() {
   checkEmptyDate();
   checkEmptyCategory()
   if (checkTitle && checkDate && checkCategory) {
+    disableButtons();
     closeAddTaskOverlaySuccses();
     postDataToServer(currentStatus);
     currentStatus = "To do";
@@ -433,10 +434,24 @@ async function createTaskBoard() {
   checkEmptyCategory()
   if (checkTitle && checkDate && checkCategory) {
     await postDataToServer(currentStatus);
+    disableButtons();
     closeAddTaskOverlaySuccses();
     currentStatus = "To do";
-    loadTasks();
+    setTimeout(() => {
+      loadTasks();
+      enableButtons();
+    }, 700);
   }
+}
+
+function disableButtons() {
+  document.querySelectorAll("button").forEach(btn => btn.disabled = true);
+  document.body.style.overflow = "hidden";
+}
+
+function enableButtons() {
+  document.querySelectorAll("button").forEach(btn => btn.disabled = false);
+  document.body.style.overflow = "";
 }
 
 function checkEmptyTitle() {

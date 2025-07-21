@@ -391,7 +391,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
                 <img onclick="addTask('subTaskInputEdit', 'subTasksEdit',  'plusIconEdit', 'cancelOrCheckEdit')" src="../assets/icons/Property 1=check.png"/>
               </div>
             </div>
-            <div id="subTasksEdit">
+            <div id="subTasksEdit" class="subtask_edit">
             ${subtasksOverlayEdit(tasksEditRef)}
             </div>
           </div>
