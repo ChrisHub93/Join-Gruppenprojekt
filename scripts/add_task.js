@@ -12,8 +12,8 @@ let subtasksClosed = [];
 let debounceTimeOut = 0;
 let contactsToAssign;
 
-window.addEventListener('DOMContentLoaded', () => {
-  const dateInput = document.getElementById('date');
+window.addEventListener("DOMContentLoaded", () => {
+  const dateInput = document.getElementById("date");
   dateInput.min = getTodayStr();
 });
 
@@ -229,12 +229,12 @@ function getContact(id) {
   if (activeUser) {
     let selectedMember = document.getElementById("selected_name_icon" + id);
     if (!selectedMember) {
-    getIcon(membersRef, id).then(() => {
+      getIcon(membersRef, id).then(() => {
+        updateAssignedMembersDisplay();
+      });
+    } else {
       updateAssignedMembersDisplay();
-    });
-  } else {
-    updateAssignedMembersDisplay();
-  }
+    }
   }
 
   if (!activeUser) {
@@ -299,13 +299,14 @@ function updateAssignedMembersDisplay() {
   let existingWrapper = container.querySelector(".plusWrapper");
   if (existingWrapper) existingWrapper.remove();
 
-  let icons = Array.from(container.querySelectorAll(".assigned_to_icon"))
-  .filter(icon => !icon.closest(".bubbleTooltip"));
-  icons.forEach(icon => icon.style.display = "flex");
+  let icons = Array.from(
+    container.querySelectorAll(".assigned_to_icon")
+  ).filter((icon) => !icon.closest(".bubbleTooltip"));
+  icons.forEach((icon) => (icon.style.display = "flex"));
 
   if (icons.length > 5) {
     let hiddenIcons = icons.slice(5);
-    hiddenIcons.forEach(icon => icon.style.display = "none");
+    hiddenIcons.forEach((icon) => (icon.style.display = "none"));
 
     let plusWrapper = document.createElement("div");
     plusWrapper.classList.add("plusWrapper");
@@ -317,7 +318,7 @@ function updateAssignedMembersDisplay() {
     let bubbleTooltip = document.createElement("div");
     bubbleTooltip.classList.add("bubbleTooltip");
 
-    hiddenIcons.forEach(icon => {
+    hiddenIcons.forEach((icon) => {
       let clone = icon.cloneNode(true);
       clone.style.display = "flex";
       bubbleTooltip.appendChild(clone);
@@ -421,7 +422,7 @@ function addDisplayNone(id) {
 function createTask() {
   checkEmptyTitle();
   checkEmptyDate();
-  checkEmptyCategory()
+  checkEmptyCategory();
   if (checkTitle && checkDate && checkCategory) {
     disableButtons();
     closeAddTaskOverlaySuccses();
@@ -436,7 +437,7 @@ function createTask() {
 async function createTaskBoard() {
   checkEmptyTitle();
   checkEmptyDate();
-  checkEmptyCategory()
+  checkEmptyCategory();
   if (checkTitle && checkDate && checkCategory) {
     await postDataToServer(currentStatus);
     disableButtons();
@@ -450,12 +451,12 @@ async function createTaskBoard() {
 }
 
 function disableButtons() {
-  document.querySelectorAll("button").forEach(btn => btn.disabled = true);
+  document.querySelectorAll("button").forEach((btn) => (btn.disabled = true));
   document.body.style.overflow = "hidden";
 }
 
 function enableButtons() {
-  document.querySelectorAll("button").forEach(btn => btn.disabled = false);
+  document.querySelectorAll("button").forEach((btn) => (btn.disabled = false));
   document.body.style.overflow = "";
 }
 
@@ -493,8 +494,8 @@ function checkEmptyDate() {
 function getTodayStr() {
   const today = new Date();
   const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, '0');
-  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const dd = String(today.getDate()).padStart(2, "0");
   return `${yyyy}-${mm}-${dd}`;
 }
 
@@ -502,7 +503,7 @@ function checkEmptyCategory() {
   const category = document.getElementById("select").innerText;
   const errorCatRef = document.getElementById("selectCategoryField");
 
-  if (category === 'Select task category') {
+  if (category === "Select task category") {
     errorCatRef.classList.add("inputError");
     checkCategory = false;
   } else {
@@ -517,7 +518,7 @@ function chooseSubTask(id, icon, cancelOrCheckIcon) {
   if (trimmedInputValue == "") {
     inputRef.value = "";
     addDisplayNone(cancelOrCheckIcon);
-    removeDisplayNone(icon)
+    removeDisplayNone(icon);
   } else if (inputRef.value != "") {
     addDisplayNone(icon);
     removeDisplayNone(cancelOrCheckIcon);
@@ -573,17 +574,23 @@ function editTask(id) {
   }
 }
 
-function acceptTask(id) {
-  toggleDisplayNone("trashOrCheck" + id);
-  let target = "editOrTrash" + id;
-  let hideRef = document.getElementById(target);
-  hideRef.classList.remove("opacity");
-  let inputRef = document.getElementById(id);
-  inputField = inputRef.querySelector("input");
-  inputField.blur();
-  inputField.classList.toggle("activeInput");
-  let bulletRef = `bullet${id}`;
-  toggleDisplayNone(bulletRef);
+function acceptTask(id, valueId) {
+  const editTaksValue = document.getElementById(valueId).value.trim();
+  if (editTaksValue === "") {
+    return;
+  } else {
+    toggleDisplayNone("trashOrCheck" + id);
+    let target = "editOrTrash" + id;
+    let hideRef = document.getElementById(target);
+    hideRef.classList.remove("opacity");
+    let inputRef = document.getElementById(id);
+    console.log(inputRef.value);
+    inputField = inputRef.querySelector("input");
+    inputField.blur();
+    inputField.classList.toggle("activeInput");
+    let bulletRef = `bullet${id}`;
+    toggleDisplayNone(bulletRef);
+  }
 }
 
 function completeDeleteTask(id) {

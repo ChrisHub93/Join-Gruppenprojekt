@@ -78,9 +78,10 @@ function getSubTasksTemplate(inputRef, newID) {
 }
 
 function subtaskTemplateHTML(inputRef){
+  const randomId = Math.floor(Math.random() * 10000);
 return `<div id="${inputRef.value}" class="relative">
             <div id="bullet${inputRef.value}" class="bullet"></div>
-                <input onclick="editTask('${inputRef.value}')" type ="text" value="${inputRef.value}" class="subTaskAdded"/>
+                <input onclick="editTask('${inputRef.value}')" type ="text" value="${inputRef.value}" id="editTask_${randomId}" class="subTaskAdded"/>
 
             <div id="editOrTrash${inputRef.value}" class="editOrTrash d-nonevip">
                 <img onclick="editTask('${inputRef.value}')" src="../assets/icons/Property 1=edit.png" alt="">
@@ -90,7 +91,7 @@ return `<div id="${inputRef.value}" class="relative">
                 <div id="trashOrCheck${inputRef.value}" class="trashOrCheck d-nonevip">
                     <img onclick="completeDeleteTask('${inputRef.value}')" src="../assets/icons/Property 1=delete.png" alt="">
                         <div class="subTasksSeperatorSecond"></div>
-                    <img onclick="acceptTask('${inputRef.value}')" src="../assets/icons/Property 1=check.png" alt="">
+                    <img onclick="acceptTask('${inputRef.value}', 'editTask_${randomId}')" src="../assets/icons/Property 1=check.png" alt="">
                 </div>               
             </div>`;
 }
