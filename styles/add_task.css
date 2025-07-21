@@ -8,7 +8,7 @@
   background-color: var(--snd-color);
   margin-left: 32px;
   margin-right: 32px;
-  min-height: 360px;
+  height: 380px;
 }
 
 .typeOfTask {
@@ -26,9 +26,8 @@
 }
 
 .typeOfTask,
-.priority,
-.seperator {
-  height: 320px;
+.priority{
+  height: 448px;
 }
 
 mark {
@@ -330,7 +329,7 @@ footer {
   width: 800px;
   display: flex;
   justify-content: space-between;
-  margin-top: 160px;
+  margin-top: 55px;
   z-index: 1;
   align-items: center;
 }
