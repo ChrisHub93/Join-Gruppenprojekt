@@ -430,6 +430,7 @@ function openAddTaskOverlay(status) {
   void taskContentRef.offsetWidth;
   taskContentRef.classList.add("animate-in");
 
+  setMinDate();
   initAddTask();
 
   currentStatus = status;
@@ -923,4 +924,9 @@ function checkemptyDateEdit() {
     errorDateRef.classList.add("opacity");
     checkDate = true;
   }
+}
+
+function setMinDate() {
+  const dateInput = document.getElementById('date');
+  dateInput.min = getTodayStr();
 }

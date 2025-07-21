@@ -76,7 +76,7 @@ function getAddTaskTemplate() {
               id="date"
               required
             />
-            <span id="errorDate" class="opacity">This field is required</span>
+            <span id="errorDate" class="opacity">Please enter a valid date – it cannot be in the past</span>
           </div>
         </div>
 
