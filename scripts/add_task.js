@@ -482,7 +482,8 @@ function checkEmptyCategory() {
 
 function chooseSubTask(id, icon, cancelOrCheckIcon) {
   let inputRef = document.getElementById(id);
-  if (inputRef.value == "") {
+  let trimmedInputValue = inputRef.value.trim();
+  if (trimmedInputValue == "") {
     inputRef.value = "";
     addDisplayNone(cancelOrCheckIcon);
     removeDisplayNone(icon)
