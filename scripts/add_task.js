@@ -12,6 +12,11 @@ let subtasksClosed = [];
 let debounceTimeOut = 0;
 let contactsToAssign;
 
+window.addEventListener('DOMContentLoaded', () => {
+  const dateInput = document.getElementById('date');
+  dateInput.min = getTodayStr();
+});
+
 function clearInputFields() {
   let titleRef = document.getElementById("title");
   let errorTitleRef = document.getElementById("errorTitle");
@@ -469,9 +474,12 @@ function checkEmptyTitle() {
 }
 
 function checkEmptyDate() {
-  let dateRef = document.getElementById("date");
-  let errorDateRef = document.getElementById("errorDate");
-  if (!dateRef.value) {
+  const dateRef = document.getElementById("date");
+  const errorDateRef = document.getElementById("errorDate");
+  const inputValue = dateRef.value.trim();
+  const todayStr = getTodayStr();
+
+  if (!inputValue || inputValue < todayStr) {
     dateRef.classList.add("inputError");
     errorDateRef.classList.remove("opacity");
     checkDate = false;
@@ -480,6 +488,14 @@ function checkEmptyDate() {
     errorDateRef.classList.add("opacity");
     checkDate = true;
   }
+}
+
+function getTodayStr() {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
 }
 
 function checkEmptyCategory() {
