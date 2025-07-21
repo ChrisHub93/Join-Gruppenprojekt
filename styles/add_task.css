@@ -789,6 +789,10 @@ div[id^="bullet"] {
     padding-right: 40px !important;
     gap: 16px !important;
   }
+
+  .typeOfTask{
+    height: unset;
+  }
 }
 
 @media (max-width: 768px) {
