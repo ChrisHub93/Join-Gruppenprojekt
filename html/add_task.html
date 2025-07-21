@@ -48,7 +48,8 @@
                 </div>
     </div> 
 
-    <main class="page-box">
+    <main class="page-box overflow">
+      <div class="flex-column30">
       <div id="overlayAddTask" class="overlayAddTask d-nonevip" onclick="closeAddTaskOverlay()">
         <div id="addTaskContent" class="overlayTask__addTaskContent" onclick="event.stopPropagation()"></div>
         <div id="AddTaskSuccesMessage" class="succesTag"> 
@@ -255,7 +256,7 @@
             </div>
           </div>
 
-          <div id="subTasks"></div>
+          <div id="subTasks" class="subtask_box"></div>
 
           <div class="markedFieldsResponsive d-none">
             <span><mark class="marked">*</mark>This field is required</span>
@@ -294,7 +295,7 @@
 
       </div>
 
-      
+      </div>
     </main>
 
       <footer class="page-box d-none">

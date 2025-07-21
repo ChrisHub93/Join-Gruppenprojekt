@@ -1,21 +1,6 @@
-main {
-  background-color: var(--bg-color);
-  height: calc(100vh - 96px);
-  width: calc(100% - 232px);
-  display: flex;
-  flex-direction: column;
-
-  align-items: center;
-  position: absolute;
-  right: 0;
-  overflow-y: auto;
-}
-
 .form {
   display: flex;
   width: 800px;
-  margin-right: auto;
-  margin-left: auto;
 }
 
 .seperator {
@@ -93,12 +78,10 @@ mark {
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 61px;
+  font-weight: 700;
   width: 800px;
-  padding-top: 136px;
   padding-bottom: 8px;
-  margin-right: auto;
-  margin-left: auto;
 }
 
 .choose {
@@ -347,8 +330,6 @@ footer {
   width: 800px;
   display: flex;
   justify-content: space-between;
-  margin-left: auto;
-  margin-right: auto;
   margin-top: 160px;
   z-index: 1;
   align-items: center;
@@ -707,6 +688,20 @@ div[id^="bullet"] {
   display: flex;
 }
 
+.subtask_box{
+  max-height: 114px;
+  overflow-y: auto;
+}
+
+.flex-column30 {
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 328px;
+    padding-top: 110px;
+    padding-bottom: 30px;
+}
+
 @media (max-width: 1100px) {
   .header-name {
     padding-left: calc(348px - 150px + 32px) !important;
@@ -722,16 +717,15 @@ div[id^="bullet"] {
     width: 200px !important;
   }
 
-  main {
-    width: calc(100% - 200px);
-    align-items: start;
+  .flex-column30 {
+    padding-top: 60px;
+    margin-left: 250px;
   }
 
   h1 {
     width: auto;
     margin-left: 32px;
     margin-right: auto;
-    padding-top: 40px;
   }
 
   .typeOfTask {
@@ -799,9 +793,10 @@ div[id^="bullet"] {
 }
 
 @media (max-width: 768px) {
-  main {
-    width: 100%;
-    height: calc(100vh - 90px);
+  .flex-column30 {
+    margin-left: 40px;
+    padding-top: 44px;
+    align-items: center;
   }
 
   .sectionButtons {
@@ -870,10 +865,6 @@ div[id^="bullet"] {
     height: 32px;
   }
 
-  .priority span {
-    font-size: 14px;
-  }
-
   .priority img[id^="standard"] {
     height: 14px;
     width: 14px;
@@ -895,11 +886,6 @@ div[id^="bullet"] {
     background-color: var(--darkBtn-color);
     padding-right: 32px;
     padding-left: 8px;
-  }
-
-  main {
-    width: 100%;
-    align-items: start;
   }
 
   .markedFields {
@@ -937,5 +923,16 @@ div[id^="bullet"] {
 @media (max-width: 545px) {
   .sectionButtons {
     bottom: 70px;
+  }
+
+  .flex-column30 {
+    padding-top: 48px;
+    margin-left: 16px;
+  }
+}
+
+@media (max-width: 423px) {
+  .flex-column30 {
+    margin-left: 4px;
   }
 }
