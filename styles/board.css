@@ -350,6 +350,10 @@ h1 {
   color: var(--error-color);
 }
 
+.no-scroll {
+  overflow: hidden !important;
+}
+
 @media (max-width: 1100px) {
   .main-board {
     margin-left: 200px;

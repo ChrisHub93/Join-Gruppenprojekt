@@ -541,7 +541,7 @@ function renderOverlayTaskContent(tasksRef) {
                 <p>Delete</p>
               </div>
               <div class="seperator_overlay_task"></div>
-              <div onclick='editOverlayTask("${tasksRef.id}"); initEditContacts(${JSON.stringify(tasksRef.assignedTo)});' class="bottom_overlay_task edit_task">
+              <div onclick='event.stopPropagation(); editOverlayTask("${tasksRef.id}"); initEditContacts(${JSON.stringify(tasksRef.assignedTo)}); disableScroll();' class="bottom_overlay_task edit_task">
                 <img src="../assets/icons/Property 1=edit.png">
                 <p>Edit</p>
               </div>
