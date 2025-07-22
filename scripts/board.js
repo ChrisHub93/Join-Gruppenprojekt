@@ -141,6 +141,7 @@ async function deleteBoardTasks(tasksRef) {
     (key) => String(tasks[key].id) === tasksRef
   );
   await deleteTasks("/tasks/", key);
+  deleteOverlaySuccses()
   loadTasks();
 }
 
@@ -471,6 +472,18 @@ function closeAddTaskOverlaySuccses() {
     addOverlayRef.classList.add("d-nonevip");
     document.getElementById("AddTaskSuccesMessage").style.display = "none";
   }, 700);
+}
+
+function deleteOverlaySuccses() {
+  const addOverlayRef = document.getElementById("overlayDeleteTask");
+  addOverlayRef.classList.remove("d-nonevip");
+
+  document.getElementById("deleteSuccesMessage").style.display = "flex";
+  setTimeout(() => {
+    document.body.style.overflow = "";
+    addOverlayRef.classList.add("d-nonevip");
+    document.getElementById("deleteSuccesMessage").style.display = "none";
+  }, 800);
 }
 
 async function loadData(path = "") {
