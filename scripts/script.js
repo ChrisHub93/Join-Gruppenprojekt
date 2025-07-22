@@ -108,6 +108,10 @@ function activateMenu(clickedElement, menuKey) {
   }
   clearMenu();
   addMenuactive(menuKey);
+    let anchor = clickedElement.querySelector("a");
+  if (anchor && anchor.href) {
+    window.location.href = anchor.href;
+  }
 }
 
 function activeMenuStorage() {
