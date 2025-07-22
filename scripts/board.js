@@ -423,7 +423,7 @@ function formatDateToDisplay(dateStr) {
     return dateStr;
   }
 
-  let [year, month, day] = isoDate.split("-");
+  let [year, month, day] = dateStr.split("-");
   return `${day}/${month}/${year}`;
 }
 
