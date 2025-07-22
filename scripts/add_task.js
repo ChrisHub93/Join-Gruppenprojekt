@@ -624,6 +624,17 @@ async function postDataToServer(currentStatus) {
   let priority = setPriority;
   let category = document.getElementById("select");
 
+  // Subtasks aus dem DOM auslesen
+  const subTasksFromDOM = Array.from(document.querySelectorAll('.subTaskAdded'))
+  .map(el => {
+    // entweder direkt ein Input-Feld oder Textinhalt
+    if (el.tagName === "INPUT") return el.value.trim();
+    let input = el.querySelector("input");
+    if (input) return input.value.trim();
+    return el.textContent.trim();
+  })
+  .filter(val => val.length > 0);
+
   await postData(`/tasks/`, {
     id: generateTimeBasedId(),
     title: title.value,
@@ -632,7 +643,7 @@ async function postDataToServer(currentStatus) {
     priority: priority,
     assignedTo: assignedTo,
     category: category.innerText,
-    subTasksOpen: subtasksOpen,
+    subTasksOpen: subTasksFromDOM, 
     status: currentStatus,
   });
 }

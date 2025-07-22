@@ -611,7 +611,7 @@ function saveSubtask(iconElement, id) {
     newUL.classList.add("subtask_list_edit");
     newUL.id = `Subtask${newValue}-${id}`;
     newUL.innerHTML = `
-      <li>
+      <li class="subTaskAdded">
         <div class="flex_edit">
           <p>${newValue}</p>
           <div class="hide_edit_subtask">
