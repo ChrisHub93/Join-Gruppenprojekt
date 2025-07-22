@@ -199,9 +199,7 @@
   padding-inline-start: 0px;
 }
 
-.show {
-  max-height: 200px;
-}
+
 
 .options {
   max-height: 0px;
@@ -305,7 +303,7 @@ select:focus {
 }
 
 .show {
-  max-height: 200px;
+  max-height: 157px;
 }
 
 .priorityUrgentBg {
