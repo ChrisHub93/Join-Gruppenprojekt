@@ -61,12 +61,12 @@
   height: 40px;
 }
 
-.duedate_edit {
+/* .duedate_edit {
   padding-right: 40px;
   background: url("../assets/icons/calendar.png") no-repeat right 10px center;
   background-size: 24px 24px;
   cursor: pointer;
-}
+} */
 
 .border_edit_active:focus-visible {
   border-color: #29abe2;

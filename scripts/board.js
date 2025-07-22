@@ -356,8 +356,9 @@ function editOverlayTask(tasksRef) {
   let dialogTaskEditRef = document.getElementById("dialogTaskEditContent");
   addOverlayRef.classList.remove("active");
   addOverlayEditRef.classList.add("active");
-  dialogTaskEditRef.innerHTML = renderOverlayTaskEdit(todos[tasksEditRef]);  
-  toggleFlatpickr(document.getElementById("dateEdit"));
+  dialogTaskEditRef.innerHTML = renderOverlayTaskEdit(todos[tasksEditRef]);
+  upToDateEdit();  
+  // toggleFlatpickr(document.getElementById("dateEdit"));
 }
 
 function renderPrioButton(prioName, activePrio) {
@@ -398,22 +399,27 @@ function setPrioActive(clickedButton) {
   }
 }
 
-let flatpickrInstance = null;
-function toggleFlatpickr(inputElement) {
-  if (flatpickrInstance) {
-    flatpickrInstance.destroy();
-    flatpickrInstance = null;
-  }
-  if (!flatpickrInstance) {
-    flatpickrInstance = flatpickr(inputElement, {
-      dateFormat: "d/m/Y",
-      allowInput: true,
-      defaultDate: inputElement.value || null,
-      minDate: "today",
-      disableMobile: true,
-    });
-  }
+function upToDateEdit() {  
+  let dateInput = document.getElementById("dateEdit");
+  dateInput.min = getTodayStr();
 }
+
+// let flatpickrInstance = null;
+// function toggleFlatpickr(inputElement) {
+//   if (flatpickrInstance) {
+//     flatpickrInstance.destroy();
+//     flatpickrInstance = null;
+//   }
+//   if (!flatpickrInstance) {
+//     flatpickrInstance = flatpickr(inputElement, {
+//       dateFormat: "d/m/Y",
+//       allowInput: true,
+//       defaultDate: inputElement.value || null,
+//       minDate: "today",
+//       disableMobile: true,
+//     });
+//   }
+// }
 
 function formatDateToDisplay(dateStr) {
   if (!dateStr) return "";
