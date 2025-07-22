@@ -357,8 +357,6 @@ function editOverlayTask(tasksRef) {
   addOverlayEditRef.classList.add("active");
   dialogTaskEditRef.innerHTML = renderOverlayTaskEdit(todos[tasksEditRef]);  
   toggleFlatpickr(document.getElementById("dateEdit"));
-  // document.body.style.overflow = "hidden";
-  // document.documentElement.style.overflow = "hidden";
 }
 
 function renderPrioButton(prioName, activePrio) {
