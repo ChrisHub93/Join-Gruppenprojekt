@@ -254,6 +254,10 @@ h4 {
   background-color: #a8a8a8;
 }
 
+.edit_icons{
+  height: 20px;
+}
+
 .edit_icons:hover {
   transform: scale(1.03);
 }

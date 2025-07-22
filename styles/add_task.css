@@ -452,6 +452,7 @@ footer {
   padding-block: 4px;
   padding-inline: 8px;
   width: 100%;
+  cursor: pointer;
 }
 
 .subTaskAdded:focus {

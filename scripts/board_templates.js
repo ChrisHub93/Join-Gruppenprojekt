@@ -460,7 +460,7 @@ function subtasksOverlayRenderEdit(tasksEditRef) {
           (subtask, i) => `
         <ul class="subtask_list_edit"  id="Subtask${subtask}-${i}">
           <li>
-            <div class="flex_edit">
+            <div onclick="editSubtask(this, ${i})" class="flex_edit">
               <p>${subtask}</p>
               <div class="hide_edit_subtask">
                 <img onclick="editSubtask(this, ${i})" class="edit_icons" src="../assets/icons/edit.png">

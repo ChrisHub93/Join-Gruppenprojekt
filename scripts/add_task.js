@@ -585,7 +585,7 @@ function acceptTask(id, valueId) {
     let hideRef = document.getElementById(target);
     hideRef.classList.remove("opacity");
     let inputRef = document.getElementById(id);
-    console.log(inputRef.value);
+    // console.log(inputRef.value);
     inputField = inputRef.querySelector("input");
     inputField.blur();
     inputField.classList.toggle("activeInput");
