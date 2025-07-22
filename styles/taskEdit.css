@@ -345,3 +345,13 @@ h4 {
   max-height: 114px;
   overflow-y: auto;
 }
+
+label {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.span_edit{
+  font-size: 18px;
+  font-weight: 600;
+}
