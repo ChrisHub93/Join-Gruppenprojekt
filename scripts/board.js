@@ -416,8 +416,13 @@ function toggleFlatpickr(inputElement) {
   }
 }
 
-function formatDateToDisplay(isoDate) {
-  if (!isoDate) return "";
+function formatDateToDisplay(dateStr) {
+  if (!dateStr) return "";
+
+  if (dateStr.includes("/")) {
+    return dateStr;
+  }
+
   let [year, month, day] = isoDate.split("-");
   return `${day}/${month}/${year}`;
 }
