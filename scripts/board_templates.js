@@ -330,20 +330,20 @@ function renderOverlayTaskEdit(tasksEditRef) {
       <div class="edit_dialog_scrollable">
         <div class="form_edit_task">
           <div class="form_edit_container">
-            <label for="titleEdit">Title</label>
+            <label class="editCategoryText" for="titleEdit">Title</label>
             <input onfocusout="checkEmptyTitleEdit()" class="border_edit_active" type="text" id="titleEdit" name="titleEdit" value="${
               tasksEditRef.title
             }" required>
             <span class="opacity errorTitleEdit" id="errorTitleEdit">This field is required</span>
           </div>
           <div class="form_edit_container">
-            <label for="descriptionEdit">Description</label>
+            <label class="editCategoryText" for="descriptionEdit">Description</label>
             <textarea class="border_edit_active" id="descriptionEdit" name="descriptionEdit">${
               tasksEditRef.description
             }</textarea>
           </div>
           <div class="form_edit_container">
-            <label for="dateEdit">Due Date</label>
+            <label class="editCategoryText" for="dateEdit">Due Date</label>
             <input onfocusout="checkemptyDateEdit()" class="duedate_edit border_edit_active" type="date" id="dateEdit" name="dateEdit" value="${
               tasksEditRef.date
             }" placeholder="dd/mm/yyyy" required>
@@ -351,7 +351,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
           </div>
           
           <div class="form_edit_container">
-            <h4>Priority</h4>
+            <p class="editCategoryText">Priority</p>
             <div class="prio_edit_container">
               ${renderPrioButton("urgent", prio)}
               ${renderPrioButton("medium", prio)}
@@ -359,7 +359,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
             </div>
           </div>
           <div class="form_edit_container">
-            <span>Assigned to</span>
+            <span class="editCategoryText">Assigned to</span>
               <div class="category">
                 <div class="inputSelectContact">
                   <input 
@@ -381,7 +381,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
               )}</div>
           </div>
           <div class="form_edit_container">
-            <label for="subTaskInputEdit">Subtasks</label>
+            <label class="editCategoryText" for="subTaskInputEdit">Subtasks</label>
             <div class="edit_subtask_input">  
               <input class="border_edit_active" type="text" name="subtasks" id="subTaskInputEdit" placeholder="Add new subtask"/>
               <img onclick="chooseSubTask('subTaskInputEdit', 'plusIconEdit', 'cancelOrCheckEdit')" id="plusIconEdit" class="plusIcon_edit" src="../assets/icons/Subtasks-plus.png"/>

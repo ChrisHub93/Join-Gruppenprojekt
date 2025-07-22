@@ -354,6 +354,11 @@ h1 {
   overflow: hidden !important;
 }
 
+.editCategoryText {
+  font-size: 19px;
+  font-weight: 500;
+}
+
 @media (max-width: 1100px) {
   .main-board {
     margin-left: 200px;
