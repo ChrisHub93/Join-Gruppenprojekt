@@ -351,7 +351,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
           </div>
           
           <div class="form_edit_container">
-            <h4>Priority</h4>
+            <span class="span_edit">Priority</span>
             <div class="prio_edit_container">
               ${renderPrioButton("urgent", prio)}
               ${renderPrioButton("medium", prio)}
@@ -359,7 +359,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
             </div>
           </div>
           <div class="form_edit_container">
-            <span>Assigned to</span>
+            <span class="span_edit">Assigned to</span>
               <div class="category">
                 <div class="inputSelectContact">
                   <input 
