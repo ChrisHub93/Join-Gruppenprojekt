@@ -79,6 +79,7 @@
   padding: 6px 16px;
   gap: 16px;
   align-items: center;
+  height: 33px;
 }
 
 .subtask_toggle:hover img {

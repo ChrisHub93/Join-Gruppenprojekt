@@ -180,6 +180,7 @@ function overlayTask(element) {
   addOverlayEditRef.classList.remove("active");
   addOverlayRef.classList.add("active");
   dialogTaskContentRef.innerHTML = renderOverlayTaskContent(todos[tasksRef]);
+  document.body.style.overflow = "hidden";
   if (!checkOpenOverlay && !checkOpenOverlayEdit) {
     dialogTaskContentRef.style.transform = "translateX(100%)";
     dialogTaskContentRef.style.opacity = "0";
@@ -204,6 +205,7 @@ function closeOverlay(event) {
   let addOverlayEditRef = document.getElementById("overlayTaskEdit");
   let dialogTaskContentRef = document.getElementById("dialogTaskContent");
   let dialogTaskEditContent = document.getElementById("dialogTaskEditContent");
+  document.body.style.overflow = "";
   if (
     event.target === addOverlayTaskRef ||
     event.target.closest("#overlayTask .closeIcon") ||
@@ -346,7 +348,7 @@ function taskOverlaySync() {
   }
 }
 
-function editOverlayTask(tasksRef) {
+function editOverlayTask(tasksRef) {  
   taskOverlaySync();
   let tasksEditRef = searchElement(tasksRef);
   let addOverlayRef = document.getElementById("overlayTask");
@@ -354,8 +356,9 @@ function editOverlayTask(tasksRef) {
   let dialogTaskEditRef = document.getElementById("dialogTaskEditContent");
   addOverlayRef.classList.remove("active");
   addOverlayEditRef.classList.add("active");
-  dialogTaskEditRef.innerHTML = renderOverlayTaskEdit(todos[tasksEditRef]);
+  dialogTaskEditRef.innerHTML = renderOverlayTaskEdit(todos[tasksEditRef]);  
   toggleFlatpickr(document.getElementById("dateEdit"));
+  document.body.style.overflow = "hidden";
 }
 
 function renderPrioButton(prioName, activePrio) {
@@ -687,6 +690,7 @@ async function initEditContacts(assignedTo = []) {
   renderContactListEdit(contacts, assignedTo);
   assignedToEditTemp = [...assignedTo];
   updateAssignedMembersEdit(assignedToEditTemp);
+  document.body.overflow = "hidden";
 }
 
 function openAssignedToEdit() {
