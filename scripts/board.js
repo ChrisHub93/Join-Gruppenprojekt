@@ -410,6 +410,8 @@ function toggleFlatpickr(inputElement) {
       dateFormat: "d/m/Y",
       allowInput: true,
       defaultDate: inputElement.value || null,
+      minDate: "today",
+      disableMobile: true,
     });
   }
 }
