@@ -88,10 +88,10 @@ return `<div id="subtask_${idSubtask}" class="relative">
             <div id="editOrTrash_${idSubtask}" class="editOrTrash d-nonevip">
                 <img onclick="editTask('${idSubtask}')" src="../assets/icons/Property 1=edit.png" alt="">
                     <div class="subTasksSeperatorSecond"></div>
-                <img onclick="completeDeleteTask('${idSubtask}')" src="../assets/icons/Property 1=delete.png" alt="">
+                <img onclick="completeDeleteTask('subtask_${idSubtask}')" src="../assets/icons/Property 1=delete.png" alt="">
             </div>
                 <div id="trashOrCheck_${idSubtask}" class="trashOrCheck d-nonevip">
-                    <img onclick="completeDeleteTask('${idSubtask}')" src="../assets/icons/Property 1=delete.png" alt="">
+                    <img onclick="completeDeleteTask('subtask_${idSubtask}')" src="../assets/icons/Property 1=delete.png" alt="">
                         <div class="subTasksSeperatorSecond"></div>
                     <img onclick="acceptTask('${idSubtask}', 'editTask_${idSubtask}')" src="../assets/icons/Property 1=check.png" alt="">
                 </div>               

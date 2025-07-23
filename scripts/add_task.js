@@ -585,7 +585,7 @@ function acceptTask(id, valueId) {
 
 function completeDeleteTask(id) {
   let inputRef = document.getElementById(id);
-  inputRef.remove();
+  if (inputRef) inputRef.remove();
 }
 
 function addDisplayNone(id) {
