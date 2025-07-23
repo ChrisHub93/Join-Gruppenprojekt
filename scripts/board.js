@@ -520,6 +520,7 @@ async function updateDataEdit(tasksEditRef) {
       priority: priorityEdit,
       assignedTo: assignedToEditTemp,
       subTasksOpen: getUpdatedSubtasks(),
+      subTasksClosed: tasks[taskKeyEdit].subTasksClosed,
       status: tasks[taskKeyEdit].status,
     };
 
