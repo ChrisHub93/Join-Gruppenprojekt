@@ -476,6 +476,15 @@ async function openEditOverlay(event) {
 function toggleEditOverlay() {
   let overlayRef = document.getElementById("editOverlay");
   let contentOverlayRef = document.getElementById("contentEditOverlay");
+
+  let overlayIsHidden = overlayRef.classList.contains("d-nonevip");
+
+  if (overlayIsHidden) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+
   contentOverlayRef.classList.remove("hideContentOverlayMobile");
   if(window.innerWidth <= 1100){
     contentOverlayRef.classList.add("hideContentOverlayMobile");
