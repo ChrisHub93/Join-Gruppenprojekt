@@ -316,17 +316,17 @@ function updateAssignedMembersDisplay() {
     plusOne.classList.add("assignedPlusOne");
     plusOne.textContent = `+${hiddenIcons.length}`;
 
-    let bubbleTooltip = document.createElement("div");
-    bubbleTooltip.classList.add("bubbleTooltip");
+    // let bubbleTooltip = document.createElement("div");
+    // bubbleTooltip.classList.add("bubbleTooltip");
 
-    hiddenIcons.forEach((icon) => {
-      let clone = icon.cloneNode(true);
-      clone.style.display = "flex";
-      bubbleTooltip.appendChild(clone);
-    });
+    // hiddenIcons.forEach((icon) => {
+    //   let clone = icon.cloneNode(true);
+    //   clone.style.display = "flex";
+    //   bubbleTooltip.appendChild(clone);
+    // });
 
     plusWrapper.appendChild(plusOne);
-    plusWrapper.appendChild(bubbleTooltip);
+    // plusWrapper.appendChild(bubbleTooltip);
     container.appendChild(plusWrapper);
   }
 }
@@ -557,41 +557,30 @@ function addTaskHTML(id, renderedField, plusIconRef, CancelOrCheckRef) {
 }
 
 function editTask(id) {
-  let inputRef = document.getElementById(id);
+  let inputRef = document.getElementById(`subtask_${id}`);
   inputField = inputRef.querySelector("input");
-  if (inputField.classList[1] == "activeInput") {
-    return;
-  } else {
-    addDisplayNone("editOrTrash" + id);
-    toggleDisplayNone("trashOrCheck" + id);
+  if (inputField.classList.contains("activeInput")) return;
+    addDisplayNone(`editOrTrash_${id}`);
+    toggleDisplayNone(`trashOrCheck_${id}`);
     inputField.classList.add("activeInput");
-    let bulletRef = `bullet${id}`;
-    toggleDisplayNone(bulletRef);
+    toggleDisplayNone(`bullet_${id}`);
     let length = inputField.value.length;
     inputField.setSelectionRange(length, length);
-    let target = "editOrTrash" + id;
-    let hideRef = document.getElementById(target);
+    let hideRef = document.getElementById(`editOrTrash_${id}`);
     hideRef.classList.add("opacity");
-  }
 }
 
 function acceptTask(id, valueId) {
   const editTaksValue = document.getElementById(valueId).value.trim();
-  if (editTaksValue === "") {
-    return;
-  } else {
-    toggleDisplayNone("trashOrCheck" + id);
-    let target = "editOrTrash" + id;
-    let hideRef = document.getElementById(target);
+  if (editTaksValue === "") return;
+    toggleDisplayNone(`trashOrCheck_${id}`);
+    let hideRef = document.getElementById(`editOrTrash_${id}`);
     hideRef.classList.remove("opacity");
-    let inputRef = document.getElementById(id);
-    // console.log(inputRef.value);
+    let inputRef = document.getElementById(`subtask_${id}`);
     inputField = inputRef.querySelector("input");
     inputField.blur();
     inputField.classList.toggle("activeInput");
-    let bulletRef = `bullet${id}`;
-    toggleDisplayNone(bulletRef);
-  }
+    toggleDisplayNone(`bullet_${id}`);
 }
 
 function completeDeleteTask(id) {

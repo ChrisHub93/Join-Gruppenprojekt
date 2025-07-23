@@ -596,6 +596,7 @@ div[id^="bullet"] {
   justify-content: center;
   font-weight: 400;
   font-size: 12px;
+  cursor: default;
 }
 
 .selectContactInput {
@@ -670,26 +671,8 @@ div[id^="bullet"] {
   color: white;
   font-size: 12px;
   margin-left: 5px;
-  cursor: pointer;
+  cursor: default;
   z-index: 1;
-}
-
-.bubbleTooltip {
-  display: none;
-  position: absolute;
-  bottom: 110%;
-  left: 50%;
-  transform: translateX(-50%);
-  flex-direction: column;
-  background-color: transparent;
-  padding: 6px;
-  border-radius: 6px;
-  z-index: 10;
-  gap: 5px;
-}
-
-.plusWrapper:hover .bubbleTooltip {
-  display: flex;
 }
 
 .subtask_box{

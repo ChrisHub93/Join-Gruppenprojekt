@@ -79,19 +79,21 @@ function getSubTasksTemplate(inputRef, newID) {
 
 function subtaskTemplateHTML(inputRef){
   const randomId = Math.floor(Math.random() * 10000);
-return `<div id="${inputRef.value}" class="relative">
-            <div id="bullet${inputRef.value}" class="bullet"></div>
-                <input onclick="editTask('${inputRef.value}')" type ="text" value="${inputRef.value}" id="editTask_${randomId}" class="subTaskAdded"/>
+  let subtaskValue = inputRef.value.trim();
+  let idSubtask = `${subtaskValue}_${randomId}`;
+return `<div id="subtask_${idSubtask}" class="relative">
+            <div id="bullet_${idSubtask}" class="bullet"></div>
+                <input onclick="editTask('${idSubtask}')" type ="text" value="${subtaskValue}" id="editTask_${idSubtask}" class="subTaskAdded"/>
 
-            <div id="editOrTrash${inputRef.value}" class="editOrTrash d-nonevip">
-                <img onclick="editTask('${inputRef.value}')" src="../assets/icons/Property 1=edit.png" alt="">
+            <div id="editOrTrash_${idSubtask}" class="editOrTrash d-nonevip">
+                <img onclick="editTask('${idSubtask}')" src="../assets/icons/Property 1=edit.png" alt="">
                     <div class="subTasksSeperatorSecond"></div>
-                <img onclick="completeDeleteTask('${inputRef.value}')" src="../assets/icons/Property 1=delete.png" alt="">
+                <img onclick="completeDeleteTask('${idSubtask}')" src="../assets/icons/Property 1=delete.png" alt="">
             </div>
-                <div id="trashOrCheck${inputRef.value}" class="trashOrCheck d-nonevip">
-                    <img onclick="completeDeleteTask('${inputRef.value}')" src="../assets/icons/Property 1=delete.png" alt="">
+                <div id="trashOrCheck_${idSubtask}" class="trashOrCheck d-nonevip">
+                    <img onclick="completeDeleteTask('${idSubtask}')" src="../assets/icons/Property 1=delete.png" alt="">
                         <div class="subTasksSeperatorSecond"></div>
-                    <img onclick="acceptTask('${inputRef.value}', 'editTask_${randomId}')" src="../assets/icons/Property 1=check.png" alt="">
+                    <img onclick="acceptTask('${idSubtask}', 'editTask_${idSubtask}')" src="../assets/icons/Property 1=check.png" alt="">
                 </div>               
             </div>`;
 }
