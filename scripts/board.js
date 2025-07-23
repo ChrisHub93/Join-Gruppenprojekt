@@ -252,6 +252,7 @@ async function toggleSubtask(img, id, clickedID) {
   } finally {
     isToggling = false;
   }
+  loadTasks();
 }
 
 async function postSubtaskClosed(id, clickedID) {
