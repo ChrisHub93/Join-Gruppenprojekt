@@ -852,21 +852,7 @@ async function updateAssignedMembersEdit(assignedTo) {
     plusIcon.className = "assignedPlusOneEdit";
     plusIcon.textContent = `+${total - visibleCount}`;
 
-    let tooltip = document.createElement("div");
-    tooltip.classList.add("bubbleTooltipEdit");
-
-    hiddenUsers.forEach(user => {
-      if (!user) return;
-      let initials = `${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`;
-      let colorClass = getAvatarColorClass(`${user.firstname} ${user.lastname}`);
-      let icon = document.createElement("p");
-      icon.className = `assigned_to_icon ${colorClass}`;
-      icon.textContent = initials;
-      tooltip.appendChild(icon);
-    });
-
     plusWrapper.appendChild(plusIcon);
-    plusWrapper.appendChild(tooltip);
     assignedMembersEditRef.appendChild(plusWrapper);
   }
 }
