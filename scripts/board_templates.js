@@ -602,13 +602,6 @@ function getTaskTemplate(element) {
             `;
 }
 
-function getDragTemplate() {
-  return `
-   <div class="dragContainer">
-            </div>
-  `;
-}
-
 function getEmptyTemplate() {
   return `
    <div class="emptyContainer">

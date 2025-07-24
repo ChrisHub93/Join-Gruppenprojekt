@@ -173,14 +173,6 @@ async function putDataStatus(path = "", data = {}) {
   return (responseToJson = await response.json());
 }
 
-// function highlight(id) {
-//   document.getElementById(id).innerHTML = getDragTemplate();
-// }
-
-// function removeHighlight(id) {
-//   document.getElementById(id).innerHTML = "";
-// }
-
 function overlayTask(element) {
   let tasksRef = searchElement(element);
   let addOverlayRef = document.getElementById("overlayTask");

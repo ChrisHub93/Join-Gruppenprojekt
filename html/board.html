@@ -10,17 +10,20 @@
     <link rel="stylesheet" href="../styles/fonts.css" />
     <link rel="stylesheet" href="../styles/style.css" />
     <link rel="stylesheet" href="../styles/board.css" />
-    <link rel="stylesheet" href="../styles/boardAddTask.css">
-    <link rel="stylesheet" href="../styles/taskOverlay.css">
-    <link rel="stylesheet" href="../styles/taskEdit.css">
+    <link rel="stylesheet" href="../styles/boardAddTask.css" />
+    <link rel="stylesheet" href="../styles/taskOverlay.css" />
+    <link rel="stylesheet" href="../styles/taskEdit.css" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script src="../scripts/script.js"></script>
     <script src="../scripts/templates.js"></script>
     <script src="../scripts/board.js"></script>
-        <script src="../scripts/board_templates.js"></script>
+    <script src="../scripts/board_templates.js"></script>
     <script src="../scripts/add_task.js"></script>
   </head>
   <body onload="init(); loadTasks(); getProfile();">
@@ -108,10 +111,12 @@
       <p class="header-name">Kanban Project Management Tool</p>
       <img class="headerLogo d-none" src="../assets/img/Capa 1.png" alt="" />
       <div class="profile-navbar">
-            <div class="header-top-profile">
-                <a onclick="activateMenu(this, 'help')" href="../html/help.html"><img class="help-icon" src="../assets/icons/help.png" alt=""></a>
-                <div id="profile"></div>
-            </div>
+        <div class="header-top-profile">
+          <a onclick="activateMenu(this, 'help')" href="../html/help.html"
+            ><img class="help-icon" src="../assets/icons/help.png" alt=""
+          /></a>
+          <div id="profile"></div>
+        </div>
         <div id="navbar" class="navbar d-none">
           <a class="navbarlink hide-help" href="../html/help.html">Help</a>
           <a
@@ -128,39 +133,59 @@
             href="../html/privacy_policy.html"
             >Privacy Policy</a
           >
-          <a onclick="logout()"  class="navbarlink" href="../index.html">Log Out</a>
+          <a onclick="logout()" class="navbarlink" href="../index.html"
+            >Log Out</a
+          >
         </div>
       </div>
     </header>
 
-    <div id="overlayTask" class="overlayTask page-box" onclick="closeOverlay(event); loadTasks(); enableScroll()">
-        <div id="dialogTaskContent" class="dialog_open_task"></div>       
+    <div
+      id="overlayTask"
+      class="overlayTask page-box"
+      onclick="closeOverlay(event); loadTasks(); enableScroll()"
+    >
+      <div id="dialogTaskContent" class="dialog_open_task"></div>
     </div>
 
-    <div id="overlayTaskEdit" class="overlayTask page-box" onclick="closeOverlay(event)">
-        <div id="dialogTaskEditContent" class="dialog_open_task"></div>       
+    <div
+      id="overlayTaskEdit"
+      class="overlayTask page-box"
+      onclick="closeOverlay(event)"
+    >
+      <div id="dialogTaskEditContent" class="dialog_open_task"></div>
     </div>
 
-    <div id="overlayAddTask" class="overlayAddTask d-nonevip" onclick="closeAddTaskOverlay()">
-        <div id="addTaskContent" class="overlayTask__addTaskContent" onclick="event.stopPropagation()"></div>
-        <div id="AddTaskSuccesMessage" class="succesTag"> 
-            <p>Task added to board</p>
-            <img src="../assets/icons/Board.png" alt="Board icon">
-        </div>        
+    <div
+      id="overlayAddTask"
+      class="overlayAddTask d-nonevip"
+      onclick="closeAddTaskOverlay()"
+    >
+      <div
+        id="addTaskContent"
+        class="overlayTask__addTaskContent"
+        onclick="event.stopPropagation()"
+      ></div>
+      <div id="AddTaskSuccesMessage" class="succesTag">
+        <p>Task added to board</p>
+        <img src="../assets/icons/Board.png" alt="Board icon" />
+      </div>
     </div>
 
-    <div id="overlayDeleteTask" class="overlayAddTask d-nonevip" >
+    <div id="overlayDeleteTask" class="overlayAddTask d-nonevip">
       <div id="deleteSuccesMessage" class="succesTag">
         <p>Delete successful</p>
       </div>
     </div>
-    
 
     <main class="main-board page-box">
       <div class="headline">
         <div class="headline__text">
           <h1>Board</h1>
-          <button class="headline__btn-mobile" onclick="openAddTaskOverlay(); setPriorityMedium(`medium`)">
+          <button
+            class="headline__btn-mobile"
+            onclick="openAddTaskOverlay(); setPriorityMedium(`medium`)"
+          >
             <img
               src="../assets/icons/plus add task mobile.svg"
               alt="add icon mobile"
@@ -168,7 +193,13 @@
           </button>
         </div>
         <div class="headline__inputs">
-          <input oninput="filterTasks()" id="filterTasks" class="headline__input" type="text" placeholder="Find Task" />
+          <input
+            oninput="filterTasks()"
+            id="filterTasks"
+            class="headline__input"
+            type="text"
+            placeholder="Find Task"
+          />
 
           <div class="headline__inputs__imgs">
             <img src="../assets/icons/Vector 3.svg" alt="linke" />
@@ -178,7 +209,10 @@
               alt="search icon"
             />
           </div>
-          <button class="addTaskBtn" onclick="openAddTaskOverlay('To do'); setPriorityMedium(`medium`)">
+          <button
+            class="addTaskBtn"
+            onclick="openAddTaskOverlay('To do'); setPriorityMedium(`medium`)"
+          >
             Add Task
             <img src="../assets/icons/add.svg" alt="Add icon" />
           </button>
@@ -189,7 +223,12 @@
         <div class="container__content">
           <div class="content__headline">
             <p class="content__headline__text">To do</p>
-            <button onclick="openAddTaskOverlay('To do'); setPriorityMedium(`medium`)" class="content__headline__btn">+</button>
+            <button
+              onclick="openAddTaskOverlay('To do'); setPriorityMedium(`medium`)"
+              class="content__headline__btn"
+            >
+              +
+            </button>
           </div>
 
           <div
@@ -199,17 +238,24 @@
             ondragover="allowDrop(event); highlight('toDoContentDropContent')"
             ondragleave="removeHighlight('toDoContentDropContent')"
           ></div>
-          <div id="toDoContentDropContent"
+          <div
+            id="toDoContentDropContent"
             class="dropzone"
             ondrop="moveTo('To do'); removeHighlight('toDoContentDropContent')"
             ondragover="allowDrop(event); highlight('toDoContentDropContent')"
-            ondragleave="removeHighlight('toDoContentDropContent')"></div>
-          </div>
+            ondragleave="removeHighlight('toDoContentDropContent')"
+          ></div>
+        </div>
 
         <div class="container__content">
           <div class="content__headline">
             <p class="content__headline__text">In progress</p>
-            <button onclick="openAddTaskOverlay(`In progress`); setPriorityMedium(`medium`)" class="content__headline__btn">+</button>
+            <button
+              onclick="openAddTaskOverlay(`In progress`); setPriorityMedium(`medium`)"
+              class="content__headline__btn"
+            >
+              +
+            </button>
           </div>
 
           <div
@@ -219,17 +265,24 @@
             ondragover="allowDrop(event); highlight('inProgressContentDropContent')"
             ondragleave="removeHighlight('inProgressContentDropContent')"
           ></div>
-          <div id="inProgressContentDropContent"
-             class="dropzone"
+          <div
+            id="inProgressContentDropContent"
+            class="dropzone"
             ondrop="moveTo('In progress'); removeHighlight('inProgressContentDropContent')"
             ondragover="allowDrop(event); highlight('inProgressContentDropContent')"
-            ondragleave="removeHighlight('inProgressContentDropContent')"></div>
+            ondragleave="removeHighlight('inProgressContentDropContent')"
+          ></div>
         </div>
 
         <div class="container__content">
           <div class="content__headline">
             <p class="content__headline__text">Await feedback</p>
-            <button onclick="openAddTaskOverlay('Await feedback'); setPriorityMedium(`medium`)" class="content__headline__btn">+</button>
+            <button
+              onclick="openAddTaskOverlay('Await feedback'); setPriorityMedium(`medium`)"
+              class="content__headline__btn"
+            >
+              +
+            </button>
           </div>
 
           <div
@@ -239,11 +292,13 @@
             ondragover="allowDrop(event); highlight('awaitFeedbackContentDropContent')"
             ondragleave="removeHighlight('awaitFeedbackContentDropContent')"
           ></div>
-          <div id="awaitFeedbackContentDropContent"
-          class="dropzone"
+          <div
+            id="awaitFeedbackContentDropContent"
+            class="dropzone"
             ondrop="moveTo('Await feedback'); removeHighlight('awaitFeedbackContentDropContent')"
             ondragover="allowDrop(event); highlight('awaitFeedbackContentDropContent')"
-            ondragleave="removeHighlight('awaitFeedbackContentDropContent')"></div>
+            ondragleave="removeHighlight('awaitFeedbackContentDropContent')"
+          ></div>
         </div>
 
         <div class="container__content">
@@ -258,11 +313,13 @@
             ondragover="allowDrop(event); highlight('doneDropContent')"
             ondragleave="removeHighlight('doneDropContent')"
           ></div>
-          <div id="doneDropContent"
-          class="dropzone"
+          <div
+            id="doneDropContent"
+            class="dropzone"
             ondrop="moveTo('Done'); removeHighlight('doneDropContent')"
             ondragover="allowDrop(event); highlight('doneDropContent')"
-            ondragleave="removeHighlight('doneDropContent')"></div>
+            ondragleave="removeHighlight('doneDropContent')"
+          ></div>
         </div>
       </div>
     </main>
