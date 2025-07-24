@@ -3,11 +3,14 @@ function initSummary() {
     filterTaskSummary();
 }
 
+/**
+ * This function is used to swap the icons when hovering the top two div elements
+ */
 function iconHoverSwaps() {
     let boxes = document.getElementsByClassName("summary-box");
     for (let i = 0; i < boxes.length; i++) {
-        const box = boxes[i];
-        const img = box.getElementsByClassName("todone-icon")[0];
+        let box = boxes[i];
+        let img = box.getElementsByClassName("todone-icon")[0];
     if (!img) continue;
         let original = img.src;
         let hover = img.dataset.altSrc;
@@ -17,6 +20,11 @@ function iconHoverSwaps() {
     }
 }
 
+/**
+ * This function declares the Greeting Text shown by the time a user logs in
+ * 
+ * @returns {string} based on the timezone of user
+ */
 function getGreeting() {
     let time = new Date().getHours();    
     	if (time >= 5 && time < 12) {
@@ -28,6 +36,9 @@ function getGreeting() {
         }
 }
 
+/**
+ * This function is used to differ between a mobile or desktop greeting for a logged in user
+ */
 function showGreeting() {
     let greeting = getGreeting();
     let username = sessionStorage.getItem('loggedInUser');
@@ -43,6 +54,13 @@ function showGreeting() {
     }
 }
 
+/**
+ * This function checks if its a logged in user or a guest
+ * 
+ * @param {string} greeting - goes through the getGreeting function
+ * @param {string} username - shows the name of the logged in user based on the session storage
+ * @returns the full greeting based on a user or a guest
+ */
 function checkUserOrGuest(greeting, username) {
     if (username) {
         let colorClass = getUserNameColorClass(username);
@@ -52,12 +70,26 @@ function checkUserOrGuest(greeting, username) {
     }
 }
 
+/**
+ * This function shows the greeting in the desktop version
+ * 
+ * @param {*} fullGreeting - shows the full greeting based on user or guest
+ * @param {*} overlay - overlay just for the mobile version to show the greeting
+ * @param {*} mainContent - displays the main content, needs to have a timeout for the mobile version
+ */
 function desktopGreeting(fullGreeting, overlay, mainContent) {
     document.getElementById("greeting-main-text").innerHTML = fullGreeting;
     overlay.style.display = "none";
     mainContent.style.display = "block";
 }
 
+/**
+ * This function shows the greeting in the mobile version
+ * 
+ * @param {*} fullGreeting - shows the full greeting based on user or guest
+ * @param {*} overlay - overlay just for the mobile version to show the greeting
+ * @param {*} mainContent - displays the main content, needs to have a timeout for the mobile version
+ */
 function mobileGreeting(fullGreeting, overlay, mainContent) {
     document.getElementById("greeting-overlay-text").innerHTML = fullGreeting;
     overlay.style.display = "flex";
@@ -67,6 +99,10 @@ function mobileGreeting(fullGreeting, overlay, mainContent) {
         }, 2000);
 }
 
+/**
+ * This function filters through all tasks just to find all urgent dates and shows the nearest to come
+ * @returns {date}
+ */
 async function filterTaskSummary() {
     let checkboxRef = document.getElementById('checkbox');
     let tasks = await fetchData("/tasks/");
@@ -81,6 +117,11 @@ async function filterTaskSummary() {
     iconHoverSwaps();   
 }
 
+/**
+ * This is a function to help the filter process
+ * @param {Array} todos - all available tasks
+ * @returns filtered task or tasks based on priority urgent
+ */
 function getTasksFiltered(todos) {
     let tasksToDo = todos.filter(task => task.status === "To do");
     let tasksDone = todos.filter(task => task.status === "Done");
@@ -93,12 +134,24 @@ function getTasksFiltered(todos) {
     return {tasksToDo,tasksDone,tasksProgress,tasksFeedback,tasksUrgent,urgentDate};
 }
 
+/**
+ * This function gets us our data from our backend
+ * 
+ * @param {URL} path - our database URL
+ * @returns an object or objects from our database
+ */
 async function fetchData(path) {
   let response = await fetch(BASE_URL + path + ".json");
   let responseAsJson = await response.json();
   return responseAsJson;
 }
 
+/**
+ * This function helps us to define the nearest urgent date and let it display
+ * 
+ * @param {date} tasksPrioDate - nearest urgent date 
+ * @returns the nearest urgent date
+ */
 function formatDatetoEnglish(tasksPrioDate) {
     let date = new Date(tasksPrioDate);
     const monthNames = [
