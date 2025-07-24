@@ -18,8 +18,7 @@ function iconHoverSwaps() {
 }
 
 function getGreeting() {
-    let time = new Date().getHours();
-    
+    let time = new Date().getHours();    
     	if (time >= 5 && time < 12) {
         return "Good Morning";
         } else if (time >= 12 && time < 18) {
@@ -40,9 +39,7 @@ function showGreeting() {
     if (loadingMobile) {
         mobileGreeting(fullGreeting, overlay, mainContent);
     } else {
-        document.getElementById("greeting-main-text").innerHTML = fullGreeting;
-        overlay.style.display = "none";
-        mainContent.style.display = "block";
+        desktopGreeting(fullGreeting, overlay, mainContent);
     }
 }
 
@@ -53,6 +50,12 @@ function checkUserOrGuest(greeting, username) {
     } else {
         return greeting;
     }
+}
+
+function desktopGreeting(fullGreeting, overlay, mainContent) {
+    document.getElementById("greeting-main-text").innerHTML = fullGreeting;
+    overlay.style.display = "none";
+    mainContent.style.display = "block";
 }
 
 function mobileGreeting(fullGreeting, overlay, mainContent) {
@@ -67,24 +70,27 @@ function mobileGreeting(fullGreeting, overlay, mainContent) {
 async function filterTaskSummary() {
     let checkboxRef = document.getElementById('checkbox');
     let tasks = await fetchData("/tasks/");
-
     if (tasks === null){
         checkboxRef.innerHTML = getCheckboxSummaryEmpty();
         iconHoverSwaps();
         return; 
     }
-
     todos = Object.values(tasks);
+    let {tasksToDo,tasksDone,tasksProgress,tasksFeedback,tasksUrgent,urgentDate} = getTasksFiltered(todos);
+    checkboxRef.innerHTML = getCheckboxSummary(tasksToDo, tasksDone, tasksProgress, tasksFeedback, tasksUrgent, todos, urgentDate);
+    iconHoverSwaps();   
+}
+
+function getTasksFiltered(todos) {
     let tasksToDo = todos.filter(task => task.status === "To do");
     let tasksDone = todos.filter(task => task.status === "Done");
     let tasksProgress = todos.filter(task => task.status === "In progress");
     let tasksFeedback = todos.filter(task => task.status === "Await feedback");
     let tasksUrgent = todos.filter(task => task.priority === "urgent");
-    tasksUrgent.sort((a,b) => new Date(a.date) - new Date(b.date));
+    tasksUrgent.sort((a, b) => new Date(a.date) - new Date(b.date));
     let tasksPrioDate = tasksUrgent[0]?.date ?? "";
     let urgentDate = tasksPrioDate ? formatDatetoEnglish(tasksPrioDate) : "";
-    checkboxRef.innerHTML = getCheckboxSummary(tasksToDo, tasksDone, tasksProgress, tasksFeedback, tasksUrgent, todos, urgentDate);
-    iconHoverSwaps();   
+    return {tasksToDo,tasksDone,tasksProgress,tasksFeedback,tasksUrgent,urgentDate};
 }
 
 async function fetchData(path) {
@@ -99,11 +105,9 @@ function formatDatetoEnglish(tasksPrioDate) {
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
-
     const day = date.getDate();
     const month = monthNames[date.getMonth()];
     const year = date.getFullYear();
-
     return `${month} ${day}, ${year}`;
 }
 
