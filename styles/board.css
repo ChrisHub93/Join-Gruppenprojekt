@@ -485,6 +485,10 @@ h1 {
   .edit_task:hover img {
     content: initial;
   }
+
+  .dropzone {
+    display: none;
+  }
 }
 
 @media (max-width: 545px) {
