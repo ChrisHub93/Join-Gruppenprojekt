@@ -4,8 +4,6 @@ let pwCheck = false;
 let pwConfirmCheck = false;
 let checkBox = false;
 
-function initSignUp() {}
-
 async function signUp() {
   validateSignUpInputs();
   if (nameCheck && emailCheck && pwCheck && pwConfirmCheck && checkBox) {
