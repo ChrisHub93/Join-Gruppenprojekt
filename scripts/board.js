@@ -19,7 +19,7 @@ async function loadTasks() {
     return;
   }
   loadTodos = Object.values(tasks);
-  addSubtasks();
+  addEmptySubtasks();
 
   let contactsData = await fetchData("/contacts/");
   globalContacts = Object.values(contactsData);
@@ -77,7 +77,7 @@ async function loadTasks() {
   }
 }
 
-function addSubtasks() {
+function addEmptySubtasks() {
   todos = [];
 
   for (let task of loadTodos) {
