@@ -199,8 +199,12 @@
             ondragover="allowDrop(event); highlight('toDoContentDropContent')"
             ondragleave="removeHighlight('toDoContentDropContent')"
           ></div>
-          <div id="toDoContentDropContent"></div>
-        </div>
+          <div id="toDoContentDropContent"
+            class="dropzone"
+            ondrop="moveTo('To do'); removeHighlight('toDoContentDropContent')"
+            ondragover="allowDrop(event); highlight('toDoContentDropContent')"
+            ondragleave="removeHighlight('toDoContentDropContent')"></div>
+          </div>
 
         <div class="container__content">
           <div class="content__headline">
@@ -215,7 +219,11 @@
             ondragover="allowDrop(event); highlight('inProgressContentDropContent')"
             ondragleave="removeHighlight('inProgressContentDropContent')"
           ></div>
-          <div id="inProgressContentDropContent"></div>
+          <div id="inProgressContentDropContent"
+             class="dropzone"
+            ondrop="moveTo('In progress'); removeHighlight('inProgressContentDropContent')"
+            ondragover="allowDrop(event); highlight('inProgressContentDropContent')"
+            ondragleave="removeHighlight('inProgressContentDropContent')"></div>
         </div>
 
         <div class="container__content">
@@ -231,7 +239,11 @@
             ondragover="allowDrop(event); highlight('awaitFeedbackContentDropContent')"
             ondragleave="removeHighlight('awaitFeedbackContentDropContent')"
           ></div>
-          <div id="awaitFeedbackContentDropContent"></div>
+          <div id="awaitFeedbackContentDropContent"
+          class="dropzone"
+            ondrop="moveTo('Await feedback'); removeHighlight('awaitFeedbackContentDropContent')"
+            ondragover="allowDrop(event); highlight('awaitFeedbackContentDropContent')"
+            ondragleave="removeHighlight('awaitFeedbackContentDropContent')"></div>
         </div>
 
         <div class="container__content">
@@ -246,7 +258,11 @@
             ondragover="allowDrop(event); highlight('doneDropContent')"
             ondragleave="removeHighlight('doneDropContent')"
           ></div>
-          <div id="doneDropContent"></div>
+          <div id="doneDropContent"
+          class="dropzone"
+            ondrop="moveTo('Done'); removeHighlight('doneDropContent')"
+            ondragover="allowDrop(event); highlight('doneDropContent')"
+            ondragleave="removeHighlight('doneDropContent')"></div>
         </div>
       </div>
     </main>

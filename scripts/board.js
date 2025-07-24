@@ -116,6 +116,16 @@ function allowDrop(event) {
   event.preventDefault();
 }
 
+function highlight(id) {
+  const el = document.getElementById(id);
+  el.classList.add('dragContainer');
+}
+
+function removeHighlight(id) {
+  const el = document.getElementById(id);
+  el.classList.remove('dragContainer');
+}
+
 async function moveTo(status) {
   let tasks = await fetchData("/tasks/");
 
@@ -163,13 +173,13 @@ async function putDataStatus(path = "", data = {}) {
   return (responseToJson = await response.json());
 }
 
-function highlight(id) {
-  document.getElementById(id).innerHTML = getDragTemplate();
-}
+// function highlight(id) {
+//   document.getElementById(id).innerHTML = getDragTemplate();
+// }
 
-function removeHighlight(id) {
-  document.getElementById(id).innerHTML = "";
-}
+// function removeHighlight(id) {
+//   document.getElementById(id).innerHTML = "";
+// }
 
 function overlayTask(element) {
   let tasksRef = searchElement(element);

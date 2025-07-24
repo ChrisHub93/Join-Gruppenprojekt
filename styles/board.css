@@ -367,6 +367,11 @@ h1 {
   font-weight: 500;
 }
 
+.dropzone {
+  height: 230px;
+  margin-top: 8px;
+}
+
 @media (max-width: 1420px) {
   .container{
     padding: 0px 24px;
