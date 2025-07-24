@@ -540,6 +540,12 @@ h1 {
   }
 }
 
+@media (max-width:450px){
+  .form{
+    padding: 8px !important;
+  }
+}
+
 @media (max-width: 423px) {
   .main-board {
     padding: 16px;
