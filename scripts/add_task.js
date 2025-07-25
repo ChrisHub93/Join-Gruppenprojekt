@@ -18,26 +18,41 @@ function upToDate() {
 }
 
 function clearInputFields() {
-  let titleRef = document.getElementById("title");
-  let errorTitleRef = document.getElementById("errorTitle");
-  let descriptionRef = document.getElementById("description");
-  let dateRef = document.getElementById("date");
-  let errorDateRef = document.getElementById("errorDate");
-  let subTaskInputRef = document.getElementById("subTaskInput");
-  let subTasksRef = document.getElementById("subTasks");
-  let userNameWordRef = document.getElementById("userNameWord");
-  let assignedMembersRef = document.getElementById("assignedMembers");
-  titleRef.value = "";
-  titleRef.classList.remove("inputError");
-  errorTitleRef.classList.add("opacity");
-  descriptionRef.value = "";
-  dateRef.value = "";
-  dateRef.classList.remove("inputError");
-  errorDateRef.classList.add("opacity");
-  subTaskInputRef.value = "";
-  subTasksRef.innerHTML = "";
-  userNameWordRef.value = "";
-  assignedMembersRef.innerHTML = "";
+  removeValue("title");
+  removeInputError("title");
+  addOpacity("errorTitle");
+  removeValue("description");
+  removeValue("date");
+  removeInputError("date");
+  addOpacity("errorDate");
+  removeValue("subTaskInput");
+  clearInnerHTML("subTasks");
+  removeValue("userNameWord");
+  clearInnerHTML("assignedMembers");
+}
+
+function removeValue(id){
+  let ref = document.getElementById(id);
+  if(!ref)return;
+  ref.value ="";
+}
+
+function removeInputError(id){
+  let ref = document.getElementById(id);
+  if(!ref)return;
+  ref.classList.remove("inputError");
+}
+
+function addOpacity(id){
+  let ref = document.getElementById(id);
+  if(!ref)return;
+  ref.classList.add("opacity");
+}
+
+function clearInnerHTML(id){
+  let ref = document.getElementById(id);
+  if(!ref)return;
+  ref.innerHTML = "";
 }
 
 function removeClasses() {
