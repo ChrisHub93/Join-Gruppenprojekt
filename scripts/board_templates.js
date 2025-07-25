@@ -406,11 +406,11 @@ function renderOverlayTaskEdit(tasksEditRef) {
   `;
 }
 
-function assignedLineRender(initials, name, assignedColor) {
+function assignedLineRender(initials) {
   return `
     <div class="assigned_to_line">
-      <p class="assigned_to_icon ${assignedColor}">${initials}</p>
-      <p class="assigned_to_name">${name}</p>
+      <p class="assigned_to_icon ${initials.assignedColor}">${initials.initials}</p>
+      <p class="assigned_to_name">${initials.name}</p>
     </div>`;
 }
 
