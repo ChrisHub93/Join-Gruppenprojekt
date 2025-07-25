@@ -25,14 +25,14 @@ async function logIn() {
 }
 
 /**
- *
- * @param {string} path - Loads data from the given path on the server.
+ * Loads data from the given path on the server.
+ * 
+ * @param {string} path - The relative path to the resource (e.g., "users")
  * @returns - A promise that resolves to the parsed JSON data
  */
 async function loadData(path = "") {
   let response = await fetch(BASE_URL + path + ".json");
   let responseToJson = await response.json();
-
   return responseToJson;
 }
 
