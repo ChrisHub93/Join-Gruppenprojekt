@@ -1,15 +1,24 @@
 const BASE_URL =
   "https://join-464-default-rtdb.europe-west1.firebasedatabase.app/";
 
+/**
+ * Function to show sidebar and active menu
+ */
 function init() {
   activeMenuStorage();
   sidebarVisibility();
 }
 
+/**
+ * Function to set the user as a guest
+ */
 function loginAsGuest() {
   sessionStorage.setItem("loginStatus", "guest");
 }
 
+/**
+ * Function to clear the session storage
+ */
 function logout() {
   sessionStorage.setItem("loginStatus", "none");
   sessionStorage.removeItem("loggedInUser");
@@ -17,28 +26,31 @@ function logout() {
   sessionStorage.removeItem("activePolicy");
 }
 
+/**
+ * function to show the sidebar menu for logged in user or logged out user and show it after declaration
+ */
 function sidebarVisibility() {
   let status = sessionStorage.getItem("loginStatus");
   let isLoggedIn = status === "user" || status === "guest";
-
   document.querySelectorAll(".logged-in").forEach((el) => {
     el.classList.remove("hidden-init");
     el.style.display = isLoggedIn ? "flex" : "none";
   });
-
   document.querySelectorAll(".logged-out").forEach((el) => {
     el.classList.remove("hidden-init");
     el.style.display = isLoggedIn ? "none" : "flex";
   });
   setSideBarMenu(isLoggedIn);
-  document
-    .querySelectorAll(".menu-box")
-    .forEach((el) => el.classList.add("ready"));
+  document.querySelectorAll(".menu-box").forEach((el) => el.classList.add("ready"));
 }
 
+/**
+ * Function to declare which menu will be displayed
+ * 
+ * @param {boolean} isLoggedIn - session storage item
+ */
 function setSideBarMenu(isLoggedIn) {
   let menuBox = document.querySelector(".menu-box");
-
   if (!isLoggedIn) {
     menuBox.classList.add("logged-out");
   } else {
@@ -46,44 +58,64 @@ function setSideBarMenu(isLoggedIn) {
   }
 }
 
-function showNavbar() {
+/**
+ * function to declare when the navbar is shown
+ */
+function toggleNavbar() {
   let navbar = document.getElementById("navbar");
-  let navbarhidden = navbar.classList.contains("d-none");
-  let mobileCheck = window.innerWidth <= 768;
-
-  if (navbarhidden) {
-    navbar.classList.remove("d-none");
-    outsideNavbar();
-    if (mobileCheck) {
-      setTimeout(function () {
-        navbar.style.right = "20px";
-      }, 0);
-    } else {
-      navbar.style.right = "";
-    }
+  let isHidden = navbar.classList.contains("d-none");
+  if (isHidden) {
+    showNavbar(navbar);
   } else {
-    if (mobileCheck) {
-      navbar.style.right = "-250px";
-      setTimeout(function () {
-        navbar.classList.add("d-none");
-      }, 300);
-    } else {
-      navbar.classList.add("d-none");
-    }
+    hideNavbar(navbar);
   }
 }
 
+/**
+ * function to show the navbar based on desktop or mobile Version
+ * 
+ * @param {HTMLElement} navbar - DOM Element of navbar
+ */
+function showNavbar(navbar) {
+  let mobileCheck = window.innerWidth <= 768;
+  navbar.classList.remove("d-none");
+  outsideNavbar();
+  if (mobileCheck) {
+    setTimeout(() => {
+      navbar.style.right = "20px";
+    }, 0);
+  } else {
+    navbar.style.right = "";
+  }
+}
+
+/**
+ * function to hide the navbar
+ * 
+ * @param {HTMLElement} navbar - DOM Element of navbar
+ */
+function hideNavbar(navbar) {
+  let mobileCheck = window.innerWidth <= 768;
+  if (mobileCheck) {
+    navbar.style.right = "-250px";
+    setTimeout(() => {
+      navbar.classList.add("d-none");
+    }, 300);
+  } else {
+    navbar.classList.add("d-none");
+  }
+}
+
+/**
+ * function to close the navbar with an outside click
+ */
 function outsideNavbar() {
   let navbar = document.getElementById("navbar");
   let isTransitioning = navbar.style.transitionDuration === "0.5s";
   function outsideClick(event) {
     if (isTransitioning) return;
-
     if (!navbar.contains(event.target)) {
-      navbar.style.right = "-250px";
-      setTimeout(function () {
-        navbar.classList.add("d-none");
-      }, 300);
+      hideNavbar(navbar);
       document.removeEventListener("click", outsideClick);
     }
   }
@@ -92,21 +124,21 @@ function outsideNavbar() {
   }, 0);
 }
 
+/**
+ * function to show the clicked element of the sidebar
+ * @param {HTMLElement} clickedElement - clicked DOM Element
+ * @param {string} menuKey - key to identify the clicked menu
+ */
 function activateMenu(clickedElement, menuKey) {
   if (menuKey !== "help") {
     sessionStorage.setItem("activeMenu", menuKey);
+    if (policyCheck(clickedElement)) {
+      sessionStorage.setItem("activePolicy", menuKey);
+    } else {
+      sessionStorage.removeItem("activePolicy");
+    }
   }
-  if (
-    menuKey !== "help" &&
-    (clickedElement.classList.contains("policy-text") ||
-      clickedElement.classList.contains("navbarlink") ||
-      clickedElement.classList.contains("footer-login__link"))
-  ) {
-    sessionStorage.setItem("activePolicy", menuKey);
-  } else if (menuKey !== "help") {
-    sessionStorage.removeItem("activePolicy");
-  }
-  clearMenu();
+  clearAllMenus();
   addMenuactive(menuKey);
     let anchor = clickedElement.querySelector("a");
   if (anchor && anchor.href) {
@@ -114,51 +146,77 @@ function activateMenu(clickedElement, menuKey) {
   }
 }
 
+/**
+ * function to get the active menu from the session storage
+ * @returns active menu element with active classes
+ */
 function activeMenuStorage() {
-  if (window.location.pathname.includes("../html/help.html")) return;
+  let helpPage = window.location.pathname.includes("help.html");
   let activeMenu = sessionStorage.getItem("activeMenu") || "summary";
   let activePolicy = sessionStorage.getItem("activePolicy");
-  clearMenu();
-
-  document
-    .querySelectorAll(`[menu-data="${activeMenu}"]`)
+  clearAllMenus();
+  if (helpPage) {return;}
+  document.querySelectorAll(`[menu-data="${activeMenu}"]`)
     .forEach((menuElement) => {
       menuElement.classList.add("sidebar-menu-active");
       if (
-        activePolicy &&
-        (menuElement.classList.contains("policy-text") ||
-          menuElement.classList.contains("navbarlink") ||
-          menuElement.classList.contains("footer-login__link"))
-      ) {
+        activePolicy && policyCheck(menuElement)) {
         menuElement.classList.add("policy-text-active");
       }
     });
 }
 
-function clearMenu() {
-  document
-    .querySelectorAll(".sidebar-menu, .navbarlink, .policy-text")
-    .forEach((menu) => {
-      menu.classList.remove("sidebar-menu-active");
-      menu.classList.remove("policy-text-active");
-    });
-}
-
+/**
+ * function to add the active menu classes to the clicked menu
+ * 
+ * @param {string} menuKey - key to identify the clicked menu
+ */
 function addMenuactive(menuKey) {
-  document
-    .querySelectorAll(`[menu-data="${menuKey}"]`)
-    .forEach((menuElement) => {
-      menuElement.classList.add("sidebar-menu-active");
-      if (
-        menuElement.classList.contains("policy-text") ||
-        menuElement.classList.contains("navbarlink") ||
-        menuElement.classList.contains("footer-login__link")
-      ) {
-        menuElement.classList.add("policy-text-active");
-      }
+  document.querySelectorAll(`[menu-data="${menuKey}"]`).forEach(setMenuActive);
+}
+
+/**
+ * function to check for policy elements in the project
+ * 
+ * @param {string} el - clicked element/key
+ * @returns logic to identify policy HTML Elements
+ */
+function policyCheck(el) {
+  return (
+    el.classList.contains("policy-text") ||
+    el.classList.contains("navbarlink") ||
+    el.classList.contains("footer-login__link")
+  );
+}
+
+/**
+ * function to give classes to the active menu
+ * 
+ * @param {string} el - clicked element/key
+ */
+function setMenuActive(el) {
+    el.classList.add("sidebar-menu-active");
+  if (policyCheck(el)) {
+    el.classList.add("policy-text-active");
+  }
+}
+
+/**
+ * function to clear all classes of the sidebar menu
+ */
+function clearAllMenus() {
+    document.querySelectorAll(".sidebar-menu, .navbarlink, .policy-text")
+    .forEach((menu) => {
+      menu.classList.remove("sidebar-menu-active", "policy-text-active");
     });
 }
 
+/**
+ * function to get the Icon letters
+ * 
+ * @param {string} name 
+ * @returns the first letters of the firstname and last name
+ */
 function getInitials(name) {
   return name
     .split(" ")
@@ -167,36 +225,47 @@ function getInitials(name) {
     .toUpperCase();
 }
 
+/**
+ * function to iterate through all contacts
+ * 
+ * @param {string} id - id of all contacts 
+ * @returns {initials: string, name: string, assignedColor: string, id: string} - object with the named parameters
+ */
+function contactRenderData(id) {
+  let contact = globalContacts.find((c) => c.id === id);
+  if (!contact) return null;
+
+  let name = `${contact.firstname} ${contact.lastname}`;
+  let initials = getInitials(name);
+  let assignedColor = getAvatarColorClass(name);
+
+  return { initials, name, assignedColor, id };
+}
+
 function getAssignedInitials(assignedToIds) {
-  if (assignedToIds === undefined) {
+  if (!assignedToIds) {
     return `
     <p class="assigned_to_empty">Nobody assigned yet</p>`;
   } else {
     return assignedToIds
       .map((id) => {
-        let contactRef = globalContacts.find((contact) => contact.id === id);
-        if (!contactRef) return "";
-        let name = `${contactRef.firstname} ${contactRef.lastname}`;
-        let initials = getInitials(name);
-        let assignedColor = getAvatarColorClass(name);
-        return assignedLineRender(initials, name, assignedColor);
+        let data = contactRenderData(id);
+        if (!data) return "";
+        return assignedLineRender(data);
       })
       .join("");
   }
 }
 
 function getAssignedInitialsEditIcons(assignedToIds) {
-  if (assignedToIds === undefined) {
+  if (!assignedToIds) {
     return "";
   } else {
     return assignedToIds
       .map((id) => {
-        let contactRef = globalContacts.find((contact) => contact.id === id);
-        if (!contactRef) return "";
-        let name = `${contactRef.firstname} ${contactRef.lastname}`;
-        let initials = getInitials(name);
-        let assignedColor = getAvatarColorClass(name);
-        return assignedIconEditRender(initials, assignedColor, id);
+        let data = contactRenderData(id);
+        if (!data) return "";
+        return assignedIconEditRender(data);
       })
       .join("");
   }

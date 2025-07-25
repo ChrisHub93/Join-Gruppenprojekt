@@ -1,12 +1,12 @@
 function getProfileRender(colorClass, username) { 
   return `
-          <p onclick="showNavbar()" class="personal-icon ${colorClass}">${username}</p>
+          <p onclick="toggleNavbar()" class="personal-icon ${colorClass}">${username}</p>
     `;
 }
 
 function getProfileRenderGuest() {
   return `                
-          <p onclick="showNavbar()" class="personal-icon">G</p>`
+          <p onclick="toggleNavbar()" class="personal-icon">G</p>`
 }
 
 function getBasicSelectTemplate(){
