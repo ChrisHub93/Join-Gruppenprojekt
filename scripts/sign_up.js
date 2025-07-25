@@ -32,7 +32,7 @@ async function getInputValueAndPost() {
   const password = document.getElementById("signUpInputPassword").value;
   const id = getId(); 
 
-  await postData("/users/", { name: name, email: email, password: password, id});
+  await postData("/users/", { name: name, email: email, password: password, id: id});
 
   let fullName = name.split(" ");
   let firstNameOfUser = fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
