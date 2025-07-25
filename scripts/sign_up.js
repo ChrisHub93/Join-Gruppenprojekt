@@ -24,52 +24,22 @@ async function signUp() {
  * This function retrieves the input values from the sign-up form.
  * It posts two objects to the server:
  * 1. The user data used for login (name, email, password, id).
- * 2. The contact data for the same user (firstname, lastname, email, password, id).
+ * 2. The contact data for the same user (firstname, lastname, email, id).
  */
-// muss noch geklärt werden, warum user nochmal vom server geladen werden
 async function getInputValueAndPost() {
-  let name = document.getElementById("signUpInputName").value;
-  let email = document.getElementById("signUpInputEmail").value;
-  let password = document.getElementById("signUpInputPassword").value;
-  await postData("/users/", { name: name, email: email, password: password, id:getId() });
+  const name = document.getElementById("signUpInputName").value;
+  const email = document.getElementById("signUpInputEmail").value;
+  const password = document.getElementById("signUpInputPassword").value;
+  const id = getId(); 
 
-  let newUser = await fetchData("/users/");
-  let values = Object.values(newUser);
-  let findUser = values.find((currentUser)=> currentUser.name == name);
+  await postData("/users/", { name: name, email: email, password: password, id});
+
   let fullName = name.split(" ");
   let firstNameOfUser = fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
   let lastNameOfUser = fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
-  if (findUser){
-    await postData("/contacts/", { firstname: firstNameOfUser, lastname: lastNameOfUser, email: email, password: password, id:findUser.id });
-  }
+
+  await postData("/contacts/", { firstname: firstNameOfUser, lastname: lastNameOfUser, email: email, id: id});
 }
-
-// Alternative function
-// async function getInputValueAndPost() {
-//   const name = document.getElementById("signUpInputName").value;
-//   const email = document.getElementById("signUpInputEmail").value;
-//   const password = document.getElementById("signUpInputPassword").value;
-//   const id = getId(); 
-
-//   await postData("/users/", {
-//     name,
-//     email,
-//     password,
-//     id
-//   });
-
-//   let fullName = name.split(" ");
-//   let firstNameOfUser = fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
-//   let lastNameOfUser = fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
-
-//   await postData("/contacts/", {
-//     firstname: formattedFirstName,
-//     lastname: formattedLastName,
-//     email,
-//     password,
-//     id
-//   });
-// }
 
 /**
  * Loads data from the given path on the server.
