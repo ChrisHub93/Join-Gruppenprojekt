@@ -12,7 +12,7 @@ let subtasksClosed = [];
 let debounceTimeOut = 0;
 let contactsToAssign;
 
-function upToDate() {  
+function upToDate() {
   const dateInput = document.getElementById("date");
   dateInput.min = getTodayStr();
 }
@@ -31,47 +31,53 @@ function clearInputFields() {
   clearInnerHTML("assignedMembers");
 }
 
-function removeValue(id){
+function removeValue(id) {
   let ref = document.getElementById(id);
-  if(!ref)return;
-  ref.value ="";
+  if (!ref) return;
+  ref.value = "";
 }
 
-function removeInputError(id){
+function removeInputError(id) {
   let ref = document.getElementById(id);
-  if(!ref)return;
+  if (!ref) return;
   ref.classList.remove("inputError");
 }
 
-function addOpacity(id){
+function addOpacity(id) {
   let ref = document.getElementById(id);
-  if(!ref)return;
+  if (!ref) return;
   ref.classList.add("opacity");
 }
 
-function clearInnerHTML(id){
+function clearInnerHTML(id) {
   let ref = document.getElementById(id);
-  if(!ref)return;
+  if (!ref) return;
   ref.innerHTML = "";
 }
 
-function removeClasses() {
-  let allMembers = document.getElementById("allMembers");
+function renderList() {
   let listRef = allMembers.querySelectorAll("li");
-  let inputRef = allMembers.querySelectorAll("input");
-  let checkBoxImg = allMembers.querySelectorAll("img");
-  let selectCategoryFieldRef = document.getElementById("selectCategoryField");
   for (let element of listRef) {
     element.classList.remove("assignedBg");
   }
+}
+
+function setCheckBoxFalse() {
+  let inputRef = allMembers.querySelectorAll("input");
   for (const element of inputRef) {
     element.checked = false;
   }
+}
+
+function getDefaultCheckBoxImg() {
+  let checkBoxImg = allMembers.querySelectorAll("img");
   for (const element of checkBoxImg) {
     element.src = "../assets/icons/Check button.png";
     element.classList.remove("filterChecked");
   }
-  allMembers.classList.remove("show");
+}
+
+function changeArrowOfInput() {
   let ref = document.getElementById("arrow");
   let currentSrc = ref.getAttribute("src");
   if (currentSrc.includes("arrow_drop_down.png")) {
@@ -79,6 +85,15 @@ function removeClasses() {
   } else {
     ref.src = "../assets/icons/arrow_drop_down.png";
   }
+}
+
+function removeClasses() {
+  let allMembers = document.getElementById("allMembers");
+  let selectCategoryFieldRef = document.getElementById("selectCategoryField");
+  renderList();
+  setCheckBoxFalse();
+  allMembers.classList.remove("show");
+  changeArrowOfInput();
   selectCategoryFieldRef.innerHTML = "";
   selectCategoryFieldRef.innerHTML = getBasicSelectTemplate();
 }
@@ -94,9 +109,7 @@ function clearAddTaskFields() {
 function filterContactsToAssign(userNameWord) {
   clearTimeout(debounceTimeOut);
   debounceTimeOut = setTimeout(() => {
-    currentUser = contactsToAssign.filter((user) =>
-      user.firstname.toLowerCase().includes(userNameWord.toLowerCase())
-    );
+    currentUser = contactsToAssign.filter((user) => user.firstname.toLowerCase().includes(userNameWord.toLowerCase()));
     if (userNameWord.length >= 2) {
       let allMembersRef = document.getElementById("allMembers");
       allMembersRef.innerHTML = "";
@@ -112,7 +125,6 @@ function filterContactsToAssign(userNameWord) {
 async function initAddTask() {
   let contacts = await loadContacts();
   let username = sessionStorage.getItem("loggedInUser");
-
   if (username) {
     let currentUserLoggedIn = await loadUsers();
     let loggedUser = currentUserLoggedIn.find((user) => user.name === username);
@@ -199,10 +211,8 @@ function toggleBorderColor(id) {
 async function openAssignedTo() {
   let allMembers = document.getElementById("allMembers");
   let membersAreVisible = allMembers.classList.toggle("show");
-
   toggleBorderColor("selectMember", membersAreVisible ? "add" : "remove");
   toggleArrow("arrow", membersAreVisible ? "open" : "close");
-
   if (membersAreVisible) {
     setTimeout(() => {
       document.addEventListener("click", handleClickOutsideAllMembers, true);
@@ -216,7 +226,6 @@ function handleClickOutsideAllMembers(event) {
   let allMembers = document.getElementById("allMembers");
   let input = document.getElementById("userNameWord");
   let arrow = document.getElementById("arrow");
-
   if (
     !allMembers.contains(event.target) &&
     !input.contains(event.target) &&
@@ -229,21 +238,16 @@ function handleClickOutsideAllMembers(event) {
   }
 }
 
-function getContact(id) {
-  let membersRef = document.getElementById("contact" + id);
-  let inputRef = document.getElementById("checkbox" + id);
-  let checkBoxImg = document.getElementById("checkBoxImg" + id);
-
+function checkInputCheckBox(membersRef, inputRef, checkBoxImg){
   if (!inputRef.checked) {
     getInputCheckedTrue(membersRef, inputRef, checkBoxImg);
   } else if (inputRef.checked && membersRef.classList.contains("assignedBg")) {
     getInputCheckedFalse(membersRef, inputRef, checkBoxImg);
   }
-  toggleAssignment(id);
+}
 
-  let activeUser = assignedTo.find((currentId) => currentId == id);
-  if (activeUser) {
-    let selectedMember = document.getElementById("selected_name_icon" + id);
+function getActiveUser(membersRef, id){
+let selectedMember = document.getElementById("selected_name_icon" + id);
     if (!selectedMember) {
       getIcon(membersRef, id).then(() => {
         updateAssignedMembersDisplay();
@@ -251,14 +255,47 @@ function getContact(id) {
     } else {
       updateAssignedMembersDisplay();
     }
-  }
+}
 
-  if (!activeUser) {
-    let selectedMember = document.getElementById("selected_name_icon" + id);
+function getNotActiveUser(id){
+   let selectedMember = document.getElementById("selected_name_icon" + id);
     if (selectedMember) {
       selectedMember.remove();
       updateAssignedMembersDisplay();
     }
+}
+
+function getContact(id) {
+  let membersRef = document.getElementById("contact" + id);
+  let inputRef = document.getElementById("checkbox" + id);
+  let checkBoxImg = document.getElementById("checkBoxImg" + id);
+  // if (!inputRef.checked) {
+  //   getInputCheckedTrue(membersRef, inputRef, checkBoxImg);
+  // } else if (inputRef.checked && membersRef.classList.contains("assignedBg")) {
+  //   getInputCheckedFalse(membersRef, inputRef, checkBoxImg);
+  // }
+  checkInputCheckBox(membersRef, inputRef, checkBoxImg)
+  toggleAssignment(id);
+  let activeUser = assignedTo.find((currentId) => currentId == id);
+  if (activeUser) {
+    getActiveUser(membersRef, id);
+    // let selectedMember = document.getElementById("selected_name_icon" + id);
+    // if (!selectedMember) {
+    //   getIcon(membersRef, id).then(() => {
+    //     updateAssignedMembersDisplay();
+    //   });
+    // } else {
+    //   updateAssignedMembersDisplay();
+    // }
+  }
+
+  if (!activeUser) {
+    getNotActiveUser(id);
+    // let selectedMember = document.getElementById("selected_name_icon" + id);
+    // if (selectedMember) {
+    //   selectedMember.remove();
+    //   updateAssignedMembersDisplay();
+    // }
   }
 }
 
@@ -311,26 +348,23 @@ function getCheckBoxFalse(id) {
 
 function updateAssignedMembersDisplay() {
   let container = document.getElementById("assignedMembers");
-
   let existingWrapper = container.querySelector(".plusWrapper");
   if (existingWrapper) existingWrapper.remove();
-
-  let icons = Array.from(
-    container.querySelectorAll(".assigned_to_icon")
-  ).filter((icon) => !icon.closest(".bubbleTooltip"));
+  let icons = Array.from(container.querySelectorAll(".assigned_to_icon")).filter((icon) => !icon.closest(".bubbleTooltip"));
   icons.forEach((icon) => (icon.style.display = "flex"));
-
   if (icons.length > 5) {
-    let hiddenIcons = icons.slice(5);
-    hiddenIcons.forEach((icon) => (icon.style.display = "none"));
+    getIconClasses(container);
+  }
+}
 
+function getIconClasses(container){
+  let hiddenIcons = icons.slice(5);
+    hiddenIcons.forEach((icon) => (icon.style.display = "none"));
     let plusWrapper = document.createElement("div");
     plusWrapper.classList.add("plusWrapper");
-
     let plusOne = document.createElement("p");
     plusOne.classList.add("assignedPlusOne");
     plusOne.textContent = `+${hiddenIcons.length}`;
-
     // let bubbleTooltip = document.createElement("div");
     // bubbleTooltip.classList.add("bubbleTooltip");
 
@@ -339,11 +373,9 @@ function updateAssignedMembersDisplay() {
     //   clone.style.display = "flex";
     //   bubbleTooltip.appendChild(clone);
     // });
-
     plusWrapper.appendChild(plusOne);
     // plusWrapper.appendChild(bubbleTooltip);
     container.appendChild(plusWrapper);
-  }
 }
 
 function openTaskCategory() {
@@ -575,27 +607,27 @@ function editTask(id) {
   let inputRef = document.getElementById(`subtask_${id}`);
   inputField = inputRef.querySelector("input");
   if (inputField.classList.contains("activeInput")) return;
-    addDisplayNone(`editOrTrash_${id}`);
-    toggleDisplayNone(`trashOrCheck_${id}`);
-    inputField.classList.add("activeInput");
-    toggleDisplayNone(`bullet_${id}`);
-    let length = inputField.value.length;
-    inputField.setSelectionRange(length, length);
-    let hideRef = document.getElementById(`editOrTrash_${id}`);
-    hideRef.classList.add("opacity");
+  addDisplayNone(`editOrTrash_${id}`);
+  toggleDisplayNone(`trashOrCheck_${id}`);
+  inputField.classList.add("activeInput");
+  toggleDisplayNone(`bullet_${id}`);
+  let length = inputField.value.length;
+  inputField.setSelectionRange(length, length);
+  let hideRef = document.getElementById(`editOrTrash_${id}`);
+  hideRef.classList.add("opacity");
 }
 
 function acceptTask(id, valueId) {
   const editTaksValue = document.getElementById(valueId).value.trim();
   if (editTaksValue === "") return;
-    toggleDisplayNone(`trashOrCheck_${id}`);
-    let hideRef = document.getElementById(`editOrTrash_${id}`);
-    hideRef.classList.remove("opacity");
-    let inputRef = document.getElementById(`subtask_${id}`);
-    inputField = inputRef.querySelector("input");
-    inputField.blur();
-    inputField.classList.toggle("activeInput");
-    toggleDisplayNone(`bullet_${id}`);
+  toggleDisplayNone(`trashOrCheck_${id}`);
+  let hideRef = document.getElementById(`editOrTrash_${id}`);
+  hideRef.classList.remove("opacity");
+  let inputRef = document.getElementById(`subtask_${id}`);
+  inputField = inputRef.querySelector("input");
+  inputField.blur();
+  inputField.classList.toggle("activeInput");
+  toggleDisplayNone(`bullet_${id}`);
 }
 
 function completeDeleteTask(id) {
@@ -629,15 +661,15 @@ async function postDataToServer(currentStatus) {
   let category = document.getElementById("select");
 
   // Subtasks aus dem DOM auslesen
-  const subTasksFromDOM = Array.from(document.querySelectorAll('.subTaskAdded'))
-  .map(el => {
-    // entweder direkt ein Input-Feld oder Textinhalt
-    if (el.tagName === "INPUT") return el.value.trim();
-    let input = el.querySelector("input");
-    if (input) return input.value.trim();
-    return el.textContent.trim();
-  })
-  .filter(val => val.length > 0);
+  const subTasksFromDOM = Array.from(document.querySelectorAll(".subTaskAdded"))
+    .map((el) => {
+      // entweder direkt ein Input-Feld oder Textinhalt
+      if (el.tagName === "INPUT") return el.value.trim();
+      let input = el.querySelector("input");
+      if (input) return input.value.trim();
+      return el.textContent.trim();
+    })
+    .filter((val) => val.length > 0);
 
   await postData(`/tasks/`, {
     id: generateTimeBasedId(),
@@ -647,7 +679,7 @@ async function postDataToServer(currentStatus) {
     priority: priority,
     assignedTo: assignedTo,
     category: category.innerText,
-    subTasksOpen: subTasksFromDOM, 
+    subTasksOpen: subTasksFromDOM,
     status: currentStatus,
   });
 }
