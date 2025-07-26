@@ -24,12 +24,9 @@ function allowDrop(event) {
   event.preventDefault();
 }
 
-function highlight(id) {
+function highlightDragContainer(id, action) {
   const el = document.getElementById(id);
-  el.classList.add("dragContainer");
-}
-
-function removeHighlight(id) {
-  const el = document.getElementById(id);
-  el.classList.remove("dragContainer");
+  if (el && (action === 'add' || action === 'remove')) {
+    el.classList[action]("dragContainer");
+  }
 }
