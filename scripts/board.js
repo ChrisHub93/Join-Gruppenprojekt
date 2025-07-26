@@ -163,12 +163,6 @@ async function putDataStatus(path = "", data = {}) {
   return (responseToJson = await response.json());
 }
 
-// function getOverlayInfo(addOverlayEditRef, addOverlayRef, dialogTaskContentRef, tasksRef){
-//   addOverlayEditRef.classList.remove("active");
-//   addOverlayRef.classList.add("active");
-//   dialogTaskContentRef.innerHTML = renderOverlayTaskContent(todos[tasksRef]);
-// }
-
 function overlayTask(element) {
   let tasksRef = searchElement(element);
   let addOverlayRef = document.getElementById("overlayTask");
@@ -176,7 +170,6 @@ function overlayTask(element) {
   let addOverlayEditRef = document.getElementById("overlayTaskEdit");
   let checkOpenOverlayEdit = addOverlayEditRef.classList.contains("active");
   let checkOpenOverlay = addOverlayRef.classList.contains("active");
-  // getOverlayInfo(addOverlayEditRef, addOverlayRef, dialogTaskContentRef, tasksRef);
   addOverlayEditRef.classList.remove("active");
   addOverlayRef.classList.add("active");
   dialogTaskContentRef.innerHTML = renderOverlayTaskContent(todos[tasksRef]);
@@ -324,18 +317,6 @@ function taskOverlaySync() {
     dialogTaskEditContentRef.style.height =
       dialogTaskContentRef.offsetHeight + "px";
   }
-}
-
-function editOverlayTask(tasksRef) {  
-  taskOverlaySync();
-  let tasksEditRef = searchElement(tasksRef);
-  let addOverlayRef = document.getElementById("overlayTask");
-  let addOverlayEditRef = document.getElementById("overlayTaskEdit");
-  let dialogTaskEditRef = document.getElementById("dialogTaskEditContent");
-  addOverlayRef.classList.remove("active");
-  addOverlayEditRef.classList.add("active");
-  dialogTaskEditRef.innerHTML = renderOverlayTaskEdit(todos[tasksEditRef]);
-  upToDateEdit();  
 }
 
 function renderPrioButton(prioName, activePrio) {
