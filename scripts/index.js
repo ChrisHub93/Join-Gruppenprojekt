@@ -47,11 +47,9 @@ async function loadData(path = "") {
 function search(dataValues) {
   const email = document.getElementById("logInInputEmail").value;
   const password = document.getElementById("logInInputPassword").value;
-
   for (let user of dataValues) {
     let mails = user.email;
     let passwords = user.password;
-
     if (mails == email && passwords == password) {
       sessionStorage.setItem("loginStatus", "user");
       sessionStorage.setItem("loggedInUser", user.name);
@@ -59,7 +57,6 @@ function search(dataValues) {
       return;
     }
   }
-
   clearPasswordInput();
   showAlert();
 }
