@@ -29,6 +29,7 @@
     <script src="../scripts/add_task_more.js"></script>
     <script src="../scripts/drag_and_drop.js"></script>
     <script src="../scripts/boardAddTask.js"></script>
+    <script src="../scripts/add_task_more.js"></script>
   </head>
   <body onload="init(); loadTasks(); getProfile();">
     <div class="page-box">
@@ -238,16 +239,16 @@
           <div
             id="toDoContent"
             class="idContentContainer"
-            ondrop="moveTo('To do'); removeHighlight('toDoContentDropContent')"
-            ondragover="allowDrop(event); highlight('toDoContentDropContent')"
-            ondragleave="removeHighlight('toDoContentDropContent')"
+            ondrop="moveTo('To do'); highlightDragContainer('toDoContentDropContent', 'remove')"
+            ondragover="allowDrop(event); highlightDragContainer('toDoContentDropContent', 'add')"
+            ondragleave="highlightDragContainer('toDoContentDropContent', 'remove')"
           ></div>
           <div
             id="toDoContentDropContent"
             class="dropzone"
-            ondrop="moveTo('To do'); removeHighlight('toDoContentDropContent')"
-            ondragover="allowDrop(event); highlight('toDoContentDropContent')"
-            ondragleave="removeHighlight('toDoContentDropContent')"
+            ondrop="moveTo('To do'); highlightDragContainer('toDoContentDropContent', 'remove')"
+            ondragover="allowDrop(event); highlightDragContainer('toDoContentDropContent', 'add')"
+            ondragleave="highlightDragContainer('toDoContentDropContent', 'remove')"
           ></div>
         </div>
 
@@ -265,16 +266,16 @@
           <div
             id="inProgressContent"
             class="idContentContainer"
-            ondrop="moveTo('In progress'); removeHighlight('inProgressContentDropContent')"
-            ondragover="allowDrop(event); highlight('inProgressContentDropContent')"
-            ondragleave="removeHighlight('inProgressContentDropContent')"
+            ondrop="moveTo('In progress'); highlightDragContainer('inProgressContentDropContent', 'remove')"
+            ondragover="allowDrop(event); highlightDragContainer('inProgressContentDropContent', 'add')"
+            ondragleave="highlightDragContainer('inProgressContentDropContent', 'remove')"
           ></div>
           <div
             id="inProgressContentDropContent"
             class="dropzone"
-            ondrop="moveTo('In progress'); removeHighlight('inProgressContentDropContent')"
-            ondragover="allowDrop(event); highlight('inProgressContentDropContent')"
-            ondragleave="removeHighlight('inProgressContentDropContent')"
+            ondrop="moveTo('In progress'); highlightDragContainer('inProgressContentDropContent', 'remove')"
+            ondragover="allowDrop(event); highlightDragContainer('inProgressContentDropContent', 'add')"
+            ondragleave="highlightDragContainer('inProgressContentDropContent', 'remove')"
           ></div>
         </div>
 
@@ -292,16 +293,16 @@
           <div
             id="awaitFeedbackContent"
             class="idContentContainer"
-            ondrop="moveTo('Await feedback'); removeHighlight('awaitFeedbackContentDropContent')"
-            ondragover="allowDrop(event); highlight('awaitFeedbackContentDropContent')"
-            ondragleave="removeHighlight('awaitFeedbackContentDropContent')"
+            ondrop="moveTo('Await feedback'); highlightDragContainer('awaitFeedbackContentDropContent', 'remove')"
+            ondragover="allowDrop(event); highlightDragContainer('awaitFeedbackContentDropContent', 'add')"
+            ondragleave="highlightDragContainer('awaitFeedbackContentDropContent', 'remove')"
           ></div>
           <div
             id="awaitFeedbackContentDropContent"
             class="dropzone"
-            ondrop="moveTo('Await feedback'); removeHighlight('awaitFeedbackContentDropContent')"
-            ondragover="allowDrop(event); highlight('awaitFeedbackContentDropContent')"
-            ondragleave="removeHighlight('awaitFeedbackContentDropContent')"
+            ondrop="moveTo('Await feedback'); highlightDragContainer('awaitFeedbackContentDropContent', 'remove')"
+            ondragover="allowDrop(event); highlightDragContainer('awaitFeedbackContentDropContent', 'add')"
+            ondragleave="highlightDragContainer('awaitFeedbackContentDropContent', 'remove')"
           ></div>
         </div>
 
@@ -313,16 +314,16 @@
           <div
             id="doneContent"
             class="idContentContainer"
-            ondrop="moveTo('Done'); removeHighlight('doneDropContent')"
-            ondragover="allowDrop(event); highlight('doneDropContent')"
-            ondragleave="removeHighlight('doneDropContent')"
+            ondrop="moveTo('Done'); highlightDragContainer('doneDropContent', 'remove')"
+            ondragover="allowDrop(event); highlightDragContainer('doneDropContent', 'add')"
+            ondragleave="highlightDragContainer('doneDropContent', 'remove')"
           ></div>
           <div
             id="doneDropContent"
             class="dropzone"
-            ondrop="moveTo('Done'); removeHighlight('doneDropContent')"
-            ondragover="allowDrop(event); highlight('doneDropContent')"
-            ondragleave="removeHighlight('doneDropContent')"
+            ondrop="moveTo('Done'); highlightDragContainer('doneDropContent', 'remove')"
+            ondragover="allowDrop(event); highlightDragContainer('doneDropContent', 'add')"
+            ondragleave="highlightDragContainer('doneDropContent', 'remove')"
           ></div>
         </div>
       </div>
