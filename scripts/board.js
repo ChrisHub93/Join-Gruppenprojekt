@@ -163,11 +163,11 @@ async function putDataStatus(path = "", data = {}) {
   return (responseToJson = await response.json());
 }
 
-function getOverlayInfo(addOverlayEditRef, addOverlayRef, dialogTaskContentRef, tasksRef){
-  addOverlayEditRef.classList.remove("active");
-  addOverlayRef.classList.add("active");
-  dialogTaskContentRef.innerHTML = renderOverlayTaskContent(todos[tasksRef]);
-}
+// function getOverlayInfo(addOverlayEditRef, addOverlayRef, dialogTaskContentRef, tasksRef){
+//   addOverlayEditRef.classList.remove("active");
+//   addOverlayRef.classList.add("active");
+//   dialogTaskContentRef.innerHTML = renderOverlayTaskContent(todos[tasksRef]);
+// }
 
 function overlayTask(element) {
   let tasksRef = searchElement(element);
@@ -176,7 +176,10 @@ function overlayTask(element) {
   let addOverlayEditRef = document.getElementById("overlayTaskEdit");
   let checkOpenOverlayEdit = addOverlayEditRef.classList.contains("active");
   let checkOpenOverlay = addOverlayRef.classList.contains("active");
-  getOverlayInfo(addOverlayEditRef, addOverlayRef, dialogTaskContentRef, tasksRef);
+  // getOverlayInfo(addOverlayEditRef, addOverlayRef, dialogTaskContentRef, tasksRef);
+  addOverlayEditRef.classList.remove("active");
+  addOverlayRef.classList.add("active");
+  dialogTaskContentRef.innerHTML = renderOverlayTaskContent(todos[tasksRef]);
   disableScroll();
   if (!checkOpenOverlay && !checkOpenOverlayEdit) {
     dialogTaskContentRef.style.transform = "translateX(100%)";
@@ -341,10 +344,7 @@ function renderPrioButton(prioName, activePrio) {
   let prioFullName = prioName.charAt(0).toUpperCase() + prioName.slice(1);
   let iconPath = `../assets/icons/priority-${prioGet}.png`;
   let iconPathClicked = `../assets/icons/priority-clicked-${prioGet}.png`;
-  getButton(prioGet, isActive, prioFullName, iconPathClicked, iconPath);
-}
-
-function getButton(prioGet, isActive, prioFullName, iconPathClicked, iconPath){
+  
   return `
     <button 
       class="prio_edit_button ${prioGet} ${isActive ? "active" : ""}" 
@@ -357,6 +357,8 @@ function getButton(prioGet, isActive, prioFullName, iconPathClicked, iconPath){
     </button>
   `;
 }
+
+
 
 function setPrioActive(clickedButton) {
   let prioButtons = clickedButton.parentElement.querySelectorAll(".prio_edit_button");
