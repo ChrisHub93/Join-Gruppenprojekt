@@ -4,37 +4,50 @@ let currentDraggedElement;
 let globalContacts = [];
 let isToggling = false;
 
+function getLoadTasksTemplateFunctions(toDoContentRef, inProgressContentRef, awaitFeedbackContentRef, doneContentRef){
+  toDoContentRef.innerHTML = getEmptyTemplate();
+  inProgressContentRef.innerHTML = getEmptyTemplate();
+  awaitFeedbackContentRef.innerHTML = getEmptyTemplate();
+  doneContentRef.innerHTML = getEmptyTemplate();
+}
+
+function emptyContentHTML(toDoContentRef, inProgressContentRef, awaitFeedbackContentRef, doneContentRef){
+  toDoContentRef.innerHTML = "";
+  inProgressContentRef.innerHTML = "";
+  awaitFeedbackContentRef.innerHTML = "";
+  doneContentRef.innerHTML = "";
+}
+
 async function loadTasks() {
   let toDoContentRef = document.getElementById("toDoContent");
   let inProgressContentRef = document.getElementById("inProgressContent");
   let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
   let doneContentRef = document.getElementById("doneContent");
   let tasks = await fetchData("/tasks/");
-
   if (tasks === null) {
-    toDoContentRef.innerHTML = getEmptyTemplate();
-    inProgressContentRef.innerHTML = getEmptyTemplate();
-    awaitFeedbackContentRef.innerHTML = getEmptyTemplate();
-    doneContentRef.innerHTML = getEmptyTemplate();
+    getLoadTasksTemplateFunctions(toDoContentRef, inProgressContentRef, awaitFeedbackContentRef, doneContentRef);
     return;
   }
   loadTodos = Object.values(tasks);
   addEmptySubtasks();
-
   let contactsData = await fetchData("/contacts/");
   globalContacts = Object.values(contactsData);
   let statusToDo = todos.filter((task) => task.status === "To do");
   let statusInProgress = todos.filter((task) => task.status === "In progress");
-  let statusAwaitFeedback = todos.filter(
-    (task) => task.status === "Await feedback"
-  );
+  let statusAwaitFeedback = todos.filter((task) => task.status === "Await feedback");
   let statusDone = todos.filter((task) => task.status === "Done");
+  emptyContentHTML(toDoContentRef, inProgressContentRef, awaitFeedbackContentRef, doneContentRef);
+  checkAllStatus(statusToDo, toDoContentRef, statusInProgress, inProgressContentRef, statusAwaitFeedback, awaitFeedbackContentRef, statusDone, doneContentRef);
+}
 
-  toDoContentRef.innerHTML = "";
-  inProgressContentRef.innerHTML = "";
-  awaitFeedbackContentRef.innerHTML = "";
-  doneContentRef.innerHTML = "";
+function checkAllStatus(statusToDo, toDoContentRef, statusInProgress, inProgressContentRef, statusAwaitFeedback, awaitFeedbackContentRef, statusDone, doneContentRef){
+  checkStatusToDo(statusToDo, toDoContentRef);
+  checkStatusInProgress(statusInProgress, inProgressContentRef);
+  checkStatusAwaitFeedback(statusAwaitFeedback, awaitFeedbackContentRef);
+  checkStatusDone(statusDone, doneContentRef);
+}
 
+function checkStatusToDo(statusToDo, toDoContentRef){
   if (statusToDo.length === 0) {
     toDoContentRef.innerHTML = getEmptyTemplate();
   } else {
@@ -44,7 +57,9 @@ async function loadTasks() {
       calculateAndRenderProgressBar(element);
     }
   }
+}
 
+function checkStatusInProgress(statusInProgress, inProgressContentRef){
   if (statusInProgress.length == 0) {
     inProgressContentRef.innerHTML = getEmptyTemplate();
   } else {
@@ -54,8 +69,10 @@ async function loadTasks() {
       calculateAndRenderProgressBar(element);
     }
   }
+}
 
-  if (statusAwaitFeedback.length == 0) {
+function checkStatusAwaitFeedback(statusAwaitFeedback, awaitFeedbackContentRef){
+   if (statusAwaitFeedback.length == 0) {
     awaitFeedbackContentRef.innerHTML = getEmptyTemplate();
   } else {
     for (let index = 0; index < statusAwaitFeedback.length; index++) {
@@ -64,7 +81,9 @@ async function loadTasks() {
       calculateAndRenderProgressBar(element);
     }
   }
+}
 
+function checkStatusDone(statusDone, doneContentRef){
   if (statusDone.length == 0) {
     doneContentRef.innerHTML = getEmptyTemplate();
   } else {
@@ -79,7 +98,6 @@ async function loadTasks() {
 
 function addEmptySubtasks() {
   todos = [];
-
   for (let task of loadTodos) {
     if (task.subTasksOpen === undefined) {
       task.subTasksOpen = [];
@@ -91,13 +109,11 @@ function addEmptySubtasks() {
   }
 }
 
-// prettier-ignore
 function calculateAndRenderProgressBar(element) {
   let percent = 0;
   let tasksOpenLength = element.subTasksOpen?.length ?? 0;
   let tasksClosedLength = element.subTasksClosed?.length ?? 0;
   let tasksLength = tasksOpenLength + tasksClosedLength
-
   if (tasksLength === 0) {
      document.getElementById("filledContainer-status" + element.id).style.display = "none";
   } else {
@@ -136,6 +152,12 @@ async function putDataStatus(path = "", data = {}) {
   return (responseToJson = await response.json());
 }
 
+function getOverlayInfo(addOverlayEditRef, addOverlayRef, dialogTaskContentRef, tasksRef){
+  addOverlayEditRef.classList.remove("active");
+  addOverlayRef.classList.add("active");
+  dialogTaskContentRef.innerHTML = renderOverlayTaskContent(todos[tasksRef]);
+}
+
 function overlayTask(element) {
   let tasksRef = searchElement(element);
   let addOverlayRef = document.getElementById("overlayTask");
@@ -143,10 +165,8 @@ function overlayTask(element) {
   let addOverlayEditRef = document.getElementById("overlayTaskEdit");
   let checkOpenOverlayEdit = addOverlayEditRef.classList.contains("active");
   let checkOpenOverlay = addOverlayRef.classList.contains("active");
-  addOverlayEditRef.classList.remove("active");
-  addOverlayRef.classList.add("active");
-  dialogTaskContentRef.innerHTML = renderOverlayTaskContent(todos[tasksRef]);
-  disableScroll()
+  getOverlayInfo(addOverlayEditRef, addOverlayRef, dialogTaskContentRef, tasksRef);
+  disableScroll();
   if (!checkOpenOverlay && !checkOpenOverlayEdit) {
     dialogTaskContentRef.style.transform = "translateX(100%)";
     dialogTaskContentRef.style.opacity = "0";
@@ -171,42 +191,39 @@ function closeOverlay(event) {
   let addOverlayEditRef = document.getElementById("overlayTaskEdit");
   let dialogTaskContentRef = document.getElementById("dialogTaskContent");
   let dialogTaskEditContent = document.getElementById("dialogTaskEditContent");
-  if (
-    event.target === addOverlayTaskRef ||
-    event.target.closest("#overlayTask .closeIcon") ||
-    event.target.closest(".delete_task")
-  ) {
-    dialogTaskContentRef.style.transform = "translateX(100%)";
-    dialogTaskContentRef.style.opacity = "0";
+  if (event.target === addOverlayTaskRef || event.target.closest("#overlayTask .closeIcon") || event.target.closest(".delete_task")) {
+    getStyleToCloseOverlay(dialogTaskContentRef, dialogTaskContentRef, addOverlayTaskRef);
+  } else if (event.target === addOverlayEditRef || event.target.closest("#overlayTaskEdit .closeIcon")) {
+    getStyleToCloseEditOverlay(dialogTaskEditContent, addOverlayEditRef);
+  }
+}
 
-    setTimeout(() => {
-      addOverlayTaskRef.classList.remove("active");
-      dialogTaskContentRef.style.transform = "";
-      dialogTaskContentRef.style.opacity = "";
-    }, 300);
-  } else if (
-    event.target === addOverlayEditRef ||
-    event.target.closest("#overlayTaskEdit .closeIcon")
-  ) {
-    dialogTaskEditContent.style.transform = "translateX(100%)";
+function getStyleToCloseOverlay(dialogTaskContentRef, dialogTaskContentRef, addOverlayTaskRef){
+  dialogTaskContentRef.style.transform = "translateX(100%)";
+  dialogTaskContentRef.style.opacity = "0";
+  setTimeout(() => {
+  addOverlayTaskRef.classList.remove("active");
+  dialogTaskContentRef.style.transform = "";
+  dialogTaskContentRef.style.opacity = "";
+  }, 300);
+}
+
+function getStyleToCloseEditOverlay(dialogTaskEditContent, addOverlayEditRef){
+  dialogTaskEditContent.style.transform = "translateX(100%)";
     dialogTaskEditContent.style.opacity = "0";
-
     setTimeout(() => {
       addOverlayEditRef.classList.remove("active");
       dialogTaskEditContent.style.transform = "";
       dialogTaskEditContent.style.opacity = "";
     }, 300);
-  }
 }
 
 async function toggleSubtask(img, id, clickedID) {
   if (isToggling) return;
   isToggling = true;
-
   try {
     let fileName = img.src.split("/").pop();
     let isChecked = fileName === "subtask-checked.png";
-
     if (isChecked) {
       img.src = "../assets/icons/subtask-unchecked.png";
       await postSubtaskClosed(id, clickedID);
@@ -225,19 +242,13 @@ async function postSubtaskClosed(id, clickedID) {
   let getTasks = await fetchData("tasks/");
   let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
   if (!taskKey) return;
-
   const task = getTasks[taskKey];
   const closedSubtasks = task.subTasksClosed || [];
   const openSubtasks = task.subTasksOpen || [];
-
-  const subTaskIndex = closedSubtasks.findIndex(
-    (task) => task.trim() === clickedValue
-  );
+  const subTaskIndex = closedSubtasks.findIndex((task) => task.trim() === clickedValue);
   if (subTaskIndex === -1) return;
-
   const [movedSubtask] = closedSubtasks.splice(subTaskIndex, 1);
   openSubtasks.push(movedSubtask);
-
   await patchData(`tasks/${taskKey}`, {
     subTasksOpen: openSubtasks,
     subTasksClosed: closedSubtasks,
@@ -246,23 +257,16 @@ async function postSubtaskClosed(id, clickedID) {
 
 async function postSubtaskOpen(id, clickedID) {
   const clickedValue = document.getElementById(clickedID).innerText.trim();
-
   let getTasks = await fetchData("tasks/");
   let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
   if (!taskKey) return;
-
   const task = getTasks[taskKey];
   const closedSubtasks = task.subTasksClosed || [];
   const openSubtasks = task.subTasksOpen || [];
-
-  const subTaskIndex = openSubtasks.findIndex(
-    (task) => task.trim() === clickedValue
-  );
+  const subTaskIndex = openSubtasks.findIndex((task) => task.trim() === clickedValue);
   if (subTaskIndex === -1) return;
-
   const [movedSubtask] = openSubtasks.splice(subTaskIndex, 1);
   closedSubtasks.push(movedSubtask);
-
   await patchData(`tasks/${taskKey}`, {
     subTasksOpen: openSubtasks,
     subTasksClosed: closedSubtasks,
@@ -281,10 +285,7 @@ async function patchData(path, data = {}) {
 }
 
 function subtasksOverlay(taskRef) {
-  if (
-    taskRef.subTasksOpen == undefined &&
-    taskRef.subTasksClosed === undefined
-  ) {
+  if (taskRef.subTasksOpen == undefined && taskRef.subTasksClosed === undefined) {
     return "";
   } else {
     return subtasksOverlayRender(taskRef);
@@ -304,10 +305,7 @@ function subtasksOverlayEdit(tasksEditRef) {
 
 function taskOverlaySync() {
   let dialogTaskContentRef = document.getElementById("dialogTaskContent");
-  let dialogTaskEditContentRef = document.getElementById(
-    "dialogTaskEditContent"
-  );
-
+  let dialogTaskEditContentRef = document.getElementById("dialogTaskEditContent");
   if (dialogTaskContentRef && dialogTaskEditContentRef) {
     dialogTaskEditContentRef.style.height =
       dialogTaskContentRef.offsetHeight + "px";
@@ -324,7 +322,6 @@ function editOverlayTask(tasksRef) {
   addOverlayEditRef.classList.add("active");
   dialogTaskEditRef.innerHTML = renderOverlayTaskEdit(todos[tasksEditRef]);
   upToDateEdit();  
-  // toggleFlatpickr(document.getElementById("dateEdit"));
 }
 
 function renderPrioButton(prioName, activePrio) {
@@ -333,7 +330,10 @@ function renderPrioButton(prioName, activePrio) {
   let prioFullName = prioName.charAt(0).toUpperCase() + prioName.slice(1);
   let iconPath = `../assets/icons/priority-${prioGet}.png`;
   let iconPathClicked = `../assets/icons/priority-clicked-${prioGet}.png`;
+  getButton(prioGet, isActive, prioFullName, iconPathClicked, iconPath);
+}
 
+function getButton(prioGet, isActive, prioFullName, iconPathClicked, iconPath){
   return `
     <button 
       class="prio_edit_button ${prioGet} ${isActive ? "active" : ""}" 
@@ -348,8 +348,7 @@ function renderPrioButton(prioName, activePrio) {
 }
 
 function setPrioActive(clickedButton) {
-  let prioButtons =
-    clickedButton.parentElement.querySelectorAll(".prio_edit_button");
+  let prioButtons = clickedButton.parentElement.querySelectorAll(".prio_edit_button");
   let prioButtonClicked = clickedButton.classList.contains("active");
   prioButtons.forEach((btn) => {
     btn.classList.remove("active");
@@ -370,30 +369,12 @@ function upToDateEdit() {
   dateInput.min = getTodayStr();
 }
 
-// let flatpickrInstance = null;
-// function toggleFlatpickr(inputElement) {
-//   if (flatpickrInstance) {
-//     flatpickrInstance.destroy();
-//     flatpickrInstance = null;
-//   }
-//   if (!flatpickrInstance) {
-//     flatpickrInstance = flatpickr(inputElement, {
-//       dateFormat: "d/m/Y",
-//       allowInput: true,
-//       defaultDate: inputElement.value || null,
-//       minDate: "today",
-//       disableMobile: true,
-//     });
-//   }
-// }
-
 function formatDateToDisplay(dateStr) {
   if (!dateStr) return "";
 
   if (dateStr.includes("/")) {
     return dateStr;
   }
-
   let [year, month, day] = dateStr.split("-");
   return `${day}/${month}/${year}`;
 }
@@ -401,7 +382,6 @@ function formatDateToDisplay(dateStr) {
 async function loadData(path = "") {
   let response = await fetch(BASE_URL + path + ".json");
   let responseToJson = await response.json();
-
   return responseToJson;
 }
 
@@ -411,9 +391,7 @@ async function updateDataEdit(tasksEditRef) {
     return;
   } else {
     let tasks = await fetchData("/tasks/");
-    let taskKeyEdit = Object.keys(tasks).find(
-      (k) => String(tasks[k].id) === String(tasksEditRef)
-    );
+    let taskKeyEdit = Object.keys(tasks).find((k) => String(tasks[k].id) === String(tasksEditRef));
     let prioButton = document.querySelector(".prio_edit_button.active");
     let priorityEdit = prioButton.dataset.prio;
     let data = {
@@ -428,10 +406,8 @@ async function updateDataEdit(tasksEditRef) {
       subTasksClosed: tasks[taskKeyEdit].subTasksClosed,
       status: tasks[taskKeyEdit].status,
     };
-
     await putDataEdit(`/tasks/${taskKeyEdit}`, data);
     await loadTasks();
-
     overlayTask(data.id);
   }
 }
