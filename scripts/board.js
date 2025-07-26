@@ -165,22 +165,15 @@ async function putDataStatus(path = "", data = {}) {
 
 function overlayTask(element) {
   let tasksRef = searchElement(element);
-  let addOverlayRef = document.getElementById("overlayTask");
-  let dialogTaskContentRef = document.getElementById("dialogTaskContent");
-  let addOverlayEditRef = document.getElementById("overlayTaskEdit");
+  let { addOverlayTaskRef, dialogTaskContentRef, addOverlayEditRef } = getOverlayElements();
   let checkOpenOverlayEdit = addOverlayEditRef.classList.contains("active");
-  let checkOpenOverlay = addOverlayRef.classList.contains("active");
+  let checkOpenOverlay = addOverlayTaskRef.classList.contains("active");
   addOverlayEditRef.classList.remove("active");
-  addOverlayRef.classList.add("active");
+  addOverlayTaskRef.classList.add("active");
   dialogTaskContentRef.innerHTML = renderOverlayTaskContent(todos[tasksRef]);
   disableScroll();
   if (!checkOpenOverlay && !checkOpenOverlayEdit) {
-    dialogTaskContentRef.style.transform = "translateX(100%)";
-    dialogTaskContentRef.style.opacity = "0";
-    requestAnimationFrame(() => {
-      dialogTaskContentRef.style.transform = "translateX(0)";
-      dialogTaskContentRef.style.opacity = "1";
-    });
+  overlaySlide(dialogTaskContentRef);
   }
 }
 
@@ -193,36 +186,41 @@ function searchElement(id) {
   return index;
 }
 
+function getOverlayElements() {
+  return {
+    addOverlayTaskRef: document.getElementById("overlayTask"),
+    dialogTaskContentRef: document.getElementById("dialogTaskContent"),
+    addOverlayEditRef: document.getElementById("overlayTaskEdit"),
+    dialogTaskEditContent: document.getElementById("dialogTaskEditContent"),
+  };
+}
+
+function overlaySlide(element) {
+      element.style.transform = "translateX(100%)";
+      element.style.opacity = "0";
+    requestAnimationFrame(() => {
+      element.style.transform = "translateX(0)";
+      element.style.opacity = "1";
+    });
+}
+
 function closeOverlay(event) {
-  let addOverlayTaskRef = document.getElementById("overlayTask");
-  let addOverlayEditRef = document.getElementById("overlayTaskEdit");
-  let dialogTaskContentRef = document.getElementById("dialogTaskContent");
-  let dialogTaskEditContent = document.getElementById("dialogTaskEditContent");
+  let { addOverlayTaskRef, dialogTaskContentRef, addOverlayEditRef, dialogTaskEditContent } = getOverlayElements();
   if (event.target === addOverlayTaskRef || event.target.closest("#overlayTask .closeIcon") || event.target.closest(".delete_task")) {
-    getStyleToCloseOverlay(dialogTaskContentRef, dialogTaskContentRef, addOverlayTaskRef);
+    closeOverlayAnimation(dialogTaskContentRef, addOverlayTaskRef);
   } else if (event.target === addOverlayEditRef || event.target.closest("#overlayTaskEdit .closeIcon")) {
-    getStyleToCloseEditOverlay(dialogTaskEditContent, addOverlayEditRef);
+    closeOverlayAnimation(dialogTaskEditContent, addOverlayEditRef);
   }
 }
 
-function getStyleToCloseOverlay(dialogTaskContentRef, dialogTaskContentRef, addOverlayTaskRef){
-  dialogTaskContentRef.style.transform = "translateX(100%)";
-  dialogTaskContentRef.style.opacity = "0";
+function closeOverlayAnimation(contentRef, overlayRef){
+  contentRef.style.transform = "translateX(100%)";
+  contentRef.style.opacity = "0";
   setTimeout(() => {
-  addOverlayTaskRef.classList.remove("active");
-  dialogTaskContentRef.style.transform = "";
-  dialogTaskContentRef.style.opacity = "";
+  overlayRef.classList.remove("active");
+  contentRef.style.transform = "";
+  contentRef.style.opacity = "";
   }, 300);
-}
-
-function getStyleToCloseEditOverlay(dialogTaskEditContent, addOverlayEditRef){
-  dialogTaskEditContent.style.transform = "translateX(100%)";
-    dialogTaskEditContent.style.opacity = "0";
-    setTimeout(() => {
-      addOverlayEditRef.classList.remove("active");
-      dialogTaskEditContent.style.transform = "";
-      dialogTaskEditContent.style.opacity = "";
-    }, 300);
 }
 
 async function toggleSubtask(img, id, clickedID) {
@@ -244,40 +242,60 @@ async function toggleSubtask(img, id, clickedID) {
   loadTasks();
 }
 
-async function postSubtaskClosed(id, clickedID) {
+async function moveSubtaskBetweenLists(id, clickedID, fromKey, toKey) {
   const clickedValue = document.getElementById(clickedID).innerText.trim();
   let getTasks = await fetchData("tasks/");
   let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
   if (!taskKey) return;
-  const task = getTasks[taskKey];
-  const closedSubtasks = task.subTasksClosed || [];
-  const openSubtasks = task.subTasksOpen || [];
-  const subTaskIndex = closedSubtasks.findIndex((task) => task.trim() === clickedValue);
+  let task = getTasks[taskKey];
+  let fromSubtaskList = task[fromKey] || [];
+  let toSubtaskList = task[toKey] || [];
+  let subTaskIndex = fromSubtaskList.findIndex((task) => task.trim() === clickedValue);
   if (subTaskIndex === -1) return;
-  const [movedSubtask] = closedSubtasks.splice(subTaskIndex, 1);
-  openSubtasks.push(movedSubtask);
+  let [movedSubtask] = fromSubtaskList.splice(subTaskIndex, 1);
+  toSubtaskList.push(movedSubtask);
   await patchData(`tasks/${taskKey}`, {
-    subTasksOpen: openSubtasks,
-    subTasksClosed: closedSubtasks,
+    [fromKey]: fromSubtaskList,
+    [toKey]: toSubtaskList,
   });
 }
 
+async function postSubtaskClosed(id, clickedID) {
+  await moveSubtaskBetweenLists(id, clickedID, "subTasksClosed", "subTasksOpen");
+  // const clickedValue = document.getElementById(clickedID).innerText.trim();
+  // let getTasks = await fetchData("tasks/");
+  // let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
+  // if (!taskKey) return;
+  // const task = getTasks[taskKey];
+  // const closedSubtasks = task.subTasksClosed || [];
+  // const openSubtasks = task.subTasksOpen || [];
+  // const subTaskIndex = closedSubtasks.findIndex((task) => task.trim() === clickedValue);
+  // if (subTaskIndex === -1) return;
+  // const [movedSubtask] = closedSubtasks.splice(subTaskIndex, 1);
+  // openSubtasks.push(movedSubtask);
+  // await patchData(`tasks/${taskKey}`, {
+  //   subTasksOpen: openSubtasks,
+  //   subTasksClosed: closedSubtasks,
+  // });
+}
+
 async function postSubtaskOpen(id, clickedID) {
-  const clickedValue = document.getElementById(clickedID).innerText.trim();
-  let getTasks = await fetchData("tasks/");
-  let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
-  if (!taskKey) return;
-  const task = getTasks[taskKey];
-  const closedSubtasks = task.subTasksClosed || [];
-  const openSubtasks = task.subTasksOpen || [];
-  const subTaskIndex = openSubtasks.findIndex((task) => task.trim() === clickedValue);
-  if (subTaskIndex === -1) return;
-  const [movedSubtask] = openSubtasks.splice(subTaskIndex, 1);
-  closedSubtasks.push(movedSubtask);
-  await patchData(`tasks/${taskKey}`, {
-    subTasksOpen: openSubtasks,
-    subTasksClosed: closedSubtasks,
-  });
+    await moveSubtaskBetweenLists(id, clickedID, "subTasksOpen", "subTasksClosed");
+  // const clickedValue = document.getElementById(clickedID).innerText.trim();
+  // let getTasks = await fetchData("tasks/");
+  // let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
+  // if (!taskKey) return;
+  // const task = getTasks[taskKey];
+  // const closedSubtasks = task.subTasksClosed || [];
+  // const openSubtasks = task.subTasksOpen || [];
+  // const subTaskIndex = openSubtasks.findIndex((task) => task.trim() === clickedValue);
+  // if (subTaskIndex === -1) return;
+  // const [movedSubtask] = openSubtasks.splice(subTaskIndex, 1);
+  // closedSubtasks.push(movedSubtask);
+  // await patchData(`tasks/${taskKey}`, {
+  //   subTasksOpen: openSubtasks,
+  //   subTasksClosed: closedSubtasks,
+  // });
 }
 
 async function patchData(path, data = {}) {
@@ -325,18 +343,7 @@ function renderPrioButton(prioName, activePrio) {
   let prioFullName = prioName.charAt(0).toUpperCase() + prioName.slice(1);
   let iconPath = `../assets/icons/priority-${prioGet}.png`;
   let iconPathClicked = `../assets/icons/priority-clicked-${prioGet}.png`;
-  
-  return `
-    <button 
-      class="prio_edit_button ${prioGet} ${isActive ? "active" : ""}" 
-      data-prio="${prioGet}" 
-      type="button"
-      onclick="setPrioActive(this)">
-      ${prioFullName} <img class="prio_overlay_task" src="${
-    isActive ? iconPathClicked : iconPath
-  }">
-    </button>
-  `;
+  return prioButtonTemplate(prioFullName, prioGet, isActive, iconPath, iconPathClicked);
 }
 
 

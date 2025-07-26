@@ -610,3 +610,15 @@ function getEmptyTemplate() {
             </div>
   `;
 }
+
+function prioButtonTemplate(prioFullName, prioGet, isActive, iconPath, iconPathClicked) {
+  return `
+    <button 
+      class="prio_edit_button ${prioGet} ${isActive ? "active" : ""}" 
+      data-prio="${prioGet}" 
+      type="button"
+      onclick="setPrioActive(this)">
+      ${prioFullName} <img class="prio_overlay_task" src="${isActive ? iconPathClicked : iconPath}">
+    </button>
+  `;
+}
