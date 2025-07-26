@@ -1,6 +1,5 @@
 let loadTodos = [];
 let todos = [];
-let currentDraggedElement;
 let globalContacts = [];
 let isToggling = false;
 
