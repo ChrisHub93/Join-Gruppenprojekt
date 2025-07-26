@@ -242,6 +242,12 @@ function contactRenderData(id) {
   return { initials, name, assignedColor, id };
 }
 
+/**
+ * function to show the assigned contacts as initials of a task
+ * 
+ * @param {Array} assignedToIds - list of assigned contacts
+ * @returns {string} - Initials or a text if nobody is assigned
+ */
 function getAssignedInitials(assignedToIds) {
   if (!assignedToIds) {
     return `
@@ -257,6 +263,12 @@ function getAssignedInitials(assignedToIds) {
   }
 }
 
+/**
+ * function to show the assigned contacts as initials on an edited task
+ * 
+ * @param {Array} assignedToIds - list of assigned contacts
+ * @returns {string} - Initials or nothing
+ */
 function getAssignedInitialsEditIcons(assignedToIds) {
   if (!assignedToIds) {
     return "";
@@ -271,24 +283,49 @@ function getAssignedInitialsEditIcons(assignedToIds) {
   }
 }
 
-function getAvatarColorClass(name) {
+/**
+ * function to identify a color index based on a name, 
+ * where the index ist between 0 and 14
+ *
+ * @param {string} name - name to identify the color index
+ * @returns {number} - integer between 0 and 14
+ */
+function getHashedColorIndex(name) {
   let hash = 0;
   for (let i = 0; i < name.length; i++) {
     hash = name.charCodeAt(i) + ((hash << 5) - hash);
   }
-  let index = Math.abs(hash) % 15;
+  return Math.abs(hash) % 15;
+}
+
+/**
+ * function to define the CSS class of an user
+ *
+ * @param {string} name - full name of an user
+ * @returns {string} - CSS class name
+ */
+function getAvatarColorClass(name) {
+  let index = getHashedColorIndex(name);
   return `initials_color_${index}`;
 }
 
+/**
+ * function to define the CSS class of a user
+ *
+ * @param {string} name - full name of an user
+ * @returns {string} - CSS class name
+ */
 function getUserNameColorClass(name) {
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  let index = Math.abs(hash) % 15;
+  let index = getHashedColorIndex(name);
   return `user_color_${index}`;
 }
 
+/**
+ * function to render the profile icon based on the login status.
+ * Differs between a true logged in user, guest or no icon.
+ * 
+ * @returns {void}
+ */
 function getProfile() {
     let status = sessionStorage.getItem("loginStatus");
   if (status !== "user" && status !== "guest") return;
