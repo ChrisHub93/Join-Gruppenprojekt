@@ -124,7 +124,15 @@ function renderProgressBar(percent, tasksClosedLength, tasksLength, element) {
       "status-bar-number2" + element.id
     ).innerText = `${tasksLength}`;
 }
-
+/**
+ * Deletes a task from the board by its task ID.
+ * 
+ * Fetches all tasks, finds the matching task key by ID, deletes it from the server,
+ * then triggers UI updates by closing the overlay and reloading tasks.
+ * 
+ * @param {number} tasksRef - The ID of the task to delete
+ * @returns {Promise<void>} Resolves when the deletion and UI updates are complete
+ */
 async function deleteBoardTasks(tasksRef) {
   let tasks = await fetchData("/tasks/");
   let key = Object.keys(tasks).find(
@@ -135,6 +143,13 @@ async function deleteBoardTasks(tasksRef) {
   loadTasks();
 }
 
+/**
+ * Sends a DELETE request to remove a task by its key from the server.
+ * 
+ * @param {string} path - The base API path (e.g., "/tasks/")
+ * @param {string} key - The server key of the task to delete
+ * @returns {Promise<object>} The parsed JSON response from the server
+ */
 async function deleteTasks(path, key) {
   let response = await fetch(BASE_URL + path + key + ".json", {
     method: "DELETE",
@@ -142,6 +157,15 @@ async function deleteTasks(path, key) {
   return await response.json();
 }
 
+/**
+ * Shows a delete success overlay for 0.8 seconds.
+ * 
+ * Removes the hidden class from the delete overlay and displays the success message,
+ * then hides the overlay and message again after 800 milliseconds.
+ * Also resets the document body's overflow style.
+ * 
+ * @returns {void}
+ */
 function deleteOverlaySuccses() {
   const addOverlayRef = document.getElementById("overlayDeleteTask");
   addOverlayRef.classList.remove("d-nonevip");
@@ -154,8 +178,20 @@ function deleteOverlaySuccses() {
   }, 800);
 }
 
-function overlayTask(element) {
-  let tasksRef = searchElement(element);
+/**
+ * Opens the task overlay for the given task element.
+ * 
+ * It finds the task index by searching for the element,
+ * then switches the UI by hiding the edit overlay (if open),
+ * showing the task overlay, rendering the task content,
+ * and disabling page scroll. If no overlay was previously open,
+ * it triggers the slide-in animation for the overlay.
+ * 
+ * @param {number} ID - ID of the task to display
+ * @returns {void}
+ */
+function overlayTask(ID) {
+  let tasksRef = searchElement(ID);
   let { addOverlayTaskRef, dialogTaskContentRef, addOverlayEditRef } =
     getOverlayElements();
   let checkOpenOverlayEdit = addOverlayEditRef.classList.contains("active");
@@ -169,6 +205,13 @@ function overlayTask(element) {
   }
 }
 
+/**
+ * Searches for the index of the task with the given ID in the todos array.
+ * If no matching ID is found, logs an error and returns undefined.
+ * 
+ * @param {number} id - ID of the task to search for.
+ * @returns {number|undefined} - Index of the task in the todos array, or undefined if not found.
+ */
 function searchElement(id) {
   const index = todos.findIndex((task) => task.id == id);
   if (index === -1) {
@@ -178,6 +221,15 @@ function searchElement(id) {
   return index;
 }
 
+/**
+ * Retrieves references to the main overlay elements in the DOM.
+ *
+ * @returns {Object} An object containing references to overlay-related DOM elements:
+ *  - {HTMLElement|null} addOverlayTaskRef - The task overlay container element.
+ *  - {HTMLElement|null} dialogTaskContentRef - The content container for the task overlay.
+ *  - {HTMLElement|null} addOverlayEditRef - The edit task overlay container element.
+ *  - {HTMLElement|null} dialogTaskEditContent - The content container for the edit task overlay.
+ */
 function getOverlayElements() {
   return {
     addOverlayTaskRef: document.getElementById("overlayTask"),
@@ -187,6 +239,11 @@ function getOverlayElements() {
   };
 }
 
+/**
+ * Animates the given element by sliding it in from the right and fading it in.
+ *
+ * @param {HTMLElement} element - The DOM element to animate.
+ */
 function overlaySlide(element) {
   element.style.transform = "translateX(100%)";
   element.style.opacity = "0";
@@ -196,6 +253,12 @@ function overlaySlide(element) {
   });
 }
 
+/**
+ * Handles closing of task or edit overlays when the user clicks outside the content area
+ * or on specific close/delete elements.
+ *
+ *@param {MouseEvent} event - The click event that triggered the handler
+ */
 function closeOverlay(event) {
   let {
     addOverlayTaskRef,
@@ -217,6 +280,13 @@ function closeOverlay(event) {
   }
 }
 
+/**
+ * Animates the closing of an overlay by sliding it out to the right and fading it out.
+ * After the animation (300ms), it removes the "active" class from the overlay and resets styles.
+ *
+ * @param {HTMLElement} contentRef - The DOM element containing the overlay content.
+ * @param {HTMLElement} overlayRef - The overlay container element to hide.
+ */
 function closeOverlayAnimation(contentRef, overlayRef) {
   contentRef.style.transform = "translateX(100%)";
   contentRef.style.opacity = "0";
@@ -227,6 +297,11 @@ function closeOverlayAnimation(contentRef, overlayRef) {
   }, 300);
 }
 
+/**
+ * Synchronizes the height of the task edit overlay with the height of the task view overlay.
+ * 
+ * Ensures a consistent layout when switching between view and edit mode.
+ */
 function taskOverlaySync() {
   let dialogTaskContentRef = document.getElementById("dialogTaskContent");
   let dialogTaskEditContentRef = document.getElementById(
@@ -238,6 +313,16 @@ function taskOverlaySync() {
   }
 }
 
+/**
+ * Generates the HTML for a priority button based on its name and active state.
+ *
+ * Converts the priority name to lowercase to match asset paths and checks if it is the currently active priority.
+ * Builds appropriate icon paths for normal and clicked states.
+ *
+ * @param {string} prioName - The name of the priority (e.g., "High", "Medium", "Low").
+ * @param {string} activePrio - The currently selected priority name to determine active state.
+ * @returns {string} - The HTML string for the priority button, generated by `prioButtonTemplate`.
+ */
 function renderPrioButton(prioName, activePrio) {
   let prioGet = prioName.toLowerCase();
   let isActive = prioGet === activePrio.toLowerCase();
