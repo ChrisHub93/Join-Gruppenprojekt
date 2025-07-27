@@ -298,6 +298,7 @@ function getContactEdit(id) {
     getInputCheckedFalse(membersRef, inputRef, checkBoxImg);
   }
   toggleAssignmentEdit(id);
+  initEditContacts(assignedToEditTemp);
 }
 
 function toggleAssignmentEdit(id) {
