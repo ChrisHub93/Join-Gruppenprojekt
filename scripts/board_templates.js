@@ -635,3 +635,24 @@ function saveSubtaskTemplate(newValue, id){
         </div>
       </li>`
 }
+
+function renderUnassigned(){
+  return `<div>Currently unassigned</div>`;
+}
+
+function assignedMembersTemplate(colorClass, leftOffset, initials){
+  return `
+        <div class="assigned ${colorClass}" style="position:absolute; left: ${leftOffset}px">
+          ${initials
+            .split("")
+            .map((letter) => `<span>${letter}</span>`)
+            .join("")}
+        </div>`;
+}
+
+function plusMembers(leftOffset, extraCount){
+  return `
+      <div class="assigned more" style="position:absolute; left: ${leftOffset}px">
+        +${extraCount}
+      </div>`;
+}

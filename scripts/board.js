@@ -70,74 +70,6 @@ async function loadTasks() {
   );
 }
 
-function checkAllStatus(
-  statusToDo,
-  toDoContentRef,
-  statusInProgress,
-  inProgressContentRef,
-  statusAwaitFeedback,
-  awaitFeedbackContentRef,
-  statusDone,
-  doneContentRef
-) {
-  checkStatusToDo(statusToDo, toDoContentRef);
-  checkStatusInProgress(statusInProgress, inProgressContentRef);
-  checkStatusAwaitFeedback(statusAwaitFeedback, awaitFeedbackContentRef);
-  checkStatusDone(statusDone, doneContentRef);
-}
-
-function checkStatusToDo(statusToDo, toDoContentRef) {
-  if (statusToDo.length === 0) {
-    toDoContentRef.innerHTML = getEmptyTemplate();
-  } else {
-    for (let index = 0; index < statusToDo.length; index++) {
-      const element = statusToDo[index];
-      toDoContentRef.innerHTML += getTaskTemplate(element);
-      calculateAndRenderProgressBar(element);
-    }
-  }
-}
-
-function checkStatusInProgress(statusInProgress, inProgressContentRef) {
-  if (statusInProgress.length == 0) {
-    inProgressContentRef.innerHTML = getEmptyTemplate();
-  } else {
-    for (let index = 0; index < statusInProgress.length; index++) {
-      const element = statusInProgress[index];
-      inProgressContentRef.innerHTML += getTaskTemplate(element);
-      calculateAndRenderProgressBar(element);
-    }
-  }
-}
-
-function checkStatusAwaitFeedback(
-  statusAwaitFeedback,
-  awaitFeedbackContentRef
-) {
-  if (statusAwaitFeedback.length == 0) {
-    awaitFeedbackContentRef.innerHTML = getEmptyTemplate();
-  } else {
-    for (let index = 0; index < statusAwaitFeedback.length; index++) {
-      const element = statusAwaitFeedback[index];
-      awaitFeedbackContentRef.innerHTML += getTaskTemplate(element);
-      calculateAndRenderProgressBar(element);
-    }
-  }
-}
-
-function checkStatusDone(statusDone, doneContentRef) {
-  if (statusDone.length == 0) {
-    doneContentRef.innerHTML = getEmptyTemplate();
-  } else {
-    for (let index = 0; index < statusDone.length; index++) {
-      const element = statusDone[index];
-
-      doneContentRef.innerHTML += getTaskTemplate(element);
-      calculateAndRenderProgressBar(element);
-    }
-  }
-}
-
 function calculateAndRenderProgressBar(element) {
   let percent = 0;
   let tasksOpenLength = element.subTasksOpen?.length ?? 0;
@@ -176,17 +108,6 @@ async function deleteTasks(path, key) {
     method: "DELETE",
   });
   return await response.json();
-}
-
-async function putDataStatus(path = "", data = {}) {
-  let response = await fetch(BASE_URL + path + ".json", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  return (responseToJson = await response.json());
 }
 
 function overlayTask(element) {
@@ -356,18 +277,6 @@ function clearAllDocuments(){
   document.getElementById("doneContent").innerHTML = "";
 }
 
-function renderStatus(status, elementId){
-  if (status.length === 0) {
-    elementId.innerHTML = getEmptyTemplate();
-  } else {
-    for (let index = 0; index < status.length; index++) {
-      const element = statusToDo[index];
-      elementId.innerHTML += getTaskTemplate(element);
-      calculateAndRenderProgressBar(element);
-    }
-  }
-}
-
 function loadSearch(todos) {
   let searchInput = document.getElementById("filterTasks").value;
   if (searchInput === "") {
@@ -393,7 +302,7 @@ function loadSearch(todos) {
 
 function renderAssignedTo(assignedToIds) {
   if (!assignedToIds || assignedToIds.length === 0) {
-    return `<div>Currently unassigned</div>`;
+    return renderUnassigned();
   }
   const MAX_VISIBLE = 5;
   const visibleIds = assignedToIds.slice(0, MAX_VISIBLE);
@@ -406,21 +315,12 @@ function renderAssignedTo(assignedToIds) {
       let initials = getInitials(name);
       let colorClass = getAvatarColorClass(name);
       let leftOffset = index * 24;
-      return `
-        <div class="assigned ${colorClass}" style="position:absolute; left: ${leftOffset}px">
-          ${initials
-            .split("")
-            .map((letter) => `<span>${letter}</span>`)
-            .join("")}
-        </div>`;
+      return assignedMembersTemplate(colorClass, leftOffset, initials);
     })
     .join("");
   if (extraCount > 0) {
     let leftOffset = MAX_VISIBLE * 24;
-    html += `
-      <div class="assigned more" style="position:absolute; left: ${leftOffset}px">
-        +${extraCount}
-      </div>`;
+    html += plusMembers(leftOffset, extraCount);
   }
   return html;
 }
