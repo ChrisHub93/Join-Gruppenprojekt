@@ -49,20 +49,20 @@ async function initEditContacts(assignedTo = []) {
 // }
 
 async function updateDataEdit(tasksEditRef) {
-    if (!checkEditInputFields()) return;
-  
-    let tasks = await fetchData("/tasks/");
-    let taskKeyEdit = Object.keys(tasks).find(
-      (k) => String(tasks[k].id) === String(tasksEditRef)
-    );
-    let prioButton = document.querySelector(".prio_edit_button.active");
-    let priorityEdit = prioButton.dataset.prio;
-    let data = dataEditObject(tasks, taskKeyEdit, priorityEdit);
-  
-    await putDataEdit(`/tasks/${taskKeyEdit}`, data);
-    await loadTasks();
-    overlayTask(data.id);
-  }
+  if (!checkEditInputFields()) return;
+
+  let tasks = await fetchData("/tasks/");
+  let taskKeyEdit = Object.keys(tasks).find(
+    (k) => String(tasks[k].id) === String(tasksEditRef)
+  );
+  let prioButton = document.querySelector(".prio_edit_button.active");
+  let priorityEdit = prioButton.dataset.prio;
+  let data = dataEditObject(tasks, taskKeyEdit, priorityEdit);
+
+  await putDataEdit(`/tasks/${taskKeyEdit}`, data);
+  await loadTasks();
+  overlayTask(data.id);
+}
 
 function dataEditObject(tasks, taskKeyEdit, priorityEdit) {
   return {
@@ -119,14 +119,14 @@ function editSubtask(iconElement, id) {
 }
 
 function getEditSubtaskContainer(currentText, id) {
-    return`
+  return `
       <input type="text" value="${currentText}" class="subtask_input_edit noBorder">
       <div class="edit_subtask_checkbox">
         <img class="edit_icons edit_icons_subtask_change" src="../assets/icons/check-subtask.png" onclick="saveSubtask(this, '${id}')">
         <div class="seperator_edit"></div>
         <img onclick="completeDeleteTask('edit-subtask-${id}')" class="edit_icons edit_icons_subtask_change" src="../assets/icons/delete.png">
       </div>
-    `;    
+    `;
 }
 
 function openAssignedToEdit() {
@@ -227,46 +227,102 @@ function filterEditContactList() {
   });
 }
 
+//original
+// async function updateAssignedMembersEdit(assignedTo) {
+//   let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
+//   if (!assignedMembersEditRef) return;
+//   assignedMembersEditRef.innerHTML = "";
+
+//   let contacts = await loadContacts();
+//   let visibleCount = 5;
+//   let total = assignedTo.length;
+
+//   assignedTo.forEach((id, index) => {
+//     const user = contacts.find((c) => c.id === id);
+//     if (!user) return;
+
+//     let initials = `${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`;
+//     let icon = document.createElement("p");
+//     let colorClass = getAvatarColorClass(`${user.firstname} ${user.lastname}`);
+//     icon.className = `assigned_to_icon ${colorClass}`;
+//     icon.textContent = initials;
+
+//     if (index < visibleCount) {
+//       assignedMembersEditRef.appendChild(icon);
+//     }
+//   });
+
+//   if (total > visibleCount) {
+//     let hiddenUsers = assignedTo
+//       .slice(visibleCount)
+//       .map((id) => contacts.find((c) => c.id === id));
+
+//     let plusWrapper = document.createElement("div");
+//     plusWrapper.classList.add("plusWrapperEdit");
+
+//     let plusIcon = document.createElement("p");
+//     plusIcon.className = "assignedPlusOneEdit";
+//     plusIcon.textContent = `+${total - visibleCount}`;
+
+//     plusWrapper.appendChild(plusIcon);
+//     assignedMembersEditRef.appendChild(plusWrapper);
+//   }
+// }
+
+//Test start------------------------------------------------
 async function updateAssignedMembersEdit(assignedTo) {
-  let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
-  if (!assignedMembersEditRef) return;
-  assignedMembersEditRef.innerHTML = "";
+  const container = document.getElementById("assignedMembersEdit");
+  if (!container) return;
 
-  let contacts = await loadContacts();
-  let visibleCount = 5;
-  let total = assignedTo.length;
+  container.innerHTML = "";
 
-  assignedTo.forEach((id, index) => {
+  const contacts = await loadContacts();
+  const visibleCount = 5;
+
+  renderVisibleAvatars(container, contacts, assignedTo, visibleCount);
+
+  if (assignedTo.length > visibleCount) {
+    renderOverflowIcon(container, assignedTo, visibleCount);
+  }
+}
+
+function renderVisibleAvatars(container, contacts, assignedTo, count) {
+  assignedTo.slice(0, count).forEach((id) => {
     const user = contacts.find((c) => c.id === id);
     if (!user) return;
 
-    let initials = `${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`;
-    let icon = document.createElement("p");
-    let colorClass = getAvatarColorClass(`${user.firstname} ${user.lastname}`);
-    icon.className = `assigned_to_icon ${colorClass}`;
-    icon.textContent = initials;
-
-    if (index < visibleCount) {
-      assignedMembersEditRef.appendChild(icon);
-    }
+    const icon = createUserIcon(user);
+    container.appendChild(icon);
   });
-
-  if (total > visibleCount) {
-    let hiddenUsers = assignedTo
-      .slice(visibleCount)
-      .map((id) => contacts.find((c) => c.id === id));
-
-    let plusWrapper = document.createElement("div");
-    plusWrapper.classList.add("plusWrapperEdit");
-
-    let plusIcon = document.createElement("p");
-    plusIcon.className = "assignedPlusOneEdit";
-    plusIcon.textContent = `+${total - visibleCount}`;
-
-    plusWrapper.appendChild(plusIcon);
-    assignedMembersEditRef.appendChild(plusWrapper);
-  }
 }
+
+function renderOverflowIcon(container, assignedTo, startIndex) {
+  const remaining = assignedTo.length - startIndex;
+  if (remaining <= 0) return;
+
+  const plusWrapper = document.createElement("div");
+  plusWrapper.classList.add("plusWrapperEdit");
+
+  const plusIcon = document.createElement("p");
+  plusIcon.className = "assignedPlusOneEdit";
+  plusIcon.textContent = `+${remaining}`;
+
+  plusWrapper.appendChild(plusIcon);
+  container.appendChild(plusWrapper);
+}
+
+function createUserIcon(user) {
+  const initials = `${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`;
+  const icon = document.createElement("p");
+  const colorClass = getAvatarColorClass(`${user.firstname} ${user.lastname}`);
+
+  icon.className = `assigned_to_icon ${colorClass}`;
+  icon.textContent = initials;
+
+  return icon;
+}
+
+//Test ende------------------------------------------------
 
 function getContactEdit(id) {
   let membersRef = document.getElementById("contactEdit" + id);
