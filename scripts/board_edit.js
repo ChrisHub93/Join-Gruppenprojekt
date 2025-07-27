@@ -57,14 +57,14 @@ async function updateDataEdit(tasksEditRef) {
     );
     let prioButton = document.querySelector(".prio_edit_button.active");
     let priorityEdit = prioButton.dataset.prio;
-    let data = dataObject(tasks, taskKeyEdit, priorityEdit);
+    let data = dataEditObject(tasks, taskKeyEdit, priorityEdit);
   
     await putDataEdit(`/tasks/${taskKeyEdit}`, data);
     await loadTasks();
     overlayTask(data.id);
   }
 
-function dataObject(tasks, taskKeyEdit, priorityEdit) {
+function dataEditObject(tasks, taskKeyEdit, priorityEdit) {
   return {
     id: tasks[taskKeyEdit].id,
     category: tasks[taskKeyEdit].category,
@@ -104,18 +104,11 @@ async function putDataEdit(path = "", data = {}) {
 function editSubtask(iconElement, id) {
   let ul = iconElement.closest("ul");
   let currentText = ul.querySelector("p").innerText;
-
   let newContainer = document.createElement("div");
+
   newContainer.classList.add("subtask_edit_wrapper");
   newContainer.id = `edit-subtask-${id}`;
-  newContainer.innerHTML = `
-      <input type="text" value="${currentText}" class="subtask_input_edit noBorder">
-      <div class="edit_subtask_checkbox">
-        <img class="edit_icons edit_icons_subtask_change" src="../assets/icons/check-subtask.png" onclick="saveSubtask(this, '${id}')">
-        <div class="seperator_edit"></div>
-        <img onclick="completeDeleteTask('edit-subtask-${id}')" class="edit_icons edit_icons_subtask_change" src="../assets/icons/delete.png">
-      </div>
-    `;
+  newContainer.innerHTML = getEditSubtaskContainer(currentText, id);
   ul.replaceWith(newContainer);
   let inputActive = newContainer.querySelector("input");
   inputActive.focus();
@@ -123,6 +116,17 @@ function editSubtask(iconElement, id) {
     inputActive.value.length,
     inputActive.value.length
   );
+}
+
+function getEditSubtaskContainer(currentText, id) {
+    return`
+      <input type="text" value="${currentText}" class="subtask_input_edit noBorder">
+      <div class="edit_subtask_checkbox">
+        <img class="edit_icons edit_icons_subtask_change" src="../assets/icons/check-subtask.png" onclick="saveSubtask(this, '${id}')">
+        <div class="seperator_edit"></div>
+        <img onclick="completeDeleteTask('edit-subtask-${id}')" class="edit_icons edit_icons_subtask_change" src="../assets/icons/delete.png">
+      </div>
+    `;    
 }
 
 function openAssignedToEdit() {
