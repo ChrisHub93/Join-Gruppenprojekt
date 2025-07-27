@@ -3,14 +3,24 @@ let todos = [];
 let globalContacts = [];
 let isToggling = false;
 
-function getLoadTasksTemplateFunctions(toDoContentRef, inProgressContentRef, awaitFeedbackContentRef, doneContentRef){
+function getLoadTasksTemplateFunctions(
+  toDoContentRef,
+  inProgressContentRef,
+  awaitFeedbackContentRef,
+  doneContentRef
+) {
   toDoContentRef.innerHTML = getEmptyTemplate();
   inProgressContentRef.innerHTML = getEmptyTemplate();
   awaitFeedbackContentRef.innerHTML = getEmptyTemplate();
   doneContentRef.innerHTML = getEmptyTemplate();
 }
 
-function emptyContentHTML(toDoContentRef, inProgressContentRef, awaitFeedbackContentRef, doneContentRef){
+function emptyContentHTML(
+  toDoContentRef,
+  inProgressContentRef,
+  awaitFeedbackContentRef,
+  doneContentRef
+) {
   toDoContentRef.innerHTML = "";
   inProgressContentRef.innerHTML = "";
   awaitFeedbackContentRef.innerHTML = "";
@@ -24,7 +34,12 @@ async function loadTasks() {
   let doneContentRef = document.getElementById("doneContent");
   let tasks = await fetchData("/tasks/");
   if (tasks === null) {
-    getLoadTasksTemplateFunctions(toDoContentRef, inProgressContentRef, awaitFeedbackContentRef, doneContentRef);
+    getLoadTasksTemplateFunctions(
+      toDoContentRef,
+      inProgressContentRef,
+      awaitFeedbackContentRef,
+      doneContentRef
+    );
     return;
   }
   loadTodos = Object.values(tasks);
@@ -33,20 +48,45 @@ async function loadTasks() {
   globalContacts = Object.values(contactsData);
   let statusToDo = todos.filter((task) => task.status === "To do");
   let statusInProgress = todos.filter((task) => task.status === "In progress");
-  let statusAwaitFeedback = todos.filter((task) => task.status === "Await feedback");
+  let statusAwaitFeedback = todos.filter(
+    (task) => task.status === "Await feedback"
+  );
   let statusDone = todos.filter((task) => task.status === "Done");
-  emptyContentHTML(toDoContentRef, inProgressContentRef, awaitFeedbackContentRef, doneContentRef);
-  checkAllStatus(statusToDo, toDoContentRef, statusInProgress, inProgressContentRef, statusAwaitFeedback, awaitFeedbackContentRef, statusDone, doneContentRef);
+  emptyContentHTML(
+    toDoContentRef,
+    inProgressContentRef,
+    awaitFeedbackContentRef,
+    doneContentRef
+  );
+  checkAllStatus(
+    statusToDo,
+    toDoContentRef,
+    statusInProgress,
+    inProgressContentRef,
+    statusAwaitFeedback,
+    awaitFeedbackContentRef,
+    statusDone,
+    doneContentRef
+  );
 }
 
-function checkAllStatus(statusToDo, toDoContentRef, statusInProgress, inProgressContentRef, statusAwaitFeedback, awaitFeedbackContentRef, statusDone, doneContentRef){
+function checkAllStatus(
+  statusToDo,
+  toDoContentRef,
+  statusInProgress,
+  inProgressContentRef,
+  statusAwaitFeedback,
+  awaitFeedbackContentRef,
+  statusDone,
+  doneContentRef
+) {
   checkStatusToDo(statusToDo, toDoContentRef);
   checkStatusInProgress(statusInProgress, inProgressContentRef);
   checkStatusAwaitFeedback(statusAwaitFeedback, awaitFeedbackContentRef);
   checkStatusDone(statusDone, doneContentRef);
 }
 
-function checkStatusToDo(statusToDo, toDoContentRef){
+function checkStatusToDo(statusToDo, toDoContentRef) {
   if (statusToDo.length === 0) {
     toDoContentRef.innerHTML = getEmptyTemplate();
   } else {
@@ -58,7 +98,7 @@ function checkStatusToDo(statusToDo, toDoContentRef){
   }
 }
 
-function checkStatusInProgress(statusInProgress, inProgressContentRef){
+function checkStatusInProgress(statusInProgress, inProgressContentRef) {
   if (statusInProgress.length == 0) {
     inProgressContentRef.innerHTML = getEmptyTemplate();
   } else {
@@ -70,8 +110,11 @@ function checkStatusInProgress(statusInProgress, inProgressContentRef){
   }
 }
 
-function checkStatusAwaitFeedback(statusAwaitFeedback, awaitFeedbackContentRef){
-   if (statusAwaitFeedback.length == 0) {
+function checkStatusAwaitFeedback(
+  statusAwaitFeedback,
+  awaitFeedbackContentRef
+) {
+  if (statusAwaitFeedback.length == 0) {
     awaitFeedbackContentRef.innerHTML = getEmptyTemplate();
   } else {
     for (let index = 0; index < statusAwaitFeedback.length; index++) {
@@ -82,7 +125,7 @@ function checkStatusAwaitFeedback(statusAwaitFeedback, awaitFeedbackContentRef){
   }
 }
 
-function checkStatusDone(statusDone, doneContentRef){
+function checkStatusDone(statusDone, doneContentRef) {
   if (statusDone.length == 0) {
     doneContentRef.innerHTML = getEmptyTemplate();
   } else {
@@ -93,18 +136,6 @@ function checkStatusDone(statusDone, doneContentRef){
       calculateAndRenderProgressBar(element);
     }
   }
-}
-
-function editOverlayTask(tasksRef) {  
-  taskOverlaySync();
-  let tasksEditRef = searchElement(tasksRef);
-  let addOverlayRef = document.getElementById("overlayTask");
-  let addOverlayEditRef = document.getElementById("overlayTaskEdit");
-  let dialogTaskEditRef = document.getElementById("dialogTaskEditContent");
-  addOverlayRef.classList.remove("active");
-  addOverlayEditRef.classList.add("active");
-  dialogTaskEditRef.innerHTML = renderOverlayTaskEdit(todos[tasksEditRef]);
-  upToDateEdit();  
 }
 
 function addEmptySubtasks() {
@@ -124,14 +155,22 @@ function calculateAndRenderProgressBar(element) {
   let percent = 0;
   let tasksOpenLength = element.subTasksOpen?.length ?? 0;
   let tasksClosedLength = element.subTasksClosed?.length ?? 0;
-  let tasksLength = tasksOpenLength + tasksClosedLength
+  let tasksLength = tasksOpenLength + tasksClosedLength;
   if (tasksLength === 0) {
-     document.getElementById("filledContainer-status" + element.id).style.display = "none";
+    document.getElementById(
+      "filledContainer-status" + element.id
+    ).style.display = "none";
   } else {
-    percent = Math.round(((tasksClosedLength)/ tasksLength) * 100);
-    document.getElementById('status-bar-js' + element.id).style = `width: ${percent}%`;
-    document.getElementById('status-bar-number1' + element.id).innerText = `${tasksClosedLength}`;
-    document.getElementById('status-bar-number2' + element.id).innerText = `${tasksLength}`;
+    percent = Math.round((tasksClosedLength / tasksLength) * 100);
+    document.getElementById(
+      "status-bar-js" + element.id
+    ).style = `width: ${percent}%`;
+    document.getElementById(
+      "status-bar-number1" + element.id
+    ).innerText = `${tasksClosedLength}`;
+    document.getElementById(
+      "status-bar-number2" + element.id
+    ).innerText = `${tasksLength}`;
   }
 }
 
@@ -141,7 +180,7 @@ async function deleteBoardTasks(tasksRef) {
     (key) => String(tasks[key].id) === tasksRef
   );
   await deleteTasks("/tasks/", key);
-  deleteOverlaySuccses()
+  deleteOverlaySuccses();
   loadTasks();
 }
 
@@ -165,7 +204,8 @@ async function putDataStatus(path = "", data = {}) {
 
 function overlayTask(element) {
   let tasksRef = searchElement(element);
-  let { addOverlayTaskRef, dialogTaskContentRef, addOverlayEditRef } = getOverlayElements();
+  let { addOverlayTaskRef, dialogTaskContentRef, addOverlayEditRef } =
+    getOverlayElements();
   let checkOpenOverlayEdit = addOverlayEditRef.classList.contains("active");
   let checkOpenOverlay = addOverlayTaskRef.classList.contains("active");
   addOverlayEditRef.classList.remove("active");
@@ -173,7 +213,7 @@ function overlayTask(element) {
   dialogTaskContentRef.innerHTML = renderOverlayTaskContent(todos[tasksRef]);
   disableScroll();
   if (!checkOpenOverlay && !checkOpenOverlayEdit) {
-  overlaySlide(dialogTaskContentRef);
+    overlaySlide(dialogTaskContentRef);
   }
 }
 
@@ -196,30 +236,42 @@ function getOverlayElements() {
 }
 
 function overlaySlide(element) {
-      element.style.transform = "translateX(100%)";
-      element.style.opacity = "0";
-    requestAnimationFrame(() => {
-      element.style.transform = "translateX(0)";
-      element.style.opacity = "1";
-    });
+  element.style.transform = "translateX(100%)";
+  element.style.opacity = "0";
+  requestAnimationFrame(() => {
+    element.style.transform = "translateX(0)";
+    element.style.opacity = "1";
+  });
 }
 
 function closeOverlay(event) {
-  let { addOverlayTaskRef, dialogTaskContentRef, addOverlayEditRef, dialogTaskEditContent } = getOverlayElements();
-  if (event.target === addOverlayTaskRef || event.target.closest("#overlayTask .closeIcon") || event.target.closest(".delete_task")) {
+  let {
+    addOverlayTaskRef,
+    dialogTaskContentRef,
+    addOverlayEditRef,
+    dialogTaskEditContent,
+  } = getOverlayElements();
+  if (
+    event.target === addOverlayTaskRef ||
+    event.target.closest("#overlayTask .closeIcon") ||
+    event.target.closest(".delete_task")
+  ) {
     closeOverlayAnimation(dialogTaskContentRef, addOverlayTaskRef);
-  } else if (event.target === addOverlayEditRef || event.target.closest("#overlayTaskEdit .closeIcon")) {
+  } else if (
+    event.target === addOverlayEditRef ||
+    event.target.closest("#overlayTaskEdit .closeIcon")
+  ) {
     closeOverlayAnimation(dialogTaskEditContent, addOverlayEditRef);
   }
 }
 
-function closeOverlayAnimation(contentRef, overlayRef){
+function closeOverlayAnimation(contentRef, overlayRef) {
   contentRef.style.transform = "translateX(100%)";
   contentRef.style.opacity = "0";
   setTimeout(() => {
-  overlayRef.classList.remove("active");
-  contentRef.style.transform = "";
-  contentRef.style.opacity = "";
+    overlayRef.classList.remove("active");
+    contentRef.style.transform = "";
+    contentRef.style.opacity = "";
   }, 300);
 }
 
@@ -250,7 +302,9 @@ async function moveSubtaskBetweenLists(id, clickedID, fromKey, toKey) {
   let task = getTasks[taskKey];
   let fromSubtaskList = task[fromKey] || [];
   let toSubtaskList = task[toKey] || [];
-  let subTaskIndex = fromSubtaskList.findIndex((task) => task.trim() === clickedValue);
+  let subTaskIndex = fromSubtaskList.findIndex(
+    (task) => task.trim() === clickedValue
+  );
   if (subTaskIndex === -1) return;
   let [movedSubtask] = fromSubtaskList.splice(subTaskIndex, 1);
   toSubtaskList.push(movedSubtask);
@@ -261,7 +315,12 @@ async function moveSubtaskBetweenLists(id, clickedID, fromKey, toKey) {
 }
 
 async function postSubtaskClosed(id, clickedID) {
-  await moveSubtaskBetweenLists(id, clickedID, "subTasksClosed", "subTasksOpen");
+  await moveSubtaskBetweenLists(
+    id,
+    clickedID,
+    "subTasksClosed",
+    "subTasksOpen"
+  );
   // const clickedValue = document.getElementById(clickedID).innerText.trim();
   // let getTasks = await fetchData("tasks/");
   // let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
@@ -280,7 +339,12 @@ async function postSubtaskClosed(id, clickedID) {
 }
 
 async function postSubtaskOpen(id, clickedID) {
-    await moveSubtaskBetweenLists(id, clickedID, "subTasksOpen", "subTasksClosed");
+  await moveSubtaskBetweenLists(
+    id,
+    clickedID,
+    "subTasksOpen",
+    "subTasksClosed"
+  );
   // const clickedValue = document.getElementById(clickedID).innerText.trim();
   // let getTasks = await fetchData("tasks/");
   // let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
@@ -310,7 +374,10 @@ async function patchData(path, data = {}) {
 }
 
 function subtasksOverlay(taskRef) {
-  if (taskRef.subTasksOpen == undefined && taskRef.subTasksClosed === undefined) {
+  if (
+    taskRef.subTasksOpen == undefined &&
+    taskRef.subTasksClosed === undefined
+  ) {
     return "";
   } else {
     return subtasksOverlayRender(taskRef);
@@ -330,7 +397,9 @@ function subtasksOverlayEdit(tasksEditRef) {
 
 function taskOverlaySync() {
   let dialogTaskContentRef = document.getElementById("dialogTaskContent");
-  let dialogTaskEditContentRef = document.getElementById("dialogTaskEditContent");
+  let dialogTaskEditContentRef = document.getElementById(
+    "dialogTaskEditContent"
+  );
   if (dialogTaskContentRef && dialogTaskEditContentRef) {
     dialogTaskEditContentRef.style.height =
       dialogTaskContentRef.offsetHeight + "px";
@@ -343,13 +412,18 @@ function renderPrioButton(prioName, activePrio) {
   let prioFullName = prioName.charAt(0).toUpperCase() + prioName.slice(1);
   let iconPath = `../assets/icons/priority-${prioGet}.png`;
   let iconPathClicked = `../assets/icons/priority-clicked-${prioGet}.png`;
-  return prioButtonTemplate(prioFullName, prioGet, isActive, iconPath, iconPathClicked);
+  return prioButtonTemplate(
+    prioFullName,
+    prioGet,
+    isActive,
+    iconPath,
+    iconPathClicked
+  );
 }
 
-
-
 function setPrioActive(clickedButton) {
-  let prioButtons = clickedButton.parentElement.querySelectorAll(".prio_edit_button");
+  let prioButtons =
+    clickedButton.parentElement.querySelectorAll(".prio_edit_button");
   let prioButtonClicked = clickedButton.classList.contains("active");
   prioButtons.forEach((btn) => {
     btn.classList.remove("active");
@@ -363,11 +437,6 @@ function setPrioActive(clickedButton) {
     let icon = clickedButton.querySelector("img");
     icon.src = `../assets/icons/priority-clicked-${prio}.png`;
   }
-}
-
-function upToDateEdit() {  
-  let dateInput = document.getElementById("dateEdit");
-  dateInput.min = getTodayStr();
 }
 
 function formatDateToDisplay(dateStr) {
@@ -384,55 +453,6 @@ async function loadData(path = "") {
   let response = await fetch(BASE_URL + path + ".json");
   let responseToJson = await response.json();
   return responseToJson;
-}
-
-async function updateDataEdit(tasksEditRef) {
-  let checkInputs = checkEditInputFields();
-  if (!checkInputs) {
-    return;
-  } else {
-    let tasks = await fetchData("/tasks/");
-    let taskKeyEdit = Object.keys(tasks).find((k) => String(tasks[k].id) === String(tasksEditRef));
-    let prioButton = document.querySelector(".prio_edit_button.active");
-    let priorityEdit = prioButton.dataset.prio;
-    let data = {
-      id: tasks[taskKeyEdit].id,
-      category: tasks[taskKeyEdit].category,
-      title: document.getElementById("titleEdit").value,
-      description: document.getElementById("descriptionEdit").value,
-      date: document.getElementById("dateEdit").value,
-      priority: priorityEdit,
-      assignedTo: assignedToEditTemp,
-      subTasksOpen: getUpdatedSubtasks(),
-      subTasksClosed: tasks[taskKeyEdit].subTasksClosed,
-      status: tasks[taskKeyEdit].status,
-    };
-    await putDataEdit(`/tasks/${taskKeyEdit}`, data);
-    await loadTasks();
-    overlayTask(data.id);
-  }
-}
-
-function checkEditInputFields() {
-  let titleValue = document.getElementById("titleEdit").value.trim();
-  let dateValue = document.getElementById("dateEdit").value.trim();
-
-  if (titleValue === "" || dateValue === "") {
-    return false;
-  } else {
-    return true;
-  }
-}
-
-async function putDataEdit(path = "", data = {}) {
-  let response = await fetch(BASE_URL + path + ".json", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  return await response.json();
 }
 
 function getUpdatedSubtasks() {
@@ -460,36 +480,12 @@ function getUpdatedSubtasks() {
   return updatedSubtasks;
 }
 
-function editSubtask(iconElement, id) {
-  let ul = iconElement.closest("ul");
-  let currentText = ul.querySelector("p").innerText;
-
-  let newContainer = document.createElement("div");
-  newContainer.classList.add("subtask_edit_wrapper");
-  newContainer.id = `edit-subtask-${id}`;
-  newContainer.innerHTML = `
-    <input type="text" value="${currentText}" class="subtask_input_edit noBorder">
-    <div class="edit_subtask_checkbox">
-      <img class="edit_icons edit_icons_subtask_change" src="../assets/icons/check-subtask.png" onclick="saveSubtask(this, '${id}')">
-      <div class="seperator_edit"></div>
-      <img onclick="completeDeleteTask('edit-subtask-${id}')" class="edit_icons edit_icons_subtask_change" src="../assets/icons/delete.png">
-    </div>
-  `;
-  ul.replaceWith(newContainer);
-  let inputActive = newContainer.querySelector("input");
-  inputActive.focus();
-  inputActive.setSelectionRange(
-    inputActive.value.length,
-    inputActive.value.length
-  );
-}
-
 function saveSubtask(iconElement, id) {
   let updatedSubtask = iconElement.closest(".subtask_edit_wrapper");
   let newValue = updatedSubtask.querySelector("input").value.trim();
 
   if (newValue === "") {
-    return
+    return;
   } else {
     let newUL = document.createElement("ul");
     newUL.classList.add("subtask_list_edit");
@@ -506,10 +502,9 @@ function saveSubtask(iconElement, id) {
         </div>
       </li>
     `;
-  
+
     updatedSubtask.replaceWith(newUL);
   }
-  
 }
 
 function filterTasks() {
@@ -593,174 +588,6 @@ function loadSearch(todos) {
   }
 }
 
-async function initEditContacts(assignedTo = []) {
-  let contacts = await loadContacts();
-  renderContactListEdit(contacts, assignedTo);
-  assignedToEditTemp = [...assignedTo];
-  updateAssignedMembersEdit(assignedToEditTemp);
-  document.body.overflow = "hidden";
-}
-
-function openAssignedToEdit() {
-  let editMembers = document.getElementById("editMembers");
-
-  let editIsVisible = editMembers.classList.toggle("show");
-
-  toggleBorderColor("selectMember", editIsVisible ? "add" : "remove");
-  toggleArrow("arrow", editIsVisible ? "open" : "close");
-
-  initEditContacts(assignedToEditTemp);
-
-
-  if (editIsVisible) {
-    setTimeout(() => {
-      document.addEventListener("click", handleClickOutsideEditContacts);
-    }, 0);
-  }
-}
-
-function handleClickOutsideEditContacts(event) {
-  let editMembers = document.getElementById("editMembers");
-  let input = document.getElementById("contactSearchInputEdit");
-  let arrow = document.getElementById("arrow");
-
-  if (
-    !editMembers.contains(event.target) &&
-    !input.contains(event.target) &&
-    !arrow.contains(event.target)
-  ) {
-    editMembers.classList.remove("show");
-    toggleBorderColor("selectMember", "remove");
-    toggleArrow("arrow", "close");
-    document.removeEventListener("click", handleClickOutsideEditContacts);
-  }
-}
-
-function renderContactListEdit(contacts, assignedTo = []) {
-  let editMembersRef = document.getElementById("editMembers");
-  editMembersRef.innerHTML = "";
-
-  if (contacts) {
-    for (let contact of contacts) {
-      let name = contact.firstname + " " + contact.lastname;
-      let assignedColor = getAvatarColorClass(name);
-      let isAssigned = assignedTo.includes(contact.id);
-      editMembersRef.innerHTML += getContactListEdit(
-        contact,
-        assignedColor,
-        isAssigned
-      );
-    }
-  }
-}
-
-function getContactListEdit(contact, assignedColor, isAssigned) {
-  return `  <li
-                  onclick="getContactEdit('${contact.id}')"
-                  id="contactEdit${contact.id}"
-                  class="optionsCategory inputFlex ${
-                    isAssigned ? "assignedBg" : ""
-                  }">
-                  <div class="contacts_name_icon">
-                    <p class="assigned_to_icon ${assignedColor}">${contact.firstname
-    .toUpperCase()
-    .charAt(0)}${contact.lastname.toUpperCase().charAt(0)}</p>
-                    ${contact.firstname + " "} ${contact.lastname}
-                  </div>
-                  <input id="checkboxEdit${contact.id}" type="checkbox" class="checkBox" ${
-                    isAssigned ? "checked" : ""
-                  } />
-                  <img
-                    onclick="getContactEdit('${contact.id}', event)"
-                    id="checkBoxImgEdit${contact.id}"
-                    class="checkBoxImg ${isAssigned ? "filterChecked" : ""}"
-                    src="${
-                      isAssigned
-                        ? "../assets/icons/Check button true.png"
-                        : "../assets/icons/Check button.png"
-                    }"
-                    alt=""
-                  />
-                </li>
-  `;
-}
-
-function filterEditContactList() {
-  let input = document
-    .getElementById("contactSearchInputEdit")
-    .value.toLowerCase();
-  let editMembersRef = document.getElementById("editMembers");
-  let editMembersListItem = editMembersRef.querySelectorAll("li");
-
-  editMembersListItem.forEach((item) => {
-    let text = item.textContent.toLowerCase();
-    item.style.display = text.includes(input) ? "flex" : "none";
-  });
-}
-
-async function updateAssignedMembersEdit(assignedTo) {
-  let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
-  if (!assignedMembersEditRef) return;
-  assignedMembersEditRef.innerHTML = "";
-
-  let contacts = await loadContacts();
-  let visibleCount = 5;
-  let total = assignedTo.length;
-
-  assignedTo.forEach((id, index) => {
-    const user = contacts.find(c => c.id === id);
-    if (!user) return;
-
-    let initials = `${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`;
-    let icon = document.createElement("p");
-    let colorClass = getAvatarColorClass(`${user.firstname} ${user.lastname}`);
-    icon.className = `assigned_to_icon ${colorClass}`;
-    icon.textContent = initials;
-
-    if (index < visibleCount) {
-      assignedMembersEditRef.appendChild(icon);
-    }
-  });
-
-  if (total > visibleCount) {
-    let hiddenUsers = assignedTo.slice(visibleCount).map(id =>
-      contacts.find(c => c.id === id)
-    );
-
-    let plusWrapper = document.createElement("div");
-    plusWrapper.classList.add("plusWrapperEdit");
-
-    let plusIcon = document.createElement("p");
-    plusIcon.className = "assignedPlusOneEdit";
-    plusIcon.textContent = `+${total - visibleCount}`;
-
-    plusWrapper.appendChild(plusIcon);
-    assignedMembersEditRef.appendChild(plusWrapper);
-  }
-}
-
-function getContactEdit(id) {
-  let membersRef = document.getElementById("contactEdit" + id);
-  let inputRef = document.getElementById("checkboxEdit" + id);
-  let checkBoxImg = document.getElementById("checkBoxImgEdit" + id);
-
-  if (!inputRef.checked) {
-    getInputCheckedTrue(membersRef, inputRef, checkBoxImg);
-  } else if (inputRef.checked && membersRef.classList.contains("assignedBg")) {
-    getInputCheckedFalse(membersRef, inputRef, checkBoxImg);
-  }
-  toggleAssignmentEdit(id);
-}
-
-function toggleAssignmentEdit(id) {
-  let index = assignedToEditTemp.indexOf(id);
-  if (index !== -1) {
-    assignedToEditTemp.splice(index, 1);
-  } else {
-    assignedToEditTemp.push(id);
-  }
-}
-
 function renderAssignedTo(assignedToIds) {
   if (!assignedToIds || assignedToIds.length === 0) {
     return `<div>Currently unassigned</div>`;
@@ -798,20 +625,6 @@ function renderAssignedTo(assignedToIds) {
   }
 
   return html;
-}
-
-function checkemptyDateEdit() {
-  let dateRef = document.getElementById("dateEdit");
-  let errorDateRef = document.getElementById("errorDateEdit");
-  if (!dateRef.value) {
-    dateRef.classList.add("inputError");
-    errorDateRef.classList.remove("opacity");
-    checkDate = false;
-  } else {
-    dateRef.classList.remove("inputError");
-    errorDateRef.classList.add("opacity");
-    checkDate = true;
-  }
 }
 
 function disableScroll() {
