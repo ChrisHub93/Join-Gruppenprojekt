@@ -321,21 +321,6 @@ async function postSubtaskClosed(id, clickedID) {
     "subTasksClosed",
     "subTasksOpen"
   );
-  // const clickedValue = document.getElementById(clickedID).innerText.trim();
-  // let getTasks = await fetchData("tasks/");
-  // let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
-  // if (!taskKey) return;
-  // const task = getTasks[taskKey];
-  // const closedSubtasks = task.subTasksClosed || [];
-  // const openSubtasks = task.subTasksOpen || [];
-  // const subTaskIndex = closedSubtasks.findIndex((task) => task.trim() === clickedValue);
-  // if (subTaskIndex === -1) return;
-  // const [movedSubtask] = closedSubtasks.splice(subTaskIndex, 1);
-  // openSubtasks.push(movedSubtask);
-  // await patchData(`tasks/${taskKey}`, {
-  //   subTasksOpen: openSubtasks,
-  //   subTasksClosed: closedSubtasks,
-  // });
 }
 
 async function postSubtaskOpen(id, clickedID) {
@@ -345,21 +330,6 @@ async function postSubtaskOpen(id, clickedID) {
     "subTasksOpen",
     "subTasksClosed"
   );
-  // const clickedValue = document.getElementById(clickedID).innerText.trim();
-  // let getTasks = await fetchData("tasks/");
-  // let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
-  // if (!taskKey) return;
-  // const task = getTasks[taskKey];
-  // const closedSubtasks = task.subTasksClosed || [];
-  // const openSubtasks = task.subTasksOpen || [];
-  // const subTaskIndex = openSubtasks.findIndex((task) => task.trim() === clickedValue);
-  // if (subTaskIndex === -1) return;
-  // const [movedSubtask] = openSubtasks.splice(subTaskIndex, 1);
-  // closedSubtasks.push(movedSubtask);
-  // await patchData(`tasks/${taskKey}`, {
-  //   subTasksOpen: openSubtasks,
-  //   subTasksClosed: closedSubtasks,
-  // });
 }
 
 async function patchData(path, data = {}) {
@@ -460,16 +430,13 @@ function getUpdatedSubtasks() {
   let maindiv = document.getElementById("subTasksEdit");
   let newSubTasks = maindiv.querySelectorAll("input");
   let updatedSubtasks = [];
-
   for (let index = 0; index < newSubTasks.length; index++) {
     const element = newSubTasks[index];
     let addedTask = element.offsetParent.id;
     updatedSubtasks.push(addedTask);
   }
-
   for (let el of editedSubtasks) {
     let pTag = el.querySelector("p");
-
     if (pTag) {
       let text = pTag.textContent.trim();
       if (text !== "") {
@@ -483,26 +450,13 @@ function getUpdatedSubtasks() {
 function saveSubtask(iconElement, id) {
   let updatedSubtask = iconElement.closest(".subtask_edit_wrapper");
   let newValue = updatedSubtask.querySelector("input").value.trim();
-
   if (newValue === "") {
     return;
   } else {
     let newUL = document.createElement("ul");
     newUL.classList.add("subtask_list_edit");
     newUL.id = `Subtask${newValue}-${id}`;
-    newUL.innerHTML = `
-      <li class="subTaskAdded">
-        <div class="flex_edit">
-          <p>${newValue}</p>
-          <div class="hide_edit_subtask">
-            <img onclick="editSubtask(this)" class="edit_icons" src="../assets/icons/edit.png">
-            <div class="seperator_edit"></div>
-            <img onclick="completeDeleteTask('Subtask${newValue}-${id}')" class="edit_icons" src="../assets/icons/delete.png">
-          </div>
-        </div>
-      </li>
-    `;
-
+    newUL.innerHTML = saveSubtaskTemplate(newValue, id);
     updatedSubtask.replaceWith(newUL);
   }
 }
@@ -523,13 +477,31 @@ function filterTasks() {
   loadSearch(todos);
 }
 
+function clearAllDocuments(){
+  document.getElementById("toDoContent").innerHTML = "";
+  document.getElementById("inProgressContent").innerHTML = "";
+  document.getElementById("awaitFeedbackContent").innerHTML = "";
+  document.getElementById("doneContent").innerHTML = "";
+}
+
+function renderStatus(status, elementId){
+  if (status.length === 0) {
+    elementId.innerHTML = getEmptyTemplate();
+  } else {
+    for (let index = 0; index < status.length; index++) {
+      const element = statusToDo[index];
+      elementId.innerHTML += getTaskTemplate(element);
+      calculateAndRenderProgressBar(element);
+    }
+  }
+}
+
 function loadSearch(todos) {
   let searchInput = document.getElementById("filterTasks").value;
   if (searchInput === "") {
     loadTasks();
     return;
   }
-
   let toDoContentRef = document.getElementById("toDoContent");
   let inProgressContentRef = document.getElementById("inProgressContent");
   let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
@@ -540,63 +512,20 @@ function loadSearch(todos) {
     (task) => task.status === "Await feedback"
   );
   let statusDone = todos.filter((task) => task.status === "Done");
-
-  toDoContentRef.innerHTML = "";
-  inProgressContentRef.innerHTML = "";
-  awaitFeedbackContentRef.innerHTML = "";
-  doneContentRef.innerHTML = "";
-
-  if (statusToDo.length === 0) {
-    toDoContentRef.innerHTML = getEmptyTemplate();
-  } else {
-    for (let index = 0; index < statusToDo.length; index++) {
-      const element = statusToDo[index];
-      toDoContentRef.innerHTML += getTaskTemplate(element);
-      calculateAndRenderProgressBar(element);
-    }
-  }
-
-  if (statusInProgress.length == 0) {
-    inProgressContentRef.innerHTML = getEmptyTemplate();
-  } else {
-    for (let index = 0; index < statusInProgress.length; index++) {
-      const element = statusInProgress[index];
-      inProgressContentRef.innerHTML += getTaskTemplate(element);
-      calculateAndRenderProgressBar(element);
-    }
-  }
-
-  if (statusAwaitFeedback.length == 0) {
-    awaitFeedbackContentRef.innerHTML = getEmptyTemplate();
-  } else {
-    for (let index = 0; index < statusAwaitFeedback.length; index++) {
-      const element = statusAwaitFeedback[index];
-      awaitFeedbackContentRef.innerHTML += getTaskTemplate(element);
-      calculateAndRenderProgressBar(element);
-    }
-  }
-
-  if (statusDone.length == 0) {
-    doneContentRef.innerHTML = getEmptyTemplate();
-  } else {
-    for (let index = 0; index < statusDone.length; index++) {
-      const element = statusDone[index];
-
-      doneContentRef.innerHTML += getTaskTemplate(element);
-      calculateAndRenderProgressBar(element);
-    }
-  }
+  clearAllDocuments();
+  renderStatus(statusToDo, toDoContentRef);
+  renderStatus(statusInProgress, inProgressContentRef);
+  renderStatus(statusAwaitFeedback, awaitFeedbackContentRef);
+  renderStatus(statusDone, doneContentRef);
 }
 
 function renderAssignedTo(assignedToIds) {
   if (!assignedToIds || assignedToIds.length === 0) {
     return `<div>Currently unassigned</div>`;
   }
-
   const MAX_VISIBLE = 5;
   const visibleIds = assignedToIds.slice(0, MAX_VISIBLE);
   const extraCount = assignedToIds.length - MAX_VISIBLE;
-
   let html = visibleIds
     .map((id, index) => {
       let contactRef = globalContacts.find((contact) => contact.id === id);
@@ -605,7 +534,6 @@ function renderAssignedTo(assignedToIds) {
       let initials = getInitials(name);
       let colorClass = getAvatarColorClass(name);
       let leftOffset = index * 24;
-
       return `
         <div class="assigned ${colorClass}" style="position:absolute; left: ${leftOffset}px">
           ${initials
@@ -615,7 +543,6 @@ function renderAssignedTo(assignedToIds) {
         </div>`;
     })
     .join("");
-
   if (extraCount > 0) {
     let leftOffset = MAX_VISIBLE * 24;
     html += `
@@ -623,7 +550,6 @@ function renderAssignedTo(assignedToIds) {
         +${extraCount}
       </div>`;
   }
-
   return html;
 }
 
