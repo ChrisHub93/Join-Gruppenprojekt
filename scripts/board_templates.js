@@ -622,3 +622,16 @@ function prioButtonTemplate(prioFullName, prioGet, isActive, iconPath, iconPathC
     </button>
   `;
 }
+
+function saveSubtaskTemplate(newValue, id){
+  return `<li class="subTaskAdded">
+        <div class="flex_edit">
+          <p>${newValue}</p>
+          <div class="hide_edit_subtask">
+            <img onclick="editSubtask(this)" class="edit_icons" src="../assets/icons/edit.png">
+            <div class="seperator_edit"></div>
+            <img onclick="completeDeleteTask('Subtask${newValue}-${id}')" class="edit_icons" src="../assets/icons/delete.png">
+          </div>
+        </div>
+      </li>`
+}

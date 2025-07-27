@@ -321,21 +321,6 @@ async function postSubtaskClosed(id, clickedID) {
     "subTasksClosed",
     "subTasksOpen"
   );
-  // const clickedValue = document.getElementById(clickedID).innerText.trim();
-  // let getTasks = await fetchData("tasks/");
-  // let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
-  // if (!taskKey) return;
-  // const task = getTasks[taskKey];
-  // const closedSubtasks = task.subTasksClosed || [];
-  // const openSubtasks = task.subTasksOpen || [];
-  // const subTaskIndex = closedSubtasks.findIndex((task) => task.trim() === clickedValue);
-  // if (subTaskIndex === -1) return;
-  // const [movedSubtask] = closedSubtasks.splice(subTaskIndex, 1);
-  // openSubtasks.push(movedSubtask);
-  // await patchData(`tasks/${taskKey}`, {
-  //   subTasksOpen: openSubtasks,
-  //   subTasksClosed: closedSubtasks,
-  // });
 }
 
 async function postSubtaskOpen(id, clickedID) {
@@ -345,21 +330,6 @@ async function postSubtaskOpen(id, clickedID) {
     "subTasksOpen",
     "subTasksClosed"
   );
-  // const clickedValue = document.getElementById(clickedID).innerText.trim();
-  // let getTasks = await fetchData("tasks/");
-  // let taskKey = Object.keys(getTasks).find((key) => getTasks[key].id === id);
-  // if (!taskKey) return;
-  // const task = getTasks[taskKey];
-  // const closedSubtasks = task.subTasksClosed || [];
-  // const openSubtasks = task.subTasksOpen || [];
-  // const subTaskIndex = openSubtasks.findIndex((task) => task.trim() === clickedValue);
-  // if (subTaskIndex === -1) return;
-  // const [movedSubtask] = openSubtasks.splice(subTaskIndex, 1);
-  // closedSubtasks.push(movedSubtask);
-  // await patchData(`tasks/${taskKey}`, {
-  //   subTasksOpen: openSubtasks,
-  //   subTasksClosed: closedSubtasks,
-  // });
 }
 
 async function patchData(path, data = {}) {
@@ -421,218 +391,174 @@ function renderPrioButton(prioName, activePrio) {
   );
 }
 
-function setPrioActive(clickedButton) {
-  let prioButtons =
-    clickedButton.parentElement.querySelectorAll(".prio_edit_button");
-  let prioButtonClicked = clickedButton.classList.contains("active");
-  prioButtons.forEach((btn) => {
-    btn.classList.remove("active");
-    let prio = btn.dataset.prio;
-    let icon = btn.querySelector("img");
-    icon.src = `../assets/icons/priority-${prio}.png`;
-  });
-  if (!prioButtonClicked) {
-    clickedButton.classList.add("active");
-    let prio = clickedButton.dataset.prio;
-    let icon = clickedButton.querySelector("img");
-    icon.src = `../assets/icons/priority-clicked-${prio}.png`;
-  }
-}
+// function setPrioActive(clickedButton) {
+//   let prioButtons =
+//     clickedButton.parentElement.querySelectorAll(".prio_edit_button");
+//   let prioButtonClicked = clickedButton.classList.contains("active");
+//   prioButtons.forEach((btn) => {
+//     btn.classList.remove("active");
+//     let prio = btn.dataset.prio;
+//     let icon = btn.querySelector("img");
+//     icon.src = `../assets/icons/priority-${prio}.png`;
+//   });
+//   if (!prioButtonClicked) {
+//     clickedButton.classList.add("active");
+//     let prio = clickedButton.dataset.prio;
+//     let icon = clickedButton.querySelector("img");
+//     icon.src = `../assets/icons/priority-clicked-${prio}.png`;
+//   }
+// }
 
-function formatDateToDisplay(dateStr) {
-  if (!dateStr) return "";
+// function formatDateToDisplay(dateStr) {
+//   if (!dateStr) return "";
 
-  if (dateStr.includes("/")) {
-    return dateStr;
-  }
-  let [year, month, day] = dateStr.split("-");
-  return `${day}/${month}/${year}`;
-}
+//   if (dateStr.includes("/")) {
+//     return dateStr;
+//   }
+//   let [year, month, day] = dateStr.split("-");
+//   return `${day}/${month}/${year}`;
+// }
 
-async function loadData(path = "") {
-  let response = await fetch(BASE_URL + path + ".json");
-  let responseToJson = await response.json();
-  return responseToJson;
-}
+// async function loadData(path = "") {
+//   let response = await fetch(BASE_URL + path + ".json");
+//   let responseToJson = await response.json();
+//   return responseToJson;
+// }
 
-function getUpdatedSubtasks() {
-  let editedSubtasks = document.querySelectorAll(".flex_edit");
-  let maindiv = document.getElementById("subTasksEdit");
-  let newSubTasks = maindiv.querySelectorAll("input");
-  let updatedSubtasks = [];
+// function getUpdatedSubtasks() {
+//   let editedSubtasks = document.querySelectorAll(".flex_edit");
+//   let maindiv = document.getElementById("subTasksEdit");
+//   let newSubTasks = maindiv.querySelectorAll("input");
+//   let updatedSubtasks = [];
+//   for (let index = 0; index < newSubTasks.length; index++) {
+//     const element = newSubTasks[index];
+//     let addedTask = element.offsetParent.id;
+//     updatedSubtasks.push(addedTask);
+//   }
+//   for (let el of editedSubtasks) {
+//     let pTag = el.querySelector("p");
+//     if (pTag) {
+//       let text = pTag.textContent.trim();
+//       if (text !== "") {
+//         updatedSubtasks.push(text);
+//       }
+//     }
+//   }
+//   return updatedSubtasks;
+// }
 
-  for (let index = 0; index < newSubTasks.length; index++) {
-    const element = newSubTasks[index];
-    let addedTask = element.offsetParent.id;
-    updatedSubtasks.push(addedTask);
-  }
+// function saveSubtask(iconElement, id) {
+//   let updatedSubtask = iconElement.closest(".subtask_edit_wrapper");
+//   let newValue = updatedSubtask.querySelector("input").value.trim();
+//   if (newValue === "") {
+//     return;
+//   } else {
+//     let newUL = document.createElement("ul");
+//     newUL.classList.add("subtask_list_edit");
+//     newUL.id = `Subtask${newValue}-${id}`;
+//     newUL.innerHTML = saveSubtaskTemplate(newValue, id);
+//     updatedSubtask.replaceWith(newUL);
+//   }
+// }
 
-  for (let el of editedSubtasks) {
-    let pTag = el.querySelector("p");
+// function filterTasks() {
+//   let searchInput = document
+//     .getElementById("filterTasks")
+//     .value.trim()
+//     .toLowerCase();
+//   let filteredTask = todos
+//     .slice(0)
+//     .filter(
+//       (todos) =>
+//         todos.title.toLowerCase().includes(searchInput) ||
+//         todos.description.toLowerCase().includes(searchInput)
+//     );
+//   todos = filteredTask;
+//   loadSearch(todos);
+// }
 
-    if (pTag) {
-      let text = pTag.textContent.trim();
-      if (text !== "") {
-        updatedSubtasks.push(text);
-      }
-    }
-  }
-  return updatedSubtasks;
-}
+// function clearAllDocuments(){
+//   document.getElementById("toDoContent").innerHTML = "";
+//   document.getElementById("inProgressContent").innerHTML = "";
+//   document.getElementById("awaitFeedbackContent").innerHTML = "";
+//   document.getElementById("doneContent").innerHTML = "";
+// }
 
-function saveSubtask(iconElement, id) {
-  let updatedSubtask = iconElement.closest(".subtask_edit_wrapper");
-  let newValue = updatedSubtask.querySelector("input").value.trim();
+// function renderStatus(status, elementId){
+//   if (status.length === 0) {
+//     elementId.innerHTML = getEmptyTemplate();
+//   } else {
+//     for (let index = 0; index < status.length; index++) {
+//       const element = statusToDo[index];
+//       elementId.innerHTML += getTaskTemplate(element);
+//       calculateAndRenderProgressBar(element);
+//     }
+//   }
+// }
 
-  if (newValue === "") {
-    return;
-  } else {
-    let newUL = document.createElement("ul");
-    newUL.classList.add("subtask_list_edit");
-    newUL.id = `Subtask${newValue}-${id}`;
-    newUL.innerHTML = `
-      <li class="subTaskAdded">
-        <div class="flex_edit">
-          <p>${newValue}</p>
-          <div class="hide_edit_subtask">
-            <img onclick="editSubtask(this)" class="edit_icons" src="../assets/icons/edit.png">
-            <div class="seperator_edit"></div>
-            <img onclick="completeDeleteTask('Subtask${newValue}-${id}')" class="edit_icons" src="../assets/icons/delete.png">
-          </div>
-        </div>
-      </li>
-    `;
+// function loadSearch(todos) {
+//   let searchInput = document.getElementById("filterTasks").value;
+//   if (searchInput === "") {
+//     loadTasks();
+//     return;
+//   }
+//   let toDoContentRef = document.getElementById("toDoContent");
+//   let inProgressContentRef = document.getElementById("inProgressContent");
+//   let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
+//   let doneContentRef = document.getElementById("doneContent");
+//   let statusToDo = todos.filter((task) => task.status === "To do");
+//   let statusInProgress = todos.filter((task) => task.status === "In progress");
+//   let statusAwaitFeedback = todos.filter(
+//     (task) => task.status === "Await feedback"
+//   );
+//   let statusDone = todos.filter((task) => task.status === "Done");
+//   clearAllDocuments();
+//   renderStatus(statusToDo, toDoContentRef);
+//   renderStatus(statusInProgress, inProgressContentRef);
+//   renderStatus(statusAwaitFeedback, awaitFeedbackContentRef);
+//   renderStatus(statusDone, doneContentRef);
+// }
 
-    updatedSubtask.replaceWith(newUL);
-  }
-}
+// function renderAssignedTo(assignedToIds) {
+//   if (!assignedToIds || assignedToIds.length === 0) {
+//     return `<div>Currently unassigned</div>`;
+//   }
+//   const MAX_VISIBLE = 5;
+//   const visibleIds = assignedToIds.slice(0, MAX_VISIBLE);
+//   const extraCount = assignedToIds.length - MAX_VISIBLE;
+//   let html = visibleIds
+//     .map((id, index) => {
+//       let contactRef = globalContacts.find((contact) => contact.id === id);
+//       if (!contactRef) return "";
+//       let name = `${contactRef.firstname} ${contactRef.lastname}`;
+//       let initials = getInitials(name);
+//       let colorClass = getAvatarColorClass(name);
+//       let leftOffset = index * 24;
+//       return `
+//         <div class="assigned ${colorClass}" style="position:absolute; left: ${leftOffset}px">
+//           ${initials
+//             .split("")
+//             .map((letter) => `<span>${letter}</span>`)
+//             .join("")}
+//         </div>`;
+//     })
+//     .join("");
+//   if (extraCount > 0) {
+//     let leftOffset = MAX_VISIBLE * 24;
+//     html += `
+//       <div class="assigned more" style="position:absolute; left: ${leftOffset}px">
+//         +${extraCount}
+//       </div>`;
+//   }
+//   return html;
+// }
 
-function filterTasks() {
-  let searchInput = document
-    .getElementById("filterTasks")
-    .value.trim()
-    .toLowerCase();
-  let filteredTask = todos
-    .slice(0)
-    .filter(
-      (todos) =>
-        todos.title.toLowerCase().includes(searchInput) ||
-        todos.description.toLowerCase().includes(searchInput)
-    );
-  todos = filteredTask;
-  loadSearch(todos);
-}
+// function disableScroll() {
+//   document.body.classList.add("no-scroll");
+//   document.documentElement.classList.add("no-scroll");
+// }
 
-function loadSearch(todos) {
-  let searchInput = document.getElementById("filterTasks").value;
-  if (searchInput === "") {
-    loadTasks();
-    return;
-  }
-
-  let toDoContentRef = document.getElementById("toDoContent");
-  let inProgressContentRef = document.getElementById("inProgressContent");
-  let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
-  let doneContentRef = document.getElementById("doneContent");
-  let statusToDo = todos.filter((task) => task.status === "To do");
-  let statusInProgress = todos.filter((task) => task.status === "In progress");
-  let statusAwaitFeedback = todos.filter(
-    (task) => task.status === "Await feedback"
-  );
-  let statusDone = todos.filter((task) => task.status === "Done");
-
-  toDoContentRef.innerHTML = "";
-  inProgressContentRef.innerHTML = "";
-  awaitFeedbackContentRef.innerHTML = "";
-  doneContentRef.innerHTML = "";
-
-  if (statusToDo.length === 0) {
-    toDoContentRef.innerHTML = getEmptyTemplate();
-  } else {
-    for (let index = 0; index < statusToDo.length; index++) {
-      const element = statusToDo[index];
-      toDoContentRef.innerHTML += getTaskTemplate(element);
-      calculateAndRenderProgressBar(element);
-    }
-  }
-
-  if (statusInProgress.length == 0) {
-    inProgressContentRef.innerHTML = getEmptyTemplate();
-  } else {
-    for (let index = 0; index < statusInProgress.length; index++) {
-      const element = statusInProgress[index];
-      inProgressContentRef.innerHTML += getTaskTemplate(element);
-      calculateAndRenderProgressBar(element);
-    }
-  }
-
-  if (statusAwaitFeedback.length == 0) {
-    awaitFeedbackContentRef.innerHTML = getEmptyTemplate();
-  } else {
-    for (let index = 0; index < statusAwaitFeedback.length; index++) {
-      const element = statusAwaitFeedback[index];
-      awaitFeedbackContentRef.innerHTML += getTaskTemplate(element);
-      calculateAndRenderProgressBar(element);
-    }
-  }
-
-  if (statusDone.length == 0) {
-    doneContentRef.innerHTML = getEmptyTemplate();
-  } else {
-    for (let index = 0; index < statusDone.length; index++) {
-      const element = statusDone[index];
-
-      doneContentRef.innerHTML += getTaskTemplate(element);
-      calculateAndRenderProgressBar(element);
-    }
-  }
-}
-
-function renderAssignedTo(assignedToIds) {
-  if (!assignedToIds || assignedToIds.length === 0) {
-    return `<div>Currently unassigned</div>`;
-  }
-
-  const MAX_VISIBLE = 5;
-  const visibleIds = assignedToIds.slice(0, MAX_VISIBLE);
-  const extraCount = assignedToIds.length - MAX_VISIBLE;
-
-  let html = visibleIds
-    .map((id, index) => {
-      let contactRef = globalContacts.find((contact) => contact.id === id);
-      if (!contactRef) return "";
-      let name = `${contactRef.firstname} ${contactRef.lastname}`;
-      let initials = getInitials(name);
-      let colorClass = getAvatarColorClass(name);
-      let leftOffset = index * 24;
-
-      return `
-        <div class="assigned ${colorClass}" style="position:absolute; left: ${leftOffset}px">
-          ${initials
-            .split("")
-            .map((letter) => `<span>${letter}</span>`)
-            .join("")}
-        </div>`;
-    })
-    .join("");
-
-  if (extraCount > 0) {
-    let leftOffset = MAX_VISIBLE * 24;
-    html += `
-      <div class="assigned more" style="position:absolute; left: ${leftOffset}px">
-        +${extraCount}
-      </div>`;
-  }
-
-  return html;
-}
-
-function disableScroll() {
-  document.body.classList.add("no-scroll");
-  document.documentElement.classList.add("no-scroll");
-}
-
-function enableScroll() {
-  document.body.classList.remove("no-scroll");
-  document.documentElement.classList.remove("no-scroll");
-}
+// function enableScroll() {
+//   document.body.classList.remove("no-scroll");
+//   document.documentElement.classList.remove("no-scroll");
+// }
