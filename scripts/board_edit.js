@@ -18,33 +18,65 @@ async function initEditContacts(assignedTo = []) {
   document.body.overflow = "hidden";
 }
 
+// Original
+// async function updateDataEdit(tasksEditRef) {
+//   let checkInputs = checkEditInputFields();
+//   if (!checkInputs) {
+//     return;
+//   } else {
+//     let tasks = await fetchData("/tasks/");
+//     let taskKeyEdit = Object.keys(tasks).find(
+//       (k) => String(tasks[k].id) === String(tasksEditRef)
+//     );
+//     let prioButton = document.querySelector(".prio_edit_button.active");
+//     let priorityEdit = prioButton.dataset.prio;
+//     let data = {
+//       id: tasks[taskKeyEdit].id,
+//       category: tasks[taskKeyEdit].category,
+//       title: document.getElementById("titleEdit").value,
+//       description: document.getElementById("descriptionEdit").value,
+//       date: document.getElementById("dateEdit").value,
+//       priority: priorityEdit,
+//       assignedTo: assignedToEditTemp,
+//       subTasksOpen: getUpdatedSubtasks(),
+//       subTasksClosed: tasks[taskKeyEdit].subTasksClosed,
+//       status: tasks[taskKeyEdit].status,
+//     };
+//     await putDataEdit(`/tasks/${taskKeyEdit}`, data);
+//     await loadTasks();
+//     overlayTask(data.id);
+//   }
+// }
+
 async function updateDataEdit(tasksEditRef) {
-  let checkInputs = checkEditInputFields();
-  if (!checkInputs) {
-    return;
-  } else {
+    if (!checkEditInputFields()) return;
+  
     let tasks = await fetchData("/tasks/");
     let taskKeyEdit = Object.keys(tasks).find(
       (k) => String(tasks[k].id) === String(tasksEditRef)
     );
     let prioButton = document.querySelector(".prio_edit_button.active");
     let priorityEdit = prioButton.dataset.prio;
-    let data = {
-      id: tasks[taskKeyEdit].id,
-      category: tasks[taskKeyEdit].category,
-      title: document.getElementById("titleEdit").value,
-      description: document.getElementById("descriptionEdit").value,
-      date: document.getElementById("dateEdit").value,
-      priority: priorityEdit,
-      assignedTo: assignedToEditTemp,
-      subTasksOpen: getUpdatedSubtasks(),
-      subTasksClosed: tasks[taskKeyEdit].subTasksClosed,
-      status: tasks[taskKeyEdit].status,
-    };
+    let data = dataObject(tasks, taskKeyEdit, priorityEdit);
+  
     await putDataEdit(`/tasks/${taskKeyEdit}`, data);
     await loadTasks();
     overlayTask(data.id);
   }
+
+function dataObject(tasks, taskKeyEdit, priorityEdit) {
+  return {
+    id: tasks[taskKeyEdit].id,
+    category: tasks[taskKeyEdit].category,
+    title: document.getElementById("titleEdit").value,
+    description: document.getElementById("descriptionEdit").value,
+    date: document.getElementById("dateEdit").value,
+    priority: priorityEdit,
+    assignedTo: assignedToEditTemp,
+    subTasksOpen: getUpdatedSubtasks(),
+    subTasksClosed: tasks[taskKeyEdit].subTasksClosed,
+    status: tasks[taskKeyEdit].status,
+  };
 }
 
 function checkEditInputFields() {
