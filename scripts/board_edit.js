@@ -18,36 +18,6 @@ async function initEditContacts(assignedTo = []) {
   document.body.overflow = "hidden";
 }
 
-// Original
-// async function updateDataEdit(tasksEditRef) {
-//   let checkInputs = checkEditInputFields();
-//   if (!checkInputs) {
-//     return;
-//   } else {
-//     let tasks = await fetchData("/tasks/");
-//     let taskKeyEdit = Object.keys(tasks).find(
-//       (k) => String(tasks[k].id) === String(tasksEditRef)
-//     );
-//     let prioButton = document.querySelector(".prio_edit_button.active");
-//     let priorityEdit = prioButton.dataset.prio;
-//     let data = {
-//       id: tasks[taskKeyEdit].id,
-//       category: tasks[taskKeyEdit].category,
-//       title: document.getElementById("titleEdit").value,
-//       description: document.getElementById("descriptionEdit").value,
-//       date: document.getElementById("dateEdit").value,
-//       priority: priorityEdit,
-//       assignedTo: assignedToEditTemp,
-//       subTasksOpen: getUpdatedSubtasks(),
-//       subTasksClosed: tasks[taskKeyEdit].subTasksClosed,
-//       status: tasks[taskKeyEdit].status,
-//     };
-//     await putDataEdit(`/tasks/${taskKeyEdit}`, data);
-//     await loadTasks();
-//     overlayTask(data.id);
-//   }
-// }
-
 async function updateDataEdit(tasksEditRef) {
   if (!checkEditInputFields()) return;
 
@@ -227,49 +197,6 @@ function filterEditContactList() {
   });
 }
 
-//original
-// async function updateAssignedMembersEdit(assignedTo) {
-//   let assignedMembersEditRef = document.getElementById("assignedMembersEdit");
-//   if (!assignedMembersEditRef) return;
-//   assignedMembersEditRef.innerHTML = "";
-
-//   let contacts = await loadContacts();
-//   let visibleCount = 5;
-//   let total = assignedTo.length;
-
-//   assignedTo.forEach((id, index) => {
-//     const user = contacts.find((c) => c.id === id);
-//     if (!user) return;
-
-//     let initials = `${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`;
-//     let icon = document.createElement("p");
-//     let colorClass = getAvatarColorClass(`${user.firstname} ${user.lastname}`);
-//     icon.className = `assigned_to_icon ${colorClass}`;
-//     icon.textContent = initials;
-
-//     if (index < visibleCount) {
-//       assignedMembersEditRef.appendChild(icon);
-//     }
-//   });
-
-//   if (total > visibleCount) {
-//     let hiddenUsers = assignedTo
-//       .slice(visibleCount)
-//       .map((id) => contacts.find((c) => c.id === id));
-
-//     let plusWrapper = document.createElement("div");
-//     plusWrapper.classList.add("plusWrapperEdit");
-
-//     let plusIcon = document.createElement("p");
-//     plusIcon.className = "assignedPlusOneEdit";
-//     plusIcon.textContent = `+${total - visibleCount}`;
-
-//     plusWrapper.appendChild(plusIcon);
-//     assignedMembersEditRef.appendChild(plusWrapper);
-//   }
-// }
-
-//Test start------------------------------------------------
 async function updateAssignedMembersEdit(assignedTo) {
   const container = document.getElementById("assignedMembersEdit");
   if (!container) return;
@@ -321,8 +248,6 @@ function createUserIcon(user) {
 
   return icon;
 }
-
-//Test ende------------------------------------------------
 
 function getContactEdit(id) {
   let membersRef = document.getElementById("contactEdit" + id);

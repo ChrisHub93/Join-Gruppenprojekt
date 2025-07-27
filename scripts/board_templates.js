@@ -317,7 +317,6 @@ function getAddTaskTemplate() {
       `;
 }
 
-
 function renderOverlayTaskEdit(tasksEditRef) {
   let prio = tasksEditRef.priority.toLowerCase();
 
