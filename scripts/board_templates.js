@@ -343,7 +343,7 @@ function renderOverlayTaskEdit(tasksEditRef) {
           </div>
           <div class="form_edit_container">
             <label class="editCategoryText" for="dateEdit">Due Date</label>
-            <input onfocusout="checkemptyDateEdit()" class="duedate_edit border_edit_active" type="date" id="dateEdit" name="dateEdit" value="${
+            <input onfocusout="checkEmptyDateEdit()" class="duedate_edit border_edit_active" type="date" id="dateEdit" name="dateEdit" value="${
               tasksEditRef.date
             }" placeholder="dd/mm/yyyy" required>
             <span class="errorDateEdit opacity" id="errorDateEdit">This field is required</span>

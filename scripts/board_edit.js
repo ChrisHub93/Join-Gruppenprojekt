@@ -199,10 +199,10 @@ function handleClickOutsideEditContacts(event) {
 
 
 /**
+ * Renders the list of contacts and highlights those who are assigned to the task.
  * 
- * 
- * @param {Array} contacts - List of all contacts
- * @param {Array} assignedTo - List of the users how assigned to
+ * @param {Array} contacts - List of all available contacts
+ * @param {Array} assignedTo - List of contacts currently assigned to the task
  */
 function renderContactListEdit(contacts, assignedTo = []) {
   let editMembersRef = document.getElementById("editMembers");
@@ -222,6 +222,11 @@ function renderContactListEdit(contacts, assignedTo = []) {
   }
 }
 
+/**
+ * Filters the contact list in the edit view based on the search input.
+ * 
+ * Only contacts whose names match the input string will be displayed.
+ */
 function filterEditContactList() {
   let input = document
     .getElementById("contactSearchInputEdit")
@@ -235,6 +240,16 @@ function filterEditContactList() {
   });
 }
 
+/**
+ * Updates the avatar display for the assigned contacts in the edit view.
+ * 
+ * If the container element 'assignedMembersEdit' does not exist, the function returns early.
+ * Otherwise, it clears the container, renders up to five visible avatars,
+ * and adds an overflow icon if more than five contacts are assigned.
+ * 
+ * @param {Array} assignedTo - List of contacts currently assigned to the task
+ * @returns {void}
+ */
 async function updateAssignedMembersEdit(assignedTo) {
   const container = document.getElementById("assignedMembersEdit");
   if (!container) return;
@@ -251,6 +266,14 @@ async function updateAssignedMembersEdit(assignedTo) {
   }
 }
 
+/**
+ * Renders up to a given number of avatar icons into the specified container.
+ * 
+ * @param {HTMLElement} container - The DOM element where the avatars will be rendered
+ * @param {Array} contacts - List of all available contact objects
+ * @param {Array} assignedTo - List of contact IDs currently assigned to the task
+ * @param {number} count - Maximum number of avatars to display
+ */
 function renderVisibleAvatars(container, contacts, assignedTo, count) {
   assignedTo.slice(0, count).forEach((id) => {
     const user = contacts.find((c) => c.id === id);
@@ -261,6 +284,16 @@ function renderVisibleAvatars(container, contacts, assignedTo, count) {
   });
 }
 
+/**
+ * Renders the overflow icon (e.g., "+3") indicating how many assigned users are not shown.
+ * 
+ * The number displayed depends on how many users exceed the visible avatar limit.
+ * 
+ * @param {HTMLElement} container - The DOM element where the avatar icons are rendered
+ * @param {Array} assignedTo - List of contact IDs currently assigned to the task
+ * @param {number} startIndex - Number of avatars already displayed
+ * @returns {void}
+ */
 function renderOverflowIcon(container, assignedTo, startIndex) {
   const remaining = assignedTo.length - startIndex;
   if (remaining <= 0) return;
@@ -276,6 +309,13 @@ function renderOverflowIcon(container, assignedTo, startIndex) {
   container.appendChild(plusWrapper);
 }
 
+/**
+ * Creates a user icon element with the initials of the user's first and last name.
+ * The icon gets a background color class based on the user's full name.
+ * 
+ * @param {object} user - User data object containing at least `firstname` and `lastname`
+ * @returns {HTMLElement} - Returns a <p> element containing the user's initials
+ */
 function createUserIcon(user) {
   const initials = `${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`;
   const icon = document.createElement("p");
@@ -287,6 +327,14 @@ function createUserIcon(user) {
   return icon;
 }
 
+/**
+ * Handles the selection state of a contact in the edit view.
+ * 
+ * Checks if the contact is already assigned. If not, it marks the contact as selected;
+ * otherwise, it unselects it. Updates the UI and assigned contact list accordingly.
+ * 
+ * @param {string} id - ID of the contact
+ */
 function getContactEdit(id) {
   let membersRef = document.getElementById("contactEdit" + id);
   let inputRef = document.getElementById("checkboxEdit" + id);
@@ -301,6 +349,14 @@ function getContactEdit(id) {
   initEditContacts(assignedToEditTemp);
 }
 
+/**
+ * Toggles the assignment state of a contact in the temporary assignment list.
+ * 
+ * If the contact ID is already in the list, it will be removed.
+ * Otherwise, it will be added to the list.
+ * 
+ * @param {string} id - ID of the contact
+ */
 function toggleAssignmentEdit(id) {
   let index = assignedToEditTemp.indexOf(id);
   if (index !== -1) {
@@ -310,7 +366,15 @@ function toggleAssignmentEdit(id) {
   }
 }
 
-function checkemptyDateEdit() {
+/**
+ * Validates whether the date input field has a value.
+ * 
+ * If empty, it adds an error style and displays an error message.
+ * Otherwise, it removes the error style and hides the message.
+ * 
+ * Also updates the global variable `checkDate` accordingly.
+ */
+function checkEmptyDateEdit() {
   let dateRef = document.getElementById("dateEdit");
   let errorDateRef = document.getElementById("errorDateEdit");
   if (!dateRef.value) {
@@ -324,6 +388,11 @@ function checkemptyDateEdit() {
   }
 }
 
+/**
+ * Sets the minimum selectable date for the date input field to today.
+ * 
+ * Prevents users from selecting a past date.
+ */
 function upToDateEdit() {
   let dateInput = document.getElementById("dateEdit");
   dateInput.min = getTodayStr();
