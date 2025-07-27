@@ -3,7 +3,16 @@ let todos = [];
 let globalContacts = [];
 let isToggling = false;
 
-function getLoadTasksTemplateFunctions(
+/**
+ * Renders the empty task template in all status columns if no tasks exist.
+ *
+ * @param {HTMLElement} toDoContentRef - DOM element for the "To Do" column
+ * @param {HTMLElement} inProgressContentRef - DOM element for the "In Progress" column
+ * @param {HTMLElement} awaitFeedbackContentRef - DOM element for the "Await Feedback" column
+ * @param {HTMLElement} doneContentRef - DOM element for the "Done" column
+ * @returns {void}
+ */
+function renderEmptyTemplatesForAllColumns(
   toDoContentRef,
   inProgressContentRef,
   awaitFeedbackContentRef,
@@ -15,7 +24,16 @@ function getLoadTasksTemplateFunctions(
   doneContentRef.innerHTML = getEmptyTemplate();
 }
 
-function emptyContentHTML(
+/**
+ * Clears the inner HTML of all task board status columns.
+ *
+ * @param {HTMLElement} toDoContentRef - DOM element for the "To Do" column
+ * @param {HTMLElement} inProgressContentRef - DOM element for the "In Progress" column
+ * @param {HTMLElement} awaitFeedbackContentRef - DOM element for the "Await Feedback" column
+ * @param {HTMLElement} doneContentRef - DOM element for the "Done" column
+ * @returns {void}
+ */
+function clearAllTaskColumns(
   toDoContentRef,
   inProgressContentRef,
   awaitFeedbackContentRef,
@@ -27,49 +45,48 @@ function emptyContentHTML(
   doneContentRef.innerHTML = "";
 }
 
+/**
+ * Loads all tasks from the server and renders them into the respective status columns.
+ * 
+ * If no tasks exist, empty task templates will be rendered instead.
+ * Also loads all contacts and stores them in the global `globalContacts` array.
+ * 
+ * @returns {void}
+ */
 async function loadTasks() {
-  let toDoContentRef = document.getElementById("toDoContent");
-  let inProgressContentRef = document.getElementById("inProgressContent");
-  let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
-  let doneContentRef = document.getElementById("doneContent");
-  let tasks = await fetchData("/tasks/");
-  if (tasks === null) {
-    getLoadTasksTemplateFunctions(
-      toDoContentRef,
-      inProgressContentRef,
-      awaitFeedbackContentRef,
-      doneContentRef
-    );
+  const toDo = document.getElementById("toDoContent");
+  const inProgress = document.getElementById("inProgressContent");
+  const awaitFeedback = document.getElementById("awaitFeedbackContent");
+  const done = document.getElementById("doneContent");
+
+  const tasks = await fetchData("/tasks/");
+  if (!tasks) {
+    renderEmptyTemplatesForAllColumns(toDo, inProgress, awaitFeedback, done);
     return;
   }
+
   loadTodos = Object.values(tasks);
   addEmptySubtasks();
-  let contactsData = await fetchData("/contacts/");
-  globalContacts = Object.values(contactsData);
-  let statusToDo = todos.filter((task) => task.status === "To do");
-  let statusInProgress = todos.filter((task) => task.status === "In progress");
-  let statusAwaitFeedback = todos.filter(
-    (task) => task.status === "Await feedback"
-  );
-  let statusDone = todos.filter((task) => task.status === "Done");
-  emptyContentHTML(
-    toDoContentRef,
-    inProgressContentRef,
-    awaitFeedbackContentRef,
-    doneContentRef
-  );
-  checkAllStatus(
-    statusToDo,
-    toDoContentRef,
-    statusInProgress,
-    inProgressContentRef,
-    statusAwaitFeedback,
-    awaitFeedbackContentRef,
-    statusDone,
-    doneContentRef
-  );
+
+  const contacts = await fetchData("/contacts/");
+  globalContacts = Object.values(contacts);
+
+  const toDoTasks = loadTodos.filter(t => t.status === "To do");
+  const inProgressTasks = loadTodos.filter(t => t.status === "In progress");
+  const awaitFeedbackTasks = loadTodos.filter(t => t.status === "Await feedback");
+  const doneTasks = loadTodos.filter(t => t.status === "Done");
+
+  clearAllTaskColumns(toDo, inProgress, awaitFeedback, done);
+  checkAllStatus(toDoTasks, toDo, inProgressTasks, inProgress, awaitFeedbackTasks, awaitFeedback, doneTasks, done);
 }
 
+/**
+ * Renders the progress bar for a task's subtasks.
+ * 
+ * If no subtasks exist, the progress bar container will be hidden.
+ * 
+ * @param {object} element - Task object element
+ */
 function calculateAndRenderProgressBar(element) {
   let percent = 0;
   let tasksOpenLength = element.subTasksOpen?.length ?? 0;
@@ -80,7 +97,23 @@ function calculateAndRenderProgressBar(element) {
       "filledContainer-status" + element.id
     ).style.display = "none";
   } else {
-    percent = Math.round((tasksClosedLength / tasksLength) * 100);
+    renderProgressBar(percent, tasksClosedLength, tasksLength, element);
+  }
+}
+
+/**
+ * Renders the progress bar UI for a given task.
+ * 
+ * It sets the width of the progress bar and updates the displayed number
+ * of completed and total subtasks.
+ *
+ * @param {number} tasksClosedLength - Number of completed subtasks
+ * @param {number} tasksLength - Total number of subtasks
+ * @param {object} element - Task object containing an `id` property
+ * @returns {void}
+ */
+function renderProgressBar(percent, tasksClosedLength, tasksLength, element) {
+  percent = Math.round((tasksClosedLength / tasksLength) * 100);
     document.getElementById(
       "status-bar-js" + element.id
     ).style = `width: ${percent}%`;
@@ -90,7 +123,6 @@ function calculateAndRenderProgressBar(element) {
     document.getElementById(
       "status-bar-number2" + element.id
     ).innerText = `${tasksLength}`;
-  }
 }
 
 async function deleteBoardTasks(tasksRef) {
@@ -270,7 +302,7 @@ function filterTasks() {
   loadSearch(todos);
 }
 
-function clearAllDocuments(){
+function clearAllDocuments() {
   document.getElementById("toDoContent").innerHTML = "";
   document.getElementById("inProgressContent").innerHTML = "";
   document.getElementById("awaitFeedbackContent").innerHTML = "";
