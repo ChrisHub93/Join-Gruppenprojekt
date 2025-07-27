@@ -142,6 +142,18 @@ async function deleteTasks(path, key) {
   return await response.json();
 }
 
+function deleteOverlaySuccses() {
+  const addOverlayRef = document.getElementById("overlayDeleteTask");
+  addOverlayRef.classList.remove("d-nonevip");
+
+  document.getElementById("deleteSuccesMessage").style.display = "flex";
+  setTimeout(() => {
+    document.body.style.overflow = "";
+    addOverlayRef.classList.add("d-nonevip");
+    document.getElementById("deleteSuccesMessage").style.display = "none";
+  }, 800);
+}
+
 function overlayTask(element) {
   let tasksRef = searchElement(element);
   let { addOverlayTaskRef, dialogTaskContentRef, addOverlayEditRef } =
@@ -213,17 +225,6 @@ function closeOverlayAnimation(contentRef, overlayRef) {
     contentRef.style.transform = "";
     contentRef.style.opacity = "";
   }, 300);
-}
-
-async function patchData(path, data = {}) {
-  const response = await fetch(BASE_URL + path + ".json", {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  return response.json();
 }
 
 function taskOverlaySync() {

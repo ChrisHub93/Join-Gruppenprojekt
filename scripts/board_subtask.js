@@ -125,3 +125,14 @@ function subtasksOverlayEdit(tasksEditRef) {
     return subtasksOverlayRenderEdit(tasksEditRef);
   }
 }
+
+async function patchData(path, data = {}) {
+  const response = await fetch(BASE_URL + path + ".json", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return response.json();
+}
