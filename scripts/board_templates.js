@@ -655,3 +655,47 @@ function plusMembers(leftOffset, extraCount){
         +${extraCount}
       </div>`;
 }
+
+function getEditSubtaskContainer(currentText, id) {
+  return `
+      <input type="text" value="${currentText}" class="subtask_input_edit noBorder">
+      <div class="edit_subtask_checkbox">
+        <img class="edit_icons edit_icons_subtask_change" src="../assets/icons/check-subtask.png" onclick="saveSubtask(this, '${id}')">
+        <div class="seperator_edit"></div>
+        <img onclick="completeDeleteTask('edit-subtask-${id}')" class="edit_icons edit_icons_subtask_change" src="../assets/icons/delete.png">
+      </div>
+    `;
+}
+
+function getContactListEdit(contact, assignedColor, isAssigned) {
+  return `  <li
+                    onclick="getContactEdit('${contact.id}')"
+                    id="contactEdit${contact.id}"
+                    class="optionsCategory inputFlex ${
+                      isAssigned ? "assignedBg" : ""
+                    }">
+                    <div class="contacts_name_icon">
+                      <p class="assigned_to_icon ${assignedColor}">${contact.firstname
+    .toUpperCase()
+    .charAt(0)}${contact.lastname.toUpperCase().charAt(0)}</p>
+                      ${contact.firstname + " "} ${contact.lastname}
+                    </div>
+                    <input id="checkboxEdit${
+                      contact.id
+                    }" type="checkbox" class="checkBox" ${
+    isAssigned ? "checked" : ""
+  } />
+                    <img
+                      onclick="getContactEdit('${contact.id}', event)"
+                      id="checkBoxImgEdit${contact.id}"
+                      class="checkBoxImg ${isAssigned ? "filterChecked" : ""}"
+                      src="${
+                        isAssigned
+                          ? "../assets/icons/Check button true.png"
+                          : "../assets/icons/Check button.png"
+                      }"
+                      alt=""
+                    />
+                  </li>
+    `;
+}
