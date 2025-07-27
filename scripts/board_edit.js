@@ -397,3 +397,29 @@ function upToDateEdit() {
   let dateInput = document.getElementById("dateEdit");
   dateInput.min = getTodayStr();
 }
+
+/**
+ * Toggles the active state of priority buttons within the same container.
+ * 
+ * Deactivates all priority buttons first by removing the "active" class and resetting their icons.
+ * If the clicked button was not already active, it becomes active and its icon is updated.
+ * 
+ * @param {HTMLElement} clickedButton - The button element that was clicked.
+ */
+function setPrioActive(clickedButton) {
+  let prioButtons =
+    clickedButton.parentElement.querySelectorAll(".prio_edit_button");
+  let prioButtonClicked = clickedButton.classList.contains("active");
+  prioButtons.forEach((btn) => {
+    btn.classList.remove("active");
+    let prio = btn.dataset.prio;
+    let icon = btn.querySelector("img");
+    icon.src = `../assets/icons/priority-${prio}.png`;
+  });
+  if (!prioButtonClicked) {
+    clickedButton.classList.add("active");
+    let prio = clickedButton.dataset.prio;
+    let icon = clickedButton.querySelector("img");
+    icon.src = `../assets/icons/priority-clicked-${prio}.png`;
+  }
+}

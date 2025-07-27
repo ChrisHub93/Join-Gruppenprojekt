@@ -338,24 +338,6 @@ function renderPrioButton(prioName, activePrio) {
   );
 }
 
-function setPrioActive(clickedButton) {
-  let prioButtons =
-    clickedButton.parentElement.querySelectorAll(".prio_edit_button");
-  let prioButtonClicked = clickedButton.classList.contains("active");
-  prioButtons.forEach((btn) => {
-    btn.classList.remove("active");
-    let prio = btn.dataset.prio;
-    let icon = btn.querySelector("img");
-    icon.src = `../assets/icons/priority-${prio}.png`;
-  });
-  if (!prioButtonClicked) {
-    clickedButton.classList.add("active");
-    let prio = clickedButton.dataset.prio;
-    let icon = clickedButton.querySelector("img");
-    icon.src = `../assets/icons/priority-clicked-${prio}.png`;
-  }
-}
-
 function formatDateToDisplay(dateStr) {
   if (!dateStr) return "";
 
