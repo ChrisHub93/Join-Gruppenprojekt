@@ -338,6 +338,15 @@ function renderPrioButton(prioName, activePrio) {
   );
 }
 
+/**
+ * Formats a date string from `YYYY-MM-DD` to `DD/MM/YYYY` for display.
+ * 
+ * If the input already contains a `/`, it is returned unchanged (assumed to be already formatted).
+ * If the input is empty or undefined, it returns an empty string.
+ * 
+ * @param {string} dateStr - The date string in `YYYY-MM-DD` format.
+ * @returns {string} - The formatted date string in `DD/MM/YYYY` format or unchanged if already formatted.
+ */
 function formatDateToDisplay(dateStr) {
   if (!dateStr) return "";
 
@@ -348,12 +357,26 @@ function formatDateToDisplay(dateStr) {
   return `${day}/${month}/${year}`;
 }
 
+/**
+ * Loads data from the given path on the server.
+ * 
+ * @param {string} path - The relative path to the resource (e.g., "users")
+ * @returns - A promise that resolves to the parsed JSON data
+ */
 async function loadData(path = "") {
   let response = await fetch(BASE_URL + path + ".json");
   let responseToJson = await response.json();
   return responseToJson;
 }
 
+/**
+ * Filters the global `todos` array based on the user's search input.
+ * 
+ * It checks whether the `title` or `description` of a task includes the search term (case-insensitive).
+ * The filtered tasks are assigned back to `todos` and passed to `loadSearch()` for rendering.
+ * 
+ * @returns {void}
+ */
 function filterTasks() {
   let searchInput = document
     .getElementById("filterTasks")
@@ -370,12 +393,16 @@ function filterTasks() {
   loadSearch(todos);
 }
 
-function clearAllDocuments() {
-  document.getElementById("toDoContent").innerHTML = "";
-  document.getElementById("inProgressContent").innerHTML = "";
-  document.getElementById("awaitFeedbackContent").innerHTML = "";
-  document.getElementById("doneContent").innerHTML = "";
-}
+/**
+ * Renders filtered tasks by their status into the appropriate task columns.
+ * 
+ * If the search input is empty, it reloads all tasks.
+ * Otherwise, it categorizes the filtered tasks by status and displays them
+ * in the corresponding sections: "To do", "In progress", "Await feedback", and "Done".
+ *
+ * @param {Array} todos - The list of filtered task objects to be rendered.
+ * @returns {void}
+ */
 
 function loadSearch(todos) {
   let searchInput = document.getElementById("filterTasks").value;
@@ -400,6 +427,29 @@ function loadSearch(todos) {
   renderStatus(statusDone, doneContentRef);
 }
 
+/**
+ * Clears the inner HTML content of all task columns:
+ * "To Do", "In Progress", "Await Feedback", and "Done".
+ *
+ * This is typically used before re-rendering tasks to ensure the UI is reset.
+ *
+ * @returns {void}
+ */
+function clearAllDocuments() {
+  document.getElementById("toDoContent").innerHTML = "";
+  document.getElementById("inProgressContent").innerHTML = "";
+  document.getElementById("awaitFeedbackContent").innerHTML = "";
+  document.getElementById("doneContent").innerHTML = "";
+}
+
+/**
+ * Renders a list of assigned member avatars with initials and color coding.
+ * Shows up to 5 avatars with overlapping style and a "+X" overflow indicator if more members exist.
+ * If the assignedToIds array is empty or not provided, renders a placeholder for unassigned tasks.
+ * 
+ * @param {Array<string>} assignedToIds - Array of contact IDs assigned to the task
+ * @returns {string} - HTML string representing the assigned members avatars and overflow icon
+ */
 function renderAssignedTo(assignedToIds) {
   if (!assignedToIds || assignedToIds.length === 0) {
     return renderUnassigned();
@@ -425,11 +475,27 @@ function renderAssignedTo(assignedToIds) {
   return html;
 }
 
+/**
+ * Disables page scrolling by adding the "no-scroll" CSS class
+ * to the <body> and <html> elements.
+ * 
+ * Typically used to prevent background scroll when overlays or modals are open.
+ * 
+ * @returns {void}
+ */
 function disableScroll() {
   document.body.classList.add("no-scroll");
   document.documentElement.classList.add("no-scroll");
 }
 
+/**
+ * Enables page scrolling by removing the "no-scroll" CSS class
+ * from the <body> and <html> elements.
+ * 
+ * Typically used to restore scroll functionality after an overlay or modal is closed.
+ * 
+ * @returns {void}
+ */
 function enableScroll() {
   document.body.classList.remove("no-scroll");
   document.documentElement.classList.remove("no-scroll");
