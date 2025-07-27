@@ -1,6 +1,15 @@
-function editOverlayTask(tasksRef) {
+/**
+ * Switches from the task detail overlay to the task edit overlay for the given task.
+ * 
+ * It locates the task by ID in the `todos` array, hides the task view overlay,
+ * shows the edit overlay, renders the edit form for the selected task, and
+ * checks whether the current date is up to date.
+ * 
+ * @param {number} taskID - ID of the task to be edited
+ */
+function editOverlayTask(taskID) {
   taskOverlaySync();
-  let tasksEditRef = searchElement(tasksRef);
+  let tasksEditRef = searchElement(taskID);
   let addOverlayRef = document.getElementById("overlayTask");
   let addOverlayEditRef = document.getElementById("overlayTaskEdit");
   let dialogTaskEditRef = document.getElementById("dialogTaskEditContent");
@@ -10,6 +19,15 @@ function editOverlayTask(tasksRef) {
   upToDateEdit();
 }
 
+/**
+ * Initializes the contact list in the edit task overlay.
+ * 
+ * Loads all contacts from the server, renders them into the edit view,
+ * copies the provided assigned contacts into a temporary array for editing,
+ * and updates the displayed assigned contacts.
+ * 
+ * @param {Array} assignedTo - Array of user IDs assigned to the task
+ */
 async function initEditContacts(assignedTo = []) {
   let contacts = await loadContacts();
   renderContactListEdit(contacts, assignedTo);
@@ -18,12 +36,24 @@ async function initEditContacts(assignedTo = []) {
   document.body.overflow = "hidden";
 }
 
-async function updateDataEdit(tasksEditRef) {
+/**
+ * Updates the task data when the "OK" button is pressed in the edit overlay.
+ * 
+ * If required input fields are missing, the function exits early.
+ * 
+ * It loads all tasks from the server, locates the task by ID, determines the selected priority,
+ * builds a new task data object, sends the updated task to the server, reloads the task list,
+ * and displays the updated task in the detail view.
+ * 
+ * @param {*} taskID - ID of the task to be edited
+ * @returns {void}
+ */
+async function updateDataEdit(taskID) {
   if (!checkEditInputFields()) return;
 
   let tasks = await fetchData("/tasks/");
   let taskKeyEdit = Object.keys(tasks).find(
-    (k) => String(tasks[k].id) === String(tasksEditRef)
+    (k) => String(tasks[k].id) === String(taskID)
   );
   let prioButton = document.querySelector(".prio_edit_button.active");
   let priorityEdit = prioButton.dataset.prio;
@@ -34,6 +64,14 @@ async function updateDataEdit(tasksEditRef) {
   overlayTask(data.id);
 }
 
+/**
+ * Builds a new task object from the current form input and existing task data.
+ * 
+ * @param {Object<string, Object>} tasks - All tasks from the server, keyed by database ID
+ * @param {string} taskKeyEdit - The database key (Firebase ID) of the task to be edited
+ * @param {string} priorityEdit - The new priority (e.g., "medium")
+ * @returns {Object} The updated task object to be sent to the server
+ */
 function dataEditObject(tasks, taskKeyEdit, priorityEdit) {
   return {
     id: tasks[taskKeyEdit].id,
@@ -49,6 +87,11 @@ function dataEditObject(tasks, taskKeyEdit, priorityEdit) {
   };
 }
 
+/**
+ * Checks whether the required title and date input fields are filled.
+ * 
+ * @returns {boolean} - Returns true if both title and date have values; otherwise false
+ */
 function checkEditInputFields() {
   let titleValue = document.getElementById("titleEdit").value.trim();
   let dateValue = document.getElementById("dateEdit").value.trim();
@@ -60,6 +103,14 @@ function checkEditInputFields() {
   }
 }
 
+/**
+ * Sends data to the server using a PUT request.
+ * Overwrites the resource at the given path with the provided data.
+ * 
+ * @param {string} path - The relative path to the resource (e.g., "tasks/abc123")
+ * @param {object} data - The full data object to be stored at the specified location
+ * @returns {Promise<object>} The server's response as a parsed JSON object
+ */
 async function putDataEdit(path = "", data = {}) {
   let response = await fetch(BASE_URL + path + ".json", {
     method: "PUT",
@@ -71,6 +122,16 @@ async function putDataEdit(path = "", data = {}) {
   return await response.json();
 }
 
+
+/**
+ * Replaces a subtask list item with an input field for editing.
+ * 
+ * Locates the surrounding <ul> element of the clicked icon, extracts the current subtask text,
+ * replaces the list with an editable input container, and focuses the input for immediate editing.
+ * 
+ * @param {HTMLElement} iconElement - The element (e.g., pencil icon) that was clicked
+ * @param {string|number} id - The ID of the subtask to be edited
+ */
 function editSubtask(iconElement, id) {
   let ul = iconElement.closest("ul");
   let currentText = ul.querySelector("p").innerText;
@@ -88,6 +149,13 @@ function editSubtask(iconElement, id) {
   );
 }
 
+/**
+ * Toggles the visibility of the list of assignable users in the edit task view.
+ * 
+ * When the list is shown, it updates the border color of the selection container
+ * and rotates the dropdown arrow icon. It also initializes the contact list and
+ * adds a click listener to detect clicks outside the container.
+ */
 function openAssignedToEdit() {
   let editMembers = document.getElementById("editMembers");
 
@@ -105,6 +173,13 @@ function openAssignedToEdit() {
   }
 }
 
+/**
+ * Closes the dropdown menu for editing assigned members when clicking outside of it.
+ * 
+ * Also resets the border styling and arrow direction.
+ * 
+ * @param {MouseEvent} event - The click event that triggered the handler
+ */
 function handleClickOutsideEditContacts(event) {
   let editMembers = document.getElementById("editMembers");
   let input = document.getElementById("contactSearchInputEdit");
@@ -122,6 +197,13 @@ function handleClickOutsideEditContacts(event) {
   }
 }
 
+
+/**
+ * 
+ * 
+ * @param {Array} contacts - List of all contacts
+ * @param {Array} assignedTo - List of the users how assigned to
+ */
 function renderContactListEdit(contacts, assignedTo = []) {
   let editMembersRef = document.getElementById("editMembers");
   editMembersRef.innerHTML = "";
