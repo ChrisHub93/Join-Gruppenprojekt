@@ -3,7 +3,7 @@ function checkEmptyPhone() {
   let requiredPhoneFieldRef = document.getElementById("requiredPhoneField");
   let phoneNumber = phoneRef.value.trim();
   let phoneValidation = /^\d+$/;
-  if (!phoneNumber || !phoneValidation.test(phone)) {
+  if (!phoneNumber || !phoneValidation.test(phoneNumber)) {
     phoneRef.classList.add("error");
     requiredPhoneFieldRef.classList.remove("opacity");
   } else {
@@ -26,19 +26,6 @@ function checkEmptyEmail() {
   }
 }
 
-function checkEmptyPhone() {
-  let phoneRef = document.getElementById("phone");
-  let requiredPhoneFieldRef = document.getElementById("requiredPhoneField");
-  let phoneNumber = phoneRef.value.trim();
-  let phoneValidation = /^\d+$/;
-  if (!phoneNumber || !phoneValidation.test(phone)) {
-    phoneRef.classList.add("error");
-    requiredPhoneFieldRef.classList.remove("opacity");
-  } else {
-    phoneRef.classList.remove("error");
-    requiredPhoneFieldRef.classList.add("opacity");
-  }
-}
 
 function checkEmptyName() {
   let nameRef = document.getElementById("name");
