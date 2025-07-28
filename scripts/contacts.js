@@ -191,52 +191,6 @@ function removeOpacity(requiredNameFieldRef,requiredEmailFieldRef,requiredPhoneF
   requiredPhoneFieldRef.classList.remove("opacity");
 }
 
-// original
-// async function createContact(event) {
-//   let nameRef = document.getElementById("name");
-//   let emailRef = document.getElementById("email");
-//   let phoneRef = document.getElementById("phone");
-//   let nameValue = nameRef.value.trim().replace(/\s+/g, " ");
-//   let emailValue = emailRef.value.trim().replace(/\s+/g, "");
-//   let phoneValue = phoneRef.value.trim().replace(/\s+/g, "");
-//   let namePattern = /^[A-Za-zÀ-ÖØ-öø-ÿ]+( [A-Za-zÀ-ÖØ-öø-ÿ]+)+$/;
-//   let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//   let phonePattern = /^[\d +()-]{6,}$/;
-//   let requiredNameFieldRef = document.getElementById("requiredNameField");
-//   let requiredEmailFieldRef = document.getElementById("requiredEmailField");
-//   let requiredPhoneFieldRef = document.getElementById("requiredPhoneField");
-
-//   if (!namePattern.test(nameValue) && emailValue === "" && phoneValue === "") {
-//     addError(nameRef, emailRef, phoneRef);
-//     removeOpacity(requiredNameFieldRef,requiredEmailFieldRef,requiredPhoneFieldRef);
-//     return;
-//   } else if (!namePattern.test(nameValue)) {
-//     nameRef.classList.add("error");
-//     requiredNameFieldRef.classList.remove("opacity");
-//     return;
-//   } else if (!emailPattern.test(emailValue)) {
-//     emailRef.classList.add("error");
-//     requiredEmailFieldRef.classList.remove("opacity");
-//     return;
-//   } else if (!phonePattern.test(phoneValue)) {
-//     phoneRef.classList.add("error");
-//     requiredPhoneFieldRef.classList.remove("opacity");
-//     return;
-//   }
-
-//   let fullName = nameRef.value.split(" ");
-//   let firstNameOfUser = fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
-//   let lastNameOfUser = fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
-//   await postData(`/contacts/`, {id: getId(),email: emailRef.value,firstname: firstNameOfUser,lastname: lastNameOfUser,phone: phoneRef.value,});
-//   getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef);
-//   closeOverlayAfterCreatedContact(event);
-//   moreDetailsAboutContact(emailRef.value,firstNameOfUser,lastNameOfUser,phoneRef.value);
-//   clearInputFields(nameRef, emailRef, phoneRef);
-//   resetErrorStatus([nameRef, emailRef, phoneRef],[requiredNameFieldRef, requiredEmailFieldRef, requiredPhoneFieldRef]);
-//   showSuccess();
-// }
-
-// TEST START -------------------------------------------------------------------------------------------
 async function createContact(event) {
   const refs = getRefs();
   const values = getSanitizedValues(refs);
@@ -327,7 +281,6 @@ function splitAndCapitalizeName(name) {
     lastName: capitalize(lastRaw),
   };
 }
-// TEST ENDE --------------------------------------------------------------------------------------------
 
 function resetErrorStatus(inputs, warnings) {
   inputs.forEach((input) => input.classList.remove("error"));
