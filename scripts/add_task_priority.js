@@ -1,56 +1,133 @@
+// function setPriorityUrgent(id) {
+//   if (!priorityUrgent) {
+//     resetAllPriorities();
+//     priorityUrgent = true;
+//     let urgentRef = document.getElementById(id);
+//     urgentRef.classList.toggle("priorityUrgentBg");
+//     addDisplayNone("standardUrgentIcon");
+//     removeDisplayNone("activeUrgentIcon");
+//     setPriority = "urgent";
+//   } else if (priorityUrgent) {
+//     resetAllPriorities();
+//   }
+// }
+
+// function setPriorityMedium(id) {
+//   if (!priorityMedium) {
+//     resetAllPriorities();
+//     priorityMedium = true;
+//     let urgentRef = document.getElementById(id);
+//     urgentRef.classList.toggle("priorityMediumBg");
+//     addDisplayNone("standardMediumIcon");
+//     removeDisplayNone("activeMediumIcon");
+//     setPriority = "medium";
+//   } else if (priorityMedium) {
+//     resetAllPriorities();
+//   }
+// }
+
+// function setPriorityLow(id) {
+//   if (!priorityLow) {
+//     resetAllPriorities();
+//     priorityLow = true;
+//     let urgentRef = document.getElementById(id);
+//     urgentRef.classList.toggle("priorityLowBg");
+//     addDisplayNone("standardLowIcon");
+//     removeDisplayNone("activeLowIcon");
+//     setPriority = "low";
+//   } else if (priorityLow) {
+//     resetAllPriorities();
+//   }
+// }
+
+// function resetAllPriorities() {
+//   priorityUrgent = false;
+//   priorityMedium = false;
+//   priorityLow = false;
+//   document.getElementById("urgent").classList.remove("priorityUrgentBg");
+//   removeDisplayNone("standardUrgentIcon");
+//   addDisplayNone("activeUrgentIcon");
+//   document.getElementById("medium").classList.remove("priorityMediumBg");
+//   removeDisplayNone("standardMediumIcon");
+//   addDisplayNone("activeMediumIcon");
+//   document.getElementById("low").classList.remove("priorityLowBg");
+//   removeDisplayNone("standardLowIcon");
+//   addDisplayNone("activeLowIcon");
+// }
+
+
+/**
+ * function to set the urgent button
+ * 
+ * @param {string} id - id (urgent) of the HTML Element 
+ */
 function setPriorityUrgent(id) {
   if (!priorityUrgent) {
-    resetAllPriorities();
+    togglePrioritySet("Urgent", id, "urgent");
     priorityUrgent = true;
-    let urgentRef = document.getElementById(id);
-    urgentRef.classList.toggle("priorityUrgentBg");
-    addDisplayNone("standardUrgentIcon");
-    removeDisplayNone("activeUrgentIcon");
-    setPriority = "urgent";
-  } else if (priorityUrgent) {
+  } else {
     resetAllPriorities();
   }
 }
 
+/**
+ * function to set the medium button
+ * 
+ * @param {string} id - id (medium) of the HTML Element button
+ */
 function setPriorityMedium(id) {
   if (!priorityMedium) {
-    resetAllPriorities();
+    togglePrioritySet("Medium", id, "medium");
     priorityMedium = true;
-    let urgentRef = document.getElementById(id);
-    urgentRef.classList.toggle("priorityMediumBg");
-    addDisplayNone("standardMediumIcon");
-    removeDisplayNone("activeMediumIcon");
-    setPriority = "medium";
-  } else if (priorityMedium) {
+  } else {
     resetAllPriorities();
   }
 }
 
+/**
+ * function to set the low button
+ * 
+ * @param {string} id - id (low) of the HTML Element button
+ */
 function setPriorityLow(id) {
   if (!priorityLow) {
-    resetAllPriorities();
+    togglePrioritySet("Low", id, "low");
     priorityLow = true;
-    let urgentRef = document.getElementById(id);
-    urgentRef.classList.toggle("priorityLowBg");
-    addDisplayNone("standardLowIcon");
-    removeDisplayNone("activeLowIcon");
-    setPriority = "low";
-  } else if (priorityLow) {
+  } else {
     resetAllPriorities();
   }
 }
 
+/**
+ * function to set the new priority or turn it off
+ * 
+ * @param {string} prio - capitalized name of the clicked priority to identify CSS class and Icons
+ * @param {string} id - id (urgent, medium, low) of the clicked HTML Element button
+ * @param {string} newSetPrio - lower case name of the clicked priority to set the new priority
+ */
+function togglePrioritySet(prio, id, newSetPrio) {
+  resetAllPriorities();
+  let bgClass = `priority${prio}Bg`;
+  let standardIcon = `standard${prio}Icon`;
+  let activeIcon = `active${prio}Icon`;
+  document.getElementById(id).classList.add(bgClass);
+  addDisplayNone(standardIcon);
+  removeDisplayNone(activeIcon);
+  setPriority = newSetPrio;
+}
+
+/**
+ * function to set back all priority buttons to not activated
+ */
 function resetAllPriorities() {
   priorityUrgent = false;
   priorityMedium = false;
   priorityLow = false;
-  document.getElementById("urgent").classList.remove("priorityUrgentBg");
-  removeDisplayNone("standardUrgentIcon");
-  addDisplayNone("activeUrgentIcon");
-  document.getElementById("medium").classList.remove("priorityMediumBg");
-  removeDisplayNone("standardMediumIcon");
-  addDisplayNone("activeMediumIcon");
-  document.getElementById("low").classList.remove("priorityLowBg");
-  removeDisplayNone("standardLowIcon");
-  addDisplayNone("activeLowIcon");
+  let priorities = ["Urgent", "Medium", "Low"];
+  priorities.forEach(label => {
+    let el = label.toLowerCase();
+    document.getElementById(el).classList.remove(`priority${label}Bg`);
+    removeDisplayNone(`standard${label}Icon`);
+    addDisplayNone(`active${label}Icon`);
+  });
 }
