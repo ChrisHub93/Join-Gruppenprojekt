@@ -309,6 +309,7 @@ function removeDisplayNone(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
   ref.classList.remove("d-none");
+  ref.classList.remove("d-nonevip");
 }
 
 /**
