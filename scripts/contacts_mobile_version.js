@@ -1,3 +1,7 @@
+/**
+ * Switches the UI to a mobile-specific view by hiding the contacts list
+ * and displaying the contact information title section.
+ */
 function showMobileVersion() {
   let contactsRef = document.getElementById("contacts");
   let infoTitleRef = document.getElementById("infoTitle");
@@ -5,6 +9,12 @@ function showMobileVersion() {
   infoTitleRef.classList.add("d-Block");
 }
 
+/**
+ * Stops event propagation and closes the mobile choose overlay.
+ * Applies hide animations and sets the display to "none" after a short delay.
+ *
+ * @param {Event} event - The event that triggered this function (e.g. click).
+ */
 function stopPropagationForMobile(event) {
   event.stopPropagation(event);
   let chooseOverlayForMobileRef = document.getElementById(
@@ -18,6 +28,10 @@ function stopPropagationForMobile(event) {
   }, 50);
 }
 
+/**
+ * Closes the mobile overlay view and resets the UI to its default mobile state.
+ * Also hides the edit/delete options and restores visibility of main sections.
+ */
 function closeMobileOverlay() {
   sameContact();
   let contactsRef = document.getElementById("contacts");
