@@ -1,7 +1,6 @@
 /**
- * Initializes the `subTasksOpen` and `SubTasksClosed` properties for each task in `loadTodos`.
- * If these properties are undefined, they are set to empty arrays.
- * @function addEmptySubtasks
+ * Adds empty arrays for `subTasksOpen` and `subTasksClosed` if they are undefined.
+ * Populates the global `todos` array with updated task objects.
  */
 function addEmptySubtasks() {
   todos = [];
@@ -17,10 +16,10 @@ function addEmptySubtasks() {
 }
 
 /**
- * 
- * @param {HTMLElement} iconElement - The icon element that was clicked to trigger the save.
- * @param {string|number} id - The identifier for subtask group.
- * @returns {void}
+ * Saves an edited subtask input by replacing the edit input with a standard list item.
+ *
+ * @param {HTMLElement} iconElement - The element inside the editable subtask container
+ * @param {number|string} id - ID of the parent task
  */
 function saveSubtask(iconElement, id) {
   let updatedSubtask = iconElement.closest(".subtask_edit_wrapper");
@@ -36,10 +35,10 @@ function saveSubtask(iconElement, id) {
   }
 }
 
-
 /**
- * Gathers and returns a list of updated subtask values from the DOM.
- * @returns {string[]} An array of subtask values.
+ * Collects all subtasks (both from input fields and existing <p> tags) and returns them as an array.
+ *
+ * @returns {Array<string>} - List of updated subtask strings
  */
 function getUpdatedSubtasks() {
   let editedSubtasks = document.querySelectorAll(".flex_edit");
@@ -64,20 +63,11 @@ function getUpdatedSubtasks() {
 }
 
 /**
- * Toggles the checked state of a subtask and updates it on the server.
- * 
- * Based on the current image source (`subtask-checked.png`
- * or `subtask-unchecked.png`), 
- * this function switches the subtask state, updates the icon, 
- * sends the new state to the server,
- * and reloads the task list.
- * 
- * @async
- * @function toggleSubtask
- * @param {HTMLImageElement} img - The image element representing the subtask checkbox.
- * @param {string|number} id - The ID of the parent task.
- * @param {string|number} clickedID - The ID of the subtask being toggled.
- * @returns {Promise<void>} Resolves when the toggle operation and task reload are complete.
+ * Toggles a subtask between completed and open states by updating the UI icon and syncing with the server.
+ *
+ * @param {HTMLImageElement} img - The clicked image element representing checkbox
+ * @param {number} id - ID of the task
+ * @param {string} clickedID - ID of the subtask container (DOM element)
  */
 async function toggleSubtask(img, id, clickedID) {
   if (isToggling) return;
@@ -100,17 +90,13 @@ async function toggleSubtask(img, id, clickedID) {
 }
 
 /**
+ * Moves a subtask between two lists (`subTasksOpen` and `subTasksClosed`) in the task data,
+ * and updates the backend via PATCH request.
  *
- * This function fetches all tasks, identifies the task with the given ID, and
- * transfers the subtask (identified by its DOM element's text content) from the list specified by `fromKey` to the list specified by `toKey`. The updated task data is then sent to the server via a PATCH request.
- *  
- * @async
- * @function moveSubtaskBetweenLists
- * @param {string|number} id - The ID of the task containing the subtask.
- * @param {string} clickedID - The DOM ID of the element representing the clicked subtask.
- * @param {string} fromKey - The key of the source subtask list (e.g., "subTasksOpen").
- * @param {string} toKey - The key of the target subtask list (e.g., "subTasksClosed").
- * @returns {Promise<void>} Resolves when the update is completed or exits early if conditions aren't met.
+ * @param {number} id - ID of the task
+ * @param {string} clickedID - ID of the subtask DOM element
+ * @param {string} fromKey - Property name of the source list (e.g. 'subTasksClosed')
+ * @param {string} toKey - Property name of the destination list (e.g. 'subTasksOpen')
  */
 async function moveSubtaskBetweenLists(id, clickedID, fromKey, toKey) {
   const clickedValue = document.getElementById(clickedID).innerText.trim();
@@ -133,47 +119,10 @@ async function moveSubtaskBetweenLists(id, clickedID, fromKey, toKey) {
 }
 
 /**
- * Moves a subtask from the "closed" list to the "open" list for a given task.
- * 
- * @async
- * @function postSubtaskClosed
- * @param {string|number} id - The ID of the task.
- * @param {string} clickedID - The DOM ID of the subtask element being toggled.
- * @returns {Promise<void>} Resolves after the subtask has been moved and the server updated.
- */
-async function postSubtaskClosed(id, clickedID) {
-  await moveSubtaskBetweenLists(
-    id,
-    clickedID,
-    "subTasksClosed",
-    "subTasksOpen"
-  );
-}
-
-/**
- * Moves a subtask from the "open" list to the "closed" list for a given task.
- * 
- * @async
- * @function postSubtaskOpen
- * @param {string|number} id - The ID of the task.
- * @param {string} clickedID - The DOM ID of the subtask element being toggled.
- * @returns {Promise<void>} Resolves after the subtask has been moved and the server updated.
- */
-async function postSubtaskOpen(id, clickedID) {
-  await moveSubtaskBetweenLists(
-    id,
-    clickedID,
-    "subTasksOpen",
-    "subTasksClosed"
-  );
-}
-
-/**
- * Returns the rendered subtask overlay HTML for a given task if it contains subtasks.
- * 
- * @function subtasksOverlay
- * @param {*} taskRef - The task object to check for subtasks.
- * @returns {string} The rendered HTML string for the subtask overlay or an empty string if no subtasks exist.
+ * Renders the subtask overlay content if subtasks are available.
+ *
+ * @param {object} taskRef - Task object
+ * @returns {string} - HTML string or empty string
  */
 function subtasksOverlay(taskRef) {
   if (
@@ -187,32 +136,13 @@ function subtasksOverlay(taskRef) {
 }
 
 /**
- * Returns the rendered editable subtask overlay HTML for a given task edit reference.
- * 
- * @function subtasksOverlayEdit
- * @param {*} tasksEditRef - The task edit object to check for subtasks.
- * @returns {string} The rendered HTML string for the editable subtask overlay or an empty string if no subtasks exist.
+ * Sends a PATCH request to update part of a resource in the backend.
+ *
+ * @param {string} path - The relative path to the resource (e.g. "tasks/abc123")
+ * @param {object} data - The partial data to update
+ * @returns {Promise<object>} - The server's response as JSON
  */
-function subtasksOverlayEdit(tasksEditRef) {
-  if (
-    tasksEditRef.subTasksOpen === undefined &&
-    tasksEditRef.subTasksClosed === undefined
-  ) {
-    return "";
-  } else {
-    return subtasksOverlayRenderEdit(tasksEditRef);
-  }
-}
 
-/**
- * Sends a PATCH request with JSON data to the specified API endpoint and returns the parsed JSON response.
- * 
- * @async
- * @function patchData
- * @param {string} path - The API resource path
- * @param {object} data - The data object to be patched
- * @returns {Promise<Object>} A promise that resolves to the JSON response from the server.
- */
 async function patchData(path, data = {}) {
   const response = await fetch(BASE_URL + path + ".json", {
     method: "PATCH",

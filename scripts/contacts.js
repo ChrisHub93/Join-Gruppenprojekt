@@ -1,5 +1,8 @@
 let currentActiveContactId = null;
 
+/**
+ * This function loads all contacts from server. It sorts it alphabetic. If the window screen is smaller than
+ */
 async function initContacts() {
   let contacts = await fetchData("/contacts/");
   let contactsArray = Object.values(contacts);
