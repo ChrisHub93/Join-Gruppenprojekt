@@ -1,3 +1,7 @@
+/**
+ * Adds empty arrays for `subTasksOpen` and `subTasksClosed` if they are undefined.
+ * Populates the global `todos` array with updated task objects.
+ */
 function addEmptySubtasks() {
   todos = [];
   for (let task of loadTodos) {
@@ -11,6 +15,12 @@ function addEmptySubtasks() {
   }
 }
 
+/**
+ * Saves an edited subtask input by replacing the edit input with a standard list item.
+ *
+ * @param {HTMLElement} iconElement - The element inside the editable subtask container
+ * @param {number|string} id - ID of the parent task
+ */
 function saveSubtask(iconElement, id) {
   let updatedSubtask = iconElement.closest(".subtask_edit_wrapper");
   let newValue = updatedSubtask.querySelector("input").value.trim();
@@ -25,6 +35,11 @@ function saveSubtask(iconElement, id) {
   }
 }
 
+/**
+ * Collects all subtasks (both from input fields and existing <p> tags) and returns them as an array.
+ *
+ * @returns {Array<string>} - List of updated subtask strings
+ */
 function getUpdatedSubtasks() {
   let editedSubtasks = document.querySelectorAll(".flex_edit");
   let maindiv = document.getElementById("subTasksEdit");
@@ -47,6 +62,13 @@ function getUpdatedSubtasks() {
   return updatedSubtasks;
 }
 
+/**
+ * Toggles a subtask between completed and open states by updating the UI icon and syncing with the server.
+ *
+ * @param {HTMLImageElement} img - The clicked image element representing checkbox
+ * @param {number} id - ID of the task
+ * @param {string} clickedID - ID of the subtask container (DOM element)
+ */
 async function toggleSubtask(img, id, clickedID) {
   if (isToggling) return;
   isToggling = true;
@@ -67,6 +89,15 @@ async function toggleSubtask(img, id, clickedID) {
   loadTasks();
 }
 
+/**
+ * Moves a subtask between two lists (`subTasksOpen` and `subTasksClosed`) in the task data,
+ * and updates the backend via PATCH request.
+ *
+ * @param {number} id - ID of the task
+ * @param {string} clickedID - ID of the subtask DOM element
+ * @param {string} fromKey - Property name of the source list (e.g. 'subTasksClosed')
+ * @param {string} toKey - Property name of the destination list (e.g. 'subTasksOpen')
+ */
 async function moveSubtaskBetweenLists(id, clickedID, fromKey, toKey) {
   const clickedValue = document.getElementById(clickedID).innerText.trim();
   let getTasks = await fetchData("tasks/");
@@ -87,6 +118,12 @@ async function moveSubtaskBetweenLists(id, clickedID, fromKey, toKey) {
   });
 }
 
+/**
+ * Renders the subtask overlay content if subtasks are available.
+ *
+ * @param {object} taskRef - Task object
+ * @returns {string} - HTML string or empty string
+ */
 function subtasksOverlay(taskRef) {
   if (
     taskRef.subTasksOpen == undefined &&
@@ -98,6 +135,12 @@ function subtasksOverlay(taskRef) {
   }
 }
 
+/**
+ * Renders the subtask edit overlay if subtasks exist in the task.
+ *
+ * @param {object} tasksEditRef - Task object being edited
+ * @returns {string} - HTML string or empty string
+ */
 function subtasksOverlayEdit(tasksEditRef) {
   if (
     tasksEditRef.subTasksOpen === undefined &&
@@ -108,6 +151,14 @@ function subtasksOverlayEdit(tasksEditRef) {
     return subtasksOverlayRenderEdit(tasksEditRef);
   }
 }
+
+/**
+ * Sends a PATCH request to update part of a resource in the backend.
+ *
+ * @param {string} path - The relative path to the resource (e.g. "tasks/abc123")
+ * @param {object} data - The partial data to update
+ * @returns {Promise<object>} - The server's response as JSON
+ */
 
 async function patchData(path, data = {}) {
   const response = await fetch(BASE_URL + path + ".json", {
