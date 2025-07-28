@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: contacts.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: contacts.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let currentActiveContactId = null;
+
+/**
+ * Initialize contacts by fetching, sorting, and rendering them.
+ * Also adjusts UI elements based on window width.
+ * 
+ * @async
+ * @returns {Promise&lt;void>}
+ */
+async function initContacts() {
+  let contacts = await fetchData("/contacts/");
+  let contactsArray = Object.values(contacts);
+  contactsArray.sort(compare);
+  getListOfContacts(contactsArray);
+  if (window.innerWidth &lt;= 1100) {
+    let addPersonRef = document.getElementById("addPerson");
+    addPersonRef.classList.remove("d-nonevip");
+    let successfullyCreatedMobileRef = document.getElementById("successfullyCreatedMobile");
+    successfullyCreatedMobileRef.classList.remove("opacity");
+  } else if (window.innerWidth > 1100) {
+    getClassesForOverlayDesktop();
+  }
+}
+
+/**
+ * Fetch JSON data from the given path relative to BASE_URL.
+ * 
+ * @async
+ * @param {string} path - The API path to fetch data from (without extension).
+ * @returns {Promise&lt;Object>} The parsed JSON response.
+ */
+async function fetchData(path) {
+  let response = await fetch(BASE_URL + path + ".json");
+  let responseAsJson = await response.json();
+  return responseAsJson;
+}
+
+/**
+ * Compare two user objects by their first names alphabetically (case-insensitive).
+ * 
+ * @param {{firstname: string}} firstUser 
+ * @param {{firstname: string}} nextUser 
+ * @returns {number} -1 if firstUser &lt; nextUser, 1 if firstUser > nextUser, 0 if equal.
+ */
+function compare(firstUser, nextUser) {
+  if (firstUser.firstname.toUpperCase() &lt; nextUser.firstname.toUpperCase()) {
+    return -1;
+  } else if (
+    firstUser.firstname.toUpperCase() > nextUser.firstname.toUpperCase()
+  ) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+/**
+ * Render the list of contacts grouped alphabetically by first name.
+ * 
+ * @param {Array&lt;Object>} contactsArray - Array of contact objects.
+ */
+function getListOfContacts(contactsArray) {
+  for (user of contactsArray) {
+    let emailOfUser = user.email;
+    let firstNameOfUser = user.firstname;
+    let lastNameOfUser = user.lastname;
+    let phoneOfUser = user.phone;
+    let alphabeticalOrderRef = document.getElementById("alphabeticalOrder" + firstNameOfUser.charAt(0).toUpperCase());
+    alphabeticalOrderRef.innerHTML += getBasicInfoAboutContact(emailOfUser,firstNameOfUser,lastNameOfUser,phoneOfUser);
+    getSortTitle(firstNameOfUser);
+    randomBackgroundColor(firstNameOfUser, lastNameOfUser);
+  }
+}
+
+/**
+ * Render the alphabetical group title for a given first name.
+ * 
+ * @param {string} firstNameOfUser - First name of the contact.
+ */
+
+function getSortTitle(firstNameOfUser) {
+  let orderRef = document.getElementById(
+    "order" + firstNameOfUser.charAt(0).toUpperCase()
+  );
+  orderRef.innerHTML = getSortTitleTemplate(firstNameOfUser);
+}
+
+/**
+ * Assign a random background color class to the contact's initials circle.
+ * 
+ * @param {string} firstNameOfUser 
+ * @param {string} lastNameOfUser 
+ */
+function randomBackgroundColor(firstNameOfUser, lastNameOfUser) {
+  let numberForClass = Math.floor(Math.random() * 8) + 1;
+  let circleFirstLettersRef = document.getElementById(
+    "circleFirstLetters" + firstNameOfUser + lastNameOfUser
+  );
+  circleFirstLettersRef.classList.add(
+    "bgForCircleFirstLetters" + numberForClass
+  );
+}
+
+/**
+ * Handle the selection logic when a contact is clicked.
+ * Calls appropriate functions depending on the current active contact state.
+ * 
+ * @param {string} newContactId - New contact ID in the format "FirstName LastName".
+ * @param {string} firstNameOfUser
+ * @param {string} lastNameOfUser
+ * @param {string} emailOfUser
+ * @param {string} phoneOfUser
+ */
+function currentUser(newContactId,firstNameOfUser,lastNameOfUser,emailOfUser,phoneOfUser ){
+  if (currentActiveContactId === newContactId) {
+    sameContact();
+  } else if (
+    currentActiveContactId &amp;&amp;
+    currentActiveContactId !== newContactId
+  ) {
+    clickedOnNewContact(newContactId,firstNameOfUser,lastNameOfUser,emailOfUser,phoneOfUser);
+  } else {
+    selectContact(newContactId,firstNameOfUser,lastNameOfUser,emailOfUser,phoneOfUser);
+  }
+}
+
+/**
+ * Show or hide phone number overlay depending on phone number availability.
+ * 
+ * @param {string|undefined} phoneOfUser - Phone number string or undefined.
+ */
+
+function checkPhoneOfUser(phoneOfUser){
+  if (phoneOfUser === "undefined") {
+    let phoneOverlayRef = document.getElementById("phoneOverlay");
+    phoneOverlayRef.classList.add("d-nonevip");
+  } else if (phoneOfUser.value !== undefined) {
+    let phoneOverlayRef = document.getElementById("phoneOverlay");
+    phoneOverlayRef.classList.remove("d-nonevip");
+  }
+}
+
+/**
+ * Display more details about a contact and handle UI changes.
+ * 
+ * @param {string} emailOfUser
+ * @param {string} firstNameOfUser
+ * @param {string} lastNameOfUser
+ * @param {string} phoneOfUser
+ */
+function moreDetailsAboutContact(emailOfUser,firstNameOfUser,lastNameOfUser,phoneOfUser) {
+  let newContactId = firstNameOfUser + " " + lastNameOfUser;
+  currentUser(newContactId,firstNameOfUser,lastNameOfUser,emailOfUser,phoneOfUser );
+  if (window.innerWidth &lt;= 1100) {
+    showMobileVersion();
+    let addPersonRef = document.getElementById("addPerson");
+    let chooseEditOrDeleteMobileRef = document.getElementById("chooseEditOrDeleteMobile");
+    addPersonRef.classList.remove("d-nonevip");
+    chooseEditOrDeleteMobileRef.classList.remove("d-nonevip");
+  }
+  checkPhoneOfUser(phoneOfUser);
+}
+
+
+/**
+ * Deselect the currently active contact and reset relevant UI states.
+ */
+function sameContact() {
+  let idRef = document.querySelectorAll('[id^="setNewBgFor"]');
+  for (let cssElement of idRef) {
+    cssElement.classList.remove("darkBtn");
+  }
+  let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
+  allInfoAboutContactRef.classList.remove("showAllInfoAboutContact");
+  currentActiveContactId = null;
+}
+
+/**
+ * Handle switching to a new contact by updating UI and contact details.
+ * 
+ * @param {string} newContactId
+ * @param {string} firstNameOfUser
+ * @param {string} lastNameOfUser
+ * @param {string} emailOfUser
+ * @param {string} phoneOfUser
+ */
+function clickedOnNewContact(newContactId,firstNameOfUser,lastNameOfUser,emailOfUser,phoneOfUser) {
+  let idRef = document.querySelectorAll('[id^="setNewBgFor"]');
+  for (const element of idRef) {
+    element.classList.remove("darkBtn");
+  }
+  let setNewBgForContactRef = document.getElementById("setNewBgFor" + firstNameOfUser + lastNameOfUser);
+  setNewBgForContactRef.classList.add("darkBtn");
+  let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
+  let targetDivRef = document.getElementById("circleFirstLetters" + firstNameOfUser + lastNameOfUser);
+  let divRef = Array.from(targetDivRef.classList);
+  allInfoAboutContactRef.innerHTML = getDetailsOfContact(divRef,firstNameOfUser,lastNameOfUser,emailOfUser,phoneOfUser);
+  currentActiveContactId = newContactId;
+}
+
+/**
+ * Select a contact and display its detailed info in the UI.
+ * 
+ * @param {string} newContactId
+ * @param {string} firstNameOfUser
+ * @param {string} lastNameOfUser
+ * @param {string} emailOfUser
+ * @param {string} phoneOfUser
+ */
+function selectContact(newContactId,firstNameOfUser,lastNameOfUser,emailOfUser,phoneOfUser) {
+  currentActiveContactId = newContactId;
+  let setNewBgForContactRef = document.getElementById("setNewBgFor" + firstNameOfUser + lastNameOfUser);
+  setNewBgForContactRef.classList.add("darkBtn");
+  let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
+  allInfoAboutContactRef.classList.add("showAllInfoAboutContact");
+  let targetDivRef = document.getElementById("circleFirstLetters" + firstNameOfUser + lastNameOfUser);
+  let divRef = Array.from(targetDivRef.classList);
+  allInfoAboutContactRef.innerHTML = getDetailsOfContact(divRef,firstNameOfUser,lastNameOfUser,emailOfUser,phoneOfUser);
+}
+
+/**
+ * Clear values and error styles of input fields (name, email, phone).
+ */
+function removeInputFieldsValues(){
+  let nameRef = document.getElementById("name");
+  let emailRef = document.getElementById("email");
+  let phoneRef = document.getElementById("phone");
+  nameRef.value = "";
+  emailRef.value = "";
+  phoneRef.value = "";
+  nameRef.classList.remove("error");
+  emailRef.classList.remove("error");
+  phoneRef.classList.remove("error");
+}
+
+/**
+ * Reset input fields to default state and add opacity to required field indicators.
+ */
+function setInputToDefault() {
+  removeInputFieldsValues();
+  addOpacityToRequiredFields();
+}
+
+/**
+ * Add opacity class to all required input field labels.
+ */
+
+function addOpacityToRequiredFields(){
+  let requiredNameFieldRef = document.getElementById("requiredNameField");
+  let requiredEmailFieldRef = document.getElementById("requiredEmailField");
+  let requiredPhoneFieldRef = document.getElementById("requiredPhoneField");
+  requiredNameFieldRef.classList.add("opacity");
+  requiredEmailFieldRef.classList.add("opacity");
+  requiredPhoneFieldRef.classList.add("opacity");
+}
+
+/**
+ * Stop propagation of the given event.
+ * 
+ * @param {Event} event 
+ */
+function stopPropagation(event) {
+  event.stopPropagation(event);
+}
+
+/**
+ * Add error class to the given input fields.
+ * 
+ * @param {HTMLInputElement} nameRef
+ * @param {HTMLInputElement} emailRef
+ * @param {HTMLInputElement} phoneRef
+ */
+function addError(nameRef, emailRef, phoneRef) {
+  nameRef.classList.add("error");
+  emailRef.classList.add("error");
+  phoneRef.classList.add("error");
+}
+
+/**
+ * Remove error class from the given input fields.
+ * 
+ * @param {HTMLInputElement} nameRef
+ * @param {HTMLInputElement} emailRef
+ * @param {HTMLInputElement} phoneRef
+ */
+function removeError(nameRef, emailRef, phoneRef) {
+  nameRef.classList.remove("error");
+  emailRef.classList.remove("error");
+  phoneRef.classList.remove("error");
+}
+
+/**
+ * Add opacity to required field labels.
+ */
+function addOpacity() {
+  let requiredNameFieldRef = document.getElementById("requiredNameField");
+  let requiredEmailFieldRef = document.getElementById("requiredEmailField");
+  let requiredPhoneFieldRef = document.getElementById("requiredPhoneField");
+  requiredNameFieldRef.classList.add("opacity");
+  requiredEmailFieldRef.classList.add("opacity");
+  requiredPhoneFieldRef.classList.add("opacity");
+}
+
+/**
+ * Remove opacity from the given required field label elements.
+ * 
+ * @param {HTMLElement} requiredNameFieldRef
+ * @param {HTMLElement} requiredEmailFieldRef
+ * @param {HTMLElement} requiredPhoneFieldRef
+ */
+function removeOpacity(requiredNameFieldRef,requiredEmailFieldRef,requiredPhoneFieldRef) {
+  requiredNameFieldRef.classList.remove("opacity");
+  requiredEmailFieldRef.classList.remove("opacity");
+  requiredPhoneFieldRef.classList.remove("opacity");
+}
+
+/**
+ * Creates a new contact after validating and sanitizing user input.
+ * Submits the data to the backend and updates the UI accordingly.
+ * 
+ * @param {Event} event - The event triggered by the user (e.g. form submission or button click).
+ */
+async function createContact(event) {
+  const refs = getRefs();
+  const values = getSanitizedValues(refs);
+  
+  if (isAllEmptyOrInvalid(values, refs)) return;
+
+  const error = getFirstValidationError(values, refs);
+  if (error) return;
+
+  const { firstName, lastName } = splitAndCapitalizeName(values.name);
+
+  await postData(`/contacts/`, {
+    id: getId(),
+    email: values.email,
+    firstname: firstName,
+    lastname: lastName,
+    phone: values.phone,
+  });
+
+  getListOfCreatedContact(firstName, lastName, refs.email, refs.phone);
+  closeOverlayAfterCreatedContact(event);
+  moreDetailsAboutContact(values.email, firstName, lastName, values.phone);
+  clearInputFields(refs.name, refs.email, refs.phone);
+  resetErrorStatus(
+    [refs.name, refs.email, refs.phone],
+    [refs.errorName, refs.errorEmail, refs.errorPhone]
+  );
+  showSuccess();
+}
+
+/**
+ * Retrieves input and error label DOM references from the contact form.
+ * @returns {{name: HTMLElement, email: HTMLElement, phone: HTMLElement, errorName: HTMLElement, errorEmail: HTMLElement, errorPhone: HTMLElement}}
+ */
+function getRefs() {
+  return {
+    name: document.getElementById("name"),
+    email: document.getElementById("email"),
+    phone: document.getElementById("phone"),
+    errorName: document.getElementById("requiredNameField"),
+    errorEmail: document.getElementById("requiredEmailField"),
+    errorPhone: document.getElementById("requiredPhoneField"),
+  };
+}
+
+/**
+ * Extracts and trims user input values from input fields.
+ * 
+ * @param {Object} refs - The DOM element references returned by getRefs().
+ * @returns {{name: string, email: string, phone: string}} - Cleaned user input values.
+ */
+function getSanitizedValues(refs) {
+  return {
+    name: refs.name.value.trim().replace(/\s+/g, " "),
+    email: refs.email.value.trim().replace(/\s+/g, ""),
+    phone: refs.phone.value.trim().replace(/\s+/g, ""),
+  };
+}
+
+/**
+ * Checks whether the name is invalid and both email and phone are empty.
+ * Displays all error states if true.
+ * 
+ * @param {{name: string, email: string, phone: string}} values - The cleaned input values.
+ * @param {Object} refs - DOM references to input and error fields.
+ * @returns {boolean} - True if the form is completely invalid; false otherwise.
+ */
+function isAllEmptyOrInvalid(values, refs) {
+  const namePattern = /^[A-Za-zÀ-ÖØ-öø-ÿ]+( [A-Za-zÀ-ÖØ-öø-ÿ]+)+$/;
+  if (!namePattern.test(values.name) &amp;&amp; values.email === "" &amp;&amp; values.phone === "") {
+    addError(refs.name, refs.email, refs.phone);
+    removeOpacity(refs.errorName, refs.errorEmail, refs.errorPhone);
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Validates name, email, and phone inputs individually.
+ * Highlights the first invalid input and displays the corresponding error message.
+ * 
+ * @param {{name: string, email: string, phone: string}} values - The cleaned input values.
+ * @param {Object} refs - DOM references to input and error fields.
+ * @returns {boolean} - True if an error is found and displayed; false otherwise.
+ */
+function getFirstValidationError(values, refs) {
+  const patterns = {
+    name: /^[A-Za-zÀ-ÖØ-öø-ÿ]+( [A-Za-zÀ-ÖØ-öø-ÿ]+)+$/,
+    email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    phone: /^[\d +()-]{6,}$/,
+  };
+
+  const fields = [
+    { key: "name", pattern: patterns.name, ref: refs.name, label: refs.errorName },
+    { key: "email", pattern: patterns.email, ref: refs.email, label: refs.errorEmail },
+    { key: "phone", pattern: patterns.phone, ref: refs.phone, label: refs.errorPhone },
+  ];
+
+  for (let { key, pattern, ref, label } of fields) {
+    if (!pattern.test(values[key])) {
+      ref.classList.add("error");
+      label.classList.remove("opacity");
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Splits the full name string into first and last name, and capitalizes the first letter of each.
+ * 
+ * @param {string} name - Full name input from the user.
+ * @returns {{firstName: string, lastName: string}} - Capitalized first and last name.
+ */
+function splitAndCapitalizeName(name) {
+  const [firstRaw, lastRaw] = name.split(" ");
+  const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+  return {
+    firstName: capitalize(firstRaw),
+    lastName: capitalize(lastRaw),
+  };
+}
+
+/**
+ * Reset error styles for inputs and warnings.
+ * 
+ * @param {HTMLInputElement[]} inputs - Input elements to reset error on.
+ * @param {HTMLElement[]} warnings - Warning label elements to reset opacity on.
+ */
+function resetErrorStatus(inputs, warnings) {
+  inputs.forEach((input) => input.classList.remove("error"));
+  warnings.forEach((warn) => warn.classList.add("opacity"));
+}
+
+/**
+ * Generate a unique UUID string.
+ * 
+ * @returns {string} A new UUID.
+ */
+function getId() {
+  return self.crypto.randomUUID();
+}
+
+/**
+ * Show a temporary success message after contact creation.
+ */
+function showSuccess() {
+  let successfullyCreatedRef = document.getElementById("successfullyCreated");
+  successfullyCreatedRef.style.display = "flex";
+  setTimeout(() => {
+    successfullyCreatedRef.classList.add("showSuccess");
+    successfullyCreatedRef.classList.remove("hideSuccess");
+  }, 500);
+  setTimeout(() => {
+    successfullyCreatedRef.classList.remove("showSuccess");
+    successfullyCreatedRef.classList.add("hideSuccess");
+  }, 2000);
+  setTimeout(() => {
+    successfullyCreatedRef.style.display = "none";
+  }, 2500);
+}
+
+/**
+ * Clear the values of the given input fields.
+ * 
+ * @param {HTMLInputElement} nameRef
+ * @param {HTMLInputElement} emailRef
+ * @param {HTMLInputElement} phoneRef
+ */
+function clearInputFields(nameRef, emailRef, phoneRef) {
+  nameRef.value = "";
+  emailRef.value = "";
+  phoneRef.value = "";
+}
+
+/**
+ * Send data via POST request to the specified path.
+ * 
+ * @param {string} path - The API endpoint path.
+ * @param {Object} data - The data object to send.
+ * @returns {Promise&lt;Object>} The JSON response.
+ */
+async function postData(path, data = {}) {
+  let response = await fetch(BASE_URL + path + ".json", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return (responseToJson = await response.json());
+}
+
+/**
+ * Append a newly created contact to the UI list and refresh styles.
+ * 
+ * @param {string} firstNameOfUser
+ * @param {string} lastNameOfUser
+ * @param {HTMLInputElement} emailRef
+ * @param {HTMLInputElement} phoneRef
+ */
+function getListOfCreatedContact(firstNameOfUser,lastNameOfUser,emailRef,phoneRef) {
+  let alphabeticalOrderRef = document.getElementById("alphabeticalOrder" + firstNameOfUser.charAt(0).toUpperCase());
+  alphabeticalOrderRef.innerHTML += getBasicInfoAboutContact(emailRef.value,firstNameOfUser,lastNameOfUser,phoneRef.value);
+  getSortTitle(firstNameOfUser);
+  randomBackgroundColor(firstNameOfUser, lastNameOfUser);
+}
+
+/**
+ * Fill input fields with existing contact data for editing.
+ * 
+ * @param {Object} user - Contact user object with firstname, lastname, email, phone.
+ */
+function inputFieldsGetValuesOfContact(user) {
+  let inputNameRef = document.getElementById("nameEdit");
+  let inputEmailRef = document.getElementById("emailEdit");
+  let inputPhoneRef = document.getElementById("phoneEdit");
+  inputNameRef.value = user.firstname + " " + user.lastname;
+  inputEmailRef.value = user.email;
+  inputPhoneRef.value = user.phone;
+  if (inputPhoneRef.value === "undefined") {
+    inputPhoneRef.value = "";
+  }
+}
+
+/**
+ * Set correct background styles for the profile initials.
+ * 
+ * @param {Object} user - Contact user object.
+ */
+function profileGetCorrectBackground(user) {
+  let firstLetterOfFirstNameRef = document.getElementById("firstLetterOfFirstName");
+  let firstLetterOfLastNameRef = document.getElementById("fistLetterOfLastName");
+  firstLetterOfFirstNameRef.innerText = user.firstname.charAt(0).toUpperCase();
+  firstLetterOfLastNameRef.innerText = user.lastname.charAt(0).toUpperCase();
+  let targetDivRef = document.getElementById("moreAboutcircleFirstLetters");
+  let bgClassRef = Array.from(targetDivRef.classList);
+  let circleFirstLettersRef = document.getElementById("circleFirstLetters");
+  circleFirstLettersRef.classList.add(bgClassRef[1]);
+}
+
+/**
+ * Render and save changes for the currently active contact.
+ * 
+ * @param {Array&lt;string>} fullName - [firstName, lastName]
+ * @param {Array&lt;Object>} contactsArry - Array of contacts.
+ * @param {Event} event - Event triggering the save.
+ * @param {Array&lt;string>} keys - Array of contact keys/ids.
+ * @param {HTMLInputElement} inputEmailRef
+ * @param {HTMLInputElement} inputPhoneRef
+ */
+function renderSaveContact(fullName, contactsArry, event, keys, inputEmailRef,inputPhoneRef){
+    let firstName = fullName[0];
+    let lastName = fullName[1];
+    for (let index = 0; index &lt; contactsArry.length; index++) {
+    let contact = contactsArry[index];
+    let fullContactName = contact.firstname + " " + contact.lastname;
+    if (fullContactName == currentActiveContactId) {
+      saveContact(event,contact,index,keys,inputEmailRef,inputPhoneRef,firstName,lastName,contact.id);
+        }
+    }
+}
+
+/**
+ * Save updated contact data with a PUT request and update UI accordingly.
+ * 
+ * @param {Event} event
+ * @param {Object} contact - Existing contact object.
+ * @param {number} index - Index of the contact in the array.
+ * @param {Array&lt;string>} keys - Array of keys/ids for contacts.
+ * @param {HTMLInputElement} inputEmailRef
+ * @param {HTMLInputElement} inputPhoneRef
+ * @param {string} firstName
+ * @param {string} lastName
+ * @param {string} id - Contact's unique id.
+ */
+async function saveContact(event,contact,index,keys,inputEmailRef,inputPhoneRef,firstName,lastName,id) {
+  let key = keys[index];
+  await putData(`contacts/${key}`, {firstname: firstName,lastname: lastName,email: inputEmailRef.value,phone: inputPhoneRef.value,id: id,});
+  currentActiveContactId = firstName + " " + lastName;
+  closeOverlayAfterEditedContact(event);
+  let targetId = document.getElementById("circleFirstLetters" + contact.firstname + contact.lastname);
+  let divRef = Array.from(targetId.classList);
+  removeOldContactInfo(contact);
+  getNewContactInfo(divRef,firstName,lastName,inputEmailRef.value,inputPhoneRef.value);
+  getSortTitle(firstName);
+  showMoreDetails(divRef,firstName,lastName,inputEmailRef.value,inputPhoneRef.value);
+  clearOrLetOrder(contact);
+}
+
+/**
+ * Show detailed information of a contact in the UI.
+ * 
+ * @param {Array&lt;string>} divRef - Array of CSS classes from the contact's circle element.
+ * @param {string} firstName
+ * @param {string} lastName
+ * @param {string} inputEmailRef
+ * @param {string} inputPhoneRef
+ */
+function showMoreDetails(divRef,firstName,lastName,inputEmailRef,inputPhoneRef) {
+  let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
+  allInfoAboutContactRef.innerHTML = "";
+  allInfoAboutContactRef.innerHTML = getDetailsOfContact(divRef,firstName,lastName,inputEmailRef,inputPhoneRef);
+  let setNewBgForContactRef = document.getElementById("setNewBgFor" + firstName + lastName);
+  setNewBgForContactRef.classList.add("darkBtn");
+}
+
+/**
+ * Clear alphabetical order UI group if no child contacts remain.
+ * 
+ * @param {Object} contact - Contact object.
+ */
+function clearOrLetOrder(contact) {
+  let mainDiv = document.getElementById("alphabeticalOrder" + contact.firstname.charAt(0).toUpperCase());
+  if (mainDiv) {
+    let hasChildDiv = mainDiv.querySelectorAll('[id^="allMainInfoAbout"]');
+    if (hasChildDiv.length === 0) {
+      mainDiv.innerHTML = "";
+    } else {
+      return;
+    }
+  }
+}
+
+/**
+ * Send data via PUT request to the specified path.
+ * 
+ * @param {string} [path=""] - API endpoint path.
+ * @param {Object} [data={}] - Data object to update.
+ * @returns {Promise&lt;Object>} The JSON response.
+ */
+async function putData(path = "", data = {}) {
+  let response = await fetch(BASE_URL + path + ".json", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return (responseToJson = await response.json());
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#acceptTask">acceptTask</a></li><li><a href="global.html#activateMenu">activateMenu</a></li><li><a href="global.html#activeMenuStorage">activeMenuStorage</a></li><li><a href="global.html#addDisplayNone">addDisplayNone</a></li><li><a href="global.html#addEmptySubtasks">addEmptySubtasks</a></li><li><a href="global.html#addError">addError</a></li><li><a href="global.html#addMenuactive">addMenuactive</a></li><li><a href="global.html#addOpacity">addOpacity</a></li><li><a href="global.html#addOpacityToRequiredFields">addOpacityToRequiredFields</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#addTaskHTML">addTaskHTML</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#calculateAndRenderProgressBar">calculateAndRenderProgressBar</a></li><li><a href="global.html#cancelOverlay">cancelOverlay</a></li><li><a href="global.html#changeArrowOfInput">changeArrowOfInput</a></li><li><a href="global.html#checkAllStatus">checkAllStatus</a></li><li><a href="global.html#checkEditInputFields">checkEditInputFields</a></li><li><a href="global.html#checkEmptyCategory">checkEmptyCategory</a></li><li><a href="global.html#checkEmptyDate">checkEmptyDate</a></li><li><a href="global.html#checkEmptyDateEdit">checkEmptyDateEdit</a></li><li><a href="global.html#checkEmptyEditedEmail">checkEmptyEditedEmail</a></li><li><a href="global.html#checkEmptyEditedName">checkEmptyEditedName</a></li><li><a href="global.html#checkEmptyEditedPhone">checkEmptyEditedPhone</a></li><li><a href="global.html#checkEmptyEmail">checkEmptyEmail</a></li><li><a href="global.html#checkEmptyName">checkEmptyName</a></li><li><a href="global.html#checkEmptyPhone">checkEmptyPhone</a></li><li><a href="global.html#checkEmptyTitle">checkEmptyTitle</a></li><li><a href="global.html#checkEmptyTitleEdit">checkEmptyTitleEdit</a></li><li><a href="global.html#checkInputCheckBox">checkInputCheckBox</a></li><li><a href="global.html#checkPhoneOfUser">checkPhoneOfUser</a></li><li><a href="global.html#checkStatusAwaitFeedback">checkStatusAwaitFeedback</a></li><li><a href="global.html#checkStatusDone">checkStatusDone</a></li><li><a href="global.html#checkStatusInProgress">checkStatusInProgress</a></li><li><a href="global.html#checkStatusToDo">checkStatusToDo</a></li><li><a href="global.html#checkUserOrGuest">checkUserOrGuest</a></li><li><a href="global.html#checkWindowWidthAndSetOverlay">checkWindowWidthAndSetOverlay</a></li><li><a href="global.html#chooseSubTask">chooseSubTask</a></li><li><a href="global.html#clearAddTaskFields">clearAddTaskFields</a></li><li><a href="global.html#clearAllDocuments">clearAllDocuments</a></li><li><a href="global.html#clearAllMenus">clearAllMenus</a></li><li><a href="global.html#clearAllTaskColumns">clearAllTaskColumns</a></li><li><a href="global.html#clearInnerHTML">clearInnerHTML</a></li><li><a href="global.html#clearInputFields">clearInputFields</a></li><li><a href="global.html#clearInputFieldsOfOverlay">clearInputFieldsOfOverlay</a></li><li><a href="global.html#clearOrLetOrder">clearOrLetOrder</a></li><li><a href="global.html#clearPasswordInput">clearPasswordInput</a></li><li><a href="global.html#clickedOnNewContact">clickedOnNewContact</a></li><li><a href="global.html#closeAddTaskOverlay">closeAddTaskOverlay</a></li><li><a href="global.html#closeAddTaskOverlaySuccses">closeAddTaskOverlaySuccses</a></li><li><a href="global.html#closeEditOverlay">closeEditOverlay</a></li><li><a href="global.html#closeMobileOverlay">closeMobileOverlay</a></li><li><a href="global.html#closeOverlay">closeOverlay</a></li><li><a href="global.html#closeOverlayAfterCreatedContact">closeOverlayAfterCreatedContact</a></li><li><a href="global.html#closeOverlayAfterEditedContact">closeOverlayAfterEditedContact</a></li><li><a href="global.html#closeOverlayAnimation">closeOverlayAnimation</a></li><li><a href="global.html#closeTaskCategory">closeTaskCategory</a></li><li><a href="global.html#compare">compare</a></li><li><a href="global.html#completeDeleteTask">completeDeleteTask</a></li><li><a href="global.html#contactRenderData">contactRenderData</a></li><li><a href="global.html#createContact">createContact</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#createTaskBoard">createTaskBoard</a></li><li><a href="global.html#createUserIcon">createUserIcon</a></li><li><a href="global.html#currentUser">currentUser</a></li><li><a href="global.html#dataEditObject">dataEditObject</a></li><li><a href="global.html#deleteBoardTasks">deleteBoardTasks</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteData">deleteData</a></li><li><a href="global.html#deleteOverlaySuccses">deleteOverlaySuccses</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#deleteTasks">deleteTasks</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#deleteUserInOverlay">deleteUserInOverlay</a></li><li><a href="global.html#desktopGreeting">desktopGreeting</a></li><li><a href="global.html#disableButtons">disableButtons</a></li><li><a href="global.html#disableScroll">disableScroll</a></li><li><a href="global.html#editError">editError</a></li><li><a href="global.html#editOpacity">editOpacity</a></li><li><a href="global.html#editOverlayTask">editOverlayTask</a></li><li><a href="global.html#editSubtask">editSubtask</a></li><li><a href="global.html#editTask">editTask</a></li><li><a href="global.html#enableButtons">enableButtons</a></li><li><a href="global.html#enableScroll">enableScroll</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#filterContactsToAssign">filterContactsToAssign</a></li><li><a href="global.html#filterEditContactList">filterEditContactList</a></li><li><a href="global.html#filterTaskSummary">filterTaskSummary</a></li><li><a href="global.html#filterTasks">filterTasks</a></li><li><a href="global.html#formatDateToDisplay">formatDateToDisplay</a></li><li><a href="global.html#formatDatetoEnglish">formatDatetoEnglish</a></li><li><a href="global.html#generateTimeBasedId">generateTimeBasedId</a></li><li><a href="global.html#getActiveUser">getActiveUser</a></li><li><a href="global.html#getAssignedInitials">getAssignedInitials</a></li><li><a href="global.html#getAssignedInitialsEditIcons">getAssignedInitialsEditIcons</a></li><li><a href="global.html#getAvatarColorClass">getAvatarColorClass</a></li><li><a href="global.html#getCategory">getCategory</a></li><li><a href="global.html#getCheckBoxFalse">getCheckBoxFalse</a></li><li><a href="global.html#getClassesForOverlayDesktop">getClassesForOverlayDesktop</a></li><li><a href="global.html#getContact">getContact</a></li><li><a href="global.html#getContactEdit">getContactEdit</a></li><li><a href="global.html#getDefaultCheckBoxImg">getDefaultCheckBoxImg</a></li><li><a href="global.html#getFirstValidationError">getFirstValidationError</a></li><li><a href="global.html#getGreeting">getGreeting</a></li><li><a href="global.html#getHashedColorIndex">getHashedColorIndex</a></li><li><a href="global.html#getIcon">getIcon</a></li><li><a href="global.html#getIconClasses">getIconClasses</a></li><li><a href="global.html#getId">getId</a></li><li><a href="global.html#getInitials">getInitials</a></li><li><a href="global.html#getInputCheckedFalse">getInputCheckedFalse</a></li><li><a href="global.html#getInputCheckedTrue">getInputCheckedTrue</a></li><li><a href="global.html#getInputValueAndPost">getInputValueAndPost</a></li><li><a href="global.html#getListOfContacts">getListOfContacts</a></li><li><a href="global.html#getListOfCreatedContact">getListOfCreatedContact</a></li><li><a href="global.html#getNewContactInfo">getNewContactInfo</a></li><li><a href="global.html#getNotActiveUser">getNotActiveUser</a></li><li><a href="global.html#getOverlayElements">getOverlayElements</a></li><li><a href="global.html#getProfile">getProfile</a></li><li><a href="global.html#getRefs">getRefs</a></li><li><a href="global.html#getSanitizedValues">getSanitizedValues</a></li><li><a href="global.html#getSortTitle">getSortTitle</a></li><li><a href="global.html#getTasksFiltered">getTasksFiltered</a></li><li><a href="global.html#getTodayStr">getTodayStr</a></li><li><a href="global.html#getUpdatedSubtasks">getUpdatedSubtasks</a></li><li><a href="global.html#getUserNameColorClass">getUserNameColorClass</a></li><li><a href="global.html#handleClickOutsideAllMembers">handleClickOutsideAllMembers</a></li><li><a href="global.html#handleClickOutsideEditContacts">handleClickOutsideEditContacts</a></li><li><a href="global.html#hideNavbar">hideNavbar</a></li><li><a href="global.html#hideOverlay">hideOverlay</a></li><li><a href="global.html#hideUserFeedback">hideUserFeedback</a></li><li><a href="global.html#highlightDragContainer">highlightDragContainer</a></li><li><a href="global.html#iconHoverSwaps">iconHoverSwaps</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initAddTask">initAddTask</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initEditContacts">initEditContacts</a></li><li><a href="global.html#initLogin">initLogin</a></li><li><a href="global.html#inputFieldsGetValuesOfContact">inputFieldsGetValuesOfContact</a></li><li><a href="global.html#isAllEmptyOrInvalid">isAllEmptyOrInvalid</a></li><li><a href="global.html#loadContacts">loadContacts</a></li><li><a href="global.html#loadData">loadData</a></li><li><a href="global.html#loadSearch">loadSearch</a></li><li><a href="global.html#loadTasks">loadTasks</a></li><li><a href="global.html#loadUsers">loadUsers</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#loginAsGuest">loginAsGuest</a></li><li><a href="global.html#logoAnimation">logoAnimation</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#mobileGreeting">mobileGreeting</a></li><li><a href="global.html#moreDetailsAboutContact">moreDetailsAboutContact</a></li><li><a href="global.html#moveSubtaskBetweenLists">moveSubtaskBetweenLists</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#openAddTaskOverlay">openAddTaskOverlay</a></li><li><a href="global.html#openAssignedTo">openAssignedTo</a></li><li><a href="global.html#openAssignedToEdit">openAssignedToEdit</a></li><li><a href="global.html#openChooseOverlay">openChooseOverlay</a></li><li><a href="global.html#openEditOverlay">openEditOverlay</a></li><li><a href="global.html#openOverlay">openOverlay</a></li><li><a href="global.html#openTaskCategory">openTaskCategory</a></li><li><a href="global.html#outsideNavbar">outsideNavbar</a></li><li><a href="global.html#overlaySlide">overlaySlide</a></li><li><a href="global.html#overlayTask">overlayTask</a></li><li><a href="global.html#patchData">patchData</a></li><li><a href="global.html#policyCheck">policyCheck</a></li><li><a href="global.html#postData">postData</a></li><li><a href="global.html#postDataToServer">postDataToServer</a></li><li><a href="global.html#profileGetCorrectBackground">profileGetCorrectBackground</a></li><li><a href="global.html#putData">putData</a></li><li><a href="global.html#putDataEdit">putDataEdit</a></li><li><a href="global.html#putDataStatus">putDataStatus</a></li><li><a href="global.html#randomBackgroundColor">randomBackgroundColor</a></li><li><a href="global.html#removeClasses">removeClasses</a></li><li><a href="global.html#removeDisplayNone">removeDisplayNone</a></li><li><a href="global.html#removeError">removeError</a></li><li><a href="global.html#removeInfos">removeInfos</a></li><li><a href="global.html#removeInputError">removeInputError</a></li><li><a href="global.html#removeInputFieldsValues">removeInputFieldsValues</a></li><li><a href="global.html#removeOldContactInfo">removeOldContactInfo</a></li><li><a href="global.html#removeOpacity">removeOpacity</a></li><li><a href="global.html#removeValue">removeValue</a></li><li><a href="global.html#renderAssignedTo">renderAssignedTo</a></li><li><a href="global.html#renderContactList">renderContactList</a></li><li><a href="global.html#renderContactListEdit">renderContactListEdit</a></li><li><a href="global.html#renderDeletedUser">renderDeletedUser</a></li><li><a href="global.html#renderEmptyTemplatesForAllColumns">renderEmptyTemplatesForAllColumns</a></li><li><a href="global.html#renderList">renderList</a></li><li><a href="global.html#renderOverflowIcon">renderOverflowIcon</a></li><li><a href="global.html#renderPrioButton">renderPrioButton</a></li><li><a href="global.html#renderProgressBar">renderProgressBar</a></li><li><a href="global.html#renderSaveContact">renderSaveContact</a></li><li><a href="global.html#renderStatus">renderStatus</a></li><li><a href="global.html#renderVisibleAvatars">renderVisibleAvatars</a></li><li><a href="global.html#resetAllPriorities">resetAllPriorities</a></li><li><a href="global.html#resetErrorStatus">resetErrorStatus</a></li><li><a href="global.html#sameContact">sameContact</a></li><li><a href="global.html#saveContact">saveContact</a></li><li><a href="global.html#saveEditedContact">saveEditedContact</a></li><li><a href="global.html#saveSubtask">saveSubtask</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#searchContacts">searchContacts</a></li><li><a href="global.html#searchElement">searchElement</a></li><li><a href="global.html#selectContact">selectContact</a></li><li><a href="global.html#setCheckBoxFalse">setCheckBoxFalse</a></li><li><a href="global.html#setInputToDefault">setInputToDefault</a></li><li><a href="global.html#setMenuActive">setMenuActive</a></li><li><a href="global.html#setMinDate">setMinDate</a></li><li><a href="global.html#setPrioActive">setPrioActive</a></li><li><a href="global.html#setPriorityLow">setPriorityLow</a></li><li><a href="global.html#setPriorityMedium">setPriorityMedium</a></li><li><a href="global.html#setPriorityUrgent">setPriorityUrgent</a></li><li><a href="global.html#setSideBarMenu">setSideBarMenu</a></li><li><a href="global.html#showAlert">showAlert</a></li><li><a href="global.html#showEditErrorIfEmpty">showEditErrorIfEmpty</a></li><li><a href="global.html#showEyeIcon">showEyeIcon</a></li><li><a href="global.html#showGreeting">showGreeting</a></li><li><a href="global.html#showLockIcon">showLockIcon</a></li><li><a href="global.html#showMobileVersion">showMobileVersion</a></li><li><a href="global.html#showMoreDetails">showMoreDetails</a></li><li><a href="global.html#showNavbar">showNavbar</a></li><li><a href="global.html#showSuccess">showSuccess</a></li><li><a href="global.html#showSuccessMessage">showSuccessMessage</a></li><li><a href="global.html#showUserFeedback">showUserFeedback</a></li><li><a href="global.html#sidebarVisibility">sidebarVisibility</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#skipAnimationAndGoBack">skipAnimationAndGoBack</a></li><li><a href="global.html#skipLogoAnimation">skipLogoAnimation</a></li><li><a href="global.html#splitAndCapitalizeName">splitAndCapitalizeName</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#stopPropagation">stopPropagation</a></li><li><a href="global.html#stopPropagationForMobile">stopPropagationForMobile</a></li><li><a href="global.html#subtasksOverlay">subtasksOverlay</a></li><li><a href="global.html#subtasksOverlayEdit">subtasksOverlayEdit</a></li><li><a href="global.html#switchClassesViewPoint">switchClassesViewPoint</a></li><li><a href="global.html#switchContentOverlayClasses">switchContentOverlayClasses</a></li><li><a href="global.html#taskOverlaySync">taskOverlaySync</a></li><li><a href="global.html#toggleArrow">toggleArrow</a></li><li><a href="global.html#toggleAssignment">toggleAssignment</a></li><li><a href="global.html#toggleAssignmentEdit">toggleAssignmentEdit</a></li><li><a href="global.html#toggleBorderColor">toggleBorderColor</a></li><li><a href="global.html#toggleDisplayNone">toggleDisplayNone</a></li><li><a href="global.html#toggleEditOverlay">toggleEditOverlay</a></li><li><a href="global.html#toggleNavbar">toggleNavbar</a></li><li><a href="global.html#togglePrioritySet">togglePrioritySet</a></li><li><a href="global.html#togglePwVisibility">togglePwVisibility</a></li><li><a href="global.html#toggleSubtask">toggleSubtask</a></li><li><a href="global.html#toggleVisibility">toggleVisibility</a></li><li><a href="global.html#upToDate">upToDate</a></li><li><a href="global.html#upToDateEdit">upToDateEdit</a></li><li><a href="global.html#updateAssignedMembersDisplay">updateAssignedMembersDisplay</a></li><li><a href="global.html#updateAssignedMembersEdit">updateAssignedMembersEdit</a></li><li><a href="global.html#updateDataEdit">updateDataEdit</a></li><li><a href="global.html#validateCheckbox">validateCheckbox</a></li><li><a href="global.html#validateConfirmPassword">validateConfirmPassword</a></li><li><a href="global.html#validateEmailInput">validateEmailInput</a></li><li><a href="global.html#validateNameInput">validateNameInput</a></li><li><a href="global.html#validatePasswordInput">validatePasswordInput</a></li><li><a href="global.html#validateSignUpInputs">validateSignUpInputs</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon Jul 28 2025 19:44:20 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

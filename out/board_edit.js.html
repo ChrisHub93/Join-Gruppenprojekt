@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: board_edit.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: board_edit.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Switches from the task detail overlay to the task edit overlay for the given task.
+ * 
+ * It locates the task by ID in the `todos` array, hides the task view overlay,
+ * shows the edit overlay, renders the edit form for the selected task, and
+ * checks whether the current date is up to date.
+ * 
+ * @param {number} taskID - ID of the task to be edited
+ */
+function editOverlayTask(taskID) {
+  taskOverlaySync();
+  let tasksEditRef = searchElement(taskID);
+  let addOverlayRef = document.getElementById("overlayTask");
+  let addOverlayEditRef = document.getElementById("overlayTaskEdit");
+  let dialogTaskEditRef = document.getElementById("dialogTaskEditContent");
+  addOverlayRef.classList.remove("active");
+  addOverlayEditRef.classList.add("active");
+  dialogTaskEditRef.innerHTML = renderOverlayTaskEdit(todos[tasksEditRef]);
+  upToDateEdit();
+}
+
+/**
+ * Initializes the contact list in the edit task overlay.
+ * 
+ * Loads all contacts from the server, renders them into the edit view,
+ * copies the provided assigned contacts into a temporary array for editing,
+ * and updates the displayed assigned contacts.
+ * 
+ * @param {Array} assignedTo - Array of user IDs assigned to the task
+ */
+async function initEditContacts(assignedTo = []) {
+  let contacts = await loadContacts();
+  renderContactListEdit(contacts, assignedTo);
+  assignedToEditTemp = [...assignedTo];
+  updateAssignedMembersEdit(assignedToEditTemp);
+  document.body.overflow = "hidden";
+}
+
+/**
+ * Updates the task data when the "OK" button is pressed in the edit overlay.
+ * 
+ * If required input fields are missing, the function exits early.
+ * 
+ * It loads all tasks from the server, locates the task by ID, determines the selected priority,
+ * builds a new task data object, sends the updated task to the server, reloads the task list,
+ * and displays the updated task in the detail view.
+ * 
+ * @param {*} taskID - ID of the task to be edited
+ * @returns {void}
+ */
+async function updateDataEdit(taskID) {
+  if (!checkEditInputFields()) return;
+
+  let tasks = await fetchData("/tasks/");
+  let taskKeyEdit = Object.keys(tasks).find(
+    (k) => String(tasks[k].id) === String(taskID)
+  );
+  let prioButton = document.querySelector(".prio_edit_button.active");
+  let priorityEdit = prioButton.dataset.prio;
+  let data = dataEditObject(tasks, taskKeyEdit, priorityEdit);
+
+  await putDataEdit(`/tasks/${taskKeyEdit}`, data);
+  await loadTasks();
+  overlayTask(data.id);
+}
+
+/**
+ * Builds a new task object from the current form input and existing task data.
+ * 
+ * @param {Object&lt;string, Object>} tasks - All tasks from the server, keyed by database ID
+ * @param {string} taskKeyEdit - The database key (Firebase ID) of the task to be edited
+ * @param {string} priorityEdit - The new priority (e.g., "medium")
+ * @returns {Object} The updated task object to be sent to the server
+ */
+function dataEditObject(tasks, taskKeyEdit, priorityEdit) {
+  return {
+    id: tasks[taskKeyEdit].id,
+    category: tasks[taskKeyEdit].category,
+    title: document.getElementById("titleEdit").value,
+    description: document.getElementById("descriptionEdit").value,
+    date: document.getElementById("dateEdit").value,
+    priority: priorityEdit,
+    assignedTo: assignedToEditTemp,
+    subTasksOpen: getUpdatedSubtasks(),
+    subTasksClosed: tasks[taskKeyEdit].subTasksClosed,
+    status: tasks[taskKeyEdit].status,
+  };
+}
+
+/**
+ * Checks whether the required title and date input fields are filled.
+ * 
+ * @returns {boolean} - Returns true if both title and date have values; otherwise false
+ */
+function checkEditInputFields() {
+  let titleValue = document.getElementById("titleEdit").value.trim();
+  let dateValue = document.getElementById("dateEdit").value.trim();
+
+  if (titleValue === "" || dateValue === "") {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+/**
+ * Sends data to the server using a PUT request.
+ * Overwrites the resource at the given path with the provided data.
+ * 
+ * @param {string} path - The relative path to the resource (e.g., "tasks/abc123")
+ * @param {object} data - The full data object to be stored at the specified location
+ * @returns {Promise&lt;object>} The server's response as a parsed JSON object
+ */
+async function putDataEdit(path = "", data = {}) {
+  let response = await fetch(BASE_URL + path + ".json", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return await response.json();
+}
+
+
+/**
+ * Replaces a subtask list item with an input field for editing.
+ * 
+ * Locates the surrounding &lt;ul> element of the clicked icon, extracts the current subtask text,
+ * replaces the list with an editable input container, and focuses the input for immediate editing.
+ * 
+ * @param {HTMLElement} iconElement - The element (e.g., pencil icon) that was clicked
+ * @param {string|number} id - The ID of the subtask to be edited
+ */
+function editSubtask(iconElement, id) {
+  let ul = iconElement.closest("ul");
+  let currentText = ul.querySelector("p").innerText;
+  let newContainer = document.createElement("div");
+
+  newContainer.classList.add("subtask_edit_wrapper");
+  newContainer.id = `edit-subtask-${id}`;
+  newContainer.innerHTML = getEditSubtaskContainer(currentText, id);
+  ul.replaceWith(newContainer);
+  let inputActive = newContainer.querySelector("input");
+  inputActive.focus();
+  inputActive.setSelectionRange(
+    inputActive.value.length,
+    inputActive.value.length
+  );
+}
+
+/**
+ * Toggles the visibility of the list of assignable users in the edit task view.
+ * 
+ * When the list is shown, it updates the border color of the selection container
+ * and rotates the dropdown arrow icon. It also initializes the contact list and
+ * adds a click listener to detect clicks outside the container.
+ */
+function openAssignedToEdit() {
+  let editMembers = document.getElementById("editMembers");
+
+  let editIsVisible = editMembers.classList.toggle("show");
+
+  toggleBorderColor("selectMember", editIsVisible ? "add" : "remove");
+  toggleArrow("arrow", editIsVisible ? "open" : "close");
+
+  initEditContacts(assignedToEditTemp);
+
+  if (editIsVisible) {
+    setTimeout(() => {
+      document.addEventListener("click", handleClickOutsideEditContacts);
+    }, 0);
+  }
+}
+
+/**
+ * Closes the dropdown menu for editing assigned members when clicking outside of it.
+ * 
+ * Also resets the border styling and arrow direction.
+ * 
+ * @param {MouseEvent} event - The click event that triggered the handler
+ */
+function handleClickOutsideEditContacts(event) {
+  let editMembers = document.getElementById("editMembers");
+  let input = document.getElementById("contactSearchInputEdit");
+  let arrow = document.getElementById("arrow");
+
+  if (
+    !editMembers.contains(event.target) &amp;&amp;
+    !input.contains(event.target) &amp;&amp;
+    !arrow.contains(event.target)
+  ) {
+    editMembers.classList.remove("show");
+    toggleBorderColor("selectMember", "remove");
+    toggleArrow("arrow", "close");
+    document.removeEventListener("click", handleClickOutsideEditContacts);
+  }
+}
+
+
+/**
+ * Renders the list of contacts and highlights those who are assigned to the task.
+ * 
+ * @param {Array} contacts - List of all available contacts
+ * @param {Array} assignedTo - List of contacts currently assigned to the task
+ */
+function renderContactListEdit(contacts, assignedTo = []) {
+  let editMembersRef = document.getElementById("editMembers");
+  editMembersRef.innerHTML = "";
+
+  if (contacts) {
+    for (let contact of contacts) {
+      let name = contact.firstname + " " + contact.lastname;
+      let assignedColor = getAvatarColorClass(name);
+      let isAssigned = assignedTo.includes(contact.id);
+      editMembersRef.innerHTML += getContactListEdit(
+        contact,
+        assignedColor,
+        isAssigned
+      );
+    }
+  }
+}
+
+/**
+ * Filters the contact list in the edit view based on the search input.
+ * 
+ * Only contacts whose names match the input string will be displayed.
+ */
+function filterEditContactList() {
+  let input = document
+    .getElementById("contactSearchInputEdit")
+    .value.toLowerCase();
+  let editMembersRef = document.getElementById("editMembers");
+  let editMembersListItem = editMembersRef.querySelectorAll("li");
+
+  editMembersListItem.forEach((item) => {
+    let text = item.textContent.toLowerCase();
+    item.style.display = text.includes(input) ? "flex" : "none";
+  });
+}
+
+/**
+ * Updates the avatar display for the assigned contacts in the edit view.
+ * 
+ * If the container element 'assignedMembersEdit' does not exist, the function returns early.
+ * Otherwise, it clears the container, renders up to five visible avatars,
+ * and adds an overflow icon if more than five contacts are assigned.
+ * 
+ * @param {Array} assignedTo - List of contacts currently assigned to the task
+ * @returns {void}
+ */
+async function updateAssignedMembersEdit(assignedTo) {
+  const container = document.getElementById("assignedMembersEdit");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  const contacts = await loadContacts();
+  const visibleCount = 5;
+
+  renderVisibleAvatars(container, contacts, assignedTo, visibleCount);
+
+  if (assignedTo.length > visibleCount) {
+    renderOverflowIcon(container, assignedTo, visibleCount);
+  }
+}
+
+/**
+ * Renders up to a given number of avatar icons into the specified container.
+ * 
+ * @param {HTMLElement} container - The DOM element where the avatars will be rendered
+ * @param {Array} contacts - List of all available contact objects
+ * @param {Array} assignedTo - List of contact IDs currently assigned to the task
+ * @param {number} count - Maximum number of avatars to display
+ */
+function renderVisibleAvatars(container, contacts, assignedTo, count) {
+  assignedTo.slice(0, count).forEach((id) => {
+    const user = contacts.find((c) => c.id === id);
+    if (!user) return;
+
+    const icon = createUserIcon(user);
+    container.appendChild(icon);
+  });
+}
+
+/**
+ * Renders the overflow icon (e.g., "+3") indicating how many assigned users are not shown.
+ * 
+ * The number displayed depends on how many users exceed the visible avatar limit.
+ * 
+ * @param {HTMLElement} container - The DOM element where the avatar icons are rendered
+ * @param {Array} assignedTo - List of contact IDs currently assigned to the task
+ * @param {number} startIndex - Number of avatars already displayed
+ * @returns {void}
+ */
+function renderOverflowIcon(container, assignedTo, startIndex) {
+  const remaining = assignedTo.length - startIndex;
+  if (remaining &lt;= 0) return;
+
+  const plusWrapper = document.createElement("div");
+  plusWrapper.classList.add("plusWrapperEdit");
+
+  const plusIcon = document.createElement("p");
+  plusIcon.className = "assignedPlusOneEdit";
+  plusIcon.textContent = `+${remaining}`;
+
+  plusWrapper.appendChild(plusIcon);
+  container.appendChild(plusWrapper);
+}
+
+/**
+ * Creates a user icon element with the initials of the user's first and last name.
+ * The icon gets a background color class based on the user's full name.
+ * 
+ * @param {object} user - User data object containing at least `firstname` and `lastname`
+ * @returns {HTMLElement} - Returns a &lt;p> element containing the user's initials
+ */
+function createUserIcon(user) {
+  const initials = `${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`;
+  const icon = document.createElement("p");
+  const colorClass = getAvatarColorClass(`${user.firstname} ${user.lastname}`);
+
+  icon.className = `assigned_to_icon ${colorClass}`;
+  icon.textContent = initials;
+
+  return icon;
+}
+
+/**
+ * Handles the selection state of a contact in the edit view.
+ * 
+ * Checks if the contact is already assigned. If not, it marks the contact as selected;
+ * otherwise, it unselects it. Updates the UI and assigned contact list accordingly.
+ * 
+ * @param {string} id - ID of the contact
+ */
+function getContactEdit(id) {
+  let membersRef = document.getElementById("contactEdit" + id);
+  let inputRef = document.getElementById("checkboxEdit" + id);
+  let checkBoxImg = document.getElementById("checkBoxImgEdit" + id);
+
+  if (!inputRef.checked) {
+    getInputCheckedTrue(membersRef, inputRef, checkBoxImg);
+  } else if (inputRef.checked &amp;&amp; membersRef.classList.contains("assignedBg")) {
+    getInputCheckedFalse(membersRef, inputRef, checkBoxImg);
+  }
+  toggleAssignmentEdit(id);
+  initEditContacts(assignedToEditTemp);
+}
+
+/**
+ * Toggles the assignment state of a contact in the temporary assignment list.
+ * 
+ * If the contact ID is already in the list, it will be removed.
+ * Otherwise, it will be added to the list.
+ * 
+ * @param {string} id - ID of the contact
+ */
+function toggleAssignmentEdit(id) {
+  let index = assignedToEditTemp.indexOf(id);
+  if (index !== -1) {
+    assignedToEditTemp.splice(index, 1);
+  } else {
+    assignedToEditTemp.push(id);
+  }
+}
+
+/**
+ * Validates whether the date input field has a value.
+ * 
+ * If empty, it adds an error style and displays an error message.
+ * Otherwise, it removes the error style and hides the message.
+ * 
+ * Also updates the global variable `checkDate` accordingly.
+ */
+function checkEmptyDateEdit() {
+  let dateRef = document.getElementById("dateEdit");
+  let errorDateRef = document.getElementById("errorDateEdit");
+  if (!dateRef.value) {
+    dateRef.classList.add("inputError");
+    errorDateRef.classList.remove("opacity");
+    checkDate = false;
+  } else {
+    dateRef.classList.remove("inputError");
+    errorDateRef.classList.add("opacity");
+    checkDate = true;
+  }
+}
+
+/**
+ * Sets the minimum selectable date for the date input field to today.
+ * 
+ * Prevents users from selecting a past date.
+ */
+function upToDateEdit() {
+  let dateInput = document.getElementById("dateEdit");
+  dateInput.min = getTodayStr();
+}
+
+/**
+ * Toggles the active state of priority buttons within the same container.
+ * 
+ * Deactivates all priority buttons first by removing the "active" class and resetting their icons.
+ * If the clicked button was not already active, it becomes active and its icon is updated.
+ * 
+ * @param {HTMLElement} clickedButton - The button element that was clicked.
+ */
+function setPrioActive(clickedButton) {
+  let prioButtons =
+    clickedButton.parentElement.querySelectorAll(".prio_edit_button");
+  let prioButtonClicked = clickedButton.classList.contains("active");
+  prioButtons.forEach((btn) => {
+    btn.classList.remove("active");
+    let prio = btn.dataset.prio;
+    let icon = btn.querySelector("img");
+    icon.src = `../assets/icons/priority-${prio}.png`;
+  });
+  if (!prioButtonClicked) {
+    clickedButton.classList.add("active");
+    let prio = clickedButton.dataset.prio;
+    let icon = clickedButton.querySelector("img");
+    icon.src = `../assets/icons/priority-clicked-${prio}.png`;
+  }
+}
+
+/**
+ * Renders the subtask edit overlay if subtasks exist in the task.
+ *
+ * @param {object} tasksEditRef - Task object being edited
+ * @returns {string} - HTML string or empty string
+ */
+function subtasksOverlayEdit(tasksEditRef) {
+  if (
+    tasksEditRef.subTasksOpen === undefined &amp;&amp;
+    tasksEditRef.subTasksClosed === undefined
+  ) {
+    return "";
+  } else {
+    return subtasksOverlayRenderEdit(tasksEditRef);
+  }
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#acceptTask">acceptTask</a></li><li><a href="global.html#activateMenu">activateMenu</a></li><li><a href="global.html#activeMenuStorage">activeMenuStorage</a></li><li><a href="global.html#addDisplayNone">addDisplayNone</a></li><li><a href="global.html#addEmptySubtasks">addEmptySubtasks</a></li><li><a href="global.html#addError">addError</a></li><li><a href="global.html#addMenuactive">addMenuactive</a></li><li><a href="global.html#addOpacity">addOpacity</a></li><li><a href="global.html#addOpacityToRequiredFields">addOpacityToRequiredFields</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#addTaskHTML">addTaskHTML</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#calculateAndRenderProgressBar">calculateAndRenderProgressBar</a></li><li><a href="global.html#cancelOverlay">cancelOverlay</a></li><li><a href="global.html#changeArrowOfInput">changeArrowOfInput</a></li><li><a href="global.html#checkAllStatus">checkAllStatus</a></li><li><a href="global.html#checkEditInputFields">checkEditInputFields</a></li><li><a href="global.html#checkEmptyCategory">checkEmptyCategory</a></li><li><a href="global.html#checkEmptyDate">checkEmptyDate</a></li><li><a href="global.html#checkEmptyDateEdit">checkEmptyDateEdit</a></li><li><a href="global.html#checkEmptyEditedEmail">checkEmptyEditedEmail</a></li><li><a href="global.html#checkEmptyEditedName">checkEmptyEditedName</a></li><li><a href="global.html#checkEmptyEditedPhone">checkEmptyEditedPhone</a></li><li><a href="global.html#checkEmptyEmail">checkEmptyEmail</a></li><li><a href="global.html#checkEmptyName">checkEmptyName</a></li><li><a href="global.html#checkEmptyPhone">checkEmptyPhone</a></li><li><a href="global.html#checkEmptyTitle">checkEmptyTitle</a></li><li><a href="global.html#checkEmptyTitleEdit">checkEmptyTitleEdit</a></li><li><a href="global.html#checkInputCheckBox">checkInputCheckBox</a></li><li><a href="global.html#checkPhoneOfUser">checkPhoneOfUser</a></li><li><a href="global.html#checkStatusAwaitFeedback">checkStatusAwaitFeedback</a></li><li><a href="global.html#checkStatusDone">checkStatusDone</a></li><li><a href="global.html#checkStatusInProgress">checkStatusInProgress</a></li><li><a href="global.html#checkStatusToDo">checkStatusToDo</a></li><li><a href="global.html#checkUserOrGuest">checkUserOrGuest</a></li><li><a href="global.html#checkWindowWidthAndSetOverlay">checkWindowWidthAndSetOverlay</a></li><li><a href="global.html#chooseSubTask">chooseSubTask</a></li><li><a href="global.html#clearAddTaskFields">clearAddTaskFields</a></li><li><a href="global.html#clearAllDocuments">clearAllDocuments</a></li><li><a href="global.html#clearAllMenus">clearAllMenus</a></li><li><a href="global.html#clearAllTaskColumns">clearAllTaskColumns</a></li><li><a href="global.html#clearInnerHTML">clearInnerHTML</a></li><li><a href="global.html#clearInputFields">clearInputFields</a></li><li><a href="global.html#clearInputFieldsOfOverlay">clearInputFieldsOfOverlay</a></li><li><a href="global.html#clearOrLetOrder">clearOrLetOrder</a></li><li><a href="global.html#clearPasswordInput">clearPasswordInput</a></li><li><a href="global.html#clickedOnNewContact">clickedOnNewContact</a></li><li><a href="global.html#closeAddTaskOverlay">closeAddTaskOverlay</a></li><li><a href="global.html#closeAddTaskOverlaySuccses">closeAddTaskOverlaySuccses</a></li><li><a href="global.html#closeEditOverlay">closeEditOverlay</a></li><li><a href="global.html#closeMobileOverlay">closeMobileOverlay</a></li><li><a href="global.html#closeOverlay">closeOverlay</a></li><li><a href="global.html#closeOverlayAfterCreatedContact">closeOverlayAfterCreatedContact</a></li><li><a href="global.html#closeOverlayAfterEditedContact">closeOverlayAfterEditedContact</a></li><li><a href="global.html#closeOverlayAnimation">closeOverlayAnimation</a></li><li><a href="global.html#closeTaskCategory">closeTaskCategory</a></li><li><a href="global.html#compare">compare</a></li><li><a href="global.html#completeDeleteTask">completeDeleteTask</a></li><li><a href="global.html#contactRenderData">contactRenderData</a></li><li><a href="global.html#createContact">createContact</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#createTaskBoard">createTaskBoard</a></li><li><a href="global.html#createUserIcon">createUserIcon</a></li><li><a href="global.html#currentUser">currentUser</a></li><li><a href="global.html#dataEditObject">dataEditObject</a></li><li><a href="global.html#deleteBoardTasks">deleteBoardTasks</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteData">deleteData</a></li><li><a href="global.html#deleteOverlaySuccses">deleteOverlaySuccses</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#deleteTasks">deleteTasks</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#deleteUserInOverlay">deleteUserInOverlay</a></li><li><a href="global.html#desktopGreeting">desktopGreeting</a></li><li><a href="global.html#disableButtons">disableButtons</a></li><li><a href="global.html#disableScroll">disableScroll</a></li><li><a href="global.html#editError">editError</a></li><li><a href="global.html#editOpacity">editOpacity</a></li><li><a href="global.html#editOverlayTask">editOverlayTask</a></li><li><a href="global.html#editSubtask">editSubtask</a></li><li><a href="global.html#editTask">editTask</a></li><li><a href="global.html#enableButtons">enableButtons</a></li><li><a href="global.html#enableScroll">enableScroll</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#filterContactsToAssign">filterContactsToAssign</a></li><li><a href="global.html#filterEditContactList">filterEditContactList</a></li><li><a href="global.html#filterTaskSummary">filterTaskSummary</a></li><li><a href="global.html#filterTasks">filterTasks</a></li><li><a href="global.html#formatDateToDisplay">formatDateToDisplay</a></li><li><a href="global.html#formatDatetoEnglish">formatDatetoEnglish</a></li><li><a href="global.html#generateTimeBasedId">generateTimeBasedId</a></li><li><a href="global.html#getActiveUser">getActiveUser</a></li><li><a href="global.html#getAssignedInitials">getAssignedInitials</a></li><li><a href="global.html#getAssignedInitialsEditIcons">getAssignedInitialsEditIcons</a></li><li><a href="global.html#getAvatarColorClass">getAvatarColorClass</a></li><li><a href="global.html#getCategory">getCategory</a></li><li><a href="global.html#getCheckBoxFalse">getCheckBoxFalse</a></li><li><a href="global.html#getClassesForOverlayDesktop">getClassesForOverlayDesktop</a></li><li><a href="global.html#getContact">getContact</a></li><li><a href="global.html#getContactEdit">getContactEdit</a></li><li><a href="global.html#getDefaultCheckBoxImg">getDefaultCheckBoxImg</a></li><li><a href="global.html#getFirstValidationError">getFirstValidationError</a></li><li><a href="global.html#getGreeting">getGreeting</a></li><li><a href="global.html#getHashedColorIndex">getHashedColorIndex</a></li><li><a href="global.html#getIcon">getIcon</a></li><li><a href="global.html#getIconClasses">getIconClasses</a></li><li><a href="global.html#getId">getId</a></li><li><a href="global.html#getInitials">getInitials</a></li><li><a href="global.html#getInputCheckedFalse">getInputCheckedFalse</a></li><li><a href="global.html#getInputCheckedTrue">getInputCheckedTrue</a></li><li><a href="global.html#getInputValueAndPost">getInputValueAndPost</a></li><li><a href="global.html#getListOfContacts">getListOfContacts</a></li><li><a href="global.html#getListOfCreatedContact">getListOfCreatedContact</a></li><li><a href="global.html#getNewContactInfo">getNewContactInfo</a></li><li><a href="global.html#getNotActiveUser">getNotActiveUser</a></li><li><a href="global.html#getOverlayElements">getOverlayElements</a></li><li><a href="global.html#getProfile">getProfile</a></li><li><a href="global.html#getRefs">getRefs</a></li><li><a href="global.html#getSanitizedValues">getSanitizedValues</a></li><li><a href="global.html#getSortTitle">getSortTitle</a></li><li><a href="global.html#getTasksFiltered">getTasksFiltered</a></li><li><a href="global.html#getTodayStr">getTodayStr</a></li><li><a href="global.html#getUpdatedSubtasks">getUpdatedSubtasks</a></li><li><a href="global.html#getUserNameColorClass">getUserNameColorClass</a></li><li><a href="global.html#handleClickOutsideAllMembers">handleClickOutsideAllMembers</a></li><li><a href="global.html#handleClickOutsideEditContacts">handleClickOutsideEditContacts</a></li><li><a href="global.html#hideNavbar">hideNavbar</a></li><li><a href="global.html#hideOverlay">hideOverlay</a></li><li><a href="global.html#hideUserFeedback">hideUserFeedback</a></li><li><a href="global.html#highlightDragContainer">highlightDragContainer</a></li><li><a href="global.html#iconHoverSwaps">iconHoverSwaps</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initAddTask">initAddTask</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initEditContacts">initEditContacts</a></li><li><a href="global.html#initLogin">initLogin</a></li><li><a href="global.html#inputFieldsGetValuesOfContact">inputFieldsGetValuesOfContact</a></li><li><a href="global.html#isAllEmptyOrInvalid">isAllEmptyOrInvalid</a></li><li><a href="global.html#loadContacts">loadContacts</a></li><li><a href="global.html#loadData">loadData</a></li><li><a href="global.html#loadSearch">loadSearch</a></li><li><a href="global.html#loadTasks">loadTasks</a></li><li><a href="global.html#loadUsers">loadUsers</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#loginAsGuest">loginAsGuest</a></li><li><a href="global.html#logoAnimation">logoAnimation</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#mobileGreeting">mobileGreeting</a></li><li><a href="global.html#moreDetailsAboutContact">moreDetailsAboutContact</a></li><li><a href="global.html#moveSubtaskBetweenLists">moveSubtaskBetweenLists</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#openAddTaskOverlay">openAddTaskOverlay</a></li><li><a href="global.html#openAssignedTo">openAssignedTo</a></li><li><a href="global.html#openAssignedToEdit">openAssignedToEdit</a></li><li><a href="global.html#openChooseOverlay">openChooseOverlay</a></li><li><a href="global.html#openEditOverlay">openEditOverlay</a></li><li><a href="global.html#openOverlay">openOverlay</a></li><li><a href="global.html#openTaskCategory">openTaskCategory</a></li><li><a href="global.html#outsideNavbar">outsideNavbar</a></li><li><a href="global.html#overlaySlide">overlaySlide</a></li><li><a href="global.html#overlayTask">overlayTask</a></li><li><a href="global.html#patchData">patchData</a></li><li><a href="global.html#policyCheck">policyCheck</a></li><li><a href="global.html#postData">postData</a></li><li><a href="global.html#postDataToServer">postDataToServer</a></li><li><a href="global.html#profileGetCorrectBackground">profileGetCorrectBackground</a></li><li><a href="global.html#putData">putData</a></li><li><a href="global.html#putDataEdit">putDataEdit</a></li><li><a href="global.html#putDataStatus">putDataStatus</a></li><li><a href="global.html#randomBackgroundColor">randomBackgroundColor</a></li><li><a href="global.html#removeClasses">removeClasses</a></li><li><a href="global.html#removeDisplayNone">removeDisplayNone</a></li><li><a href="global.html#removeError">removeError</a></li><li><a href="global.html#removeInfos">removeInfos</a></li><li><a href="global.html#removeInputError">removeInputError</a></li><li><a href="global.html#removeInputFieldsValues">removeInputFieldsValues</a></li><li><a href="global.html#removeOldContactInfo">removeOldContactInfo</a></li><li><a href="global.html#removeOpacity">removeOpacity</a></li><li><a href="global.html#removeValue">removeValue</a></li><li><a href="global.html#renderAssignedTo">renderAssignedTo</a></li><li><a href="global.html#renderContactList">renderContactList</a></li><li><a href="global.html#renderContactListEdit">renderContactListEdit</a></li><li><a href="global.html#renderDeletedUser">renderDeletedUser</a></li><li><a href="global.html#renderEmptyTemplatesForAllColumns">renderEmptyTemplatesForAllColumns</a></li><li><a href="global.html#renderList">renderList</a></li><li><a href="global.html#renderOverflowIcon">renderOverflowIcon</a></li><li><a href="global.html#renderPrioButton">renderPrioButton</a></li><li><a href="global.html#renderProgressBar">renderProgressBar</a></li><li><a href="global.html#renderSaveContact">renderSaveContact</a></li><li><a href="global.html#renderStatus">renderStatus</a></li><li><a href="global.html#renderVisibleAvatars">renderVisibleAvatars</a></li><li><a href="global.html#resetAllPriorities">resetAllPriorities</a></li><li><a href="global.html#resetErrorStatus">resetErrorStatus</a></li><li><a href="global.html#sameContact">sameContact</a></li><li><a href="global.html#saveContact">saveContact</a></li><li><a href="global.html#saveEditedContact">saveEditedContact</a></li><li><a href="global.html#saveSubtask">saveSubtask</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#searchContacts">searchContacts</a></li><li><a href="global.html#searchElement">searchElement</a></li><li><a href="global.html#selectContact">selectContact</a></li><li><a href="global.html#setCheckBoxFalse">setCheckBoxFalse</a></li><li><a href="global.html#setInputToDefault">setInputToDefault</a></li><li><a href="global.html#setMenuActive">setMenuActive</a></li><li><a href="global.html#setMinDate">setMinDate</a></li><li><a href="global.html#setPrioActive">setPrioActive</a></li><li><a href="global.html#setPriorityLow">setPriorityLow</a></li><li><a href="global.html#setPriorityMedium">setPriorityMedium</a></li><li><a href="global.html#setPriorityUrgent">setPriorityUrgent</a></li><li><a href="global.html#setSideBarMenu">setSideBarMenu</a></li><li><a href="global.html#showAlert">showAlert</a></li><li><a href="global.html#showEditErrorIfEmpty">showEditErrorIfEmpty</a></li><li><a href="global.html#showEyeIcon">showEyeIcon</a></li><li><a href="global.html#showGreeting">showGreeting</a></li><li><a href="global.html#showLockIcon">showLockIcon</a></li><li><a href="global.html#showMobileVersion">showMobileVersion</a></li><li><a href="global.html#showMoreDetails">showMoreDetails</a></li><li><a href="global.html#showNavbar">showNavbar</a></li><li><a href="global.html#showSuccess">showSuccess</a></li><li><a href="global.html#showSuccessMessage">showSuccessMessage</a></li><li><a href="global.html#showUserFeedback">showUserFeedback</a></li><li><a href="global.html#sidebarVisibility">sidebarVisibility</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#skipAnimationAndGoBack">skipAnimationAndGoBack</a></li><li><a href="global.html#skipLogoAnimation">skipLogoAnimation</a></li><li><a href="global.html#splitAndCapitalizeName">splitAndCapitalizeName</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#stopPropagation">stopPropagation</a></li><li><a href="global.html#stopPropagationForMobile">stopPropagationForMobile</a></li><li><a href="global.html#subtasksOverlay">subtasksOverlay</a></li><li><a href="global.html#subtasksOverlayEdit">subtasksOverlayEdit</a></li><li><a href="global.html#switchClassesViewPoint">switchClassesViewPoint</a></li><li><a href="global.html#switchContentOverlayClasses">switchContentOverlayClasses</a></li><li><a href="global.html#taskOverlaySync">taskOverlaySync</a></li><li><a href="global.html#toggleArrow">toggleArrow</a></li><li><a href="global.html#toggleAssignment">toggleAssignment</a></li><li><a href="global.html#toggleAssignmentEdit">toggleAssignmentEdit</a></li><li><a href="global.html#toggleBorderColor">toggleBorderColor</a></li><li><a href="global.html#toggleDisplayNone">toggleDisplayNone</a></li><li><a href="global.html#toggleEditOverlay">toggleEditOverlay</a></li><li><a href="global.html#toggleNavbar">toggleNavbar</a></li><li><a href="global.html#togglePrioritySet">togglePrioritySet</a></li><li><a href="global.html#togglePwVisibility">togglePwVisibility</a></li><li><a href="global.html#toggleSubtask">toggleSubtask</a></li><li><a href="global.html#toggleVisibility">toggleVisibility</a></li><li><a href="global.html#upToDate">upToDate</a></li><li><a href="global.html#upToDateEdit">upToDateEdit</a></li><li><a href="global.html#updateAssignedMembersDisplay">updateAssignedMembersDisplay</a></li><li><a href="global.html#updateAssignedMembersEdit">updateAssignedMembersEdit</a></li><li><a href="global.html#updateDataEdit">updateDataEdit</a></li><li><a href="global.html#validateCheckbox">validateCheckbox</a></li><li><a href="global.html#validateConfirmPassword">validateConfirmPassword</a></li><li><a href="global.html#validateEmailInput">validateEmailInput</a></li><li><a href="global.html#validateNameInput">validateNameInput</a></li><li><a href="global.html#validatePasswordInput">validatePasswordInput</a></li><li><a href="global.html#validateSignUpInputs">validateSignUpInputs</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon Jul 28 2025 19:44:20 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
