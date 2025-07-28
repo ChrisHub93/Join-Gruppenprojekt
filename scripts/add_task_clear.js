@@ -1,3 +1,6 @@
+/**
+ * function to clear all inputs and set off error texts
+ */
 function clearInputFields() {
   removeValue("title");
   removeInputError("title");
@@ -12,16 +15,24 @@ function clearInputFields() {
   clearInnerHTML("assignedMembers");
 }
 
-function clearInnerHTML(id) {
-  let ref = document.getElementById(id);
-  if (!ref) return;
-  ref.innerHTML = "";
-}
-
+/**
+ * function to set back the add task formular to standard
+ */
 function clearAddTaskFields() {
   clearInputFields();
   resetAllPriorities();
   setPriorityMedium("medium");
   assignedTo.splice(0, assignedTo.length);
   removeClasses();
+}
+
+/**
+ * 
+ * @param {string} id - id of an HTML element, which needs to be cleared
+ * @returns {void}
+ */
+function clearInnerHTML(id) {
+  let ref = document.getElementById(id);
+  if (!ref) return;
+  ref.innerHTML = "";
 }
