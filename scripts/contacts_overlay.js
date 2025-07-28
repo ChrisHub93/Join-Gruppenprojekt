@@ -1,3 +1,7 @@
+/**
+ * Prepares the desktop overlay by hiding the mobile success message and 
+ * switching the choose overlay to a hidden state for mobile.
+ */
 function getClassesForOverlayDesktop(){
   let successfullyCreatedMobileRef = document.getElementById("successfullyCreatedMobile");
   successfullyCreatedMobileRef.classList.add("opacity");
@@ -6,6 +10,10 @@ function getClassesForOverlayDesktop(){
   chooseOverlayForMobileRef.classList.add("hideChooseOverlay");
 }
 
+/**
+ * Opens the main overlay by setting appropriate CSS classes based on the window width,
+ * and triggering transition animations after a short delay.
+ */
 function openOverlay() {
   let overlayRef = document.getElementById("overlay");
   let contentOverlayRef = document.getElementById("contentOverlay");
@@ -20,6 +28,12 @@ function openOverlay() {
   }, 10);
 }
 
+/**
+ * Closes the main overlay and resets its styles based on the window width.
+ * Also resets all related input fields to their default state.
+ *
+ * @param {Event} event - The event that triggered the close action.
+ */
 function closeOverlay(event) {
   event.stopPropagation(event);
   let overlayRef = document.getElementById("overlay");
@@ -33,6 +47,12 @@ function closeOverlay(event) {
   setInputToDefault();
 }
 
+/**
+ * Cancels the overlay action by clearing input fields, removing validation errors,
+ * hiding the overlay, and resetting opacity and styles.
+ *
+ * @param {Event} event - The event that triggered the cancellation.
+ */
 function cancelOverlay(event) {
   event.stopPropagation(event);
   let nameRef = document.getElementById("name");
@@ -49,18 +69,36 @@ function cancelOverlay(event) {
   addOpacity();
 }
 
+/**
+ * Clears the values of the name, email, and phone input fields inside the overlay form.
+ *
+ * @param {HTMLInputElement} nameRef - Reference to the name input field.
+ * @param {HTMLInputElement} emailRef - Reference to the email input field.
+ * @param {HTMLInputElement} phoneRef - Reference to the phone input field.
+ */
 function clearInputFieldsOfOverlay(nameRef,emailRef, phoneRef){
   nameRef.value = "";
   emailRef.value = "";
   phoneRef.value = "";
 }
 
+/**
+ * Switches the content overlay's visibility from visible to hidden and
+ * removes the background styling of the main overlay container.
+ *
+ * @param {HTMLElement} overlayRef - Reference to the overlay container element.
+ * @param {HTMLElement} contentOverlayRef - Reference to the content section inside the overlay.
+ */
 function switchContentOverlayClasses(overlayRef, contentOverlayRef){
   contentOverlayRef.classList.add("hideContentOverlay");
   contentOverlayRef.classList.remove("showContentOverlay");
   overlayRef.classList.remove("overlayBg");
 }
 
+/**
+ * Opens the choose overlay (e.g. for choosing contacts or options on mobile) 
+ * with a transition animation.
+ */
 function openChooseOverlay() {
   let chooseOverlayForMobileRef = document.getElementById("chooseOverlayForMobile");
   chooseOverlayForMobileRef.style.display = "flex";
@@ -70,6 +108,12 @@ function openChooseOverlay() {
   }, 30);
 }
 
+/**
+ * Closes the overlay after a new contact has been successfully created.
+ * Removes animation classes and resets visibility after a delay.
+ *
+ * @param {Event} event - The event that triggered the overlay close action.
+ */
 function closeOverlayAfterCreatedContact(event) {
   event.stopPropagation(event);
   let overlayRef = document.getElementById("overlay");
