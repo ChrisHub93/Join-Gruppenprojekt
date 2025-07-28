@@ -12,29 +12,47 @@ let subtasksClosed = [];
 let debounceTimeOut = 0;
 let contactsToAssign;
 
+/**
+ * Sets the minimum selectable date of the input element with ID "date" to today.
+ */
 function upToDate() {
   const dateInput = document.getElementById("date");
   dateInput.min = getTodayStr();
 }
 
-function removeValue(id) {
+/**
+ * Clears the value of an input element by ID.
+ * @param {string} id - The ID of the input element.
+ */
+function removeValue(id) { 
   let ref = document.getElementById(id);
   if (!ref) return;
   ref.value = "";
 }
 
+/**
+ * Removes the "inputError" class from the element with the given ID.
+ * @param {string} id - The ID of the element.
+ */
 function removeInputError(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
   ref.classList.remove("inputError");
 }
 
+/**
+ * Adds the "opacity" class to the element with the given ID.
+ * @param {string} id - The ID of the element.
+ */
 function addOpacity(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
   ref.classList.add("opacity");
 }
 
+/**
+ * Removes the "assignedBg" class from all list items inside allMembers.
+ */
 function renderList() {
   let listRef = allMembers.querySelectorAll("li");
   for (let element of listRef) {
@@ -42,6 +60,9 @@ function renderList() {
   }
 }
 
+/**
+ * Sets the arrow icon to the default down arrow.
+ */
 function changeArrowOfInput() {
   let ref = document.getElementById("arrow");
   let currentSrc = ref.getAttribute("src");
@@ -52,6 +73,9 @@ function changeArrowOfInput() {
   }
 }
 
+/**
+ * Resets the category selector and related UI classes.
+ */
 function removeClasses() {
   let allMembers = document.getElementById("allMembers");
   let selectCategoryFieldRef = document.getElementById("selectCategoryField");
@@ -63,18 +87,33 @@ function removeClasses() {
   selectCategoryFieldRef.innerHTML = getBasicSelectTemplate();
 }
 
+/**
+ * Loads user data from the server.
+ * @returns {Promise<Array<Object>>} A promise that resolves to an array of user objects.
+ */
 async function loadUsers() {
   let users = await fetchData("/users/");
   let contactsArray = Object.values(users);
   return contactsArray;
 }
 
+/**
+ * Fetches data from the given path.
+ * @param {string} path - The API path.
+ * @returns {Promise<Object>} A promise resolving to the fetched JSON data.
+ */
 async function fetchData(path) {
   let response = await fetch(BASE_URL + path + ".json");
   let responseAsJson = await response.json();
   return responseAsJson;
 }
 
+/**
+ * Compares two users by their first name.
+ * @param {Object} firstUser - The first user object.
+ * @param {Object} nextUser - The second user object.
+ * @returns {number} Comparison result: -1, 0, or 1.
+ */
 function compare(firstUser, nextUser) {
   if (firstUser.firstname.toUpperCase() < nextUser.firstname.toUpperCase()) {
     return -1;
@@ -87,12 +126,20 @@ function compare(firstUser, nextUser) {
   }
 }
 
+/**
+ * Toggles the "show" class on an element by ID.
+ * @param {string} id - The element ID.
+ */
 function toggleVisibility(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
   ref.classList.toggle("show");
 }
 
+/**
+ * Toggles the arrow icon source between two states.
+ * @param {string} id - The image element ID.
+ */
 function toggleArrow(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
@@ -104,12 +151,19 @@ function toggleArrow(id) {
   }
 }
 
+/**
+ * Toggles a border color class on an element.
+ * @param {string} id - The element ID.
+ */
 function toggleBorderColor(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
   ref.classList.toggle("border-color");
 }
 
+/**
+ * Opens or closes the "Assigned To" selection and attaches/detaches click event listener.
+ */
 async function openAssignedTo() {
   let allMembers = document.getElementById("allMembers");
   let membersAreVisible = allMembers.classList.toggle("show");
@@ -124,6 +178,10 @@ async function openAssignedTo() {
   }
 }
 
+/**
+ * Closes the members list if a click occurs outside of it.
+ * @param {MouseEvent} event - The click event.
+ */
 function handleClickOutsideAllMembers(event) {
   let allMembers = document.getElementById("allMembers");
   let input = document.getElementById("userNameWord");
@@ -140,6 +198,11 @@ function handleClickOutsideAllMembers(event) {
   }
 }
 
+/**
+ * Renders a user icon if not already shown.
+ * @param {HTMLElement} membersRef - The reference element.
+ * @param {string} id - The user ID.
+ */
 function getActiveUser(membersRef, id){
 let selectedMember = document.getElementById("selected_name_icon" + id);
     if (!selectedMember) {
@@ -151,6 +214,10 @@ let selectedMember = document.getElementById("selected_name_icon" + id);
     }
 }
 
+/**
+ * Removes a user's icon if currently active.
+ * @param {string} id - The user ID.
+ */
 function getNotActiveUser(id){
    let selectedMember = document.getElementById("selected_name_icon" + id);
     if (selectedMember) {
@@ -159,6 +226,11 @@ function getNotActiveUser(id){
     }
 }
 
+/**
+ * Loads user icon and appends it to the assigned members container.
+ * @param {HTMLElement} membersRef - The reference element.
+ * @param {string} id - The user ID.
+ */
 async function getIcon(membersRef, id) {
   let assignedMembersRef = document.getElementById("assignedMembers");
   let mainDiv = membersRef.querySelector("p");
@@ -174,6 +246,10 @@ async function getIcon(membersRef, id) {
   }
 }
 
+/**
+ * Adds or removes user ID from the assignedTo array.
+ * @param {string} id - The user ID.
+ */
 function toggleAssignment(id) {
   const index = assignedTo.indexOf(id);
   if (index !== -1) {
@@ -183,6 +259,9 @@ function toggleAssignment(id) {
   }
 }
 
+/**
+ * Updates the display of assigned member icons.
+ */
 function updateAssignedMembersDisplay() {
   let container = document.getElementById("assignedMembers");
   let existingWrapper = container.querySelector(".plusWrapper");
@@ -194,6 +273,10 @@ function updateAssignedMembersDisplay() {
   }
 }
 
+/**
+ * Hides extra member icons and adds a "+X" indicator.
+ * @param {HTMLElement} container - The container of the icons.
+ */
 function getIconClasses(container){
   let hiddenIcons = icons.slice(5);
     hiddenIcons.forEach((icon) => (icon.style.display = "none"));
@@ -206,6 +289,10 @@ function getIconClasses(container){
     container.appendChild(plusWrapper);
 }
 
+/**
+ * Sets the selected category based on user input.
+ * @param {string} id - The ID of the category option.
+ */
 function getCategory(id) {
   let selectRef = document.getElementById("select");
   let optionsRef = document.getElementById(id);
@@ -214,28 +301,46 @@ function getCategory(id) {
   closeTaskCategory();
 }
 
+/**
+ * Removes "d-nonevip" class from an element.
+ * @param {string} id - Element ID.
+ */
 function removeDisplayNone(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
   ref.classList.remove("d-none");
 }
 
+/**
+ * Adds "d-nonevip" class to an element.
+ * @param {string} id - Element ID.
+ */
 function addDisplayNone(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
   ref.classList.add("d-none");
 }
 
+/**
+ * Disables all buttons and prevents scrolling.
+ */
 function disableButtons() {
   document.querySelectorAll("button").forEach((btn) => (btn.disabled = true));
   document.body.style.overflow = "hidden";
 }
 
+/**
+ * Enables all buttons and restores scrolling.
+ */
 function enableButtons() {
   document.querySelectorAll("button").forEach((btn) => (btn.disabled = false));
   document.body.style.overflow = "";
 }
 
+/**
+ * Returns today's date in YYYY-MM-DD format.
+ * @returns {string} Formatted date string.
+ */
 function getTodayStr() {
   const today = new Date();
   const yyyy = today.getFullYear();
@@ -244,24 +349,20 @@ function getTodayStr() {
   return `${yyyy}-${mm}-${dd}`;
 }
 
-function addDisplayNone(id) {
-  let ref = document.getElementById(id);
-  if (!ref) return;
-  ref.classList.add("d-nonevip");
-}
-
-function removeDisplayNone(id) {
-  let ref = document.getElementById(id);
-  if (!ref) return;
-  ref.classList.remove("d-nonevip");
-}
-
+/**
+ * Toggles the "d-nonevip" class of an element.
+ * @param {string} id - Element ID.
+ */
 function toggleDisplayNone(id) {
   let ref = document.getElementById(id);
   if (!ref) return;
   ref.classList.toggle("d-nonevip");
 }
 
+/**
+ * Sends a task object to the server.
+ * @param {string} currentStatus - The current status of the task.
+ */
 async function postDataToServer(currentStatus) {
   let title = document.getElementById("title");
   let description = document.getElementById("description");
@@ -289,6 +390,12 @@ async function postDataToServer(currentStatus) {
   });
 }
 
+/**
+ * Sends data to a server endpoint via POST.
+ * @param {string} path - API path.
+ * @param {Object} data - Data to be posted.
+ * @returns {Promise<Object>} JSON response.
+ */
 async function postData(path, data = {}) {
   let response = await fetch(BASE_URL + path + ".json", {
     method: "POST",
@@ -300,10 +407,18 @@ async function postData(path, data = {}) {
   return (responseToJson = await response.json());
 }
 
+/**
+ * Generates a UUID using the browser's crypto API.
+ * @returns {string} A UUID string.
+ */
 function getId() {
   return self.crypto.randomUUID();
 }
 
+/**
+ * Generates a time-based numeric ID.
+ * @returns {number} A unique ID based on timestamp.
+ */
 function generateTimeBasedId() {
   return Date.now() + Math.floor(Math.random() * 1000);
 }
