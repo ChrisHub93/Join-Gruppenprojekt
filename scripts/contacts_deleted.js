@@ -20,7 +20,7 @@ function renderDeletedUser(contactsArry, keys, event, inputNameRef, inputEmailRe
       deleteContact(keys, index, contact);
       closeOverlayAfterEditedContact(event);
       editError("remove", inputNameRef, inputEmailRef, inputPhoneRef);
-      addEditOpacity(requiredNameEditFieldRef,requiredEmailEditFieldRef,requiredPhoneEditFieldRef);
+      editOpacity("add", requiredNameEditFieldRef,requiredEmailEditFieldRef,requiredPhoneEditFieldRef);
     }
   }
 }
