@@ -1,3 +1,7 @@
+/**
+ * Validates the edited phone input field to ensure it is not empty.
+ * Toggles error styling and visibility of the required field message accordingly.
+ */
 function checkEmptyEditedPhone() {
   let phoneEditRef = document.getElementById("phoneEdit");
   let requiredPhoneEditFieldRef = document.getElementById("requiredPhoneEditField");
@@ -10,6 +14,12 @@ function checkEmptyEditedPhone() {
   }
 }
 
+/**
+ * Opens the edit overlay for the currently active contact.
+ * Populates input fields with the contact's data and sets the correct background styling.
+ *
+ * @param {Event} event - The event that triggered the overlay opening.
+ */
 async function openEditOverlay(event) {
   event.stopPropagation(event);
   let contacts = await fetchData("/contacts/");
@@ -20,6 +30,10 @@ async function openEditOverlay(event) {
   profileGetCorrectBackground(user);
 }
 
+/**
+ * Validates the edited name field to ensure it contains both first and last name.
+ * Applies error styles and toggles required field visibility accordingly.
+ */
 function checkEmptyEditedName() {
   let nameEditRef = document.getElementById("nameEdit");
   let fullName = nameEditRef.value.split(" ");
@@ -33,6 +47,12 @@ function checkEmptyEditedName() {
   }
 }
 
+/**
+ * Closes the edit overlay after a contact has been edited.
+ * Removes active overlay styling and hides the content with animation.
+ *
+ * @param {Event} event - The event that triggered the overlay close.
+ */
 function closeOverlayAfterEditedContact(event) {
   event.stopPropagation(event);
   let overlayRef = document.getElementById("editOverlay");
@@ -46,6 +66,10 @@ function closeOverlayAfterEditedContact(event) {
   contentOverlayRef.classList.add("hideContentOverlay");
 }
 
+/**
+ * Validates the edited email input field to ensure it is not empty.
+ * Applies or removes error indicators and required field notices.
+ */
 function checkEmptyEditedEmail() {
   let emailEditRef = document.getElementById("emailEdit");
   let requiredEmailEditFieldRef = document.getElementById("requiredEmailEditField");
@@ -58,6 +82,12 @@ function checkEmptyEditedEmail() {
   }
 }
 
+/**
+ * Closes the edit overlay and resets form validation states.
+ * Also adjusts the overlay appearance based on screen size.
+ *
+ * @param {Event} event - The event that triggered the overlay closing.
+ */
 function closeEditOverlay(event) {
   event.stopPropagation(event);
   let overlayRef = document.getElementById("editOverlay");
@@ -78,6 +108,14 @@ function closeEditOverlay(event) {
   editOpacity("add", requiredNameEditFieldRef,requiredEmailEditFieldRef,requiredPhoneEditFieldRef);
 }
 
+/**
+ * Adds or removes the "error" class on all input fields depending on the given action.
+ *
+ * @param {string} action - Either "add" or "remove", determines the action to apply.
+ * @param {HTMLElement} inputNameRef - Reference to the name input field.
+ * @param {HTMLElement} inputEmailRef - Reference to the email input field.
+ * @param {HTMLElement} inputPhoneRef - Reference to the phone input field.
+ */
 function editError(action, inputNameRef, inputEmailRef, inputPhoneRef) {
   if (["add", "remove"].includes(action)) {
     inputNameRef.classList[action]("error");
@@ -88,12 +126,27 @@ function editError(action, inputNameRef, inputEmailRef, inputPhoneRef) {
   }
 }
 
+/**
+ * Adds or removes the "opacity" class on required field labels depending on the given action.
+ *
+ * @param {string} action - Either "add" or "remove", determines whether to apply or remove opacity.
+ * @param {HTMLElement} requiredNameEditFieldRef - Reference to the name field label.
+ * @param {HTMLElement} requiredEmailEditFieldRef - Reference to the email field label.
+ * @param {HTMLElement} requiredPhoneEditFieldRef - Reference to the phone field label.
+ */
 function editOpacity(action, requiredNameEditFieldRef,requiredEmailEditFieldRef,requiredPhoneEditFieldRef) {
   requiredNameEditFieldRef.classList[action]("opacity");
   requiredEmailEditFieldRef.classList[action]("opacity");
   requiredPhoneEditFieldRef.classList[action]("opacity");
 }
 
+/**
+ * Saves the edited contact after validating all input fields.
+ * If validation fails, highlights the empty fields and displays corresponding error messages.
+ * On success, triggers the rendering of the updated contact.
+ *
+ * @param {Event} event - The event that triggered the save action.
+ */
 async function saveEditedContact(event) {
   const contacts = await fetchData("/contacts/");
   const keys = Object.keys(contacts);
@@ -124,6 +177,14 @@ async function saveEditedContact(event) {
   renderSaveContact(fullName, contactsArr, event, keys, inputEmailRef, inputPhoneRef);
 }
 
+/**
+ * Helper function to show error styling on a field if a condition is true.
+ *
+ * @param {boolean} condition - Condition to determine whether to show an error.
+ * @param {HTMLElement} inputRef - Reference to the input element to style.
+ * @param {HTMLElement} labelRef - Reference to the label or hint to show.
+ * @returns {boolean} True if an error was shown, otherwise false.
+ */
 function showEditErrorIfEmpty(condition, inputRef, labelRef) {
   if (condition) {
     inputRef.classList.add("error");
@@ -133,6 +194,11 @@ function showEditErrorIfEmpty(condition, inputRef, labelRef) {
   return false;
 }
 
+/**
+ * Toggles the visibility of the edit overlay.
+ * Locks or unlocks body scroll depending on visibility,
+ * and applies correct overlay styles for different screen sizes.
+ */
 function toggleEditOverlay() {
   let overlayRef = document.getElementById("editOverlay");
   let contentOverlayRef = document.getElementById("contentEditOverlay");
