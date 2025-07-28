@@ -76,7 +76,6 @@ function checkEmptyTitleEdit() {
  * Closes the add task overlay after successfully adding a task.
  * Displays a success message briefly before hiding the overlay and resetting the state.
  */
-
 function closeAddTaskOverlaySuccses() {
   const addOverlayRef = document.getElementById("overlayAddTask");
   addOverlayRef.classList.remove("d-nonevip");
