@@ -1,8 +1,5 @@
 let currentActiveContactId = null;
 
-/**
- * This function loads all contacts from server. It sorts it alphabetic. If the window screen is smaller than
- */
 async function initContacts() {
   let contacts = await fetchData("/contacts/");
   let contactsArray = Object.values(contacts);
@@ -194,49 +191,143 @@ function removeOpacity(requiredNameFieldRef,requiredEmailFieldRef,requiredPhoneF
   requiredPhoneFieldRef.classList.remove("opacity");
 }
 
+// original
+// async function createContact(event) {
+//   let nameRef = document.getElementById("name");
+//   let emailRef = document.getElementById("email");
+//   let phoneRef = document.getElementById("phone");
+//   let nameValue = nameRef.value.trim().replace(/\s+/g, " ");
+//   let emailValue = emailRef.value.trim().replace(/\s+/g, "");
+//   let phoneValue = phoneRef.value.trim().replace(/\s+/g, "");
+//   let namePattern = /^[A-Za-zÀ-ÖØ-öø-ÿ]+( [A-Za-zÀ-ÖØ-öø-ÿ]+)+$/;
+//   let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//   let phonePattern = /^[\d +()-]{6,}$/;
+//   let requiredNameFieldRef = document.getElementById("requiredNameField");
+//   let requiredEmailFieldRef = document.getElementById("requiredEmailField");
+//   let requiredPhoneFieldRef = document.getElementById("requiredPhoneField");
+
+//   if (!namePattern.test(nameValue) && emailValue === "" && phoneValue === "") {
+//     addError(nameRef, emailRef, phoneRef);
+//     removeOpacity(requiredNameFieldRef,requiredEmailFieldRef,requiredPhoneFieldRef);
+//     return;
+//   } else if (!namePattern.test(nameValue)) {
+//     nameRef.classList.add("error");
+//     requiredNameFieldRef.classList.remove("opacity");
+//     return;
+//   } else if (!emailPattern.test(emailValue)) {
+//     emailRef.classList.add("error");
+//     requiredEmailFieldRef.classList.remove("opacity");
+//     return;
+//   } else if (!phonePattern.test(phoneValue)) {
+//     phoneRef.classList.add("error");
+//     requiredPhoneFieldRef.classList.remove("opacity");
+//     return;
+//   }
+
+//   let fullName = nameRef.value.split(" ");
+//   let firstNameOfUser = fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
+//   let lastNameOfUser = fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
+//   await postData(`/contacts/`, {id: getId(),email: emailRef.value,firstname: firstNameOfUser,lastname: lastNameOfUser,phone: phoneRef.value,});
+//   getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef);
+//   closeOverlayAfterCreatedContact(event);
+//   moreDetailsAboutContact(emailRef.value,firstNameOfUser,lastNameOfUser,phoneRef.value);
+//   clearInputFields(nameRef, emailRef, phoneRef);
+//   resetErrorStatus([nameRef, emailRef, phoneRef],[requiredNameFieldRef, requiredEmailFieldRef, requiredPhoneFieldRef]);
+//   showSuccess();
+// }
+
+// TEST START -------------------------------------------------------------------------------------------
 async function createContact(event) {
-  let nameRef = document.getElementById("name");
-  let emailRef = document.getElementById("email");
-  let phoneRef = document.getElementById("phone");
-  let nameValue = nameRef.value.trim().replace(/\s+/g, " ");
-  let emailValue = emailRef.value.trim().replace(/\s+/g, "");
-  let phoneValue = phoneRef.value.trim().replace(/\s+/g, "");
-  let namePattern = /^[A-Za-zÀ-ÖØ-öø-ÿ]+( [A-Za-zÀ-ÖØ-öø-ÿ]+)+$/;
-  let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  let phonePattern = /^[\d +()-]{6,}$/;
-  let requiredNameFieldRef = document.getElementById("requiredNameField");
-  let requiredEmailFieldRef = document.getElementById("requiredEmailField");
-  let requiredPhoneFieldRef = document.getElementById("requiredPhoneField");
+  const refs = getRefs();
+  const values = getSanitizedValues(refs);
+  
+  if (isAllEmptyOrInvalid(values, refs)) return;
 
-  if (!namePattern.test(nameValue) && emailValue === "" && phoneValue === "") {
-    addError(nameRef, emailRef, phoneRef);
-    removeOpacity(requiredNameFieldRef,requiredEmailFieldRef,requiredPhoneFieldRef);
-    return;
-  } else if (!namePattern.test(nameValue)) {
-    nameRef.classList.add("error");
-    requiredNameFieldRef.classList.remove("opacity");
-    return;
-  } else if (!emailPattern.test(emailValue)) {
-    emailRef.classList.add("error");
-    requiredEmailFieldRef.classList.remove("opacity");
-    return;
-  } else if (!phonePattern.test(phoneValue)) {
-    phoneRef.classList.add("error");
-    requiredPhoneFieldRef.classList.remove("opacity");
-    return;
-  }
+  const error = getFirstValidationError(values, refs);
+  if (error) return;
 
-  let fullName = nameRef.value.split(" ");
-  let firstNameOfUser = fullName[0].charAt(0).toUpperCase(0) + fullName[0].slice(1);
-  let lastNameOfUser = fullName[1].charAt(0).toUpperCase(0) + fullName[1].slice(1);
-  await postData(`/contacts/`, {id: getId(),email: emailRef.value,firstname: firstNameOfUser,lastname: lastNameOfUser,phone: phoneRef.value,});
-  getListOfCreatedContact(firstNameOfUser, lastNameOfUser, emailRef, phoneRef);
+  const { firstName, lastName } = splitAndCapitalizeName(values.name);
+
+  await postData(`/contacts/`, {
+    id: getId(),
+    email: values.email,
+    firstname: firstName,
+    lastname: lastName,
+    phone: values.phone,
+  });
+
+  getListOfCreatedContact(firstName, lastName, refs.email, refs.phone);
   closeOverlayAfterCreatedContact(event);
-  moreDetailsAboutContact(emailRef.value,firstNameOfUser,lastNameOfUser,phoneRef.value);
-  clearInputFields(nameRef, emailRef, phoneRef);
-  resetErrorStatus([nameRef, emailRef, phoneRef],[requiredNameFieldRef, requiredEmailFieldRef, requiredPhoneFieldRef]);
+  moreDetailsAboutContact(values.email, firstName, lastName, values.phone);
+  clearInputFields(refs.name, refs.email, refs.phone);
+  resetErrorStatus(
+    [refs.name, refs.email, refs.phone],
+    [refs.errorName, refs.errorEmail, refs.errorPhone]
+  );
   showSuccess();
 }
+
+function getRefs() {
+  return {
+    name: document.getElementById("name"),
+    email: document.getElementById("email"),
+    phone: document.getElementById("phone"),
+    errorName: document.getElementById("requiredNameField"),
+    errorEmail: document.getElementById("requiredEmailField"),
+    errorPhone: document.getElementById("requiredPhoneField"),
+  };
+}
+
+function getSanitizedValues(refs) {
+  return {
+    name: refs.name.value.trim().replace(/\s+/g, " "),
+    email: refs.email.value.trim().replace(/\s+/g, ""),
+    phone: refs.phone.value.trim().replace(/\s+/g, ""),
+  };
+}
+
+function isAllEmptyOrInvalid(values, refs) {
+  const namePattern = /^[A-Za-zÀ-ÖØ-öø-ÿ]+( [A-Za-zÀ-ÖØ-öø-ÿ]+)+$/;
+  if (!namePattern.test(values.name) && values.email === "" && values.phone === "") {
+    addError(refs.name, refs.email, refs.phone);
+    removeOpacity(refs.errorName, refs.errorEmail, refs.errorPhone);
+    return true;
+  }
+  return false;
+}
+
+function getFirstValidationError(values, refs) {
+  const patterns = {
+    name: /^[A-Za-zÀ-ÖØ-öø-ÿ]+( [A-Za-zÀ-ÖØ-öø-ÿ]+)+$/,
+    email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    phone: /^[\d +()-]{6,}$/,
+  };
+
+  const fields = [
+    { key: "name", pattern: patterns.name, ref: refs.name, label: refs.errorName },
+    { key: "email", pattern: patterns.email, ref: refs.email, label: refs.errorEmail },
+    { key: "phone", pattern: patterns.phone, ref: refs.phone, label: refs.errorPhone },
+  ];
+
+  for (let { key, pattern, ref, label } of fields) {
+    if (!pattern.test(values[key])) {
+      ref.classList.add("error");
+      label.classList.remove("opacity");
+      return true;
+    }
+  }
+  return false;
+}
+
+function splitAndCapitalizeName(name) {
+  const [firstRaw, lastRaw] = name.split(" ");
+  const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+  return {
+    firstName: capitalize(firstRaw),
+    lastName: capitalize(lastRaw),
+  };
+}
+// TEST ENDE --------------------------------------------------------------------------------------------
 
 function resetErrorStatus(inputs, warnings) {
   inputs.forEach((input) => input.classList.remove("error"));
