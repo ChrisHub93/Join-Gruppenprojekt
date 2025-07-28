@@ -1,3 +1,7 @@
+/**
+ * Validates the phone input field by checking if it is non-empty and contains only digits.
+ * Adds or removes error styling and shows/hides the required field warning accordingly.
+ */
 function checkEmptyPhone() {
   let phoneRef = document.getElementById("phone");
   let requiredPhoneFieldRef = document.getElementById("requiredPhoneField");
@@ -12,6 +16,10 @@ function checkEmptyPhone() {
   }
 }
 
+/**
+ * Validates the email input field to ensure it is non-empty and matches a basic email pattern.
+ * Applies error styling and toggles visibility of the required field warning as needed.
+ */
 function checkEmptyEmail() {
   let emailRef = document.getElementById("email");
   let requiredEmailFieldRef = document.getElementById("requiredEmailField");
@@ -26,7 +34,10 @@ function checkEmptyEmail() {
   }
 }
 
-
+/**
+ * Validates the name input field to ensure it contains both a first and last name.
+ * Adds error styling if the name is incomplete and shows a required field warning if necessary.
+ */
 function checkEmptyName() {
   let nameRef = document.getElementById("name");
   let fullName = nameRef.value.split(" ");
