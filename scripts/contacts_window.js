@@ -14,7 +14,7 @@ window.addEventListener("resize", function (event) {
   }
 });
 
-function checkWindowWidth(contentOverlayRef){
+function checkWindowWidthAndSetOverlay(contentOverlayRef){
   if (window.innerWidth <= 1100) {
     contentOverlayRef.classList.add("hideContentOverlayMobile");
     contentOverlayRef.classList.remove("showContentOverlay");

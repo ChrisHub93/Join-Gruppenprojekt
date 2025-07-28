@@ -10,7 +10,7 @@ function openOverlay() {
   let overlayRef = document.getElementById("overlay");
   let contentOverlayRef = document.getElementById("contentOverlay");
   contentOverlayRef.classList.remove("hideContentOverlayMobile");
-  checkWindowWidth(contentOverlayRef);
+  checkWindowWidthAndSetOverlay(contentOverlayRef);
   overlayRef.classList.toggle("d-nonevip");
   contentOverlayRef.classList.remove("d-nonevip");
   setTimeout(() => {
@@ -25,7 +25,7 @@ function closeOverlay(event) {
   let overlayRef = document.getElementById("overlay");
   let contentOverlayRef = document.getElementById("contentOverlay");
   contentOverlayRef.classList.remove("hideContentOverlayMobile");
-  checkWindowWidth(contentOverlayRef);
+  checkWindowWidthAndSetOverlay(contentOverlayRef);
   overlayRef.classList.remove("overlayBg");
   setTimeout(() => {
     overlayRef.classList.toggle("d-nonevip");

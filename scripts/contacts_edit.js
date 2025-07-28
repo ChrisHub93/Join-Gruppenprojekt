@@ -106,7 +106,7 @@ function closeEditOverlay(event) {
   let overlayRef = document.getElementById("editOverlay");
   let contentOverlayRef = document.getElementById("contentEditOverlay");
   contentOverlayRef.classList.remove("hideContentOverlayMobile");
-  checkWindowWidth(contentOverlayRef);
+  checkWindowWidthAndSetOverlay(contentOverlayRef);
   overlayRef.classList.remove("overlayBg");
   setTimeout(() => {
     overlayRef.classList.toggle("d-nonevip");
@@ -186,7 +186,7 @@ function toggleEditOverlay() {
     document.body.style.overflow = "";
   }
   contentOverlayRef.classList.remove("hideContentOverlayMobile");
-  checkWindowWidth(contentOverlayRef);
+  checkWindowWidthAndSetOverlay(contentOverlayRef);
   overlayRef.classList.toggle("d-nonevip");
   contentOverlayRef.classList.remove("d-nonevip");
   setTimeout(() => {
