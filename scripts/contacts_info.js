@@ -31,7 +31,6 @@ function removeOldContactInfo(contact) {
  * @param {HTMLElement} inputEmailRef - Reference to the email input field.
  * @param {HTMLElement} inputPhoneRef - Reference to the phone input field.
  */
-
 function getNewContactInfo(divRef,firstName,lastName,inputEmailRef,inputPhoneRef) {
   let alphabeticalOrderRef = document.getElementById("alphabeticalOrder" + firstName.charAt(0).toUpperCase());
   alphabeticalOrderRef.innerHTML += getEditedBasicInfoAboutContact(divRef,firstName,lastName,inputEmailRef,inputPhoneRef);
