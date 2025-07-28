@@ -360,24 +360,16 @@ function toggleDisplayNone(id) {
   ref.classList.toggle("d-nonevip");
 }
 
-/**
- * Sends a task object to the server.
- * @param {string} currentStatus - The current status of the task.
- */
+
+//new jsdoc here
+
 async function postDataToServer(currentStatus) {
   let title = document.getElementById("title");
   let description = document.getElementById("description");
   let date = document.getElementById("date");
   let priority = setPriority;
   let category = document.getElementById("select");
-  const subTasksFromDOM = Array.from(document.querySelectorAll(".subTaskAdded"))
-    .map((el) => {
-      if (el.tagName === "INPUT") return el.value.trim();
-      let input = el.querySelector("input");
-      if (input) return input.value.trim();
-      return el.textContent.trim();
-    })
-    .filter((val) => val.length > 0);
+  const subTasksFromDOM = getSubTasksFromDom();
   await postData(`/tasks/`, {
     id: generateTimeBasedId(),
     title: title.value,
@@ -390,6 +382,15 @@ async function postDataToServer(currentStatus) {
     status: currentStatus,
   });
 }
+
+function getSubTasksFromDom(){
+  return Array.from(document.querySelectorAll(".subTaskAdded")).map((el) => {if (el.tagName === "INPUT") return el.value.trim();
+      let input = el.querySelector("input");
+      if (input) return input.value.trim();
+      return el.textContent.trim();}).filter((val) => val.length > 0);
+}
+//new jsdoc end here
+
 
 /**
  * Sends data to a server endpoint via POST.
