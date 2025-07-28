@@ -49,7 +49,7 @@ function getContactListLoggedInUser(contact, assignedColor) {
                     <p id="contacts_name_icon${contact.id}" class="assigned_to_icon ${assignedColor}">${contact.name.toUpperCase().charAt(0)}</p>
                     ${contact.name + " (You)"}
                   </div>
-                  <input type="checkbox" class="checkBox" />
+                  <input id="checkbox${contact.id}" type="checkbox" class="checkBox" />
                   <img
                     onclick="getContact('${contact.id}'); event.stopPropagation();"
                     id="checkBoxImg${contact.id}"
