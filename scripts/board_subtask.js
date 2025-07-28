@@ -136,23 +136,6 @@ function subtasksOverlay(taskRef) {
 }
 
 /**
- * Renders the subtask edit overlay if subtasks exist in the task.
- *
- * @param {object} tasksEditRef - Task object being edited
- * @returns {string} - HTML string or empty string
- */
-function subtasksOverlayEdit(tasksEditRef) {
-  if (
-    tasksEditRef.subTasksOpen === undefined &&
-    tasksEditRef.subTasksClosed === undefined
-  ) {
-    return "";
-  } else {
-    return subtasksOverlayRenderEdit(tasksEditRef);
-  }
-}
-
-/**
  * Sends a PATCH request to update part of a resource in the backend.
  *
  * @param {string} path - The relative path to the resource (e.g. "tasks/abc123")

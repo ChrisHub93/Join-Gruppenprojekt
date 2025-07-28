@@ -423,3 +423,20 @@ function setPrioActive(clickedButton) {
     icon.src = `../assets/icons/priority-clicked-${prio}.png`;
   }
 }
+
+/**
+ * Renders the subtask edit overlay if subtasks exist in the task.
+ *
+ * @param {object} tasksEditRef - Task object being edited
+ * @returns {string} - HTML string or empty string
+ */
+function subtasksOverlayEdit(tasksEditRef) {
+  if (
+    tasksEditRef.subTasksOpen === undefined &&
+    tasksEditRef.subTasksClosed === undefined
+  ) {
+    return "";
+  } else {
+    return subtasksOverlayRenderEdit(tasksEditRef);
+  }
+}
