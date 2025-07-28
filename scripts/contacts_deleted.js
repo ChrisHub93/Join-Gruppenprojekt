@@ -19,7 +19,7 @@ function renderDeletedUser(contactsArry, keys, event, inputNameRef, inputEmailRe
     if (fullContactName == currentActiveContactId) {
       deleteContact(keys, index, contact);
       closeOverlayAfterEditedContact(event);
-      removeEditError(inputNameRef, inputEmailRef, inputPhoneRef);
+      editError("remove", inputNameRef, inputEmailRef, inputPhoneRef);
       addEditOpacity(requiredNameEditFieldRef,requiredEmailEditFieldRef,requiredPhoneEditFieldRef);
     }
   }

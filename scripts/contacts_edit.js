@@ -1,8 +1,6 @@
 function checkEmptyEditedPhone() {
   let phoneEditRef = document.getElementById("phoneEdit");
-  let requiredPhoneEditFieldRef = document.getElementById(
-    "requiredPhoneEditField"
-  );
+  let requiredPhoneEditFieldRef = document.getElementById("requiredPhoneEditField");
   if (!phoneEditRef.value) {
     phoneEditRef.classList.add("error");
     requiredPhoneEditFieldRef.classList.remove("opacity");
@@ -25,9 +23,7 @@ async function openEditOverlay(event) {
 function checkEmptyEditedName() {
   let nameEditRef = document.getElementById("nameEdit");
   let fullName = nameEditRef.value.split(" ");
-  let requiredNameEditFieldRef = document.getElementById(
-    "requiredNameEditField"
-  );
+  let requiredNameEditFieldRef = document.getElementById("requiredNameEditField");
   if (fullName.length <= 1 || fullName[1] == "") {
     nameEditRef.classList.add("error");
     requiredNameEditFieldRef.classList.remove("opacity");
@@ -50,48 +46,9 @@ function closeOverlayAfterEditedContact(event) {
   contentOverlayRef.classList.add("hideContentOverlay");
 }
 
-function checkEmptyEditedName() {
-  let nameEditRef = document.getElementById("nameEdit");
-  let fullName = nameEditRef.value.split(" ");
-  let requiredNameEditFieldRef = document.getElementById("requiredNameEditField");
-  if (fullName.length <= 1 || fullName[1] == "") {
-    nameEditRef.classList.add("error");
-    requiredNameEditFieldRef.classList.remove("opacity");
-  } else {
-    nameEditRef.classList.remove("error");
-    requiredNameEditFieldRef.classList.add("opacity");
-  }
-}
-
 function checkEmptyEditedEmail() {
   let emailEditRef = document.getElementById("emailEdit");
   let requiredEmailEditFieldRef = document.getElementById("requiredEmailEditField");
-  if (!emailEditRef.value) {
-    emailEditRef.classList.add("error");
-    requiredEmailEditFieldRef.classList.remove("opacity");
-  } else {
-    emailEditRef.classList.remove("error");
-    requiredEmailEditFieldRef.classList.add("opacity");
-  }
-}
-
-function checkEmptyEditedPhone() {
-  let phoneEditRef = document.getElementById("phoneEdit");
-  let requiredPhoneEditFieldRef = document.getElementById("requiredPhoneEditField");
-  if (!phoneEditRef.value) {
-    phoneEditRef.classList.add("error");
-    requiredPhoneEditFieldRef.classList.remove("opacity");
-  } else {
-    phoneEditRef.classList.remove("error");
-    requiredPhoneEditFieldRef.classList.add("opacity");
-  }
-}
-
-function checkEmptyEditedEmail() {
-  let emailEditRef = document.getElementById("emailEdit");
-  let requiredEmailEditFieldRef = document.getElementById(
-    "requiredEmailEditField"
-  );
   if (!emailEditRef.value) {
     emailEditRef.classList.add("error");
     requiredEmailEditFieldRef.classList.remove("opacity");
@@ -117,21 +74,34 @@ function closeEditOverlay(event) {
   let requiredNameEditFieldRef = document.getElementById("requiredNameEditField");
   let requiredEmailEditFieldRef = document.getElementById("requiredEmailEditField");
   let requiredPhoneEditFieldRef = document.getElementById("requiredPhoneEditField");
-  removeEditError(inputNameRef, inputEmailRef, inputPhoneRef);
+  editError("remove", inputNameRef, inputEmailRef, inputPhoneRef);
   addEditOpacity(requiredNameEditFieldRef,requiredEmailEditFieldRef,requiredPhoneEditFieldRef);
 }
 
-function addEditError(inputNameRef, inputEmailRef, inputPhoneRef) {
-  inputNameRef.classList.add("error");
-  inputEmailRef.classList.add("error");
-  inputPhoneRef.classList.add("error");
-}
+// Original
+// function addEditError(inputNameRef, inputEmailRef, inputPhoneRef) {
+//   inputNameRef.classList.add("error");
+//   inputEmailRef.classList.add("error");
+//   inputPhoneRef.classList.add("error");
+// }
 
-function removeEditError(inputNameRef, inputEmailRef, inputPhoneRef) {
-  inputNameRef.classList.remove("error");
-  inputEmailRef.classList.remove("error");
-  inputPhoneRef.classList.remove("error");
+// function removeEditError(inputNameRef, inputEmailRef, inputPhoneRef) {
+//   inputNameRef.classList.remove("error");
+//   inputEmailRef.classList.remove("error");
+//   inputPhoneRef.classList.remove("error");
+// }
+
+// TEST
+function editError(action, inputNameRef, inputEmailRef, inputPhoneRef) {
+  if (["add", "remove"].includes(action)) {
+    inputNameRef.classList[action]("error");
+    inputEmailRef.classList[action]("error");
+    inputPhoneRef.classList[action]("error");
+  } else {
+    console.warn(`Ungültige Aktion: ${action}`);
+  }
 }
+// TEST ENDE
 
 function addEditOpacity(requiredNameEditFieldRef,requiredEmailEditFieldRef,requiredPhoneEditFieldRef) {
   requiredNameEditFieldRef.classList.add("opacity");
@@ -157,7 +127,7 @@ async function saveEditedContact(event) {
   let requiredEmailEditFieldRef = document.getElementById("requiredEmailEditField");
   let requiredPhoneEditFieldRef = document.getElementById("requiredPhoneEditField");
   if (fullName.length <= 1 &&inputEmailRef.value == "" &&inputPhoneRef.value == "") {
-    addEditError(inputNameRef, inputEmailRef, inputPhoneRef);
+    editError("add", inputNameRef, inputEmailRef, inputPhoneRef);
     removeEditOpacity(requiredNameEditFieldRef,requiredEmailEditFieldRef,requiredPhoneEditFieldRef);
     return;
   } else if (fullName.length <= 1 || fullName[1] == "") {
