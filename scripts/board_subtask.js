@@ -85,12 +85,13 @@ async function toggleSubtask(img, id, clickedID) {
   try {
     let fileName = img.src.split("/").pop();
     let isChecked = fileName === "subtask-checked.png";
+
     if (isChecked) {
       img.src = "../assets/icons/subtask-unchecked.png";
-      await postSubtaskClosed(id, clickedID);
+      await moveSubtaskBetweenLists(id, clickedID, "subTasksClosed", "subTasksOpen");
     } else {
       img.src = "../assets/icons/subtask-checked.png";
-      await postSubtaskOpen(id, clickedID);
+      await moveSubtaskBetweenLists(id, clickedID, "subTasksOpen", "subTasksClosed");
     }
   } finally {
     isToggling = false;
