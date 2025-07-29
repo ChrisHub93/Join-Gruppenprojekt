@@ -269,15 +269,16 @@ function updateAssignedMembersDisplay() {
   let icons = Array.from(container.querySelectorAll(".assigned_to_icon")).filter((icon) => !icon.closest(".bubbleTooltip"));
   icons.forEach((icon) => (icon.style.display = "flex"));
   if (icons.length > 5) {
-    getIconClasses(container);
+    getIconClasses(container, icons);
   }
 }
 
 /**
  * Hides extra member icons and adds a "+X" indicator.
  * @param {HTMLElement} container - The container of the icons.
+ * @param {HTMLElement[]} icons - array of icon elements
  */
-function getIconClasses(container){
+function getIconClasses(container, icons){
   let hiddenIcons = icons.slice(5);
     hiddenIcons.forEach((icon) => (icon.style.display = "none"));
     let plusWrapper = document.createElement("div");
@@ -360,37 +361,38 @@ function toggleDisplayNone(id) {
   ref.classList.toggle("d-nonevip");
 }
 
-
-//new jsdoc here
-
+/**
+ * function to save a task to the server
+ * 
+ * @param {string} currentStatus - status of the task 
+ */
 async function postDataToServer(currentStatus) {
-  let title = document.getElementById("title");
-  let description = document.getElementById("description");
-  let date = document.getElementById("date");
-  let priority = setPriority;
-  let category = document.getElementById("select");
-  const subTasksFromDOM = getSubTasksFromDom();
-  await postData(`/tasks/`, {
+    let task = {
     id: generateTimeBasedId(),
-    title: title.value,
-    description: description.value,
-    date: date.value,
-    priority: priority,
+    title: document.getElementById("title").value,
+    description: document.getElementById("description").value,
+    date: document.getElementById("date").value,
+    priority: setPriority,
+    category: document.getElementById("select").innerText,
     assignedTo: assignedTo,
-    category: category.innerText,
-    subTasksOpen: subTasksFromDOM,
+    subTasksOpen: getSubTasksFromDom(),
     status: currentStatus,
-  });
+  };
+
+  await postData(`/tasks/`, task);
 }
 
+/**
+ * function to give back a list of subtasks
+ * 
+ * @returns {string} - an array of subtask texts
+ */
 function getSubTasksFromDom(){
   return Array.from(document.querySelectorAll(".subTaskAdded")).map((el) => {if (el.tagName === "INPUT") return el.value.trim();
       let input = el.querySelector("input");
       if (input) return input.value.trim();
       return el.textContent.trim();}).filter((val) => val.length > 0);
 }
-//new jsdoc end here
-
 
 /**
  * Sends data to a server endpoint via POST.

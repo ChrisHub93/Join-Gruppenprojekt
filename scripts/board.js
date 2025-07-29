@@ -54,30 +54,59 @@ function clearAllTaskColumns(
  * @returns {void}
  */
 async function loadTasks() {
-  const toDo = document.getElementById("toDoContent");
-  const inProgress = document.getElementById("inProgressContent");
-  const awaitFeedback = document.getElementById("awaitFeedbackContent");
-  const done = document.getElementById("doneContent");
-
+  let columns = getTaskColumns();
   const tasks = await fetchData("/tasks/");
   if (!tasks) {
-    renderEmptyTemplatesForAllColumns(toDo, inProgress, awaitFeedback, done);
+    renderEmptyTemplatesForAllColumns(...Object.values(columns));
     return;
   }
-
   loadTodos = Object.values(tasks);
   addEmptySubtasks();
+  await loadGlobalContacts();
+  let filteredTask = filteredTasksByStatus(loadTodos)
+  clearAllTaskColumns(...Object.values(columns));
+  checkAllStatus(
+    filteredTask["To do"], columns.toDo,
+    filteredTask["In progress"], columns.inProgress,
+    filteredTask["Await feedback"], columns.awaitFeedback,
+    filteredTask["Done"], columns.done);
+}
 
-  const contacts = await fetchData("/contacts/");
+/**
+ * function to declare our four columns
+ * 
+ * @returns {Object} - of our task columns
+ */
+function getTaskColumns() {
+  return {
+    toDo: document.getElementById("toDoContent"),
+    inProgress: document.getElementById("inProgressContent"),
+    awaitFeedback: document.getElementById("awaitFeedbackContent"),
+    done: document.getElementById("doneContent"),
+  };
+}
+
+/**
+ * function to load contact data and save it to globalContacts
+ */
+async function loadGlobalContacts() {
+  let contacts = await fetchData("/contacts/");
   globalContacts = Object.values(contacts);
+}
 
-  const toDoTasks = loadTodos.filter(t => t.status === "To do");
-  const inProgressTasks = loadTodos.filter(t => t.status === "In progress");
-  const awaitFeedbackTasks = loadTodos.filter(t => t.status === "Await feedback");
-  const doneTasks = loadTodos.filter(t => t.status === "Done");
-
-  clearAllTaskColumns(toDo, inProgress, awaitFeedback, done);
-  checkAllStatus(toDoTasks, toDo, inProgressTasks, inProgress, awaitFeedbackTasks, awaitFeedback, doneTasks, done);
+/**
+ * function to filter the tasks based on status
+ * 
+ * @param {Object[]} tasks - array of tasks objects
+ * @returns 
+ */
+function filteredTasksByStatus(tasks) {
+  return {
+    "To do": tasks.filter(t => t.status === "To do"),
+    "In progress": tasks.filter(t => t.status === "In progress"),
+    "Await feedback": tasks.filter(t => t.status === "Await feedback"),
+    "Done": tasks.filter(t => t.status === "Done"),
+  };
 }
 
 /**
@@ -222,98 +251,6 @@ function searchElement(id) {
 }
 
 /**
- * Retrieves references to the main overlay elements in the DOM.
- *
- * @returns {Object} An object containing references to overlay-related DOM elements:
- *  - {HTMLElement|null} addOverlayTaskRef - The task overlay container element.
- *  - {HTMLElement|null} dialogTaskContentRef - The content container for the task overlay.
- *  - {HTMLElement|null} addOverlayEditRef - The edit task overlay container element.
- *  - {HTMLElement|null} dialogTaskEditContent - The content container for the edit task overlay.
- */
-function getOverlayElements() {
-  return {
-    addOverlayTaskRef: document.getElementById("overlayTask"),
-    dialogTaskContentRef: document.getElementById("dialogTaskContent"),
-    addOverlayEditRef: document.getElementById("overlayTaskEdit"),
-    dialogTaskEditContent: document.getElementById("dialogTaskEditContent"),
-  };
-}
-
-/**
- * Animates the given element by sliding it in from the right and fading it in.
- *
- * @param {HTMLElement} element - The DOM element to animate.
- */
-function overlaySlide(element) {
-  element.style.transform = "translateX(100%)";
-  element.style.opacity = "0";
-  requestAnimationFrame(() => {
-    element.style.transform = "translateX(0)";
-    element.style.opacity = "1";
-  });
-}
-
-/**
- * Handles closing of task or edit overlays when the user clicks outside the content area
- * or on specific close/delete elements.
- *
- *@param {MouseEvent} event - The click event that triggered the handler
- */
-function closeOverlay(event) {
-  let {
-    addOverlayTaskRef,
-    dialogTaskContentRef,
-    addOverlayEditRef,
-    dialogTaskEditContent,
-  } = getOverlayElements();
-  if (
-    event.target === addOverlayTaskRef ||
-    event.target.closest("#overlayTask .closeIcon") ||
-    event.target.closest(".delete_task")
-  ) {
-    closeOverlayAnimation(dialogTaskContentRef, addOverlayTaskRef);
-  } else if (
-    event.target === addOverlayEditRef ||
-    event.target.closest("#overlayTaskEdit .closeIcon")
-  ) {
-    closeOverlayAnimation(dialogTaskEditContent, addOverlayEditRef);
-  }
-}
-
-/**
- * Animates the closing of an overlay by sliding it out to the right and fading it out.
- * After the animation (300ms), it removes the "active" class from the overlay and resets styles.
- *
- * @param {HTMLElement} contentRef - The DOM element containing the overlay content.
- * @param {HTMLElement} overlayRef - The overlay container element to hide.
- */
-function closeOverlayAnimation(contentRef, overlayRef) {
-  contentRef.style.transform = "translateX(100%)";
-  contentRef.style.opacity = "0";
-  setTimeout(() => {
-    overlayRef.classList.remove("active");
-    contentRef.style.transform = "";
-    contentRef.style.opacity = "";
-  }, 300);
-}
-
-/**
- * Synchronizes the height of the task edit overlay with the height of the task view overlay.
- * 
- * Ensures a consistent layout when switching between view and edit mode.
- */
-function taskOverlaySync() {
-  let dialogTaskContentRef = document.getElementById("dialogTaskContent");
-  let dialogTaskEditContentRef = document.getElementById(
-    "dialogTaskEditContent"
-  );
-  if (dialogTaskContentRef && dialogTaskEditContentRef) {
-    dialogTaskEditContentRef.style.height =
-      dialogTaskContentRef.offsetHeight + "px";
-  }
-}
-
-/**
  * Generates the HTML for a priority button based on its name and active state.
  *
  * Converts the priority name to lowercase to match asset paths and checks if it is the currently active priority.
@@ -370,79 +307,6 @@ async function loadData(path = "") {
 }
 
 /**
- * Filters the global `todos` array based on the user's search input.
- * 
- * It checks whether the `title` or `description` of a task includes the search term (case-insensitive).
- * The filtered tasks are assigned back to `todos` and passed to `loadSearch()` for rendering.
- * 
- * @returns {void}
- */
-function filterTasks() {
-  let searchInput = document
-    .getElementById("filterTasks")
-    .value.trim()
-    .toLowerCase();
-  let filteredTask = todos
-    .slice(0)
-    .filter(
-      (todos) =>
-        todos.title.toLowerCase().includes(searchInput) ||
-        todos.description.toLowerCase().includes(searchInput)
-    );
-  todos = filteredTask;
-  loadSearch(todos);
-}
-
-/**
- * Renders filtered tasks by their status into the appropriate task columns.
- * 
- * If the search input is empty, it reloads all tasks.
- * Otherwise, it categorizes the filtered tasks by status and displays them
- * in the corresponding sections: "To do", "In progress", "Await feedback", and "Done".
- *
- * @param {Array} todos - The list of filtered task objects to be rendered.
- * @returns {void}
- */
-
-function loadSearch(todos) {
-  let searchInput = document.getElementById("filterTasks").value;
-  if (searchInput === "") {
-    loadTasks();
-    return;
-  }
-  let toDoContentRef = document.getElementById("toDoContent");
-  let inProgressContentRef = document.getElementById("inProgressContent");
-  let awaitFeedbackContentRef = document.getElementById("awaitFeedbackContent");
-  let doneContentRef = document.getElementById("doneContent");
-  let statusToDo = todos.filter((task) => task.status === "To do");
-  let statusInProgress = todos.filter((task) => task.status === "In progress");
-  let statusAwaitFeedback = todos.filter(
-    (task) => task.status === "Await feedback"
-  );
-  let statusDone = todos.filter((task) => task.status === "Done");
-  clearAllDocuments();
-  renderStatus(statusToDo, toDoContentRef);
-  renderStatus(statusInProgress, inProgressContentRef);
-  renderStatus(statusAwaitFeedback, awaitFeedbackContentRef);
-  renderStatus(statusDone, doneContentRef);
-}
-
-/**
- * Clears the inner HTML content of all task columns:
- * "To Do", "In Progress", "Await Feedback", and "Done".
- *
- * This is typically used before re-rendering tasks to ensure the UI is reset.
- *
- * @returns {void}
- */
-function clearAllDocuments() {
-  document.getElementById("toDoContent").innerHTML = "";
-  document.getElementById("inProgressContent").innerHTML = "";
-  document.getElementById("awaitFeedbackContent").innerHTML = "";
-  document.getElementById("doneContent").innerHTML = "";
-}
-
-/**
  * Renders a list of assigned member avatars with initials and color coding.
  * Shows up to 5 avatars with overlapping style and a "+X" overflow indicator if more members exist.
  * If the assignedToIds array is empty or not provided, renders a placeholder for unassigned tasks.
@@ -458,21 +322,28 @@ function renderAssignedTo(assignedToIds) {
   const visibleIds = assignedToIds.slice(0, MAX_VISIBLE);
   const extraCount = assignedToIds.length - MAX_VISIBLE;
   let html = visibleIds
-    .map((id, index) => {
-      let contactRef = globalContacts.find((contact) => contact.id === id);
-      if (!contactRef) return "";
-      let name = `${contactRef.firstname} ${contactRef.lastname}`;
-      let initials = getInitials(name);
-      let colorClass = getAvatarColorClass(name);
-      let leftOffset = index * 24;
-      return assignedMembersTemplate(colorClass, leftOffset, initials);
-    })
+    .map((id, index) => renderAssignedIcon(id, index * 24))
     .join("");
-  if (extraCount > 0) {
-    let leftOffset = MAX_VISIBLE * 24;
-    html += plusMembers(leftOffset, extraCount);
-  }
-  return html;
+
+  let extra = extraCount > 0 ? plusMembers(MAX_VISIBLE * 24, extraCount) : "";
+
+  return html + extra;
+}
+
+/**
+ * function to render an icon element based on the contact id
+ *
+ * @param {string} id - contact id
+ * @param {number} offset - left space for the next icon
+ * @returns {string} - HTML for the icon element
+ */
+function renderAssignedIcon(id, offset) {
+  const contact = globalContacts.find(c => c.id === id);
+  if (!contact) return "";
+  const name = `${contact.firstname} ${contact.lastname}`;
+  const initials = getInitials(name);
+  const colorClass = getAvatarColorClass(name);
+  return assignedMembersTemplate(colorClass, offset, initials);
 }
 
 /**
