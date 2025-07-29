@@ -218,3 +218,52 @@ function toggleEditOverlay() {
     overlayRef.classList.add("overlayBg");
   }, 10);
 }
+
+/**
+ * Save updated contact data with a PUT request and update UI accordingly.
+ * 
+ * @param {Event} event
+ * @param {Object} contact - Existing contact object.
+ * @param {number} index - Index of the contact in the array.
+ * @param {Array<string>} keys - Array of keys/ids for contacts.
+ * @param {HTMLInputElement} inputEmailRef
+ * @param {HTMLInputElement} inputPhoneRef
+ * @param {string} firstName
+ * @param {string} lastName
+ * @param {string} id - Contact's unique id.
+ */
+async function saveContact(event,contact,index,keys,inputEmailRef,inputPhoneRef,firstName,lastName,id) {
+  let key = keys[index];
+  await putData(`contacts/${key}`, {firstname: firstName,lastname: lastName,email: inputEmailRef.value,phone: inputPhoneRef.value,id: id,});
+  currentActiveContactId = firstName + " " + lastName;
+  closeOverlayAfterEditedContact(event);
+  let targetId = document.getElementById("circleFirstLetters" + contact.firstname + contact.lastname);
+  let divRef = Array.from(targetId.classList);
+  removeOldContactInfo(contact);
+  getNewContactInfo(divRef,firstName,lastName,inputEmailRef.value,inputPhoneRef.value);
+  getSortTitle(firstName);
+  showMoreDetails(divRef,firstName,lastName,inputEmailRef.value,inputPhoneRef.value);
+  clearOrLetOrder(contact);
+}
+
+/**
+ * Render and save changes for the currently active contact.
+ * 
+ * @param {Array<string>} fullName - [firstName, lastName]
+ * @param {Array<Object>} contactsArry - Array of contacts.
+ * @param {Event} event - Event triggering the save.
+ * @param {Array<string>} keys - Array of contact keys/ids.
+ * @param {HTMLInputElement} inputEmailRef
+ * @param {HTMLInputElement} inputPhoneRef
+ */
+function renderSaveContact(fullName, contactsArry, event, keys, inputEmailRef,inputPhoneRef){
+    let firstName = fullName[0];
+    let lastName = fullName[1];
+    for (let index = 0; index < contactsArry.length; index++) {
+    let contact = contactsArry[index];
+    let fullContactName = contact.firstname + " " + contact.lastname;
+    if (fullContactName == currentActiveContactId) {
+      saveContact(event,contact,index,keys,inputEmailRef,inputPhoneRef,firstName,lastName,contact.id);
+        }
+    }
+}

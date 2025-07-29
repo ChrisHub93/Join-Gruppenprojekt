@@ -35,3 +35,36 @@ function getNewContactInfo(divRef,firstName,lastName,inputEmailRef,inputPhoneRef
   let alphabeticalOrderRef = document.getElementById("alphabeticalOrder" + firstName.charAt(0).toUpperCase());
   alphabeticalOrderRef.innerHTML += getEditedBasicInfoAboutContact(divRef,firstName,lastName,inputEmailRef,inputPhoneRef);
 }
+
+/**
+ * Show detailed information of a contact in the UI.
+ * 
+ * @param {Array<string>} divRef - Array of CSS classes from the contact's circle element.
+ * @param {string} firstName
+ * @param {string} lastName
+ * @param {string} inputEmailRef
+ * @param {string} inputPhoneRef
+ */
+function showMoreDetails(divRef,firstName,lastName,inputEmailRef,inputPhoneRef) {
+  let allInfoAboutContactRef = document.getElementById("allInfoAboutContact");
+  allInfoAboutContactRef.innerHTML = "";
+  allInfoAboutContactRef.innerHTML = getDetailsOfContact(divRef,firstName,lastName,inputEmailRef,inputPhoneRef);
+  let setNewBgForContactRef = document.getElementById("setNewBgFor" + firstName + lastName);
+  setNewBgForContactRef.classList.add("darkBtn");
+}
+
+/**
+ * Set correct background styles for the profile initials.
+ * 
+ * @param {Object} user - Contact user object.
+ */
+function profileGetCorrectBackground(user) {
+  let firstLetterOfFirstNameRef = document.getElementById("firstLetterOfFirstName");
+  let firstLetterOfLastNameRef = document.getElementById("fistLetterOfLastName");
+  firstLetterOfFirstNameRef.innerText = user.firstname.charAt(0).toUpperCase();
+  firstLetterOfLastNameRef.innerText = user.lastname.charAt(0).toUpperCase();
+  let targetDivRef = document.getElementById("moreAboutcircleFirstLetters");
+  let bgClassRef = Array.from(targetDivRef.classList);
+  let circleFirstLettersRef = document.getElementById("circleFirstLetters");
+  circleFirstLettersRef.classList.add(bgClassRef[1]);
+}
